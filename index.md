@@ -1,9 +1,8 @@
 --- 
 layout: page
-title: Home
-subtitle: My Personal Website
+title: Math
 image: /img/avatar-icon.png
 light-image: /img/avatar-icon-light.png
 ---
 
-Hi
+Hi, here's where I post math stuff.
