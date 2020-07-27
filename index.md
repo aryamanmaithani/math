@@ -6,4 +6,6 @@ light-image: /img/avatar-icon-light.png
 ---
 
 Hi, here's where I post math stuff.  
-hopefully content is updated soon.
+With all my $$\LaTeX$$'d files, I also upload the source .tex code. To view those, you can go to the appropriate folder that you may find [here](https://github.com/aryamanmaithani/math).
+
+* [Classification of Surfaces](classification-of-surfaces), a topolofy report I made for the Summer of Science initiative by [MnP, IITB](mnp-club.github.io/).
