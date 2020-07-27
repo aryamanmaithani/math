@@ -1,0 +1,17 @@
+{% capture before %}{{ include.link[1] | split: "://" | first }}{% endcapture %}
+{% capture after %}{{ include.link[1] | split: "://" | last }}{% endcapture %}
+{% assign internal = true %}
+{% if before != after %}
+  {% if before == "http" or before == "https" %}
+    {% assign internal = false %}
+  {% endif %}
+{% endif %}
+
+{% if internal %}
+  {% capture linkurl %}{{ include.link[1] | relative_url }}{% endcapture %}
+{% else %}
+  {% capture linkurl %}{{ include.link[1] }}{% endcapture %}
+{% endif %}
+
+<!-- <a class="sidebar-nav-item{% if page.url == linkurl %} active{% endif %}" href="{{ linkurl }}">{{ include.link[0] }}</a> -->
+<a class="sidebar-nav-item{% if page.url == linkurl %} active{% endif %}" href="{{ linkurl }}"><i class="ion-ios-medical-outline"></i> <span class="">{{ include.link[0] }}</span></a>

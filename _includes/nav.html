@@ -1,0 +1,42 @@
+<!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+ 
+  <header class="avatar">
+    <a href="{{ '/aboutme/' | relative_url }}"><img src="{{ '/img/sidebar.jpg' | relative_url }}" /></a>
+    <h4>math boi</h4>
+  </header>
+  <nav class="sidebar-nav">
+    <ul>
+      {% for nav in site.navbar-links %}
+          {% if nav.subcategories %}
+            <li>
+              <a class="sidebar-nav-item" href="#"><i class="ion-ios-more"></i> <span class="">{{ nav.title }}</span></a>
+              <ul class="nav-flyout">
+                {% for subcategory in nav.subcategories %}
+                <li>
+                    <a href="{{ subcategory.href | relative_url }}"><i class="ion-record"></i> <span class="">{{ subcategory.title }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li>
+              <a class="sidebar-nav-item{% if page.url == linkurl %}.active{% endif %}" href="{{ nav.href | relative_url }}"><i class="ion-ios-more-outline"></i> <span class="">{{ nav.title }}</span></a>    
+            </li>
+          {% endif %}
+        {% endfor %}
+        
+      </ul>
+    <span class="sidebar-nav-item"><a href = "{{ site.anon-form }}" target="_blank">Anonymously message</a></span>
+    <span class="sidebar-nav-item">Currently <a href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ">v3.141</a></span>
+  <div class="sidebar-nav-item">
+    <p>
+      &copy; {{ site.time | date: '%Y' }}. All lefts reversed.
+    </p>
+  </div>
+  </nav>
+</div>
