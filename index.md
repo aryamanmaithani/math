@@ -6,4 +6,4 @@ light-image: /img/avatar-icon-light.png
 ---
 
 Hi, here's where I post math stuff.  
-:) oh, no website broke.
+hopefully content is updated soon.
