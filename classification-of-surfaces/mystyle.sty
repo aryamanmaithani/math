@@ -1,0 +1,122 @@
+% packages used -
+% geometry
+% fancyhdr
+% babel
+% titlesec
+% titletoc
+
+%%The package identifies itself and the LaTeX version needed
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mystyle}
+
+%%Requeiried packages and preliminary definitions, needed by the options
+
+%%This parts handles the options passed to the package.
+\ProcessOptions\relax
+
+%%Body of the package, most of the declarations appear here.
+
+% fonts
+%\renewcommand{\rmdefault}{ptm}
+%\renewcommand{\sfdefault}{phv}
+
+\usepackage{geometry}
+\geometry{
+	letterpaper,
+%	total={170mm,257mm},
+	left=30mm,
+	right=30mm,
+	top=20mm,
+}
+
+\widowpenalty=10000
+\clubpenalty=10000
+\flushbottom
+\sloppy
+
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{titling}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyheadoffset{0pt}
+%\rhead{\scshape \footnotesize A preprint}
+\lhead{\scshape \footnotesize \@title}
+\cfoot{\thepage}
+
+% rules for title box at top of first page
+\newcommand{\@toptitlebar}{
+  \hrule height 2\p@
+  \vskip 0.25in
+  \vskip -\parskip%
+}
+\newcommand{\@bottomtitlebar}{
+  \vskip 0.29in
+  \vskip -\parskip
+  \hrule height 2\p@
+  \vskip 0.09in%
+}
+\newcommand{\smallauthor}[1]{\rhead{\scshape \footnotesize -#1}}
+
+\providecommand{\@maketitle}{}
+\renewcommand{\@maketitle}{%
+  \vbox{%
+    \hsize\textwidth
+    \linewidth\hsize
+    \vskip 0.1in
+    \@toptitlebar
+    \centering
+    {\LARGE\sc \@title\par}
+    \@bottomtitlebar
+    \vskip 0.1in
+    \def\And{%
+      \end{tabular}\hfil\linebreak[0]\hfil%
+      \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+    }
+    \def\AND{%
+      \end{tabular}\hfil\linebreak[4]\hfil%
+      \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+    }
+    \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\@author\end{tabular}%
+  \vskip 0.2in \@minus 0.1in \center{\today}   \vskip 0.4in
+  }
+}
+
+\renewenvironment{abstract}
+{
+  \centerline
+  {\fontfamily{ptm}\selectfont\large \bfseries \scshape Abstract}
+  \begin{quote}
+}
+{
+  \end{quote}
+}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\center\normalfont\scshape}{\thesection.}{0.25cm}{\large}
+\titleformat{\subsection}[block]
+  {\center\normalfont\small\scshape}{\thesubsection.}{0.15cm}{\normalsize}
+
+\usepackage{titletoc}
+
+\titlecontents{section}
+[0pt]                                               % left margin
+{}%
+{\contentsmargin{0pt}                               % numbered entry format
+    \thecontentslabel.\enspace%
+    }
+{\contentsmargin{0pt}}                              % unnumbered entry format
+{\titlerule*[.5pc]{ }\contentspage}                 % filler-page format (e.g dots)
+[\vskip 0.1cm]                                      % below code (e.g vertical space)
+
+\titlecontents{subsection}
+[10pt]                                               % left margin
+{}%
+{\contentsmargin{0pt}                               % numbered entry format
+    \thecontentslabel.\enspace%
+    }
+{\contentsmargin{0pt}}                              % unnumbered entry format
+{\titlerule*[.5pc]{ }\contentspage}                 % filler-page format (e.g dots)
+[\vskip 0.1cm]                                      % below code (e.g vertical space)

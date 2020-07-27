@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\draw[ultra thin] (-0.25, -2.5) rectangle (6.75 -0.6, 2.5);
+	\node[] at (-0.25+.25, -2.5+0.25) {\scriptsize (2)};
+	\def \length{2.75}
+	\def \height{2}
+	\def \sep{0.4}
+	\draw[thick, ->-=at 0.5 with label {\small $a$}] (0, 0) -- (\length, \height/2);
+	\draw[thick, ->-=at 0.5 with label {\footnotesize $d$}] (\length, -\height/2) -- (\length, \height/2);
+	\draw[thick, ->-=at 0.5 with label {\small $a$}] (\length, -\height/2) -- (0, 0);
+	%
+	\draw[thick, ->-=at 0.5 with label {\small $c$}] (\length+\sep, \height/2) -- (\length+\sep+\length, 0);
+	\draw[thick, -<-=at 0.5 with label {\footnotesize $d$}] (\length+\sep, \height/2) -- (\length+\sep, -\height/2);
+	\draw[thick, ->-=at 0.5 with label {\small $c$}] (\length+\sep+\length, 0) -- (\length+\sep, -\height/2);
+	%
+\end{tikzpicture}

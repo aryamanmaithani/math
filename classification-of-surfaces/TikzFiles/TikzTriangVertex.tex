@@ -1,0 +1,29 @@
+\begin{tikzpicture}[scale=0.8]
+	\coordinate (a) at (0, 0);
+	\coordinate (b) at (2, 3);
+	\coordinate (c) at (6, 6);
+	\coordinate (d) at (0, 4);
+	\coordinate (e) at (-5, 3);
+	\coordinate (f) at (-3, 8);
+	\coordinate (g) at (-2, 18/5);
+	\draw[very thick] (a) -- (b) -- (c) -- cycle;
+	\draw[very thick] (a) -- (e) -- (d) -- cycle;
+	\draw[very thick] (d) -- (b);
+	\draw[very thick] (f) -- (g);
+	\draw[very thick] (e) -- (f) -- (c);
+	%
+	\coordinate (h) at (7, -4);
+	\coordinate (i) at (7, -2.5);
+	\coordinate (j) at (9, 1.5);
+	\coordinate (k) at (11, -11/16);
+	\coordinate (l) at (8, -.5);	
+	\draw[very thick] (a) -- (i) -- (h) -- cycle;
+	\draw[very thick] (a) -- (j) -- (i);
+	\draw[very thick] (j) -- (k) -- (l);
+	\draw[very thick] (k) -- (h);
+	%
+	\fill (a) circle (2.5pt);
+	\node[] at (-1.5, 2.5) {\begin{large}$A_i$\end{large}};
+	\node[] at (6, -0.5) {\begin{large}$A_j$\end{large}};
+	\node[] at (-0.5, -0.5) {\begin{large}$v$\end{large}};
+\end{tikzpicture}

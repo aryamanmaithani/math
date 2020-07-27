@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+	\def \radius{2.5}
+	\def \theta{pi/3}
+	\def \x{0}
+	\def \y{0}
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] 
+												({\x - \radius*cos((0 * pi/3) r)}, {\y + \radius*sin((0 * pi/3) r)}) -- 
+												({\x - \radius*cos((1 * pi/3) r)}, {\y + \radius*sin((1 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] 
+												({\x - \radius*cos((1 * pi/3) r)}, {\y + \radius*sin((1 * pi/3) r)}) -- 
+												({\x - \radius*cos((2 * pi/3) r)}, {\y + \radius*sin((2 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] 
+												({\x - \radius*cos((2 * pi/3) r)}, {\y + \radius*sin((2 * pi/3) r)}) -- 
+												({\x - \radius*cos((3 * pi/3) r)}, {\y + \radius*sin((3 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] 
+												({\x - \radius*cos((3 * pi/3) r)}, {\y + \radius*sin((3 * pi/3) r)}) -- 
+												({\x - \radius*cos((4 * pi/3) r)}, {\y + \radius*sin((4 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$a_3$}] 
+												({\x - \radius*cos((4 * pi/3) r)}, {\y + \radius*sin((4 * pi/3) r)}) -- 
+												({\x - \radius*cos((5 * pi/3) r)}, {\y + \radius*sin((5 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$a_3$}] 
+												({\x - \radius*cos((5 * pi/3) r)}, {\y + \radius*sin((5 * pi/3) r)}) -- 
+												({\x - \radius*cos((0 * pi/3) r)}, {\y + \radius*sin((0 * pi/3) r)});
+\end{tikzpicture}

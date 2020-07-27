@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+	\def \x {0}
+	\def \y {0}
+	\def \radius {2}
+	\def \del{0.5}
+	\draw[ultra thin] (-2.5, -2.5) rectangle (2.5 +\del, 2.5);
+	\node[] at (-2.5 + 0.26, -2.5 + 0.25) {\scriptsize (10)};
+	\draw[thick, -<-=at 0.5 with label {$e$}] 
+	({\x - \radius*cos((0 * pi/3) r)}, {\y + \radius*sin((0 * pi/3) r)}) -- 
+	({\x - \radius*cos((1 * pi/3) r)}, {\y + \radius*sin((1 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$b$}] 
+	({\x - \radius*cos((1 * pi/3) r)}, {\y + \radius*sin((1 * pi/3) r)}) -- 
+	({\x - \radius*cos((2 * pi/3) r)}, {\y + \radius*sin((2 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$c$}] 
+	({\x +\del - \radius*cos((2 * pi/3) r)}, {\y + \radius*sin((2 * pi/3) r)}) -- 
+	({\x +\del - \radius*cos((3 * pi/3) r)}, {\y + \radius*sin((3 * pi/3) r)});
+	\draw[thick, -<-=at 0.5 with label {$e$}] 
+	({\x +\del - \radius*cos((3 * pi/3) r)}, {\y + \radius*sin((3 * pi/3) r)}) -- 
+	({\x +\del - \radius*cos((4 * pi/3) r)}, {\y + \radius*sin((4 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$c$}] 
+	({\x - \radius*cos((4 * pi/3) r)}, {\y + \radius*sin((4 * pi/3) r)}) -- 
+	({\x - \radius*cos((5 * pi/3) r)}, {\y + \radius*sin((5 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$b$}] 
+	({\x - \radius*cos((5 * pi/3) r)}, {\y + \radius*sin((5 * pi/3) r)}) -- 
+	({\x - \radius*cos((0 * pi/3) r)}, {\y + \radius*sin((0 * pi/3) r)});
+
+
+	\draw[thick, -<-=at 0.5 with label {$f$}] ({\x - \radius*cos((4 * pi/3) r)}, {\y + \radius*sin((4 * pi/3) r)}) -- ({\x - \radius*cos((2 * pi/3) r)}, {\y + \radius*sin((2 * pi/3) r)});
+	\draw[thick, ->-=at 0.5 with label {$f$}] ({\x +\del - \radius*cos((2 * pi/3) r)}, {\y + \radius*sin((2 * pi/3) r)}) -- ({\x +\del - \radius*cos((4 * pi/3) r)}, {\y + \radius*sin((4 * pi/3) r)});
+\end{tikzpicture}

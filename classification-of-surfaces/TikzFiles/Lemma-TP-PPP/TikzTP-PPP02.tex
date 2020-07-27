@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+	\draw[ultra thin] (-0.5, -2.5) rectangle (6, 2.5);
+	\node[] at (-0.5+0.25, -2.5+0.25) {\scriptsize (2)};
+	\def \length{2.5}
+	\def \height{1}
+	\def \sep{-0.6}
+	\draw[thick, ->-=at 0.55 with label {\small $a$}] (0, 0) -- (\length, \height/2);
+	\draw[thick, ->-=at 0.52 with label {\footnotesize $d$}] (\length, -\height/2) -- (\length, \height/2);
+	\draw[thick, ->-=at 0.45 with label {\small $a$}] (\length, -\height/2) -- (0, 0);
+
+	\def \length{1.5}
+	
+	 
+	\draw[thick, -<-=at 0.5 with label {\footnotesize $d$}] (\length/3 + 2*\length + \sep, \length/3) -- (\length/3 + 2*\length + \sep, -\length/3);
+
+	\draw[thick, ->-=at 0.5 with label {\small $b$}] (\length/3 + 2*\length + \sep, \length/3) -- (\length + 2*\length + \sep, \length);
+	\draw[thick, ->-=at 0.5 with label {\small $c$}] (\length + 2*\length + \sep, \length) -- (2*\length+2*\length+\sep, 0);
+	\draw[thick, -<-=at 0.5 with label {\small $b$}] (2*\length+2*\length+\sep, 0) -- (\length + 2*\length + \sep, -\length);
+	\draw[thick, -<-=at 0.5 with label {\small $c$}] (\length + 2*\length + \sep, -\length) -- (\length/3 + 2*\length + \sep, -\length/3);
+\end{tikzpicture}

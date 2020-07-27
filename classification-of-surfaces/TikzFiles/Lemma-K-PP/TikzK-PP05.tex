@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+	\draw[ultra thin] (-3, -3) rectangle (3, 3);
+	\node[] at (-3+.25, -3+0.25) {\scriptsize (5)};
+	\def \length{2}
+	\def \del{0.5}
+	\draw[thick, -<-=at 0.5 with label {$b$}] (-\length, 0 + \del/2) -- (0, \length + \del/2);
+	\draw[thick, ->-=at 0.5 with label {$a$}] (0, \length + \del/2) -- (\length, 0 + \del/2);
+	\draw[thick, -<-=at 0.5 with label {$b$}] (\length, 0 - \del/2) -- (0, -\length - \del/2);
+	\draw[thick, -<-=at 0.5 with label {$a$}] (0, -\length - \del/2) -- (-\length, 0 - \del/2);
+	\draw[thick, -<-=at 0.5 with label {$c$}] (-\length, \del/2) -- (\length, \del/2);
+	\draw[thick, ->-=at 0.5 with label {$c$}] (\length, -\del/2) -- (-\length, -\del/2);
+	%
+\end{tikzpicture}

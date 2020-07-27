@@ -1,0 +1,41 @@
+\begin{tikzpicture}
+	\def \l {7}; %length
+	\def \b {2.5}; %breadth
+	\def \w {2.5}; %width of smol rectangle 
+	\def \radius {0.8};
+	\draw[very thick,
+	->-=at 1.25/19 with label {$a$}, % b/2
+	->-=at 4.75/19 with label {$b$}, % b + (l-w)/2
+	-<-=at 10.75/19 with label {$a$}, % b + l + b/2
+	-<-=at 16.75/19 with label {$b$}] % b + l + b + (l+w)/2
+	(0, 0) rectangle (\l, \b);
+	\draw[very thick] (\l-\w, 0) -- (\l-\w, \b);
+	\draw[very thick] ({\l - \w/2}, {\b/2}) circle (\radius);
+	%
+	\def \sep{9};
+	\draw[very thick,
+	-<-=at 1.25/19 with label {$a$}, 
+	-<-=at 4.75/19 with label {$b$}, 
+	-<-=at 10.75/19 with label {$a$}, 
+	->-=at 16.75/19 with label {$b$}] (0 + \sep, 0) rectangle (\l + \sep, \b);
+	\draw[very thick] (\l-\w + \sep, 0) -- (\l-\w + \sep, \b);
+	\draw[very thick] ({\l - \w/2 + \sep}, {\b/2}) circle (\radius);
+	%
+	\fill (\l-\w, \b) circle (2pt);
+	\fill (\l-\w, 0) circle (2pt);
+	\fill (\l-\w+\sep, \b) circle (2pt);
+	\fill (\l-\w+\sep, 0) circle (2pt);
+	%
+	\def \del {0.3};
+	\node[] at (\l-\w, \b+\del) {$A$};
+	\node[] at (\l-\w, -\del) {$A'$};
+	\node[] at (\l, \b+\del) {$B$};
+	\node[] at (\l, -\del) {$B'$};
+	\node[] at (\l-\w+\sep, \b+\del) {$A$};
+	\node[] at (\l-\w+\sep, -\del) {$A'$};
+	\node[] at (\l+\sep, \b+\del) {$B$};
+	\node[] at (\l+\sep, -\del) {$B'$};
+	\def \del {0.9};
+	\node[] at (\l/2, -\del) {(a)};
+	\node[] at (\l/2+\sep, -\del) {(b)};
+\end{tikzpicture}

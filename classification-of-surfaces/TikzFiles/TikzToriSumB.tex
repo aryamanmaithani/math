@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	 \def \length{2} %not the side-length though
+	 \def \sep{-0.5}
+
+	%--------
+	\draw[thick, -<-=at 0.5 with label {$b_1$}] (0,0) -- (\length, \length);
+	\draw[thick, -<-=at 0.5 with label {$a_1$}] (\length, \length) -- (2*\length - \length/3, \length/3);
+	\draw[thick, ->-=at 0.5 with label {$b_1$}] (2*\length - \length/3, -\length/3) -- (\length, -\length);
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] (\length, -\length) -- (0,0);
+	\draw[thick, ->-=at 0.5 with label {\footnotesize $c_1$}] (2*\length - \length/3, -\length/3) -- (2*\length - \length/3, \length/3);
+	\node[] at (\length, 0)   (a) {$T_1$};
+	%------
+	\draw[thick, -<-=at 0.5 with label {\footnotesize $c_2$}] (\length/3 + 2*\length + \sep, \length/3) -- (\length/3 + 2*\length + \sep, -\length/3);
+
+	\draw[thick, ->-=at 0.5 with label {$b_2$}] (\length/3 + 2*\length + \sep, \length/3) -- (\length + 2*\length + \sep, \length);
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] (\length + 2*\length + \sep, \length) -- (2*\length+2*\length+\sep, 0);
+	\draw[thick, -<-=at 0.5 with label {$b_2$}] (2*\length+2*\length+\sep, 0) -- (\length + 2*\length + \sep, -\length);
+	\draw[thick, -<-=at 0.5 with label {$a_2$}] (\length + 2*\length + \sep, -\length) -- (\length/3 + 2*\length + \sep, -\length/3);
+
+	 \node[] at (\length+2*\length+\sep, 0)   (b) {$T_2$};
+\end{tikzpicture}

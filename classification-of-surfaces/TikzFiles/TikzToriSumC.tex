@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+	\def \radius{2.5}
+	\def \theta{2*pi/8}
+	\def \x{0}
+	\def \y{0}
+	\draw[very thick, dashed, ->-=at 0.5 with label {$c$}] (0, -\radius) -- (0, \radius);
+	 \node[] at (-\radius/2, 0)   (a) {$T_1$};
+	 \node[] at (\radius/2, 0)   (b) {$T_2$};
+
+	\draw[thick, -<-=at 0.5 with label {$b_1$}] 
+												({\x - \radius*cos((0 * \theta) r)}, {\y + \radius*sin((0 * \theta) r)}) -- 
+												({\x - \radius*cos((1 * \theta) r)}, {\y + \radius*sin((1 * \theta) r)});
+	\draw[thick, -<-=at 0.5 with label {$a_1$}] 
+												({\x - \radius*cos((1 * \theta) r)}, {\y + \radius*sin((1 * \theta) r)}) -- 
+												({\x - \radius*cos((2 * \theta) r)}, {\y + \radius*sin((2 * \theta) r)});
+	\draw[thick, ->-=at 0.5 with label {$b_2$}] 
+												({\x - \radius*cos((2 * \theta) r)}, {\y + \radius*sin((2 * \theta) r)}) -- 
+												({\x - \radius*cos((3 * \theta) r)}, {\y + \radius*sin((3 * \theta) r)});
+	\draw[thick, -<-=at 0.5 with label {$a_2$}] 
+												({\x - \radius*cos((3 * \theta) r)}, {\y + \radius*sin((3 * \theta) r)}) -- 
+												({\x - \radius*cos((4 * \theta) r)}, {\y + \radius*sin((4 * \theta) r)});
+	\draw[thick, -<-=at 0.5 with label {$b_2$}] 
+												({\x - \radius*cos((4 * \theta) r)}, {\y + \radius*sin((4 * \theta) r)}) -- 
+												({\x - \radius*cos((5 * \theta) r)}, {\y + \radius*sin((5 * \theta) r)});
+	\draw[thick, -<-=at 0.5 with label {$a_2$}] 
+												({\x - \radius*cos((5 * \theta) r)}, {\y + \radius*sin((5 * \theta) r)}) -- 
+												({\x - \radius*cos((6 * \theta) r)}, {\y + \radius*sin((6 * \theta) r)});
+	\draw[thick, ->-=at 0.5 with label {$b_1$}] 
+												({\x - \radius*cos((6 * \theta) r)}, {\y + \radius*sin((6 * \theta) r)}) --
+												({\x - \radius*cos((7 * \theta) r)}, {\y + \radius*sin((7 * \theta) r)});
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] 
+												({\x - \radius*cos((7 * \theta) r)}, {\y + \radius*sin((7 * \theta) r)}) -- 
+												({\x - \radius*cos((0 * \theta) r)}, {\y + \radius*sin((0 * \theta) r)});
+\end{tikzpicture}

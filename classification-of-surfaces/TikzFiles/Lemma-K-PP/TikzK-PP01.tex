@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+	\draw[ultra thin] (-0.25, -2.5) rectangle (6.75, 2.5);
+	\node[] at (-0.25+.25, -2.5+0.25) {\scriptsize (1)};
+	\def \length{3}
+	\def \sep{0.5}
+	\def \theta{60} % in degrees
+	
+
+	\draw[thick, ->-=at 0.5 with label {\small $a$}] (0, 0) to [out=\theta, in=180-\theta] (\length, 0);
+	\draw[thick, ->-=at 0.5 with label {\small $a$}] (\length, 0) to [out=180+\theta, in=360-\theta] (0, 0);
+	\draw[thick, ->-=at 0.52 with label {\footnotesize $d$}, variable=\t,domain=pi/2:3*pi/2,samples=500] plot ({0.4*\length*cos((\t) r) + \length},{0.1*\length*sin((2*\t) r)});
+
+	\draw[thick, ->-=at 0.5 with label {\small $c$}] (\length + \sep, 0) to [out=\theta, in=180-\theta] (\length + \length + \sep, 0);
+	\draw[thick, ->-=at 0.5 with label {\small $c$}] (\length + \length + \sep, 0) to [out=180+\theta, in=360-\theta] (0 + \length + \sep, 0);
+	  \draw[thick, -<-=at 0.5 with label {\footnotesize $d$}, variable=\t,domain=pi/2:3*pi/2,samples=500] plot ({-0.4*\length*cos((\t) r) + \length + \sep},{-0.1*\length*sin((2*\t) r)});
+\end{tikzpicture}

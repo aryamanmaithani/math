@@ -1,0 +1,42 @@
+\begin{tikzpicture}
+	\def \radius{3} % of circle
+	\def \tri{1.25}
+	\def \theta{pi/3}
+	\def \dist{0.3}
+	%triangle nodes
+	\fill ({\tri*sin(( 0 *2*\theta) r)}, {\tri*cos(( 0 *2*\theta) r)}) circle (1.5pt);
+	\fill ({\tri*sin(( 1 *2*\theta) r)}, {\tri*cos(( 1 *2*\theta) r)}) circle (1.5pt);
+	\fill ({\tri*sin(( 2 *2*\theta) r)}, {\tri*cos(( 2 *2*\theta) r)}) circle (1.5pt);
+	%circle nodes
+	\fill ({\radius*sin(( 0 *\theta) r)}, {\radius*cos(( 0 *\theta) r)}) circle (1.5pt);
+	\fill ({\radius*sin(( 1 *\theta) r)}, {\radius*cos(( 1 *\theta) r)}) circle (1.5pt);
+	\fill ({\radius*sin(( 2 *\theta) r)}, {\radius*cos(( 2 *\theta) r)}) circle (1.5pt);
+	\fill ({\radius*sin(( 3 *\theta) r)}, {\radius*cos(( 3 *\theta) r)}) circle (1.5pt);
+	\fill ({\radius*sin(( 4 *\theta) r)}, {\radius*cos(( 4 *\theta) r)}) circle (1.5pt);
+	\fill ({\radius*sin(( 5 *\theta) r)}, {\radius*cos(( 5 *\theta) r)}) circle (1.5pt);
+	\draw[very thick] (0, 0) circle (\radius);
+	%making lines
+	\draw[very thick] ({\tri*sin(( 0 *2*\theta) r)}, {\tri*cos(( 0 *2*\theta) r)}) -- ({\radius*sin(( 5 *\theta) r)}, {\radius*cos(( 5 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 0 *2*\theta) r)}, {\tri*cos(( 0 *2*\theta) r)}) -- ({\radius*sin(( 0 *\theta) r)}, {\radius*cos(( 0 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 0 *2*\theta) r)}, {\tri*cos(( 0 *2*\theta) r)}) -- ({\radius*sin(( 1 *\theta) r)}, {\radius*cos(( 1 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 0 *2*\theta) r)}, {\tri*cos(( 0 *2*\theta) r)}) -- ({\tri*sin(( 1 *2*\theta) r)}, {\tri*cos(( 1 *2*\theta) r)});
+	\draw[very thick] ({\tri*sin(( 1 *2*\theta) r)}, {\tri*cos(( 1 *2*\theta) r)}) -- ({\radius*sin(( 1 *\theta) r)}, {\radius*cos(( 1 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 1 *2*\theta) r)}, {\tri*cos(( 1 *2*\theta) r)}) -- ({\radius*sin(( 2 *\theta) r)}, {\radius*cos(( 2 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 1 *2*\theta) r)}, {\tri*cos(( 1 *2*\theta) r)}) -- ({\radius*sin(( 3 *\theta) r)}, {\radius*cos(( 3 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 1 *2*\theta) r)}, {\tri*cos(( 1 *2*\theta) r)}) -- ({\tri*sin(( 2 *2*\theta) r)}, {\tri*cos(( 2 *2*\theta) r)});
+	\draw[very thick] ({\tri*sin(( 2 *2*\theta) r)}, {\tri*cos(( 2 *2*\theta) r)}) -- ({\radius*sin(( 3 *\theta) r)}, {\radius*cos(( 3 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 2 *2*\theta) r)}, {\tri*cos(( 2 *2*\theta) r)}) -- ({\radius*sin(( 4 *\theta) r)}, {\radius*cos(( 4 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 2 *2*\theta) r)}, {\tri*cos(( 2 *2*\theta) r)}) -- ({\radius*sin(( 5 *\theta) r)}, {\radius*cos(( 5 *\theta) r)});
+	\draw[very thick] ({\tri*sin(( 2 *2*\theta) r)}, {\tri*cos(( 2 *2*\theta) r)}) -- ({\tri*sin(( 3 *2*\theta) r)}, {\tri*cos(( 3 *2*\theta) r)});
+	% labelling circle
+	\node[] at ({(\radius + \dist)*sin(( 1 *\theta) r)}, {(\radius + \dist)*cos(( 1 *\theta) r)}) {$ 1 $};
+	\node[] at ({(\radius + \dist)*sin(( 2 *\theta) r)}, {(\radius + \dist)*cos(( 2 *\theta) r)}) {$ 2 $};
+	\node[] at ({(\radius + \dist)*sin(( 3 *\theta) r)}, {(\radius + \dist)*cos(( 3 *\theta) r)}) {$ 3 $};
+	\node[] at ({(\radius + \dist)*sin(( 4 *\theta) r)}, {(\radius + \dist)*cos(( 4 *\theta) r)}) {$ 1 $};
+	\node[] at ({(\radius + \dist)*sin(( 5 *\theta) r)}, {(\radius + \dist)*cos(( 5 *\theta) r)}) {$ 2 $};
+	\node[] at ({(\radius + \dist)*sin(( 6 *\theta) r)}, {(\radius + \dist)*cos(( 6 *\theta) r)}) {$ 3 $};
+	% labelling triangle
+	\node[] at ({(\tri - 1.5*\dist)*sin(( 2 *2*\theta) r)}, {(\tri - 1.5*\dist)*cos(( 2 *2*\theta) r)}) {$ 4 $};
+	\node[] at ({(\tri - 1.5*\dist)*sin(( 0 *2*\theta) r)}, {(\tri - 1.5*\dist)*cos(( 0 *2*\theta) r)}) {$ 5 $};
+	\node[] at ({(\tri - 1.5*\dist)*sin(( 1 *2*\theta) r)}, {(\tri - 1.5*\dist)*cos(( 1 *2*\theta) r)}) {$ 6 $};
+\end{tikzpicture}

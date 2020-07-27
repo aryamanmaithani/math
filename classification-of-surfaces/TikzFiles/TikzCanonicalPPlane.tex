@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+	\def \length{3}
+	\def \theta{60} % in degrees
+	\draw[thick, ->-=at 0.5 with label {$a$}] (0, 0) to [out=\theta, in=180-\theta] (\length, 0);
+	\draw[thick, ->-=at 0.5 with label {$a$}] (\length, 0) to [out=180+\theta, in=360-\theta] (0, 0);
+	\fill (0, 0) circle (1.5pt);
+	\fill (\length, 0) circle (1.5pt);
+\end{tikzpicture}

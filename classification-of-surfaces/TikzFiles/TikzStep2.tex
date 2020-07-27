@@ -1,0 +1,66 @@
+\begin{tikzpicture}
+	\coordinate (a) at (-1.5, -2);
+	\coordinate (b) at (-1, -0.75);
+	\coordinate (c) at (0, 0);
+	\coordinate (d) at (1, -0.75);
+	\coordinate (e) at (1.5, -2);
+	\draw[very thick] (a) -- (b);
+	\draw[very thick,->-=at 0.5 with label {$a$}] (b) -- (c);
+	\draw[very thick,-<-=at 0.5 with label {$a$}] (c) -- (d);
+	\draw[very thick] (d) -- (e);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (a) to [out=300, in=240] (e);
+ 	\fill (a) circle (2pt);
+ 	\fill (b) circle (2pt);
+ 	\fill (c) circle (2pt);
+ 	\fill (d) circle (2pt);
+ 	\fill (e) circle (2pt);
+ 	%
+ 	\coordinate (a) at (-1.5+5, -2);
+	\coordinate (b) at (-0.9+5, -0);
+	\coordinate (c) at (0+5, -1);
+	\coordinate (d) at (0.9+5, -0);
+	\coordinate (e) at (1.5+5, -2);
+	\draw[very thick] (a) -- (b);
+	\draw[very thick,->-=at 0.5 with label {\small $a$}] (b) -- (c);
+	\draw[very thick,-<-=at 0.5 with label {\small $a$}] (c) -- (d);
+	\draw[very thick] (d) -- (e);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (a) to [out=300, in=240] (e);
+ 	\fill (a) circle (2pt);
+ 	\fill (b) circle (2pt);
+ 	\fill (c) circle (2pt);
+ 	\fill (d) circle (2pt);
+ 	\fill (e) circle (2pt);
+ 	%
+	\coordinate (a) at (-1.75, -1 -4.75);
+	\coordinate (b) at (-0.2, -0 -4.75);
+	\coordinate (c) at (0, -1.5 -4.75);
+	\coordinate (d) at (0.2, -0 -4.75);
+	\coordinate (e) at (1.75, -1 -4.75);
+	\draw[very thick] (a) -- (b);
+	\draw[very thick,-<-=at 0.5 with label {$a$}] (c) -- (b);
+	\draw[very thick,->-=at 0.5 with label {$a$}] (d) -- (c);
+	\draw[very thick] (d) -- (e);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (a) .. controls (-1.7, -4 -4.75) and (1.7, -4 -4.75) .. (e);
+ 	\fill (a) circle (2pt);
+ 	\fill (b) circle (2pt);
+ 	\fill (c) circle (2pt);
+ 	\fill (d) circle (2pt);
+ 	\fill (e) circle (2pt);
+ 	%
+	\coordinate (a) at (-1.75 +5, -1 -4.75);
+	\coordinate (b) at (0 +5, -0 -4.75);
+	\coordinate (c) at (0 +5, -1.5 -4.75);
+	\coordinate (e) at (1.75 +5, -1 -4.75);
+	\draw[very thick] (a) -- (b);
+	\draw[very thick,-<-=at 0.5 with label {$a$}] (c) -- (b);
+	\draw[very thick] (b) -- (e);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (a) .. controls (-1.7 +5, -4 -4.75) and (1.7 +5, -4 -4.75) .. (e);
+ 	\fill (a) circle (2pt);
+ 	\fill (b) circle (2pt);
+ 	\fill (c) circle (2pt);
+ 	\fill (e) circle (2pt);
+ 	\node[] at (0, -3.25) {(a)};
+ 	\node[] at (5, -3.25) {(b)};
+ 	\node[] at (0, -3.25 -5.25) {(c)};
+ 	\node[] at (5, -3.25 -5.25) {(d)};
+\end{tikzpicture}

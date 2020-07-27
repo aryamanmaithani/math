@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+	\def \length{2.5}
+	\def \width{2}
+	\def \radius{0.15}
+	\def \sep{3}
+	\def \del {0.2}
+	\draw[thick, dashed, ->-=at 0.8 with label {$a$}](-\width/2, 0) -- (\width/2, 0);
+	\draw[thick](-\width/2, -\length/2) -- (-\width/2, \length/2);
+	\draw[thick](\width/2, -\length/2) -- (\width/2, \length/2);
+	\draw [thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (-\width/2, \length/2) to [out=45, in=135] (\width/2, \length/2);
+	\draw [thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (-\width/2, -\length/2) to [out=315, in=225] (\width/2, -\length/2);
+	\draw[] (0, 0) circle (\radius);
+	%
+	\draw[thick, ->-=at 0.8 with label {$a$}](-\width/2 + \sep, \del/2) -- (\width/2 + \sep, \del/2);
+	\draw[thick, -<-=at 0.2 with label {$a$}](\width/2 + \sep, -\del/2) -- (-\width/2 + \sep, -\del/2);
+	\draw[thick](-\width/2 + \sep, -\del/2) -- (-\width/2 + \sep, -\length/2 - \del/2);
+	\draw[thick](\width/2 + \sep, -\del/2) -- (\width/2 + \sep, -\length/2 - \del/2);
+	\draw[thick](-\width/2 + \sep, +\del/2) -- (-\width/2 + \sep, +\length/2 + \del/2);
+	\draw[thick](\width/2 + \sep, +\del/2) -- (\width/2 + \sep, +\length/2 + \del/2);
+	\draw [thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (-\width/2 + \sep, \length/2 + \del/2) to [out=45, in=135] (\width/2 + \sep, \length/2 + \del/2);
+	\draw [thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (-\width/2 + \sep, -\length/2 - \del/2) to [out=315, in=225] (\width/2 + \sep, -\length/2 - \del/2);
+	\draw (-\radius+\sep, \del/2) -- (\radius+\sep, \del/2) arc(0:180:\radius) --cycle;
+	\draw (\radius+\sep, -\del/2) -- (-\radius+\sep, -\del/2) arc(180:360:\radius) --cycle;
+	%
+	\def \smolradius {0.05}
+	\fill (0, 0) circle (\smolradius);
+	\fill (-\smolradius+\sep, \del/2) -- (\smolradius+\sep, \del/2) arc(0:180:\smolradius) --cycle;
+	\fill (\smolradius+\sep, -\del/2) -- (-\smolradius+\sep, -\del/2) arc(180:360:\smolradius) --cycle;
+\end{tikzpicture}

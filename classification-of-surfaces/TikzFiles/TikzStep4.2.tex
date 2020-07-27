@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+	\coordinate (a) at (-1.5, 0.75);
+	\coordinate (b) at (-1.5, -0.75);
+	\coordinate (c) at (1.5, 0.75);
+	\coordinate (d) at (1.5, -0.75);
+	\draw[very thick, ->-=at 0.5 with label {$c$}] (b) -- (a);
+	\draw[very thick, -<-=at 0.5 with label {$c$}] (c) -- (d);
+	\draw[very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=1.5mm] (a) to [out=60,in=120] (c);
+	\draw[very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=1.5mm] (b) to [out=300,in=240] (d);
+ 	\fill (a) circle (2pt);
+ 	\fill (b) circle (2pt);
+ 	\fill (c) circle (2pt);
+ 	\fill (d) circle (2pt);
+ 	\node[] at (0, 2) {$A$};
+ 	\node[] at (0, -2) {$B$};
+\end{tikzpicture}

@@ -1,0 +1,49 @@
+\begin{tikzpicture}
+	\coordinate (a) at (-1.5, -1.2);
+	\coordinate (b) at (0, 0);
+	\coordinate (c) at (1.5, -1.2);
+	\coordinate (d) at (-1.5, -4);
+	\coordinate (e) at (1.5, -4);
+	\draw[very thick, ->-=at 0.5 with label {$a$}] (a) -- (b);
+	\draw[very thick, -<-=at 0.5 with label {$b$}] (b) -- (c);
+	\draw[very thick, -<-=at 0.5 with label {$c$}] (c) -- (a);
+	\draw[very thick, -<-=at 0.5 with label {$a$}] (e) -- (d);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (a) to [out=240, in=120] (d);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (c) to [out=300, in=60] (e);
+ 	\fill (a) circle (2pt);
+ 	\fill (b) circle (2pt);
+ 	\fill (c) circle (2pt);
+ 	\fill (d) circle (2pt);
+ 	\fill (e) circle (2pt);
+ 	%
+ 	\coordinate (a) at (-1.5 +5.0, -1.2);
+	\coordinate (b) at (0 +5.0, -5.5);
+	\coordinate (c) at (1.5 +5.0, -1.2);
+	\coordinate (d) at (-1.5 +5.0, -4);
+	\coordinate (e) at (1.5 +5.0, -4);
+	\draw[very thick, -<-=at 0.5 with label {$c$}] (b) -- (d);
+	\draw[very thick, -<-=at 0.5 with label {$b$}] (e) -- (b);
+	\draw[very thick, -<-=at 0.5 with label {$c$}] (c) -- (a);
+	\draw[very thick, -<-=at 0.5 with label {$a$}] (e) -- (d);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (a) to [out=240, in=120] (d);
+	\draw [very thick, decorate, decoration=snake, segment amplitude=.6mm, segment length=2mm] (c) to [out=300, in=60] (e);
+ 	\fill (a) circle (2pt);
+ 	\fill (b) circle (2pt);
+ 	\fill (c) circle (2pt);
+ 	\fill (d) circle (2pt);
+ 	\fill (e) circle (2pt);
+ 	%
+ 	\node [] at (0, 0.5) {$P$};
+ 	\node [] at (1.6, -0.9) {$Q$};
+ 	\node [] at (-1.6, -0.9) {$R$};
+ 	\node [] at (1.6 +5.0, -0.9) {$R$};
+ 	\node [] at (-1.6 +5.0, -0.9) {$Q$};
+ 	\node [] at (1.6, -4.25) {$P$};
+ 	\node [] at (-1.6, -4.25) {$R$};
+ 	\node [] at (1.6 +5.0, -4.25) {$P$};
+ 	\node [] at (-1.6 +5.0, -4.25) {$R$};
+ 	\node [] at (0.4 +5.0, -5.5) {$Q$};
+ 	%
+ 	\node[] at (0, -6) {(a)};
+ 	\node[] at (0 +5.0, -6) {(b)};
+\end{tikzpicture}

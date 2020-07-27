@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\def \length{3.5}
+	\def \height{2.4}
+	\def \sep{1.5}
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] (0, 0) -- (\length, \height/2);
+	\draw[thick, -<-=at 0.5 with label {$c_1$}] (\length, \height/2) -- (\length, -\height/2);
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] (\length, -\height/2) -- (0, 0);
+	%
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] (\length+\sep, \height/2) -- (\length+\sep+\length, 0);
+	\draw[thick, ->-=at 0.5 with label {$c_2$}] (\length+\sep, -\height/2) -- (\length+\sep, \height/2);
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] (\length+\sep+\length, 0) -- (\length+\sep, -\height/2);
+	%
+	\node[] at (0.75*\length, 0) {$P_1$};
+	\node[] at (\length+\sep+\length-0.75*\length, 0) {$P_2$};
+\end{tikzpicture}

@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+	 \def \length{2} %not the side-length though
+	 \def \sep{1}
+
+	\draw[thick, -<-=at 0.5 with label {$b_1$}] (0,0) -- (\length, \length);
+	\draw[thick, -<-=at 0.5 with label {$a_1$}] (\length, \length) -- (2*\length, 0);
+	\draw[thick, ->-=at 0.5 with label {$b_1$}] (2*\length, 0) -- (\length, -\length);
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] (\length, -\length) -- (0, 0);
+
+
+	 \draw[thick, ->-=at 0.52 with label {\footnotesize $c_1$}, variable=\t,domain=pi/2:3*pi/2,samples=500] plot ({0.9*\length*cos((\t) r) + 2*\length},{0.25*\length*sin((2*\t) r)});
+	 \node[] at (0.5*\length, 0)   (a) {$T_1$};
+	 %
+	
+	\draw[thick, ->-=at 0.5 with label {$b_2$}] (2*\length + \sep,0) -- (3*\length + \sep, \length);
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] (3*\length + \sep, \length) -- (4*\length + \sep, 0);
+	\draw[thick, -<-=at 0.5 with label {$b_2$}] (4*\length + \sep, 0) -- (3*\length + \sep, -\length);
+	\draw[thick, -<-=at 0.5 with label {$a_2$}] (3*\length + \sep, -\length) -- (2*\length + \sep,0);
+	
+	\draw[thick, -<-=at 0.5 with label {\footnotesize $c_2$}, variable=\t,domain=pi/2:3*pi/2,samples=500] plot ({-0.9*\length*cos((\t) r) + 2*\length + \sep},{-0.25*\length*sin((2*\t) r)});
+	
+	\node[] at (4*\length+\sep-0.5*\length, 0)   (b) {$T_2$};
+\end{tikzpicture}

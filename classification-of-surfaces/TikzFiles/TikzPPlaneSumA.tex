@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\def \length{4}
+	\def \sep{1}
+	\def \theta{60} % in degrees
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] (0, 0) to [out=\theta, in=180-\theta] (\length, 0);
+	\draw[thick, ->-=at 0.5 with label {$a_1$}] (\length, 0) to [out=180+\theta, in=360-\theta] (0, 0);
+	\fill (0, 0) circle (1.5pt);
+	\fill (\length, 0) circle (1.5pt);
+
+	\draw[thick, ->-=at 0.52 with label {\footnotesize $c_1$}, variable=\t,domain=pi/2:3*pi/2,samples=500] plot ({0.4*\length*cos((\t) r) + \length},{0.1*\length*sin((2*\t) r)});
+	%
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] (\length+\sep, 0) to [out=\theta, in=180-\theta] (\length+\sep+\length, 0);
+	\draw[thick, ->-=at 0.5 with label {$a_2$}] (\length+\sep+\length, 0) to [out=180+\theta, in=360-\theta] (\length+\sep, 0);
+	\fill (\length+\sep, 0) circle (1.5pt);
+	\fill (\length+\sep+\length, 0) circle (1.5pt);
+
+	\draw[thick, -<-=at 0.5 with label {\footnotesize $c_1$}, variable=\t,domain=pi/2:3*pi/2,samples=500] plot ({-0.4*\length*cos((\t) r) + \length+\sep},{-0.1*\length*sin((2*\t) r)});
+	%
+	\node[] at (0.25*\length, 0)   (a) {$P_1$};
+	\node[] at (\length+\sep+\length-0.25*\length, 0)   (b) {$P_2$};
+\end{tikzpicture}

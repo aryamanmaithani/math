@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings, snakes}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\newcommand{\marrow}[3]{\draw[thick, ->] #1 -- #2; \draw[thick] #2 -- #3;}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+	\tikzset{lab dis/.store in=\LabDis,
+lab dis=0.3,
+->-/.style args={at #1 with label #2}{decoration={
+ markings,
+ mark=at position #1 with {\arrow{>}; \node at (0,\LabDis) {#2};}}, postaction={decorate}
+ },
+ -<-/.style args={at #1 with label #2}{decoration={
+ markings,
+ mark=at position #1 with {\arrow{<}; \node at (0,\LabDis)
+ {#2};}},postaction={decorate}},
+ -*-/.style={decoration={
+ markings,
+ mark=at position #1 with {\fill (0,0) circle (1.5pt);}},postaction={decorate}},
+}
+%\tikzset{myhex/.style args={ #1 #2 #3 #4 #5 #6 #7 #8 #9 #10 #11 #12}	}
+%
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\def \sep {1} % vertical length
+		
+	\end{tikzpicture}
+\end{figure}
+\end{document}

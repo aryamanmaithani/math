@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+	\draw[ultra thin] (-3, -3) rectangle (3, 3);
+	\node[] at (-3+.25, -3+0.25) {\scriptsize (6)};
+	\def \length{2}
+	\draw[thick, -<-=at 0.5 with label {$b$}] (-\length, 0) -- (0, \length);
+	\draw[thick, ->-=at 0.5 with label {$a$}] (0, \length) -- (\length, 0);
+	\draw[thick, -<-=at 0.5 with label {$b$}] (\length, 0) -- (0, -\length);
+	\draw[thick, -<-=at 0.5 with label {$a$}] (0, -\length) -- (-\length, 0);
+	%
+\end{tikzpicture}

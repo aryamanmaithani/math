@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+	\draw[ultra thin] (-2.5, -2.5) rectangle (2.5, 2.5);
+	\node[] at (-2.5 + 0.25, -2.5 + 0.25) {\scriptsize (6)};
+	\def \wid {3} % smol width
+	\def \height {4}
+	\def \width {4.5} %big width
+	\draw[thick, -<-=at 0.5 with label {$a$}] (-\wid/2, 0) -- (\wid/2, 0);
+	\draw[thick, -<-=at 0.5 with label {$e$}] (\width/2, \height/2) -- (\wid/2, 0);
+	\draw[thick, ->-=at 0.5 with label {$c$}] (-\width/2, \height/2) -- (\width/2, \height/2);
+	\draw[thick, ->-=at 0.5 with label {$b$}] (-\wid/2, 0) -- (-\width/2, \height/2);
+
+	\draw[thick, ->-=at 0.5 with label {$c$}] (\wid/2, 0) -- (\width/2, -\height/2);
+	\draw[thick, ->-=at 0.5 with label {$b$}] (\width/2, -\height/2) -- (-\width/2, -\height/2);
+	\draw[thick, -<-=at 0.5 with label {$e$}] (-\width/2, -\height/2) -- (-\wid/2, 0);
+\end{tikzpicture}
