@@ -1,6 +1,5 @@
 ---
-layout: post
-blog-category: report
+layout: page
 title: Classification of surfaces
 ---
 #### [PDF](Classification of Surfaces.pdf)  
