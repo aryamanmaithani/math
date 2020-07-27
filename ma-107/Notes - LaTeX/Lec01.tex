@@ -1,0 +1,116 @@
+\pah{03-01-2019}
+\section{Mathematical statements}\label{sec:state}
+What is a mathematical statement?\\
+Is there any \textit{real} definition of a mathematical statement or is every sentence a mathematical statement?\\
+Here are some sentences:
+\begin{enumerate}
+    \itemsep0em
+    \item 2 is an even prime.
+    \item Chirag is a good man.
+    \item 5 is an even number.
+    \item The sky is blue.
+    \item There are chairs and tables in LT 101.
+    \item I love Mathematics.
+    \item Euler was smart.
+\end{enumerate}
+Are all of the above mathematical statements? The answer is: no.\\
+2, 6 and 7 are not mathematical statements.\\
+It might have become a bit clearer as to what a mathematical statement is. Do notice that 3 \textbf{\textit{is}} in fact, a mathematical statement.\\
+Furthermore, we might not know right away whether there are chairs and tables in LT 101 but what we \textbf{\textit{do}} know is that that sentence would be either true or false.\\
+
+Simply put, \highlight{a mathematical statement is a sentence which is either true or false.}\\
+
+Now, if see the problem with the 2, 3 and 7. It is the fact that ``good", ``love" and ``smart" aren't properly defined. What might be good for Chirag might not be what is good for me, et cetera. So, while most \textit{might} agree that Euler was smart, it is \textbf{\textit{not}} a mathematical statement.\\
+In Mathematics, we always phrase things in statements which do have a definite truth value.\footnote{\label{ft:conjec} We have things in Mathematics known as \textit{conjectures} which are unproven \textbf{statements}. So, even though \textit{we} do not know their truth value, they \textit{do} have a \textit{definite} truth value.}\\
+We are also precise when we state things.\\
+\newpage
+%
+%
+%
+\subsection{Compound Statements}\label{ssec:compound}
+If we look at the 5$^{\text{th}}$ sentence above which we decided to call a statement, we can see that it is more ``complicated". For that statement to be true, it demands \textbf{\textit{two}} things to be true, namely:
+\begin{enumerate}
+    \itemsep0em
+    \item There must be chairs in LT 101.
+    \item There must be tables in LT 101.
+\end{enumerate}
+On the other hand, consider the statement: ``There are chairs \textit{or} tables in LT 101.". For this statement to be true, it just demands that at least \textbf{\textit{one}} of the above two be true. (Both may also be true.)\\~\\
+The symbol for ``and" is ``$\land$".%
+\footnote{to help remember: $\land$ looks like an `A' which stands for ``and"}%
+The symbol for ``or" is ``$\lor$".\\~\\
+So, finally, if p and q are two statements, then:
+\begin{enumerate}[label = C\arabic*.]
+    \itemsep0em
+    \item \label{comp1}(p $\land$ q) is true if and only if \textbf{both} p and q are true.
+    \item \label{comp2}(p $\lor$ q) is true if and only if \textbf{at least} one of p or q is true.
+\end{enumerate}
+%
+%
+%
+\subsection{Negation}\label{ssec:neg}
+When given a statement, it often helps to look at its negation%
+\footnote{\label{ft:neg} technically, we haven't defined \textit{what} a negation is. It is assumed that you do know what it is. In case you don't (or that you want to be formal), you may take the ``property" mentioned above as the definition.}%
+\ 
+as they have exactly opposite truth values. In other words, given a statement and its negation, \textit{exactly} one of them is true.\\
+
+The easiest way to negate a statement is to place a ``not" in the statement. (At the appropriate location.)\\
+\example{%
+Statement: x is an even number.\\
+Negation: x is \textit{not} an even number.}\\
+Even though you might be tempted to say \simpleexample{``x is an odd number"} as the negation, it is not correct.\\
+Why? Simply because we do not know what x is. $\frac{1}{2}$, for example, is neither even nor odd.\\
+Had we known that x \textit{is} an integer, then it would have been correct to say that the negation is \simpleexample{``x is an odd number"}.\\
+
+Also, to introduce the notation, the negation of a statement is denoted by placing a `$\sim$' before the statement.\\
+\example{S: x is an even number.\\
+$\sim$S: x is \textit{not} an even number.}
+\\~\\
+Now, we'll move on to a slightly more complicated type of statement.\\
+Suppose A wants to buy a phone with a 40 MP camera \textit{and} a 4 GB RAM. A goes and buys a phone. When has A \textit{not} bought the originally desired phone?\\
+Consider the following table:\\~\\
+\begin{tabular}{c|c c}
+    Phone Type & 40 MP camera & 4 GB RAM \\
+    \hline
+    P$_1$ & \checkmark & \checkmark \\
+    P$_2$ & \checkmark & \xmark \\
+    P$_3$ & \xmark & \checkmark \\
+    P$_4$ & \xmark & \xmark \\
+\end{tabular}\\
+The above table makes it clear that A wants to buy P$_1$. So, if they buy any other type of phone, they have \textit{not} bought it.\\
+Therefore, if your answer originally had just been: ``When A has bought a phone which has neither a 40 MP camera nor a 4 GB Ram.", you  can see how that is not complete. You have missed the cases where just one functionality is missing.\\
+This reasoning is also consistent with how we defined \hyperref[comp1]{``and"}.\\
+So, a concise way to phrase the answer would be: ``A has not bought the desired phone if the phone is \textit{either} missing a 40 MP camera \textit{or} a 4 GB RAM."
+
+\hrulefill
+\exercise{Do the same for the condition- ``a 40 MP camera \textit{or} a 4 GB RAM".}
+
+\hrulefill\\
+It might now be clear what the relation between ``and" and ``or" is when it comes to negation.
+\begin{enumerate}
+    \itemsep0em
+    \item $\sim(p\land q) \equiv \sim p \lor \sim q$
+    \item $\sim(p\lor q) \equiv \sim p \land \sim q$
+\end{enumerate}
+The ``$\equiv$" symbol used above stands for "is equivalent to". Two statements are said to be equivalent if they have the exact same truth value.\\~\\
+Now, let's see another aspect of negation.
+\begin{center}
+    \example{%
+        \begin{tabular}{|c|c}
+            Case 1 & Case 2\\
+            \hline
+            S: $x \in \mathbb{R} \land x > 0$ & Let $x \in \mathbb{R}$ \\
+            $\sim$ S: $x \not \in \mathbb{R} \lor x \not > 0$ & S: $x > 0$\\
+             & $\sim$ S: $x \not > 0$
+        \end{tabular}
+    }
+\end{center}
+The difference between case 1 and case 2 is that in case 2, $x$ is defined to be real number which is \textbf{\textit{not}} going to be negated. In another words, it could be thought of as being part of the ``hypothesis" and being unquestionable.
+
+\hrulefill
+\exercise{Let X be a set. Let A and B be subsets of X. Write a statement that means: A is a subset of B.}
+\exercise{\label{ex:1.3}$x \in \mathbb{R}$\\
+Negate: Given $x > 0$\\
+You may have thought of another way of negating that statement apart from $x\not > 0$, can you justify why that works?
+}
+
+\hrulefill

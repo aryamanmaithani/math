@@ -1,0 +1,737 @@
+\documentclass[11pt,leqno,landscape,semhelv]{seminar}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage{fancybox}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{centernot}
+\usepackage{tikz-cd}
+\usepackage{datetime2}
+
+\theoremstyle{definition}
+\newtheorem{joke}{Joke}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+
+\usepackage{chngcntr}
+\numberwithin{joke}{section}
+\numberwithin{thm}{section}
+\numberwithin{equation}{section}
+
+\newcommand{\example}[1]{\refstepcounter{thm}\par\medskip
+   {\textbf{Example \thethm.} #1} \rmfamily}
+\newcommand{\remark}[1]{\refstepcounter{thm}\par\medskip
+   {\textit{Remark \thethm.} #1} \rmfamily}
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {}{\centering\huge\S\thesection}{0.25cm}{\centering\Huge\textsc}
+\titleformat{\subsection}[block]
+  {}{\S\S\thesubsection}{0.25cm}{\Large}
+  
+\renewcommand{\sec}[1]{%
+\begin{slide}
+\begin{center}
+    \begin{center}
+        \section{#1}
+    \end{center}
+\end{center}
+\end{slide}}
+\newcommand{\cd}[1]{
+\begin{center}
+	\begin{tikzcd}
+		#1
+	\end{tikzcd}
+\end{center}}
+\newcommand{\cod}{\operatorname{cod}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\op}{^{\operatorname{op}}}
+\newcommand{\mono}{\rightarrowtail}
+\newcommand{\epi}{\twoheadrightarrow}
+\newcommand{\tto}{\rightrightarrows}
+\let\emptyset\varnothing
+
+\DeclareSymbolFont{matha}{OML}{txmi}{m}{it}
+\DeclareMathSymbol{\varv}{\mathord}{matha}{35}
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+\definecolor{mylinkcolor}{RGB}{0, 255, 255} %46, 51, 63
+
+\usepackage{pagecolor}
+%\pagecolor{mybgcolor}
+%\color{white}
+
+\usepackage[colorlinks=true,
+	%linkcolor=mylinkcolor
+	]
+	{hyperref}
+
+
+\title{\vspace{1cm} Category Theory}
+\author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
+\date{\DTMnow}
+
+\begin{document}
+\maketitle
+\newpage
+\setcounter{section}{-2}
+\tableofcontents
+\input{intro.tex}
+\input{sec0.tex}
+\input{sec1.tex}
+\input{sec2.tex}
+\sec{Duality}
+\subsection{The Duality Principle}
+Let us recall the definition of a category: There are two kinds of \emph{things}, objects $A, B, C,\ldots$ and arrows $f, g, h, \ldots;$ four operations $\dom(f), \cod(f), 1_A, g \circ f;$ and these satisfy the following seven axioms:
+\begin{align} 
+  \dom(1_A) = A &\qquad \cod(1_A) = A\nonumber\\
+  f\circ1_{\dom(f)} = f &\qquad 1_{\cod(f)}\circ f = f \label{catax}\\
+  \dom(g\circ f) = \dom(f) &\qquad \cod(g\circ f) = \cod(g)\nonumber\\
+  h\circ(g\circ f) &= (h\circ g) \circ f\nonumber
+\end{align}
+Where the operation ``$g\circ f$'' is defined precisely when
+\begin{equation*} 
+  \dom(g) = \cod(f),
+\end{equation*}
+so a suitable form of this should occur as a condition on each equation containing $\circ,$ as in $\dom(g) = \cod(f) \implies \dom(g\circ f) = \dom(f).$\\
+Now, given any sentence $\Sigma$ in the elementary language of category theory, we can form the ``dual statement'' $\Sigma^*$ by making the following replacements:
+\begin{align*} 
+  f\circ g \; &\text{for} \; g \circ f,\\
+  \cod \; &\text{for} \; \dom,\\
+  \dom \; &\text{for} \; \cod.
+\end{align*}
+It is easy to see that after these replacements, the statement will again be well formed. Next, suppose that we have shown a statement $\Sigma$ to entail one $\Delta,$ that is, $\Sigma \implies \Delta,$ without using any of the category axioms. Then, it follows that $\Sigma^* \implies \Delta^*.$ This is because the substituted terms are mere undefined constants if we don't use any category axioms.\\
+However, now observe that the axioms (\ref{catax}) for category theory (CT) are themselves ``self-dual,'' in the sense that we have,
+\begin{equation*} 
+  \text{CT}^* = \text{CT}.
+\end{equation*}
+We now have the following \emph{duality principle}.
+%
+\begin{prop}[formal duality]
+  For any sentence $\Sigma$ in the language of category theory, if $\Sigma$ follows from the axioms of categories, then do foes its dual $\Sigma^*$:
+  \begin{equation*} 
+    \text{CT} \implies \Sigma \; \text{implies} \; \text{CT} \implies \Sigma^*.
+  \end{equation*}
+\end{prop}
+Taking a more conceptual point of view, note that if a statement $\Sigma$ involves some diagram of objects and arrows,
+\begin{equation*} 
+  \begin{tikzcd}
+    A \arrow[rr, "f"] \arrow[rrddd, "g\circ f"'] && B\arrow[ddd, "g"]\\
+    &&\\&&\\
+    &&C
+  \end{tikzcd}
+\end{equation*}
+then the dual statement $\Sigma^*$ involves the diagram obtained from it by reversing the direction and the order of composition of arrows.
+\begin{equation*} 
+  \begin{tikzcd}
+  A &  & B \arrow[ll, "f"']                            \\
+    &  &                                               \\
+    &  &                                               \\
+    &  & C \arrow[lluuu, "f\circ g"] \arrow[uuu, "g"']
+  \end{tikzcd}
+\end{equation*}
+Recalling the opposite category $\mathbf{C}\op$ of a category $\mathbf{C},$ we see that an interpretation of a statement $\Sigma$ in $\mathbf{C}$ automatically gives an interpretation of $\Sigma^*$ in $\mathbf{C}\op.$\\
+Now suppose that a statement $\Sigma$ holds for all categories $\mathbf{C}.$ Then, it also holds in all categories $\mathbf{C}\op,$ and so $\Sigma^*$ holds in all categories $(\mathbf{C}\op)\op.$ But since for every category $\mathbf{C},$
+\begin{equation*} 
+  (\mathbf{C}\op)\op= \mathbf{C},
+\end{equation*}
+we see that $\Sigma^*$ also holds in all categories $\mathbf{C}.$ We therefore have the following form of conceptual form of the duality principle.
+\begin{prop}[conceptual duality]
+  For any statement $\Sigma$ about categories, if $\Sigma$ holds for all categories, then so does the dual statement $\Sigma^*.$
+\end{prop}
+%
+\subsection{Coproducts}
+Let us consider the example of products and see what the dual notion must be. We first recall the definition of product.
+\begin{defn} 
+  A diagram \begin{tikzcd}A & P \arrow[l, "p_1"'] \arrow[r, "p_2"] & B\end{tikzcd} is a \emph{product} of $A$ and $B,$ if for any $Z$ and \begin{tikzcd}A & Z \arrow[l, "z_1"'] \arrow[r, "z_2"] & B\end{tikzcd} there is a unique $u:Z\to P$ with $p_i \circ u = z_i,$ all as indicated in
+  \begin{equation*} 
+    \begin{tikzcd}
+    && Z \arrow[llddd, "z_1"'] \arrow[rrddd, "z_2"] \arrow[ddd, "u", dotted] &&\\
+    &&&&\\&&&&\\
+    A && P \arrow[ll, "p_1"] \arrow[rr, "p_2"'] && B
+    \end{tikzcd}
+  \end{equation*}
+\end{defn}
+Now what is the dual statement? The reader is encouraged to write the dual statement themselves and compare it with the next definition. The convention is to use the prefix ``co-'' to indicate the dual notion. Thus, we get the definition of a \emph{co-}product as follows.
+\begin{defn} 
+A diagram \begin{tikzcd}A \arrow[r, "q_1"] & Q & B \arrow[l, "q_2"']\end{tikzcd} is a \emph{coproduct} of $A$ and $B,$ if for any $Z$ and \begin{tikzcd}A \arrow[r, "z_1"] & Z & B \arrow[l, "z_2"']\end{tikzcd} there is a unique $u:Q\to Z$ with $u \circ q_i = z_i,$ all as indicated in
+
+  \begin{equation*} 
+    \begin{tikzcd}
+    && Z&&\\
+    &&  &&\\&&  &&\\
+    A \arrow[rr, "q_1"'] \arrow[rruuu, "z_1"] &  & Q \arrow[uuu, "u"', dotted] &
+    & B \arrow[ll, "q_2"] \arrow[lluuu, "z_2"']
+    \end{tikzcd} 
+  \end{equation*}
+\end{defn}
+We usually write \begin{tikzcd}A \arrow[r, "i_1"] & A+B & B \arrow[l, "i_2"']\end{tikzcd} for the coproduct and $[f, g]$ for the uniquely determined arrow $u:A+B \to Z.$ The ``coprojections'' $i_1:A \to A+B$ and $i_2:B\to A+B$ are usually called \emph{injections}, with no deeper meaning.
+
+A coproduct is therefore, precisely the product of the objects in the opposite category. This immediately gets a lot of examples of coproducts. However, the opposite category of a familiar category is not really very familiar. Let us look at some more familiar categories and coproducts there.
+
+\hrulefill
+
+However, before we see examples, a joke:
+\begin{joke}
+A mathematician is a person who turns coffee into theorems.\\
+A comathematician is a coperson who turns cotheorems into ffee.
+\end{joke}
+\hrulefill
+
+\example{}  In $\mathsf{Set},$ the coproduct $A+B$ of two sets is their disjoint union which can be constructed, for example, as
+\begin{equation*} 
+  A + B = \{(a, 1) \mid a \in A\} \cup \{(b, 2) \mid b \in B\}
+\end{equation*}
+with evident coproduct injections as
+\begin{equation*} 
+  i_1(a) = (a, 1), \quad i_2(b) = (b, 2).
+\end{equation*}
+Given any functions $f$ and $g$ as in
+\begin{equation*} 
+  \begin{tikzcd}
+    A \arrow[rr, "f"] && Z && B \arrow[ll, "g"']
+  \end{tikzcd},
+\end{equation*}
+we define $[f, g]:A+B \to Z$ as
+\begin{equation*} 
+  [f, g](x, \delta) = \begin{cases}
+    f(x) & \delta = 1\\
+    g(x) & \delta = 2.
+  \end{cases}
+\end{equation*}
+It can be verified that $[f, g]\circ i_1 = f$ and $[f, g]\circ i_2 = g.$\\
+Moreover, given any $h:A+B \to Z$ with $h\circ i_1 = f$ and $h\circ i_2 = g,$ we must have $h = [f, g].$\\
+Thus, every pair of objects in $\mathsf{Set}$ does have a coproduct.\\
+Also, note that in $\mathsf{Set},$ every finite set is a coproduct:
+\begin{equation*} 
+  A \cong \underbrace{1 + 1 + \cdots + 1}_{n \text{ times}}
+\end{equation*}
+for $n = \operatorname{card}(A).$ This is because a function $f:A \to Z$ is uniquely determined by its values $f(a)$ for all $a \in A.$ (This also encapsulates the fact that one may define $f(a)$ in \emph{any} way for each $a \in A$ and still get a function $f:A\to Z.$ This is in contrast to something more structured like a monoid where the arrows must satisfy some further constraints.)
+
+\example{\label{ex:freemoncop}} If $M(A)$ and $M(B)$ are \emph{free} monoids on sets $A$ and $B,$ then in $\mathbf{Mon},$ we can construct there coproduct as
+\begin{equation*} 
+  M(A) + M(B) \cong M(A+B),
+\end{equation*}
+where $A+B$ is the coproduct of sets, id est, their disjoint union as defined above.\\
+The injections are the natural inclusions.\\
+One can see that this is a coproduct directly by considering words over $A + B,$ but it also follows abstractly by using the diagram.
+\begin{equation} \label{diag:moncoprod}
+  \begin{tikzcd}
+    && N&&\\&&&&\\&&&&\\&&&&\\
+    M(A) \arrow[rruuuu] \arrow[rr]&  & 
+    M(A+B) \arrow[uuuu, dotted]    &  & M(B) \arrow[lluuuu] \arrow[ll]
+    \\&&&&\\&&&&\\
+    A \arrow[uuu, "\eta_A"] \arrow[rr] &  & A+B \arrow[uuu, "\eta_{A+B}"] 
+    && B \arrow[ll] \arrow[uuu, "\eta_B"']
+  \end{tikzcd}
+\end{equation}
+in which the $\eta$s are the respective insertion of generators. (Recall this from \S\S\ref{ssec:free}.)\\
+(Note that there's actually an abuse of notation in the above diagram as we have objects from both $\mathsf{Set}$ and $\mathsf{Mon}$ in it. This will carry on for the rest of this example.)\\
+The UMPs of $M(A), M(B), A+B,$ and $M(A+B)$ then imply that $M(A+B)$ has the required UMP of $M(A) + M(B).$ \\~\\
+%
+Let us look at this in more detail:\\
+The injections $i_1 : M(A) \to M(A + B)$ and $i_2 : M(B) \to M(A + B)$ are defined to be precisely those that make the squares in (\ref{diag:moncoprod}) commute. (Their existence and uniqueness are given by the UMP of free monoids.)\\
+Now we show that $M(A + B)$ has the desired UMP given these injections.\\~\\
+%
+Let $f:M(A) \to N$ and $g:M(B) \to N$ be monoid homomorphisms. We want to show the existence of a unique monoid homomorphism $u:M(A + B) \to N$ that makes the two triangles commute.\\~\\
+\textbf{Existence}: Consider the arrows $f\circ\eta_A:A\to N$ and $g\circ\eta_B:B\to N$ (in $\mathsf{Set}$). By the UMP of $A + B,$ there exists $h:A+B \to N$ making the following diagram commute.
+
+\begin{equation} \label{diag:coprodmon2}
+  \begin{tikzcd}
+  && N &&\\&&&&\\&&&&\\
+  M(A) \arrow[rruuu, "f"]            &  &                         &  & M(B) \arrow[lluuu, "g"']\\&&&&\\&&&&\\
+  A \arrow[uuu, "\eta_A"] \arrow[rr, "i_1'"'] &  & A+B \arrow[uuuuuu, "h"] &  & B \arrow[ll, "i_2'"] \arrow[uuu, "\eta_B"']
+  \end{tikzcd}
+\end{equation}
+Now, using the UMP of the free monoid $M(A + B),$ get a monoid homomorphism $u:M(A + B) \to N$ such that $u\circ\eta_{A+B} = h.$\\
+Now, we show that this $u$ makes the triangles commute. We show this for the left triangle. We first observe that $f\circ \eta_A = u \circ i_1 \circ \eta_A.$ This was because $h = u \circ \eta_{A+B}$ and the fact that the left square commuted. And also note that
+\begin{align*} 
+  f\circ \eta_A = u \circ i_1 \circ \eta_A \implies f = u \circ i_1.
+\end{align*}
+This above follows from the UMP of $M(A).$\\
+Similarly, we get that the right triangle commutes.\\~\\
+%
+\textbf{Uniqueness}: Let $v:M(A+B) \to N$ be another monoid homomorphism making (\ref{diag:moncoprod}) commute. Then (\ref{diag:coprodmon2}) also commuted with $v\circ \eta_{A+B}$ instead of $h.$ However, by the UMP of $M(A+B),$ this forces $h = v\circ \eta_{A+B},$ id est, $u \circ \eta_{A+B} = v \circ \eta_{A+B}.$ This clearly forces $u = v,$ as desired.
+  
+Note: twice in the above have we used that $f\circ \eta = g\circ\eta \implies f = g.$ This had not been proven earlier but is an easy consequence of the UMP. This is left to the reader.\\~\\
+%
+The foregoing examples says precisely that the free monoid functor $M:\mathsf{Set} \to \mathsf{Mon}$ preserves coproducts. However, note that the underlying set of $M(A + B)$ is \textbf{not} the coproduct of the underlying sets of $M(A)$ and $M(B).$ 
+
+\example{} In $\mathsf{Top},$ the coproduct of two topological spaces $X$ and $Y$ is the space $X + Y$ defined as follows:\\
+As a set, $X + Y$ is simply the disjoint union of $X$ and $Y,$ id est, the coproduct in $\mathsf{Set}.$\\
+A set $U \subset X + Y$ is open iff $U \cap X$ is open and $U \cap Y$ is open. (Considering our previous construction of coproduct in $\mathsf{Set},$ we should write $U \cap (X \times \{1\})$ with the understanding that $X \times \{1\}$ has the topology $O(X) \times \{1\}.$)\\
+The injections are the same as in $\mathsf{Set}.$ It is an easy verification that these injections are indeed arrows in $\mathsf{Top},$ id est, these are continuous.\\
+Moreover, given any $z_1, z_2, Z$ as in the definition, it can be verified that the arrow $u:X+Y \to Z$ obtained in $\mathsf{Set}$ is indeed an arrow in $\mathsf{Top},$ id est, it is continuous.
+
+\example{\label{ex:rootedpos}} Coproducts of posets are similarly constructed from the coproducts of the underlying sets, by ``putting them side by side.'' That is, given posets $P$ and $Q,$ the poset $P+Q$ is simply a poset on the disjoint union $P + Q$ with the relation as inherited from earlier without any additional ones.\\
+What about ``rooted posets'', id est, posets with a distinguished initial element $0?$ In the category $\mathsf{Pos}_0$ of such posets and monotone maps that preserve $0,$ one constructs the coproduct of two such posets $P$ and $Q$ from the coproduct $P + Q$ in the category $\mathsf{Pos},$ by ``identifying'' the two different $0$s,
+
+\begin{equation*} 
+  A +_{\mathsf{Pos}_0} B = (A +_{\mathsf{Pos}} B)/\text{``}0_A = 0_B\text{''}.
+\end{equation*}
+(Recall \nameref{equivrel}.)
+
+Recall the example of product in a poset (viewed as a category). There we had gotten the product to be the greatest lowest bound of two elements. Dually, one can consider the question of coproduct in a poset. The answer is not surprising.
+
+\example{} Let $P$ be a fixed poset and $p, q \in P.$ Suppose $p + q$ exists. Then we have
+
+\begin{equation*} 
+  p \le p + q \quad \text{and} \quad q \le p + 1
+\end{equation*}
+and if 
+
+\begin{equation*} 
+  p \le z \quad \text{and} \quad p \le z
+\end{equation*}
+then
+
+\begin{equation*} 
+  p + q \le z.
+\end{equation*}
+So, $p + q = p \vee q$ is the join, or \emph{least upper bound} of $p$ and $q.$\\
+(Of course, it is not necessary that joins exist.)
+
+\example{} Two monoids $A, B$ have a coproduct of the form
+\begin{equation*} 
+  A + B = M(|A| + |B|)/\sim
+\end{equation*}
+where, as before, the free monoid $M(|A| + |B|)$ is strings (words) over the disjoint union $|A| + |B|$ of the underlying sets - that is, the elements of $A$ and $B$ - and the equivalence relation $v \sim w$ is the smallest one containing all instances of the following equations:
+\begin{align} 
+  (\ldots x u_A y \ldots) &= (\ldots xy\ldots)\nonumber\\
+  (\ldots x u_B y \ldots) &= (\ldots xy\ldots) \label{eq:coprod}\\
+  (\ldots aa' \ldots) &= (\ldots a\cdot_Aa'\ldots)\nonumber\\
+  (\ldots bb' \ldots) &= (\ldots b\cdot_Ab'\ldots)\nonumber
+\end{align}
+
+The idea is informally to have only those words with letters from $A$ and $B$ such that the letters alternate and that $u_A$ and $u_B$ never appear.
+
+The unit is the equivalence class $[\epsilon]$ of the empty word (which is the same as $[u_A]$ and $[u_B]$). Multiplication of equivalence classes is as expected:
+\begin{equation*} 
+  [x\ldots y]\cdot[x'\ldots y'] = [x\ldots yx' \ldots y'].
+\end{equation*}
+It would have to be verified that the above is indeed well defined. That is to say:
+\begin{equation*} 
+  [x\ldots y] = [a\ldots b] \text{ and } [x'\ldots y'] = [a'\ldots b'] \text{ implies } [x\ldots yx' \ldots y'] = [a\ldots ba' \ldots b'].
+\end{equation*}
+We leave this to the reader.
+
+The coproduct injections $i_A:A\to A+B$ and $i_B:B\to A+B$ are simply
+\begin{equation*} 
+  i_A(a) = [a], \quad i_B(b) = [b],
+\end{equation*}
+which are easily seen to be homomorphisms. Given any homomorphism $f:A\to M$ and $g:B\to M$ into a monoid $M,$ the unique homomorphism
+\begin{equation*} 
+  [f, g] : A + B \to M
+\end{equation*}
+is defined as follows:
+\begin{enumerate}
+  \item We have the functions $|f| : |A| \to |M|,$ $|g| : |B| \to |M|.$ We use these to obtain the function $[|f|, |g|] : |A| + |B| \to |M|.$
+  \item The function $[|f|, |g|] : |A| + |B| \to |M|$ is extended to one $[f, g]'$ on the free monoid $M(A + B)$ using the UMP.
+  
+  \begin{equation*} 
+    \begin{tikzcd}
+     M({\vert}A{\vert} + {\vert}B{\vert}) \arrow[rr, "{[f, g]'}"] \arrow[ddd, two heads] &  & M \\
+      &&\\&&\\
+      M({\vert}A{\vert} + {\vert}B{\vert})/{\sim} &&
+    \end{tikzcd}
+  \end{equation*}
+  \item We then observe that $[f, g]'$ ``respects the equivalence relation $\sim$,'' the sense that if $v \sim w$ in $M(|A| + |B|),$ then $[f, g]'(v) = [f, g]'(w).$ This is a consequence of the fact that the equations (\ref{eq:coprod}) are respected by homomorphisms.\\
+  Thus, the map $[f, g]'$ extends to the quotient to yield the desired map $[f, g]:M(|A| + |B|)/\sim \to M.$
+
+  \begin{equation*} 
+    \begin{tikzcd}
+     M({\vert}A{\vert} + {\vert}B{\vert}) \arrow[rr, "{[f, g]'}"] \arrow[ddd, two heads] &  & M \\
+      &&\\&&\\
+      M({\vert}A{\vert} + {\vert}B{\vert})/{\sim} \arrow[rruuu, "{[f, g]}"', dotted] &&
+    \end{tikzcd}
+  \end{equation*}
+  That this is the unique homomorphism is to be verified.
+\end{enumerate}
+
+This construction also works to give coproducts in $\mathsf{Grp},$ where it is usually called the \emph{free product} of $A$ and $B$ and written as $A \oplus B,$ we well as other categories of ``algebras,'' id est, sets equipped with operations. \\
+As we had seen before in Example \ref{ex:freemoncop}, the underlying set of $A+B$ is \emph{not} the coproduct of $|A|$ and $|B|.$ This is to say that the forgetful functor $U:\mathsf{Mon} \to \mathsf{Set}$ does not preserve coproducts.
+
+\example{} For \emph{abelian groups} $A, B,$ the free product $A \oplus B$ need not be abelian. One could take a further quotient to get an abelian group which would give us the coproduct in the category $\mathsf{Ab}$ of abelian groups (and group homomorphisms). However, there is a more convenient presentation which we now consider.
+
+As we will work in the category $\mathsf{Ab}$ of abelian groups, we shall use additive notation to represent the group operation.\\
+In the category $\mathsf{Ab},$ the coproduct $A \oplus B$ must be forced to satisfy the commutativity conditions
+\begin{equation*} 
+  (a_1b_1a_2b_2\ldots) \sim (a_1a_2\ldots b_1b_2\ldots)
+\end{equation*}
+we can shuffle all the $a$s to the front and all the $b$s to the back, of the words. However, we already have
+\begin{equation*} 
+  (a_1a_2\ldots b_1b_2\ldots) \sim (a_1 + a_2 + \cdots + b_1 + b_2 + \cdots) \sim (a + b),
+\end{equation*}
+where $a = (a_1 + a_2 + \cdots) \in A$ and $b = (b_1 + b_2 + \cdots) \in B.$\\
+Thus, in effect, we have pairs $(a, b).$ \\
+This motivates the fact that we can take the typical product of groups as the coproduct. That is, as a set, it is $|A| \times |B|.$ The operation is component wise.\\
+As injections, we use the homomorphisms
+\begin{equation*} 
+  i_A(a) = (a, 0_B), \quad i_B(b) = (0_A, b).
+\end{equation*}
+Then, given any homomorphisms $A \overset{f}{\longrightarrow}X \overset{g}{\longleftarrow} B,$ we let $[f, g]:A + B \to X$ be defined as
+\begin{equation*} 
+  [f, g](a, b) = f(a) +_X g(b).
+\end{equation*}
+The fact that $[f, g]$ is indeed a homomorphism follows from the commutativity of $+_X.$ Indeed, one can see
+\begin{align*} 
+  [f, g]((a, b) + (a', b')) &= [f, g](a + a', b + b')\\
+  &= f(a + a') +_X + g(b + b')\\
+  &= f(a) +_X f(a') +_X g(b) +_X g(b')\\
+  &= f(a) +_X g(b) +_X f(a') +_X g(b')\\
+  &= [f, g](a, b) +_X [f, g](a', b').
+\end{align*}
+Now, we verify that $f = [f, g]i_A.$ Let $a \in A,$ then
+\begin{align*} 
+  ([f, g]\circ i_A)(a) &= [f, g](i_A(a))\\
+  &= [f, g](a, 0_B)\\
+  &= f(a) +_X g(0_B)\\
+  &= f(a) +_X 0_X\\
+  &= f(a).
+\end{align*}
+Similarly, $g = [f, g]i_B.$\\
+Now, let $h:A + B \to X$ be such that $hi_A = f$ and $hi_B = g.$\\
+First we show that $h$ and $[f, g]$ agree on $A \times \{0_B\}.$
+\begin{align*} 
+  h(a, 0_B) &= h(i_A(a))\\
+  &= f(a)\\
+  &= [f, g](i_A(a))\\
+  &= [f, g](a, 0_B).
+\end{align*}
+Similarly, we see that $[f, g](0_A, b) = h(0_A, b).$
+Now, let $(a, b) \in A + B.$ Then,
+\begin{align*} 
+  h(a, b) &= h(a, 0_B) +_X h(0_A, b)\\
+  &= [f, g](a, 0_B) +_X [f, g](0_A, b)\\
+  &= [f, g](a, b).
+\end{align*}
+Thus, the uniqueness is also proved.
+
+\begin{prop}
+  In the category $\mathsf{Ab}$ of abelian groups and group homomorphisms, there is a canonical isomorphism between the binary coproduct and product,
+  \begin{align*} 
+    A + B \cong A \times B.
+  \end{align*}
+\end{prop}
+\begin{proof}
+  To define an arrow $\varv:A+B \to A\times B,$ we need one $A \to A \times B$ (and one $B \to A \times B$), so we need arrows $A\to A$ and $A \to B$ (and $B \to A$ and $B \to B$). For these, we take $1_A : A \to A$ and the zero homomorphism $0_B : A \to B$ (and $0_A : B \to A$ and $1_B : B \to B$). Thus, all together, we get
+  \begin{equation*} 
+    \varv = [\langle 1_A, 0_B\rangle, \langle 0_A, 1_B\rangle]:A+B \to A \times B.
+  \end{equation*}
+  Then, given any $(a, b) \in A + B,$ we have
+  \begin{align*} 
+    \varv(a, b) &= \langle 1_A, 0_B\rangle(a) + \langle 0_A, 1_B\rangle(b)\\
+    &= (1_A(a), 0_B(a)) + (0_A(b), 1_B(b))\\
+    &= (a, 0) + (0, b)\\
+    &= (a, b).
+  \end{align*}
+\end{proof}
+
+Just as with products, one can consider the empty coproduct, which is an initial object $0$, as well as coproduct of several factors, and the coproduct of two arrows,
+\begin{equation*} 
+  f + f' : A + A' \to B + B'
+\end{equation*}
+which leads to a coproduct functor $+ : \mathbf{C} \times \mathbf{C} \to \mathbf{C}$ on categories $\mathbf{C}$ with binary coproducts. All of these facts follow simply by duality; that is, by considering the dual notions in the opposite category. Similarly, we have the following proposition.
+\begin{prop}
+  Coproducts are unique up to isomorphism.
+\end{prop}
+\begin{proof} 
+  Use duality, Proposition \ref{prop:prodiso} and the fact that the dual of ``isomorphism'' is ``isomorphism.''
+\end{proof}
+In just the same way, it follows that $(A + B) + C \cong A + (B + C).$
+
+Thus, in general, it will suffice to introduce new notions once and then simply observe that the dual notions have analogous (but dual) properties.
+
+\subsection{Equalizers}
+\begin{defn} 
+  In any category $\mathbf{C},$ given parallel arrows
+  \begin{equation*} 
+    \begin{tikzcd}
+      A \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left]&&B
+    \end{tikzcd}
+  \end{equation*}
+  an \emph{equalizer} of $f$ and $g$ consists of an object $E$ and arrow $e:E\to A,$ \textbf{universal} such that
+  \begin{equation*} 
+    f\circ e = g \circ e.
+  \end{equation*}
+  That is, given any $z : Z \to A$ with $f \circ z = g \circ z,$ there is a \emph{unique} $u:Z \to E$ with $e \circ u = x,$ all as in the diagram
+
+  \begin{equation*} 
+    \begin{tikzcd}
+    E \arrow[rr, "e"] &  & A \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left]&&B\\
+    &&&&\\&&&&\\
+    Z \arrow[rruuu, "z"'] \arrow[uuu, "u", dotted] &&&&  
+    \end{tikzcd}
+  \end{equation*}
+\end{defn}
+
+Let us consider some examples.
+\example{} Consider the category $\mathbf{C} = \mathsf{Set}.$ Let $f, g:A \tto B$ be a pair of parallel arrows. Consider the equationally defined subset $E = \{x \in A \mid f(x) = g(x)\} \subset A$ along with the inclusion map $i:E \hookrightarrow A$ define as $x\mapsto x.$ Then $E$ and $i$ comprise the equalizer. This can be concisely written as
+\begin{equation*} 
+  \{x \in A \mid f(x) = g(x)\} \hookrightarrow A.
+\end{equation*}
+Let us show that this has the properties required. First, we show that $f\circ i = g\circ i.$ Let $x \in E,$ then
+\begin{align*} 
+  (f \circ i)(x) &= f(i(x))\\
+  &= f(x)\\
+  &= g(x)\\
+  &= g(i(x))\\
+  &= (g\circ i)(x).
+\end{align*}
+Now, let $z:Z \to A$ be any function with $f \circ z = g \circ z$ as depicted by
+
+\begin{equation*} 
+  \begin{tikzcd}
+    E \arrow[rr, "i", hook] &  & A \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left]&&B\\
+    &&&&\\&&&&\\
+    Z \arrow[rruuu, "z"'] &&&&  
+    \end{tikzcd}
+\end{equation*}
+From the above, we get that $f(z(x)) = g(z(x))$ for all $x \in Z.$ This is the same as saying that $z(x) \in E$ for all $x \in Z.$\\
+Which, in turn, is the same as saying that the function $z$ ``restricts''\footnote{``Restriction'' usually refers to restricting the map to a subset of the domain. This is not what we mean here.} to a function $\bar{z}:Z \to E$ defined as $x \mapsto z(x).$ (As the image lies within $E.$)\\
+This is the desired $u = \bar{z}$ that makes the diagram commute.
+
+\begin{equation*} 
+  \begin{tikzcd}
+    E \arrow[rr, "i", hook] &  & A \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left]&&B\\
+    &&&&\\&&&&\\
+    Z \arrow[rruuu, "z"']  \arrow[uuu, "u", dotted] &&&&  
+    \end{tikzcd}
+\end{equation*}
+
+The uniqueness of $u$ follows from $i$ being monic.
+
+\example{} Let us take a more explicit version of the above example. Suppose we have the functions $f, g: \mathbb{R}^2 \tto \mathbb{R}$ where
+\begin{align*} 
+  f(x, y) &= x^2 + y^2,\\
+  g(x, y) &= 1
+\end{align*}
+and we take the equalizer in say, $\mathsf{Top}.$ As before, this is the subspace (along with the inclusion map)
+\begin{equation*} 
+  S^1 = \{(x, y) \in \mathbb{R}^2 \mid x^2 + y^2 = 1\} \hookrightarrow \mathbb{R}^2,
+\end{equation*}
+that is, the unit circle in the plane. (Note that the inclusion is indeed continuous.)\\
+Once again, given any generalised element $z:Z\to \mathbb{R}^2$ with $fz = gz,$ we have that $z$ actually maps into $S^1$ and we note that the ``restriction'' $\bar{z}:Z\to S^1$ is in fact continuous. The uniqueness again follows from the inclusion being monic.
+
+Before moving ahead, we note that every subset $U \subset A$ is of this ``equational'' form, that is, every subset is an equalizer for some pair of functions. (We are back in $\mathsf{Set}.$)\\
+Indeed, one can do this in a very canonical way. First, let us put 
+\begin{equation*} 
+  2 = \{\bot, \top\}.
+\end{equation*}
+The above can be thought of as a set of ``truth values.'' Then, consider the \emph{characteristic function}
+\begin{equation*} 
+  \chi_U : A \to 2,
+\end{equation*}
+defined for $x \in A$ by
+\begin{align*} 
+  \chi_U(x) = \begin{cases}
+    \top & x \in U\\
+    \bot & x \notin U.
+  \end{cases}
+\end{align*}
+Thus, we have
+\begin{equation*} 
+  U = \{x \in A \mid \chi_U(x) = \top\}.
+\end{equation*}
+So the following is an equalizer:
+\begin{equation*} 
+  \begin{tikzcd}
+    U \arrow[rr] && A \arrow[rr, "\top!", shift left] \arrow[rr, "\chi_U"', shift right] && 2
+  \end{tikzcd}
+\end{equation*}
+where $\top! = \top\circ !:A \overset{!}{\longrightarrow}1 \overset{\top}{\longrightarrow}2,$ id est, $\top!(x) = \top$ for all $x \in A.$
+
+Moreover, for every function,
+\begin{equation*} 
+  \varphi:A \to 2,
+\end{equation*}
+we can form the ``variety'' (id est, equational subset)
+\begin{equation*} 
+  V_\varphi = \{x \in A \mid \varphi(x) = \top\}
+\end{equation*}
+as an equalizer, in the same way.
+
+Now, it is easy to see that these operations are mutually inverses, id est, $\chi_{V_{\varphi}} = \varphi$ and $V_{\chi_{U}} = U.$ To see, we first note that
+\begin{align*} 
+  \chi_{V_{\varphi}}(x) &= \begin{cases}
+    \top & x \in V_{\varphi}\\
+    \bot & x \notin V_{\varphi}
+  \end{cases}\\
+  &= \begin{cases}
+    \top & \phi(x) = \top\\
+    \bot & \phi(x) \neq \top
+  \end{cases}\\
+  &= \begin{cases}
+    \top & \phi(x) = \top\\
+    \bot & \phi(x) = \bot
+  \end{cases}\\
+  &= \varphi(x).
+\end{align*}
+Then, we note that
+\begin{align*} 
+  V_{\chi_{U}} &= \{x \in A \mid \chi_U(x) = \top\}\\
+  &= \{x \in A \mid x \in U\}\\
+  &= U.
+\end{align*}
+Thus, we have the familiar isomorphism
+\begin{equation*} 
+  \Hom(A, 2) \cong P(A).
+\end{equation*}
+\begin{prop} \label{prop:eqmonic}
+  In any category, if $e:E\to A$ is an equalizer of some pair of arrows, then $e$ is monic.
+\end{prop}
+\begin{proof} 
+  Let $e$ be the equalizer of $f, g:A\tto B.$\\
+  Let $x, y:Z \tto E$ be a pair of arrows such that $ex = ey.$ We wish to show that $x = y.$
+  \begin{equation*} 
+    \begin{tikzcd}
+      Z \arrow[rr, "x", shift left]\arrow[rr, "y"', shift right] &&
+      E \arrow[rr, "e"] &&
+      A \arrow[rr, "f", shift left]\arrow[rr, "g"', shift right] && B
+    \end{tikzcd}
+  \end{equation*}
+  Consider $z = ex = ey.$ Then, we have
+  \begin{align*} 
+    fz &= fex\\
+    &= gex & (\because fe = ge)\\
+    &= gz.
+  \end{align*}
+  Thus, we have a diagram of the form
+  \begin{equation*} 
+    \begin{tikzcd}
+    E \arrow[rr, "e"] &  & A \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left]&&B\\
+    &&&&\\&&&&\\
+    Z \arrow[rruuu, "z"'] \arrow[uuu, "u", dotted] &&&&  
+    \end{tikzcd}
+  \end{equation*}
+  Now, using the universal property of the equalizer, we get that there is a unique $u:Z \to E$ making the following diagram commute
+  \begin{equation*} 
+    \begin{tikzcd}
+    E \arrow[rr, "e"] &  & A \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left]&&B\\
+    &&&&\\&&&&\\
+    Z \arrow[rruuu, "z"'] \arrow[uuu, "u", dotted] &&&&  
+    \end{tikzcd}
+  \end{equation*}
+  However, one can observe that both $u = x$ and $u = y$ make the diagram commute. Uniqueness forces $x = y.$
+\end{proof}
+
+\example{} In many other categories, such as posets and monoids, the equalizer of a parallel pair of arrows $f, g:A\tto B$ can be constructed by taking the equalizer of the underlying functions as above, id est, the subset $A(f = g) \subset A$ of elements $x \in A$ where $f$ and $g$ agree, $f(x) = g(x),$ and then restricting the structure of $A$ to $A(f = g).$ \\~\\
+%
+%
+For instance, in posets one takes the ordering from $A$ restricted to this subset $A(f = g),$ and in topological spaces one takes the subspace topology.\\~\\
+%
+In monoids, the subset $A(f = g)$ is then again a monoid with the operations from $A,$ id est, it contains the unit and is closed under multiplication. To see this, we first note that $f(u_A) = u_B = g(u_A)$ and thus $u_A \in A(f = g).$ Secondly, if $f(a) = g(a)$ and $f(a') = g(a'),$ then $f(aa') = f(a)f(a') = g(a)g(a') = g(aa')$ and thus, $A(f = g)$ is closed under multiplication.\\
+This shows that $A(f = g)$ is a submonoid of $A$ and hence, the inclusion is a homomorphism.\\~\\
+%
+In abelian groups, for instance, one has an alternate description of the equalizer using the fact that,
+\begin{equation*} 
+  f(x) = g(x) \quad \text{iff} \quad (f - g)(x) = 0.
+\end{equation*}
+Now, since we're in $\mathsf{Ab},$ $f - g$ is again a homomorphism. Thus, the equalizer of $f$ and $g$ is the same as that of the homomorphism $f - g$ and the zero homomorphism $0:A\to B,$ so it suffices to consider equalizers of the special form $A(h = 0) \mono A$ for arbitrary homomorphisms $h:A\to B.$ \\
+This subgroup of $A$ is called the \emph{kernel} of $h,$ written $\ker(h).$ Thus, we have the equalizer
+\begin{equation*} 
+  \begin{tikzcd}
+    \ker(f - g) \arrow[rr, hook] && A \arrow[rr, "f", shift left] \arrow[rr, "g"', shift right] && B
+  \end{tikzcd}.
+\end{equation*}
+
+\subsection{Coequalizers} \label{ssec:coeq}
+We consider the notion dual to that of equalizer.
+\begin{defn} 
+  For any parallel arrows $f, g:A \tto B,$ in a category $\mathbf{C},$ a \emph{coequalizer} consists of $Q$ and $q:B \to Q,$ universal with the property $qf = qg,$ as in
+  \begin{equation*} 
+    \begin{tikzcd}
+    A \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] && 
+    B \arrow[rr, "q"] \arrow[rrddd, "z"'] &  & Q \arrow[ddd, "u", dotted] \\
+    &&&&\\&&&&\\
+    &&&& Z
+    \end{tikzcd}
+  \end{equation*}
+  That is, given any $Z$ and $z:B\to Z,$ if $zf = zg,$ then there exists a unique $u:Q \to Z$ such that $uq = z.$
+\end{defn}
+Using duality, we directly get the following proposition.
+\begin{prop}
+  In any category, if $q:B\to Q$ is a coequalizer of some pair of arrows, then $q$ is epic.
+\end{prop}
+\begin{proof} 
+  Duality and Proposition \ref{prop:eqmonic}.
+\end{proof}
+Before the next examples, recall \S\S\ref{equivrel}.
+\example{} Consider an equivalence relation $R \subset B \times B$ and the diagram
+\begin{equation*} 
+  \begin{tikzcd}
+    R \arrow[rr, "r_1", shift left] \arrow[rr, "r_2"', shift right] && B
+  \end{tikzcd}
+\end{equation*}
+where the two $r$s are the two compositions of the projections with the inclusion
+
+\begin{equation*} 
+  \begin{tikzcd}
+  && R \arrow[ddd, hook] \arrow[llddd, "r_1"'] \arrow[rrddd, "r_2"] &&\\
+  &&&&\\&&&&\\
+  B && B \times B \arrow[ll, "p_1"] \arrow[rr, "p_2"'] && B
+  \end{tikzcd}
+\end{equation*} 
+
+The quotient projection 
+\begin{equation*} 
+  \pi:B \to B/R
+\end{equation*}
+defined as $x \mapsto [x]$ is then a coequalizer of $r_1$ and $r_2.$\\
+To see this, consider any $f:X \to Y$ as in
+
+\begin{equation*} 
+  \begin{tikzcd}
+  R \arrow[rr, "r_1", shift left] \arrow[rr, "r_2"', shift right]&& 
+  B \arrow[rr, "\pi"] \arrow[rrddd, "f"'] &  & X/R \arrow[ddd, "\bar{f}", dotted] \\&&&&\\&&&&\\
+  &&&& Y  
+  \end{tikzcd}
+\end{equation*}
+
+Then, there exists a unique $\bar{f}$ as indicated in the above diagram, id est, 
+\begin{equation*}   
+  \bar{f}\pi(b) = f(b) \quad \text{for all } b \in B.
+\end{equation*}
+As we had noted in Proposition \ref{prop:fextend}, this happens precisely when $f$ respects $R.$ As $fr_1 = fr_2,$ this is indeed true. To see this, let $(b, b') \in R.$ Then,
+\begin{align*} 
+  f(b) &= fr_1(b, b')\\
+  &= fr_2(b, b')\\
+  &= f(b').
+\end{align*}
+
+\exapmle{} The coequalizer of any arbitrary pair of arrows $f, g:A\tto B$ in $\mathsf{Set}$ can be constructed similarly as follows:
+\begin{enumerate}
+  \item Define a relation $R$ on $B$ as follows:
+  \begin{equation*} 
+    R = \{(f(a), g(a)) \mid a \in A\}.
+  \end{equation*}
+  \item Define $\sim$ to be the equivalence relation generated by $R.$\\
+  Thus, $\sim$ is the equivalence relation generated by the equations $f(a) = g(a)$ for all $a \in A.$
+  \item Then, $\pi:X \to X/R$ is a coequalizer of $f$ and $g.$ To see this, consider any $z:B \to Z$ as in
+  \begin{equation*} 
+    \begin{tikzcd}
+    A \arrow[rr, "f", shift left] \arrow[rr, "g"', shift right] &  & B \arrow[rr, "\pi"] \arrow[rrddd, "z"'] &  & B/{\sim} \arrow[ddd, "\bar{z}", dotted] \\
+    &&&&\\&&&&\\
+    &&&& Z       
+    \end{tikzcd}
+  \end{equation*}
+
+  As before, one sees that $z$ respects $R.$ Then, by Proposition \ref{prop:fextends2}, we get the existence of the unique $\bar{z},$ as desired.
+\end{enumerate}
+
+\example{} In Example \ref{ex:rootedpos}, we considered the coproduct of ``rooted posets'' $P$ and $Q$ by first making $P + Q$ in $\mathsf{Pos}$ and then ``identifying'' the resulting two different $0$-elements $0_P$ and $0_Q$ (id est, the images of these under the coproduct inclusions). We can now describe this ``identification'' as a coequalizer taken in  $\mathsf{Pos},$
+\begin{equation*} 
+  \begin{tikzcd}
+    1 \arrow[rr, "0_P", shift left] \arrow[rr, "0_Q"', shift right] && P + Q \arrow[rr] && P + Q/(0_P = 0_Q)
+  \end{tikzcd}
+\end{equation*}
+
+\input{ack.tex}
+\end{document}

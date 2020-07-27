@@ -1,0 +1,179 @@
+\pah{01-02-2019}
+\section{Writing some proofs}\label{sec:writingproofs}
+This lecture comprised of solving some problems which were given in \hyperref[assign:2]{Assignment 2}.\\
+
+\hrulefill
+\ \\~\\
+Question. Write $A = \emptyset$ as a subset of $B = \mathbb{R}$.\\
+Solution.\\
+    $A = \{x\in\mathbb{R}|x^2 < 0\}$\\
+    ``$x\in\mathbb{R}$" makes it clear that $A \subset \mathbb{R}$. Now, we must show that $A$ is empty.
+    \begin{proof}
+    Assume not. Then, $A \neq \emptyset$.\\
+    Let $x \in A$.\\
+    By definition, 
+    \begin{tabular}[t]{l r r}
+        $x^2 < 0$ & & (1)  \\
+        $x \in \mathbb{R}$ & & \\
+        $\therefore 0 \le x^2$ & [$\forall a \in \mathbb{R}(0 \le a^2)$] &(2)
+    \end{tabular}\\
+    By (1) and (2), we have:\\
+    $x^2 < 0$ and $0 \le x^2$\\
+    But $x \in \mathbb{R}$ implies that $x^2 \in \mathbb{R}$.\\
+    Hence $x^2 < 0$ \textit{and} $0 \le x^2$ contradicts \hyperref[sec:LoT]{Law of Trichotomy of real numbers.}\\
+    Thus, the assumption $A \neq \emptyset$ is incorrect and hence, $A = \emptyset$.
+    \end{proof}
+
+\dotfill
+    
+    Notes:
+    \begin{enumerate}
+        \item The above proof presented is a proof by contradiction.
+        \item It was important to explicitly state that we are assuming ``$A \neq \emptyset$" as it makes the next line ``Let $x \in A$" valid. Moreover, it gives the clarity that all the reasoning that had followed was because we said ``$A \neq \emptyset$".
+        \item When writing the reason for (2), we used another variable $(a)$. This was to show that the property we're using is \textit{for any} real number and therefore, it must be valid for $x$ too as it is a real number.
+        \item We cannot directly conclude that ``$x^2 < 0$ and $0 \le x^2$" is a contradiction of Law of Trichotomy as it is a law about \textit{real numbers}. Therefore, first we must show that $x^2$ \textit{is} a real number. (Of course, later on, these things are always at the back of our mind and we need not write it.)
+    \end{enumerate}
+
+\hrulefill
+
+\exercise{Show that $\{x \in \mathbb{R}|x^2 + 1 = 0\} = \emptyset$}
+
+\hrulefill
+\newpage
+Question. Let $X$ be any set. Show that: $\emptyset \subset X$.\\
+Solution.\\
+To show that it is true, it is enough to show that its negation is false.\\
+That is, prove that: $\emptyset \not\subset X$ is false.
+\begin{proof}
+Assume not. Then, $\emptyset \not\subset X$ is true.\\
+Recall the condition for $A\subset B$: $x \in A \implies x \in B$.\\
+The negation of that would be: $\exists x \in A$ such that $x \not\in B.$\\
+Using that here, tells us that: $\exists x \in \emptyset$ such that $x \not\in X$.\\
+But $\emptyset$ is empty. Hence, ``$\exists x \in \emptyset$" cannot be true which means the above statement cannot be true. Therefore, it is false.\\
+As we concluded a false statement from our assumption, our assumption must be false as nothing false can follow from something true.\\
+$\implies \emptyset \not\subset X$ is false $\implies \emptyset \subset X$.
+\end{proof}
+
+\dotfill
+
+Notes:
+\begin{enumerate}
+    \item The above is proof is also a proof by contradiction.
+    \item While working with empty sets, proofs usually take a route of contradiction as it is usually not possible to have a direct proof.
+    \item Due to the nature of the empty set, a lot of statements about the empty sets are \textit{vacuously true.} Similarly, statements of the form ``If p, then q" are also vacuously true if p itself is false.
+    Examples:
+    \begin{enumerate}[nosep]
+        \item ``All my children are cats" is a vacuous truth when spoken by someone without children.
+        \item ``If $\sin(x)=x$, then $\pi = 3.$" is also a vacuous truth. \footnote{Despite what some \st{engineers} people might try to convince you, it is only \textit{vacuously} true.}
+        \item ``All odd numbers divisible by 2 are prime."
+        \item ``If the square of a real number is negative, then it is -1."
+        \item ``If pigs fly, then they don't fly." \footnote{This was written at a time when pigs didn't fly. (Note that this does \textit{not} imply that pigs do fly at the time you're reading this.)}
+    \end{enumerate}
+\end{enumerate}
+
+\hrulefill
+
+\exercise{Recall the $\epsilon-\delta$ of limit and show that every function $f:\mathbb{N}\to \mathbb{R}$ is continuous.}
+\exercise{The above exercise would then tell you that is possible for a function $f: \mathbb{N} \to \mathbb{R}$ to have different limits. You must have previously proven that ``the" limit of a function ($g:\mathbb{R} \to \mathbb{R}$) (if it exists) is unique. Can you see where that proof breaks in the case of $f:\mathbb{N}\to\mathbb{N}$?}
+
+\hrulefill
+
+(Note: The above two exercises were not actually given in class but I, the author find them interesting.)
+\newpage
+Question. Describe the set $A = \left\{(x, y) \in \mathbb{R}^2\left|\dfrac{x}{y}+\dfrac{y}{x} \ge 2\right.\right\}$\\
+Solution.\\
+As $(x, y)\in \mathbb{R}^2$, Law of Trichotomy tells us that us that we have three options each for $x$ and $y$ which gives us $2^3=8$ cases.\\
+Straight away, we can see that it if $x=0$ or $y=0$, then it cannot be a solution as $\dfrac{x}{y}+\dfrac{y}{x}$ would not be defined.\\
+Therefore, we have that $x\neq 0$ and $y\neq0$. This leaves us with 2 possibilities each for $x$ and $y$ with a total of $2^2=4$ cases.\\
+Based on this bifurcation, we can look at the following subsets of $\mathbb{R}^2$:
+\begin{enumerate}[nosep]
+    \item $\{(x, y) \in \mathbb{R}^2|0 < x, 0 < y\}$
+    \item $\{(x, y) \in \mathbb{R}^2|x < 0, 0 < y\}$
+    \item $\{(x, y) \in \mathbb{R}^2|x < 0, y < 0\}$
+    \item $\{(x, y) \in \mathbb{R}^2|0 < x, y < 0\}$
+\end{enumerate}
+The above are the first, second, third, and fourth quadrants, respectively.\\~\\
+%
+%
+Claim 1: If $(x, y) \in$ I quadrant, then $(x, y) \in A$.
+\begin{proof}
+Let $(x, y) \in$ I quadrant.\\
+$(x, y) \in$ I quadrant $\implies 0 < x, 0 < y$.\\
+$(x-y)^2 \ge 0$ \hfill [$x-y \in \mathbb{R}$ and $\forall a \in \mathbb{R}(a^2 \ge 0)$]\\
+$\implies x^2 - 2xy + y^2 \ge 0$\\
+$\implies x^2 + y^2 \ge 2xy$\\~\\
+$\implies \dfrac{x^2+y^2}{xy} \ge 2$\hfill $\left[0 < x, 0 < y \implies 0 < xy \implies 0 < \dfrac{1}{xy}\right]$\\~\\
+$\implies \dfrac{x}{y} + \dfrac{y}{x} \ge 2$\\~\\
+$\therefore (x, y) \in A$
+\end{proof}
+%
+%
+Claim 2: If $(x, y) \in$ II quadrant, then $(x, y)\not\in A$.
+\begin{proof}Let $(x, y) \in$ II quadrant.
+$(x, y) \in$ II quadrant $\implies x < 0, 0 < y$.\\
+$x < 0 \implies \dfrac{1}{x} < 0$ \hfill $\left[\forall a \in \mathbb{R}\left(a < 0 \implies \dfrac{1}{a} < 0\right)\right]$\\
+$\dfrac{1}{x} < 0 \implies \dfrac{y}{x} < 0$ \hfill (1) $\left[\forall a, b \in \mathbb{R}\left(a < 0, 0 < b \implies ab < 0\right)\right]$\\~\\
+Also, \\
+$0 < y \implies 0 < \dfrac{1}{y}$ \hfill $\left[\forall a \in \mathbb{R}\left(0 < a \implies 0 < \dfrac{1}{a} \right)\right]$\\
+$0 < \dfrac{1}{y} \implies \dfrac{x}{y} < 0$ \hfill $\left[\forall a, b \in \mathbb{R}\left(a < 0, 0 < b \implies ab < 0\right)\right]$\\~\\
+$\implies \dfrac{x}{y} + \dfrac{y}{x} < \dfrac{y}{x}$ \hfill [Ordered Field Axiom (\refaxiom{8})]\\~\\
+$\implies \dfrac{x}{y} + \dfrac{y}{x} < 0$ \hfill [Using (1) and transitivity of $`<'$]\\~\\
+$\implies \dfrac{x}{y} + \dfrac{y}{x} < 2$ \hfill [Using transitivity and the fact that $0<1<1+1=2$]\\~\\
+$\therefore (x, y) \not \in A$ \hfill $\Bigg[$Using Law of Trichotomy on $\dfrac{x}{y} + \dfrac{y}{x}\Bigg]$
+\end{proof}
+%
+%
+Claim 3: If $(x, y) \in$ III quadrant, then $(x, y) \in A$.
+\begin{proof}
+As $\dfrac{x}{y} + \dfrac{y}{x} = \dfrac{-x}{-y} + \dfrac{-y}{-x}$, this implies $(x, y) \in A\iff(-x, -y) \in A$\\\phantom{ } \\
+$(x, y) \in$ III quadrant $\implies x < 0, y < 0 \implies 0 < -x, 0 < -y \implies (-x, -y) \in$ I quadrant $\implies (-x, -y) \in A \implies (x, y) \in A$\\~\\
+\end{proof}
+%
+%
+Claim 4: If $(x, y) \in$ IV quadrant, then $(x, y)\not\in A$.
+\begin{proof}
+As $\dfrac{x}{y} + \dfrac{y}{x} = \dfrac{y}{x} + \dfrac{x}{y}$, this implies $(x, y) \in A\iff(y, x) \in A$\\ \phantom{ }\\
+$(x, y) \in$ IV quadrant $\implies 0 < x, y < 0 \implies (y, x) \in$ II quadrant $\implies (y, x) \not\in A \implies (x, y) \not\in A$.
+\end{proof}
+Let $B = \{(x, y) \in \mathbb{R}^2|(x, y) \in $I quadrant or $(x, y) \in $III quadrant$\}$\\
+Claim 5: $A = B$
+\begin{proof}
+For $A=B$: $A \subset B$ and $B \subset A$\\
+Claims 1 and 3 show that $B \subset A$.\\
+Claims 2 and 4 along with the fact that $x\neq0$ and $y\neq0$ show that $B^c\subset A^c$. (Here complement in taken with respect to the bigger set being $\mathbb{R}^2$.)\\
+Therefore, $A \subset B$ \hfill [$A\subset B \equiv B^c\subset A^c$]\\
+$\therefore A = B$
+\end{proof}
+The $B$ above is precisely the description desired.
+
+\dotfill
+
+Notes:
+\begin{enumerate}
+    \item A way to start would be to look at some examples, see which points belong to the set $A$ and which do not. This would lead to the discovery that points of the form $(x, 0)$ and $(0, y)$ would not be in the set $A$, not because they don't satisfy the inequality but because the terms are not defined.
+    \item The proof was written in a sequential manner covering all the quadrants in order. This is the cleaned up version. While in reality, the quadrants first covered were quadrants 2 and 4 as it was clear how any point in those quadrants could possibly not be in $A$.
+    \item The proof of claim 1 might seem very weird as it seems to come seemingly out of nowhere. It was actually derived in a ``backwards" manner. That is, we assumed that there's an $(x, y)$ in the first quadrant which is in $A$, this then gave us:\\~\\
+    $\dfrac{x}{y} + \dfrac{y}{x} \ge 2$\\~\\
+    The most natural thing now was to take the LCM and see if that gets us somewhere:\\~\\
+    $\dfrac{x^2 + y^2}{xy} \ge 2$\\~\\
+    $(x, y)$ being in the first quadrant ensured that $xy$ was positive, this then let us multiply both sides with $xy$, which, after a bit of manipulation gave us:\\
+    $(x-y)^2 \ge 0$- which is true for all $(x, y) \in \mathbb{R}^2$. However, coming till this result involved a step which we could do because we assumed $(x, y)$ to be in I quadrant. Writing these steps in the reverse direction very clearly proved our claim.
+    \item After proving it for the first quadrant, it was quite an easy step to conclude Claim 3 from that, noticing the symmetries. Even if not the symmetry, we can observe that the only place we used that $(x, y)$ was in the first quadrant was when we multiplied both sides with $xy$. We can still do that for a point in the third quadrant as the product $xy$ would still be positive.
+\end{enumerate}
+
+\hrulefill
+
+\exercise{Using the above method, describe the set $A = \{x \in \mathbb{R}| x(x-1)(x-2) < 0\}.$ Be sure that if you describe it as a set $B$, you have shown that $A=B$ and not just $A \subset B.$}
+
+\hrulefill
+
+\section{Cartesion Product}\label{sec:cartproduct}
+\textbf{Definition: }Given sets $A, B$, we define:\\
+\phantom{Definition: D}$A \times B = \{(a, b)|a \in A$ and $b \in B\}$\\~\\
+\example{Let $A = \{1, 2\}, B = \{a, b\}$.\\
+Then, $A\times B = \{(1, a), (1, b), (2, a), (2, b)\}$\\
+$B \times A = \{(a, 1), (a, 2), (b, 1), (b, 2)\}$}\\
+\example{All points $(x, y)$ in the XY plane are elements of $\mathbb{R}^2 = \mathbb{R}\times\mathbb{R}$}\\
+\example{$\mathbb{N}\times\mathbb{R}$ is the set of all pairs $(a, b)$ where $a$ is a natural number and $b$ is a real number.}
+
+\hrulefill

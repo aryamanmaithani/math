@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{center}
+	\begin{large}
+		\textbf{Introduction to Mathematical Concepts (MA 107) - Final Exam}\\
+		\textbf{IIT Bombay: 25th April, 2019}\\
+	\end{large}
+	\textbf{Instructions:} Show all your work for full marks. Answers without justifications will get a ZERO.\\
+	You may use only the results PROVED in class. State the results used clearly. \textbf{Max. Marks:} 40
+\end{center}
+\begin{enumerate}[label = (\arabic*)] 
+	\item Let $X$ and $Y$ be non-empty sets, $A, B \subset X,$ and $f:X\to Y$ be a function.\\
+	Prove or disprove: $f(A\cup B) = f(A) \cup f(B).$ \hfill [3]
+	\item Let $a, b \in \mathbb{R}$ be such that $a < b.$ Show that $(a, b) \cap \mathbb{Q} \neq \emptyset.$\\
+	(You may assume the Archimedean property). \hfill [3]
+	\item Let $A = \left(-\dfrac{1}{2}, \dfrac{1}{2}\right) \subset \mathbb{R}.$ Show that $\operatorname{lub}(A) = \dfrac{1}{2}.$ \hfill [3]
+	\item Let $a \in \mathbb{R}.$ Find $\displaystyle\bigcap_{n=1}^\infty[a, a+1/n].$ Justify your steps. \hfill [3]
+	\item Find the limit of the series $\sum a_n,$ where $a_n = \dfrac{1}{n(n+1)}$ for all $n.$ Justify your steps. \hfill [3]
+	\item Show that $12\mathbb{Z}$ is a subgroup of $\mathbb{Z}.$ \hfill [3]
+	\item Prove or disprove: There exists a bijection from the set $\mathbb{Q}\cap(0, 1)$ to $\mathbb{Q}\cap[0, 1].$ \hfill [3]
+	\item Let $a, b \in \mathbb{N}.$ \hfill [4]
+	\begin{enumerate}[nosep] 
+		\item Show there exist unique $q \in \mathbb{N}$ and $r \in \{0, \cdots, a-1\},$ such that $b = aq + r.$\\
+		(You may assume existence of $q$ and $r,$ and only need to prove the uniqueness).
+		\item Show that $\gcd(a, b) = \gcd(a, r).$
+	\end{enumerate}
+	\item Let $(a_n), (b_n)$ and $(c_n)$ be sequences of real numbers. Suppose for all $n \in \mathbb{N},$ $a_n \le b_n \le c_n.$\\
+	If $(a_n)$ and $(c_n)$ converse the same limit $L \in \mathbb{R},$ show that $(b_n)$ converges to $L.$ \hfill [4]
+	\item Let $a, b, p \in \mathbb{N},$ where $p$ is prime. Show that if $p|(ab),$ then $p|a$ or $p|b.$ Justify your steps.  \hfill [4]
+	\item Define a relation on $\mathbb{C}$ as follows: For $a, b \in \mathbb{C}, a \sim b$ if $|a| = |b|.$ \hfill [5]
+	\begin{enumerate}[nosep] 
+		\item Is $i \in \mathbb{C}$ related to $2i?$ Why or why not?
+		\item Show that $\sim$ is an equivalence relation on $\mathbb{C}.$
+		\item Identify the equivalence class of $1$ (with justification).
+	\end{enumerate}
+	\item Let $G$ be a group and $f:G\to G$ be defined as $f(a) = a^{-1}.$ \hfill [5]\\
+	Show that $f$ is a
+	\begin{enumerate*}[label = (\roman*)] 
+		\item well-defined function and
+		\item a bijection.
+	\end{enumerate*}
+\end{enumerate}
+\textbf{Bonus:} (All or nothing)\\
+Prove or disprove: Let $\mathcal{A}$ be a non-empty set with a relation, which is a total order. If $\mathcal{A}$ is in bijection with $\mathbb{N},$ then every non-empty subset of $\mathcal{A}$ has a least order element under the given order. \hfill [3]
+\end{document}

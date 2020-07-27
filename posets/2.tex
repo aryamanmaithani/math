@@ -1,0 +1,226 @@
+\documentclass[handout, aspectratio=169]{beamer}
+\mode<presentation>{}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\setbeamertemplate{theorems}[numbered]
+
+\title{Lattices}
+\author{Aryaman Maithani}
+\date[08-10-2019]{8th October, 2019}
+\institute[IITB]{Undergraduate\\ IIT Bombay}
+\usetheme{Warsaw}
+%\usecolortheme{beetle}
+\newtheorem{defn}{Definition}
+\newtheorem{lem}{Lemma}
+\newtheorem{prop}{Proposition}
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+  \insertshorttitle\hfill%
+  \insertframenumber\,/\,\inserttotalframenumber}
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Infimum and Supremum}
+	\begin{defn}[Upper bound]
+		If $x$ and $y$ belong to a poset $P,$ then \emph{an} upper bound of $x$ and $y$ is an element $z \in P$ satisfying $x \le z$ and $y \le z.$
+	\end{defn}
+	\begin{defn}[Least upper bound]
+		A least upper bound $z$ of $x$ and $y$ is an upper bound such that every upper bound $w$ of $x$ and $y$ satisfies $z \le w.$
+	\end{defn}
+	Thus, if a least upper bound of $x$ and $y$ exists, then it is clearly unique due to antisymmetry of $\le.$ The element is denoted by $x \vee y,$ read as ``$x$ join $y$'' or ``$x$ sup $y$.''\\~\\
+	Dually, one can define a greatest lower bound of $x$ and $y.$
+\end{frame}
+\begin{frame}{Lattices}
+	\begin{defn}
+		A lattice is a poset for which every pair of elements has a least upper bound and greatest lower bound.
+	\end{defn}
+	Let $L$ be a lattice and $x, y\in L.$\\
+	One can verify that the following properties hold:
+	\begin{enumerate} 
+		\item The operations $\wedge$ and $\vee$ are associative, commutative and idempotent, that is, $x \wedge x = x \vee x = x,$
+		\item $x \wedge (x \vee y) = x \vee (x \wedge y) = x,$ and
+		\item $x \wedge y = x \iff x \le y \iff x \vee y = y.$
+	\end{enumerate}
+	In fact, one could even define a lattice axiomatically in terms of a set $L$ with the operations $\wedge$ and $\vee$ satisfying the first two properties. 
+\end{frame}
+\begin{frame}{Some results}
+	All finite lattices have $\hat{0}$ and $\hat{1}.$ Indeed, if $L = \{x_1,\;\ldots,\;x_n\}.$ Then $x_1 \wedge \cdots \wedge x_n$ and $x_1 \vee \cdots \vee x_n$ are well-defined elements of $L$ and they are $\hat{0}$ and $\hat{1},$ respectively.\\~\\
+	If $L$ and $M$ are lattices, then so are $L^*,\;L\times M,\;L\oplus M.$ However, $L + M$ will never be lattice unless $L = \emptyset$ or $M = \emptyset.$ Indeed, if one takes $x \in L$ and $y \in M,$ then there exists no meet of $x$ and $y$ in $L+M.$\\
+	However, one can verify that $\widehat{L+M}$ is always a lattice.
+\end{frame}
+\begin{frame}{Semilattices}
+	\begin{defn}[Meet semilattice]
+		If every pair of elements of a poset $P$ has a meet, we say that $P$ is a meet-semilattice.
+	\end{defn}
+	Sometimes, it may be easy to check whether a finite poset is a meet-semilattice. The following proposition then helps us in determining whether the poset is also a lattice.
+	\begin{prop}
+		Let $P$ be a finite meet semilattice with $\hat{1}.$ Then, $P$ is a lattice.
+	\end{prop}
+	\begin{proof}
+		We just need to show that given $x, y \in P,$ there exists a join of $x$ and $y.$\\
+		Towards this end, define $S := \{z \in P : x \le z,\;y \le z\}.$\\
+		Then, $S$ is finite as $P$ is finite. Moreover, $S$ is nonempty as $\hat{1} \in S.$\\
+		Then, it can be seen that $x \vee y = \displaystyle\bigwedge_{z \in S}z.$
+	\end{proof}
+\end{frame}
+	
+\begin{frame}{}
+	The proof breaks for infinite posets as $S$ defined earlier need not be finite and hence, its meet may not exist. \\~\\
+	Analogously, one may define a join-semilattice and the corresponding proposition for a join-semilattice holds as well.
+	\begin{defn}
+		If every subset of $L$ does have a meet and a join, then $L$ is a called a complete lattice.
+	\end{defn}
+	(The meet and join of a subset of a lattice have their natural meanings.)\\
+	Clearly, a complete lattice has a $\hat{0}$ and $\hat{1}.$
+\end{frame}
+\begin{frame}{Modular Lattice}
+	\begin{prop}
+		Let $L$ be a finite lattice. The following are equivalent:
+		\begin{enumerate} 
+			\item $L$ is graded and the rank generating function $\rho$ of $L$ satisfies $\rho(x) + \rho(y) \ge \rho(x\wedge y) + \rho(x\vee y)$ for all $x, y \in L.$
+			\item If $x$ and $y$ cover $x\wedge y,$ then $x\vee y$ covers $x$ and $y.$
+		\end{enumerate}
+	\end{prop}
+	We omit the proof.\\
+	A finite lattice satisfying either of the above (equivalent) properties is called a finite (upper) semimodular lattice.\\
+	A finite lattice $L$ whose dual is semimodular is said to be lower semimodular.\\
+	A lattice which is both semimodular and lower semimodular is said to be modular.\\
+	Thus, a finite lattice is modular if and only if $\rho(x) + \rho(y) = \rho(x\wedge y) + \rho(x\vee y)$ for all $x, y \in L.$\\
+\end{frame}	
+\begin{frame}{Distributive lattices}
+	This is the most important class of lattices from a combinatorial point of view.
+	\begin{defn}[Distributive lattices]
+		A lattice $L$ is said to be distributive if the following laws hold for all $x, y \in L$:
+		\begin{enumerate} 
+			\item $x \vee(y \wedge z)=(x \vee y) \wedge(x \vee z),$ and
+			\item $x \wedge(y \vee z)=(x \wedge y) \vee(x \wedge z).$
+		\end{enumerate}
+	\end{defn}
+	\textbf{Examples.}\\
+	$[n],\;B_n,\;D_n$ are distributive lattices.\\
+	$\Pi_n$ is not distributive for $n > 2.$
+\end{frame}
+\begin{frame}{Order ideals}
+	Recall that the set of all order ideals of a poset $P,$ denoted by $J(P),$ ordered by inclusion, forms a poset.\\
+	Moreover, $J(P)$ is closed under unions and intersections.\\
+	Thus, one can check that $J(P)$ is a lattice as well with $\wedge$ being $\cap$ and $\vee$ being $\cup.$\\
+	Now, set theory tells us that $J(P)$ is in fact, a distributive lattice as well.\\~\\
+	The Fundamental Theorem of Finite Distributive Lattices (FTFDL) states that the converse is true when $P$ is finite.
+\end{frame}
+\begin{frame}{The Fundamental Theorem of Finite Distributive Lattices}
+	\begin{theorem}[FTFDL]
+		Let $L$ be a finite distributive lattice. Then, there is a unique (up to isomorphism) finite poset $P$ for which $L \cong J(P).$
+	\end{theorem}
+	The above theorem is also known as \emph{Birkoff's Theorem}.\\~\\
+	To prove this theorem, we first produce a candidate $P$ and show that is indeed the case that $J(P) \cong L.$ Towards this end, we define the following.
+	\begin{defn}[Join-irreducible]
+		An element $x$ of a lattice $L$ is said to be join-irreducible if one cannot write $x = y \vee z$ with $y < x$ and $z < x.$
+	\end{defn}
+	Equivalently, the above condition says that if $x$ is join-irreducible, then $x = y \vee z$ forces $x = y$ or $x = z.$
+\end{frame}
+
+\begin{frame}{Relation between order ideals and antichains}
+	Before carrying forward, we emphasise the following result from before as it will used often.\\
+	\begin{prop}\label{prop:ideal}
+		Given an order ideal $I$ of a finite poset $P,$ there exists a corresponding antichain $A = \{x_1,\;\ldots,\;x_n\}$ where each $x_i$ is a maximal element of $I.$\\
+		We also write $I = \langle x_1,\;\ldots,\;x_n\rangle.$\\
+		Moreover, $I$ is the smallest order ideal containing $A.$\\
+		It can also be verified that $\langle x_1,\;x_2\rangle = \langle x_1\rangle\cup\langle x_2\rangle.$\\
+		In fact, one has $\langle x_1,\;\ldots,\;x_n\rangle = \langle x_1\rangle\cup\cdots\cup\langle x_n\rangle.$
+	\end{prop}
+\end{frame}
+
+\begin{frame}{Link between J(P) and P}
+	The following theorem will help us in coming up with a suitable candidate $P$ and it will also help in showing the uniqueness of $P$ claimed in FTFDL.
+	\begin{theorem}\label{thm:irred}
+		An order ideal $I$ of the finite poset $P$ is join-irreducible \textbf{in} $\mathbf{J(P)}$ if and only if it is a principal order ideal of $P.$
+	\end{theorem}
+	Before giving a proof of this theorem, we observe that there's a natural one-to-one correspondence between principal order ideals of $P$ and $P.$ Namely, $\langle x\rangle \leftrightarrow x.$ In fact, this correspondence is also an isomorphism as $\langle x\rangle \subset \langle y\rangle \iff x \le y.$\\~\\
+	Thus, if $J(P) \cong J(Q),$ then the set of join-irreducibles will also be isomorphic and in turn, $P \cong Q.$ This shows us that the $P$ mentioned in FTFDL, if it exists, is indeed unique.
+
+\end{frame}
+\begin{frame}{Proof of Theorem \ref{thm:irred}}
+	
+	\begin{proof}
+		$(\implies)$ Suppose $I$ is join-irreducible. Since $P$ is finite, Proposition \ref{prop:ideal} tells us that there exists a corresponding antichain $A$ that generates $I.$\\
+		Let us assume that $|A| > 1.$ Choose $a \in A$ and let $B := \{a\}.$ Then, $\langle A\setminus B\rangle\cup\langle B\rangle = I.$\\
+		By Proposition \ref{prop:ideal}, $\langle A\setminus B\rangle \subsetneq I$ and $\langle B\rangle\subsetneq I.$ \\
+		However, this contradicts that $I$ is join-irreducible. Thus, $|A| = 1$ and hence, $I$ is principal.\\~\\
+		$(\impliedby)$ Suppose $I$ is a principal order ideal. Then, there exists some $x \in P$ such that $\langle x\rangle = P.$ Suppose $I = J \cup K$ for some $J, K \in J(P).$\\
+		Then $x \in J$ or $x \in K.$ WLOG, we assume that $x \in J.$ As $J$ is an order ideal, we get that $\langle x\rangle \subset J.$ But $\langle x\rangle = I.$ Hence, we get that $J = I.$ This proves that $J$ is join-irreducible.
+	\end{proof}
+\end{frame}
+\begin{frame}{Conclusion}
+	What the theorem helps us with is the following - \\
+	Suppose that we are given an arbitrary (finite) poset $Q$ and are told that $Q \cong J(P)$ for some poset $P.$ The theorem has then shown that the poset $P$ must be isomorphic to the set of the join-irreducibles of $Q.$ (Or rather, the subposet obtained by inducing the structure of $Q$ on the set of join-irreducibles of $Q.$)\\~\\
+	%
+	In effect, it has given us a way of procuring an eligible candidate $P$ to prove the Fundamental theorem that we wanted to prove.
+\end{frame}
+\begin{frame}{A helpful lemma}
+	Before proving the theorem, we shall prove the following lemma. Let $L$ be a finite distributive lattice and let $P$ be the set of all the join-irreducible elements of $L.$
+	\begin{lem}
+		For $y \in L,$ there exist $y_1, y_2,\ldots,y_n\in P$ such that $y = y_1 \vee y_2 \vee \cdots \vee y_n.$ For $n$ minimal, the expression is unique up to permutations.
+	\end{lem}
+	\begin{proof}[Proof (Of existence)]
+		If $y$ is join-irreducible, then we are done.\\
+		Suppose $y \notin P.$ Then, by definition, there exist $y_1,y_2 \in L$ such that $y = y_1 \vee y_2$ with $y_1 < y$ and $y_2 < y.$ If one of $y_1$ or $y_2$ is not in $P,$ then we can further ``decompose'' it. As $L$ is finite and we keep getting smaller elements, this process must stop after a finite number of steps. Thus, given any $y \in L,$ there does exist \emph{a} representation as stated.
+	\end{proof}
+\end{frame}
+\begin{frame}{Proof of the lemma}
+	\begin{proof}[Proof (of uniqueness)]
+		Now, suppose $y_1 \vee y_2 \vee \cdots \vee y_n = y = z_1 \vee \cdots \vee z_n$ for $y_i, z_i \in P$ for each $i \in [n]$ where $n$ is the least number of elements of $P$ required to be ``joined'' to get $y.$\\
+		Note that given any $i \in [n],$ $z_i \le y.$ \\
+		Thus, $\displaystyle z_i = z_i \wedge y = z_i \wedge \left(\bigvee_{j=1}^n y_j\right) = \bigvee_{j=1}^n(z_i \wedge y_j),$ by distributivity.\\
+		But $z_i \in P$ and thus, we get that $z_i = z_i \wedge y_j$ for some $j \in [n].$ This gives us that $z_i \le y_j.$\\
+		Now, suppose it is the case that there exists $k \in [n]$ such that $k \neq i$ and $z_k \le y_j.$ We show that this leads to a contradiction. Since $\vee$ is associative and commutative, we can assume that $i = 1$ and $k = 2.$ As $y_j \le y,$ we get that $y_j \vee z_3 \vee \cdots z_n = y,$ contradicting the minimality of $n.$\\
+		Thus, given any $i \in [n],$ there exists a unique $j\in [n]$ such that $z_i \le y_j.$ Similarly, we get an inequality in the other direction which proves the lemma.
+	\end{proof}
+\end{frame}
+\begin{frame}{Proof of FTFDL}
+	Carrying on with the same notation, we define the following functions:
+	\begin{align*}
+		f: J(P) \to L\\
+		f(I) := \bigvee_{x \in I}x.
+	\end{align*}
+	\begin{align*}
+		g: L \to J(P)\\
+		g(y) := \bigcup_{i = 1}^n \langle y_i\rangle ,
+	\end{align*}
+	where $y = y_1 \vee \cdots \vee y_n$ in the unique way as described earlier. By our previous lemma and commutativity of union, we get that $g$ is indeed well defined.\\
+	By our previous lemma, it is also clear that $f$ is surjective.\\
+\end{frame}
+\begin{frame}{Proof of FTFDL}
+	Now, we claim that $g(f(I)) = I$ for every $I \in J(P).$\\
+	To see this, let $A$ be the antichain corresponding to $I.$ That is, let $A = \{y_1, \ldots, y_n\}$ where each $y_i$ is a maximal element of $I.$\\
+	Then, we get that $f(I) = \displaystyle\bigvee_{x\in I}x = y_1 \vee \cdots \vee y_n,$ using the fact that each $a \vee b = b$ if $a \le b.$\\
+	Now, $g(f(I)) =  g(y_1 \vee \cdots \vee y_n) = \langle y_1\rangle\cup\cdots\cup\langle y_n\rangle = \langle y_1, \ldots, y_n\rangle = I.$ \hfill $(*)$\\~\\
+	Thus, $g\circ f$ is the identity function on $J(P)$ and hence, $f$ is injective.\\
+	This shows that $f$ is bijective. As $g$ is its one-sided inverse, it is also its two-sided inverse since $f$ is a bijection. Now, we show that $f$ is an isomorphism by showing that both $f$ and $g$ are order preserving.
+\end{frame}
+\begin{frame}{Proof of FTFDL}
+	1. $f$ is order preserving.\\
+	Suppose $I_1, I_2 \in J(P)$ with $I_1 \subsetneq I_2.$ Then,
+	\begin{align*}
+		f(I_2) &= \bigvee_{x \in I_2}x\\
+		&= \left(\bigvee_{x \in I_1}x\right)\vee\left(\bigvee_{x\in I_2\setminus I_1}x\right)\\
+		& \ge \bigvee_{x \in I_1}x\\
+		&= f(I_1)
+	\end{align*}
+	As we already have seen that $f$ is injective, we get that $f(I_1) < f(I_2),$ as desired.
+\end{frame}
+\begin{frame}{Proof of FTFDL}
+	2. $g$ is order preserving.\\
+	Suppose that for $I_1, I_2 \in J(P),$ we have $\displaystyle\bigvee_{x \in I_1} x \le \displaystyle\bigvee_{x \in I_2} x.$ We want to show that $I_1 \subset I_2.$\\
+	Let $x \in I_1$ be given. We have that $x \le \displaystyle\bigvee_{x \in I_1} x$ and thus, $x \le \displaystyle\bigvee_{y \in I_2} y.$
+	\begin{align*}
+		\implies x &= \left(\displaystyle\bigvee_{y \in I_2} y\right)\wedge x\\
+		&= \bigvee_{y\in I_2}(y\wedge x) & \text{(By distributivity)}
+	\end{align*}
+	As $x$ is join-irreducible, there exists some $y \in I_2$ such that $x = y \wedge x,$ that is, $x \le y.$ As $I_2$ is an order ideal, this implies that $x \in I_2.$\\
+	Thus, $I_1 \subset I_2.$ \hfill $\blacksquare$
+\end{frame}
+\begin{frame}{Small note}
+	The line marked $(*)$ has a possible flaw. We are assuming that $ g(y_1 \vee \cdots \vee y_n) = \langle y_1\rangle\cup\cdots\cup\langle y_n\rangle,$ that is, we are assuming that $y_1 \vee \cdots \vee y_n$ is indeed the minimal representation of $f(I).$\\
+	However, this is justified for if there were a shorter representation in terms of join-irreducibles, we would get a contradiction about the maximality of $y_i$s.
+\end{frame}
+\end{document}

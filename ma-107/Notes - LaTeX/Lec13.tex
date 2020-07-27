@@ -1,0 +1,120 @@
+\prs{11-02-2019}
+\section{Density of rationals}\label{sec:ratdense}
+\highlight{\textbf{Theorem:} Between any two (distinct) real numbers, there exists a rational numbers.}
+$$\forall x, y \in \mathbb{R}, x < y \big(\exists q \in \mathbb{Q}(x < q < y)\big)$$
+\begin{proof}
+The given statement is equivalent to saying:\\
+$\exists m \in \mathbb{Z}, n \in \mathbb{N}(nx < m < ny)$\\
+By \hyperref[sec:APoR]{the Archimedean Property of real numbers}, we know that:\\
+$\exists n \in \mathbb{N}\big(1 < n(y-x)\big)$\\
+$\iff \exists n \in \mathbb{N}\big(1 < ny - nx\big)$\\~\\
+Let $k = \floor{nx}$\\
+$\therefore k \le nx < k+1$ \hfill [By definition of floor function]\\
+$\implies k + 1 \le nx + 1$\\
+$\implies (k+1) - nx \le 1$\\
+$\implies (k+1) - nx < ny -nx$ \hfill [$\because 1 < ny-nx$]\\
+$\implies k + 1 < ny$\\
+We also know that $nx < k+1$, this gives us that:\\
+$nx < k+1 < y$\\
+Letting $m = k+1$ gives us exactly what we wanted, completing the proof.
+\end{proof}
+
+\hrulefill
+
+Note: Had we chosen $k' = \floor{ny}$, we wouldn't have gotten the strict inequality as we desired. Instead, we would have gotten: $nx < k' \le ny$
+
+\hrulefill
+
+\exercise{If we had taken the other route and chosen $k' = \floor{ny}$, we would have ended up with the following result:\\
+$\forall x, y \in \mathbb{R}, x < y \big(\exists q \in \mathbb{Q}(x < q \le y)\big)$\\
+Using this, prove the theorem.}
+
+\hrulefill
+\newpage
+\section{Existence of n$^\text{th}$ root}\label{sec:rootn}
+\highlight{\textbf{Theorem:} Let $\alpha \in \mathbb{R}, \alpha > 0$\\
+\phantom{Theorem: T}Then, for any $n\in\mathbb{N}: \exists x \in \mathbb{R}$ such that $x^n = \alpha$}\\
+\textit{Construction of proof.}\\
+Let $S = \{x \in \mathbb{R}|x^n \le \alpha\}$\\
+We would now like to use the $\lub$ axiom. To use that, we must first show that $S \neq \emptyset$ and that  $S$ is bounded above.\\
+It is easy to see that $S \neq \emptyset$ as $0 \in S$.\\
+However, later on, we'll see that we require the $\lub$ of this set to be positive. Therefore, we would like to show the existence of a positive real number in this set.\\
+By Archimedean Property, we have that:\\
+$\exists k \in \mathbb{N}\left(\dfrac{1}{\alpha} < k\right)$\\~\\
+$\iff\exists k \in \mathbb{N}\left(\dfrac{1}{k} < \alpha\right)$\\~\\
+$\implies\exists k \in \mathbb{N}\left(\dfrac{1}{k^n} \le \dfrac{1}{k} < \alpha\right)$ \hfill [$\because 1 \le k]$\\~\\
+$\implies \exists k \in \mathbb{N}\left(\dfrac{1}{k} \in S\right)$\\~\\
+Now, we would like to show that $S$ is bounded above.\\
+$0 < \alpha \iff 1 < \alpha + 1 \implies \alpha + 1 < (\alpha + 1)^n \implies \alpha < (\alpha + 1)^n$\\
+$\implies \forall x \in S\big(x^n < (\alpha + 1)^n\big)$\\
+$\implies \forall x \in S\big(x < \alpha + 1\big)$ \hfill (*)\\
+$\therefore S$ is bounded above.\\~\\
+Therefore, by the $\lub$ axiom: $\exists \beta \in \mathbb{R}$ such that $\lub(S) = \beta$.\\
+Now, we would like to claim that $\beta^n = \alpha$\\
+As it does not seem feasible to prove it directly, we may try proving it via contradiction. That is, show that $\beta^n \neq \alpha$ is not possible. This would give us two cases that we'd have to disprove:\\
+(i) $\beta^n < \alpha$\\
+(ii) $\alpha < \beta^n$\\~\\
+Case (i): $\beta^n < \alpha$\\
+As $\beta$ is the $\lub$, in order to reach a contradiction, there could be two possible things that we could contradict. Either the fact that $\beta$ is an upper bound itself or that $\beta$ is the \textit{least} upper bound. \\
+Given our existing intuition of real numbers, it might feel that the path to the contradiction in this case would be to show the existence of a $\beta'$ such that $\beta^n<\beta'^n<\alpha$ which would give us that $\beta < \beta'$ (*) resulting in the contradiction that $\beta$ is an upper bound.\\~\\
+Phrasing it in other manner, we would like to show the existence of a real number $h > 0$ such that $(\beta + h)^n < \alpha$. Phrasing it this way is nicer as it already ensures that the new number is strictly greater than $\beta$ and also makes it easier to work with it.\\~\\
+\begin{flalign*}
+(\beta+h)^n &= \beta^n + \dbinom{n}{1}\beta^{n-1}h + \dbinom{n}{2}\beta^{n-1}h^2 + \dots h^n&\\
+\end{flalign*}
+Our aim now would be to get an expression that is greater than $(\beta + h)^n$ which we can easily make lesser than $\alpha$ by choosing $h$ appropriately. Note that this must be done in a ``nice" manner.\\
+As it is difficult to work with higher powers, we could try to convert the expression above to be linear in $h$. As we want the resulting expression to be greater, we would need \highlight{$h \le 1$}. We can do this as we have the luxury to choose $h$.\\
+\begin{flalign*}
+(\beta+h)^n &= \beta^n + \dbinom{n}{1}\beta^{n-1}h + \dbinom{n}{2}\beta^{n-1}h^2 + \dots h^n&\\
+&\le \beta^n + \dbinom{n}{1}\beta^{n-1}h + \dbinom{n}{2}\beta^{n-1}h + \dots h&\\
+&= \beta^n + h\underbrace{\left[\dbinom{n}{1}\beta^{n-1} + \dbinom{n}{2}\beta^{n-1} + \dots 1\right]}_{t_0} &\\
+&=\beta^n + ht_0&\\
+\end{flalign*}
+We now wish to make $\beta + ht_0$ smaller than $\alpha$. Note that $t_0$ is a fixed quantity over which we have no control. We can, however choose $h$ accordingly.\\
+It is clear that if we take $h$ to be any positive real number less than $\dfrac{\alpha-\beta^n}{t_0}$, we'll get the required inequality. As the numerator and denominator both are positive, it would be easy to show that such a number does exist.\\~\\
+By Archimedean Property, $\exists M \in \mathbb{N}$ such that $t_0 < M\cdot(\alpha - \beta^n)$ \hfill [$\because \alpha - \beta^n > 0$]\\
+Letting $h = \dfrac{1}{M}$ would then work. Recall that along the way, we did claim that $h \le 1$. Therefore, we must ideally say that $h = \min\left\{\dfrac{1}{M}, 1\right\}$. In this case, however, it won't matter as $M$ is a natural number.\\~\\
+This we have now shown the existence of a positive real number $h$ such that $(\beta+h)^n < \alpha$.\\
+$\therefore \beta + h \in S$.\\
+This contradicts that $\beta$ is an upper bound. Therefore, $\beta^n < \alpha$ is not possible.
+
+\dotfill
+
+Note that the above way of writing was an informal way to see how one would work through it all. The ``proper" proof would work in a somewhat backwards manner. I shall now write the proof of the second case.
+
+\dotfill
+
+Case (ii): $\alpha < \beta^n$\\~\\
+Let $t_0 := \sum\limits_{i=1}^{n}\dbinom{n}{i}\beta^{n-i}$ \hfill $[\beta > 0 \implies t_0 > 0]$\\~\\
+Let $\epsilon := \beta^n - \alpha$ \hfill $[\beta^n > \alpha \implies \epsilon > 0]$\\~\\
+By Archimedean Property, \\
+$\exists n_0 \in \mathbb{N}\left(\dfrac{1}{n_0} < \dfrac{\epsilon}{t_0}\right)$ \hfill $\left[t_0, \epsilon > 0 \implies \dfrac{t_0}{\epsilon} > 0\right]$\\~\\
+Let $h:= \min\left\{\dfrac{\beta}{2}, 1, \dfrac{1}{n_0}\right\}$\\
+From the definition, it immediately follows that:\\
+$0 < h $ --- (A) \hfill $\left[\because \dfrac{\beta}{2}, 1, \dfrac{1}{n_0} > 0\right]$\\~\\
+$\dfrac{\beta}{2} \ge h\implies \beta - h \ge \dfrac{\beta}{2} > 0 \implies \beta - h > 0$ ---(B) \\ ~ \\
+$0 < h \le 1 \implies h^n \le h \forall n \in \mathbb{N} \iff -h \le -h^n \forall n \in \mathbb{N}$ ---(C)\\ ~ \\
+$h \le \dfrac{1}{n_0} < \dfrac{\epsilon}{t_0} \implies h < \dfrac{\epsilon}{t_0} \implies ht_0 < \epsilon \iff -\epsilon < -ht_0$ ---(D)\\~\\
+Consider:
+\begin{align*}
+	(\beta - h) ^n &= \beta^n - \dbinom{n}{1}h\beta^{n-1} + \dbinom{n}{2}h^2\beta^{n-2} - \dbinom{n}{3}h^3\beta^{n-3} +\dots +(-1)^nh^n&\\
+& >  \beta^n - \dbinom{n}{1}h\beta^{n-1} - \dbinom{n}{2}h^2\beta^{n-2} - \dbinom{n}{3}h^3\beta^{n-3} +\dots -h^n & [\because h^n > 0] \\
+& \ge \beta^n - \dbinom{n}{1}h\beta^{n-1} - \dbinom{n}{2}h\beta^{n-2} - \dbinom{n}{3}h\beta^{n-3} +\dots -h& [\because (C)]\\
+& = \beta^n - h\left(\dbinom{n}{1}\beta^{n-1} + \dbinom{n}{2}\beta^{n-2} + \dbinom{n}{3}\beta^{n-3} +\dots 1\right) &\\
+& = \beta^n - h\left( \sum\limits_{i=1}^{n}\dbinom{n}{i}\beta^{n-i} \right) &\\
+& = \beta^n -  ht_0&\\
+& > \beta^n - \epsilon & [\because (D)]\\
+& = \beta^n - (\beta^n - \alpha) &\\
+& = \alpha &\\
+\end{align*}
+$\therefore (\beta-h)^n > \alpha$\\
+$\implies \forall x \in S\big(x^n < (\beta - h)^n\big)$ \hfill [Using definition of $S$ and transitivity of $<$]\\
+$\implies \forall x \in S\big(x < \beta - h\big)$ \hfill (*)\\~\\
+$\therefore (\beta - h)$ is an upper bound of $S$ in $\mathbb{R}$.\\
+Also, by (A), we have that $\beta - h < \beta$.\\
+This contradicts that $\beta$ is the $\lub$ of $S$ in $\mathbb{R}$. \hfill $\qed$ \\
+
+\dotfill
+
+In the above construction of proof, there are places marked with (*). These are places which could possibly be wrong. At all those places, we conclude $x < y$ from $x^n < y^n$ which is something we haven't proven. This is because it isn't even necessarily true. If we know that $y > 0$, then we can say that $x^n < y^n \implies x < y$.\\
+\textit{Proof of this has been left as an exercise for the reader.}\\
+Go back and confirm that wherever we used the above result, the ``$y$" was indeed positive.

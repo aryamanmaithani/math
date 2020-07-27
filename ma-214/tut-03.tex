@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\title{MA 214: Tutorial 3}
+\author{Aryaman Maithani}
+\date{05-02-2020}
+
+\begin{document}
+\maketitle
+1. Give an example of a polynomial $P_{2n+2}(x)$ of degree $2n+2$ such that Gaussian Quadratures (with $n+1$ nodes) is not exact for $P_{2n+2}(x).$\\
+
+\textbf{Solution.}\\
+Simply consider $P_{2n+2}(x) = \left(Q_{n+1}(x)\right)^2.$\\
+It is clear that $P_{2n+2}(x)$ is indeed of degree $2n+2$ as $Q_{n+1}$ has degree $n+1.$\\
+Now, note that $I = \displaystyle\int_{-1}^{1} P_{2n+2}(x) \text{d}x > 0.$ This is because the integrand is a nonnegative continuous function that is not identically zero. (It being continuous is required.)\\~\\
+On the other hand, if we calculate the the approximate sum, we get 
+\[S = \sum_{i=0}^{n}c_iP_{2n+2}(x_i),\]
+where $x_i$ are the roots of $Q_{n+1}(x).$ However, this means that they are also roots of $P_{2n+2}.$ This gives us that $S = 0.$\\
+Thus, $I$ is clearly not equal to $S.$
+
+\hrulefill
+
+4. Consider $I = \displaystyle\int_{0}^{1} \sin\left(x^3\right) \text{d}x.$\\
+a) How many subdivisions of the interval $[0, 1]$ are needed so that the trapezoid rule gives an error of $10^{-4}$ (or less)?\\
+\textbf{Solution.} Let $N$ be the number of divisions used in approximating the integral via the composite trapezoidal rule. Recall that the error given by the composite trapezoid rule will be:
+\[E_C^T = -f''(\xi)h^2\frac{1}{12} \qquad \text{ for some }\xi \in [0, 1],\]
+where $h = \frac{1 - 0}{N}.$\\~\\
+In this case, we have $f''(\xi) = 6\xi\cos(\xi^3) - 9\xi^4\sin(\xi^3).$ As $|\xi| \le 1,$ we have it that $|f''(\xi)| \le 15.$\\~\\
+Thus, we see that $|E_C^T| \le 15\cdot\dfrac{1}{N^2}\cdot\dfrac{1}{12}.$\\~\\
+Now, one way to ensure that $|E_C^T|$ is $\le 10^{-4},$ we may simply ``equate'' the RHS to be $\le 10^{-4}.$ \\
+This gives us $15\cdot\frac{1}{N^2}\cdot\frac{1}{12} \le 10^{-4}$ or $N^2 \ge 12500$ which implies $N \ge 111.8.$ Now, we can simply choose $N = 112.$\\~\\
+%
+b) (Same question as a) but for Simpson's rule)\\
+\textbf{Solution.}\\
+With similar notations, we now have the error as
+\[E_C^S = -\frac{1}{180}f^{(4)}(\xi)\left(\frac{1}{2N}\right)^4.\]
+Note that the fourth derivative of $\sin(x^3)$ is given as
+\[9(x^2(9x^6 - 20)\sin(x^3) - 36x^5\cos(x^3)).\]
+
+Thus, we have $|f^{(4)}(\xi)| \le 585.$\\
+
+Doing the same thing as earlier sets up the inequality:
+\[\frac{585}{180}\frac{1}{16N^4} \le 10^{-4}.\]
+The smallest natural number satisfying the above is $N = 7.$ That is our answer.\\~\\
+\emph{Remark.} Note that these are quite loose bounds. That is, it is quite possible that even a smaller value of $N$ works. However, our method guarantees that the $N$ that we do get will indeed work.
+
+\end{document}

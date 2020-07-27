@@ -1,0 +1,155 @@
+\pah{19-02-2019}
+In Lecture 14, we talked about functions and saw some different functions.\\
+There are different ways that one could define a function. One way would be to give one rule, for example $f(x) = x^2$ (after giving the appropriate domain and codomain). Another way is to define it in a piece-wise manner, for example:\\
+$$f:\mathbb{R}\to\mathbb{R}$$
+$$f(x) = \left\{
+\begin{array}{l r}
+    x & ;x\ge 0 \\
+    -x & ;x < 0
+\end{array}\right.$$
+Note that 0 was included in one definition and not in the other. In this case, it would not have been a problem even if it was included in both definitions as there would have been any ambiguity as to what is $f(0)$. Therefore, we could have also written:\\
+$$f:\mathbb{R}\to\mathbb{R}$$
+$$f(x) = \left\{
+\begin{array}{l r}
+    x & ;x\ge 0 \\
+    -x & ;x \le 0
+\end{array}\right.$$
+or even:
+\\$$f(x) = \left\{
+\begin{array}{l r}
+    x & ;x\ge 0 \\
+    -x & ;x \le 0 \\
+    0 & ;x = 0
+\end{array}\right.$$
+What could \textit{not} have been written is:\\
+$$f(x) = \left\{
+\begin{array}{l r}
+    x & ;x > 0 \\
+    -x & ;x < 0
+\end{array}\right.$$
+This is incorrect because $0$ belongs to the domain but the ``function" gives no output for $0$. On the other hand, this would have also been an incorrect definition for a function:
+$$f(x) = \left\{
+\begin{array}{l r}
+    x+1 & ;x \ge 0 \\
+    -x & ;x \le 0
+\end{array}\right.$$
+This is because there are two possibilities as to what $f(0)$ could be.
+
+\dotfill
+
+Recall the following definitions:\\
+\textbf{Domain}: Set of values for which the function must give an ouput.\\
+\textbf{Codomain}: Set into which all of the output of the function is constrained to fall.\\
+It is \textbf{not} necessary that all the values in the codomain are the output for some element in the domain. However, it \textbf{is} necessary the function must give an output for all elements in the domain.\\~\\
+\textbf{Range}: Given $f:X\to Y$\\
+Range of $f:=\{y\in Y|\exists x \in X$ such that $f(x)=y\}$\\
+Range of $f$ is also referred to as ``image of $f$" and denoted by $f(X)$.\\
+For $A\subset X$, the image of $A$ is given as:\\
+$f(A) =\left\{y \in Y | \exists a \in A \big(f(a) = y\big)\right\}$\\
+This is known as ``restriction of function to $A$".
+\section{Composition of Functions}
+If asked, ``Is your mobile number odd or even?", we would be quite quick to answer the question. What we implicitly do to answer the question is compute the value of a composition of functions.
+\begin{center}
+    Me $\to$ My number $\to$ parity
+\end{center}
+This can be seen in the following manner:
+\begin{center}
+    $f:$ people with phones $\to \mathbb{N}$\\
+    $f(x) = $ phone number of $x$\\~\\
+    $g:\mathbb{N}\to\{$even, odd$\}$\\
+    $g(x) = \left\{
+    \begin{array}{lr}
+        \text{even} & x \text{ is divisible by }2 \\
+        \text{odd} & x \text{ is not divisible by }2
+    \end{array}\right.$
+\end{center}
+The answer that I would give would be $g(f($Aryaman$))$.
+In general, composition of function works in the following manner:\\
+Let $f:X\to Y, g:Y\to Z$ be functions. Then, we get the composition function:\\
+$g\circ f:X \to Z$ defined as:\\
+$(g\circ f)(x) = g\big(f(x)\big)$
+\section{Special functions}
+\subsection{Binary operations}
+Binary operations on a set $X$ are functions of the form:
+\begin{center}
+    $*:X\times X\to X$
+\end{center}
+Notation- $a*b := *(a, b)$ \hfill $[a, b \in X]$
+\subsection{Sequences}
+A sequence in $X$ is a function of the form:
+\begin{center}
+    $a:X\to\mathbb{N}$
+\end{center}
+Notation- $a_n := a(n)$
+\subsection{One-to-one functions}
+Let $f:X\to Y$ be a function.\\
+$f$ is one-to-one if:\\
+$\forall x_1\in X, \forall x_2 \in X, \underbrace{x_1\neq x_2 \big(f(x_1) \neq f(x_2)\big)}_{x_1\neq x_2\implies f(x_1)\neq f(x_2)}$\\
+Writing the contrapositive gives us:\\
+$\forall (x_1, x_2) \in X^2 \big(f(x_1) = f(x_2) \implies x_1 = x_2\big)$\\
+Working with contrapositive is what often helps in proving that a function is one-to-one.\\
+From the definition, we can conclude that $f$ is \textit{not} one-to-one if:\\
+$\exists (x_1, x_2) \in X^2\big(x_1 \neq x_2$ and $f(x_1) = f(x_2)\big)$
+\example{Let $f:\mathbb{R}\to\mathbb{R}$ be defined as $f(x) = 2x$.\\
+Show that $f$ is one-to-one.\\
+Solution: Suppose $f(x_1) = f(x_2)$\\
+$\implies 2x_1 = 2x_2$\\
+$\implies 2^{-1}\cdot 2\cdot x_1 = 2^{-1}\cdot2\cdot x_2$\\
+$\implies x_1 = x_2$\\
+As $f(x_1)=f(x_2) \implies x_1=x_2$, $f$ is a one-to-one function.\\}
+One-to-one functions are also called ``injective" functions or simply, ``injections".
+%
+\example{Let $f:\mathbb{R}\to\mathbb{R}$ be defined as $f(x) = x^2$.\\
+Show that $f$ is not one-to-one.\\
+Solution: Note that $(-1, 1)\in\mathbb{R}^2$ and $-1\neq1$ but $f(-1)=f(1) = 1$.\\
+$\therefore f$ is not one-to-one.}
+
+\hrulefill
+\exercise{Let $f:\mathbb{R}\to\mathbb{R}$ be defined as $f(x) = ax+b$ where $(a, b) \in\mathbb{R}^2$\\
+Show that $f$ is one-to-one iff $a\neq0$.}
+
+\hrulefill
+\subsection{Onto functions}
+Let $f:X\to Y$ be a function.\\
+$f$ is onto if:\\
+$\forall y \in Y \Big(\exists x \in X \big(f(x) =y\big)\Big)$\\
+That is, $f(X) = Y$.\\
+From the definition, we can conclude that $f$ is \textit{not} onto if:\\
+$\exists y \in Y\Big(\forall x \in X\big(f(x)\neq y\big)\Big)$\\
+Onto functions are also called ``surjective" functions or simply, ``surjections".
+
+\hrulefill
+\exercise{Consider $f:X\to Y, f(x) = x^2$.\\
+Choose $X\subset\mathbb{R}, Y\subset\mathbb{R}$ such that:
+\begin{enumerate}[label=(\roman*), nosep]
+    \item $f$ is an injection and surjection
+    \item $f$ is an injection but not a surjection
+    \item $f$ is not an injection but is a surjection
+    \item $f$ is neither an injection nor a surjection
+\end{enumerate}
+In each case, choose $X$ and $Y$ such that they are not finite subsets. (Definition of finite given later)}
+
+\hrulefill
+\subsection{Bijective functions}
+A one-to-one and onto function is called a bijective function or simply, a bijection.\\
+Some examples:
+\begin{enumerate}[nosep]
+    \item $f:\mathbb{R}\to\mathbb{R}, f(x)=ax+b$ where $(a, b)\in\mathbb{R}^2$ and $a\neq0$.
+    \item $f:\mathbb{R}^n\to\mathbb{R}^n, f(\textbf{x}) = A\textbf{x}$ where $A$ is a real invertible $n\times n$ matrix.
+\end{enumerate}
+\section{Finite, countable and uncountable sets}
+Let $A$ and $B$ be two sets. If there exists a bijection from $A$ to $B$, let us write $A\sim B$.\\
+For any natural number $n$, let $\underline{n}:=\{k\in\mathbb{N}|k\le n\}.$\\
+For any set $S$, we say:
+\begin{enumerate}[nosep, label=(\alph*)]
+    \item $S$ is \textit{finite} if $S\sim \underline{n}$ for some $n$ (the empty set is also considered finite).
+    \item $S$ is \textit{infinite} if $S$ is not finite.
+    \item $S$ is \textit{countable} if $S$ is finite or $S\sim\mathbb{N}$.
+    \item $S$ is \textit{uncountable} if $S$ is not countable.
+\end{enumerate}
+\textbf{Note:} Some texts consider \textit{countable} to mean just $S\sim \mathbb{N}$. In that case, \textit{almost countable} is used to mean finite or countable.
+
+\hrulefill
+\exercise{Show that $\mathbb{Q}$ is countable.}
+
+\hrulefill

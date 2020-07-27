@@ -1,0 +1,75 @@
+\prs{08-01-2019}
+In this part of the course, we would begin by writing some axioms%
+\footnote{An axiom or postulate is a statement that is taken to be true, to serve as a premise or starting point for further reasoning and arguments.}%
+that we say a set known as $\mathbb{R}$ follows. By the end, we would then attempt to show that such a set indeed does exist and it is, in fact, the set of numbers we all know and are familiar with.%
+%
+\section{Field Axioms}\label{sec:field}
+Let $\mathbb{F}$ be a set of elements.\\
+$+:\mathbb{F} \times \mathbb{F} \to \mathbb{F}$ and $\cdot:\mathbb{F}\times \mathbb{F} \to \mathbb{F}$ are binary operations.\\
+The following are known as Field Axioms:
+\axiom{Associativity\\
+$\forall a, b, c \in \mathbb{F}:$\\
+$(a+b)+c = a + (b+c)$\\
+$(a\cdot b)\cdot c = a\cdot(b\cdot c)$}\\~\\
+Note: If $*$ is any arbitrary binary operations, it does not make sense to write $a*b*c$ as it's ambiguous whether one means $(a*b)*c$ or $a*(b*c)$ but now that we've seen that $+$ and $\cdot$ are associative, we may write $a+b+c$ or $a\cdot b\cdot c$.
+\axiom{Commutativity\\
+$\forall a, b\in \mathbb{F}:$\\
+$ a + b= b + a$\\
+$ a \cdot b = b \cdot a$
+}\\
+\axiom{Existence of identity\\
+$\exists 0 \in \mathbb{F}\big(\forall a \in \mathbb{F}(0 + a = a = a + 0)\big)$\\
+$\exists 1 \in \mathbb{F}\big(\forall a \in \mathbb{F}(1 \cdot a = a = a \cdot 1)\big)$
+}\\
+\axiom{Existence of inverse\\
+$\forall a \in \mathbb{F}\big(\exists b \in \mathbb{F}(a + b = 0 = b + a)\big)$\\
+$\forall a \in \mathbb{F}\setminus\{0\}\big(\exists b \in \mathbb{F}(a \cdot b = 1 = b \cdot a)\big)$
+}\\
+\axiom{Distributivity\\
+$\forall a, b, c \in \mathbb{F}\big(a\cdot(b+c) = a\cdot b + a\cdot c\big)$
+}\\
+
+If a set $\mathbb{F}$ satisfies the above axioms, $(\mathbb{F}, +, \cdot)$ is said to be a field.\\
+$(\mathbb{R}, +, \cdot)$ is a field.
+
+\hrulefill
+\exercise{Think about the sets you know, see which ones do follow the field axioms. Note that you are free to take any binary operations, so you may even try defining your own operations on your sets and see if they follow all the axioms.}
+\exercise{Is $(\{0\}, +, \cdot)$ a field? (Note that the `1' stated above is just an element with a certain property, it doesn't have necessarily have to be different from 0.)}
+
+\newpage
+Note the following:
+\begin{enumerate}
+    \itemsep0em
+    \item the difference in the order of the \hyperref[sec:quant]{quantifiers} in A3 and A4; what does the difference in order signify? What would have been the change in meaning had the orders been switched?
+    \item contrary to how you may have been introduced to addition and multiplication, the definitions here have never said anything like ``multiplication is repeated addition." In fact, up until \hyperref[ax:A5]{A5}, they were not related to each other in any way.
+    \item $\mathbb{Q}$, the set of rational numbers%
+    \footnote{Formally speaking, I should not talk about $\mathbb{Q}$ as I haven't defined it yet but since this is not supposed to be a formal book, I can do that assuming that you know what rational numbers are.}%
+    \ satisfies all the above properties as well.
+    \item we have used \hyperref[ssec:exisquant]{$\exists$ quantifier} in many places. Recall that this does not mean that those elements are unique. We would have to prove that there is in fact only one such element with that property.
+\end{enumerate}
+%
+\section{Ordered Set Axioms}\label{sec:oset}
+$\mathbb{S}$ is said to an ordered set if there exists an order `$<$' on $\mathbb{S}$ obeying the following rules:
+\axiom{Law of Trichotomy\\
+$\forall a, b \in \mathbb{S}$, exactly one of:\\
+i) a = b \\
+ii) a $<$ b \\
+iii) b $<$ a\\
+is true.}\\
+\axiom{$<$ is a transitive relation.\\
+$\forall a, b, c \in \mathbb{S}$: if a $<$ b and b $<$ c, then a $<$ c.\\}\\~\\
+$\mathbb{R}$ is an ordered set.\\
+Note that once again, $\mathbb{Q}$ satisfies all the properties as well.
+
+\hrulefill\\
+Note regarding notation- At places, the following notations would be used interchangeably:\\
+i) $a\cdot b$ and $ab$\\
+ii) $x<y$ and $y>x$.\\
+Also
+, $x\le y$ is going to be the notation for ``$x<y$ or $x=y$". Once again, $x \le y$ can be used interchangeably with $y \ge x$.
+
+\hrulefill
+
+\exercise{Can you think of a set with some relation which is not transitive? (Hint: Rock-Paper-Scissors)}
+
+\hrulefill

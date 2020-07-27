@@ -1,0 +1,113 @@
+\prs{23-01-2019}
+Let's consider two sets, $S$ and $T$.\\~\\
+\begin{tabular}{l|l}
+    $S = \{x\in\mathbb{Q}|x^2\le 2, 0 < x\}$ & $T = \{x\in\mathbb{Q}|2\le x^2, 0 < x\}$ \\
+    Is $S\neq\emptyset?$ & Is $T\neq\emptyset?$\\
+    Yes. $1\in S$  & Yes. $3\in T$
+\end{tabular}\\
+Let us see what $S\cap T$ is.\\
+$S\cap T $
+\begin{tabular}[t]{l r}
+    $= \{x\in\mathbb{Q}|x^2 \le 2$ and $2\le x^2, 0 < x\}$ & \\
+    $= \{x\in\mathbb{Q}|x^2 = 2, x > 0\}$ & (Using Law of Trichotomy)\\
+    $= \emptyset$ & (As we have proven that $\not\exists x\in \mathbb{Q} (x^2 = 2)$)
+\end{tabular}\\
+So, we have shown that $S$ and $T$ have no common elements. Is there any relation that we state between the elements of $S$ and $T$?
+
+\hrulefill
+\exercise{\label{ex:7.1}Prove that: $\forall s \in S, \forall t \in T(s < t)$}
+
+\hrulefill
+
+The set $S$ is bounded above in $\mathbb{Q}$, i.e., $\exists M \in \mathbb{Q}\big(\forall s\in S(s \le M)\big)$\\
+The set $T$ is bounded below in $\mathbb{Q}$, i.e., $\exists m \in \mathbb{Q}\big(\forall t\in T(m \le t)\big)$\\
+Let $U_{S\mathbb{Q}}$ be the set of all upper bounds of $S$ in $\mathbb{Q}$. By the \hyperref[ex:7.1]{above exercise}, we have: $T \subset U_{S\mathbb{Q}}$.\\~\\
+Question: Is $T = U_{S\mathbb{Q}}?$\\
+Attempt to solve: Let $x \in U_{S\mathbb{Q}}$.\\
+Can $x \le 0$ be true? No. (Why?)\\
+$\therefore U_{S\mathbb{Q}} \subset \{x\in\mathbb{Q}|0 < x\}$\\
+Now, if there is some $y$ such that $y \not \in T$ but $y \in U_{S\mathbb{Q}}$, then: $y^2 < 2, 0 < y, y \in \mathbb{Q}$\\
+The above is then equivalent to: $y\in S$.\\~\\
+Next question: Can an element in $S$ be an upper bound of $S$ in $\mathbb{Q}$?\\
+That is: Is $\exists M \in S\big(\forall s \in S(s\le M)\big)$ true?\\
+The above is equivalent to asking: Does $S$ have a maximum?\\
+Answer: As it turns out, no. $S$ does not have a maximum.\\
+That is: $\forall M \in S\big(\exists s \in S(M < s)\big)$ is true.\\
+What this means is:\\
+\highlight{For any $a \in S$, there is an element $s_a \in \mathbb{Q}$ such that $a < s_a$ and $s_a^2 < 2$.}
+
+\hrulefill
+\exercise{Prove the above statement. That is, try to come up with a number $s_a \in \mathbb{Q}$ which depends on $a$ in such that a way that it is strictly greater $a$ than while having its square be strictly less than 2.\\
+Hint: Write $s_a = a + a_0$ where $a_0$ is a positive rational such that $(a+a_0)^2 < 2$. Find an appropriate $a_0$. (This exercise is \textit{\textbf{not}} trivial. The purpose of this exercise is show how it's not easy to construct such a number algebraically.)}
+
+\hrulefill
+
+As we have ``shown" that $S$ does not have a maximum, it means that it is not possible for a $y$ to exist such that $y \not \in T$ but $y \in U_{S\mathbb{Q}}$.\\
+This means that if $y \not \in T$, then $y \not \in U_{S\mathbb{Q}}$.\\
+This means that if $y \in U_{S\mathbb{Q}}$, then $y \in T$.\\
+Thus, we have shown that $U_{S\mathbb{Q}} \subset T$.\\
+As we already knew that $T \subset U_{S\mathbb{Q}}$, we can now conclude: $\boxed{T = U_{S\mathbb{Q}}}$
+\section{Least Upper Bound}\label{sec:lub}
+\highlight{%
+\textbf{Definition: }
+Let $(X, <)$ be an ordered set. Then, $A\subset X$ is said to have a least upper bound (lub) $\alpha$ if $\alpha$ is an upper bound of $A$ in $X$ and $\alpha$ is smaller than all other upper bounds of $A$ in $X$.\\
+}
+$a\in X$ is the lub of $A \subset X$ if:
+\begin{enumerate}[nosep]
+    \item $\forall a \in A(a \le \alpha)$
+    \item if $\exists \beta \in X\big(\forall a \in A(a \le \beta)\big)$, \hfill(Basically stating that $\beta$ is an upper bound)\\
+    then $\alpha \le \beta$.
+\end{enumerate}
+
+\hrulefill
+\exercise{In a similar manner, define greatest lower bound (glb) of $A\subset X$ where $(X, <)$ is an ordered set.}
+\exercise{Find glb and lub (if they exist) of $A_i$ in $X_i$ in the following cases:
+\begin{enumerate}[nosep]
+    \item $A_1 = \{x \in \mathbb{Z}|-15<x<10\}$; $X_1 = \mathbb{Z}$
+    \item $A_2 = \{x \in \mathbb{Q}|-15<x<10\}$; $X_2 = \mathbb{N}$
+    \item $A_3 = \{x \in \mathbb{R}|-15<x<10\}$; $X_3 = \mathbb{R}$
+\end{enumerate}
+}
+
+\hrulefill
+
+Looking at the definition of lub, it tells us that $\alpha$ is an lub (of $A$ in $X$) if all other upper bounds (of $A$ in $X$) are greater than $\alpha$. However, while writing a proof, it is quite hard to work with that definition. Therefore, we can look at an equivalent condition which would be:
+\begin{center}
+    \highlight{Any number $(\in X)$ strictly less that $\alpha$ cannot be the upper bound (of $A$ in $X$).}
+\end{center}
+%
+Let us look at half the solution of $\textbf{Ex 7.4.}$ 2.:\\
+\claim{10 is the lub of $A_2$ in $\mathbb{Q}$.}{\\
+(a) To show that 10 is \textit{an} upper bound.\\
+Let $a \in A_2$.\\
+By definition of $A_2, a < 10$.\\
+$\therefore 10$ is an upper bound.\\
+(b) To show that 10 is the \textit{least} upper bound.\\
+Assume $\beta (\in \mathbb{Q}) < 10$ is an upper bound of $A_2$ in $\mathbb{Q}$.\\
+As $-14\in A_2$, clearly $-15<-14\le\beta$ \hfill ---(I)\\
+Consider: $\gamma = \dfrac{\beta+10}{2}$\\
+As $\beta, 10 \in \mathbb{Q}$, this implies that $\gamma \in \mathbb{Q}$\hfill ---(II)\\
+As $\beta < 10$, this means that $\beta < \dfrac{\beta+10}{2} < 10$ \hfill (Shown in \hyperref[assign:1]{Assignment 1})\\
+$\implies \beta < \gamma < 10$ \\
+$\implies -15 < \gamma < 10$ \hfill (Using (I))\\
+The above, along with (II) gives us that: $\gamma \in A_2$\\
+This means that $\beta$ cannot be an upper bound of $A_2$ as there exists an element ($\gamma$) in $A_2$ which is strictly greater than $\beta$.\\
+This shows that any rational $\beta$ strictly less than 10 cannot be an upper bound of $A_2$.\\
+$\boxed{\therefore 10\text{ is the lub of }A_2\text{ in }\mathbb{Q}.}$
+}
+
+This proof gives us a general idea of how one could go about to show that a number is the lub of a given set.\\
+Let $(X, <)$ be an ordered set and let $A\subset X$.\\
+$\operatorname{lub}(A) = \alpha$ if:
+\begin{enumerate}[nosep]
+    \item $\alpha$ is an upper bound.
+    \item for any $\beta  (\in X)< \alpha$, $\exists a \in A(\alpha < a \le \beta)$
+\end{enumerate}
+
+\hrulefill
+
+\exercise{Prove that lub of a set (if it exists) is unique.}
+
+\hrulefill
+
+Once you have shown that lub (and similarly glb) of a set (if it exists) is unique, it is appropriate to say ``\textit{the} lub". At the same time, one must say ``\textit{an} upper bound" when talking about an arbitrary upper bound. This is because one may use ``the" only when it is proven that the character is unique. Since there is no unique upper bound, one must not say ``\textit{the} upper bound".

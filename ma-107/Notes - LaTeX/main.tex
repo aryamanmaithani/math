@@ -1,0 +1,188 @@
+\documentclass[12 pt, a4paper, toc=graduated, oneside]{book}
+\usepackage{amsmath, amssymb,amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage{pifont}
+\usepackage[inline]{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{calc,trees,positioning,arrows,fit,shapes,calc}
+
+\setlength\parindent{0pt}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+ 
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{Page \thepage}
+\renewcommand{\footrulewidth}{1pt}
+\fancypagestyle{plain}{%
+\fancyhf{}% clears all header and footer fields
+\rfoot{Page \thepage}}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[block]
+  {\normalfont\huge\bfseries}{}{0 em}{\Huge}
+\titleformat{\section}[block]
+  {\normalfont\Large\bfseries}{\thesection}{1em}{\Large}
+\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+
+\usepackage{chngcntr}
+\counterwithin{footnote}{chapter}
+
+\newcommand{\pah}[1]{\rhead{Prof. A. Hariharan}
+    #1
+    \begin{flushright}
+    -Professor Ananthnarayan Hariharan\\
+    \hrulefill\\
+    \end{flushright}}
+\newcommand{\prs}[1]{\rhead{Prof. R. Santhanam}
+    #1
+    \begin{flushright}
+    -Professor Rekha Santhanam\\
+    \hrulefill\\
+    \end{flushright}}
+\newcommand{\assign}[1]{\rhead{Assignment}
+    #1
+    
+    \hrulefill\\}
+\newcommand{\example}[1]{\refstepcounter{example}\par\medskip
+   {\color{examplecolor}{\textbf{Eg~\thechapter.\theexample. }#1}} \rmfamily}
+\newcommand{\highlight}[1]{{\color{highlightcolor}{#1}}}
+\newcommand{\exercise}[1]{\refstepcounter{exercise}\par\medskip
+   {\color{exercisecolor}{\textbf{Ex~\thechapter.\theexercise. }#1}} \rmfamily}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\LoT}{\hyperref[sec:LoT]{Law of Trichotomy}}
+\newcommand{\simpleexample}[1]{{\color{examplecolor}{#1}}}
+\newcommand{\claim}[2]{{\color{claimcolor}{%
+            \textbf{Claim: }#1\\%
+            \textbf{\textit{Proof}: }#2}} \\}
+\newcommand{\axiom}[1]{\refstepcounter{axiom}\par\medskip
+   \label{ax:A\theaxiom}\textbf{A\theaxiom. }%
+   \begin{tabular}[t]{l}
+        #1 
+   \end{tabular}%
+   \rmfamily}
+\newcommand{\refaxiom}[1]{\hyperref[ax:A#1]{A#1}}
+\newcommand{\lub}{\operatorname{lub}} 
+\newcommand{\glb}{\operatorname{glb}} 
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+ 
+\newcounter{exercise}[chapter]
+\newcounter{example}[chapter]
+\newcounter{axiom}
+%\newenvironment{exercise}[1][]{}{\medskip}
+
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mylinkcolor}{RGB}{00,00,75}
+\definecolor{examplecolor}{RGB}{00, 75, 00}
+\definecolor{highlightcolor}{RGB}{75, 00, 00}
+\definecolor{exercisecolor}{RGB}{81, 40, 00}
+\definecolor{claimcolor}{RGB}{29, 100, 100}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=mylinkcolor,
+    filecolor=magenta,      
+    urlcolor=cyan,
+%    bookmarks=true,
+}
+\title{MA 107}
+\author{Aryaman Maithani}
+\date{}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+%\addtocontents{toc}{~\hfill\textbf{Page}\par}
+\newpage
+\chapter{Introduction}
+\input{Introduction.tex}
+%
+\mainmatter
+\lhead{MA 107: Lecture \thechapter}
+\chapter{Lecture 1}
+\input{Lec01}
+%
+\chapter{Lecture 2}
+\input{Lec02}
+%
+\chapter{Lecture 3}
+\input{Lec03}
+%
+\chapter{Lecture 4}
+\input{Lec04}
+%
+\chapter*{Assignment 1}\label{assign:1}
+\addcontentsline{toc}{chapter}{Assignment 1}
+\input{Assign01}
+%
+\chapter{Lecture 5}
+\input{Lec05}
+%
+\chapter{Lecture 6}
+\input{Lec06}
+%
+\chapter*{Assignment 2}\label{assign:2}
+\addcontentsline{toc}{chapter}{Assignment 2}
+\input{Assign02}
+%
+\chapter{Lecture 7}
+\input{Lec07}
+%
+\chapter{Lecture 8}
+\input{Lec08}
+%
+\chapter*{Assignment 3}\label{assign:3}
+\addcontentsline{toc}{chapter}{Assignment 3}
+\input{Assign03}
+%
+\chapter{Lecture 9}\label{lec:9}
+\input{Lec09}
+%
+\chapter{Lecture 10}
+\input{Lec10}
+%
+\chapter*{Assignment 4}\label{assign:4}
+\addcontentsline{toc}{chapter}{Assignment 4}
+\input{Assign04}
+%
+\chapter{Lecture 11}
+\input{Lec11}
+%
+\chapter{Lecture 12}
+\input{Lec12}
+%
+\chapter{Lecture 13}
+\input{Lec13}
+%
+\chapter{Lecture 14}
+\input{Lec14}
+%
+\chapter{Lecture 15}
+\input{Lec15}
+%
+\chapter{Lecture 16}
+\input{Lec16}
+%
+\chapter*{Assignment 5}\label{assign:5}
+\addcontentsline{toc}{chapter}{Assignment 5}
+\input{Assign05}
+%
+\chapter{Lecture 17}
+\input{Lec17}
+%
+\end{document}

@@ -1,0 +1,137 @@
+\pah{12-02-2019}
+In Lecture 11, we stated that $\displaystyle\bigcup_{z\in\mathbb{Z}}[z, z+1) = \mathbb{R}$.\\
+How would one go about proving such a statement? It is evident that $\displaystyle\bigcup_{z\in\mathbb{Z}}[z, z+1) \subset \mathbb{R}$ as every set being ``united" is a subset of $\mathbb{R}$. What we really have to show is that $\displaystyle\bigcup_{z\in\mathbb{Z}}[z, z+1) \supset \mathbb{R}$.\\
+One way of doing so would be to start with: Let $x\in\mathbb{R}$ and then come up with a $z \in \mathbb{Z}$ such that $x \in [z, z+1)$. As we have defined the floor function, it becomes very simple as we've already done the painful part of showing the existence of such a function.
+
+\hrulefill
+
+Some definitions:\\
+Let $\Lambda$ be an indexing set and $\{A_\lambda\}_{\lambda\in\Lambda}$ be a collection of subsets of some set $X$.
+\begin{enumerate}[nosep]
+    \item $\{A_\lambda\}_{\lambda\in\Lambda}$ is disjoint if $\displaystyle\bigcap_{\lambda\in\Lambda} = \emptyset$
+    \item $\{A_\lambda\}_{\lambda\in\Lambda}$ is pairwise disjoint if: $\forall \lambda_1, \lambda_2 \in \Lambda, \lambda_1\neq\lambda_2(A_{\lambda_1}\cap A_{\lambda_2} = \emptyset)$
+\end{enumerate}
+If we wish to ensure that that $\{A_\lambda\}_{\lambda\in\Lambda}$ is pairwise disjoint \textit{and }every set is non-empty, we can write:
+\begin{align*}
+    \forall \lambda_1, \lambda_2 \in \Lambda\big(A_{\lambda_1}\cap A_{\lambda_2} = \emptyset \iff \lambda_1 \neq \lambda_2\big)
+\end{align*}
+
+\hrulefill
+
+\exercise{Let us say that $\{A_\lambda\}_{\lambda\in\Lambda}$ is nice if the following holds:
+\begin{align*}
+    \forall \lambda_1\in\Lambda\big(\exists!\lambda_2\in\Lambda(A_{\lambda_1} \cap A_{\lambda_2} \neq \emptyset)\big)
+\end{align*}
+Which implications hold between a collection of sets $\{A_\lambda\}_{\lambda\in\Lambda}$ being disjoint, pairwise disjoint and nice? Prove or give counterexamples for each.}
+
+\hrulefill
+
+In the \textit{previous} lecture, we had written $\mathbb{R}$ as a union of sets in many different ways. When we wrote it as a union of two sets, we did not use an indexing set but rather, explicitly wrote the sets. This does \textit{not} mean that we cannot use an indexing set. For example, let us take the sets to be $(-\infty, 0)$ and $[0, \infty)$. I can now index it in the following different manners:\\
+\[\begin{array}{lll}
+    \Lambda_1 = \{1, 2\} & A_1 = (-\infty, 0) & A_2 = [0, \infty)\\
+    \Lambda_2 = \{e, \pi\} & A_e = (-\infty, 0) & A_\pi = [0, \infty)\\
+    \Lambda_3 = \{\text{me}, \text{you}\} & A_\text{me} = (-\infty, 0) & A_\text{you} = [0, \infty)\\ 
+\end{array}\]
+As it is evident, it does not really matter what the indexing set is. All we really want is that the set must have two elements. It is also quite easy to see how one may switch amongst $\Lambda_1$, $\Lambda_2$ and $\Lambda_3$.\\
+\begin{tikzcd}
+1 \arrow[r, leftrightarrow] \arrow[dr, leftrightarrow] 
+& e \arrow[d, leftrightarrow]\\
+& \text{me}
+\end{tikzcd}
+\begin{tikzcd}
+2 \arrow[r, leftrightarrow] \arrow[dr, leftrightarrow] 
+& \pi \arrow[d, leftrightarrow]\\
+& \text{you}
+\end{tikzcd}\\
+This sort of ``one-to-one" correspondence is what is known as a bijection.\\
+Let us first see what are function.
+\section{Functions}\label{sec:functions}
+Given two (non-empty) sets $A$ and $B$, we can a function to be an ``object" that takes an element of $A$ and gives \textbf{an} element of $B$.\\
+What is important is that each element of $A$ must correspond to only \textit{one} element of $B$. \\
+For example, the following is not an example of a function:\\
+$f:\mathbb{R}\to\mathbb{R}$\\
+$f(x) = y$ such that $y^2 = x$.\\
+This is not a function as $f(1)$ could be both $1$ or $-1$.\\
+On the other hand, the following \textit{is} a function:\\
+$g:\mathbb{R}\to\mathbb{R}$\\
+$g(x) = x^2$\\
+This is because- given any real number $x$, there is a unique $x^2.$\\
+Note that $g(1)=g(-1)=1$ but that is \textbf{not} a problem.\\~\\
+For a function to be defined, it must be important that the \textit{domain} $(A)$ and \textit{codomain} $(B)$ are mentioned.
+\begin{enumerate}[nosep]
+    \item $f(x) = x$
+    \item $f(x) = 0$
+    \item $f(x) = 3x^2+2$
+    \item $f(x) = x^{-1}$
+    \item $f(x) = \sqrt{x}$
+\end{enumerate}
+The things written above are \textit{not} examples of functions as no domain and codomain is mentioned.\\
+Let us now see what could possibly be the domain and codomain of those ``functions".
+\subsection{Identity Function}
+$f:X\to X$\\
+$f(x) = x$\\
+This would work for any non=empty set $X$. If it defined from $X$ to $Y$ such that $X\subset Y$, then it called the ``natural inclusion" and not the identity. In case of $X = Y$, it is also the identity.\\
+For example:\\
+$f:\mathbb{Z} \to \mathbb{Q}$\\
+$f(x) = x$\\
+is \textbf{not} ``an" identity function. Given any non-empty set, there is only one identity function and therefore, we can say \textit{the} identity function. The identity function on $X$ is often denoted as id$_X$.\\
+It is not necessary that the identity function must always ``look" like $f(x) = x$. For example:\\
+$f:\{0, 1\} \to \{0, 1\}$\\
+$f(x) = x^2$\\
+The above is the identity function on $\{0, 1\}$.
+
+\dotfill
+\subsection{Constant Function}
+$f:X\to Y$\\
+$f(x) = 0$\\
+Here, $X$ can be any non-empty set and $Y$ can be any set such that $0\in Y$.\\
+her example:\\
+$f:X\to Y$\\
+$f(x) =$\ding{102}\\
+Where $X$ can be any non-empty set and $Y$ can be any set such that
+\ding{102}$\in Y$.
+
+\dotfill
+
+Other functions would require more care, for example for $f(x)=x^2$, the domain must be a set where it makes sense to compute $x^2$. Similarly for $3x^2+2$, the domain must be a set where all the computations involved make sense. The codomain would then be the appropriate set.\\~\\
+An example of domain $(X)$ and codomain $(Y)$ for $f(x) = x^{-1}$ could be:\\
+$X=$ set of invertible $2\times2$ matrices.\\
+$Y=$ set of $2\times2$ matrices.\\
+Note that not all elements of $Y$ would be the output of some element (for example, the zero matrix) but that is okay.\\
+Similarly, this would have also been okay:\\
+$X = \mathbb{R}\setminus\{0\}$\\
+$Y = \mathbb{R}$\\
+Even though $x^{-1}$ isn't $0$ for any real number, the definition of function does not demand that every element of $Y$ be actually achieved.
+
+\dotfill
+
+When defining a function, there must be no ambiguity as to what the value of a function must be for any given input. For example, here is an ambiguous definition:\\
+$f:\mathbb{R}\to\mathbb{R}$\\
+$f(x) = y$ such that $y^2 = x$.\\
+This can be taken by appropriately modifying the domain and codomain, for example:
+\begin{center}
+\begin{tabular}{|c|c|}
+    \hline
+    Domain & Codomain \\
+    \hline
+    $[0, \infty)$ & $[0, \infty)$\\
+    $[0, \infty)$ & $(-\infty, 0]$\\
+    $\{1\}$ & $\{-1\}$\\
+    $\{1\}$ & $\{-1, 0, 2, -2\}$\\
+    $\{0\}$ & $\mathbb{R}$\\
+    \hline
+\end{tabular}
+\end{center}
+The reason why these sets are acceptable is because for each element in the domain, there is exactly one element in the codomain which satisfies the condition of the function.\\
+Most commonly, the first domain and codomain is chosen and the function is denoted by $\sqrt{x}$.\\~\\
+Let us see some more examples and see whether they are functions or not.\\
+\example{$f:$ students $\to \mathbb{N}$\\
+$f(x)=$ age of $x$\\
+Problem: Age of $x$ in what? Months? Days? Years? Minutes?\\
+Modification: $f(x)=$ age of $x$ in years.\\
+Possible problem: Ambiguity regarding whether ``completed" age or ``running" age.\\
+Modification: $f(x)=$ completed age of $x$ in years.\\}
+\example{$f:$ students $\to \mathbb{N}$\\
+$f(x)=$ mobile number of $x$.\\
+This could lead to two possible problems: i) a student might not have a mobile number.\\
+\phantom{This could lead to two possible problems: }ii) a student might have multiple mobile numbers.\\}

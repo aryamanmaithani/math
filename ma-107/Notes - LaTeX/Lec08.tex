@@ -1,0 +1,178 @@
+\pah{25-01-2019}
+\section{Some subsets}\label{sec:subsets}
+Let $X$ be a set and $A, B \subset X$.\\
+Using these, we may construct some more subsets of $X$:
+\begin{enumerate}
+    \item \underline{Union}:
+    \begin{enumerate}
+        \item $A\cup B = \{x \in X|x\in A \text{ or } x \in B \}$
+        \item $x \in A \cup B$ if $(x \in A$ or $x \in B)$
+    \end{enumerate}
+    \item \underline{Intersection}:
+    \begin{enumerate}
+        \item $A\cap B = \{x \in X|x\in A \text{ and } x \in B \}$
+        \item $x \in A \cap B$ if $(x \in A$ and $x \in B)$
+    \end{enumerate}
+    
+    In each case, both (a) and (b) mean the same but are useful in different scenarios. (b), for example, is useful when one wants to answer something like ``when is $x$ \textit{not} in the union/intersection?"
+    %
+    \item \underline{Complement}: Complement of $A$ is denoted by $A^c$
+    \begin{enumerate}
+        \item $A^c = \{x\in X|x\not\in A\}$
+        \item Let $x \in X$\\
+        $x\in A^c$ if $x \not \in A$
+    \end{enumerate}
+    Note that complement especially demands that $A$ should be part of a bigger set $X$. For union and intersection, one can construct them even if just $A$ and $B$ are given; however, given just $A$ without a larger set, $A^c$ is meaningless. This is also reflected by how (b) of complement starts with ``$x \in X$".
+\end{enumerate}
+\claim{$(A^c)^c=A$}{%
+To show that: $A\subset(A^c)^c$ and $(A^c)^c \subset A$\\
+First part:\\
+Let $x \in A$. Now we must show: $x \in (A^c)^c$\\
+If $x \in A$, then $x \not \in A^c$ \hfill (Follows from the contrapositive of the definition of $A^c$)\\
+If $x \not\in A^c$, then $x \in (A^c)^c$ \hfill (Follows from the definition of $(A^c)^c$)\\
+We have shown that $x \in A \implies x \in (A^c)^c$.\\
+$\therefore A \subset (A^c)^c$\\
+Second part:\\
+Let $x \in (A^c)^c$. Now we must show $x \in A$\\
+If $x \in (A^c)^c$, then $x \not \in A^c$ \hfill (Follows from the definition of $(A^c)^c$)\\
+If $x \not \in A^c$, then $x \in A$ \hfill (Follows from the contrapositive of the definition of $A^c$)\\
+We have shown that $x \in (A^c)^c \implies x \in A$.\\
+$\therefore (A^c)^c \subset A$\\
+This completes our proof.}
+
+In the above proof, we have used something known as ``contrapositive".\\
+If we have statement such as ``If p, then q", the contrapositive of that is ``If not q, then not p". The useful thing about contrapositive is that the contrapositive of a statement is logically equivalent to the original statement.\\
+\example{%
+Statement: $x \not \in A \implies x \in A^c$\\
+Contrapositive: $x \not \in A^c \implies x \in A$
+}\\~\\
+Note: In the proof, we said that ``$x \in A \implies x \not\in A^c$"; this was the contrapositive of the definition as we take definitions to be ``if and only if" statements even though we do not write that.\\~\\
+Going back to the above proof, what if we were not able to come up with the proof as given above? There is one way of proof often used which is called ``Proof by contradiction".  It starts by assuming that the opposite proposition is true, and then shows that such an assumption leads to a contradiction.%
+\footnote{G. H. Hardy described proof by contradiction as ``one of a mathematician's finest weapons", saying ``It is a far finer gambit than any chess gambit: a chess player may offer the sacrifice of a pawn or even a piece, but a mathematician offers the game."}
+If $P$ is the proposition to be proved:
+\begin{enumerate}
+    \itemsep0em
+    \item $P$ is assumed to be false, that is $\sim P$ is true.
+    \item It is shown that $\sim P$ implies  two mutually contradictory assertions, $Q$ and $\sim Q$.
+    \item Since $Q$ and $\sim Q$ cannot both be true, the assumption that $P$ is false must be wrong, and $P$ must be true.
+\end{enumerate}
+
+Depicting that proof for the first part:\\
+{\color{claimcolor}%
+Let $x \in A$. Now we must show that $x \in (A^c)^c$.\\
+Assume not. That is $x \in A$ and $x \not \in (A^c)^c$.\\
+If $x \not \in (A^c)^c$, then $x \in A^c$.  \hfill (Follows from the contrapositive of the definition of $(A^c)^c$)\\
+If $x \in A^c$, then $x \not \in A.$  \hfill (Follows from the definition of $A^c$)\\
+This gives us that $x\in A$ and $x\not\in A$ which cannot be true.\\ Therefore, our assumption was wrong and $x \in (A^c)^c$ must be true.\\
+This proves the first part that $x \in A \implies x \in (A^c)^c.$
+}\\
+Note that here we wanted to show that \textit{given} an $x$ belonging to $A$, $x \in (A^c)^c$. Which is why when we assumed that the proposition was false, we didn't negate $x \in A$ because that was part of the hypothesis.\\
+In this case, the proof by contradiction was quite similar to the direct proof as almost identical arguments were made. In fact, looking at the proof by contradiction, one may even see how the direct proof would follow. Also note that in this case, the direct proof is neater and easier to follow.
+%
+\subsection{Relation between the subsets}\label{ssec:relsubset}
+When given two real numbers, a natural question could be to ask whether they're equal. If not, which one is smaller?\\
+A similar thing can be done with sets, where instead of ``smaller", we may ask whether one is a subset of the other. Except here, there's no law of trichotomy. That is, it is possible for two sets to be not equal as well as neither be a subset of the other.\\
+Given \textit{any} two arbitrary subsets $A, B$ of a set $X$, it may not be possible to comment on their relation with each other but we \textit{can} comment on their relation with their union and intersection.
+\begin{enumerate}
+    \itemsep0em
+    \item $A, B, A \cap B \subset (A \cup B)$
+    \item $(A\cap B) \subset A, B$
+\end{enumerate}
+Combining the above two points, we may write:
+\begin{center}
+    \highlight{$(A\cap B)\subset A \subset (A\cup B)$}
+\end{center}
+No need to mention $B$ as it follows from symmetry. (How?)\\
+The above statement actually implies two statements: $(A\cap B)\subset A$ \textit{and} $A \subset (A\cup B)$.
+
+\hrulefill
+\exercise{Prove the following:
+\begin{enumerate}
+    \itemsep0em
+    \item $A \subset (A\cup B)$
+    \item $(A\cap B) \subset A$
+    \item $A\subset B$ and $B \subset C\implies A\subset C$; that is, $\subset$ is a transitive relation.
+\end{enumerate}}
+
+\hrulefill
+
+After having defined such new sets, it might feel natural to ask some questions about them to look at their properties.\\
+Let us do that by deciding the truth value of the following statements.\\~\\
+S1. For any set $X$, given any $A, B \subset X$: $A\cap B = \emptyset$\\
+Is the statement true or false?\\
+As it's talking about \textit{all} $X$ and \textit{all} subsets of $X$, a way to show that the statement is false is to just come up with one $X$ and choose subsets $A$ and $B$ of $X$ such that $A\cap B\neq \emptyset$. (\hyperref[sec:pvsce]{Proofs versus Counterexamples.})\\
+Come up with 3 such counterexamples yourself.\\
+One counterexample: $X=A=B=\{1\}$. It can also be seen how this is the ``simplest" counterexample in terms of number of elements.\\
+Therefore, S1 is $\boxed{\text{false.}}$\\~\\
+S2. For any set $X$, given any $A, B \subset X$: $A\cap B = A$\\
+Once again, to show that the above statement is false, one counterexample would suffice. Also, chances are one of the 3 counterexamples that you came up with previously would also be a counterexample for this. The counterexample that I mentioned, however, would not.  (Come up with one yourself if your previous counterexamples do not work.)\\
+The fact that a counterexample does exist shows that S2 is also $\boxed{\text{false.}}$\\~\\
+Even if a statement turns out to be false, sometimes it's fruitful to ponder as to how can the statement be modified such that it becomes true. In terms of the statement stated above, what we'd like to do is- come up with a condition that implies that $A\cap B = B$\\~\\
+Question: When is $A\cap B = A$ true?\\
+Attempt to solve: Following just from the definition of set equality, we can write that the above is true if $(A\cap B) \subset A$ and $A\subset(A\cap B)$. We can straight away observe that the condition ``$(A\cap B) \subset A$" is always true. (Stated above.) As it was an ``and" condition and one of the statements is known to be true, it depends only the second statement.\\
+$(A\cap B) = A$ is true if and only if $A \subset (A\cap B)$.\\
+This can be written as:\\
+    \highlight{Let $X$ be a set and $A, B \subset X$.\\
+    Then, the following are equivalent:
+    \begin{enumerate}[nosep]
+        \item $(A\cap B) = A$
+        \item $A \subset (A\cap B)$
+    \end{enumerate}
+    }
+Let us see if we can proceed any further, that is, solve the question: When is $A \subset (A\cap B)$ true?\\
+Attempt to solve: Let $A \subset (A\cap B)$\\
+$\implies \forall x \in A(x \in A\cap B)$\\
+$\implies \forall x \in A(x \in A$ and $x \in B)$\\
+\phantom{ }\hfill (Note that the inner ``$x \in A$" doesn't add any information as it's always true)\\
+$\implies \forall x \in A(x \in B)$\\
+What we have now written is the condition that $A\subset B$.%
+\footnote{note that this could have directly been concluded using the fact $(A\cap B)\subset B$}\\
+$\therefore A \subset (A\cap B) \implies A \subset B$\\
+This is interpreted as $A \subset B$ being a necessary consequence of $A\subset(A\cap B)$ being true. What this means is that if $A \subset B$ is false, then $A \subset (A\cap B)$ is false as well. (Contrapositive)\\
+The next natural question now is: Does $A \subset B$ ensure that $A\subset(A\cap B)$?\\
+This is known as the ``converse". For the implication $P \implies Q$, the converse is $Q \implies P$. However, unlike contrapositive, the converse is not equivalent to the statement. This means that showing that a statement is true does not mean that its converse will also be true.\\
+In this case, though, the converse also does happen to be true.\\
+That is: $A\subset B\implies A \subset (A\cap B)$\\
+\phantom{ }\hfill\textit{The proof is trivial and is left as an exercise to the reader.}\\~\\
+
+Now that this has been ``proven", we can add it to the list of equivalencies:
+
+\highlight{
+\begin{enumerate}[nosep]
+    \item $(A\cap B) = A$
+    \item $A\subset (A\cap B)$
+    \item $A\subset B$
+\end{enumerate}
+}
+I am now adding two more claims:
+\highlight{
+\begin{enumerate}[nosep]
+    \setcounter{enumi}{3}
+    \item $B = (A\cup B)$
+    \item $B^c\subset A^c$
+\end{enumerate}
+}
+%
+\section{Equivalence}\label{sec:equiv}
+In the previous example, we had a set of statements which we said were equivalent. What it really means is that all those statements will have same the truth value. That is, if any one of them is true, all the others will be true as well. Speaking in terms of conditional statements, it means that between any two statements of the list, there is an ``if and only if" relation.\\
+So, given $n$ statements, how would one prove that they're equivalent? One way to do so would be to simply take all combinations of 2 statements and prove that either implies the other one. This would consists of proving $2\cdot\dbinom{n}{2}$ ``elementary" statements.
+\footnote{$\binom{n}{k} = ^{n}$C$_k=\frac{n!}{k!(n-k)!}$}
+\\
+Is there a better way? Well, yes, what we could do is proceed in a following manner:\\
+1) Show that $1.\iff 2.$\\
+2) Show that $2. \iff 3.$\\
+.\\
+.\\
+.\\
+n-1) Show that $n-1. \iff n.$\\
+This reduces the work to proving $2\cdot(n-1)$ ``elementary" statements. It can be seen that this is better than the previous case as $\dbinom{n}{2}$ is a quadratic in $n$ while $(n-1)$ is linear. Just in the case of the above example with $5$ statements, the difference in the two methods is: $20 - 8 = 12$\\
+Turns out that there's an even better way, you could proceed as follows:\\
+1) Show that $1.\implies 2.$\\
+2) Show that $2. \implies 3.$\\
+.\\
+.\\
+.\\
+n-1) Show that $n-1. \implies n.$\\
+n) Show that $n. \implies 1.$\\
+This now reduces the task to $n$ ``elementary" statements. (Note how they're not $\iff$ anymore)\\
+As the order of the statements does not matter, it is convenient to arrange them in an order such that it becomes the easiest to conclude one statement from the other.\\

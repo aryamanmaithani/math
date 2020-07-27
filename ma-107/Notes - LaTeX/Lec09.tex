@@ -1,0 +1,79 @@
+\prs{30-01-2019}
+\section{lub Axiom}\label{sec:lubaxiom}
+An ordered set $S$ is said to satisfy the lub axiom if for every non-empty subset $A \subset S$ which is bounded above in $S$, $\lub(A)$ in $S$ exists.\\~\\
+\textbf{Theorem:} There exists an ordered field $\mathbb{R}$ which satisfies the $\lub$ axiom.
+
+\hrulefill
+
+It can be shown that $\mathbb{R}$ is unique up to ordered field isomorphism. That is, any other set that satisfies all the axioms A1-A10 as well as $\lub$ axiom is isomorphic to $\mathbb{R}$.
+
+\hrulefill
+
+We could earlier show that $\mathbb{N}$ is unbounded in $\mathbb{N}$ and $\mathbb{Q}$. (Refer: \hyperref[ex:unboundedN]{This} exercise.)\\
+Now, we can show that $\mathbb{N}$ is not bounded above in $\mathbb{R}$. As we wish to show that existence of a certain element (that is, an upper bound) is \textit{not} possible, it may feel natural to prove it using contradiction.\\~\\
+\textbf{Proposition}: $\mathbb{N} \subset \mathbb{R}$ is not bounded above in $\mathbb{R}$.\\
+\textbf{Proof}: Assume the negation of the proposition. That is, let us assume that $\mathbb{N}$ \textit{is} bounded above in $\mathbb{R}$.\\
+Then, by $\lub$ axiom, $\mathbb{N}$ has an $\lub$ in $\mathbb{R}$.\\
+$\exists \alpha \in \mathbb{R}\bigg(\big(\forall n \in \mathbb{N}(n\le \alpha)\big)$ and $ \big(\forall 0< \epsilon (\in \mathbb{R}), \exists m \in \mathbb{N}(\alpha - \epsilon < m \le \alpha) \big)\bigg)$\\
+Letting $\epsilon=1$ gives:
+\begin{tabular}[t]{r l}
+    $\exists m\in\mathbb{N}:$ & $\alpha - 1 < m \le \alpha$\\ 
+    $\implies$ & $\alpha < m+1\le \alpha + 1$
+\end{tabular}\\
+But, if $m\in\mathbb{N}$, then $(m+1) \in \mathbb{N}$.\\
+As $\alpha < m+1 (\in \mathbb{N})$, $\alpha$ is not an upper bound.\\
+This is a contradiction and therefore, our original assumption was false which means that our proposition must be true. \hfill $\qed$\\~\\
+
+In the above proof, we used $\epsilon = 1$, we could do this as the statement above said something true \textit{for all} $0 < \epsilon$, this gives us the liberty to choose any $\epsilon$ of our choosing. The reason why we thought $\epsilon=1$ might be helpful here was because we know that if $n$ is a natural number, then $n+1$ must also be a natural number.
+%
+\section{Archimedean Property}\label{sec:APoR}
+$\mathbb{R}$ has the Archimedean property which states that:
+\begin{enumerate}[nosep]
+    \item $\forall x, y \in\mathbb{R}, 0 < x \big(\exists n \in \mathbb{N}(y < nx)\big)$
+    \item $\mathbb{N}$ is not bounded above in $\mathbb{R}$.
+\end{enumerate}
+
+The two statements stated above are in fact, equivalent. 
+
+\hrulefill
+
+\exercise{Prove that the two statements are equivalent.}
+\exercise{Prove or disprove that $\mathbb{Z}$ is bounded in: 
+    \begin{enumerate*}[label=(\roman*)]
+        \item $\mathbb{Z}$
+        \item $\mathbb{Q}$
+        \item $\mathbb{R}$
+    \end{enumerate*}\\
+    If your answer in any case is that is not bounded, then answer whether it is not bounded above as well as not bounded below.}
+\exercise{Try to show that $\mathbb{Z}$ is not bounded below in $\mathbb{R}$ using the fact that $\mathbb{N}$ is not bounded above in $\mathbb{R}$.}
+ 
+\hrulefill
+
+Going back to a question of \hyperref[assign:3]{Assignment 3}, we had to find the $\lub$ and $\glb$ of the set:\\A = $\{x\in\mathbb{Q} : x\neq0, 1/x \in \mathbb{N}\}$\\
+Looking at the set, it can be seen that it same as: $\left\{\left.\dfrac{1}{n}\right|n\in\mathbb{N}\right\}$\\
+This makes it clear that $\lub(A)=1$ as $1$ is the maximum of the set.\\
+It is clear that $A$ has no minimum. It can be seen that every element of $A$ is positive. Therefore, it is  clear that $0$ is a lower bound of the set. So, we may guess that $0$ is the $\glb$ of the set. For this we must show that:\\
+$$\forall 0 < \epsilon (\in \mathbb{R}), \exists m\in \mathbb{N}\left(0 \le \dfrac{1}{m} \le 0 + \epsilon\right)$$
+
+\hrulefill
+
+\exercise{Show that $\glb(A)=0.$}
+
+\hrulefill
+\section{Abundance of Rational numbers}\label{sec:abundanceofq}
+We would now like to prove that between any two real numbers, there always exists a rational number. That is:
+$$\forall x, y \in\mathbb{R}, x < y\big(\exists q \in\mathbb{Q}(x < q < y)\big)$$
+Since $q \in \mathbb{Q}$, it can be written as $\frac{m}{n}$ where $m, n \in \mathbb{Z}, 0 < n$. (We're not saying that $m$ and $n$ share no common factors, so $m$ and $n$ aren't fixed.)\\
+$$x < \dfrac{m}{n} < y \iff nx < m < ny$$
+So, the above question is now equivalent to showing that there exist two integers $m$ and $n$ satisfying $nx < m < ny$. This leads to asking: When can we ensure that there exists an integer between two real numbers?\\
+Looking at some examples would lead us to believe that whenever difference of two real numbers is (strictly) greater than 1, then an integer will surely lie in between. (Strictly is required as there's no integer in $(1, 2)$)\\
+Even though we haven't yet proven our above claim, let us first see if we \textit{can} in fact ensure that the difference is strictly greater than 1. That is: $1 < ny - nx$
+$$1 < ny - nx \iff 1 < n(y-x)$$
+As $1, (y-x) \in \mathbb{R}$ and $0 < y-x$, Archimedean property of real numbers says that there does exist a natural number $n$ satisfying that. (Note that we have no control over $x$ and $y$ but $m$ and $n$ are up to us for choosing.)\\~\\
+All we have to now show is to prove our hypothesis, \textit{id est}- whenever difference of two real numbers is (strictly) greater than 1, then an integer will surely lie in between.
+
+\hrulefill
+
+\exercise{Try proving the above hypothesis.}
+
+\hrulefill

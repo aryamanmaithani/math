@@ -1,0 +1,38 @@
+\prs{07-02-2019}
+\section{The Floor Function}\label{sec:floor}
+By the end of \hyperref[lec:9]{Lecture 9}, we had to show that if $1 < ny - nx$, then there is an integer $m$ such that $nx < m < ny$. To do that, we shall try to define the floor function. \footnote{in case this name sounds new, you may have heard this under the name ``Greatest Integer Function"}\\%
+What we would like to show is:
+$$\forall x \in \mathbb{R}, \exists ! M \in \mathbb{Z} \text{ such that: } M \le x < M + 1$$
+The above $M$ would then be equal to the floor of $x$.
+($``\exists!"$ isn't really standard notation, it stands for ``there exists a \textit{unique}")\\
+\begin{proof} Let $S = \{k \in \mathbb{Z}|k \le x\}$\\
+$S\neq\emptyset$ as $\mathbb{Z}$ is not bounded below. \hfill (Why does that mean $S\neq\emptyset$?)\\
+$S$ is bounded above in $\mathbb{R}$ as $x$ is an upper bound.\\
+$\therefore$By the \hyperref[sec:lubaxiom]{lub axiom}, $S$ has an $\lub$ in $\mathbb{R}$.\\
+Let $\lub(S)=\alpha$.\\
+The above means that: $\forall\epsilon \in \mathbb{R}, 0 < \epsilon \big(\exists M \in S(\alpha - \epsilon < M)\big)$\\
+Letting $\epsilon = 1$, we get that:
+\begin{flalign*}
+    \exists M \in S \text{ such that: } & \alpha - 1 < M &\\
+                                \implies & \alpha < M + 1 &
+\end{flalign*}
+As $\alpha$ is an upper bound of $S$, $\alpha < M+1$ implies that $(M+1) \not \in S$.
+\begin{flalign*}
+    \text{We know: } &\forall k \in S (k \le \alpha) & [\because \alpha \text{ is an upper bound}] &\\
+    \implies & \forall k \in S (k < M+1) & [\because \alpha < M+1] & \\
+    \implies & \forall k \in S (k \le M) & [\because S \subset \mathbb{Z} \text { and } (M+1) \in \mathbb{Z}] &\\
+    \implies & M \text{ is the maximum of } S.
+\end{flalign*}
+$M$ is the maximum of $S \implies M$ is the $\lub$.\\
+Now that we have shown the existence, it is easy to show that such an $M$ is unique by considering $M'<M$ and $M'>M$.
+\end{proof}
+Now, we can define the following function:
+$$\lfloor \text{ } \rfloor: \mathbb{R} \to \mathbb{Z}$$
+$$\floor{x}:= \lub\big(\{k \in \mathbb{Z}| k \le x\}\big)$$
+
+\newpage
+\begin{enumerate}
+    \item $\floor{x}$ is the greatest integer which is lesser than or equal to $x$.
+    \item The ``ceil" function is defined in a similar manner. It gives the least integer which is greater than or equal to $x$. It is denoted by $\lceil x \rceil$.
+    \item You may have seen floor$(x)$ being denoted by $[x]$ but $\floor{x}$ is more accepted. $[x]$ is sometimes used to denote the ``nearest integer function". Verify that $[x] = \floor{x + 0.5}.$ (Where the rule that numbers of the form $z + 0.5$ are rounded up to $z+1$ for $z \in \mathbb{Z}$.) 
+\end{enumerate}

@@ -1,0 +1,198 @@
+\pah{07-01-2019}
+Going back to \hyperref[ex:1.3]{Ex 1.3.}, your answer might have been ``x $\le$ 0".\\
+The justification of that comes from a property of real numbers, known as the \highlight{Law of Trichotomy}.
+\section{Law of Trichotomy}\label{sec:LoT}
+Let $x \in \mathbb{R}$. Then \textit{exactly} 1 of the following is true:
+\begin{enumerate}
+    \itemsep0em 
+    \item $x < 0$
+    \item $x = 0$
+    \item $0 < x$
+\end{enumerate}
+Note that it was important to use the word \textit{``exactly"}. Had it not been used, it could have been possible that more than one of those statements is true at the same time. Therefore, the law becomes stronger with the addition of the word ``exactly".\\
+Now, it is clear why $x \not > 0 \equiv x \le 0$. (Ponder what $x \le 0$ means in terms of $<$ and $=$.)
+
+\hrulefill
+\exercise{State \LoT{} in an equivalent way involving any $x, y \in \mathbb{R}$. $\big($To show equivalence, try introducing (x-y).$\big)$}
+
+\hrulefill
+\section{Quantifiers}\label{sec:quant}
+Let us now try to write some simple statements in a mathematical manner.\\
+\example{\label{exam:2.1}
+    \begin{tabular}{|r l}
+        English: & Every bench is this room is brown. \\
+        Math: & Let B = set of benches in this room.\\
+              & $\forall b \in B\left(\text{b is brown.}\right)$
+    \end{tabular}
+}\\
+\example{%
+    \begin{tabular}{|r l}
+        English: & There is a brown bench in this room. \\
+        Math: & Let B = set of benches in this room.\\
+              & $\exists b \in B\left(\text{b is brown.}\right)$
+    \end{tabular}
+}\\~\\
+As you can see, two new symbols have been introduced. Considering the English statement was written above the mathematical one, you might have an intuition as to what the symbols mean.
+%
+%
+\subsection{The Universal Quantifier \texorpdfstring{$\left(\forall\right)$}{}} \label{ssec:univquant}
+$\forall$ is the symbol used when we are talking about \textit{every} element of some set. It is pronounced as ``for all".\\
+``$\forall b \in B$" would be read ``for all b belonging to B".\\
+For one's own clarity, it may also be inferred as ``given \textit{any} b belonging to B".\\
+As you might have understood, it is used when we want to make a statement which applies to \textit{every} element of some set.
+%
+%
+\subsection{The Existential Quantifier \texorpdfstring{$\left(\exists\right)$}{}} \label{ssec:exisquant}
+$\exists$ is the symbol when we want to talk about the \textit{existence} of some element with a certain property. It is pronounced as ``there exists a(n)"\\
+``$\exists b \in B$" would be read ``there exists a b belonging to B".\\
+It is used when we want to make a statement expressing the {\color{blue}{existence}} of {\color{orange}{some element}} in a {\color{red}{set}} for which some {\color{brown}{certain statement}} is true. Example: ${\color{blue}{\exists}} {\color{orange}{b}} \in {\color{red}{B}} \left({\color{brown}{\text{b is brown.}}}\right)$\\
+Note that \textbf{existence does not imply uniqueness.}
+%
+%
+\section{Negating Quantifiers}\label{sec:negquant}
+The above two quantifiers mentioned perform complementary roles when it comes to negation. To illustrate this, let's go back to the \hyperref[exam:2.1]{Eg. \thechapter.\ref*{exam:2.1}}.
+\example{%
+\begin{tabular}{|c|c|c|}
+    \hline
+     & Statement & Negation\\
+     \hline
+     English: & Every bench is this room is brown. & ?? \\
+     \hline
+        Math: & Let B = set of benches in this room. & \\
+              & $\forall b \in B\left(\text{b is brown.}\right)$ & ??\\
+    \hline
+\end{tabular}
+}\\~\\
+Let us first try to think of the negation in English.\\
+Is it ``Every bench is this room is \textit{not} brown."?\\
+No. It is not. (Why?)\\
+Let us try to think when would the original statement be false. You can think of it as ``What would one person have to do to prove the statement wrong?"\\
+As the claim is that \textit{every} bench is brown, it would be sufficient to find \textit{any} one bench which is \textit{not} brown.
+\addtocounter{example}{-1}
+\example{%
+\textbf{(contd.)}\\
+\begin{tabular}{|c|c|c|}
+    \hline
+     & Statement & Negation\\
+     \hline
+     English: & Every bench is this room is brown. & There is \textit{a} bench in this room which is not brown. \\
+     \hline
+        Math: & Let B = set of benches in this room. & \\
+              & $\forall b \in B\left(\text{b is brown.}\right)$ & ??\\
+    \hline
+\end{tabular}
+}\\~\\
+It might now be clear as to why the quantifiers play a complementary role. As the English concluded the \textit{existence} of a particular type of bench, it becomes clear that the existential quantifier must be used. This finally completes the example:
+\addtocounter{example}{-1}
+\example{%
+\textbf{(contd.)}\\
+\begin{tabular}{|c|c|c|}
+    \hline
+     & Statement & Negation\\
+     \hline
+     English: & Every bench is this room is brown. & There is \textit{a} bench in this room which is not brown. \\
+     \hline
+        Math: & Let B = set of benches in this room. & Let B = set of benches in this room. \\
+              & $\forall b \in B\left(\text{b is brown.}\right)$ & $\exists b \in B\left(\text{b is not brown.}\right)$\\
+    \hline
+\end{tabular}
+}\\
+
+\hrulefill
+\exercise{Verify with an example that negation of $\exists$ would involve $\forall$.}
+
+\hrulefill\\
+We may summarise the above discussion as:\\
+$$\sim\bigg(\forall x \in X \big(p\big)\bigg)\equiv \exists x \in X(\sim p)$$
+\newpage
+%
+%
+%
+\section{Complicated Statements}\label{sec:compstate}
+This section would be best explained with the help of examples.
+\example{%
+    \begin{tabular}{|r l}
+        English: & There is \textit{\textbf{a}} classroom in this building where \textit{\textbf{every}} bench is brown. \\
+        Math: & ??
+    \end{tabular}
+}\\
+It can be seen that this statement is more complicated than the previous as it has invoked two different levels of hierarchy as well as the two different quantifiers.\\
+It often helps to start writing the statement from the inner-most level. As we know what the final property is supposed to be, we can write: {\color{examplecolor}{(b is brown.)}}\\
+Now, it immediately becomes clear that we must define what {\color{examplecolor}{b}} is. We may write it as before and we get: {\color{examplecolor}{$\forall b \in B$(b is brown.)}}\\
+Now, we see a problem: We have to define what {\color{examplecolor}{B}} is but there isn't any fixed {\color{examplecolor}{B}} because no classroom is fixed. As {\color{examplecolor}{B}} would have to be the set of benches in some particular classroom, it would be more appropriate to denote it as: {\color{examplecolor}{$B_c$}}. This is more appropriate it as it shows the dependency of set of benches on the classroom. Of course,  {\color{examplecolor}{c}} still remains to be defined. So far, we can write: {\color{examplecolor}{$\bigg(\forall b \in B_c$(b is brown.)\bigg)}}\\
+From here, it is not too tough to conclude the final answer:
+\addtocounter{example}{-1}
+\example{%
+\textbf{(contd.)}\\
+    \begin{tabular}{r l}
+        English: & There is \textit{\textbf{a}} classroom in this building where \textit{\textbf{every}} bench is brown. \\
+        Math: & Let C = set of classrooms in this building \\
+         & For $c \in C$, let $B_c$ = set of benches in c\\
+         & $\exists c \in C \Bigg(\forall b \in B_c(\text{b is brown.})\Bigg)$
+    \end{tabular}
+}\\~\\
+As before, we would like to talk about the negation of the statement.\\
+To first see what the negation would be in English, we must again ask \textit{when} would the statement be false. As the statement first starts by making some statement about \textit{\textbf{a}} classroom in the building, to prove it wrong, we must check \textbf{\textit{every}} classroom and show that the statement is false in every single classroom. Working out the negation of the inner statement in a similar manner, it is not too tough to come to the English negation:\\
+\highlight{In \textbf{\textit{every}} classroom in this building, there is \textbf{\textit{a}} bench which is \textit{not} brown.}\\
+Using similar notation as before, we can write the mathematical version fairly easily now:\\
+\highlight{%
+Let C = set of classrooms in this building \\
+For $c \in C$, let $B_c$ = set of benches in c\\
+$\forall c \in C \bigg(\exists b \in B_c(\text{b is not brown.})\bigg)$
+}
+
+\hrulefill
+\exercise{See how the above answer matches with the summary mentioned before.}
+
+\hrulefill
+\example{%
+Suppose you're in a classroom. How would you say that a particular student (say, Chirag) in the classroom has the maximum height amongst other students in the classroom?\\}
+Let us see how we many start to answer this.\\
+{\color{examplecolor}{First, we must pick a student to compare heights.}}\\
+Now, we must ask where is this student coming from? Considering our set, it \textit{has} to be a student \textit{in} the classroom.\footnote{It is also important to note that it has to be a \textit{student}. There might be a professor in the room who is taller but the professor is not in the set we're considering.}\\
+So, it may seem to correct to go in the following manner:\\
+{\color{examplecolor}{Let S be any student in the classroom.
+Then, height of Chirag $>$ height of S.}} \\
+This, however raises a problem. What if S is Chirag himself? Well, it's fairly easy to sort that out, we may simply restrict S to be any student (in the classroom) \textit{except} Chirag. The statement then becomes:\\
+{\color{examplecolor}{Let S be any student in the classroom except Chirag. Then, height of Chirag $>$ height of S.}} \\
+But now, one might think, what if there's another person in the room who is \textit{as tall as} Chirag? Then, that person would not satisfy the above condition but it still is correct to say that Chirag has the maximum height (he just does not happen to be the unique one.) This can be sorted out by substituting the $>$ sign with $\ge$ which gives us: \\
+{\color{examplecolor}{Let S be any student in the classroom except Chirag. Then, height of Chirag $\ge$ height of S.}} \\
+Now, with the above definition, there's no need to restrict the set to students except Chirag\footnote{Although it's not incorrect even if we do, it just becomes neater without it.}. Therefore, we may finally write that the answer to question is:\\
+{\color{examplecolor}{Let S be any student in the classroom. Then, height of Chirag $\ge$ height of S.}} \\
+Similarly,
+\example{%
+Let $S \subset \mathbb{R}$, then $a \in S$ is maximum in $S$ if:\\
+$\forall x \in S(a \ge x)$
+}
+\example{%
+For $S \subset \mathbb{R}$ to have a maximum:\\
+$\exists a \in S\bigg(\forall x \in S(a \ge x)\bigg)$
+}
+\example{%
+For $S \subset \mathbb{R}$, $a\in S$ is \textbf{not} the maximum in $S$ if:\\
+$\exists x \in S(a < x)$
+}
+\example{%
+For $S \subset \mathbb{R}$, $a\in \mathbb{R}$ is \textbf{not} the maximum in $S$ if:\\
+$a \not \in S \lor \exists x \in S(a < x)$
+}\\
+Note the difference in the last two examples.
+
+\hrulefill
+\exercise{%
+Statement S: In every building in the campus, there is a classroom in which every bench is brown.\\
+\begin{enumerate}
+    \itemsep0em
+    \item Write S mathematically.
+    \item Write $\sim$ S in English.
+    \item Write $\sim$ S Mathematically. This might be derived in two ways:
+    \begin{enumerate}
+        \itemsep0em
+        \item by negating 1. mathematically.
+        \item by writing the mathematical equivalent of 2.
+    \end{enumerate}
+    Whichever way you follow, verify it by matching it with the other way.
+\end{enumerate}
+}
+
+\hrulefill

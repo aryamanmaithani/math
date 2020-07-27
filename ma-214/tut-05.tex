@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\title{MA 214: Tutorial 5}
+\author{Aryaman Maithani}
+\date{19-02-2020}
+
+\begin{document}
+\maketitle
+4. Show that $g(x) = \pi + 0.5\sin\left(\frac{x}{2}\right)$ has a unique fixed point in $[0, 2\pi].$\\~\\
+\textbf{Solution.}\\
+First method:\\
+In this method, we don't use anything that's taught in MA 214 but just stuff we know from before.\\
+We want to show that $g(x) = x$ has a unique solution in $[0, 2\pi].$ Define $f(x) := g(x) - x$ for $x \in [0, 2\pi].$ Thus, the given problem is equivalent to showing that $f$ has a unique root in $[0, 2\pi].$\\~\\
+\emph{Existence.} Note that $f(0) = g(0) - 0 = \pi > 0$ and $f(2\pi) = g(2\pi) - 2\pi = -\pi < 0.$\\
+As $f$ is continuous, there is some $\xi \in (0, 2\pi)$ such that $f(\xi) = 0.$\\~\\
+\emph{Uniqueness.} Suppose that there exists two distinct roots $a, b \in [0, 2\pi]$ of $f.$ Then, by Rolle's theorem, there exists some $c$ between $a$ and $b$ such that $f'(c) = 0.$\\
+However, note that $f'(x) = g'(x) - 1 = \frac{1}{4}\cos\left(\frac{x}{2}\right)-1 \le -\frac{3}{4} < 0$ for all $x \in (0, 2\pi).$ A contradiction.\\~\\
+Second method:\\
+In this method, we use the following theorem done in Lecture 9:\\
+Let $I = [a, b]$ be an interval and $g:I\to I$ be a continuous function. Then, $g$ has a fixed point. Further, if $g$ is differentiable on $I$ and if there exists some $K < 1$ such that $|g'(x)| \le K,$ then the fixed point is unique.\\~\\
+In our case, we have $I = [0, 2\pi].$  It can be easily checked that for $x \in I,$ we have $g(x) \in I.$ Moreover, $|g'(x)| \le \frac{1}{4}.$ Thus, we are done.
+\\~\\
+Note: To find the fixed point, start with any $x_0 \in I$ and keep computing $g(x_0), g(g(x_0)), g(g(g(x_0))), \ldots.$
+\end{document}

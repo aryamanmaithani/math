@@ -1,0 +1,202 @@
+\sec{Preliminaries}
+These are not strictly preliminaries, in the sense that you do not \emph{need} to know these to understand the text. However, since the examples do rely on these, it's certainly beneficial to know these.\\
+The reader may skip these at the beginning and return to these whenever the text demands it.
+\subsection{Axiom of Choice}\label{axiomofchoice}
+Given a collection $\mathcal{B}$ of nonempty sets, there exists a function
+\begin{equation*} 
+	f:\mathcal{B} \to \bigcup_{B \in \mathcal{B}}B
+\end{equation*}
+such that $f(B) \in B,$ for each $B \in \mathcal{B}.$\\
+The function $f$ is called a \emph{\textbf{choice function}} for the collection $\mathcal{B}.$\\
+Note that the above can be stated in an equivalent way where the collection of (nonempty) sets is being indexed by some set. This is done in the following manner:\\
+Let $X$ be a set and $(E_x)_{x \in X}$ be an arbitrary collection of nonempty sets. \\
+Set $E = \displaystyle\bigcup_{x \in X}E_x.$ \\
+Then, there exists a function
+\begin{equation*} 
+ 	f : X \to E
+\end{equation*}
+such that $f(x) \in E_x,$ for all $x \in X.$\\
+As before, $f$ is called a \emph{\textbf{choice function}}.\\~\\
+Informally, the definition above states that:\\
+Given a collection $\mathcal{B}$ of nonempty sets, there is a way to ``choose'' exactly one element from each set. (Note that we do not demand the sets to be disjoint, so it is possible that the same element can picked from two different sets. That is okay.) \\
+One may also note that there is no uniqueness demanded of the choice function.
+\subsection{Monoids}
+A \emph{monoid} is a set $M$ equipped with a binary operation $*$ and a distinguished element $u \in M$ satisfying:
+\begin{itemize}
+	\item $a*(b*c) = (a*b)*c,$ for all $a, b, c \in M,$ and
+	\item $a*u = a = u*a$ for all $a \in M.$
+\end{itemize}
+We may sometimes also refer to the monoid as $(M, *, u).$\\
+A monoid homomorphism $h:(M, *, u_M) \to (N, \cdot, u_N)$ is a function $h:M\to N$ satisfying
+\begin{itemize}
+	\item $h(a*b) = h(a)\cdot h(b),$ for all $a, b \in M,$ and
+	\item $h(u_M) = h(u_N).$
+\end{itemize}
+\subsection{Groups}
+With the same notation as earlier, a monoid $M$ is said to be \emph{group} if for every $a \in M,$ there exists some $b \in M$ such that $a * b = u = b * a.$\\
+A group homomorphism is a monoid homomorphism between groups.
+\subsection{Preorders}
+A \emph{preorder} is a set $P$ equipped with a binary relation $\le$ satisfying:
+\begin{itemize}
+	\item $a \le a$ for all $a \in P,$ and
+	\item $a \le b$ and $b \le c$ implies $a \le c$ for all $a, b, c \in P.$
+\end{itemize}
+That is, the relation is reflexive and transitive.
+\subsection{Posets}
+A \emph{poset} is a preorder $P$ with the additional condition that $\le$ is antisymmetric, that is,
+	\begin{equation*} 
+		a \le b \text{ and } b \le a \implies a = b \text{ for all } a, b \in P.
+	\end{equation*}
+An order-preserving map between posets $(P, \le_P)$ and $(Q, \le_Q)$ is a function $f:P\to Q$ satisfying
+\begin{align*} 
+	p \le_P q \implies f(p) \le_Q f(q). 
+\end{align*}
+\subsection{Boolean algebra} \label{boolalg}
+A \emph{Boolean algebra} is a poset $B$ equipped with distinguished elements $0, 1,$ binary operations $a\vee b$ of ``join'' and $a\wedge b$ of ``meet,'' and a unary operation $\neg b$ of ``complementation.'' These are required to satisfy the conditions
+\begin{align*} 
+	0 &\le a\\
+	a &\le 1\\
+	a \le c \text{ and } b \le c \quad &\text{iff} \quad a \vee b \le c \\
+	c \le a \text{ and } c \le b \quad &\text{iff} \quad c \le a \wedge b \\
+	a \le \neg b \quad &\text{iff} \quad a \wedge b = 0\\
+	\neg\neg a  &= a.
+\end{align*}
+A typical example of a Boolean algebra is the power-set $\mathcal{P}(X)$ of $X.$ We have the following identifications:
+\begin{equation*} 
+	0 = \emptyset, 1 = X, A \vee B = A \cup B, A \wedge B = A \cap B, \neg A = X\setminus A.
+\end{equation*}
+A Boolean homomorphism is a function $h:B\to B'$ between Boolean algebras that is an order-preserving map which preserves the addition structure, id est, 
+\begin{align*} 
+	h(0) &= 0, \\
+	h(1) &= 1, \\
+	h(a \vee b) &= h(a) \vee h(b), \\
+	h(a \wedge b) &= h(a) \wedge h(b), \text{ and} \\
+	h(\neg a) &= \neg h(a).
+\end{align*}
+%
+\subsection{Topological spaces}
+A \textbf{\emph{topology}} on a set $X$ is a collection $\mathcal{T}$ of subsets of $X$ having the following properties:
+\begin{itemize} 
+\item $\emptyset$ and $X$ are in $\mathcal{T}.$
+\item The union of elements of any subcollection of $\mathcal{T}$ is in $\mathcal{T}.$
+\item The intersection of the elements of any finite subcollection of $\mathcal{T}$ is in $\mathcal{T}.$
+\end{itemize}
+If $X$ is a topological space with topology $\mathcal{T}$, we say that a subset $U$ of $X$ is an \textbf{\emph{open set}} of $X$ if $U$ belongs to the collection $\mathcal{T}.$\\
+In this text, we shall write $O(X)$ to denote $\mathcal{T},$ id est, the collection of open sets.
+
+Given topological spaces $X$ and $Y,$ a function $f:X\to Y$ is said to be open if the preimage of every open set is open. That is to say, if $V \in O(Y),$ then $f^{-1}(V) \in O(X).$
+
+(To recall, $f^{-1}(V) = \{x \in X \mid f(x) \in V\}.$)
+%
+\subsection{Equivalence relations and Quotients} \label{equivrel}
+Let $B$ be a set. A \emph{relation} $R$ \emph{on} $B$ is a subset $R \subset B \times B.$ We write ``$aRb$'' to mean ``$(a, b) \in R$.''\\
+Let ${\sim}$ be a relation on $B.$ We say that ${\sim}$ is an \emph{equivalence relation} on $B$ if the following holds for all $x, y, z \in B:$
+\begin{itemize}
+	\item (Reflexive) $x \sim x,$
+	\item (Symmetric) $x \sim y$ implies $y \sim x,$
+	\item (Transitive) $x \sim y$ and $y \sim z$ implies $x {\sim} z.$
+\end{itemize}
+Given such a relation, one defines the \emph{equivalence class} $[x]$ of an element $x \in X$ by
+
+\begin{equation*} 
+	[x] = \{y \in  B \mid x \sim y\}.
+\end{equation*}
+
+The various different equivalence classes $[x]$ then form a \emph{partition} of $B,$ that is:
+\begin{itemize}
+	\item Each equivalence class is nonempty,
+	\item Any two distinct equivalence classes are disjoint, and
+	\item The union of all equivalence classes is $B.$
+\end{itemize}
+(That the above is true is an exercise.)\\
+In particular, given any $x \in B,$ there exists a unique equivalence class to which $x$ belongs.\\
+The set of all equivalence classes
+
+\begin{equation*} 
+	B/{\sim} = \{[x] \mid x \in B\}
+\end{equation*}
+is called the \emph{quotient} of $X$ by ${\sim}.$ it is used in place of $B$ when one wants to ``abstract away'' the difference between equivalent elements $x \sim y,$ in the sense that in $B/{\sim}$ such (and only such) elements are identified, since
+
+\begin{equation*} 
+	[x] = [y] \; \text{iff} \; x \sim y.
+\end{equation*}
+We have a natural (surjective) map $B \to B/{\sim}$ called the \emph{quotient mapping},
+
+\begin{equation*} 
+	q:B \to B/{\sim}
+\end{equation*}
+defined as $x \mapsto [x].$ 
+
+\begin{defn} 
+	Let $R$ be a relation on a set $B$ and $f:B\to Z$ be a function.\\
+	We say that ``$f$ respects $R$'' if $f(b) = f(b')$ whenever $(b, b') \in R.$
+\end{defn}
+
+\begin{prop} \label{prop:fextend}
+The quotient mapping has the property that a map $f:B\to Z$ extends (uniquely) as,
+\begin{equation*} 
+	\begin{tikzcd}
+		B \arrow[rr, "q"] \arrow[rrddd, "f"'] && B/{\sim} \arrow[ddd, "\bar{f}" ,dotted]\\
+		&&\\&&\\
+		&& Z
+	\end{tikzcd}
+\end{equation*}
+precisely when $f$ respects the equivalence relation.
+\end{prop}
+\begin{proof} 
+	Note that if the map $f$ extends, then it must respect the relation. For if $x \sim y,$ then $q(x) = q(y)$ and $f(x) = \bar{f}(q(x)) = \bar{f}(q(y)) = f(y).$\\~\\
+	Conversely, suppose that $f$ respects $\sim.$ Then, define $\bar{f}:B/{\sim} \to Y$ as follows:
+	\begin{equation*} 
+		\bar{f}([x]) = f(x).
+	\end{equation*}
+	We must verify that the above is indeed well-defined, id est, $f(x) = f(y)$ whenever $[x] = [y].$ However, this is precisely what it means to say that $f$ respects $\sim.$\\
+	The uniqueness follows from the fact that $q$ is surjective.
+\end{proof}
+
+%This concept extends to many other cases of taking more sophisticated quotients in the cases of monoids, groups, topological spaces, et cetera.\\~\\
+
+\textbf{Equivalence closure}: Suppose we are given an arbitrary relation $R$ on some set $B.$ We can construct a relation ${\sim}$ on $B$ which is the \emph{smallest} equivalence relation containing $R$. This is constructed as follows:\\
+Let $\mathcal{E}$ be the set of all equivalence relations on $B$ containing $R,$ id est,
+\begin{equation*} 
+	\mathcal{E} = \{E \subset B \times B \mid R \subset E \text{ and } E \text{ is an equivalence relation}\}.
+\end{equation*}
+
+Then, 
+\begin{equation*} 
+	{\sim} = \bigcap_{E \in \mathcal{E}}E.
+\end{equation*}
+It can be verified that ${\sim}$ is an equivalence relation. (Intersection of any family of equivalence relation is an equivalence relation.) Moreover, $R \subset {\sim}.$ We also have that ${\sim} \subset E$ for any equivalence relation $E \supset R.$\\~\\
+We say that ${\sim}$ is the equivalence relation \emph{generated} by $R.$
+
+We now observe a crucial property of this closure which is later used in \S\S\ref{ssec:coeq}.\\
+Let the notations be the same as earlier. Let $f:B\to Z$ be a function.\\
+As before, we let ${\sim}$ denote the equivalence relation generated by $R$ and $q:B \to B/{\sim}$ be the projection mapping, all as depicted in the following diagram.
+
+\begin{equation*} 
+	\begin{tikzcd}
+		B \arrow[rr, "q"] \arrow[rrddd, "f"'] && B/{\sim}\\
+		&&\\&&\\
+		&& Z
+	\end{tikzcd}
+\end{equation*}
+
+\begin{prop} \label{prop:fextends2}
+	If $f:B\to Z$ respects $R,$ then there exists a (unique) function $\bar{f}:B/{\sim} \to Z$ such $\bar{f}\circ q = f.$
+\end{prop}
+\begin{proof} 
+	We first define an equivalence relation $\approx$ on $B$ as 
+	\begin{equation*} 
+		b \approx b' \text{ iff } f(b) = f(b').
+	\end{equation*}
+	(This can easily be verified to be an equivalence relation.)\\
+	\textbf{Claim 1.} $R \subset \ \approx.$\\
+	\emph{Proof.} $(b, b)' \in R \implies f(b) = f(b') \implies (b, b') \in \ \approx.$ \\
+	(The first implication follows from the fact that $f$ respects $R.$)\\~\\
+	Now, from the definition of $\sim,$ it follows that ${\sim} \subset {\approx}.$\\
+	However, this means that $f$ respects $\sim$ as well. Indeed,
+	\begin{align*} 
+		b \sim b' &\implies b \approx b'\\
+		&\implies f(b) = f(b').
+	\end{align*}
+	The result now follows by Proposition \ref{prop:fextend}.
+\end{proof}

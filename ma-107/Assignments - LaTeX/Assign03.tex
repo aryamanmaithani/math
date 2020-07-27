@@ -1,0 +1,59 @@
+\assign{28-01-2019}
+\begin{enumerate}[label = (\arabic*)]
+    \item Identify the set $A\subset \mathbb{N}$ given that: if $x \in A$, then $x+1\in A$. Justify your answer.
+    %
+    \item The \textit{absolute value} or \textit{mod} function is defined as follows: $\forall x \in \mathbb{R}$, define
+    \[ |x| = \left\{
+        \begin{array}{l l}
+            x & \text{when } x \ge 0 \\
+            -x & \text{when } x < 0 
+        \end{array}
+    \right. \]
+    Identify the following sets:\\
+    \begin{enumerate*}[label=(\roman*)]
+        \item $\{x\in\mathbb{R}: |x| = 3\}$
+        \item $\{x\in\mathbb{R}: |x| \le 3\}$
+        \item $\{x\in\mathbb{R}: |x+5| \le 3\}$
+    \end{enumerate*}
+    %
+    \item Find $\lub(A)$ and $\glb(A)$ in $B$ in the following examples, if they exist. If not, explain why they do not exist.
+    \begin{enumerate}[nosep]
+        \item $A=\mathbb{N}, B=\mathbb{N}$
+        \item $A = \{x\in\mathbb{Z} : -1 \le |x+5| < 8\}, B = \mathbb{Z}$. Does your answer change if $B=\mathbb{R}$?
+        \item $A = \{x\in\mathbb{Q} : -1 \le |x+5| < 8\}, B = \mathbb{Q}$. Does your answer change if $B=\mathbb{R}$?
+        \item $A = \{x\in\mathbb{Q} : x\neq0, 1/x \in \mathbb{N}\}, B = \mathbb{Q}$. Does your answer change if $B=\mathbb{R}$?
+    \end{enumerate}
+    %
+    \item Let $A\subset\mathbb{R}$ and $\alpha \in \mathbb{R}$ such that $\alpha$ in an upper bound of $S$ in $\mathbb{R}$. Show that the following statements are equivalent.
+    \begin{enumerate}[nosep]
+        \item $\alpha$ is the least upper bound of $A$ in $\mathbb{R}$.
+        \item For every $\epsilon > 0 \in \mathbb{R}$, there exist $a \in A$ such that $\alpha - \epsilon < a \le \alpha$
+        \item For every $t\in\mathbb{R}$ with $t < \alpha$, there exists $a\in A$ such that $t < a \le \alpha$.
+    \end{enumerate}
+    %
+    \item Let $c \in \mathbb{R}; A, B \subset \mathbb{R}$ be bounded and non-empty. State whether the following are true or false. If true, prove it. If false, give a counter-example, and state and prove the corrected version.
+    \begin{enumerate}[nosep]
+        \item If $A\subset B$ then $\lub(A) = \lub(B)$.
+        \item $\lub(A\cup B) = \min\{\lub(A), \lub(B)\}$
+        \item $\lub(A\cap B) \rule{1cm}{0.15mm}\{\lub(A), \lub(B)\}$
+        \item $\lub(cA) = c \lub(A)$
+        \item $\lub(A+B) = \lub(A) + \lub(B)$
+    \end{enumerate}
+    %
+    \item Let $X$ be a set, $A, B \subset X$. Show that the following are equivalent:\\
+    \begin{enumerate*}[label=(\roman*)]
+        \item $A\subset B$
+        \item $A = A\cap B$
+        \item $A \subset (A\cap B)$\\
+        \item $B^c \subset A^c$
+        \item $B = A\cup B$
+        \item $(A\cup B)\subset B$
+    \end{enumerate*}
+    %
+    \item Let $a, b, c, d \in \mathbb{N}$. State the following mathematically and write their negations:
+    \begin{enumerate}[nosep]
+        \item $c$ divides $a$. (Easier to think of: $a$ is a multiple of $c$).
+        \item $c$ is a common divisor of $a$ and $b$,
+        \item $d$ is a greatest common divisor of $a$ and $b$.
+    \end{enumerate}
+\end{enumerate}

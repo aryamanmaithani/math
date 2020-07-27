@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\title{MA 214: Tutorial 2}
+\author{Aryaman Maithani}
+\date{29-01-2020}
+
+\begin{document}
+\maketitle
+1. Let $x_0, x_1, \ldots, x_m$ be not necessarily distinct points. Let $f$ and $g$ be two polynomials such that $f$ and $g$ agree on $x = x_0, x_1, \ldots, x_m.$ Also, $\deg f \le m$ and $\deg g \le m.$ Show that $f = g.$\\
+
+\textbf{Solution}.\\
+Let $y_1, \ldots, y_r$ be the distinct points out of $x_0, \ldots x_m.$\\
+Let $m_i$ denote the number of times that $y_i$ is repeated.\\
+Thus, we can straight away note that
+\[m_1 + m_2 + \cdots + m_r = m+1. \qquad \text{(I)}\]
+Now, let us define $h(x) := f(x) - g(x).$ Note that $h$ has the following properties:\\
+(i) $h$ is a polynomial of degree $\le m$\\
+(ii) $h^{(k)}(x) = f^{(k)}(x) - g^{(k)}(x)$ for all $k \ge 0.$\\~\\
+The fact that $f$ and $g$ agree on $x_0, \ldots, x_m$ gives us that:\\
+\begin{align*} 
+	h(y_1) = h^{(1)}(y_1) = &\cdots = h^{(m_1 - 1)}(y_1) = 0\\
+	h(y_2) = h^{(1)}(y_2) = &\cdots = h^{(m_2 - 1)}(y_2) = 0\\
+	&\vdots\\
+	h(y_r) = h^{(1)}(y_r) = &\cdots = h^{(m_r - 1)}(y_r) = 0	
+\end{align*}
+Thus, $y_1$ is root of $h$, repeated $m_1$ times and so on.\\
+This means that $h$ can be written as:
+\[h(x) = (x - y_1)^{m_1}\cdots(x - y_r)^{m_r}q(x),\]
+for some polynomial $q(x).$\\
+However, note that the degree of the left hand side is $\le m,$ by (i).\\
+On the other hand, the degree of $(x - y_1)^{m_1}\cdots(x - y_r)^{m_r}$ is $m+1,$ by (I).\\
+Thus, if $q(x)$ is not identically zero, we'd get that the degree of the RHS is strictly greater than the degree of the LHS, a contradiction.\\
+Thus, we get that $q(x) = 0$ for all $x.$ This, in turn, gives that $h(x) = 0$ for all $x.$\\
+This gives us that $f = g,$ as desired.
+
+\hrulefill
+
+4. A function $f(x)$ has a double zero at $z_1$ and a triple zero at $z_2.$ Determine the form of the polynomial of degree $\le 5$ which interpolates $f(x)$ twice at $z_1,$ three times at $z_2$ and once at some other point $z_3.$\\
+
+\textbf{Solution.}\\
+One ``stupid'' way to do this would obviously be to construct the general divided difference table and write it. However, we can be smarter.\\
+Using the same idea as earlier, we know that the form of the polynomial, say $h(x)$, must be:\\
+$h(x) = (x - z_1)^2(x - z_2)^3q(x),$ where $q(x)$ is some polynomial.\\~\\
+The factor $(x - z_1)^2$ appeared because $z_1$ was a double root of $f$ and $h$ is supposed to interpolate $f$ twice. Similar justification of $(x - z_2)^3.$\\~\\
+Now, note that $h(x)$ has degree $\le 5$ and $(x - z_1)^2(x - z_2)^3$ already has degree $5.$ Thus, $p(x)$ must be a constant polynomial.\\
+Let $p(x) = c.$ Now, we just have to determine what the constant $c$ must be.\\
+To do this, we just evaluate $h(x)$ at $x = z_3$ to get
+\[h(z_3) = (z_3 - z_1)^2(z_3 - z_2)^3c.\]
+Note that $h(z_3)$ must equal $f(z_3)$ as $h$ interpolates $f$ at $z_3.$\\
+Thus, $c = \dfrac{f(z_3)}{(z_3 - z_1)^2(z_3 - z_2)^3}.$\\~\\
+This gives us the final polynomial to be
+\[h(x) = f(z_3)\dfrac{(x - z_1)^2(x - z_2)^3}{(z_3 - z_1)^2(z_3 - z_2)^3}.\]
+(Note that the denominator is indeed nonzero.)
+\end{document}

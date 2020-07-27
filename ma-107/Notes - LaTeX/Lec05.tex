@@ -1,0 +1,102 @@
+\prs{16-01-2019}
+Let us now try to construct some subsets of $\mathbb{R}$.\\
+$\mathbb{N} = \{x \in \mathbb{R} | \text{where x can be written as a non-trivial sum of 1s}\}$\\
+This gives us that $\mathbb{N}$ has elements: 1, 1+1, 1+1+1, $\dots$\\
+As we had shown that $0<1$, we also have that: $0<1<1+1<1+1+1<\dots$\\
+$\mathbb{Z} = \{x \in \mathbb{R} | x \in \mathbb{N} \text{ or } (-x) \in \mathbb{N} \text{ or } x=0\}$\\
+$\mathbb{Q} = \{x \in \mathbb{R} | \exists p, q \in \mathbb{Z}, q \neq 0 \text{ such that } \frac{p}{q} = x \}$ %
+$\left(\frac{p}{q} \text{ is notation for } p\cdot q^{-1}\right)$\\
+
+Mentioning this once again for the sake of emphasis- till now, all the axioms which we had written (A1-A9) were satisfied by $\mathbb{Q}$ as well. We would now like to find a way to show that $\mathbb{Q} \neq \mathbb{R}$.
+
+\hrulefill
+
+Question: Is there a rational number x such that $x^2=2?$\\
+Answer: Suppose $\exists x \in \mathbb{Q}$ such that $x^2 = 2$.
+By our definition of rationals, this would mean that x can written as $p/q$ where $p$ and $q$ are integers. \\
+To avoid equivalent fractions, let us put extra constraints saying: $p$ and $q$ must have no common factor and $q > 0$.\\
+Now, by our assumption:\\~\\
+$\left(p\cdot \dfrac{1}{q}\right)^2 = 2$\\~\\
+$\implies p^2\cdot\left(\dfrac{1}{q}\right)^2 = 2$\\~\\
+$\implies p^2=2q^2$ \hfill (Steps have been skipped, make sure that you can fill in the gaps.)\\~\\
+This shows that $p^2$ is an even number.\\
+$\implies$ p is an even number. \hfill (Show that the square of an odd number is odd and then, justify.)\\
+$\implies p = 2r$ for some $r \in \mathbb{Z}$\\
+$\implies p^2=(2r)^2=4r^2$\\
+$\therefore 4r^2 = 2q^2 \iff q^2 = 2r^2$
+$\implies q^2$ is even. $\implies q$ is even.\\
+If $p$ and $q$ are both even, this means that they have a common factor, i.e., 2.\\
+This contradicts our original assumption that p and q have no common factors.\\
+Therefore, there is no $x \in \mathbb{Q}$ such that $x^2 = 2$. 
+
+\hrulefill
+
+The above shows that $\mathbb{Q}$ is not enough to solve all sorts of equations. Note that I haven't shown that any element of $\mathbb{R}$ \textit{can} solve that equation, so I can't yet say that $\mathbb{Q} \neq \mathbb{R}$.
+
+\hrulefill
+
+Let us look at another question:
+$S = \{x \in \mathbb{Q} | x^2 < 2\}$\\
+Is $S\neq \emptyset$? Yes. $0\in S, 1 \in S, 4/3 \in S.$\\
+If you have any $r \in S$, would there always exist an $r' \in S$ such that $r < r'?$ In other words, does $S$ have a maximum?%
+\footnote{Recall that maximum of a set requires that the maximal element belongs in the set as well. So, something like 5 would not be a correct answer for maximum.}\\
+$T = \{x \in \mathbb{Q} | x > 0, 2 < x^2\}$\\
+Does T have a minimum?
+%
+\section{Upper bound}\label{sec:ub}
+\highlight{\textbf{Definition: }Let $S$ be an ordered set with relation $<$.\\
+Then a subset $A \subset S$ is said to be bounded above in $S$ if:\\
+$\exists z \in S\big(\forall x \in A (x \le z)\big)$\\
+Further, $z$ is said to be an upper bound of $A$.}
+
+\example{Is $\mathbb{N}$ bounded above in $\mathbb{R}?$\\%
+Suppose I want to show that $\mathbb{N}$ is not bounded. What would I have to do? I would have to have the negate the statement given above in the definition, that is, I would have to show that-\\
+$\forall z \in \mathbb{R}\big(\exists n \in \mathbb{N}(z < n)\big)$\\~\\
+So, let us suppose that a given $z \in \mathbb{R}$ is an upper bound.\\
+\phantom{ } \hfill(Now I want to show the existence of an $n \in \mathbb{N}$ such that $a < n$)\\
+Then: $n \le a$\hspace{1 cm}$\forall n \in \mathbb{N}$\\
+Now... it seems that there's nothing that we can do which will lead to any sort of contradiction.\\~\\
+$\dots$ To be \textbf{\textit{completed.}}\footnote{pun intended.}
+}
+
+\hrulefill
+
+If you do feel that you have a valid proof based only the axioms stated until now, ask a professor about its validity. If your reasoning is anywhere involving ``if $\mathbb{N}$ is bounded, then it must have a largest element", note that that reasoning is not correct. (Why?)
+
+\hrulefill
+
+\exercise{%
+Let $S$ be an ordered set.\\
+Define what it means for $A \subset S$ to be bounded below.\\
+Define what a lower bound for $A$ in $S$ means.\\
+(Note that the aim here is for these definitions to be analogous to the upper bound ones, so don't just come up with \textit{any} definition.)}
+
+\hrulefill
+
+\example{%
+$A = \{5, 25, 391, 1667, 200899\}$\\
+What is the set of all upper bounds ($U$) of $A$ in $\mathbb{R}$?\\
+Ans: $U = \{x \in \mathbb{R} | 200899 \le x\}$
+}
+
+\hrulefill
+
+\exercise{%
+$A = \left\{x\in\mathbb{Q}\bigg|x < \dfrac{1}{2}\right\}$\\
+$U = \left\{x\in\mathbb{R}\bigg|\dfrac{1}{2} \le x \right\}$\\
+Show that $U$ is set of all upper bounds of $A$ in $\mathbb{R}$.
+}
+
+\exercise{\label{ex:unboundedN}Show that $\mathbb{N}$ is not bounded above in $\mathbb{N}$.}
+
+\exercise{Show that $\mathbb{N}$ is not bounded above in $\mathbb{Q}$.}
+
+\hrulefill
+\newpage
+\section{Completeness Axiom}\label{sec:complete}
+$\mathbb{R}$ satisfies the completeness axiom which states that-
+\axiom{Any nonempty subset of $\mathbb{R}$ that is bounded above has a least upper bound.}
+
+\hrulefill
+
+With the above, we have now concluded all the axioms of $\mathbb{R}$.

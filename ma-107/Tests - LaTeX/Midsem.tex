@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage[inline]{enumitem}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\begin{document}
+\begin{center}
+    \textsc{Midsem: MA 107}\\
+    \textsc{Spring 2019, IIT Bombay}
+\end{center}
+\begin{enumerate}[label = (\arabic*)]
+    \item Write the negation of the following statements in words. Then write both the original statements and its negation mathematically. (While writing the mathematical statements, define the appropriate sets).
+    \begin{enumerate}
+        \item Every library has a book with at least 100 pages.
+        \item Each student is smart or has a smart phone.
+    \end{enumerate}
+    %
+    \item For non-empty subsets $A, B \subset \mathbb{R}$, define $A+B = \{x\in\mathbb{R}|\exists y\in A, z\in B(x = y+z)\}$
+    \begin{enumerate}
+        \item For $A = (2, 4)$ and $B = \{3, 4\}$, show that $7 \in A+B$ and $8\not\in A+B$.
+        \item For $A = (2, 4)$ and $B = \{3, 4\}$, find $A+B$ (with proof).
+        \item If $A$ and $B$ are bounded above in $\mathbb{R}$, show that $A+B$ is also bounded above in $\mathbb{R}$.
+        \item Prove or disprove: If $A$ and $B$ are bounded above in $\mathbb{R}$, then $\operatorname{lub}(A)+\operatorname{lub}(B) = \operatorname{lub}(A+B)$
+    \end{enumerate}
+    %
+    \item \begin{enumerate}
+        \item Prove or disprove: Let $x, y \in\mathbb{R}.$ If $x+y\ge0$, then $x\ge0$ or $y \ge 0$.
+        \item Let $x, y\in(0,\infty)$. If $x^3 > y^3,$ prove that $x > y.$
+    \end{enumerate}
+    %
+    \item Let $A\subset \mathbb{Z}$ be non-empty and bounded above in $\mathbb{R}$. Show that $A$ contains a maximum element.
+    %
+    \item Consider the function $f: X \to Y$ defined by $f(x) = x^2$, where $X, Y \subset \mathbb{R}$.
+    \begin{enumerate}
+        \item For $X = \mathbb{R} = Y$ and $A = (0, 2] \subset X$, find $f(A)$ (with proof).
+        \item For $X = \mathbb{R} = Y$, show that $f$ is not
+        \begin{enumerate*}[label=(\roman*)]
+            \item one-one
+            \item onto.
+        \end{enumerate*}
+        \item Prove or disprove: If $X = (0, \infty) = Y$, then f is a bijection.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,71 @@
+\prs{10-01-2019}
+\section{Some Proofs}\label{sec:uniquenessproofs}
+Let us now prove some claims working on the axioms stated in the previous lecture.\\
+\claim{Additive identity is unique.}{%
+Assume $\exists 0' \in \mathbb{F}$ which is also an additive identity. If I can show that $0' = 0$, then I would've proven my statement.\\
+\begin{tabular}{l r}
+    $\forall a \in \mathbb{F}: a + 0' = a = 0' + a$  & 
+(By definition of additive identity) \\
+    Also, $\forall b \in \mathbb{F}: b + 0 = b = 0 + b$     & (By \hyperref[ax:A3]{A3})\\
+    $a = 0: 0 + 0' = 0 = 0' + 0$ & --- (I)\\
+    $b = 0: 0' + 0 = 0' = 0 + 0'$ & ---(II)\\
+    By (I) and (II) & \\
+    $0+0' = 0 = 0'$ & \\
+    $\therefore 0' = 0$ & \\
+    $\implies$ Additive identity is unique. &
+\end{tabular}}\\~\\
+%
+\claim{Multiplicative identity is unique.}{Similar as above.}\\
+%
+\claim{Additive inverse is unique.}{%
+By definition, $\forall a\big( \exists b_a \in \mathbb{F}\big)$ such that:\\
+$a + b_a = 0 = b_a + a$\\
+Assume $\exists b_a' \in \mathbb{F}$ such that:\\
+$a + b_a' = 0 = b_a' + a$\\
+Now, I would like to prove that $b_a = b_a'$\\
+\begin{tabular}{r l r}
+    $b_a$ & $=b_a + 0$ & (By \refaxiom{3})  \\
+     & $=b_a + (a + b_a')$ & (By definition stated above) \\
+     & $= (b_a + a) + b_a'$ & (By \refaxiom{1})\\
+     & $= 0 + b_a'$ & (By definition stated above)\\
+     & $=b_a'$ & (By \refaxiom{3})  \\
+     \hline
+\end{tabular}\\~\\
+$\therefore b_a = b_a' \implies$ Additive inverse is unique.
+}\\
+Now that we have shown that the additive inverse is unique, we can denote it by something. The additive inverse of $a$ is denoted by $-a$.\\~\\
+\claim{Multiplicative inverse is unique.}{Similar as above.}
+Now that we have ``shown'' that the multiplicative inverse is unique, we can denote it by something. The multiplicative inverse of $a$ is denoted by $\dfrac{1}{a}$ or $a^{-1}$.\\
+\newpage
+
+\hrulefill
+\exercise{For a field $(\mathbb{F}, +, \cdot)$, prove that:%
+\begin{enumerate}
+    \itemsep0em
+    \item $\forall a, b, c \in \mathbb{F}: a + b = a + c\implies b = c$
+    \item $\forall a, b, c \in \mathbb{F}, a\neq0: a\cdot b = a\cdot c \implies b=c$
+\end{enumerate}
+}
+
+\hrulefill
+\section{Ordered Field Axioms}\label{sec:ofield}
+A field $(\mathbb{F}, +, \cdot)$ is said to be an ordered field if it is an ordered set with an order `$<$' that follows:
+\axiom{$\forall x, y, z \in \mathbb{F}$:\\
+        $x < y \implies x + z < y + z$}\\
+\axiom{$\forall x, y \in \mathbb{F}$:\\
+        if $0 < x, 0 < y$; then $0 < x\cdot y$}
+\\~\\
+$\mathbb{R}$ is an ordered field.\\
+Note that yet again, $\mathbb{Q}$ satisfies all the above properties.
+
+\hrulefill
+
+It had been mentioned before that $(\{0\}, +, \cdot)$ would constitute a field. This goes to show that from the field axioms alone, we cannot prove that $1\neq0$.\\
+At this point, we add the ``axiom" that the multiplicative identity of $\mathbb{R}$ is not equal to its additive identity. This axiom is not being numbered but from now on, we'll use the fact that $1\neq0$.
+
+\hrulefill
+\exercise{After this lecture, \hyperref[assign:1]{this assignment} had been given where we proved many properties about real numbers using the 9 axioms. These properties will now be taken for granted. So, go through the assignment and prove them yourself.}
+\exercise{What is the smallest field you can construct which has more than one element?}
+\exercise{The ordered field axioms are not stated the same way everywhere. Find another notion of an ordered field and then show that that is equivalent to what we did.}
+
+\hrulefill

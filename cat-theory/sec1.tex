@@ -1,0 +1,566 @@
+\sec{Categories}
+\subsection{Definition - Category}
+We avoid any technicalities of set theory and define what a category is.
+\begin{defn} 
+	A \emph{category} consists of the following data:
+	\begin{itemize}
+		\item Objects: $A, B, C, \ldots$
+		\item Arrows (or \emph{morphisms}): $f, g, h, \ldots$
+		\item For each arrow $f,$ there are given objects
+		\[\dom(f), \cod(f)\]
+		called the \emph{domain} and \emph{codomain} of $f.$ We write 
+		\[f:A \to B\]
+		to indicate that $\cod(f) = A$ and $\dom(f) = B.$
+		\item Given arrows $f:A\to B$ and $g:B\to C,$ there is given an arrow
+		\[g\circ f : A \to C\]
+		called the \emph{composite} of $f$ and $g.$
+		\item For each object $A,$ there is given an arrow
+		\[1_A : A \to A\]
+		called the \emph{identity arrow} of $A.$
+	\end{itemize}
+	Additionally, we require the above data to follow the following laws:
+	\begin{itemize}
+		\item Associativity:
+		\[h \circ (g \circ f) = (h \circ g) \circ f\]
+		for all $f : A \to B, g: B \to C, h : C \to D.$
+		\item Unit:
+		\[f\circ 1_A = f = 1_B \circ f\]
+		for all $f:A\to B.$
+	\end{itemize}
+\end{defn}
+The above highly imitates the behaviour of that of sets and functions. Indeed, that shall be our first example of a category. Many of our other examples will also consist of categories where the objects are ``structured sets'' and arrows ``structure-preserving functions.'' However, these are not all. A category is \emph{anything} that satisfies the above definition.\\
+Note that technically, it isn't correct to write $C \in \mathbf{C}$ or $(f:C \to D) \in \mathbf{C};$ however, we shall abuse notation and write so as the alternative is too annoying.
+\subsection{Examples}
+\begin{enumerate} 
+	\item The category $\mathsf{Set}.$ The objects of this category are (all) sets and the arrows are (all) functions between sets. The composite of two arrows is defined as composition of functions. It can be verified that this is indeed a well defined composition. Lastly, given any object $X$ (a set), the identity arrow of $X$ is simply the identity function $1_X = \id_X:X\to X.$\\
+	The above is all the data that's required to define a category. Now, it is be verified that $\mathsf{Set}$ is indeed a category with the above data. These are basic results from set theory and we leave this to the reader.
+	\item We may also consider the category $\mathsf{Set}_{\text{fin}},$ the category consisting of finite sets and functions between them.\\
+	In the same spirit, we may take other restrictions as well. For example, we may take only injective functions instead of functions. By noting that that the composition of two injections is again an injection and that the identity map is an injection, we get that this is indeed a category.\\
+	Similarly, one may restrict the arrows to surjections.
+	\item As mentioned before, many categories arise from other mathematical structures. In these categories, the objects are ``structured sets'' and arrows ``structure-preserving functions.'' The following table lists these.
+
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+		\hline
+		Category & Objects & Arrows (Morphisms)\\
+		\hline
+		$\mathsf{Top}$ & Topological spaces & Continuous maps\\
+		$\mathsf{Mon}$ & Monoids & Monoid homomorphisms\\
+		$\mathsf{Grp}$ & Groups & Group homomorphisms\\
+		$\mathsf{Ring}$ & Rings & Ring homomorphisms\\
+		$\mathsf{Field}$ & Fields & Field extensions\\
+		$\mathsf{Vec}_\Bbbk$ & Vector spaces over $\Bbbk$ & Linear maps\\
+		$\mathsf{Pos}$ & Posets & Order-preserving maps\\
+		$\mathsf{BA}$ & Boolean algebra & Boolean homomorphisms\\
+		\hline
+		\end{tabular}
+	\end{center}
+	\item Preorders. A preorder is a set $P$ equipped with a binary relation $\le$ satisfying:
+	\begin{itemize}
+		\item $a \le a$ for all $a \in P,$ and
+		\item $a \le b$ and $b \le c$ implies $a \le c$ for all $a, b, c \in P.$
+	\end{itemize}
+	That is, the relation is reflexive and transitive.\\
+	Any preorder $P$ can be recognised as a category with objects being the elements of $P$ and a unique arrow 
+	\begin{equation} \label{eq:precat}
+		a \to b \text{ iff } a \le b.
+	\end{equation}
+	The compositions of arrows is defined in the way that will be forced from construction. One can verify that this is indeed a category.\\
+	Note very carefully these this is quite different from the earlier examples where the objects were ``sets'' and  arrows were functions.\\
+	Conversely, given a category where there is at most one arrow between any two objects, one may define a preorder using (\ref{eq:precat}).
+	\item A poset is a preorder $P$ with the additional condition that $\le$ is antisymmetric, that is,
+	\begin{equation*} 
+		a \le b \text{ and } b \le a \implies a = b \text{ for all } a, b \in P.
+	\end{equation*}
+	With the same construction as before, we see that a poset is also a category.
+	\item Finite categories. These are categories with finitely many arrows (and thus, finitely many objects as well). As the previous example shows posets to be categories, we can already get many examples. Let's look at some of them in particular.
+	\begin{itemize}
+		\item The category $\mathbf{1}$ looks like this:
+		\begin{center}
+			\begin{tikzcd} 
+				*
+			\end{tikzcd}
+		\end{center}
+		It has one object and its identity arrow, which we do not draw.
+		\item The category $\mathbf{2}$ looks like this:
+		\begin{center}
+			\begin{tikzcd} 
+				* \arrow[r] & \star
+			\end{tikzcd}
+		\end{center}
+		It has two objects, their identity arrows, and exactly one arrow between them. Once again, the law of composition is clear.
+		\item The category $\mathbf{3}$ looks like this:
+		\begin{center}
+			\begin{tikzcd} 
+				* \arrow[r] \arrow[dr] 	& \star \arrow[d]\\
+									 	& \odot
+			\end{tikzcd}
+		\end{center}
+		This is the category recognised by the poset $\{1, 2, 3\}$ with the typical ordering.
+		\item The category $\mathbf{0}$ looks like this:
+		\begin{center}
+			\begin{tikzcd}
+				
+			\end{tikzcd}
+		\end{center}
+		It has no objects and no arrows.\\
+		It is easy to specify finite categories - just take some objects and start putting arrows between them, but makes sure to put in the necessary identities and composites, as required by the axioms for a category. Also, if there are any any loops, then the need to be cut off by equations to keep the category finite. For example, consider the following specification:
+		\begin{equation} \label{diag:looptwo}
+		\begin{tikzcd}
+			A \arrow[rr, shift left = 1, "e"] && B \arrow[ll, shift left = 1, "f"]
+		\end{tikzcd}
+	\end{equation}
+	Unless we stipulate an equation like $ef = 1_A,$ we will end up with infinitely many arrows $ef, efef, efefefef, \ldots$ This is still a category, just not a \emph{finite} one. We will see this situation later again when we discuss free categories. 
+	\end{itemize}
+	\item Let $X$ be a set. We can regard $X$ as a category $\mathbf{Dis}(X)$ by taking the objects to be the elements of $X$ and taking the arrows to just be the required identity arrows, one for each $x \in X.$ Such categories, in which the arrows are only identities, are called \emph{discrete}. These categories are just special posets.
+\end{enumerate}
+Before returning to more examples, we now define a ``structure preserving'' ``function" between categories.
+\newpage
+\subsection{Definition - Functors}
+\begin{defn} 
+	A functor \[F:\mathbf{C} \to \mathbf{D}\] between categories $\mathbf{C}$ and $\mathbf{D}$ is a mapping of objects (of $\mathbf{C}$) to objects (of $\mathbf{D}$) and arrows (of $\mathbf{C}$) to arrows (of $\mathbf{D}$), in such a way that
+	\begin{enumerate}
+		\item $F(f:A\to B) = F(f):F(A)\to F(B),$
+		\item $F(1_A) = 1_{F(A)},$ and
+		\item $F(g\circ f) = F(g)\circ F(f).$
+	\end{enumerate}
+\end{defn}
+Thus, an arrow between objects gets mapped to an arrow between the images of the two objects. That is to say, a functor preserves domain and codomain. Similarly, it preserved identities and compositions.\\
+This can be illustrated via the following picture:
+\begin{center}
+    \begin{tikzcd}
+		& A \arrow[rr, "f"] \arrow[rrdd, "g \circ f"']&& B \arrow[dd, "g"]\\
+		\mathbf{C} \arrow[dddd, "F"']&&&\\
+		 &&& C\\
+		&&&\\
+		& F(A) \arrow[rr, "F(f)"] \arrow[rrdd, "F(g \circ f)"'] && F(B) \arrow[dd, "F(g)"] \\\mathbf{D}&&&\\
+		&&& F(C)                  
+	\end{tikzcd}
+\end{center}
+Functors compose in the expected way. Moreover, this composition is associative. Also, every category $\mathbf{C}$ has an identity functor $1_{\mathbf{C}} : \mathbf{C} \to \mathbf{C}.$\\
+This gives us another category $\mathsf{Cat},$ the category with categories as objects and functors as arrows.\\
+Let us now turn back to examples.
+\subsection{Some more examples}
+\begin{enumerate}
+	\item We had previously seen that a poset $P$ is in fact a category. The following question is natural to ask: Given posets $P$ and $Q,$ what is a functor between them?\\
+	As it turns out and one can easily see, a functor $F:P\to Q$ is precisely an order preserving function from $P$ to $Q.$\\
+	The reader may compare this with the category $\mathsf{Pos}.$
+	\item One may also consider monoids to be categories in the following way:\\
+	A monoid is just a category with one element. The arrows of the category are the elements of the monoid. In particular, the identity arrow is the unit element. Composition of arrows is determined by the ``product" (binary operation) $m\cdot n$ of the monoid.\\~\\
+	For any set $X,$ the set of functions from $X$ to $X,$ written as
+	\begin{equation*} 
+		\Hom_{\mathsf{Set}}(X, X)
+	\end{equation*}
+	is a monoid under the operation of composition. More generally, for any object $C$ in any category $\mathbf{C},$ the set of arrows from $C$ to $C,$ written as $\Hom_\mathbf{C}(C, C),$ is a monoid under the composition operation of $\mathbf{C}.$ The unit is the identity $1_C.$\\~\\
+	Once again, we have a correspondence between the arrows in $\mathsf{Mon}$ and functors between monoids regarded as categories. The correspondence is that they are the same!
+	\item \emph{Forgetful functors.}\\
+	Consider the functor $U:\mathsf{Grp} \to \mathsf{Set}$ which maps a group to its underlying set and a group homomorphism to the corresponding function between sets. This is clearly a functor. This is called the ``forgetful functor'' as it ``forgets'' the structure of the group. Similarly, one has forgetful functors from various different categories where the objects are structured sets.
+\end{enumerate}
+\subsection{Isomorphisms}
+\begin{defn} 
+	In any category $\mathbf{C},$ an arrow $f:A\to B$ is called an \emph{isomorphism}, if there is an arrow $g:B\to A$, called the \emph{inverse} of $f$ such that
+	\begin{equation*} 
+		g\circ f = 1_A \text{ and } f\circ g = 1_B.
+	\end{equation*}
+\end{defn}
+\begin{lem} 
+	Inverses are unique.
+\end{lem}
+\begin{proof} 
+	Let $f:A\to B$ be an arrow and let $g_1, g_2:B\to A$ be inverses of $f.$ Observe that
+	\begin{equation*} 
+		g_1 = g_1 \circ 1_B = g_1 \circ (f \circ g_2) = (g_1 \circ f) \circ g_2 = 1_A \circ g_2 = g_2.
+	\end{equation*}
+\end{proof}
+Since inverses are unique, we write the inverse of $f$ as $f^{-1}.$ (This is, of course, in the case that $f$ is indeed an isomorphism.)\\
+\begin{defn} 
+	For objects $A, B$ of $\mathbf{C},$ we say that $A$ and $B$ are \emph{isomorphic} if there exists an isomorphism between them.\\
+	This is denoted by writing $A \cong B.$
+\end{defn}
+\example{} Let us consider some familiar categories where the objects are structured sets.
+\begin{enumerate}
+	\item $\mathsf{Set}.$ Here, the isomorphisms are precisely the bijections.
+	\item $\mathsf{Mon}, \mathsf{Grp}, \mathsf{Ring}, \mathsf{Field}, \mathsf{Vec}_\Bbbk.$ Here, the isomorphisms are precisely the (appropriate) homomorphisms\footnote{By ``appropriate,'' we mean that one must consider \emph{monoid} homomorphisms in the case of $\mathsf{Mon}$ and so on.} which are bijective.
+	\item $\mathsf{Pos}.$ Here, the isomorphisms are \emph{\textbf{not}} the same as bijective order-preserving maps. While every isomorphism is indeed a bijective order-preserving map, the converse is not true.\\
+	For example, consider the posets $P_1$ and $P_2$ defined on $\{a, b\}.$ Let the order on $P_1$ be the discrete one. Let the order on $P_2$ be $a \le b.$ Consider the identity function as an arrow from $P_1$ to $P_2.$ This is clearly a bijection that preserves the (trivial) order relations. However, this clearly is not an isomorphism of posets. (One may manually verify that the set-theoretic inverse is not an arrow in $\mathsf{Pos}$. Later, we shall see a method that utilises the structure.)
+	\item $\mathsf{Top}.$ Once again, it is \textbf{\emph{not}} the case that continuous bijections are isomorphisms.
+\end{enumerate}
+The last two examples illustrate how isomorphisms need not always take the same form. The definition of isomorphism is our first example of an \emph{abstract}, category theoretic definition of an important notion. It is abstract in the sense that it makes use only of the category theoretic notions, rather than some additional information about the objects and arrows.\\
+As the reader may be familiar that one often defines a ``group isomorphism'' to be a bijective homomorphism. This definition makes use of the following fact - the inverse of a bijective homomorphism is once again a homomorphism. The advantage of our definition is that applies in \emph{any} category.
+%
+\subsection{Categories - New from Old}
+We now consider some constructions that help us create new categories from old.
+\begin{enumerate}
+	\item \emph{Product.} The product of two categories $\mathbf{C}$ and $\mathbf{D},$ written as
+	\begin{equation*} 
+		\mathbf{C} \times \mathbf{D}
+	\end{equation*}
+	has objects of the form $(C, D),$ for $C \in \mathbf{C}$ and $D \in \mathbf{D},$ and arrows of the form
+	\begin{equation*} 
+		(f, g) : (C, D) \to (C', D')
+	\end{equation*}
+	for $f: C \to C' \in \mathbf{C}$ and $g:D\to D\in \mathbf{D}.$ Composition and units are defined componentwise, that is,
+	\begin{align*} 
+		(f, g) \circ (f', g') &= (f\circ f', g\circ g'),\\
+		1_{(C, D)} &= (1_C, 1_D).
+	\end{align*}
+	There are two obvious \emph{projection functors}
+	\begin{equation*} 
+		\begin{tikzcd}
+			\mathbf{C} && \mathbf{C}\times\mathbf{D} \arrow[rr, "\pi_2"] \arrow[ll, "\pi_1"'] && \mathbf{D}
+		\end{tikzcd}
+	\end{equation*}
+	defined by $\pi_1(C, D) = C$ and $\pi_1(f, g) = f,$ and similarly for $\pi_2.$\\
+	As groups are monoids, one may recognise them as categories. In this case, the reader familiar with groups may recognise that for groups $G$ and $H,$ the product category $G\times H$ is the same as the (direct) group product $G \times H$ interpreted as a category.
+	\item The \emph{opposite} (or ``dual'') category $\mathbf{C}\op$ of a category $\mathbf{C}$ has the same objects and arrow $f:C\to D$ in $\mathbf{C}\op$ is an arrow $f:D\to C$ in $\mathbf{C}.$ That is, $\mathbf{C}\op$ is just $\mathbf{C}$ with all of the arrows formally turned around.\\
+	For easier notation, we shall write
+	\begin{equation*} 
+		f^* : D^* \to C^*
+	\end{equation*}
+	in $\mathbf{C}\op$ for $f:C\to D$ in $\mathbf{C}.$ With this notation, we have the units and composition rule as
+	\begin{align*} 
+		1_{C^*} &= (1_C)^*\\
+		f^*\circ g^* &= (g \circ f)^*.
+	\end{align*}
+	Thus, a diagram in $\mathbf{C}$
+	\begin{equation*} 
+		\begin{tikzcd}
+			A \arrow[rr, "f"] \arrow[rrdd, "g\circ f"'] && B \arrow[dd, "g"]\\
+			&&\\
+			&& C
+		\end{tikzcd}
+	\end{equation*}
+	looks like this in $\mathbf{C}\op$
+	\begin{equation*} 
+		\begin{tikzcd}
+			A^* && \arrow[ll, "f^*"'] B^* \\
+			&&\\
+			&& \arrow[lluu, "f^*\circ g^*"]\arrow[uu, "g^*"'] C^*
+		\end{tikzcd}
+	\end{equation*}
+	\item The \emph{arrow category} $\mathbf{C}^\to$ of a category $\mathbf{C}$ has the arrows of $\mathbf{C}$ as objects and arrow $g$ from $f:A\to B$ to $f':A\to B'$ in $\mathbf{C}^\to$ is a ``commutative square''
+	\begin{equation*} 
+		\begin{tikzcd}
+		A \arrow[dd, "f"'] \arrow[rr, "g_1"] &  & A' \arrow[dd, "f'"] \\
+		                                     &  &                     \\
+		B \arrow[rr, "g_2"']                 &  & B'                 
+		\end{tikzcd}
+	\end{equation*}
+	where $g_1$ and $g_2$ are arrows in $\mathbf{C}.$ That is, such an arrow is a pair of arrows $g = (g_1, g_2)$ in $\mathbf{C}$ such that
+	\begin{equation*} 
+		g_2\circ f = f'\circ g_1.
+	\end{equation*}
+	(A possible confusion that may arise in the mind of the reader is - why should such a commutative square exist? However, note that we are not claiming the existence of such a square. It could very well be possible that there is no arrow between two given objects in $\mathbf{C}^\to$.)\\
+	The identity arrow $1_f$ on an object $f:A\to B$ is the pair $(1_A, 1_B).$\\
+	Composition of arrows is componentwise:
+	\begin{equation*} 
+		(h_1, h_2)\circ (g_1, g_2) = (h_1\circ g_1, h_2\circ g_2).
+	\end{equation*}
+	That this works can be verified using the diagram
+	\begin{equation*} 
+		\begin{tikzcd}
+		A \arrow[dd, "f"'] \arrow[rr, "g_1"] &  & A' \arrow[dd, "f'"] \arrow[rr, "h_1"] &  & A'' \arrow[dd, "f''"] \\
+		                                     &  &                                       &  &                       \\
+		B \arrow[rr, "g_2"']                 &  & B' \arrow[rr, "h_2"']                 &  & B''                  
+		\end{tikzcd}
+	\end{equation*}
+	\item The \emph{slice category} $\mathbf{C}/C$ of a category $\mathbf{C}$ over an object $C \in \mathbf{C}$ has
+	\begin{itemize}
+		\item Objects: all arrows $f \in \mathbf{C}$ such that $\cod(f) = C,$
+		\item Arrows: an arrow $a$ from $f:X\to C$ to $f':X' \to C$ is an arrow $a: X\to X'$ in $\mathbf{C}$ such that $f'\circ a = f,$ as indicated in
+		\begin{equation*} 
+			\begin{tikzcd}
+			X \arrow[rddd, "f"'] \arrow[rr, "a"] &     & X' \arrow[lddd, "f'"] \\
+			                                       &     &                   \\
+			                                       &     &                   \\
+			                                       &  C  &                      
+			\end{tikzcd}
+		\end{equation*}
+	\end{itemize}
+	The identity arrows and compositions are induced from those of $\mathbf{C},$ just like the case of arrow category. Note that there is a functor $U:\mathbf{C}/C \to \mathbf{C}$ that ``forgets about the base object $C.$''\\
+	If $g:C\to D$ is a any arrow, then there is a composition functor,
+	\begin{equation*} 
+		g_*:\mathbf{C}/C \to \mathbf{C}/D
+	\end{equation*}
+	defined by $g_*(f) = g\circ f,$ and similarly for the arrows in $\mathbf{C}/C.$ (The arrows just go to themselves.)\\
+	The following diagram may be useful for the reader.
+	\begin{equation*} 
+		\begin{tikzcd}
+X \arrow[rrdd, "f"'] \arrow[rrrr, "a"] \arrow[rrdddd, "g\circ f"', bend right] &%
+&&&X' \arrow[lldd, "f'"] \arrow[lldddd, "g\circ f'", bend left] \\
+&&&&\\&&C\arrow[dd, "g"] &&\\&&&&\\&&D&&                                                             
+\end{tikzcd}
+	\end{equation*}
+	%
+	To repeat, we saw that given an object $C \in \mathbf{C},$ we get a category $\mathbf{C}/C.$ Moreover, given an arrow $g:C\to D\in \mathbf{C},$ we get a functor $g_*:\mathbf{C}/C \to \mathbf{C}/D.$\\
+	Recalling that categories and functors are nothing but objects and arrows in $\mathsf{Cat},$ this suggests that the above construction is in fact a functor. In fact, this is true as the reader may verify
+	\begin{equation*} 
+		\mathbf{C}/(-) : \mathbf{C} \to \mathsf{Cat}
+	\end{equation*}
+	to be a functor. 
+	If $\mathbf{C} = \mathbf{P}$ is a poset category and $p \in \mathbf{P},$ then
+	\begin{equation*} 
+		\mathbf{P}/p \cong\ {\downarrow}(p),
+	\end{equation*}
+	that is, the slide category $\mathbf{P}/p$ is just the \emph{principal ideal} ${\downarrow}(p)$ consisting of elements $q \in \mathbf{P}$ with $q \le p.$
+	\item Similarly, the \emph{coslice} category $C/\mathbf{C}$ of a category $\mathbf{C}$ under an object $C$ of $\mathbf{C}$ has as objects all arrows $f$ of $\mathbf{C}$ such that $\dom(f) = C,$ and an arrow from $f:C\to X$ to $f':C'\to X$ is an an arrow $h:X\to X'$ such that $h\cdot f = f'.$
+	\begin{equation*} 
+		\begin{tikzcd}
+		X \arrow[rr, "h"] &                                         & X' \\
+						  &											&	 \\
+		                  &                                         &    \\
+		                  &  C \arrow[luuu, "f"] \arrow[ruuu, "f'"']  &   
+		\end{tikzcd}
+	\end{equation*}
+\end{enumerate}
+\example{}The category $\mathsf{Set}_*$ of \emph{pointed sets} consists of sets $A$ with distinguished elements $a \in A,$ and arrows $f:(A, a) \to (B, b)$ are functions $f:A\to B$ that preserves the ``points,'' $f(a) = b.$ This is isomorphic to the coslice category,
+\begin{equation*} 
+	\mathsf{Set}_* \cong 1/\mathsf{Set}
+\end{equation*}
+of $\mathsf{Set}$ under any singleton $1 = \{*\}.$ To see this, note that the functions $a:1\to A$ correspond uniquely to elements, $a(*) = a \in A,$ and arrows $f:(A, a) \to (B, b)$ correspond exactly to commutative triangles:
+\begin{equation*} 
+	\begin{tikzcd}
+1 \arrow[rr, "a"] \arrow[rrdd, "b"'] &  & A \arrow[dd, "f"] \\
+                                     &  &                   \\
+                                     &  & B                
+\end{tikzcd}
+\end{equation*}
+\subsection{Free categories}\label{ssec:free}
+\textbf{Free monoid.} First we look at the concept of a free monoid.\\
+First, we start with a set $A$ which we shall call an ``alphabet.'' We shall denote its elements as $a, b, c, \ldots$ and call them ``letters,'' that is,
+\begin{equation*} 
+	A = \{a, b, c, \ldots\}.
+\end{equation*}
+A \emph{word} over $A$ is a finite sequence of letters:
+\begin{equation*} 
+	aryaman,\;integral,\;lenny,\;face,\;alkmdslkd,\ldots.
+\end{equation*}
+We write $\varepsilon$ for the empty word, that is, the unique word over $A$ of length zero. The ``Kleene closure'' of $A$ is defined to be the set 
+\begin{equation*} 
+	A^* = \{\text{words over }A\}.
+\end{equation*}
+The above can easily be made into a monoid with composition (denoted by $*$) as concatenation. Accordingly, $\varepsilon$ is the unit. Thus, $A^*$ is a monoid, called the \emph{free monoid} over the set $A.$\\
+Any element $a \in A$ can also be regarded as a word of length one and hence, we have a function
+\begin{equation*} 
+	i:A \to A^*
+\end{equation*}
+defined by $i(a) = a,$ and called the ``insertion of generators.'' The elements of $A$ ``generate'' the free monoid, in the sense that every $w \in A^*$ is a $*-$product of $a$s, that is, $w = a_1*a_2*\cdots *a_n$ for some $a_1, \ldots, a_n \in A.$ One usually defines the property of being ``free'' in the following manner:\\
+A monoid $M$ is freely generated by $A \subset M,$ if the following conditions hold:
+\begin{enumerate}
+	\item Every element $m \in M$ can be written as a product of elements of $A:$
+	\begin{equation*} 
+		m = a_1 \cdot_M \cdots \cdot_M a_n, \quad a_i \in A.
+	\end{equation*}
+	\item No ``nontrivial'' relations hold in $M,$ that is, if $a_1\cdots a_j = a_1'\cdots a_k',$ then this is required by the axioms for monoids.
+\end{enumerate}
+The second condition might seem a little vague and imprecise. We give a precise definition of ``free'' - capturing what is meant in the above - which avoids vagueness.\\
+First, every monoid $N$ has an underlying set $|N|,$ and every monoid homomorphism $f:N\to M$ has an underlying function $|f|:|N| \to |M|.$ This is nothing but the action of the forgetful functor seen earlier. ``The'' free monoid on a set $A$ is, by definition, ``the'' monoid with the following so-called \emph{universal mapping property} or UMP.\\\\
+\emph{Universal Mapping Property of }$M(A)$\\
+There is a function $i:A\to |M(A)|,$ and given any monoid $N$ and any function $f:A\to |N|,$ there is a \emph{unique} monoid homomorphism $\bar{f}:M(A) \to N$ such that $|\bar{f}|\circ i = f,$ all as indicated in the following diagram:\\
+in $\mathsf{Mon}$:
+\begin{equation*} 
+	\begin{tikzcd}
+		M(A) \arrow[rr, dotted, "\bar{f}"] && N
+	\end{tikzcd}
+\end{equation*}
+in $\mathsf{Set}$:
+\begin{equation*} 
+	\begin{tikzcd}
+	{\vert}M(A){\vert} \arrow[rr, "{\vert}\bar{f}{\vert}"]&  & {\vert}N{\vert} \\
+	                                     &  &     \\
+	A \arrow[uu, "i"] \arrow[rruu, "f"'] &  &    
+	\end{tikzcd}
+\end{equation*}
+The reader is encouraged to prove the following proposition on their own.
+\begin{prop}
+	$A^*$ has the UMP of the free monoid on $A.$
+\end{prop}
+\begin{proof} 
+	Given $f:A \to |N|,$ define $f:A^* \to N$ by
+	\begin{align*} 
+		f(\varepsilon) = u_N, \text{ the unit of }N,\\
+		f(a_1\cdots a_i) = f(a_1)\cdot_N\cdots\cdot_Nf(a_i).
+	\end{align*}
+	Then, $\bar{f}$ is clearly a homomorphism with 
+	\begin{equation*} 
+		\bar{f}(a) = f(a) \quad \text{for all } a \in A.
+	\end{equation*}
+	Now, we prove the uniqueness of $\bar{f}.$\\
+	If $g:A^* \to N$ also satisfies $g(a) = f(a)$ for all $a \in A,$ then for all $a_1\cdots a_i \in A^*:$
+	\begin{align*} 
+		g(a_1\cdots a_i) &= g(a_1*\cdots *a_i)\\
+		&= g(a_1)\cdot_N\cdots\cdot_Ng(a_i)\\
+		&= f(a_1)\cdot_N\cdots\cdot_Nf(a_i)\\
+		&= \bar{f}(a_1)\cdot_N\cdots\cdot_N\bar{f}(a_i)\\
+		&= \bar{f}(a_1)\cdot_N\cdots\cdot_Ng(a_i)\\
+		&= \bar{f}(a_1\cdots a_i)
+	\end{align*}
+	Thus, $g = \bar{f}$ and hence, uniqueness is proved.
+\end{proof}
+Using the UMP, it is also easy to show that the free monoid $M(A)$ is determined uniquely, up to isomorphism, in the following sense.
+\begin{prop}
+	Given monoids $M$ and $N$ with functions $i:A\to |M|$ and $j:A\to|N|,$ each with the UMP of the free monoid of $A,$ there is a (unique) monoid isomorphism $h:M\to N$ such that $|h|i = j$ and $|h^{-1}|j = i.$
+\end{prop}
+Once again, the reader is encouraged to prove this on their own as it's a fun exercise.
+\begin{proof} 
+	Using $j$ and the UMP of $M,$ we get a monoid homomorphism $\bar{j}:M \to N$ with the following diagrams:\\
+	in $\mathsf{Set}$:
+	\begin{equation*} 
+		\begin{tikzcd}
+			M \arrow[rr, dotted, "\bar{j}"] && N
+		\end{tikzcd}
+	\end{equation*}
+	in $\mathsf{Mon}$:
+	\begin{equation*} 
+		\begin{tikzcd}
+{\vert}M{\vert} \arrow[rr, "{\vert}\bar{j}{\vert}"] &  & {\vert}N{\vert}                     \\
+                                                    &  &                                     \\
+                                                    &  & A \arrow[uu, "j"] \arrow[lluu, "i"]
+\end{tikzcd}
+	\end{equation*}
+	On the other hand, using $i$ and the UMP of $N$ we get a monoid homomorphism $\bar{i}:N \to M$ with the following diagrams:\\
+	in $\mathsf{Set}$:
+	\begin{equation*} 
+		\begin{tikzcd}
+			N \arrow[rr, dotted, "\bar{j}"] && M
+		\end{tikzcd}
+	\end{equation*}
+	in $\mathsf{Mon}$:
+	\begin{equation*} 
+		\begin{tikzcd}
+{\vert}N{\vert} \arrow[rr, "{\vert}\bar{i}{\vert}"] &  & {\vert}M{\vert} \\
+                                                    &  &                 \\
+A \arrow[uu, "j"] \arrow[rruu, "i"']                &  &                
+		\end{tikzcd}
+	\end{equation*}
+Composing the above arrows gives us the diagrams:
+in $\mathsf{Set}$:
+	\begin{equation*} 
+		\begin{tikzcd}
+			M \arrow[rr, dotted, "\bar{j}"] && N \arrow[rr, dotted, "\bar{j}"] && M
+		\end{tikzcd}
+	\end{equation*}
+	in $\mathsf{Mon}$:
+	\begin{equation*} 
+		\begin{tikzcd}
+{\vert}M{\vert} \arrow[rr, "{\vert}\bar{j}{\vert}"] &  & {\vert}N{\vert} \arrow[rr, "{\vert}\bar{i}{\vert}"]    &  & {\vert}M{\vert} \\
+                                                    &  &                                                        &  &                 \\
+                                                    &  & A \arrow[uu, "j"] \arrow[rruu, "i"'] \arrow[lluu, "i"] &  &                
+\end{tikzcd}
+	\end{equation*}
+	Now, look at the monoid homomorphism $\bar{i}\circ\bar{j}:M\to M.$\\
+	It has the property that $|\bar{i}\circ\bar{j}|i = i.$ As $1_M:M\to M$ has this property, by the uniqueness part of the UMP of $M,$ it follows that $\bar{i}\circ\bar{j} = 1_M.$ Exchanging the roles of $M$ and $N$ shows that $\bar{j}\circ\bar{i} = 1_N.$\\
+	This finishes our proof.
+\end{proof}
+(How do we get that this isomorphism is unique?)\\~\\
+\textbf{Free category.} Now, we want to do the same thing for categories in general. Instead of underlying sets, categories have underlying graphs, so let us review these first.\\
+A \emph{directed graph} consists of vertices and edges, each of which is directed, that is, each edge has a ``source'' and a ``target'' vertex.
+\begin{equation*} 
+	\begin{tikzcd}
+A \arrow[dd, "u"']                   &  & B                  \\
+                                     &  &                    \\
+C \arrow[rr, "x"'] \arrow[rruu, "v"] &  & D \arrow[uu, "w"']
+\end{tikzcd}
+\end{equation*}
+We draw graphs just like categories, but there is no composition of edges, and there are no identities.\\
+Thus, a graph consists of two sets, $E$ (edges) and $V$ (vertices), and two functions, $s:E\to V$ (source) and $t:E\to V$ (target). Thus, in $\mathsf{Set},$ a graph is just a configuration of objects and arrows of the form
+\begin{equation*} 
+	\begin{tikzcd}
+		E \arrow[rr, "t"', shift right] \arrow[rr, "s", shift left] &  & V
+	\end{tikzcd}
+\end{equation*}
+Now, every graph ``generates'' a category, the \emph{free category} on $G.$ This is similar in spirit to the construction of the free monoid on a set. There we created the words by writing letters one after the other. We do the same here but adjoining arrows only if the source and target matches. To be more precise, the free category $\mathbf{C}(G)$ is defined by taking the vertices of $G$ as objects, and the \emph{paths} in $G$ as arrows, where a path is a finite sequence of edges $e_1, \ldots, e_n$ such that $t(e_i) = s(e_{i+1}),$ for all $i = 1, \ldots, n.$ We write the arrows of $\mathbf{C}(G)$ in the form $e_ne_{n-1}\ldots e_1.$
+\begin{equation*} 
+	\begin{tikzcd}
+		v_0 \arrow[rr, "e_1"] && v_1 \arrow[rr, "e_2"] && \ldots \arrow[rr, "e_n"] && v_n
+	\end{tikzcd}
+\end{equation*}
+Put
+\begin{align*} 
+	\dom(e_n\ldots e_1) &= s(e_1)\\
+	\cod(e_n\ldots e_1) &= t(e_n)
+\end{align*}
+and define composition by concatenation:
+\begin{equation*} 
+	e_n\ldots e_1 \circ e_m' \ldots e_1' = e_n\ldots e_1e_m'\ldots e_1'.
+\end{equation*}
+For each vertex $v,$ we have an ``empty path'' denoted by $1_v,$ which is to be the identity arrow at $v.$\\
+We will show that the $\mathbf{C}(G)$ so defined also has a UMP. Before that, we make a slight digression.\\
+First, we observe that any category $\mathbf{C}$ can be described with a diagram like this:
+\begin{equation*} 
+	\begin{tikzcd}
+	C_2 \arrow[rr, "\circ"] &  & C_1 \arrow[rr, "\cod", shift left=2] \arrow[rr, "\dom"', shift right=2] &  & C_0 \arrow[ll, "i" description]
+	\end{tikzcd}
+\end{equation*}
+where $C_0$ is the collection of objects of $\mathbf{C},$ $C_1$ the arrows, $i$	 is the identity operation, and $C_2$ is the collection $\{(f, g) \in C_1 \times C_1 : \cod(f) = \dom(g)\}.$
+Then, a functor $F:\mathbf{C} \to \mathbf{D}$ from $\mathbf{C}$ to another category $\mathbf{D}$ is a pair of functions
+\begin{align*} 
+	F_0 &: C_0 \to D_0\\
+	F_1 &: C_1 \to D_1
+\end{align*}
+such that each similarly labeled square in the following diagram commutes:
+\begin{equation} \label{diag:func}
+	\begin{tikzcd}
+C_2 \arrow[rr, "\circ"] \arrow[ddd, "F_2"'] &  & C_1 \arrow[rr, "\cod", shift left=2] \arrow[rr, "\dom"', shift right=2] \arrow[ddd, "F_1"'] &  & C_0 \arrow[ll, "i" description] \arrow[ddd, "F_0"] \\ &&&&\\ &&&&\\
+D_2 \arrow[rr, "\circ"']&  & D_1 \arrow[rr, "\cod", shift left=2] \arrow[rr, "\dom"', shift right=2]&  & D_0 \arrow[ll, "i" description]                  
+\end{tikzcd}
+\end{equation}
+where $F_2(f, g) = (F_1(f), F_1(g)).$\\
+Now let us describe a \emph{homomorphism of graphs},
+\begin{equation*} 
+	h:G \to H.
+\end{equation*}
+We need a pair of functions $h_0 : G_0 \to H_0, h_1 : G_1 \to H_1$ making the two squares commute (once with $t$s and once with $s$s) in the following diagram commute:
+\begin{equation} \label{diag:graphhomo}
+	\begin{tikzcd}
+		G_1 \arrow[rr, "t", shift left = 1] \arrow[rr, "s"', shift right = 1] \arrow[ddd, "h_1"'] && G_0 \arrow[ddd, "h_0"]\\
+		&&\\
+		&&\\
+		H_1 \arrow[rr, "t", shift left = 1] \arrow[rr, "s"', shift right = 1] && H_0
+	\end{tikzcd}
+\end{equation}
+With this in place, we can now describe the forgetful functor
+\begin{equation*} 
+	U:\mathsf{Cat} \to \mathsf{Graphs}
+\end{equation*}
+as sending the category
+\begin{equation*} 
+	\begin{tikzcd}
+	C_2 \arrow[rr, "\circ"] &  & C_1 \arrow[rr, "\cod", shift left=2] \arrow[rr, "\dom"', shift right=2] &  & C_0 \arrow[ll, "i" description]
+	\end{tikzcd}
+\end{equation*}
+to the underlying graph
+\begin{equation*} 
+	\begin{tikzcd}
+	C_1 \arrow[rr, "\cod", shift left=2] \arrow[rr, "\dom"', shift right=2] &  & C_0.
+	\end{tikzcd}
+\end{equation*}
+And similarly, the effect of $U$ is described functors by erasing some of the arrows of (\ref{diag:func}) to get a diagram like (\ref{diag:graphhomo}).\\
+Recall how we had defined the UMP of free monoid using the forgetful functor. We shall do the same in this case. Borrowing the same notation, we shall write $|\mathbf{C}| = U(\mathbf{C}),$ et cetera, for the underlying graph of a category $\mathbf{C}.$\\
+The free category on a graph now has the following UMP.\\\\
+\emph{Universal mapping property of }$\mathbf{C}(G).$\\
+There is a graph homomorphism $i:G \to |\mathbf{C}(G)|,$ and given any category $\mathbf{D}$ and any graph homomorphism $h:G \to |\mathbf{D}|,$ there is a unique functor $\bar{h}:\mathbf{C}(G) \to \mathbf{D}$ with $|\bar{h}|\circ i = h.$\\
+in $\mathsf{Cat}$:
+\begin{equation*} 
+	\begin{tikzcd}
+		\mathbf{C}(G) \arrow[rr, dotted, "\bar{h}"] && \mathbf{D}
+	\end{tikzcd}
+\end{equation*}
+in $\mathsf{Graph}$:
+\begin{equation*} 
+	\begin{tikzcd}
+	{\vert}\mathbf{C}(G){\vert} \arrow[rr, "{\vert}\bar{h}{\vert}"] &  & {\vert}\mathbf{D}{\vert} \\&  &\\&  &\\
+	G \arrow[uuu, "i"] \arrow[rruuu, "h"']&&                        
+	\end{tikzcd}
+\end{equation*}
+\example{} The free category on a graph with just one vertex is just a free monoid on the set of edges. The free category on a graph with only vertices (no edges) is the discrete category on the set of vertices of $G.$ The free category on a graph with two vertices and one edge between them is the finite category $\mathbf{2}.$ The free category on a graph of the form
+\begin{equation*} 
+	\begin{tikzcd}
+		A \arrow[rr, shift left = 1, "e"] && B \arrow[ll, shift left = 1, "f"]
+	\end{tikzcd}
+\end{equation*}
+has (in addition to the identity arrows) the infinitely many arrows:
+\begin{equation*} 
+	e, f, ef, fe, efe, fef, \ldots
+\end{equation*}
+Recall we had seen the above graph earlier ((\ref{diag:looptwo})) when we were discussing finite categories.

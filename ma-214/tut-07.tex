@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\title{MA 214: Tutorial 7}
+\author{Aryaman Maithani}
+\date{11-03-2020}
+
+\begin{document}
+\maketitle
+\begin{enumerate} 
+	\item Show that an upper triangular matrix $U = (u_{ij})$ is invertible iff $u_{ii} \neq 0$ for all $i.$\\~\\
+	\textbf{Solution.}\\
+	Let $U = (u_{ij})$ be an upper triangular matrix.\\
+	\textbf{Claim.} $\det U = \displaystyle\prod_{i = 1}^{n}u_{ii}.$
+	\begin{proof} 
+		Via induction on the size of $U.$ \\
+		Clearly, it's true if $U$ is a $1 \times 1$ matrix.\\
+		Suppose that it's true when $U$ is an $(n - 1) \times (n - 1)$ matrix where $n \ge 2.$ We show that it's true for when $U$ is an $n\times n$ matrix.\\
+		Note that expanding along the first column gives us that $\det U = u_{11}\det U_{11}$ where $U_{11}$ is the matrix obtained by deleting the first row and the first column of $U.$\\
+		Note that $U_{11}$ is an $(n - 1)\times(n - 1)$ upper triangular matrix with diagonal entries $u_{22}, \ldots, u_{nn}.$\\
+		Thus, by induction hypothesis, $\det U_{11} = \displaystyle\prod_{i = 1}^{n-1}u_{ii}.$\\
+		The claim follows.
+	\end{proof}
+	Now, the result of the question follows as $U$ is invertible iff $\det U \neq 0$ iff $u_{ii} \neq 0$ for all $i.$
+	\item Suppose $U$ is an invertible upper triangular matrix. Show that its inverse is also upper triangular.\\~\\
+	\textbf{Solution.}\\
+	Let $V$ be the inverse of $U$ (which exists, by hypothesis).\\
+	We want to show that $V$ is upper triangular. We do so by contradiction.\\
+	Suppose that $V$ is not upper triangular. Write $V = (v_{ij}).$ By assumption, there exist some $i, j$ such that $i > j$ such that $v_{ij} \neq 0.$\\
+	For this fixed $i,$ choose $k$ to be the smallest such natural number such that $v_{ik} \neq 0.$ (That is, the first element in row $i$ which is nonzero.)\\
+	By assumption, we have $k < i.$\\
+	Now, let $P = VU.$ (We know that $P$ must be identity.)\\
+	Let us look at the $(i, k)^{\text{th}}$ entry of $P.$\\
+	By definition of matrix multiplication, we have:
+	\begin{align*} 
+		p_{ik} = \sum_{r=1}^{n}v_{ir}u_{rk}
+	\end{align*}
+	Note that for $1 \le r < k,$ we have that $v_{ir} = 0.$ (Since $k$ was chosen to be the smallest such.)\\
+	For $k < r \le n,$ we have that $u_{rk} = 0.$ (Since $U$ was an upper triangular matrix.)\\
+	Thus, the sum above just reduces to $p_{ik} = v_{ik}u_{kk}.$\\
+	As $U$ is an invertible upper triangular matrix, we have that $u_{kk} \neq 0$ (by previous question).\\
+	Moreover, $v_{ik} \neq 0$ by construction.\\
+	Thus, we get that $p_{ik} \neq 0.$ However, $P$ was supposed to be the identity matrix. Thus, we get a contradiction as $p_{ik}$ is an off-diagonal element, which is nonzero.
+	\setcounter{enumi}{3}
+	\item Show that the LU factorisation of a matrix is unique.\\~\\
+	\textbf{Solution.}\\
+	Let us assume that $A = L_1U_1 = L_2U_2$ where $L_1, L_2$ are lower triangular matrices with $1$s along the diagonal and $U_1, U_2$ are upper triangular matrices.\\
+	We wish to show that $L_1 = L_2$ and $U_1 = U_2.$\\~\\
+	Note that I shall solve this for the case that $A$ is invertible. This gives us that $U_1$ and $U_2$ are also invertible.\\
+	Thus, $L_1U_1 = L_2U_2 \implies L_2^{-1}L_1 = U_2U_1^{-1}.$ Label the last equation as $(*)$.\\
+	Now, note that the inverse of a lower triangular matrix is lower triangular and similarly, inverse of an upper triangular matrix is upper triangular. Moreover, product of triangular matrices of the same kind is again of the same kind.\\
+	Thus, LHS of $(*)$ is a lower triangular matrix and RHS is upper. As they are equal, they must be equal to some diagonal matrix $D.$\\
+	However, now we note that $L_2$ had $1$s along the diagonal and thus, so does $L_2^{-1}.$ As $L_1$ also had that, we get that $L_2^{-1}L_1$ has $1$s along the diagonal. (Note that when triangular matrices get multiplied, the diagonal elements get multiplied directly.)\\
+	Thus, $D = I$ and we get $L_2^{-1}L_1 = I = U_2U_1^{-1}$ giving us $L_1 = L_2$ and $U_1 = U_2,$ as desired.
+\end{enumerate}
+\end{document}

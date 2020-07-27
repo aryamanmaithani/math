@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\title{MA 214: Tutorial 1}
+\author{Aryaman Maithani}
+\date{22-01-2020}
+
+\begin{document}
+\maketitle
+
+2. Let $f:[a, b] \to \mathbb{R}$ be a continuous function and let $g \ge 0$ be an integrable function on $[a, b].$ Show that
+\[\int_{a}^{b} f(x)g(x) \text{d}x = f(\xi)\int_{a}^{b} g(x) \text{d}x \qquad \text{for some } \xi \in [a, b].\]
+
+\textbf{Solution.}\\
+%Case 1. $g(x) = 0$ for all $x \in [a, b].$ In this case, it's trivial. One can simply choose $\xi = a$ and be done as both sides are zero.\\
+%Case 2. $g(x)$ is not identically zero.\\
+%As $g$ 
+As $f$ is a continuous function defined on a closed and bounded interval, it is bounded and moreover, it attains these bounds. (Extreme value theorem, done in 105.)\\
+In other words, there exist $m, M \in [a, b]$ such that $f(m) \le f(x) \le f(M)$ for all $x \in [a, b].$\\
+(Note that it's not necessary that $m \le M$ but that's not required anyway.)\\
+As $g \ge 0,$ the above gives us that
+\[f(m)g(x) \le f(x)g(x) \le f(M)g(x) \quad \forall x \in [a, b].\]
+Integrating on all three sides gives that $\displaystyle\int_{a}^{b} f(x)g(x) \text{d}x$ lies between $If(m)$ and $If(M)$ where $I = \displaystyle\int_{a}^{b} g(x)\text{d}x.$\\
+Now, note that $h(x) := If(x)$ defined for $x \in [a, b]$ is a continuous function and thus, by intermediate value property, there exists $\xi$ between $m$ and $M$ such that $h(\xi) = \displaystyle\int_{a}^{b} f(x)g(x) \text{d}x.$ As $m, M \in [a, b],$ we also get that $\xi \in [a, b].$\\~\\
+Thus, we get that $\displaystyle f(\xi)\int_{a}^{b} g(x) \text{d}x = \int_{a}^{b} f(x)g(x) \text{d}x,$ as desired.
+
+\hrulefill
+
+5. Prove that the $k^{\text{th}}$ divided difference $p[x_0, \ldots, x_k]$ of a polynomial $p$ of degree $\le k$ is independent of the interpolation points $x_0, x_1, \ldots, x_k.$ \\
+
+\textbf{Solution}.\\
+Let $p(x)$ be a polynomial of degree $\le k.$\\
+Then, $p(x) = a_0 + a_1x + \cdots a_{k}x^k$ for some $a_0, \ldots, a_k \in \mathbb{R}.$ \hfill ($a_k$ may be zero.)\\
+Now, we show that the $k^{\text{th}}$ divided difference equals $a_k$ independent of the choice of $x_0, \ldots, x_k.$ This would clearly prove the desired result.\\~\\
+To see this, simply observe that $P_k(x)$ is a polynomial of degree $\le k$ such that $P_k(x_i) = p(x_i)$ for all $i \in \{0, \ldots, k\}.$ In other words, $p$ and $q$ agree at $k+1$ points. By the uniqueness theorem seen earlier, this forces $p(x) = P_k(x).$ In turn, this forces that $p(x)$ and $P_k(x)$ have the same leading coefficient. We already know the leading coefficient of $p(x)$ is $a_k,$ by definition. On the other hand, recalling the definition of $P_k(x)$ gives us:\\
+\begin{align*} 
+		P_k(x) := p[x_0]  +& p[x_0, x_1](x - x_0)\\
+						 +& p[x_0, x_1, x_2](x - x_0)(x - x_1)\\
+						 +& \ldots\\
+						  &\vdots\\
+						 +& p[x_0, x_1, \ldots, x_k](x - x_0)(x - x_1)\cdots(x - x_{k-1})
+	\end{align*}
+	Thus, the leading coefficient of $P_k(x)$ is $p[x_0, \ldots, x_k].$\\
+	This completes the proof as we conclude that $a_k = p[x_0, \ldots, x_k],$ as desired.
+\end{document}

@@ -1,0 +1,93 @@
+\prs{01-03-2019}
+In Lecture 15, we stated and proved \hyperref[sec:nestedint]{the Nested Interval Theorem}. In Lecture 16, we defined countable sets. Using Nested Interval Theorem, we would now like to show that $\mathbb{R}$ is not countable.
+\section{Uncountability of $\mathbb{R}$}\label{sec:uncountableR}
+\textbf{Theorem: }$\mathbb{R}$ is uncountable.\\
+\textit{Proof. }Assume not. That is, $\mathbb{R}$ is countable.\\
+Then, it is either finite or $\mathbb{R}\sim\mathbb{N}$.\\
+Clearly, $\mathbb{R}$ is not finite as $\mathbb{N}\subsetneq\mathbb{R}$.\\
+Therefore, there exists a bijection from $\mathbb{N}$ to $\mathbb{R}$.\\
+Let $x:\mathbb{N}\to\mathbb{R}$ be the bijection.\\
+Denote $x(n)$ as $x_n$.\\
+$\therefore \mathbb{R} = \{x_1, x_2, x_3, \dots\}$ and $i\neq j\implies x_i\neq x_j$.\\
+(We now want to show the existence of a real number which cannot be equal to $x_n$ for any natural $n$)\\
+Let $I_1\subset\mathbb{R}$ be a closed interval such that $x_1\not\in I_1$. It easy to see that such an interval does exist and can be easily constructed as follows: $I_1 = [x_1 + 1, x_1 + 2]$\\~\\
+Claim: There exists a collection of closed intervals $\{I_n\}_{n\in\mathbb{N}}$ such that $I_1\supset I_2 \supset I_2 \supset I_3 \supset \dots$ and $\forall n\in\mathbb{N}(x_n\not\in I_n)$.\\~\\
+Proof of claim: Let us prove the claim via induction.\\
+    $P(n): \exists I_n \subset \mathbb{R}$ such that $I_n \subset I_{n-1} \subset \dots I_1 \subset \mathbb{R}$ and $I_n$ can be written as $[a_n, b_n]$ with $a_n < b_n$ and $x_n\not\in I_n$.\\
+    Base case: $n = 1$. We have already constructed $I_1$ above. Let $a_1 = x_1+1$ and $b_1 = x_1 + 2$.\\~\\
+    Induction step: Assume $P(n-1)$ is true.\\
+    Then, $\exists I_{n-1} = [a_{n-1}, b_{n-1}]$ with $a_{n-1}<b_{n-1}$.\\
+    Now, there are two cases:\\
+    Case i) $x_n \not \in I_{n-1}$. In this case, let $I_n = I_{n-1}$ and we are done.\\
+    Case ii) $x_n \in I_{n-1}$.\\
+    $\implies a_{n-1} \le x_n \le b_{n-1}$\\
+    As $a_{n-1}\neq b_{n-1}$, one of the inequalities must be strict. That is: (a) $a_{n-1} < x_n$ or (b) $x < b_{n-1}$\\
+    Case (a): $a_{n-1} < x_n$\\
+    $\exists \alpha \in \mathbb{R}$ such that $a_{n-1} < \alpha < x_n$ \hfill [due to density of $\mathbb{R}$]\\
+    Let $a_n := a_{n-1}$ and $b_n:=\alpha$\\~\\
+    Case (b): $x < b_{n-1}$\\
+    $\exists \beta \in \mathbb{R}$ such that $x < \beta < b_{n-1}$ \hfill [due to density of $\mathbb{R}$]\\
+    Let $a_n := \beta$ and $b_n:=b_{n-1}$\\~\\
+    In either case, $a_n < b_n$ and $x\not\in[a_n, b_n]$ and $a_{n-1} \le a_{n} < b_{n} \le b_{n-1}$.\\
+    $\therefore I_n:=[a_n, b_n]$ satisfies all the conditions required.\\
+    $\therefore P(n-1)\implies P(n)$. By principle of mathematical induction, we have proven the claim.\\~\\
+By nested interval theorem: $\displaystyle\bigcap_{n=1}^\infty I_n \neq \emptyset$\\
+$\implies \exists r \in \displaystyle\bigcap_{n=1}^\infty I_n$\\
+$\implies \exists r \in \mathbb{R}\Big(\forall n \in \mathbb{N}\big(x \in I_n\big)\Big)$ --- (1) \hfill [$r\in\mathbb{R}$ as $I_n\subset \mathbb{R}$]\\~\\
+By our assumption, if $r\in\mathbb{R}$, then $r = x_m$ for some $m \in \mathbb{N}$.\\
+By (1), $r\in I_m$ \hfill [As it's true for all $n$, it must be true for $n=m$].\\
+But by construction, $r=x_m\not\in I_m$. This is a contradiction.\\
+Therefore, our assumption must be wrong.\hfill\qed
+\section{Absolute Value Function}
+The \textit{absolute value} function is defined as follows:
+\begin{align*}
+    |\text{ }|:\mathbb{R}\to\mathbb{R}_0^+\\
+    |x| = \left\{
+    \begin{array}{l r}
+        x & x \ge 0 \\
+        -x & x < 0
+    \end{array}\right.
+\end{align*}
+Where $\mathbb{R}_0^+:=[0, \infty)$ \\
+It is also called the \textit{modulus} function. $|x|$ is often read as ``mod $x$".
+It has the following properties:
+\begin{enumerate}[nosep]
+    \item $|x| < M \iff -M < x < M$
+    \item $|xy| = |x||y|$
+    \item $|x+y| \le |x| + |y|$
+\end{enumerate}
+Where $x, y, M \in \mathbb{R}$. Note that if $M\le0$, then $|x|<M\implies x\in\emptyset$\\
+The most important of three properties is the third one which is called the Triangle Inequality.\\
+\textit{Proof of the Triangle Inequality.}\\
+Case i) $x, y \ge 0$ or $x, y < 0$
+\[\begin{array}{l|l}
+    x, y \ge 0 & x, y < 0 \\
+    \implies x + y \ge 0 & \implies x + y < 0\\
+    \implies |x+y| = (x + y) & \implies |x+y| = -(x+y)\\
+    \implies |x+y| = x + y & \implies |x+y| = -x + -y\\
+    \implies |x+y| = |x| + |y| & \implies |x+y| = |x| + |y|
+\end{array}\]
+The transition of from the second-last step to the last step uses the definition of the absolute value function which is different in each case.\\
+Case ii) Without loss of generality (WLOG) assume: $x\ge0>y$
+\[\begin{array}{l|l}
+    x \ge -y & x < -y \\
+    \implies x + y \ge 0 & \implies x + y < 0\\
+    \implies |x+y| = (x + y) & \implies |x+y| = -(x+y)\\
+    \implies |x+y| = x + y & \implies |x+y| = -x + -y\\
+    \implies |x+y| \le x - y & \implies |x+y| < x - y\\
+    \implies |x+y| \le |x| + |y| & \implies |x+y| < |x| + |y|
+\end{array}\]
+The transition from the third-last step to the second-last step uses the fact that $0\le x$ (left) and $y < 0$ (right). The next transition is as before.\\~\\
+Given this function, we may define a distance function on $\mathbb{R}$ as follows:
+\begin{align*}
+    d : \mathbb{R}\times\mathbb{R} \to \mathbb{R}\\
+    d(x, y) = |x-y|
+\end{align*}
+This distance function has the following properties:
+\begin{enumerate}[nosep]
+    \item $d(x, x) = 0$
+    \item $x \neq y \implies d(x, y) > 0$
+    \item $d(x, y) = d(y, x)$
+    \item $d(x, z) \le d(x,y) + d(y, z)$
+\end{enumerate}
+Where $x, y, z \in\mathbb{R}.$

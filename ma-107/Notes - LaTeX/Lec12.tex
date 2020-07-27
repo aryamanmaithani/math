@@ -1,0 +1,91 @@
+\pah{08-02-2019}
+In Lecture 10, we defined \hyperref[sec:cartproduct]{the cartesian product}. Such a product makes it useful for notation.\\
+\example{Archimedean Property: $\forall x, y \in \mathbb{R}, x > 0 \big(\exists n \in \mathbb{N}(y < nx\big)$\\
+It can be written as:\\
+$\forall x, y \in (0, \infty) \times \mathbb{R}\big(\exists n \in \mathbb{N}(y < nx\big)$}\\~\\
+\textbf{Definition: }Let $(x_1, y_1), (x_2, y_2) \in X \times Y$.\\
+\phantom{Definition: I} Then, $(x_1, y_1) = (x_2, y_2)$ if $x_1 = x_2$ and $y_1 = y_2$.\\~\\
+Similar to $\mathbb{R}^2$, one may also consider $\mathbb{R}^3$ or in general, $\mathbb{R}^n$.\\
+One of the benefits of considering such sets is that it becomes easier to represent data. \\
+For example, let us consider the equation of a line (in $\mathbb{R}^3$) in vector form.\\
+$L = \{\textbf{a} + \lambda\textbf{m}|\lambda \in \mathbb{R}\}$ for some $\textbf{a}, \textbf{m} \in \mathbb{R}^3$.\\
+Here $L$ is the set of position vectors of all those points on the line passing through $\textbf{a}$ parallel to $\textbf{m}$.\\~\\
+Let $\textbf{a} = (x_1, y_1, z_1)$ and $\textbf{m} = (a, b, c)$, then each point $(x, y, z) \in L$ is of the form $(x_1 + \lambda a, y_1 + \lambda b, z_1 + \lambda c)$.\\
+Equating each co-ordinate gives us:\\
+\(\begin{array}{rccc}
+    & x = x_1 + \lambda a & y = y_1 + \lambda b & z = z_1 + \lambda c \\
+    \implies & x - x_1 = \lambda a & y - y_1 = \lambda b & z - z_1 = \lambda c \\
+\end{array}\)\\
+Assuming $abc\neq0$, we can find the value of $\lambda$ from each equation, equating those values gives us:
+$$\dfrac{x-x_1}{a}=\dfrac{y-y_1}{b}=\dfrac{z-z_1}{c}$$
+Thus, it can be seen how the same line can be written in two different forms. Expressing it in terms of vectors in $\mathbb{R}^3$ gives a much more concise way.\\
+Also, by our way of defining equality, it can be seen that the order matters and that $(1, 2) \neq (2, 1)$.\\~\\
+If we look at the equation: $x_1 + 2x_2 + 3x_3 = 6$, three of its infinitely many solutions are:
+\begin{enumerate*}[label=(\roman*)]
+    \item $(6, 0, 0)$
+    \item $(0, 3, 0)$
+    \item $(0, 0, 2)$
+\end{enumerate*}\\
+As can be seen, it is important to list them in the correct order. $(6, 0, 0)$ is a solution while $(0, 0, 6)$ is not.\\~\\
+Another example can be given which would work well with those who are familiar with a tailor-%
+\footnote{This example was given to Professor by a person who was in his 70s when he gave this example, who was in turn given this example by his professor.}%
+when a tailor takes measurements, (s)he doesn't keep mentioning the part they are measuring but rather just note down the measurements in a certain order. This is because the tailor knows what is the pre-decided order. This is why you don't end up with disproportionate clothes.
+\section{Indexing Set}\label{sec:indexset}
+An index set is a set whose members label (or index) members of another set.\\
+For example, if we want a set $S$ which is the set of all IPL players, we may use an index set $T=$ set of all IPL teams, then:
+$$S = \bigcup_{t \in T}(\text{set of players of }t)$$
+Similarly, let $B$ = set of branches in IITB
+$$\text{Set of all first year students in IITB} = \bigcup_{b\in B}(\text{Set of first year students in }b)$$
+Let us now try to write $\mathbb{R}$ as a union of two sets. This can be done in many ways:
+\begin{align*}
+    \mathbb{R} &= (-\infty, 0) \cup [0, \infty)\\
+    &= \mathbb{Q} \cup (\mathbb{R}\setminus\mathbb{Q})\\
+    &= \mathbb{R} \cup \mathbb{R}\\
+    &= \mathbb{R} \cup \emptyset\\
+    &= (-\infty, 1] \cup [0, \infty)\\
+\end{align*}
+It can be seen that it's not a necessity for the sets to be disjoint, non-empty or a proper subset. However, in most cases, we do work with proper subsets whenever taking union.\\
+Let us write $\mathbb{R}$ as a union of three sets:
+\begin{align*}
+    \mathbb{R} &= (-\infty, 0) \cup \{0\} \cup (0, \infty)\\
+    &= \{0\}\cup\{1\}\cup(\mathbb{R}\setminus\{0, 1\})\\
+\end{align*}
+Let us write $\mathbb{R}$ as a union of sets indexed by integers:
+\begin{align*}
+    \mathbb{R} &= \bigcup_{z\in\mathbb{Z}}[z, z+1)\\
+    &= \bigcup_{z\in\mathbb{Z}}(z, z+1]\\
+    &= \bigcup_{z\in\mathbb{Z}}[z, z+1]\\
+\end{align*}
+The difference in the last way is that here some elements may appear in more than one sets but it is still valid.\\
+What is \textbf{not} valid is the following: $\mathbb{R} = \displaystyle\bigcup_{z\in\mathbb{Z}}(z, z+1)$\\
+Before showing why this not valid, we must see what it means for an element to lie in the union of infinitely many sets.\\
+\textbf{Definition: }Let $\Lambda$ be an indexing set.\\
+\phantom{Definition: D}$x \in \displaystyle\bigcup_{\lambda\in\Lambda}A_\lambda\iff\exists\lambda\in\Lambda(x\in A_\lambda)$\\
+Similarly, one can naturally define intersection for infinitely many sets:\\
+\textbf{Definition: }Let $\Lambda$ be an indexing set.\\
+\phantom{Definition: D}$x \in \displaystyle\bigcap_{\lambda\in\Lambda}A_\lambda\iff\forall\lambda\in\Lambda(x\in A_\lambda)$\\~\\
+\claim{$\mathbb{R}\neq\displaystyle\bigcup_{z\in\mathbb{Z}}(z, z+1)$}{If can take an element of $\mathbb{R}$ and show that it is not in the union, then we would be done.\\
+Let us take $0\in\mathbb{R}$.\\
+To show: $0\not\in\displaystyle\bigcup_{z\in\mathbb{Z}}(z, z+1)$\\
+Proof: Assume not.
+\begin{align*}
+    0\in\displaystyle\bigcup_{z\in\mathbb{Z}}(z, z+1) &\implies \exists z_0 \in \mathbb{Z}\big(0\in(z_0, z_0+1)\big)\\
+    &\implies \exists z_0 \in \mathbb{Z}\big(z_0 < 0 < z_0 + 1\big)\\
+    &\implies \exists z_0 \in \mathbb{Z}\big(0 < -z_0 < 1\big)\\
+\end{align*}
+If $z_0\in\mathbb{Z}$, then $-z_0\in\mathbb{Z}$. Therefore, the above tells us that there lies an integer in the interval $(0, 1)$ which is a contradiction. (Why?)\\
+Hence, $0\not\in\displaystyle\bigcup_{z\in\mathbb{Z}}(z, z+1)$ \hfill \qed
+}
+
+\hrulefill
+
+\exercise{Write $\mathbb{R}$ as a union of sets where the sets are indexed by $\mathbb{N}$. (Try making the sets pairwise disjoint)}
+\exercise{Write $\mathbb{R}$ as a union of sets where the sets are indexed by $\mathbb{R}$. (Try making the sets pairwise disjoint)}
+\exercise{Write $\mathbb{R}^2$ as a union of 
+\begin{enumerate*}[label=(\roman*)]
+    \item lines
+    \item circles
+\end{enumerate*}\\
+In each case, try to make the sets pairwise disjoint and come up with a \textit{good} indexing set.}
+
+\hrulefill

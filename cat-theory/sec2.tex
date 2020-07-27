@@ -1,0 +1,683 @@
+\sec{Abstract Structures}
+\subsection{Epis and Monos}
+\begin{defn} 
+	In any category $C,$ an arrow
+	\begin{equation*} 
+		f:A\to B
+	\end{equation*}
+	is called a 
+	\begin{itemize}
+		\item \emph{monomorphism}, if given any $g, h:C\to A,$ $fg = fh$ implies $g = h.$
+		\item \emph{epimorphism}, if given any $i, j:B\to D,$ $if = jf$ implies $i = j.$
+	\end{itemize}
+	\begin{equation*} 
+		\begin{tikzcd}
+		C \arrow[rr, "h"', shift right] \arrow[rr, "g", shift left] &  & A \arrow[rr, "f"] &  & B \arrow[rr, "i", shift left] \arrow[rr, "j"', shift right] &  & D
+		\end{tikzcd}
+	\end{equation*}
+\end{defn}	
+We often write $f:A\mono B$ if $f$ is a monomorphism and $f:A \epi B$ if $f$ is an epimorphism.
+\begin{prop} \label{prop:monin}
+	A function $f:A\to B$ between is monic iff $f$ is injective.
+\end{prop}
+\begin{proof} 
+	$(\implies)$ Suppose that $f$ is monic. We show that $f$ is injective. \\
+	Let $a, a' \in A$ be such that $f(a) = f(a').$\\
+	Consider $g:A \to A$ defined as
+	\begin{align*} 
+		g(x) = \begin{cases}
+			x & x \neq a\\
+			a' & x = a
+		\end{cases}
+	\end{align*}
+	and let $h:A \to A = 1_A.$\\
+	Clearly, one sees that $fg = f = f1_A.$ As $f$ is monic, we have that $1_A = g.$ In particular, $g(a) = 1_A(a)$ which yields $a' = a.$\\
+	$(\impliedby)$ Suppose that $f$ in injective. We show that $f$ is monic.\\
+	Let $g, h:C\to A$ be arrows such that $fg = fh.$ Let $a \in A$ be arbitrary. Then, $fg(a) = fh(a).$ As $f$ is injective, this yields $g(a) = h(a).$
+\end{proof}
+Before going ahead, we may make the following observation for proving that $f:A\to B$ is injective.
+\begin{prop} \label{prop:injec}
+	Let $f:A\to B$ be a function. Let $1 = \{*\}$ be any one-element set.\\
+	Suppose that $fg \neq fh$ whenever $g, h: 1 \to A$ are distinct functions.\\
+	Then, $f$ is injective.
+\end{prop}
+\begin{proof} 
+	Let $a, a' \in A$ be such that $a \neq a'.$ Consider the functions
+	\begin{equation*} 
+		\bar{a}, \bar{a'} : 1 \to A
+	\end{equation*}
+	where
+	\begin{equation*} 
+		\bar{a}(*) = a, \quad \bar{a'}(x) = a'.
+	\end{equation*}
+	Since $\bar{a} \neq \bar{a'},$ it follows from our hypothesis that $f\bar{a} \neq f\bar{a'}.$ Thus, $f(a) = (f\bar{a})(x) \neq (f\bar{a'})(x) = f(a').$ Hence, it follows that $f$ is injective.
+\end{proof}
+Using this proposition, one may give a slightly simpler proof of $(\implies)$ of Proposition \ref{prop:monin}.\\
+\example{} In many categories of ``structured sets'' like monoids, the monos are exactly the ``injective homomorphisms''. More precisely, a homomorphism $h:M\to N$ is monic precisely if the underlying function $|h|:M\to N$ is injective. (By the above, it is the same as saying $|h|$ is monic.)\\
+To see that $|h|$ being injective $\implies$ $h$ is monic, one may consider the earlier proof.\\
+Conversely, let $h:M \to N$ be monic. We show that $|h|$ is monic. \\
+Suppose $x, y:1 \to |M|$ are two different ``elements'' (arrows), where $1 = \{*\},$ any one-element set. By Proposition \ref{prop:injec}, it suffices to prove that $|h|x, |h|y : 1 \to N$ are also distinct.\\
+By the UMP of the free monoid $M(1),$ there are distinct corresponding homomorphisms $\bar{x}, \bar{y}:M(1) \to M,$ with distinct composites $h\circ \bar{x}, h\circ \bar{y}:M(1) \to N,$ since $h$ is monic. Thus, the corresponding ``elements'' $|h|\circ x, |h|\circ y:1 \to N$ are also distinct, again by the UMP of $M(1).$\\\\
+\example{} In a poset $\mathbf{P},$ every arrow $p \le q$ is both monic and epic. This follows trivially from the fact that given any two objects, there is at most one arrow from one to the other.\\\\
+Dually to the foregoing, the epis in $\mathsf{Set}$ are exactly the surjective functions. This is a fun exercise that is left to the reader. However, unlike the previous case in $\mathsf{Mon},$ the epis are not just the surjective homomorphisms!\\
+\example{\label{eg:monepi}} In the category $\mathsf{Mon}$ of monoids and monoid homomorphisms, there is a monoid homomorphism
+\begin{equation*} 
+	\mathbb{N} \mono \mathbb{Z}
+\end{equation*}
+where $\mathbb{N}$ is the additive monoid of nonnegative integers and $\mathbb{Z}$ is the additive monoid of integers. We show that this map, given by the inclusion, is also epic in $\mathsf{Mon}$ by showing that the following holds:\\
+Given any monoid homomorphisms $f, g: (|\mathbb{Z}|, +, 0) \to (M, *, u),$ if the restrictions to $|\mathbb{N}|$ are equal, then $f = g.$\\
+The restrictions to $|\mathbb{N}|$ being equal already tells us that $f(n) = g(n)$ whenever $n \ge 0.$ Let us assume that $n < 0.$ One then notes
+
+\begin{align*} 
+	f(n) &= f(n)*u\\
+	&= f(n)*g(0)\\
+	&= f(n)*g(-n + n)\\
+	&= f(n)*g(-n)*g(n)\\
+	&= f(n)*f(-n)*g(n)\\
+	&= f(0)*g(n)\\
+	&= u*g(n)\\
+	&= g(n)
+\end{align*}
+From an algebraic point of view, a morphism $e$ is epic if and only if $e$ cancels on the right: $xe = ye$ implies $x = y.$ Dually, $m$ is monic if and only if $m$ cancels on the left: $mx = my$ implies $x = y.$\\
+Note that, of course, this does not mean that either $e$ or $m$ is invertible. (Even if they're cancel-able from both sides.)\\
+However, \emph{if} a morphism \emph{is} invertible, then it is clearly a mono and an epi. This leads to the next proposition.
+\begin{prop}
+	Every iso is both monic and epic.
+\end{prop}
+\begin{proof} 
+	Let $e$ be an isomorphism with $m$ as its inverse. Let $x$ and $y$ be arrows such that $xe = ye.$ Then, one has $xem = yem$ or $x = y,$ as desired. Similarly, $ef = eg$ implies that $f = g.$ 
+\end{proof}
+In $\mathsf{Set},$ the converse also holds: every mono-epi is iso. But this is not true in the general case, as Example \ref{eg:monepi} showed us.
+
+\subsubsection{Sections and retractions}
+We just noted that any iso is both monic and epic. However, carefully looking at the above proof tells us the following more general result:\\
+Let $f:A\to B$ and $g:B\to A$ be arrows such that $gf = 1_A.$ Then, $f$ is monic and $g$ epic.\\
+This leads to the following definition.
+\begin{defn} 
+	A \emph{split} mono (epi) is an arrow with a left (right) inverse. Given arrows $e:X \to A$ and $s:A \to X$ such that $es = 1_A,$ the arrow $s$ is called a \emph{section} or a \emph{splitting} of $e,$ and the arrow $e$ is called a \emph{retraction} of $s.$ The object $A$ is called a \emph{retract} of $X.$
+\end{defn}
+Clearly every \emph{split} mono (epi) is also a mono (epi) but the converse is not true in general.\\
+Since functors preserve identities, they also preserve \emph{split} epis and monos. Compare this with Example \ref{eg:monepi} where the forgetful functor $\mathsf{Mon}\to \mathsf{Set}$ clearly does not preserve the epi $\mathbb{N}\mono \mathbb{Z}.$ (Thus, this also serves as an example of an epi that does not split.)\\
+\example{} In $\mathsf{Set},$ every mono splits except those of the form
+\begin{equation*} 
+	\emptyset \mono A.
+\end{equation*}
+To see this, let $f:X \mono A$ be a mono with $X \neq \emptyset.$ Pick some $x_0 \in X$ and define $g:A \epi X$ as
+\begin{equation*} 
+	g(a) = \begin{cases}
+		b & a = f(b)\\
+		x_0	& a \neq f(b) \text{ for any } b \in X
+	\end{cases}
+\end{equation*}	
+In view of $f$ being monic (and hence, injective), the above function is well defined and the reader may verify that $gf = 1_X.$\\
+Let us look at the more interesting condition of an epi splitting. (Recall \nameref{axiomofchoice}.)
+\begin{lem} \label{lem:episplit}
+	In $\mathsf{Set},$ the condition that every epi splits is equivalent to the axiom of choice.
+\end{lem}
+\begin{proof} 
+	First, let us assume the axiom of choice. Consider an epi
+	\begin{equation*} 
+		e : E \epi X.
+	\end{equation*}
+	We have the following nonempty collection of nonempty sets:
+	\begin{equation*} 
+		E_x = e^{-1}\{x\}, \quad x \in X.
+	\end{equation*}
+	A choice function for this family $(E_x)_{x \in X}$ is exactly a splitting of $e,$ that is, a function $s:X \to E$ such that $es = 1_X,$ since that means that $s(x) \in E_x$ for all $x \in X.$\\
+	Conversely, assume that every epi splits. Given a nonempty collection of nonempty sets,
+	\begin{equation*} 
+		(E_x)_{x\in X}
+	\end{equation*}
+	take $E = \{(x, y) \mid x \in X, y \in E_x\}$ and define the epi $e:E\epi X$ by $(x, y) \mapsto x.$ A splitting $s$ of $e$ then determines a choice function for the collection.
+\end{proof}
+\begin{cor}
+	The Axiom of Choice is equivalent to the following statement:\\
+	Given any surjective map $s:A \epi B,$ there exists a map $f:B\to A$ such that $sf = 1_B.$
+\end{cor}
+\subsubsection{Projective objects}
+A notion related to the existence of ``choice functions'' is that of being ``projective.''
+\begin{defn} \label{def:projec}
+	An object $P$ is said to be \emph{projective} if for any epi $e:E\epi X$ and arrow $f:P\to X$ there is some (not necessarily unique) arrow $\bar{f}:P \to E$ such that $e\circ \bar{f} = f,$ as indicated in the following diagram:
+\end{defn}
+\begin{equation} \label{diag:projec}
+	\begin{tikzcd}
+		&  & E \arrow[ddd, "e", two heads] \\&&\\&&\\
+		P \arrow[rr, "f"'] \arrow[rruuu, "\bar{f}", dotted] &  & X
+	\end{tikzcd}
+\end{equation}
+One says that $f$ \emph{lifts across} $e.$
+\begin{prop}
+	Any epi into a projective object splits.
+\end{prop}
+\begin{proof} 
+	Let $P$ be a projective object and $e:E \epi P$ an epi. Consider (\ref{diag:projec}) with $X = P$ and $f = 1_P.$ The lift $\overline{1_P}$ is clearly a right inverse of $e.$
+\end{proof}
+\begin{prop}
+	The axiom of choice implies that all sets are projective.
+\end{prop}
+\begin{proof} 
+	Consider $E, P, X, e, f$ as in the Definition \ref{def:projec}. By Lemma \ref{lem:episplit}, we see that there exists $s:X \to E$ such that $es = 1_X.$ One sees that $\bar{f} = sf$ has the desired property.
+\end{proof}
+\begin{prop}
+	Any retract of a projective object is also projective.
+\end{prop}
+\begin{proof} 
+	Let $P$ be a projective object and $R$ a retract of $P.$ Let $p, s$ be as pictured.
+	\begin{equation*} 
+		\begin{tikzcd}
+		R \arrow[rr, "s", tail] \arrow[rrddd, "1"'] &  & P \arrow[ddd, "p", two heads] \\&&\\&&\\&&R                            
+		\end{tikzcd}
+	\end{equation*}
+	Let $e: E \epi X$ be an epi and let $f:R\to X$ be an arrow. We show that $e$ lifts across $f.$ The information so far can be pictured as follows:
+	\begin{equation*} 
+		\begin{tikzcd}
+			R \arrow[rr, "s", tail] \arrow[rrddd, "1"'] &%
+			& P \arrow[ddd, "p", two heads] &  & E \arrow[ddd, "e", two heads] \\
+			&&&&\\&&&&\\&&R \arrow[rr, "f"]&&X
+		\end{tikzcd}	
+	\end{equation*}
+	Now, since $P$ is projective, we get that $e$ lifts across $fp:P\to E.$ Let this lift be $\overline{fp}$ as shown.
+	\begin{equation*} 
+		\begin{tikzcd}
+			R \arrow[rr, "s", tail] \arrow[rrddd, "1"'] &%
+			& P \arrow[ddd, "p", two heads] \arrow[rr, "\overline{fp}", dotted]  &  & E \arrow[ddd, "e", two heads] \\
+			&&&&\\&&&&\\&&R \arrow[rr, "f"]&&X
+		\end{tikzcd}	
+	\end{equation*}
+	Then, $\bar{f} = \overline{fp}s$ is the desired lift of $e$ across $f.$ To see this, one observes that the above diagram commutes, that is,
+	\begin{align*} 
+		e(\overline{fp}s) &= (e \overline{fp})s\\
+		&= (fp)s\\
+		&= f(ps)\\
+		&= f(1)\\
+		&= f.
+	\end{align*}
+\end{proof}
+%
+%
+\subsection{Initial and terminal objects}
+\begin{defn} 
+	In any category $\mathbf{C},$ an object
+	\begin{itemize}
+		\item $0$ is \emph{initial} if for any object $C$ there is a unique morphism,
+		\begin{equation*} 
+			0 \to C,
+		\end{equation*}
+		\item $1$ is \emph{terminal} if for any object $C$ there is a unique morphism,
+		\begin{equation*} 
+			C \to 1.
+		\end{equation*}
+	\end{itemize}
+\end{defn}
+One may note that a terminal object in $\mathbf{C}$ is precisely an initial object in $\mathbf{C}\op.$ Note that a category need not have an terminal or initial object. A category may also have one more than of either. However, the following proposition tells us that they must be isomorphic.
+\begin{prop}
+	Initial (terminal) objects are unique up to isomorphism.
+\end{prop}
+\begin{proof} 
+	We shall prove the statement for initial objects.\\
+	Let $C$ and $C'$ be initial objects. Let $i:C\to C'$ and $i':C'\to C$ be the unique morphisms between these objects.\\
+	Consider the morphism $i\circ i'.$ It is a morphism from $C'$ to $C'.$ Note that $1_{C'}$ is a morphism from $C'$ to $C'.$ As $C'$ is an initial object, there is only one morphism from $C'$ to itself. Thus, $i\circ i' = 1_{C'}.$ A similar argument shows that $i' \circ i = 1_C$ and thus, $i$ is an isomorphism.
+\end{proof}
+\example{}
+\begin{enumerate}
+	\item In $\mathsf{Set},$ the empty set is initial and any singleton set $\{x\}$ is terminal. Observe that $\mathsf{Set}$ has just one initial object but many terminal objecs.
+	\item In $\mathsf{Cat},$ the category $\mathbf{0}$ (no objects and no arrows) is initial and the category $\mathbf{1}$ (one object and its identity arrow) is terminal.
+	\item In $\mathsf{Grp},$ the one-element group is both initial and terminal. (Same for $\mathsf{Vec}_\Bbbk$ and $\mathsf{Mon}.$) But in $\mathsf{Ring}$ (commutative with unit), the ring $\mathbb{Z}$ is initial and the one-element ring is terminal.
+	\item Recall \nameref{boolalg}.
+	Another familiar example of the two-element Boolean algebra $\mathbf{2} = \{0, 1\}$ (which may be taken to be the power-set $\mathcal{P}(1)$). It is an initial object in the category $\mathsf{BA}$ of Boolean algebras and boolean homomorphisms.\\
+	The one-element structure (i.e., $\mathcal{P}(0)$) is terminal
+	\item In a poset (viewed as a category), an object is initial iff is the least and terminal iff is the greatest. Thus, for instance, any Boolean algebra has both. (Note that we are viewing the Boolean algebra as a category in itself. Different from what we did in the previous example.)\\
+	On the other hand, the poset $(\mathbb{Z}, \le)$ has neither.
+	\item For any category $\mathbf{C}$ and any object $X \in \mathbf{C},$ the identity arrow $1_X:X\to X$ is a terminal object in the slice category $\mathbf{C}/X$ and an initial object in the coslice category $X/\mathbf{C}.$
+
+%
+%
+\subsection{Generalised elements}
+Let us consider arrows into and out of initial and terminal objects.\\
+A set $A$ has an arrow into the initial object $0$ precisely if it is itself initial and the same is true for poset categories. In monoids and groups, by contrast, every object has a unique arrow to the initial object, since it is also terminal.\\
+Let us consider some arrows from terminal objects. For any set $X,$ for instance, we have an isomorphism
+\begin{equation*} 
+	X \cong \Hom_{\mathsf{Set}}(1, X)
+\end{equation*}
+between elements $x \in X$ and arrows $\bar{x}:1\to X,$ determined $\bar{x}(*) = x,$ from a terminal object $1 = \{*\}.$ A similar situation holds in posets and in topological spaces, where the arrows $1\to P$ correspond to elements of the underlying set of a poset or topological space. In any category with terminal objects $1,$ such arrows $1 \to A$ are often called \emph{global elements}, or \emph{points}, or \emph{constants} of $A.$ In sets, posets, and spaces, the general arrows $A \to B$ are determined by what they do to the points of $A,$ in the sense that two arrows $f, g: A \to B$ are equal if for every point $a:1 \to A$ the composites $fa$ and $ga$ are equal.\\
+However, this is not always the case! Recall that in $\mathsf{Mon},$ the terminal object $1$ is also an initial object and hence, given any monoid $M,$ there is a unique arrow $1\to M.$ (This is to say that $M$ has one point.) In the category $\mathsf{BA},$ there is no arrow $1 \to B$ if $B \neq 1.$ (This is to say that $B$ has no points.)\\
+Thus, in general, an object is not determined by its points. For this reason, it is convenient to introduce the device of \emph{generalised elements}. There are arbitrary arrows
+\begin{equation*} 
+	x : X \to A
+\end{equation*}
+(with arbitrary domain $X$), which can be regarded as \emph{generalised} or \emph{variable elements} of $A.$\\
+We summarise the above in the following list of examples:\\
+\example{}
+\begin{itemize}
+	\item Consider arrows $f, g: P\to Q$ in $\mathsf{Pos}.$ Then, $f = g$ iff for all $x:1 \to P,$ we have $fx = gx.$ In this sense, posets ``have enough points'' to separate the arrows.
+	\item By contrast, in $\mathsf{Mon},$ for homomorphisms $h, j: M \to N,$ we always have $hx = jx,$ for all $x:1 \to M,$ since there is just one such point $x.$ However, we do have examples of distinct homomorphisms between two monoids. Thus, monoids do not ``have enough points.''
+	\item But in any category $\mathbf{C},$ and for any arrows $f, g:C\to D,$ we always have $f = g$ iff for all $x:X\to C,$ it holds that $fx = gx.$\\
+	The ``only if'' part is trivial. To see the ``if'' part, consider $X = C$ and $x = 1_C.$\\
+	Thus, all objects have enough generalised elements.
+	\item In fact, it often happens that it is enough to consider generalised elements of just a certain form $T \to A,$ that is, for certain ``test'' objects $T.$ We shall consider this presently.
+\end{itemize}
+Generalised elements are also good for ``testing'' for various conditions. Consider, for instance, diagrams of the following shape:
+\begin{equation*} 
+	\begin{tikzcd}
+		X \arrow[rr, "x", shift left = 1] \arrow[rr, "x'"', shift right = 1] && A \arrow[rr, "f"] && B 
+	\end{tikzcd}
+\end{equation*}
+The arrow $f$ is monic iff $x \neq x'$ implies $fx \neq fx'$ for all $x, x',$ that is, just if $f$ is ``injective on generalised elements.''\\
+Similarly, in any category $\mathbf{C},$ to test whether a square commutes,
+\begin{equation*} 
+	\begin{tikzcd}
+	A \arrow[rr, "f"] \arrow[ddd, "g"'] &  & B \arrow[ddd, "\alpha"] \\&&\\&&\\D \arrow[rr, "\beta"']&&C
+	\end{tikzcd}
+\end{equation*}	
+we shall have $\alpha f = \beta g$ just if $\alpha fx = \beta gx$ for all generalised elements $x:X \to A.$ (why?)\\\\
+\end{enumerate}
+\example{} Generalised elements can also be used to ``reveal more structure'' than do the constant elements. For example, consider the following posets $X$ and $A:$
+\begin{align*} 
+	X &= \{x\le y, y\le z\},\\
+	A &= \{a \le b \le c\}.
+\end{align*}
+There is an order preserving bijection $f:X \to A$ defined by
+\begin{align*} 
+	f(x) = a, \quad f(y) = b, \quad f(z) = c.
+\end{align*}
+It is easy to see that $f$ is both monic and epic in the category $\mathsf{Pos};$ however, it is clearly not an iso. In fact, no map between them is an iso. However, how would one \emph{prove} this? In this case, it is not that difficult to do this via ``brute force.''\\
+One way to prove that two objects are not isomorphic is to use ``invariants'': attributes that are preserved by isomorphisms. If two objects differ by an invariant, they cannot be isomorphic. For instance, the number of global elements of $X$ and $A$ is the same, namely the three elements of the set. But consider instead the ``$\mathbf{2}-$elements'' $\mathbf{2} \to X,$ from the poset $\mathbf{2} = \{0 \le 1\}$ as a ``test-object.'' Then $X$ has $5$ such elements, and $A$ has $6.$ Since these numbers are invariants (why?), the posets cannot be isomorphic. In more detail, we can define for any poset $P$ the numerical invariant
+\begin{equation*} 
+	|\Hom(\mathbf{2}, P)| = \text{ the number of elements of }\Hom(\mathbf{2}, P).
+\end{equation*}
+Then if $P \cong Q,$ it is easy to see that $|\Hom(\mathbf{2}, P)| = |\Hom(\mathbf{2}, Q)|,$ since any isomorphism
+\begin{equation*} 
+	\begin{tikzcd}
+		P \arrow[rr, "i", shift left = 1] && Q \arrow[ll, "j", shift left = 1]
+	\end{tikzcd}
+\end{equation*}
+also gives an isomorphism
+\begin{equation*} 
+	\begin{tikzcd}
+		\Hom(\mathbf{2}, P) \arrow[rr, "i_*", shift left = 1] && \Hom(\mathbf{2}, Q) \arrow[ll, "j_*", shift left = 1]
+	\end{tikzcd}
+\end{equation*}
+defined by composition:
+\begin{align*} 
+	i_*(f) &= if,\\
+	j_*(g) &= jg,
+\end{align*}
+for all $f:\mathbf{2} \to P$ and $g:\mathbf{2} \to Q.$ Indeed, this is a special case of the very general fact that $\Hom(X,- )$ is always a functor, and functors always preserve isomorphisms.
+\example{} As in the foregoing example, it is often the case that generalised elements $t:T\to A$ ``based at'' certain objects $T$ are especially revealing. We can think of such elements geometrically as ``figures of shape $T$ in $A$,'' just as an arrow $\mathbf{2} \to P$ in posets is a figure of shape $p \le p'$ in $P.$ For instance, as we have already seen, in the category of monoids, the arrows from the terminal monoid are entirely uninformative, but those from the free monoid on one generator $M(1)$ suffice to distinguish homomorphisms, in the sense that two homomorphisms $f, g:M \to M'$ are equal if their composites with all such arrows are equal. Since we know that $M(1) = \mathbb{N},$ the monoid of natural numbers, we can think of generalised elements $M(1) \to M$ based at $M(1)$ as ``figures of shape $\mathbb{N}$'' in $M.$ In fact, by the UMP of $M(1),$ the underlying set $|M|$ is therefore (isomorphic to) the collection $\Hom_{\mathsf{Mon}}(\mathbb{N}, M)$ of all such figures, since
+\begin{equation*} 
+	|M| \cong \Hom_{\mathsf{Set}}(1, |M|) \cong \Hom_{\mathsf{Mon}}(\mathbb{N}, M).
+\end{equation*}
+In this sense, a map from a monoid is determined by its effect on all of the figures of shape $\mathbb{N}$ in the monoid.
+%
+%
+\subsection{Products}
+\begin{defn} \label{def:prod}
+	In any category $\mathbf{C},$ a \emph{product diagram} for the objects $A$ and $B$ consists of an object $P$ and arrows
+	\begin{equation*} 
+		\begin{tikzcd}
+			A && P \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && B
+		\end{tikzcd}
+	\end{equation*}
+	satisfying the following UMP:\\
+	Given any diagram of the form
+	\begin{equation*} 
+		\begin{tikzcd}
+			A && X \arrow[ll, "x_1"'] \arrow[rr, "x_2"] && B
+		\end{tikzcd}
+	\end{equation*}
+	there exists a unique $u:X\to P$ making the diagram
+	\begin{equation*} 
+		\begin{tikzcd}
+			&& X \arrow[llddd, "x_1"'] \arrow[rrddd, "x_2"] \arrow[ddd, dotted, "u"] &&\\
+			&&&&\\&&&&\\
+			A && P \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && B
+		\end{tikzcd}
+	\end{equation*}
+	commute, that is, such that $x_1 = p_1u$ and $x_2 = p_2u.$
+\end{defn}
+\remark{\label{rem:UMP-prod}} As in other UMPs, there are two parts:
+\begin{itemize}
+	\item \emph{Existence}: There is some $u:X\to P$ such that $x_1 = p_1u$ and $x_2 = p_2u.$
+	\item \emph{Uniqueness}: Given any $v:X\to P,$ if $p_1v = x_1$ and $p_2v = x_2,$ then $v = u.$ 
+\end{itemize}
+\begin{prop} \label{prop:prodiso}
+	Products are unique up to isomorphism.
+\end{prop}
+\begin{proof}
+	Suppose
+	\begin{equation*} 
+		\begin{tikzcd}
+			A && P \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && B
+		\end{tikzcd}
+	\end{equation*}
+	and
+	\begin{equation*} 
+		\begin{tikzcd}
+			A && Q \arrow[ll, "q_1"'] \arrow[rr, "q_2"] && B
+		\end{tikzcd}
+	\end{equation*}
+	are products of $A$ and $B.$ Since $Q$ is a product, we get a (unique) morphism $i:P \to Q$ making the upper triangle of (\ref{diag:prodiso}) commute. Similarly, since $P$ is a product we get a (unique) morphism $j:Q\to P$ making the lower triangle of (\ref{diag:prodiso}) commute.
+	\begin{equation} \label{diag:prodiso}
+		\begin{tikzcd}
+			&& P \arrow[llddd, "p_1"'] \arrow[rrddd, "p_2"] \arrow[ddd, dotted, "i"] &&\\
+			&&&&\\&&&&\\
+			A && Q \arrow[ll, "q_1"'] \arrow[rr, "q_2"] \arrow[ddd, dotted, "j"] && B\\
+			&&&&\\&&&&\\
+			&& P \arrow[lluuu, "p_1"'] \arrow[rruuu, "p_2"] &&
+		\end{tikzcd}
+	\end{equation}
+	Note that the composite $j\circ i$ is a morphism from $P$ to $P$ which has the following property: $p_1 \circ j \circ i = p_1$ and $p_2 \circ j \circ i = p_2.$ Note that $1_P$ also has the same property, id est, $p_1 \circ 1_P = p_1$ and $p_2 \circ 1_P = p_2.$ Since $P$ is a product, there is a such unique morphism and thus, $j\circ i = 1_P.$ Interchanging the roles of $P$ and $Q$ gives us $i \circ j = 1_Q$ and hence, $i$ and $j$ are the desired isomorphisms.
+\end{proof}
+If $A$ and $B$ have a product, we write
+\begin{equation} 
+	\begin{tikzcd}
+		A && A \times B \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && B
+	\end{tikzcd}
+\end{equation}
+for one such product. Then given $X, x_1, x_2$ as in the definition (\ref{def:prod}), we write
+\begin{equation} \label{eq:prodpair}
+	\langle x_1, x_2\rangle \text{ for } u:X\to A\times B.
+\end{equation}
+Note, however, that a pair of objects may have many different products in a category. For example, given a product $A \times B, p_1, p_2,$ and any iso $h:A\times B \to Q,$ the diagram $Q, p_1\circ h, p_2\circ h$ is also a product of $A$ and $B.$\\
+Now an arrow \emph{into} a product
+\begin{equation*} 
+	f : X \to A \times B
+\end{equation*}
+is ``the same thing'' as a pair of arrows
+\begin{equation*} 
+	f_1:X\to A, \quad f_2: X\to B.
+\end{equation*}
+(This follows from the UMP.)\\
+So, we can essentially forget about such arrows, in that they are uniquely determined by pairs of arrows. But something useful \emph{is} gained if a category has products; namely,, consider arrows \emph{out} of the product,
+\begin{equation*} 
+	g:A\times B \to Y.
+\end{equation*}
+Such a $g$ is a ``function of two variables''; given any two generalised elements $f_1:X\to A$ and $f_2:X\to B,$ we have an element $g\langle f_1, f_2\rangle:X \to Y.$ Such arrows $g:A \times B \to Y$ are not ``reducible'' to anything more basic, the way that products into arrows were.
+%
+%
+\subsection{Examples of Products}
+\begin{enumerate}
+	\item $\mathsf{Set}.$ In this category, every pair of objects does have a product. It is the usual Cartesian product (along with the projections). Given sets $A$ and $B,$ the \emph{cartesian product} of $A$ and $B$ is the set of ordered pairs
+	\begin{align*} 
+		A \times B = \{(a, b) \mid a \in A, b \in B\}.
+	\end{align*}
+	The projections are the following two maps
+	\begin{equation*} 
+		\begin{tikzcd}
+			A && A \times B \arrow[ll, "\pi_1"'] \arrow[rr, "\pi_2"] && B
+		\end{tikzcd}
+	\end{equation*}
+	defined as
+	\begin{equation*} 
+		\begin{tikzcd}
+			a && (a, b) \arrow[ll, maps to, "\pi_1"'] \arrow[rr, maps to, "\pi_2"] && b
+		\end{tikzcd}
+	\end{equation*}
+	Moreover, given any pair of functions $f:X\to A$ and $g:X\to B,$ there is a unique $h:X\to A\times B$ that makes the required diagram commute. It is given by
+	\begin{equation*} 
+		h(x) = (f(x), g(x)).
+	\end{equation*}
+	Note that if we choose a different definition of ordered pairs, we get different sets. They will, of course, be isomorphic.
+	\item Products of ``structured sets'' like monoids and groups can \emph{often} be constructed as products of the underlying sets with \emph{componentwise} operations: If $G$ and $H$ are groups, for instance, $G\times H$ can be constructed by taking the underlying set of $G \times H$ to be the set $\{\langle g, h \mid g \in G, h \in H\rangle\}$ and defining the binary operation by
+	\begin{equation*} 
+		\langle g, h\rangle\cdot\langle g', h'\rangle = \langle g\cdot g', h\cdot h'\rangle
+	\end{equation*}
+	the unit by
+	\begin{equation*} 
+		u = \langle u_G, u_H\rangle
+	\end{equation*}
+	and inverses by
+	\begin{equation*} 
+		\langle a, b\rangle^{-1} = \langle a^{-1}, b^{-1}\rangle.
+	\end{equation*}
+	The projection homomorphisms $G\times H \to G$ (or $H$) are the evident one $\langle g, h\rangle \mapsto g$ (or $h$).\\
+	Note that this need not always work in all categories with ``structured sets.'' For example, the cartesian product of two fields with componentwise operations is not a field. (Not just ``not necessarily,'' it's \emph{never} a field.)
+	%
+	\item For categories $\mathbf{C}$ and $\mathbf{D},$	we already defined the category of objects and arrows,
+	\begin{equation*} 
+		\mathbf{C} \times \mathbf{D}.
+	\end{equation*}
+	Together with the evident projection functors, this is indeed a product in $\mathsf{Cat}$ (when $\mathbf{C}$ and $\mathbf{D}$ are ``small'').\\
+	As special cases, we also get the products of posets and of monoids as product of categories. For them to indeed be the products in $\mathsf{Pos}$ and $\mathsf{Mon},$ one has to check that the product category does indeed take the form of a poset-category or a monoid-category. Moreover, the projections and the unique paired functions have to be checked to be monotone/monoid homomorphisms.
+	%
+	\item Let $P$ be a poset (considered as a category) and consider a product of elements $p, q \in P.$ We must have projections
+	\begin{align*} 
+		p \times q &\le p,\\
+		p \times q &\le q,
+	\end{align*}
+	and if for any element $x,$ we have
+	\begin{equation*} 
+		x \le p, \quad \text{and} \quad x \le q,
+	\end{equation*}
+	then we need
+	\begin{equation*} 
+		x \le p \times q.
+	\end{equation*}
+	The above operation $\times$ can be recognised as the ``meet'' operation. $p \times q$ is just what is usually the \emph{greatest lower bound} of $p$ and $q.$ In more familiar notation, we have $p\times q = p \wedge q.$
+	\item One can show that the product of topological spaces, as usually defined, is indeed the product in $\mathsf{Top}.$
+\end{enumerate}
+%
+%
+\subsection{Categories with products}
+Let $\mathbf{C}$ be a category that has a product diagram for every pair of objects. Suppose we have objects and arrows
+\begin{equation*} 
+	\begin{tikzcd}
+		A \arrow[ddd, "f"'] && A \times A' \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && A' \arrow[ddd, "f'"]\\
+		&&&&\\&&&&\\
+		B && B \times B' \arrow[ll, "q_1"'] \arrow[rr, "q_2"] && B'
+	\end{tikzcd}
+\end{equation*}
+with indicated products. Then, we write
+\begin{equation*} 
+	f \times f' : A \times A' \to B \times B'
+\end{equation*}
+for the arrow $f\times f'$ obtained by the UMP of $B \times B'$ and the arrows $f\circ p_1:A\times A' \to B$ and $f\circ p_2:A\times A' \to B.$ That is, the unique $f\times f'$ making both squares in the following diagram commute:
+\begin{equation*} 
+	\begin{tikzcd}
+		A \arrow[ddd, "f"'] && A \times A' \arrow[ll, "p_1"'] \arrow[rr, "p_2"] \arrow[ddd, "f\times f'", dotted] && A' \arrow[ddd, "f'"]\\
+		&&&&\\&&&&\\
+		B && B \times B' \arrow[ll, "q_1"'] \arrow[rr, "q_2"] && B'
+	\end{tikzcd}
+\end{equation*}
+In this way, if we choose a product for each pair of objects, we get a functor
+\begin{equation*} 
+	\times : \mathbf{C} \times \mathbf{C} \to \mathbf{C}.
+\end{equation*}
+This is defined on objects by sending $(A, A')$ to $A \times A'$ and $(f, f'):(A, A') \to (B, B')$ to $f\times f':A \times A' \to B \times B'.$\\
+Let us show that this is indeed a functor.\\
+The domain and codomain is clearly preserved, by construction.\\
+Let us show that it preserves units. Let $(A, A') \in \mathbf{C} \times \mathbf{C}.$ We wish to show that $1_A\times 1_{A'}:A\times A' \to A\times A'$ is the identity arrow. For this, we note that the following diagram commutes (why?):
+\begin{equation*} 
+	\begin{tikzcd}
+	A \arrow[ddd, "1_A"'] &  & A \times A' \arrow[ll, "p_1"'] \arrow[rr, "p_2"] \arrow[ddd, "1_{A \times A'}"] &  & A' \arrow[ddd, "1_A"] \\&&&&\\&&&&\\
+	A &  & A\times A' \arrow[ll, "p_1"]\arrow[rr, "p_2"']&&A'                  
+	\end{tikzcd}
+\end{equation*}	
+By the uniqueness clause of the UMP, we get that $1_A \times 1_{A'} = 1_{A\times A'}.$\\
+To show that this map preserves preserves composition, one may observe diagram (\ref{diag:prodcomp}) and use the UMP of $C \times C'.$
+
+\begin{equation} \label{diag:prodcomp}
+	\begin{tikzcd}
+	A \arrow[ddd, "f"'] &  & A \times A' \arrow[ll, "p_1"'] \arrow[rr, "p_2"] \arrow[ddd, "f\times f'", dashed] &  & A' \arrow[ddd, "f'"] \\
+	&&&&\\&&&&\\
+	B \arrow[ddd, "g"'] &  & B\times B' \arrow[ll, "q_1"] \arrow[rr, "q_2"'] \arrow[ddd, "g\times g'", dashed]  &  & B' \arrow[ddd, "g'"] \\
+	&&&&\\&&&&\\
+	C&& C\times C' \arrow[ll, "r_1"'] \arrow[rr, "r_2"]&& C'                  
+	\end{tikzcd}
+\end{equation}
+One may now define a ternary product
+\begin{equation*} 
+	A_1 \times A_2 \times A_3
+\end{equation*}
+with an analogous UMP: there are three projections $p_i:A_1 \times A_2 \times A_3 \to A_i,$ and for any object $X$ and three arrows $x_i:X\to A_i,$ there is a unique arrow $u:X\to A_1\times A_2 \times A_3$ such that $p_iu = x_i$ for $i = 1, 2, 3.$ Clearly, such a condition can be formulated for any (finite?) number of factors.\\
+It is clear that if a category has binary products, then it has all finite products with two or more factors; for instance, one could set
+\begin{equation*} 
+	A \times B \times C = (A \times B) \times C
+\end{equation*}
+with the appropriate projections. On the other hand, one could have taken $A \times (B \times C)$ as well. It can be seen that both of these satisfy the ternary UMP. However, by the ternary UMP, we also then have
+\begin{align*} 
+	(A \times B) \times C \cong A \times (B \times C),
+\end{align*}
+id est, the binary product operation is associative up to isomorphism.\\
+Observe that a terminal object is a ``nullary'' product, a product of zero objects:\\
+Given no objects, there is an object $1$ with no maps, and given any other object $X$ and no maps, there is a unique arrow
+\begin{equation*} 
+	!:X \to 1
+\end{equation*}
+making nothing further commute.\\
+Similarly, any object $A$ is the \emph{unary product} of $A$ with itself one time.\\~\\
+Finally, one may also define the product of a family of objects $(C_i)_{i \in I}$ indexed by \emph{any} set $I$ in the following manner:\\
+The product $(C_i)_{i \in I}$ is an object $P$ along with a family $(p_i)_{i \in I}$ of arrows
+\begin{equation*} 
+	p_i:P \to C_i
+\end{equation*}
+satisfying the following UMP:\\
+Given any object $X$ and family $(x_i)_{i \in I}$ of arrows
+\begin{equation*} 
+	x_i:X \to C_i,
+\end{equation*}
+there exists a unique $u:X \to P$ such that $p_iu = x_i$ for every $i \in I.$
+\begin{defn} 
+	A category $\mathbf{C}$ is said to \emph{have all finite products}, if it has a terminal object and all binary products (and therewith products of any finite cardinality). The category $\mathbf{C}$ \emph{has all products} if every set of objects in $\mathbf{C}$ has a product.
+\end{defn}
+%
+%
+\subsection{Hom-sets}
+In this (sub)section, we assume that all categories are locally small, that is given any two objects in this category, the collection of morphisms from one to the other is in fact a set.\\
+Recall that in any category $\mathbf{C},$ given any objects $A$ and $B,$ we write
+\begin{equation*} 
+	\Hom(A, B) = \{f \in \mathbf{C} \mid f:A\to B\}
+\end{equation*}
+and call such a set of arrows a \emph{$\Hom$-set}. Clearly, any element in the above set is an arrow with domain $A$ and codomain $B.$ Thus, we may compose it with an arrow $g : B \to B'$ to get a an arrow $g\circ f:A \to B',$ and arrow with domain $A$ and codomain $B'.$ This is just an elaborate of saying that any arrow $g:B\to B'$ induces a function
+\begin{equation*} 
+	\Hom(A, g) : \Hom(A, B) \to \Hom(A, B')
+\end{equation*}
+defined in the above manner, id est,
+\begin{equation*} 
+	(f: A \to B) \mapsto (g \circ f:A \to B').
+\end{equation*}
+(Note very carefully that the above sends an arrow to another arrow.)\\
+Thus, we now have seen two things of the form $\Hom(A, -);$ when $-$ is an object $B,$ we get a \emph{set} $\Hom(A, B),$ an object in $\mathsf{Set},$ when $-$ is an arrow $g:B\to B',$ we get a \emph{function} $\Hom(A, g),$ an arrow in $\mathsf{Set}.$ Moreover, it's a function from $\Hom(A, \dom g)$ to $\Hom(A, \cod g).$ The attentive reader should now see what this is screaming - the creation of a functor!\\
+Indeed, now we show that
+\begin{equation*} 
+	\Hom(A, -) : \mathbf{C} \to \mathsf{Set}
+\end{equation*}
+is a functor. (The definition of this map is precisely what was written above.)\\
+That it preserves domain and codomain follows from construction. We now show that it preserves units and compositions.\\
+Units:\\
+Let $B \in \mathbf{C}$ be an object and $1_B$ its identity arrow. We show that $\Hom(A, 1_B):\Hom(A, B) \to \Hom(A, B)$ is the identity map $1_{\Hom(A, B)}.$\\
+This is direct; indeed, let $f \in \Hom(A, B).$ Then,
+\begin{align*} 
+	\Hom(A, 1_B)(f) &= 1_B \circ f\\
+	&= f.
+\end{align*}
+
+Compositions:\\
+Let $g:B\to C$ and $h:C\to D$ be arrows in $\mathbf{C}.$ We show that
+\begin{equation*} 
+	\Hom(A, h\circ g) = \Hom(A, h)\circ\Hom(A, g).
+\end{equation*}
+Note that both sides are functions from $\Hom(A, B)$ to $\Hom(A, C).$ Let $f \in \Hom(A, B).$ Then,
+\begin{align*} 
+	\Hom(A, h\circ g)(f) &= (h\circ g)\circ f\\
+	&= h \circ (g \circ f)\\
+	&= h \circ (\Hom(A, g)(f))\\
+	&= \Hom(A, h)(\Hom(A, g)(f))\\
+	&= (\Hom(A, h)\circ\Hom(A, b))(f).
+\end{align*}
+This completes the proof.\\
+Thus, $\Hom(A, -)$ is indeed a functor. We shall call this the (covariant) \emph{representable functor} of $A.$ We will study such representable functors later. For now, we see how one can use $\Hom$-sets to give another formulation of the definition of products.\\
+For \emph{any} object $P,$ a pair of arrows of arrows $p_1:P\to A$ and $p_2:P\to B$ determine an element of the set
+\begin{align*} 
+	\Hom(P, A) \times \Hom(P, B).
+\end{align*}
+Now, given any arrow
+\begin{equation*} 
+	x:X \to P
+\end{equation*}
+composing with $p_1$ and $p_2$ gives a pair of arrows $x_1 = p_1\circ x: X \to A$ and $x_2 = p_2 \circ x:X \to B,$ as indicated in the following diagram:
+\begin{equation*} 
+	\begin{tikzcd}
+	&& X \arrow[llddd, "x_1"'] \arrow[ddd, "x"] \arrow[rrddd, "x_2"] &&\\
+	&&&&\\&&&&\\
+	A && P \arrow[ll, "p_1"] \arrow[rr, "p_2"'] && B
+	\end{tikzcd}
+\end{equation*}
+(We emphasise that in the above discussion, $P$ is \emph{any} object. Not necessarily a product.)\\
+In this way, we have a function
+\begin{equation*} 
+	\varv_X = (\Hom(X, p_1), \Hom(X, p_2)) : \Hom(X, P) \to \Hom(X, A) \times \Hom(X, B)
+\end{equation*}
+defined by
+\begin{equation} \label{eq:vx}
+	\varv_X(x) = (x_1, x_2).
+\end{equation}
+Note very carefully that the above function depends on $P, p_1, p_2.$\\
+Using this function, we can express the condition of being a product concisely as follows.
+\begin{prop} \label{prop:canonprod}
+	A diagram of the form
+	\begin{equation*} 
+		\begin{tikzcd}
+			A && P \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && B
+		\end{tikzcd}
+	\end{equation*}
+	is a product for $A$ and $B$ iff for every object $X,$ the canonical function $\varv_X$ given in (\ref{eq:vx}) is an isomorphism.
+\end{prop}
+\begin{proof} 
+	The proof follows from observing that the above condition is just a rephrasing of the UMP of the product. Let $(x_1, x_2) \in \Hom(X, A) \times \Hom(X, B)$ be arbitrary. We recall from Remark \ref{rem:UMP-prod}, the two conditions of product:
+	\begin{itemize}
+		\item \emph{Existence}: There is some $x:X\to P,$ id est, $x \in \Hom(X, P)$ such that $x_1 = p_1x$ and $x_2 = p_2x.$ This is iff $\varv_X$ is surjective.
+		\item \emph{Uniqueness}: Given any $v:X\to P,$ if $p_1v = x_1$ and $p_2v = x_2,$ then $v = x.$  This is iff $\varv_X$ is injective.
+	\end{itemize}
+	The result follows. (Recall that an isomorphism in $\mathsf{Set}$ is the same as a bijection.)
+\end{proof}
+\begin{defn} 
+	Let $\mathbf{C}, \mathbf{D}$ be categories with binary products. A function $F:\mathbf{C} \to \mathbf{D}$ is said to \emph{preserve binary products} if it takes every product
+	\begin{equation*} 
+		\begin{tikzcd}
+			A && A \times B \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && B
+		\end{tikzcd}
+		\quad \text{in }\mathbf{C}
+	\end{equation*}
+	to a product diagram
+	\begin{equation} \label{diag:funcprod}
+		\begin{tikzcd}
+			FA && F(A \times B) \arrow[ll, "p_1"'] \arrow[rr, "p_2"] && FB
+		\end{tikzcd}
+		\quad \text{in }\mathbf{D}.
+	\end{equation}
+\end{defn}
+Note that in the above, it is not sufficient that $F(A \times B)$ is isomorphic to $FA \times FB.$ We also require $Fp_1$ and $Fp_2$ to act like the arrows that give us the UMP. Thus, we must have an isomorphism that is ``good enough''.\\
+Let us see more elaborately when the above is indeed a product diagram in $\mathbf{D}.$ As $\mathbf{D}$ has binary products, consider the product $FA \times FB$ with the projections $q_1$ and $q_2$ to $FA$ and $FB,$ respectively.\\
+Consider the unique arrow $i:F(A\times B) \to FA \times FB$ obtained via the UMP of $FA \times FB$ using the arrows $Fp_1$ and $Fp_2.$ Then, (\ref{diag:funcprod}) is a product diagram iff $i$ is an isomorphism.\\
+A rough sketch of the proof is as follows: For the forward direction, it will follow from the UMP as in the proof of Proposition \ref{prop:prodiso}.\\
+For the reverse direction, let $X$ be an arbitrary object with arrows into $A$ and $B,$ use $i^{-1}$ and UMP of $FA \times FB$ to get the arrow $x:X\to F(A \times B)$ as desired by the definition of product.\\~\\
+To summarise the discussion, I shall write what the book writes concisely as:\\
+It follows that $F$ preserves products just if
+\begin{equation*} 
+	F(A\times B) \cong FA \times FB
+\end{equation*}
+``canonically,'' that is, iff the canonical ``comparison arrow''
+\begin{equation*} 
+	\langle Fp_1, Fp_2\rangle : F(A \times B) \to FA \times FB
+\end{equation*}
+in $\mathbf{D}$ is an isomorphism.\\
+(Recall the definition of $\langle Fp_1, Fp_2\rangle$ from (\ref{eq:prodpair}).)\\
+For example, the forgetful functor $U:\mathsf{Mon}\to\mathsf{Set}$ preserves products.
+\begin{cor}
+	For any object $X$ in a category $\mathbf{C}$ with products, the (covariant) representable functor
+	\begin{equation*} 
+		\Hom_{\mathbf{C}}(X, -) : \mathbf{C} \to \mathsf{Set}
+	\end{equation*}
+	preserves products.
+\end{cor}
+\begin{proof} 
+	By our above observation, we want to show that: \\
+	for any $A, B \in \mathbf{C},$ $\Hom(X, A\times B)$ and $\Hom(X, A) \times \Hom(X, B)$ are canonically isomorphic (in $\mathsf{Set}$). \\
+	By Proposition \ref{prop:canonprod}, we precisely have that there is a canonical isomorphism
+	\begin{equation*} 
+		\Hom(X, A \times B) \cong \Hom(X, A) \times \Hom(X, B).
+	\end{equation*}
+	We have used that $\varv_X$ (defined in (\ref{eq:vx})) is simply $\langle \Hom(X, p_1), \Hom(X, p_2)\rangle$ (as defined in (\ref{eq:prodpair})).\\
+
+\end{proof}

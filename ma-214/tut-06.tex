@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lem}{Lemma}
+\newtheorem{defn}{Definition}
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+
+\usepackage{pagecolor}
+\pagecolor{mybgcolor}
+\color{white}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\title{MA 214: Tutorial 6}
+\author{Aryaman Maithani}
+\date{04-03-2020}
+
+\begin{document}
+\maketitle
+\begin{enumerate} 
+	\item Let $I = [a, b] \subset \mathbb{R}$ for some $a < b$ and $g:I\to I$ be a twice differentiable function such that there exists some $k \in \mathbb{R}$ such that $|g'(x)| \le k < 1$ for all $x \in I.$\\
+	Let $\xi$ denote the unique fixed point of $g.$ Suppose that $g'(\xi) = 0$ and $g''(\xi) = 0.$ Show that the fixed point iteration has quadratic rate of convergence.\\~\\
+	\textbf{Solution.}\\
+	Note that $g$ is twice continuously differentiable and thus, by Taylor, we have that for any $h \in \mathbb{R},$:
+	\[g(\xi + h) = g(\xi) + g'(\xi)h + \frac{1}{2}g''(c)h^2,\]
+	for some $c$ between $\xi$ and $\xi + h.$\\
+	As $g(\xi) = \xi$ and $g'(\xi) = 0,$ we get that
+	\[g(\xi + h) - \xi = \frac{1}{2}g''(c)h^2,\]
+	for some $c$ between $\xi$ and $\xi + h.$\\
+	Now, set $h = x_{n} - \xi = e_{n}$ to get:
+	\[g(x_{n}) - \xi = \frac{1}{2}g''(\eta_n)(x_n - \xi)^2,\]
+	for some $\eta_n$ between $x_n$ and $\xi.$\\
+	Note that $g(x_n) = x_{n+1}$ and thus, $g(x_n) - \xi = -e_{n+1}.$ Also, $x_n - \xi = -e_n.$ Thus, we have
+	\[\frac{|e_{n+1}|}{|e_n|^2} = \frac{1}{2}g''(\eta_n).\]
+	Now, we note two things:
+	\begin{enumerate}[nosep] 
+	 	\item As $\eta_n$ lies between $x_n$ and $\xi$ and $x_n \to \xi,$ we get that $\eta_n \to \xi.$ (Sandwich theorem.)
+	 	\item $g''$ is given to be twice continuously differentiable. Thus, $g''(\eta_n) \to g''(\xi).$
+	\end{enumerate} 
+	Thus, $\displaystyle\lim_{n\to \infty}\dfrac{|e_{n+1}|}{|e_n|^2} = \frac{1}{2}g''(\xi) \neq 0.$ Thus, it converges quadratically. (Since $g''(\xi) \neq 0.$)
+	%
+	\item If $f$ has a double root at $\xi,$ then show that the iteration
+	\[x_{n+1} = x_n - \frac{2f(x_n)}{f'(x_n)}\]
+	converges quadratically to $\xi$ if $x_0$ is sufficiently close to $\xi.$\\~\\
+	\textbf{Solution.} \\
+	Let $g(x) := x - \dfrac{2f(x)}{f'(x)}$ when $f'(x) \neq 0.$ At $\xi,$ we define it to be the limit.\\
+	I will also be assuming that $g$ is nice enough, that is, differentiable twice continuously. (Also assuming that $f$ is continuously differentiable thrice.)\\
+	Note that 
+	\[\lim_{x\to \xi} = \lim_{x\to \xi}\left(x - 2\frac{f(x)}{f'(x)}\right) = \xi - \lim_{x \to \xi}2\frac{f'(x)}{f''(x)} = \xi.\]
+	Thus, $g(\xi) = \xi.$\\
+	Now, differentiating gives us $g'(x) = 1 - 2\dfrac{(f'(x))^2 - f(x)f''(x)}{(f'(x))^2} = -1 + 2\dfrac{f(x)f''(x)}{(f'(x))^2}.$\\~\\
+	Computing $\displaystyle\lim_{x\to \xi}g'(x)$ is easy using L'Hospital and you get $g'(\xi) = 0.$\\
+	Now, we calculate $g''(x)$ for $x \neq \xi.$ We get:
+	\begin{align*} 
+	g'' 	&= \dfrac{(f')^2[2ff''' + 2f'f''] - 4ff'(f'')^2}{(f')^4} \\
+			&= \dfrac{f'[2ff''' + 2f'f''] - 4f(f'')^2}{(f')^3}\\
+			&= \dfrac{2(f')^2f'' - 4f(f'')^2}{(f')^3} + \frac{2ff'''}{(f')^2}	
+	\end{align*}
+	We now calculate the limit $x \to \xi$ for both the terms using L'Hospital appropriately. Let us do the second term first as that's easier.
+	\begin{align*} 
+		\lim_{x\to \xi}\frac{2f(x)f'''(x)}{(f'(x))^2} &= f'''(\xi)\lim_{x\to \xi}\frac{2f(x)}{(f'(x))^2}\\
+		&= f'''(\xi)\lim_{x\to \xi}\frac{2f'(x)}{2f'(x)f''(x)}\\
+		&= \dfrac{f'''(\xi)}{f''(\xi)} & (\because f''(\xi) \neq 0)
+	\end{align*}
+	The first term is:
+	\begin{align*} 
+		\lim_{x\to \xi}\dfrac{2(f'(x))^2f''(x) - 4f(x)(f''(x))^2}{(f'(x))^3} &= 2f''(\xi)\lim_{x\to \xi}\frac{(f'(x))^2 - 2f(x)f''(x)}{(f'(x))^3}\\
+		&= 2f''(\xi)\lim_{x\to \xi}\frac{\cancel{2f'(x)f''(x)} - 2f(x)f'''(x) - \cancel{2f'(x)f''(x)}}{3(f'(x))^2f''(x)}\\
+		&= -\frac{4}{3}\frac{\cancel{f''(\xi)}}{\cancel{f''(\xi)}}\lim_{x\to \xi}\frac{f(x)f'''(x)}{(f'(x))^2}\\
+		&= -\frac{4}{3}f'''(\xi)\lim_{x\to \xi} \frac{f'(x)}{2f'(x)f''(x)}\\
+		&= -\frac{2}{3}\frac{f'''(\xi)}{f''(\xi)}
+	\end{align*}
+	Note that we have kept using $f''(\xi) \neq 0$ in the above calculations.\\
+	Thus, we finally get:
+	\[\lim_{x\to \xi}g''(x) = \frac{1}{3}\frac{f'''(\xi)}{f''(\xi)}.\]
+	Assuming $g''$ to be continuous gives us that $g''(\xi) = \dfrac{1}{3}\dfrac{f'''(\xi)}{f''(\xi)}.$ With the further assumption that $f'''(\xi) \neq 0,$ we are almost done, by the previous case.\\~\\
+	We still need to get the `$k$' and $I$ as in the previous question.\\
+	To do this, we note that $g'$ is continuous and $g'(\xi) = 0.$ Thus, there is some $\delta > 0$ such that $|g'(\xi) - g'(x)| < 1/2$ for all $|x - \xi| < \delta.$ (Note that $1/2$ is arbitrary, we could take any $\epsilon > 0.$ But for the purpose of this question, we shall also take $\epsilon < 1.$)\\
+	Let $k := 1/2.$ Clearly, $k < 1.$\\
+	Thus, for $x \in (\xi - \delta, \xi + \delta),$ we have that $|g'(x)| < k.$ Let $I = \left[\xi - \frac{\delta}{2}, \xi + \frac{\delta}{2}\right].$ Note that $I$ is a closed interval. We continue to have the property that $|g'(x)| < k$ for $x \in I.$\\~\\
+	Now we need to show that: given any $x \in I,$ we have that $g(x) \in I.$ This is clearly true if $x = \xi.$ Assume $x \neq \xi.$\\
+	Then, we have $g(x) - g(\xi) = g'(\eta)(x - \xi)$ for some $\eta$ between $x$ and $\xi$. \hfill (LMVT)\\
+	Thus, $|g(x) - g(\xi)| \le |x - \xi| \le \dfrac{\delta}{2}.$ But $g(\xi) = \xi.$ Thus, $|g(x) - \xi| \le \dfrac{\delta}{2}$ giving us $g(x) \in I.$\\~\\
+	Now, we are in the same set up as 1.
+	%
+	\item Let $A$ be a given positive constant. Set $g(x) := 2x - Ax^2.$
+	\begin{enumerate} 
+		\item Show that if the fixed point iteration converges to a nonzero limit, then the limit is $P = 1/A.$\\
+		\textbf{Solution.}\\
+		We are given that the sequence satisfying
+		\[x_{n+1} = 2x_n - Ax_n^2,\;n \ge 0\]
+		converges to some nonzero limit $P.$\\
+		Noting that $\displaystyle\lim_{n\to \infty}x_{n+1} = \lim_{n\to \infty}x_n,$ we get that $P = 2P - AP^2$ or $AP^2 = P.$\\
+		As $P \neq 0,$ we see that $P = A^{-1},$ as desired.\\
+		%
+		\item Find an interval about $1/A$ for which the fixed point iteration converges.\\
+		\textbf{Solution.}\\
+		The idea is the same as the last question. First we choose some arbitrary $k \in (0, 1).$ I like $1/2,$ so I choose $k = 1/2.$\\
+		Now, let us try to find a closed interval containing $A^{-1}$ such that $|g'(x)| \le k$ on that interval.\\
+		Note that $|g'(x)| = 2|1 - Ax| = 2A|A^{-1} - x|.$\\
+		As we want $|g'(x)| \le k,$ we see that $|A^{-1} - x|$ must be $\le (4A)^{-1}.$ Thus, let $I = \left[\dfrac{1}{A} - \dfrac{1}{4A}, \dfrac{1}{A} + \dfrac{1}{4A}\right].$\\~\\
+		Once again, like before, we can show that $g(x) \in I$ for all $x \in I.$ As we have $|g'(x)| \le k < 1$ for $x \in I,$ we are done.\\
+		That is, $I$ is the desired interval.
+	\end{enumerate}
+	%
+	\item Use fixed point iteration to find a root of $2\sin(\pi x) + x = 0$ in $[1, 2].$\\~\\
+	\textbf{Solution.}\\
+	Consider $g(x) = \displaystyle\frac{1}{\pi}\sin^{-1}\left(-\frac{x}{2}\right) + 2$ for $x \in [1, 2].$\\
+	Check that $g(x) \in [1, 2]$ for all $x \in [1, 2].$\\
+	Also, check that $|g'(x)| = \dfrac{1}{\pi}\dfrac{1}{\sqrt{4 - x^2}}.$\\
+	Note that $g'$ shoots to infinity near $2.$ We want a closed interval on which $|g'(x)| \le k$ for some $k < 1.$\\~\\
+	Let $x_0 = \sqrt{4 - \dfrac{1}{\pi^2}}.$ Note that $1 < x_0 < 2$ and $g'(x_0) = 1.$ Choose $x_1 = \frac{1}{2}(1 + x_0).$\\
+	Then, we have $1 < x_1 <x_0 < 2.$ As $g'$ is clearly increasing on $[1, 2],$ we have that $|g'(x)| \le g'(x_1) < 1$ for all $x \in [1, x_1].$ Letting $I = [1, x_1]$ and $k = g'(x_1)$ does the job as earlier. That is, we know that we may pick any $x_0 \in I$ and we'll get that the sequence defined by $x_{n+1} = g(x_n)$ will converge to the fixed point.
+	%
+	\item Show that if $A$ is any positive real number, then the sequence defined by 
+	\[x_n = \frac{1}{2}x_{n-1} + \frac{A}{2x_{n-1}}\quad \text{ for } n \ge 1\]
+	converges to $\sqrt{A}$ whenever $x_0 > 0.$\\~\\
+	\textbf{Solution.}\\~\\
+	\textbf{Claim 1.} $x_n > 0$ for all $n \ge 0.$
+	\begin{proof}
+	It would be an insult to my time and yours if I write a proof of this evidently trivial fact.
+	\end{proof}
+	\textbf{Claim 2.} $x_n \ge \sqrt{A}$ for $n \ge 1.$
+	\begin{proof} 
+		\begin{align*} 
+			x_{n} &= \frac{1}{2}\left(x_{n-1} + \frac{A}{x_{n-1}}\right)\\
+			& \ge \sqrt{A} & (\operatorname{AM} \ge \operatorname{GM} \text{ and } x_{n-1} > 0)
+		\end{align*}
+	\end{proof}
+	\textbf{Claim 3.} $x_{n + 1} \le x_n$ for all $n \ge 1.$
+	\begin{proof} 
+		\begin{align*} 
+			x_{n+1} - x_n &= x_n - \frac{1}{2}\left(x_{n-1} + \frac{A}{x_{n-1}}\right)\\
+			&= \frac{1}{2}\left(-x_{n-1} + \frac{A}{x_{n-1}}\right)\\
+			&= \frac{1}{2}\left(\frac{A - x_n^2}{x_{n-1}}\right)\\
+			& \le 0 & (\text{By previous claim.})
+		\end{align*}
+	\end{proof}
+	Thus, $(x_n)$ is an eventually decreasing sequence which is bounded below. Thus, it converges. \hfill (Had done this in MA 105.)\\
+	(Note that the ``eventually'' is necessary because $x_0$ might be $< \sqrt{A}$.)
+	If you have forgotten MA 105, then you may look at the aliter.
+
+	\hrulefill
+
+	\textbf{Aliter.} \\
+	If $x_0 = \sqrt{A},$ then it's clear that $x_n = \sqrt{A}$ for all $n \ge 0$ and thus, $x_n \to \sqrt{A}.$\\
+	Suppose $x_0 \neq \sqrt{A}.$ Then, by the claims given earlier, we have that $\sqrt{A} \le x_n \le x_1$ for all $n \ge 1.$\\
+	Consider the function $g(x) := \frac{1}{2}\left(x - \frac{A}{x}\right)$ for $x \in I = [\sqrt{A}, x_1].$\\
+	Note that $g'(x) = \dfrac{1}{2}\left(1 - \dfrac{A}{x^2}\right).$ Clearly $g'(x) \le \dfrac{1}{2} < 1.$ Also, $x^2 > A$ gives us that $g'(x) > 0.$ Thus, $|g'(x)| \le \frac{1}{2} < 1$ for all $x \in I.$\\\\
+	Also, note that if $x \in I,$ we have $g(x) \in I.$ (Why? It is clear that $g(x) \ge A$ by AM-GM again. To see that $g(x) \le x_1$, do the same sort of argument like Claim 3 to show that $g(x) - x \le 0$.)\\
+	Thus, we are again done by our theorem about fixed point iterations. \hfill (What theorem?)
+\end{enumerate}
+\end{document}
