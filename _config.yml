@@ -55,6 +55,8 @@ math-links:
   - title: ODE
     href:  ma-108
     desc:  Summary of ODEs
+  - title: Group theory GD
+    href: group-theory-gd
   # Academic:
   #   - Notes: "notes/"
   #   - Reports: "reports/"
