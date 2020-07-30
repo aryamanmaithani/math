@@ -4,21 +4,21 @@ title: Math
 image: /img/avatar-icon.png
 light-image: /img/avatar-icon-light.png
 ---
-'sup, boi?
+'sup, yo?
 
 <div class="posts-list">
-    {% for link in site.data.math-links %}
+    {%- for link in site.data.math-links -%}
         <article class="post-preview">
           <a href="/math{{ link.href | relative_url }}">
           <h2 class="post-title">{{ link.tit }}</h2>
           </a>
-	      {% if link.desc %}
+	      {%- if link.desc -%}
 	      <div class="post-entry-container">
 	        <div class="post-entry">
 	          <a href="/math{{ link.href | relative_url }}"> {{ link.desc }} </a>
 	        </div>
 	      </div>
-	      {% endif %}
+	      {%- endif -%}
         </article>
-    {% endfor %}
+    {%- endfor -%}
 </div>
