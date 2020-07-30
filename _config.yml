@@ -49,29 +49,6 @@ navbar-links:
   - title: About Me
     href:  /aboutme/
 
-math-links:
-  - title: Numerical Analysis
-    href:  ma-214 
-  - title: ODE
-    href:  ma-108
-    desc:  Summary of ODEs
-  - title: Group theory GD
-    href: group-theory-gd
-  # Academic:
-  #   - Notes: "notes/"
-  #   - Reports: "reports/"
-  #   - Presentations: "presentations/"
-  # About Me: "aboutme/"
-  # Tutorials:
-  #   - MA 105: "tuts/ma-105/"
-  #   - MA 106: "tuts/ma-106/"
-  #   - MA 108: "tuts/ma-108/"
-  # More:
-  #   - Courses: "aboutme/courses/"
-  #   - Blog: "blog/"
-  #Dropdown:
-  #  - Item 1: "http://www.google.com/"
-  #  - Item 2: "http://www.github.com/"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
