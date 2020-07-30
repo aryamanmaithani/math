@@ -318,3 +318,11 @@ collections:
 anon-form: "https://forms.gle/faFYkmjNnevF5nBK9"
 plugins:
   - jekyll-target-blank
+
+math-links:
+  - title: Numerical Analysis
+    href:  /math/ma-214 
+  - title: ODE
+    href:  /math/ma-108
+    desc:  Summary of ODEs
+  
