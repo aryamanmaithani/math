@@ -49,12 +49,12 @@ navbar-links:
   - title: About Me
     href:  /aboutme/
 
-math-links:
-  - title: Numerical Analysis
-    href:  /math/ma-214 
-  - title: ODE
-    href:  /math/ma-108
-    desc:  Summary of ODEs
+# math-links:
+#   - title: Numerical Analysis
+#     href:  /math/ma-214 
+#   - title: ODE
+#     href:  /math/ma-108
+#     desc:  Summary of ODEs
   # Academic:
   #   - Notes: "notes/"
   #   - Reports: "reports/"
