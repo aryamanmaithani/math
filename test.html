@@ -15,12 +15,12 @@ HI!
           <h2 class="post-title">{{ link.title }}</h2>
           </a>
         </article>
-	      {% if link.desc}
-	      <div class="post-entry-container">
-	        <div class="post-entry">
-	          <a href="{{ post.href | relative_url }}"> {{ link.desc }} </a>
-	        </div>
-	      </div>
-	      {% endif %}
+      {% if link.desc %}
+      <div class="post-entry-container">
+        <div class="post-entry">
+          <a href="{{ post.href | relative_url }}"> {{ link.desc }} </a>
+        </div>
+      </div>
+      {% endif %}
     {% endfor %}
 </div>
