@@ -9,16 +9,16 @@ HI!
 
 
 <div class="posts-list">
-    {% for post in site.math-links %}
+    {% for link in site.math-links %}
         <article class="post-preview">
-          <a href="{{ post.href | relative_url }}">
-          <h2 class="post-title">{{ post.title }}</h2>
+          <a href="{{ link.href | relative_url }}">
+          <h2 class="post-title">{{ link.title }}</h2>
           </a>
 
-          {% if post.desc}
+          {% if link.desc}
           <div class="post-entry-container">
             <div class="post-entry">
-              <a href="{{ post.href | relative_url }}"> {{ post.desc }} </a>
+              <a href="{{ post.href | relative_url }}"> {{ link.desc }} </a>
             </div>
           </div>
           {% endif %}
