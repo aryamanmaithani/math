@@ -1,5 +1,6 @@
 ma-214:
   tit: Numerical Analysis 
+  desc: A compilation of the formulae done in the course
 
 ma-108:
   tit: ODE
@@ -7,12 +8,13 @@ ma-108:
 
 group-theory-gd:
   tit: Group theory GD
-
-ma-107:
-  tit: MA 107 notes
+  desc: Presentation on an introduction to Group Theory
 
 ma-419:
   tit: Group Theory notes
+
+ma-107:
+  tit: MA 107 notes
 
 cat-theory:
   tit: Category Theory notes
@@ -27,4 +29,4 @@ infinities-and-beyond:
 
 classification-of-surfaces:
   tit: Classification of Surfaces
-  desc: a topology report I made for the Summer of Science initiative by [MnP, IITB](https://mnp-club.github.io/).
+  desc: a topology report I made for the Summer of Science initiative by <a href = "https://mnp-club.github.io/" target="_blank">MnP, IITB</a>.
