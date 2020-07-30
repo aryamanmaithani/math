@@ -9,7 +9,7 @@ light-image: /img/avatar-icon-light.png
     {%- for blink in site.data.math-links -%}
     	{%- assign link = blink[1] -%}
         <article class="post-preview">
-          <a href="/math{{ link.href | relative_url }}">
+          <a href="/math{{ blink[0] | relative_url }}">
           <h2 class="post-title">{{ link.tit }}</h2>
           </a>
 	      {%- if link.desc -%}
