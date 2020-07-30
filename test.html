@@ -4,21 +4,23 @@ title: Math
 image: /img/avatar-icon.png
 light-image: /img/avatar-icon-light.png
 le-links:
-  - title: Numerical Analysis
+  - tit: Numerical Analysis
     href:  ma-214 
-  - title: ODE
+  - tit: ODE
     href:  ma-108
     desc:  Summary of ODEs
-  - title: Group theory GD
+  - tit: Group theory GD
     href: group-theory-gd
-  - title: MA 107 notes
+  - tit: MA 107 notes
   	href: ma-107
 ---
+'sup?
+
 <div class="posts-list">
     {% for link in page.le-links %}
         <article class="post-preview">
           <a href="/math{{ link.href | relative_url }}">
-          <h2 class="post-title">{{ link.title }}</h2>
+          <h2 class="post-title">{{ link.tit }}</h2>
           </a>
 	      {% if link.desc %}
 	      <div class="post-entry-container">
