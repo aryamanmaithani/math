@@ -1,7 +1,7 @@
----
+<!-- ---
 layout: page
 title: maffs
----
+--- -->
 HI
 <div class="posts-list">
 	{% for post in site.math-links %}
