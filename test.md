@@ -3,7 +3,7 @@ layout: page
 title: maffs
 --- -->
 HI
-<div class="posts-list">
+<!-- <div class="posts-list">
 	{% for post in site.math-links %}
 		<article class="post-preview">
 	      <a href="{{ post.href | relative_url }}">
@@ -20,4 +20,4 @@ HI
 
 	    </article>
 	{% endfor %}
-</div>
+</div> -->
