@@ -3,10 +3,28 @@ ma-214:
 
 ma-108:
   tit: ODE
-  desc: Summary of ODEs
+  desc: A summary of the first undergraduate ODE course
 
 group-theory-gd:
   tit: Group theory GD
 
 ma-107:
   tit: MA 107 notes
+
+ma-419:
+  tit: Group Theory notes
+
+cat-theory:
+  tit: Category Theory notes
+
+posets:
+  tit: Posets
+  desc: Small presentations I gave on the topic of posets
+
+infinities-and-beyond:
+  tit: Infinities and Beyond
+  desc: Some results on cardinalities
+
+classification-of-surfaces:
+  tit: Classification of Surfaces
+  desc: a topology report I made for the Summer of Science initiative by [MnP, IITB](https://mnp-club.github.io/).
