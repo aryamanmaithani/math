@@ -15,7 +15,7 @@ le-links:
   	href: ma-107
 ---
 <div class="posts-list">
-    {% for link in le-links %}
+    {% for link in page.le-links %}
         <article class="post-preview">
           <a href="/math{{ link.href | relative_url }}">
           <h2 class="post-title">{{ link.title }}</h2>
