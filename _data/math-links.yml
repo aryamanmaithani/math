@@ -1,0 +1,16 @@
+ma-214:
+  - tit: Numerical Analysis
+    href:  ma-214 
+
+ma-108:
+  - tit: ODE
+    href:  ma-108
+    desc:  Summary of ODEs
+
+group-theory-gd:
+  - tit: Group theory GD
+    href: group-theory-gd
+
+ma-107:
+  - tit: MA 107 notes
+    href: ma-107
