@@ -1,0 +1,66 @@
+\sec{Exact ODEs}
+\subsection{Introduction}
+\begin{defn}[Exact ODEs] 
+	A first order ODE $M(x, y) + N(x, y)y' = 0$ is called exact if there is a function $u(x, y)$ such that
+	\[\dfrac{\partial u}{\partial x} = M \text{ and } \dfrac{\partial u}{\partial y} = N.\]
+\end{defn}
+\begin{mdframed}[style=boxstyle, frametitle={Identifying such an ODE}]
+If the functions ($M$ and $N$) along with the domain are ``good enough'', then the ODE is exact if and only if
+\[\dfrac{\partial M}{\partial y} = \dfrac{\partial N}{\partial x}.\]
+\end{mdframed}
+\newpage
+\begin{mdframed}[style=boxstyle, frametitle={The Solution}]
+Given any such scalar function $u(x, y)$ as mentioned above, the solution is then given by 
+\[u(x, y) = c.\]
+Thus, the question now reduces to finding such a $u(x, y).$\\
+This function can be found either via inspection or via the following method:
+\begin{enumerate}[leftmargin = *, label = \Roman*:]
+	\item Integrate $\dfrac{\partial u}{\partial x} = M(x, y)$ with respect to $x$ to get 
+	\[u(x, y) = \int M(x, y) dx + k(y),\]
+	where $k(y)$ is a constant of integration.
+	\item To determine $k(y),$ differentiate the above equation in Step I with respect to $y,$ to get:
+	\[\frac{\partial u}{\partial y} = k'(y) + \frac{\partial}{\partial y}\left(\int M(x, y) dx\right).\]
+	As the given ODE is exact, the LHS is simply $N(x, y).$ We rearrange this to get
+	\[k'(y) = N(x, y) - \frac{\partial}{\partial y}\left(\int M(x, y) dx\right).\]
+	This can now be used to determine $k(y)$ and hence, $u.$\\
+	\emph{Remark.} Even though the RHS \emph{looks} like a function of $x$ and $y$ both, it will simplify to just a function of $y.$ This happens precisely because $u$ is exact to begin with.
+\end{enumerate}
+\end{mdframed}	
+\exercise{
+	Solve the following ODEs.
+	\begin{enumerate}[leftmargin=*]
+		\item $(2x + y^2) + 2xy y' = 0.$
+		\item $(y\cos x + 2xe^y) + (\sin x + x^2 e^y - 1)y' = 0.$
+	\end{enumerate}
+}
+%
+\newpage
+\subsection{Integrating factors}
+\begin{defn}[Integrating factor]
+Consider the scenario where we have the ODE
+\[M(x, y) + N(x, y)y' = 0\]
+and $M_y \neq N_x,$ id est, the ODE is not exact.\\~\\
+Sometimes, we may find a scalar function $\mu(x, y)$ such that
+\[\mu(x, y)M(x, y) + \mu(x, y)N(x, y)y' = 0\]
+is exact, id est, 
+\[(\mu M)_y = (\mu N)_x.\]
+Such a function $\mu(x, y)$ is called an \defin{integrating factor} of the original ODE.
+\end{defn}
+
+\begin{mdframed}[style=boxstyle, frametitle={Actually solving it}]
+In practice, we usually try to find an integrating factor which is only a function of $x$ (or $y$). In this case, we have $\mu_y = 0$ (or $\mu_x = 0,$ resp.).\\
+In the respective cases, the equations simplify to:
+\begin{enumerate}[leftmargin=*]
+	\item $\dfrac{d \mu}{dx} = \left(\dfrac{M_y - N_x}{N}\right)\mu.$\\~\\
+	Thus, our assumption that $\mu$ is just a function of $x$ is valid precisely when the term in the bracket is independent of $y.$\\
+	Similarly, the other case gives us:
+	\item $\dfrac{d \mu}{dy} = \left(\dfrac{N_x - M_y}{M}\right)\mu.$
+\end{enumerate}
+\end{mdframed}
+\exercise{%
+	Solve the following ODEs.
+	\begin{enumerate}[leftmargin=*]
+		\item $(8xy - 9y^2) + (2x^2 - 6xy)y' = 0.$
+		\item $-y + xy' = 0.$
+	\end{enumerate}
+}

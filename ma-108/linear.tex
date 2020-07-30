@@ -1,0 +1,29 @@
+\sec{Linear ODEs}
+\subsection{Introduction}
+\begin{defn}[Linear differential equations]
+	A first order differential equation of the type
+	\[\dfrac{dy}{dx} + p(x)y = g(x)\]
+	is called a \defin{linear differential equation} in standard form.
+\end{defn}
+We shall assume that $p(x)$ and $g(x)$ are continuous on an open interval $I \subset \mathbb{R}.$\\
+\begin{mdframed}[style=boxstyle, frametitle={Solving such an ODE}]
+	Verify that $\exp\left(\displaystyle\int p(x) dx\right)$ is an integrating factor of the above ODE.\\
+	Thus, we can now turn back to technique of the previous section.
+\end{mdframed}
+\subsection{Bernoulli's DE}
+\begin{defn}[Bernoulli's DE]
+	A first order differential equation of the type
+	\[\dfrac{dy}{dx} + p(x)y = q(x)y^n\]
+	is called a \defin{Bernoulli's differential equation}.
+\end{defn}
+Note that if $n = 0$ or $1,$ then it is a linear DE as well and we already know how to solve that. Thus, we assume that $n \notin \{0, 1\}.$
+\newpage
+\begin{mdframed}[style=boxstyle, frametitle={Solving such an ODE}]
+	Substitute \[u(x) = \dfrac{1}{y^{n-1}}.\]
+	Calculate the derivative and rearrange the original ODE to obtain:
+	\[\dfrac{1}{1 - n}\dfrac{du}{dx} + p(x)u(x) = q(x).\]
+	Now, we are back to the case of a linear DE which we can solve.
+\end{mdframed}
+\exercise{%
+Solve the following DE:
+\[6y^2\dfrac{dx}{dy} - yx = 2x^4.\]}

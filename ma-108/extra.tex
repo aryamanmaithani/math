@@ -1,0 +1,158 @@
+\sec{Some extra results}
+This subsection can be skipped by the reader. However, I find this quite interesting and thus, I have kept it here anyway.
+\begin{mdframed}[style=boxstyle, frametitle={The sinc integral}]
+	In this box, we compute $\displaystyle\int_{0}^{\infty} \dfrac{\sin x}{x} dx.$\\~\\
+	It is known that the indefinite integral cannot be expressed in terms of elementary functions. Thus, it is quite neat (to me) that we can compute the above (definite) integral.\\
+	We first define the following function for $t > 0:$
+	\begin{equation*} 
+		f(t) = \int_{0}^{\infty} \dfrac{\sin tx}{x} dx.
+	\end{equation*}
+	(It will have to be justified that the integral on the right does indeed exist for all $t > 0$. This is not too tough.)\\
+	Taking the Laplace transform on both sides (and interchanging $\int$ and $\mathcal{L}$), we get:
+	\begin{align*} 
+		(\mathcal{L}f)(s) &= \int_{0}^{\infty} \dfrac{1}{x} \mathcal{L}(\sin tx) dx\\
+		&= \int_{0}^{\infty} \dfrac{1}{x}\cdot\dfrac{x}{x^2 + s^2} dx\\
+		&= \int_{0}^{\infty} \dfrac{1}{x^2 + s^2} dx\\
+		&= \dfrac{\pi}{2s}\\
+		&= \left(\mathcal{L}\left(\dfrac{\pi}{2}\right)\right)(s).
+	\end{align*}
+	Thus, $f(t) = \pi/2,$ identically. (Both are continuous.)\\
+	In particular, we have:
+	\begin{equation*} 
+		f(1) = \int_{0}^{\infty} \dfrac{\sin x}{x} dx = \dfrac{\pi}{2}.
+	\end{equation*}
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={Generalised Fresnel integrals}]
+	We calculate integrals of the form $\displaystyle\int_{0}^{\infty} \sin(x^a) dx$ for $a > 1.$ The case $a = 2$ is of particular importance in optics or whatever.\\
+	Let $a > 1$ be given. For $t > 0,$ we define
+	\begin{equation*} 
+		f(t) := \int_{0}^{\infty} \sin tx^a dx.
+	\end{equation*}
+	Taking Laplace transforms as earlier, we get
+
+	\begin{align*} 
+		F(s) &= \int_{0}^{\infty} \dfrac{x^a}{s^2 + x^{2a}} dx\\
+		&\text{put } x^{2a} = s^2 u\\
+		F(s) &= \int_{0}^{\infty} \dfrac{s\sqrt{u}}{s^2(1 + u)}\cdot\dfrac{s^{1/a}}{2a}\cdot u^{\frac{1}{2a} - 1} du\\
+		&= \dfrac{1}{s^{1 - \frac{1}{a}}}\cdot\dfrac{1}{2a}\int_{0}^{\infty} \dfrac{u^{\frac{1}{2} + \frac{1}{2a} - 1}}{1 + u} du\\
+		&= \dfrac{1}{s^{1 - \frac{1}{a}}}\dfrac{1}{2a}\pi\operatorname{cosec}\left(\dfrac{\pi}{2} + \dfrac{\pi}{2a}\right) \qquad (\text{Theorem \ref{thm:randomintegral}.})\\
+		&= \dfrac{\pi}{2a}\dfrac{1}{s^{1 - \frac{1}{a}}}\operatorname{sec}\left(\dfrac{\pi}{2a}\right).
+	\end{align*}
+	Recall that 
+	\begin{equation*} 
+		\mathcal{L}(t^k) = \dfrac{\Gamma(k+1)}{s^{k+1}}.
+	\end{equation*}
+	Thus, we see that
+	\begin{equation*} 
+		f(t) = \dfrac{\pi}{2a}\operatorname{sec}\left(\dfrac{\pi}{2a}\right)\dfrac{t^{-1/a}}{\Gamma\left(1 - \frac{1}{a}\right)}.
+	\end{equation*}
+	In particular (setting $t = 1$), we see that
+	\begin{equation*} 
+		\int_{0}^{\infty} \sin x^a dx = \dfrac{\pi}{2a}\operatorname{sec}\left(\dfrac{\pi}{2a}\right)\dfrac{1}{\Gamma\left(1 - \frac{1}{a}\right)}.
+	\end{equation*}
+	Thus, we also see that
+	\begin{equation*} 
+		\int_{0}^{\infty} \sin x^2 dx = \dfrac{\sqrt{\pi}}{2\sqrt{2}}.
+	\end{equation*}
+\end{mdframed}
+\exercise{Show that $\displaystyle\int_{0}^{\infty} \cos x^2 dx = \dfrac{\sqrt{\pi}}{2\sqrt{2}}.$}
+
+\begin{mdframed}[style=boxstyle, frametitle={The Beta-Gamma Relation}]
+	Let $a, b > 0.$ We first calculate the convolution $t^a*t^b:$
+	\begin{align*} 
+		t^a * t^b &= \int_{0}^{t} (t - x)^ax^b dx\\
+		& \text{put }u = x/t\\
+		&= \int_{0}^{1} (t - ut)^a(ut)^b tdu\\
+		&= t^{a + b + 1}\int_{0}^{1} (1 - u)^au^b du\\
+		&= t^{a + b + 1}B(a + 1, b + 1).
+	\end{align*}
+	Thus, $t^{a - 1}*t^{b - 1} = t^{a + b - 1}B(a, b).$\\
+	Taking the Laplace transform on both sides gives us:
+	\begin{align*} 
+		\mathcal{L}(t^{a - 1}*t^{b - 1}) &= B(a, b)\mathcal{L}(t^{a + b - 1})\\
+		\implies \mathcal{L}(t^{a - 1})\mathcal{L}(t^{b - 1}) &= B(a, b)\dfrac{\Gamma(a + b)}{s^{a + b}}\\
+		\implies \dfrac{\Gamma(a)}{s^{a}}\dfrac{\Gamma(b)}{s^b} &= B(a, b)\dfrac{\Gamma(a + b)}{s^{a + b}}\\
+		\implies \Gamma(a)\Gamma(b) &= \Gamma(a + b)B(a, b).
+	\end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=boxstyle, frametitle={A little integral}]
+	Before the next nice result, let us prove the following result:
+	\begin{equation} \label{eq:logint}
+		\ln N = \int_{0}^{\infty} \dfrac{1}{t}(e^{-t} - e^{-Nt}) dx.
+	\end{equation}
+	(That the above exists for all $N > 0$ can be checked.)\\
+	\begin{align*} 
+		\int_{0}^{\infty} \dfrac{1}{t}(e^{-t} - e^{-Nt}) dx &= \int_{0}^{\infty} \int_{1}^{N} e^{-tx} dx dt\\
+		&= \int_{1}^{N} \int_{0}^{\infty} e^{-tx} dt dx\\
+		&= \int_{1}^{N} \dfrac{1}{x} dx\\
+		&= \ln N.
+	\end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=boxstyle, frametitle={Another pesky integral}]
+	The nice result is almost here. However, first let's get this out of the way
+	\begin{equation} \label{eq:pesky}
+		\int_{0}^{\infty} \left(\dfrac{1}{1 - e^{-t}} - \dfrac{1}{t}\right)e^{-t} dt = -\int_{0}^{\infty} e^{-t}\ln t dt
+	\end{equation}
+	Note that
+	\begin{align*} 
+		&\int_{0}^{\infty} \left(\dfrac{1}{1 - e^{-t}} - \dfrac{1}{t}\right)e^{-t} dt \\
+		&= \int_{0}^{\infty} e^{-t}\dfrac{d}{dt}\left(\ln\left(\dfrac{e^t - 1}{t}\right)\right) dt \quad \text{(Just compute)}\\
+		&= e^{-t}\ln\left(\dfrac{e^t - 1}{t}\right)\Bigg|_0^\infty + \int_{0}^{\infty} e^{-t}\ln\left(\dfrac{e^t - 1}{t}\right) dt \quad \text{(by parts)}\\
+		&= 0 + \int_{0}^{\infty} e^{-t}\ln\left(\dfrac{e^t - 1}{t}\right) dt\\
+		&= \int_{0}^{\infty} e^{-t}\ln(e^t - 1)dt - \int_{0}^{\infty} e^{-t}\ln t dt.
+	\end{align*}
+	Thus, it suffices to show that the first integral is zero. Call it $I.$ \\
+	We have
+	\begin{align*} 
+		I &= \int_{0}^{\infty} e^{-t}\ln(e^t - 1)dt\\
+		& \text{put } u =\ln(e^t - 1)\\
+		&= \int_{-\infty}^{\infty} \dfrac{ue^u}{(1 + e^u)^2} du\\
+		&= 0 \quad \text{(the integrand is odd)}
+	\end{align*}
+	Thus, we have established the result.
+\end{mdframed}
+
+\newpage
+
+\begin{mdframed}[style=boxstyle, frametitle={Smol gamma and big Gamma}]
+	The Euler Mascheroni constant $\gamma$ is defined as
+	\begin{equation*} 
+		\gamma := \lim_{N\to \infty}\left(1 + \dfrac{1}{2} + \cdots + \dfrac{1}{N} - \ln N\right).
+	\end{equation*}
+	Note that $\displaystyle\int_{0}^{\infty} e^{-kt} dt = \dfrac{1}{k}.$\\~\\
+	Thus,
+	\begin{equation*}
+		1 + \dfrac{1}{2} + \cdots + \dfrac{1}{N} = \int_{0}^{\infty} \sum_{k=1}^{N} e^{-kt} dt.
+	\end{equation*}
+	Now, using (\ref{eq:logint}), we get the following:
+	\begin{equation*} 
+		1 + \dfrac{1}{2} + \cdots + \dfrac{1}{N} - \ln N = \int_{0}^{\infty} \left(\sum_{k=1}^{N} e^{-kt} - \dfrac{1}{t}(e^{-t} - e^{-Nt})\right) dt
+	\end{equation*}
+	Letting $N \to \infty,$ we get
+	\begin{align*} 
+		\lim_{N\to \infty}\left(1 + \dfrac{1}{2} + \cdots + \dfrac{1}{N} - \ln N\right) &= \int_{0}^{\infty} \left(\dfrac{1}{1 - e^{-t}} - \dfrac{1}{t}\right)e^{-t} dt\\
+		&= -\int_{0}^{\infty} e^{-t}\ln t dt.
+	\end{align*}
+	We used (\ref{eq:pesky}) for the last equality.\\
+	Thus, we have another expression for $\gamma,$ namely
+	\begin{equation*} 
+		\boxed{\gamma = -\int_{0}^{\infty} e^{-t}\ln t dt.}
+	\end{equation*}
+
+	Now, recalling big $\Gamma,$ note that
+
+	\begin{align*} 
+		\Gamma(x) &= \int_{0}^{\infty} e^{-t}t^{x - 1} dt\\
+		\implies \Gamma'(x) &= \int_{0}^{\infty} e^{-t}t^{x - 1}\ln t dt\\
+		\implies \Gamma'(1) &= \int_{0}^{\infty} e^{-t}\ln t dt\\
+		&= -\gamma.
+	\end{align*}
+
+	Thus, we also have
+
+	\begin{equation*} 
+		\boxed{\gamma = -\Gamma'(1).}
+	\end{equation*}
+\end{mdframed}

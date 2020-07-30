@@ -1,0 +1,123 @@
+
+\sec{Higher order linear ODEs - linear algebra}
+This section has more theory as compared to the other sections. However, these are some key concepts that must be known.\\
+\subsection{Solutions}
+In this section, we shall be considering equations of the following form.
+\begin{defn}[Linear ODE]
+	An ordinary differential equation of the form
+	\begin{equation} \label{eq:lininhom}
+		y^{(n)} + p_{n-1}(x)y^{(n-1)} + \cdots + p_1(x)y^{(1)} + p_0(x)y = r(x)
+	\end{equation}
+	is a \defin{linear ODE} of $n^{\text{th}}$ order.
+\end{defn}
+We shall be assuming that all the $p_j$s are continuous on an open interval $I \subset \mathbb{R}.$\\
+Note very carefully that the coefficient of $y^{(n)}$ is assumed to be $1.$ (This could have been replaced with any nonzero constant.)\\
+The ODE (\ref{eq:lininhom}) is said to be \defin{homogeneous} iff $r \equiv 0,$ that is, $r(x) = 0$ for all $x \in I.$\\
+Given such a linear ODE, we have the \defin{associated homogeneous linear ODE} defined as
+\begin{equation} \label{eq:linhom}
+	y^{(n)} + p_{n-1}(x)y^{(n-1)} + \cdots + p_1(x)y^{(1)} + p_0(x)y = 0.
+\end{equation}
+
+Now, we make the following observation:
+
+\begin{mdframed}[style=boxstyle, frametitle={}]
+	If $y_g(x)$ is the \emph{general} solution of (\ref{eq:linhom}) and $y_p(x)$ is a \emph{particular} solution of (\ref{eq:lininhom}), then
+	\[y_p(x) + y_g(x)\]
+	is the general solution of (\ref{eq:lininhom}).
+\end{mdframed}
+(Compare the above with what you saw in MA 106 regarding the null-space of $A$ and a particular solution of $A\mathbf{x} = \mathbf{b}$.)
+
+\subsection{Dimensions}
+Recall the vector space of functions from $\mathbb{R}$ to $\mathbb{R}$. Let $V$ denote the set of functions which are solutions of (\ref{eq:linhom}). It can be verified that $V$ is a vector space with the usual addition and scalar multiplication. (We use the fact that the ODE is homogeneous.)
+\begin{thm} 
+	\[\dim V = n.\] 
+	To elaborate, the dimension of the solution space of
+	\[y^{(n)} + p_{n-1}(x)y^{(n-1)} + \cdots + p_0(x)y = 0\]
+	is equal to $n.$
+\end{thm}
+
+\subsection{Linear independence and the Wronskian}
+We recall the following from Linear Algebra.
+\begin{defn}[Linear Independence]
+	Let $f_1, \ldots, f_n:I \to \mathbb{R}$ be functions defined on some open interval $I.$ The functions are said to be \defin{linearly dependent} if there exist real numbers $a_1, \ldots, a_n$ \textbf{not all zero} such that
+	\[a_1f_1(x) + \cdots + a_nf_n(x) = 0 \quad \forall x \in I.\]
+	The functions are said to be \defin{linearly independent} if they are not linearly dependent.
+\end{defn}
+\begin{mdframed}[style=boxstyle, frametitle={A rephrasing}]
+	In other words, the functions are linearly independent if
+	\[a_1f_1(x) + \cdots + a_nf_n(x) = 0 \quad \forall x \in I\]
+	implies $a_1 = \cdots = a_n = 0.$\\
+	In yet another words, their linear combination being identically zero is possible if and only if every scalar is $0.$
+\end{mdframed}
+\begin{defn}[Wronskian]
+	Let $f_1, \ldots, f_n:I \to \mathbb{R}$ be sufficiently differentiable functions defined on some open interval $I.$ Their \defin{Wronskian} is another function defined on $I$ as:
+	\[W(f_1, \ldots, f_n)(x) := \det\begin{bmatrix}
+		f_1(x) & f_2(x) & \ldots & f_n(x)\\
+		f_1'(x) & f_2'(x) & \ldots & f_n'(x)\\
+		\vdots & \vdots & \ddots & \vdots\\
+		f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \ldots & f_n^{(n-1)}(x)\\
+	\end{bmatrix}.\]
+\end{defn}
+\exercise{%
+\begin{enumerate}[leftmargin=*]
+	\item Show that if $f_1, \ldots, f_n$ are linearly dependent, then their Wronskian is identically zero. This can be written as $W(f_1, \ldots, f_n) \equiv 0.$
+	\item Show that the converse is not true.
+\end{enumerate}
+}
+We now state a case when the converse \emph{\textbf{is}} true.
+\begin{thm} 
+	If $y_1(x), \ldots, y_n(x)$ are solutions of a linear homogeneous ODE as (\ref{eq:linhom}), then they are linearly dependent if and only if $W(y_1, \ldots, y_n) \equiv 0.$
+\end{thm}
+\begin{mdframed}[style=boxstyle, frametitle={A particular application}]
+	Suppose $y_1$ and $y_2$ are solutions of
+	\[y'' + P(x)y' + Q(x)y = 0\]
+	over an open interval $I \subset \mathbb{R}.$ Let $a \in I$ be such that
+	\[y_1(a) = 0, y_1'(a) = 1,\quad y_2(a) = 1, y_2'(a) = 0.\]
+	Then, any other solution of the ODE is given by
+	\[c_1y_1(x) + c_2y_2(x).\]
+\end{mdframed}
+The hypothesis tells us that $y_1$ and $y_2$ are two linearly independent solutions of the ODE. As the dimension of the solution space is $2,$ the functions must form a basis.
+\begin{mdframed}[style=boxstyle, frametitle={A result}]
+	Suppose $y_1$ and $y_2$ are solutions of
+	\[y'' + P(x)y' + Q(x)y = 0\]
+	over an open interval $I \subset \mathbb{R}.$ Let $a \in I$ be such that
+	\[y_1(a) = y_2(a),\quad y_1'(a) =y_2'(a).\]
+	Then, $y_1 = y_2.$
+\end{mdframed}
+This is to say that if two functions satisfy an ODE and have the same initial conditions, then they are identically equal.
+\exercise{%
+Show that the following sets of functions are linearly independent on $\mathbb{R}$ (unless otherwise mentioned):
+\begin{enumerate}[leftmargin=*]
+	\item $\{1, x, \ldots, x^n\}.$
+	\item $\{e^{m_1x}, \ldots, e^{m_nx}\}$ where $m_1, \ldots, m_n$ are distinct real numbers.
+	\item $\{e^{mx}, xe^{mx}, \ldots, x^ne^{mx}\}.$
+	\item $\{\sin x, \sin 2x, \ldots, \sin nx\}.$ (Wronskian could get quite messy. Try integration. Recall inner products.)
+	\item $\{x^m, x^m(\ln x), \ldots, x^m(\ln x)^n\}.$ Show that this is linearly independent on $(0, \infty).$
+\end{enumerate}
+}
+
+\newpage
+
+\subsection{Abel-Liouville Formula}
+\begin{mdframed}[style=boxstyle, frametitle={The formula}]
+	Suppose $y_1, \ldots, y_n$ are solutions of
+	\[y^{(n)} + P_1(x)y^{(n-1)} + \cdots + P_n(x)y = 0\]
+	over an open interval $I \subset \mathbb{R}.$\\
+	Let $W$ denote their Wronskian.	Then,
+	\[\dfrac{dW}{dx} = -P_1(x)W.\]
+	Hence, we have
+	\[W(x) = W(x_0)\exp\left(-\int_{x_0}^{x} p(t) dt\right)\]
+\end{mdframed}
+(Note that here, $P_1$ is the coefficient of $y^{(n-1)}$ and not $y'$.)
+
+\begin{cor} \label{cor:wronskian}
+	The above formula shows that either $W \equiv 0$ or that the Wronskian \textbf{never} vanishes. (In fact, it never changes sign.)
+\end{cor}
+
+
+\begin{mdframed}[style=boxstyle, frametitle={An application}]
+	Suppose $y_1$ is a solution of 
+	\[y'' + P(x)y' + Q(x)y = 0.\]
+	Then, a second \emph{linearly independent} solution is given by
+	\[y_2(x) = y_1(x)\int \dfrac{1}{(y_1(x))^2}\exp\left(-\int P(x) dx\right) dx.\]
+\end{mdframed}

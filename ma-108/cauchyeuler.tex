@@ -1,0 +1,111 @@
+\sec{Cauchy Euler equations}
+\subsection{The first challenge} \label{ssec:cauchyeulerhomo}
+\begin{mdframed}[style=boxstyle, frametitle={The Setup}]
+	An ODE of the form
+	\begin{equation*} 
+		x^ny^{(n)} + a_{n-1}x^{n-1}y^{(n-1)} + \cdots + a_{1}xy' + a_0y = 0
+	\end{equation*}
+	is called a \defin{Cauchy Euler equation}. (Each $a_i$ is a constant.)
+\end{mdframed}
+We shall be interested in solving the above equation only on $(0, \infty).$
+\begin{mdframed}[style=boxstyle, frametitle={The Solution}]
+	We plug the trial solution $y = x^m.$ This gives us the polynomial equation:
+	\begin{align} 
+		m(m - 1)\cdots(m-(n-1)) + a_{n-1}m(m-1)\cdots(m-(n-2)) + \nonumber \\
+		 \cdots + a_1m + a_0 = 0. \label{eq:indic}
+	\end{align}
+	Note that if $m$ is a root of the above, then $x^m$ is a solution of the ODE.\\
+	Thus, if the above equation has $n$ distinct roots $m_1, \ldots, m_n,$ then the original ODE has $n$ linearly independent solutions $x^{m_1}, \ldots, x^{m_n}$ and we are done.
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={Repeated roots}]
+	Suppose $m_0$ is a repeated root of (\ref{eq:indic}). Suppose that it is repeated $k$ times. Then, one can show that the following $k$ functions are solutions of the original ODE:
+	\begin{equation*} 
+		x^{m_0}, x^{m_0}\ln x, \ldots, x^{m_0}(\ln x)^{k-1}.
+	\end{equation*}
+	These are linearly independent as well.\\
+	Thus, we are now done for any case as the total number of roots is always going to be $n$ when counted with multiplicity. (This is assuming that we work in $\mathbb{C},$ which we shall do.)
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={Getting real}]
+	Suppose $m = a+ib$ is a root. Then, we have
+	\begin{align*} 
+		x^m &:= \exp(m \ln x) & (\text{By definition})\\
+		&= \exp(a \ln x + ib\ln x)\\
+		&= \exp(a \ln x)\cdot\exp(ib \ln x)\\
+		&= \exp(a \ln x)\cdot\big(\cos(b\ln x) + i\sin(b \ln x)\big)\\
+		&=x^a(\cos(b\ln x) + i\sin(b \ln x))
+	\end{align*}
+	As before, if each $a_i$ is real, then the roots appear in the same multiplicity as their conjugates which will give us the real pair of solutions as:
+	\begin{equation*} 
+		x^a\cos(b\ln x), x^a\sin(b\ln x).
+	\end{equation*}
+	In case of repetition twice, we get the four solutions:
+	\begin{equation*} 
+		x^a\cos(b\ln x), x^a\sin(b\ln x),\quad x^a(\ln x)\cos(b\ln x), x^a(\ln x)\sin(b\ln x).
+	\end{equation*}
+	The general case is (hopefully) clear.
+\end{mdframed}
+\subsection{Welcome back, annihilators}
+This time, we consider annihilators of polynomial (polylogmial?) functions.\\
+As before, we shall see that it suffices to consider the case of just the monomials first. The annihilator table is particularly simple this time:
+\begin{mdframed}[style=boxstyle, frametitle={Annihilators of special functions}]
+	\begin{center}
+	\bgroup
+	\def\arraystretch{1.25}
+	\begin{tabular}{|l|l|}
+		\hline
+		Function & Annihilator\\
+		\hline
+		$x^n$ & $xD - n$\\
+		$x^n(\ln x)^k$ & $(xD - n)^{k+1}$\\
+		\hline
+	\end{tabular}
+	\egroup
+	\end{center}
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={A word on $xD$}]
+	Note that $xD$ is the operator which acts on a function as:
+	\begin{equation*} 
+		(xD)(f) = xf'.
+	\end{equation*}
+	On the other hand, $Dx$ is an operator which acts as:
+	\begin{equation*} 
+		(Dx)(f) = D(xf) = xf' + f.
+	\end{equation*}
+	In particular, $xD \neq Dx.$ This means that $(xD)^2 \neq x^2D^2$ and so on.
+\end{mdframed}
+\emph{Note:} $xD$ is an operator but there is no $xP$ operator. \hfill (A joke.)
+\begin{mdframed}[style=boxstyle, frametitle={Some arithmetic}]
+	For ease of calculations, one may note the following useful identities:
+	\begin{align*} 
+		x^2D^2 &= xD(xD - 1)\\
+		x^3D^3 &= xD(xD - 1)(xD - 2)\\
+		&\vdots
+	\end{align*}
+\end{mdframed}
+\subsection{The main problem}
+\begin{mdframed}[style=boxstyle, frametitle={The Setup}]
+	We consider a linear ODE of the form
+	\begin{equation} 
+		x^ny^{(n)} + a_{n-1}x^{n-1}y^{(n-1)} + \cdots + a_{1}xy' + a_0y = Q(x),
+	\end{equation}
+	where each $a_i$ is a constant and $Q(x)$ is a linear combination of functions of the form $x^k(\ln x)^m$.
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={The Solution}]
+	The steps are now identical as the case of \nameref{sec:undcoeff}.\\
+	We shall assume that $Q(x) = x^k(\ln x)^m$ and not a linear combination. The general case follows as before by considering the linear combination of solutions.
+	\begin{enumerate}[leftmargin=*, label = \Roman*.]
+		\item We first consider the equation
+		\begin{equation*} 
+			x^ny^{(n)} + a_{n-1}x^{n-1}y^{(n-1)} + \cdots + a_{1}xy' + a_0y = 0.
+		\end{equation*}
+		This can be solved by the method we saw in \S\S\ref{ssec:cauchyeulerhomo}.
+		\item We then apply the annihilator of $Q(x)$ from the table earlier.\\
+		\textbf{\emph{This again gives us a Cauchy Euler equation.}}\\
+		We solve this again using the method of \S\S\ref{ssec:cauchyeulerhomo}.
+		\item We follow the step III as in the case of \nameref{sec:undcoeff} to determine the coefficients of the new functions we obtain in Step II.
+	\end{enumerate}
+\end{mdframed}
+Note that $D^{11}$ is also an annihilator of $x^{10},$ however we do not use that.\\
+The first reason is that the calculations would be a nightmare.\\
+Secondly, applying this annihilator to both sides of the equation wouldn't technically give us a Cauchy Euler equation again. \\
+Also, note that the method we have used doesn't require $k$ to be an integer. This would work even if we wish to solve something like $xy'' + y = x^{1/2}.$ Another reason to prefer the annihilator $xD - 1/2.$

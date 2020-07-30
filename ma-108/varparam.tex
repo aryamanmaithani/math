@@ -1,0 +1,54 @@
+\sec{The Method of Variation of Parameters}
+\subsection{Introduction}
+This is a powerful method to find a particular solution to a linear ODE when the general solution of the associated homogeneous equation is known.
+\begin{mdframed}[style=boxstyle, frametitle={The Setup}]
+	Consider the second order ODE 
+	\begin{equation} \label{eq:mvp}
+		y'' + P(x)y' + Q(x)y = R(x).
+	\end{equation}
+	Assume that the general solution $y_g(x)$ of the associated homogeneous equation
+	\begin{equation} \label{eq:mvphomo}
+		y'' + P(x)y' + Q(x)y = 0
+	\end{equation}
+	is known.
+\end{mdframed}
+\begin{mdframed}[style=boxstyle2, frametitle={The Solution - derivation. (Can be ignored.)}]
+	Let $y_1$ and $y_2$ be two linearly independent solutions of (\ref{eq:mvphomo}).\\
+	We seek to find a particular solution $y_p(x)$ of (\ref{eq:mvp}) of the form
+	\begin{equation} \label{eq:ypform}
+		y_p(x) = v_1(x)y_1(x) + v_2(x)y_2(x).
+	\end{equation}
+	(It is our \emph{assumption - I} that we would have a solution of this form.)\\
+	Now, we place the following restriction
+	\begin{equation} \label{eq:mvpcond1}
+		v_1'y_1 + v_2'y_2 \equiv 0.
+	\end{equation}
+	(This is \emph{assumption - II}.)\\
+	Under this assumption, we get 
+	\begin{align*} 
+		y_p' &= v_1y_1' + v_2y_2',\\
+		y_p'' &= v_1y_1'' + v_1'y_1' + v_2y_2''+ v_2'y_2'.
+	\end{align*}
+	Substituting this back into (\ref{eq:mvp}) and using the fact that $y_1$ and $y_2$ are solutions of (\ref{eq:mvphomo}) gives us that
+	\begin{equation} \label{eq:mvpcond2}
+		v_1'y_1' + v_2'y_2' = R(x).
+	\end{equation}
+	Now, note that the system of equations (\ref{eq:mvpcond1}) and (\ref{eq:mvpcond2}) can be uniquely solved for $v_1'$ and $v_2'$. (Since $\{y_1, y_2\}$ is linearly independent and hence, the Wronskian is always nonzero. Recall Corollary \ref{cor:wronskian}.)\\
+	Integrate to obtain $v_1$ and $v_2$ and finally, a particular solution $y_p$ is given by (\ref{eq:ypform}). The general solution is, as usual, $y_g + y_p.$
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={The Solution}]
+	Let $y_1$ and $y_2$ be two linearly independent solutions of (\ref{eq:mvphomo}).\\
+	Solve the following system of equations for functions $v_1'(x)$ and $v_2'(x)$:
+	\begin{align*} 
+		v_1'y_1 + v_2'y_2 &= 0,\\
+		v_1'y_1' + v_2'y_2' &= R(x).
+	\end{align*}
+	Integrate $v_1'$ and $v_2'$ to get $v_1$ and $v_2.$ Then, a particular solution of (\ref{eq:mvp}) is:
+	\begin{equation*} 
+		y_p(x) = v_1(x)y_1(x) + v_2(x)y_2(x).
+	\end{equation*}
+	The general solution of (\ref{eq:mvp}) is then $y_g + y_p.$
+\end{mdframed}
+\exercise{%
+Solve $y'' + y = \tan x.$
+}

@@ -1,0 +1,68 @@
+\sec{Some integral functions}
+Here we study some \emph{integral}\footnote{pun intended} functions that will help us later.\\
+The reader may skip this section for now and return to this when referenced later.\\
+We skip the formal discussion about convergence of improper Riemann integrals. (These are different from the integrals done in MA 105.) A discussion can be found in Professor GKS' notes mentioned.
+\subsection{The Gamma Function}
+\begin{defn}[The Gamma Function]
+	The Gamma function is defined for $a > 0$ as follows:
+	\begin{equation*} 
+		\Gamma(a) := \int_{0}^{\infty} t^{a-1}e^{-t} dt.
+	\end{equation*}
+\end{defn}
+\begin{mdframed}[style=boxstyle, frametitle={Some results}]
+	\begin{enumerate}[leftmargin=*]
+		\item $\Gamma(n) = (n - 1)!$ for all $n \in \mathbb{Z}^+ = \{1, 2, \ldots\}.$
+		\item $\Gamma(x+1) = x\Gamma(x)$ for all $x > 0.$
+		\item $\Gamma\left(\dfrac{1}{2}\right) = \sqrt{\pi}.$
+		\item The last two relations now let us calculate $\Gamma$ for all half-integers.
+		\item And that's as far as we can get. Other values of Gamma are not known in such elementary terms. 
+		\item Note that we can still calculate ratios such as
+		\begin{equation*} 
+			\Gamma\left(\dfrac{5}{4}\right)\bigg/\Gamma\left(\dfrac{1}{4}\right).
+		\end{equation*}
+	\end{enumerate}
+\end{mdframed}
+
+\subsection{The Beta Function}
+\begin{defn}[The Beta Function]
+	This is a function of two variables defined for $a > 0, b > 0$ as 
+	\begin{equation*} 
+		B(a, b) := \int_{0}^{1} x^{a-1}(1 - x)^{b-1} dx
+	\end{equation*}
+\end{defn}
+\begin{mdframed}[style=boxstyle, frametitle={Some identities}]
+	\begin{enumerate}[leftmargin=*]
+		\item $B(a, b) = B(b, a).$
+		\item $B(a + 1, b) = \dfrac{a}{b}B(a, b+1).$
+		\item $B(a + 1, b) + B(a, b+1) = B(a, b).$
+		\item $B\left(\dfrac{1}{2}, \dfrac{1}{2}\right) = \pi.$
+	\end{enumerate}
+\end{mdframed}
+\begin{thm}[The Beta-Gamma Relation] 
+	\begin{equation*} 
+		\Gamma(a)\Gamma(b) = \Gamma(a + b)B(a, b) \quad \forall\; a, b > 0.
+	\end{equation*}
+\end{thm}
+\begin{thm}[Euler's Reflection Formula]
+	\begin{equation*} 
+		\Gamma(a)\Gamma(1 - a) = \dfrac{\pi}{\sin(\pi a)} \quad \forall\;0 < a < 1
+	\end{equation*}
+\end{thm}
+
+\begin{mdframed}[style=boxstyle2, frametitle={An integral computation}]
+	\begin{thm} \label{thm:randomintegral}
+		\begin{equation*} 
+			\int_{0}^{\infty} \dfrac{x^{a-1}}{1 + x} dx = \dfrac{\pi}{\sin \pi a} \quad \text{ for } 0 < a < 1
+		\end{equation*}
+	\end{thm}
+	\begin{proof} 
+		Put $t = \dfrac{1}{1 + x}.$ The integral transforms as
+		\begin{align*} 
+			& \int_{0}^{1} (1 - t)^{a - 1}t^{-a} dt\\
+			& = B(a, 1 - a)\\
+			& = \Gamma(a)\Gamma(1 - a)\\
+			& = \dfrac{\pi}{\sin \pi a}.
+		\end{align*}
+	\end{proof}
+\end{mdframed}
+

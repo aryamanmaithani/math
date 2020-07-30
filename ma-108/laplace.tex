@@ -1,0 +1,158 @@
+\sec{Laplace Transforms}
+\subsection{The Laplace Transform}
+\begin{defn}[The Laplace Transform]
+	Let $f:(0, \infty)\to\mathbb{R}$ be a good enough function.\\
+	The Laplace transform of $f$ is another function denoted as $\mathcal{L}(f)$ or $\mathcal{L}f$ or simply, $F.$ It is defined as follows:
+	\begin{equation} \label{eq:lap}
+		(\mathcal{L}f)(s) := \int_{0}^{\infty} e^{-st}f(t) dt.
+	\end{equation}
+\end{defn}
+
+\begin{mdframed}[style=boxstyle, frametitle={Remarks}]
+	\begin{enumerate}[leftmargin=*]
+		\item It is customary to use uppercase letters for the Laplace transform and use the variable $s$ as the argument of the transform. Thus, we write $F(s), X(s), Y(s),$ et cetera for the Laplace transforms of $f(t), x(t), y(t),$ et cetera.
+		\item We have not stated what ``good enough'' means. Also we have not stated the domain of $\mathcal{L}f.$ It is precisely whenever the integral in (\ref{eq:lap}) exists. More details about sufficient conditions can be found in the notes linked.
+		\item Notations will be abused a lot and we'll write things like $\mathcal{L}(f) = F(s)$ or $\mathcal{L}(f(t)) = F(s).$ (If you don't realise why this is abuse of notation, then ignorance is bliss and continue.)
+	\end{enumerate}
+\end{mdframed}
+
+\begin{mdframed}[style=boxstyle2, frametitle={A remark}]
+	Note that in general, the function $F(s)$ need not exist on the whole real line. Often, there exists some $a \in \mathbb{R}$ such that $F(s)$ exists for $s > a.$
+\end{mdframed}
+
+\newpage
+
+\subsection{Properties}
+The advantage of studying Laplace transforms will be seen when we see its many different properties.\\
+We have the following property that's easy to verify:
+\begin{mdframed}[style=boxstyle, frametitle={Linearity of Laplace Transforms}]
+	\begin{equation*} 
+		\mathcal{L}(af + bg) = a\mathcal{L}(f) + b\mathcal{L}(g).
+	\end{equation*}
+	Of course, $a$ and $b$ are real numbers.
+\end{mdframed}
+
+Recall from calculus that changing the value of a function at finitely many points has no effect on the integral. Thus, it is possible for two different functions to have the same Laplace transform. However, we do have the following theorem if we demand continuity.
+\newpage
+\begin{thm}[Equality of Laplace transforms] 
+	Let $f, g:[0, \infty) \to \mathbb{R}$ be continuous functions such that
+	\[\mathcal{L}f = \mathcal{L}g.\]
+	In this case, we have
+	\[f = g.\]
+\end{thm}
+
+\begin{mdframed}[style=boxstyle, frametitle={A trick}]
+	One useful trick is differentiate with respect to the parameter. For example, consider:
+	\begin{align*} 
+		& \mathcal{L}(e^{at})(s) = \dfrac{1}{s - a}\\
+		& \text{Differentiating with respect to }a:\\
+		& \mathcal{L}(te^{at})(s) = \dfrac{1}{(s - a)^2}.
+	\end{align*}
+	Note that the interchanging of $\dfrac{\partial}{\partial a}$ and $\mathcal{L}$ needs justification. (Which we do not provide.)
+\end{mdframed}
+
+\begin{thm}[Derivatives of Laplace]
+	\begin{equation*} 
+		\mathcal{L}(tf(t)) = -\dfrac{d}{ds}F(s).
+	\end{equation*}
+	In general,
+	\begin{equation*} 
+		\mathcal{L}(t^nf(t)) = (-1)^n\dfrac{d^n}{ds^n}F(s).
+	\end{equation*}
+\end{thm}
+
+\begin{thm}[Laplace of derivatives]
+	\begin{align*} 
+		\mathcal{L}(f'(t)) &= sF(s) - f(0),\\
+		\mathcal{L}(f''(t)) &= s^2F(s) - sf(0) - f'(0),\\
+		\mathcal{L}(f^{(n)}(t)) &= s^nF(s) - \sum_{k=0}^{n-1} s^{n-1-k}f^{(k)}(0).
+	\end{align*}
+\end{thm}
+
+\begin{thm}[First Shift Theorem]
+	If
+	\begin{equation*} 
+		\mathcal{L}(f(t)) = F(s),
+	\end{equation*}
+	then
+	\begin{equation*} 
+		\mathcal{L}(e^{at}f(t)) = F(s - a).
+	\end{equation*}
+\end{thm}
+
+\begin{defn}[Heaviside step function]
+	The \defin{Heaviside unit step function} $u:\mathbb{R}\to\{0, 1\}$ is defined as
+	\begin{align*} 
+		u(t) := \begin{cases}
+			0 & \text{if } t < 0\\
+			1 & \text{if } t \ge 0
+		\end{cases}
+	\end{align*}
+	For $c \in \mathbb{R},$ the function $u_c(t)$ is defined as $u(t - c).$
+\end{defn}
+
+\begin{thm}[Second Shift Theorem]
+	Suppose $\mathcal{L}f = F(s)$ for $s > a \ge 0.$ \\
+	If $c > 0,$ then we have
+	\begin{equation*} 
+		\mathcal{L}(u_c(t)f(t - c)) = e^{-cs}F(s),
+	\end{equation*}
+	for $s > a.$
+\end{thm}
+
+\begin{thm}[Laplace transform of periodic functions]
+	Let $p > 0$ be such that $f(t + p) = f(t).$
+	\begin{equation*} 
+		\mathcal{L}f = \dfrac{1}{1 - e^{-ps}}\int_{0}^{p} e^{-st}f(t) dt.
+	\end{equation*}
+\end{thm}
+
+\subsection{Laplace table}
+\begin{center}
+	\bgroup
+	\def\arraystretch{2}
+	\begin{tabular}{|c|c||c|c|} 
+	\hline
+	$f(t)$ & $F(s)$ & $f(t)$ & $F(s)$ \\
+	\hline
+	\hline
+	$t$ & $1/s^2$ & $t^a$ & $\dfrac{\Gamma(a + 1)}{s^{a + 1}}$\\
+	$u_c(t)$ & $e^{-cs}/s$ & $e^{at}$ & $\dfrac{1}{s - a}$\\
+	$\sin(\omega t)$ & $\dfrac{\omega}{s^2 + \omega^2}$ & $\cos(\omega t)$ & $\dfrac{s}{s^2 + \omega^2}$\\
+	$t\sin(\omega t)$ & $\dfrac{2\omega s}{(s^2 + \omega^2)^2}$ & $t\cos(\omega t)$ & $\dfrac{s^2 - \omega^2}{(s^2 + \omega^2)^2}$\\
+	$e^{at}\sin(\omega t)$ & $\dfrac{\omega}{(s - a)^2 + \omega^2}$ & $e^{at}\cos(\omega t)$ & $\dfrac{s - a}{(s - a)^2 + \omega^2}$\\
+	$\sinh(\omega t)$ & $\dfrac{\omega}{s^2 - \omega^2}$ & $\cosh(\omega t)$ & $\dfrac{s}{s^2 - \omega^2}$\\
+	$e^{at}\sinh(\omega t)$ & $\dfrac{\omega}{(s - a)^2 - \omega^2}$ & $e^{at}\cosh(\omega t)$ & $\dfrac{s - a}{(s - a)^2 - \omega^2}$\\
+	\hline
+	\end{tabular}
+	\egroup
+\end{center}
+
+\subsection{The convolution}
+\begin{defn}[Convolution]
+	The \defin{convolution} of functions $f$ and $g$ is another function $f*g$ defined as
+	\begin{equation*} 
+		(f*g)(t) = \int_{0}^{t} f(t - \tau)g(\tau) d\tau.
+	\end{equation*}
+\end{defn}
+
+\begin{mdframed}[style=boxstyle, frametitle={Properties}]
+	\begin{enumerate}[leftmargin=*]
+		\item $f*g = g*f.$
+		\item $f*(g_1 + g_2) = f*g_1 + f*g_2.$
+		\item $(f * g) * h = f * (g * h).$
+		\item $f * 0 = 0 * f = 0.$ (Here, $0$ denotes the zero \emph{function}.)
+	\end{enumerate}
+\end{mdframed}
+
+\begin{mdframed}[style=boxstyle, frametitle={Caution}]
+	$f*1 = f$ is \textbf{not} true in general.\\
+	For instance, $\sin t * 1 = 1 - \cos t.$
+\end{mdframed}
+
+\begin{thm}[Convolution of Laplace]
+	Suppose $\mathcal{L}f$ and $\mathcal{L}g$ exist for all $s > a \ge 0.$ Then,
+	\begin{align*} 
+		\mathcal{L}(f * g) = \mathcal{L}(f)\mathcal{L}(g) \qquad \text{for } s > a.
+	\end{align*}
+\end{thm}

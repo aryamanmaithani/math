@@ -11,7 +11,7 @@ To view those, you can go to the appropriate folder that you may find [here](htt
 
 * [Numerical Analysis](ma-214)
 * [Group theory GD](group-theory-gd)
-<!-- * [ODEs](ma-108), a summary of the first undergraduate ODE course -->
+* [ODEs](ma-108), a summary of the first undergraduate ODE course
 * [MA 107 notes](ma-107)
 * [Group theory notes](ma-419)
 * [Category theory](cat-theory)

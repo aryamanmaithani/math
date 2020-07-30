@@ -1,0 +1,136 @@
+\sec{The Method of Undetermined Coefficients \label{sec:undcoeff}}
+\subsection{The first challenge} \label{ssec:undcoeffhomo}
+\begin{mdframed}[style=boxstyle, frametitle={The Setup}]
+	Consider a linear ODE of the form
+	\begin{equation}\label{eq:const}
+		y^{(n)} + a_{n-1}y^{(n - 1)} + \cdots + a_0y = 0,
+	\end{equation}
+	where $a_0, \ldots, a_{n-1}$ are constants. (Real or complex.)\\
+	This is a \defin{constant coefficients ODE}.
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={Solving it}]
+	We plug the trial solution $y = e^{mx}.$ This gives us the polynomial equation:
+	\begin{equation}\label{eq:char}
+		m^n + a_{n-1}m^{n-1} + \cdots + a_0 = 0
+	\end{equation}
+	If $m_1, \ldots, m_n$ are \emph{distinct} solutions to the above equation, then $e^{m_1x}, \ldots, e^{m_nx}$ are $n$ linearly independent solutions of the ODE and thus, we are done.
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={Repeated roots}]
+	Suppose $m_0$ is a repeated root of (\ref{eq:char}). Suppose that it is repeated $k$ times. Then, one can show that the following $k$ functions are solutions of the original ODE:
+	\begin{equation*} 
+		e^{m_0x}, xe^{m_0x}, \ldots, x^{k-1}e^{m_0x}.
+	\end{equation*}
+	These are linearly independent as well.\\
+	Thus, we are now done for any case as the total number of roots is always going to be $n$ when counted with multiplicity. (This is assuming that we work in $\mathbb{C},$ which we shall do.)
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={Getting real}]
+	Suppose we are in the case where each $a_i$ is real.\\
+	In this case, if $m = a + ib$ is a solution, then so is $m' = a - ib.$ Moreover, the ``amount of repetition'' will also be same.\\
+	Thus, we can replace solutions having $\{e^{(a + ib)x}, e^{(a - ib)x}\}$ with \\
+	$\{e^{ax}\sin bx, e^{ax}\cos bx\}.$\\~\\
+	Similarly considerations apply to functions like $x^ke^{(a + ib)x}.$
+\end{mdframed}
+\exercise{%
+Solve the following ODEs.
+\begin{enumerate}[leftmargin=*]
+	\item $y'' - 3y' + 2y = 0.$
+	\item $y^{(4)} + y = 0.$
+	\item $y^{(4)} + y^{(2)} + y = 0.$
+\end{enumerate}}
+\subsection{Annihilators}
+Before going into the main problem, let us study annihilators. \\
+In the following we shall use the following notation:
+\begin{mdframed}[style=boxstyle, frametitle={Notation}]
+	From here on, we shall write $D$ to mean $\dfrac{d}{dx}.$\\
+	Similarly, we have $D^n = \dfrac{d^n}{dx^n}.$ \\~\\
+	Note that $D$ is an ``operator'' which ``acts'' on smooth\footnote{Recall that a smooth function is a function that is infinitely differentiable.} functions to give another smooth function.
+\end{mdframed}
+	
+\begin{mdframed}[style=boxstyle, frametitle={Some arithmetic}]
+	The operator follows the usual rules like $DD = D^2$ which is the same as saying
+	\begin{equation*} 
+		\dfrac{d}{dx}\left(\dfrac{d}{dx}(f)\right) = \dfrac{d^2f}{dx^2}.
+	\end{equation*}
+	We also have things like
+	\begin{equation*} 
+		(D + 1)^2 = D^2 + 2D + 1.
+	\end{equation*}
+	Note that the $1$ above is the operator $1,$ that is, $1f = f$ for any function $f.$\\
+	(Don't make the mistake of thinking something like $D(D + 1) = D^2$ because $D1 = 0;$ the $1$ here is not the constant function.)\\
+	This also shows how the original ODE (\ref{eq:const}) relates to the polynomial (\ref{eq:char}). To make it clearer, note that the ODE can simply be written as
+	\begin{equation*} 
+		(D^n + a_{n-1}D^{n-1} + \cdots + a_0)y = 0.
+	\end{equation*}
+\end{mdframed}
+\newpage
+\begin{mdframed}[style=boxstyle, frametitle={Annihilators of special functions}]
+	From the discussion in the previous section, we can already see annihilators of some special functions as follows:
+	\begin{center}
+	\bgroup
+	\def\arraystretch{1.25}
+	\begin{tabular}{|l|l|}
+		\hline
+		Function & Annihilator\\
+		\hline
+		$e^{mx}$ & $D - m$\\
+		$x^{k}e^{mx}$ & $(D - m)^{k+1}$\\
+		$\sin bx, \cos bx$ & $D^2 + b^2$\\
+		$x^k\sin bx, x^k\cos bx$ & $(D^2 + b^2)^{k+1}$\\
+		$e^{ax}\sin bx, e^{ax}\cos bx$ & $(D - a)^2 + b^2$\\
+		$x^ke^{ax}\sin bx, x^ke^{ax}\cos bx$ & $((D - a)^2 + b^2)^{k+1}$\\
+		\hline
+	\end{tabular}
+	\egroup
+	\end{center}
+\end{mdframed}	
+Note that all the annihilators in the above table are polynomials in $D,$ we will usually write an arbitrary such operator as $P(D).$\\
+With the above things in mind, we proceed to the next subsection. 
+
+\newpage
+
+\subsection{The main problem}
+\begin{mdframed}[style=boxstyle, frametitle={The Setup}]
+	We consider a linear ODE of the form
+	\begin{equation} \label{eq:constQ}
+		(D^n + a_{n-1}D^{n-1} + \cdots + a_0)y = Q(x),
+	\end{equation}
+	where each $a_i$ is a constant and $Q(x)$ is one of the special functions listed in the table earlier.
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={The Solution}]
+	We do this quite systematically.
+	\begin{enumerate}[leftmargin=*, label = \Roman*.]
+		\item First, we consider the associated homogeneous equation
+		\begin{equation*} 
+			(D^n + a_{n-1}D^{n-1} + \cdots + a_0)y = 0.
+		\end{equation*}
+		This can be solved completely by the methods we saw in \S\S\ref{ssec:undcoeffhomo}.\\
+		Let the \emph{general} solution of this be $y_g(x).$
+		\item As $Q(x)$ was a special function, we take its annihilator $P(D)$ from the table and apply it to both sides of (\ref{eq:constQ}). This gives us an equation of the form
+		\begin{equation} \label{eq:temp1}
+			P(D)(D^n + a_{n-1}D^{n-1} + \cdots + a_0)y = 0.
+		\end{equation}
+		Note that (\ref{eq:temp1}) is again a constant coefficients ODE (why? Recall the arithmetic.) and hence, we can solve it completely.\\
+		Let this solution by $y_{g'}(x).$
+		\item This $y_{g'}$ will be a sum of special functions. It will have all $n$ of the original special functions in $y_g$ and $k$ more. ($k = \deg P(D).$)\\
+		Thus,
+		\[y_{g'}(x) = y_g(x) + c_1y_1(x) + \cdots + c_ky_k(x),\]
+		where the $y_i$s are the $k$ new functions. We now solve for \textbf{undetermined coefficients} $c_i$s by substituting the above solution back in (\ref{eq:constQ}). (Note that $y_g$ will get completely annihilated and can be ignored for better calculations.)\\
+		Thus, once we solve for the $c_i$s, we are done and the final \emph{general} solution is
+		\[y(x) = y_g(x) + c_1y_1(x) + \cdots + c_ky_k(x).\]
+	\end{enumerate}
+\end{mdframed}
+\begin{mdframed}[style=boxstyle, frametitle={Slightly more general}]
+	Note that the original restriction that $Q(x)$ be a special function was unnecessary. Indeed, we can do better and allow $Q(x)$ to be a \emph{linear combination} of the special functions.\\
+	We can solve the smaller equations individually and finally add them (with appropriate scaling) to get the final solution.\\
+	To be more explicit in terms of an example:\\
+	Consider the ODE $(D^2 + 1)y = e^x + 2\sin x.$\\
+	We shall first solve to get the general solution $y_g$ of $(D^2 + 1)y = 0.$\\
+	Then, we get a particular solution $y_{p_1}$ of $(D^2 + 1)y = e^x$ using II and III from above.\\
+	Similarly, we get a particular solution $y_{p_2}$ of $(D^2 + 1)y = \sin x.$\\ Then, the final solution is $y_g + y_{p_1} + 2y_{p_2}.$
+\end{mdframed}
+\begin{mdframed}[style=boxstyle2, frametitle={A note about calculations}]
+	Sometimes, it may be computationally easier to \emph{not} break $Q(x)$ into all of its components.\\
+	For example, if $Q(x) = e^x + xe^x + e^{2x},$ it would be better to break the problem into that for $(e^x + xe^x)$ and that for $e^{2x}.$\\
+	The reason for this is that $(D - 1)^2$ is an annihilator for the former and would minimise repeated calculations.\\
+	(Try some problems yourself, it's easier to just do it and realise what's best!)
+\end{mdframed}

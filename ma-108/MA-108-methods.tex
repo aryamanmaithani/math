@@ -1,0 +1,109 @@
+\documentclass[11pt,leqno,landscape,semhelv]{seminar}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\allowdisplaybreaks
+\usepackage{mdframed}
+\usepackage{fancybox}
+\usepackage[inline]{enumitem}
+\usepackage{cancel}
+\usepackage{soul}
+\usepackage{centernot}
+\usepackage{tikz-cd}
+\usepackage{datetime2}
+
+\mdfdefinestyle{theoremstyle}{%
+	linecolor=gray,linewidth=1pt,%
+	frametitlerule=true,%
+	frametitlebackgroundcolor=blue!20,
+	backgroundcolor=  gray!20,	
+	% innertopmargin=\topskip,
+}
+\mdtheorem[style=theoremstyle]{defn}[thm]{Definition}
+\mdtheorem[style=theoremstyle]{thm}{Theorem}
+\mdtheorem[style=theoremstyle]{cor}[thm]{Corollary}
+
+\mdfdefinestyle{boxstyle}{%
+	linecolor=gray,linewidth=1pt,
+	frametitlerule=true,%
+	frametitlebackgroundcolor=blue!10,
+}
+\mdfdefinestyle{boxstyle2}{%
+	linecolor=red,linewidth=1pt,
+	frametitlerule=true,%
+	frametitlebackgroundcolor=blue!10,
+}
+
+\newcommand{\exercise}[1]{\begin{mdframed}[style=boxstyle, frametitle = {Exercise(s)}]
+	#1
+\end{mdframed}}
+
+\theoremstyle{definition}
+\newmdtheoremenv{joke}{Joke}
+\newmdtheoremenv{lem}[thm]{Lemma}
+\newmdtheoremenv{prop}[thm]{Proposition}
+% \newmdtheoremenv{defn}[thm]{Definition}
+
+\usepackage{chngcntr}
+\numberwithin{joke}{section}
+\numberwithin{thm}{section}
+\numberwithin{equation}{section}
+
+\newcommand{\example}[1]{\refstepcounter{thm}\par\medskip
+   {\textbf{Example \thethm.} #1} \rmfamily}
+\newcommand{\remark}[1]{\refstepcounter{thm}\par\medskip
+   {\textit{Remark \thethm.} #1} \rmfamily}
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {}{\centering\huge\S\thesection}{0.25cm}{\centering\Huge\textsc}
+\titleformat{\subsection}[block]
+  {}{\S\S\thesubsection}{0.25cm}{\Large}
+  
+\renewcommand{\sec}[1]{%
+\begin{slide}
+\begin{center}
+    \begin{center}
+        \section{#1}
+    \end{center}
+\end{center}
+\end{slide}}
+\let\emptyset\varnothing
+
+\setlength\parindent{0pt}
+
+\usepackage{xcolor}
+\definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
+\definecolor{mylinkcolor}{RGB}{0, 255, 255} %46, 51, 63
+\definecolor{defcolor}{RGB}{0, 0, 200}
+
+\usepackage{pagecolor}
+%\pagecolor{mybgcolor}
+%\color{white}
+
+\newcommand{\defin}[1]{\textcolor{defcolor}{#1}}
+
+\usepackage[colorlinks=true,
+	%linkcolor=mylinkcolor
+	]
+	{hyperref}
+
+
+\title{\vspace{1cm} MA 108: ODEs\\The Methods}
+\author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
+\date{Last Update: \DTMnow}
+
+\begin{document}
+\maketitle
+\newpage
+\setcounter{section}{-1}
+\tableofcontents
+\input{intro}
+\input{exact}
+\input{linear}
+\input{picard}
+\input{linal}
+\input{undetcoeff}
+\input{cauchyeuler}
+\input{varparam}
+\input{integralfunc}
+\input{laplace}
+\input{extra}
+\end{document}	

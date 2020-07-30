@@ -1,0 +1,28 @@
+\sec{Picard's Iterates}
+\subsection{Introduction}
+\begin{mdframed}[style=boxstyle, frametitle={The Setup}]
+	Consider the initial value problem (IVP)
+	\[y' = f(t, y); \;\; y(a) = b.\]
+	Corresponding to this, we set up the following \emph{integral equation}
+	\[\phi(t) = b + \int_{a}^{t} f(s, \phi(s)) ds.\]
+	It can be verified a solution $\phi_0$ to the integral equation is a solution of the original DE as well. (And vice-versa.)\\
+\end{mdframed}
+Now, we describe a method to solve the integral equation.
+
+\newpage
+
+\begin{mdframed}[style=boxstyle, frametitle={Picard's Iteration Method}]
+	We recursively define a family of functions $\phi_n(t)$ for every $n \ge 0$ as follows:
+	\begin{align*} 
+		\phi_0 &\equiv b,\\
+		\phi_{n + 1}(t) &= b + \int_{a}^{t} f(s, \phi_n(s)) ds \quad \text{for }n \ge 0.
+	\end{align*}
+\end{mdframed}
+Under suitable conditions, the sequence of functions $\left(\phi_n\right)$ converges to a function
+\[\phi(t) = \lim_{n\to \infty}\phi_n(t),\]
+which is a solution to the IVP.
+
+\exercise{%
+Solve the IVP:
+\[y'(t) = 2t(1 + y); \;\; y(0) = 0.\]
+}
