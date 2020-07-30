@@ -3,13 +3,19 @@ layout: page
 title: Math
 image: /img/avatar-icon.png
 light-image: /img/avatar-icon-light.png
+le-links:
+  - title: Numerical Analysis
+    href:  ma-214 
+  - title: ODE
+    href:  ma-108
+    desc:  Summary of ODEs
+  - title: Group theory GD
+    href: group-theory-gd
+  - title: MA 107 notes
+  	href: ma-107
 ---
-
-HI!
-
-
 <div class="posts-list">
-    {% for link in site.math-links %}
+    {% for link in le-links %}
         <article class="post-preview">
           <a href="/math{{ link.href | relative_url }}">
           <h2 class="post-title">{{ link.title }}</h2>
