@@ -1,0 +1,1062 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage{thmtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta}
+\setlength\parindent{0pt}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\numberwithin{thm}{section}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{ex}{Example}
+
+
+\let\emptyset\varnothing
+\newcommand{\rel}{\;\;\operatorname{rel}\;}
+\newcommand{\id}{\operatorname{id}}
+
+\pagestyle{plain}
+
+% \usepackage{titlesec}
+% \titleformat{\section}[block]
+%   {\newpage\center\normalfont}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\newpage\sffamily\Large\filcenter\bfseries}{\S\thesection.}{0.25cm}{\Large}
+\titleformat{\subsection}[block]{\large\bfseries\sffamily}{\S\S\thesubsection.}{0.2cm}{\large}
+
+
+\usepackage[a4paper]{geometry}
+\usepackage{lipsum}
+
+\usepackage{cleveref}
+\crefname{thm}{Theorem}{Theorems}
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{defn}{Definition}{Definitions}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{equation}{}{}
+
+\usepackage{mdframed}
+\newenvironment{blockquote}
+{\begin{mdframed}[skipabove=0pt, skipbelow=0pt, innertopmargin=4pt, innerbottommargin=4pt, bottomline=false,topline=false,rightline=false, linewidth=2pt]}
+{\end{mdframed}}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily{\S\textbf{\nouppercase{\leftmark}}}}
+\fancyhead[R]{\sffamily{\thepage}}
+% \renewcommand{\headrulewidth}{0pt}
+
+% \renewcommand{\familydefault}{\rmdefault}
+\usepackage{tgtermes}
+
+\title{Algebraic Topology}
+\author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
+% \date{Spring Semester 2019-20}
+
+\begin{document}
+\maketitle
+\input{arrow-config}
+In what follows, $I$ will denote the closed interval $[0, 1] \subset \mathbb{R}.$\\
+Whenever we talk about a map $f:X\to Y$ between topological spaces $X$ and $Y,$ we will always mean a \emph{continuous function} $f.$\\
+A path $\sigma$ in a space $X$ is a map $\sigma: I \to X.$ If $x_0 = \sigma(0)$ and $x_1 = \sigma(1),$ we write this as
+\begin{equation*} 
+	x_0 \overset{\sigma}{\longrightarrow} x_1.
+\end{equation*}
+Moreover, $x_0$ and $x_1$ are called the \emph{end points} of $\sigma.$ In particular, $x_0$ is the initial point and $x_1$ is the final point.\\
+All the topological spaces are assumed to be nonempty.
+\section{Homotopy of Paths}
+%
+\subsection{The Fundamental Group}
+
+\begin{defn}[Homotopy]
+	Let $\sigma$ and $\tau$ be paths in a space $X$ with the same end points, i.e., $\sigma(0) = \tau(0)$ and $\sigma(1) = \tau(1).$\\
+	We say that $\sigma$ and $\tau$ are \emph{homotopic with ends points held fixed} written
+	\begin{equation*} 
+		\sigma \simeq \tau \rel \{0, 1\}
+	\end{equation*}
+	if there is a map $F: I \times I \to X$ such that
+	\begin{enumerate}
+		\item $F(s, 0) = \sigma(s)$ for all $s \in I,$
+		\item $F(s, 1) = \tau(s)$ for all $s \in I,$
+		\item $F(0, t) = x_0$ for all $t \in I,$
+		\item $F(1, t) = x_1$ for all $t \in I.$
+	\end{enumerate}
+	$F$ is called a \emph{homotopy} from $\sigma$ to $\tau.$ We write
+	\begin{equation*} 
+		F : \sigma \simeq \tau \rel \{0, 1\}.
+	\end{equation*}
+\end{defn}
+The above can be pictorially depicted as
+
+\begin{center}
+	\begin{tikzpicture}
+		\def \len{2.5}
+		\draw[thick, ->-=at 0.5 with label {$x_0$}](0, 0) -- (0, \len);
+		\draw[thick, ->-=at 0.5 with label {$\tau$}](0, \len) -- (\len, \len);
+		\draw[thick, -<-=at 0.5 with label {$x_1$}](\len, \len) -- (\len, 0);
+		\draw[thick, -<-=at 0.5 with label {$\sigma$}](\len, 0) -- (0, 0);
+	\end{tikzpicture}
+\end{center}
+
+The above picture is interpreted as follows: \\
+Along the (bottom) line $t = 0,$ $F$ agrees with $\sigma$ and along the (top) line $t = 1,$ $F$ agrees with $t = 1.$\\
+Similarly, along the (left) line $s = 0,$ $F$ is identically equal to $x_0$ and along the (right) line $s = 1,$ it is $x_1.$\\~\\
+%
+In particular, if $\sigma$ is a \emph{loop}, i.e., $x_0 = x_1$ and $e_{x_0}$ is the constant loop $s \mapsto x_0$ for $s \in I,$ and if $\sigma \simeq e_{x_0} \rel \{0, 1\},$ we say that ``$\sigma$ can be shrunk to a point,'' or is \emph{homotopically trivial}.
+
+\begin{prop}[$\simeq$ is an equivalence relation] \label{prop:equivrel}
+	\phantom{hi}\\
+	\begin{enumerate}
+		\item $\sigma \simeq \sigma \rel \{0, 1\},$
+		\item $\sigma \simeq \tau \rel \{0, 1\} \implies \tau \simeq \sigma \rel \{0, 1\},$
+		\item $\sigma \simeq \tau \rel \{0, 1\}$ and $\tau \simeq \rho \rel \{0, 1\} \implies \sigma \simeq \rho \rel \{0, 1\}.$ 
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	\begin{enumerate}
+		\item Define $F(s, t) \vcentcolon= \sigma(s).$
+		\item Define $F(s, t) \vcentcolon= F(s, 1 - t).$
+		\item Given $F:\sigma \simeq \tau \rel \{0, 1\}$ and $G:\tau \simeq \rho \rel \{0, 1\},$ define $H:I \times I \to X$ as
+
+		\begin{equation*} 
+			H(s, t) \vcentcolon= \begin{cases}
+				F(s, 2t) & 0 \le 2t \le 1,\\
+				G(s, 2t - 1) & 1 \le 2t \le 2.
+			\end{cases}
+		\end{equation*}
+		Note that $F$ and $G$ do agree for $2t = 1$ since we have $F(s, 1) = \tau(s) = G(s, 0)$ for all $s \in I.$ It is easy to see that $H$ is well-defined.\\
+		Note that $H$ is continuous (by the pasting lemma) and it satisfies all the four properties of a homotopy (from $\sigma$ to $\rho$), since $F$ and $G$ do so. \qedhere
+	\end{enumerate}
+\end{proof}
+Thus, we can consider the homotopy classes $[\sigma]$ of paths $\sigma$ from $x_0$ to $x_1$ under the equivalence relation $\simeq.$ (Note very carefully that all paths in an equivalence class have the same end points.)
+
+\begin{defn}[Multiplication of paths]
+	Let $\sigma$ be a path from $x_0$ to $x_1$ and $\tau$ from $x_1$ to $x_2.$\\
+	The product $\sigma*\tau$ is a path from $x_0$ to $x_2$ defined as
+	\begin{equation*} 
+		\sigma*\tau(s) \vcentcolon= \begin{cases}
+			\sigma(2s) & 0 \le 2s \le 1,\\
+			\tau(2s - 1) & 1 \le 2s \le 2.
+		\end{cases}
+	\end{equation*}
+	Once again, it's an easy check that $\sigma\tau$ is well-defined and continuous (using the pasting lemma).
+\end{defn}
+
+The above $\sigma*\tau$ is essentially the path from $x_0$ to $x_1$ obtained by first travelling from $x_0$ to $x_1$ via $\sigma$ and then from $x_1$ to $x_2$ via $\tau.$\\~\\
+We will now be lenient with notation and simply denote $\sigma*\tau$ as $\sigma\tau$ unless necessary.\\
+The next proposition shows how this product behaves with the equivalence relation.
+
+\begin{prop}
+	\begin{equation*} 
+		\sigma \simeq \sigma' \rel \{0, 1\} \text{ and } \tau \simeq \tau' \rel \{0, 1\} \implies \sigma\tau \simeq \sigma'\tau' \rel \{0, 1\}.
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	The proof is motivated by the following diagram.\\
+	\begin{center}
+		\begin{tikzpicture}
+			\def \len{3}
+			\draw[thick, ->-=at 0.5 with label {$x_0$}](0, 0) -- (0, \len);
+			\draw[thick, ->-=at 0.5 with label {$\sigma'$}](0, \len) -- (\len, \len);
+			\draw[dashed, -<-=at 0.5 with label {$x_1$}, -*-=at 0.0 with label {}, -*-=at 1.0 with label {}](\len, \len) -- (\len, 0);
+			\draw[thick, -<-=at 0.5 with label {$\sigma$}](\len, 0) -- (0, 0);
+			\draw[thick, ->-=at 0.5 with label {$\tau'$}](\len, \len) -- (2*\len, \len);
+			\draw[thick, -<-=at 0.5 with label {$x_2$}](2*\len, \len) -- (2*\len, 0);
+			\draw[thick, -<-=at 0.5 with label {$\tau$}](2*\len, 0) -- (\len, 0);
+			\node[] at (\len/2, \len/2) {$F$};
+			\node[] at (3*\len/2, \len/2) {$G$};
+		\end{tikzpicture}
+	\end{center}
+
+	Given $F:\sigma \simeq \sigma' \rel \{0, 1\}$ and $G:\tau \simeq \tau' \rel \{0, 1\},$ define $H:I \times I \to X$ as
+
+	\begin{equation*} 
+		H(s, t)\vcentcolon= \begin{cases}
+				F(2s, t) & 0 \le 2s \le 1,\\
+				G(2s - 1, t) & 1 \le 2s \le 2.
+			\end{cases}
+	\end{equation*}
+
+	As earlier, $H$ is well-defined (since $F(1, t) = x_1 = G(0, t)$ for all $t \in I$) and continuous. Moreover, we have
+	\begin{equation*} 
+		H(0, t) = F(0, t) = x_0, \quad H(1, t) = G(1, t) = x_2,
+	\end{equation*}
+	\begin{equation*} 
+		H(s, 0)= \begin{cases}
+				F(2s, 0) & 0 \le 2s \le 1,\\
+				G(2s - 1, 0) & 1 \le 2s \le 2
+			\end{cases} = \begin{cases}
+				\sigma(2s) & 0 \le 2s \le 1,\\
+				\tau(2s - 1) & 1 \le 2s \le 2
+			\end{cases} = \sigma\tau(s),
+	\end{equation*}
+	and similarly, 
+	\begin{equation*} 
+		H(s, 1) = \sigma'\tau'(s)\text{ for all }s \in I.
+	\end{equation*}\\
+	This shows that 
+	\begin{equation*} 
+		H : \sigma\tau\simeq\sigma'\tau' \rel \{0, 1\}. \qedhere
+	\end{equation*}
+\end{proof}
+\begin{defn}[Product of equivalence classes]
+	In view of the above proposition, we define
+	\begin{equation*} 
+		[\sigma]*[\tau] \vcentcolon= [\sigma*\tau].
+	\end{equation*}
+\end{defn}
+The above, of course, is defined only when the final point of $\sigma$ (and thus, any other representative of $[\sigma]$) equals the initial point of $\tau$ (and thus, any other representative of $[\tau]$).\\
+As before, we shall drop the $*$ and simply write $[\sigma][\tau].$
+
+\begin{lem} \label{lem:prodassoc}
+	Let $\sigma, \tau, \omega$ be paths such that the products $\sigma(\tau\omega)$ and $(\sigma\tau)\omega$ are defined. Then,
+	\begin{equation*} 
+		\sigma(\tau\omega) \simeq (\sigma\tau)\omega \rel \{0, 1\}.
+	\end{equation*}
+\end{lem}
+\begin{proof} 
+	Let $x_0, x_1, x_2, x_3$ be points such that
+	\begin{equation*} 
+		x_0 \overset{\sigma}{\longrightarrow} x_1 \overset{\tau}{\longrightarrow} x_2 \overset{\omega}{\longrightarrow} x_3. 
+	\end{equation*}
+	We define a homotopy $F$ from $\sigma(\tau\omega)$ to $(\sigma\tau)\omega.$ To motivate the definition of $F,$ we may first visualise the homotopy as follows.
+	\begin{center}
+		\begin{tikzpicture}
+			\def\len{2}
+			\def\height{3}
+	\draw[thick, ->-=at 0.5 with label {$x_0$}](0, 0) -- (0, \height);
+	\draw[thick, ->-=at 0.5 with label {$\sigma$}](0, \height) -- (\len, \height);
+	\draw[thick, ->-=at 0.5 with label {$\tau$}](\len, \height) -- (2*\len, \height);
+	\draw[thick, ->-=at 0.5 with label {$\omega$}](2*\len, \height) -- (4*\len, \height);
+	\draw[thick, -<-=at 0.5 with label {$x_3$}](4*\len, \height) -- (4*\len, 0);
+	\draw[thick, -<-=at 0.5 with label {$\omega$}](4*\len, 0) -- (3*\len, 0);
+	\draw[thick, -<-=at 0.5 with label {$\tau$}](3*\len, 0) -- (2*\len, 0);
+	\draw[thick, -<-=at 0.5 with label {$\sigma$}](2*\len, 0) -- (0, 0);
+	\draw[dashed,-*-=at 0.0 with label {},-*-=at 1.0 with label {}](\len, \height) -- (2*\len, 0);
+	\draw[dashed, -*-=at 0.0 with label {}, -*-=at 1.0 with label {}](2*\len, \height) -- (3*\len, 0);
+		\end{tikzpicture}
+	\end{center}
+	One can note that the top line depicts the path $(\sigma\tau)\omega$ and the bottom $\sigma(\tau\omega).$\\~\\
+	We define $F:I \times I \to X$ piece-wise on the three regions (from left to right) as follows:
+
+	\begin{equation*} 
+		F(s, t) \vcentcolon= \begin{cases}
+			\sigma\left(\dfrac{4s}{2 - t}\right) & 0 \le s \le \dfrac{1}{4}(2 - t) ,\\~\\
+			\tau\left(4s + 2 - t\right) & \dfrac{1}{4}(2 - t) \le s \le \dfrac{1}{4}(3 - t),\\~\\
+			\omega\left(\dfrac{4s + t - 3}{t + 1}\right) & \dfrac{1}{4}(3 - t) \le s \le 1.
+		\end{cases}
+	\end{equation*}
+	It is clear that $F$ is continuous on each piece. By the pasting lemma, it is continuous everywhere.\\
+	The four properties of being a homotopy are also clear, by construction. (The diagram makes it clear why.)
+\end{proof}
+
+\begin{defn}[Inverse path]
+	Given a path $\sigma$ from $x_0$ to $x_1,$ its \emph{inverse path} $\sigma^{-1}$ is a path from $x_1$ to $x_0$ given by
+	\begin{equation*} 
+		\sigma^{-1}(s) \vcentcolon= \sigma(1 - s), \qquad s \in I.
+	\end{equation*}
+\end{defn}
+The above is simply ``travelling backwards $\sigma$.''
+\begin{lem} 
+	Let $\sigma, \sigma':I \to X$ be paths such that $\sigma \simeq \sigma' \rel \{0, 1\}.$ Then,
+	\begin{equation*} 
+		\sigma^{-1} \simeq \sigma'^{-1} \rel \{0, 1\}.
+	\end{equation*}
+\end{lem}
+\begin{proof} 
+	Let $F:\sigma \simeq \sigma' \rel \{0, 1\}$ be a homotopy. Then, $F'(s, t) \vcentcolon= F(1 - s, t)$ is a homotopy between the inverses.
+\end{proof}
+
+\begin{defn}[Inverse class]
+	Let $\sigma:I \to X$ be a path. We define the inverse of the class $[\sigma]$ as
+	\begin{equation*} 
+		[\sigma]^{-1} \vcentcolon= [\sigma^{-1}].
+	\end{equation*}
+\end{defn}
+In view of the above lemma, the above definition is indeed well-defined.
+
+\begin{lem} \label{lem:prodinv}
+	Given any path $\sigma$ from $x_0$ to $x_1,$ we have
+	\begin{equation*} 
+		e_{x_0} \simeq \sigma\sigma^{-1} \rel \{0, 1\},
+	\end{equation*}
+	where $e_{x_0}$ denotes the constant loop at $x_0.$
+\end{lem}
+
+\begin{proof} 
+	As usual, we motivate the proof with a diagram. In this case, it is the following:
+	\begin{center}
+		\begin{tikzpicture}
+			\def\len{3}
+			\draw[thick, ->-=at 0.5 with label {$x_0$}](0, 0) -- (0, \len);
+			\draw[thick, ->-=at 0.5 with label {$\sigma$}](0, \len) -- (\len, \len);
+			\draw[thick, -<-=at 0.5 with label {$e_{x_0}$}](2*\len, 0) -- (0, 0);
+			\draw[thick, ->-=at 0.5 with label {$\sigma^{-1}$}](\len, \len) -- (2*\len, \len);
+			\draw[thick, -<-=at 0.5 with label {$x_0$}](2*\len, \len) -- (2*\len, 0);
+			\draw[dashed, -*-=at 0.5 with label {$x_1$}] (0, 0) -- (\len, \len) -- (2*\len, 0);
+		\end{tikzpicture}
+	\end{center}
+	The homotopy $F:I \times I \to X$ in this case, is defined as
+	\begin{equation*} 
+		F(s, t) \vcentcolon= \begin{cases}
+			\sigma(2s) & 0 \le 2s \le t,\\
+			\sigma(t) & t \le 2s \le 2 - t,\\
+			\sigma^{-1}(2s - 1) & 2 - t \le 2s \le 2.
+		\end{cases}
+	\end{equation*}
+	It is clear that the piecewise definitions agree on the dashed line $2s = t.$ Observe that $\sigma^{-1}(2s - 1) = \sigma(2 - 2s)$ and thus, the functions do agree on the dashed line $2s = 2 - t$ as well. \\
+	One can easily check that the four properties of the homotopy are satisfied. To see the bottom line property, note that $F(s, 0) = \sigma(0)$ (using the second piece definition) and $\sigma(0) = x_0 = e_{x_0}(s)$ for all $s \in I.$
+\end{proof}
+
+Note that since $(\sigma^{-1})^{-1} = \sigma,$ the above also shows that $\sigma^{-1}\sigma = e_{x_1}.$
+
+\begin{lem} \label{lem:leftid}
+	Let $x_0 \overset{\sigma}{\longrightarrow} x_1$ and $e_{x_0}$ be the constant path at $x_0.$ Then,
+	\begin{equation*} 
+		\sigma \simeq e_{x_0}\sigma \rel \{0, 1\}.
+	\end{equation*}
+\end{lem}
+\begin{proof} 
+	The proof is motivated by this diagram.
+
+	\begin{center}
+		\begin{tikzpicture}
+			\def\len{3}
+			\draw[thick, ->-=at 0.5 with label {$x_0$}](0, 0) -- (0, \len);
+			\draw[thick, ->-=at 0.5 with label {$e_{x_0}$}](0, \len) -- (\len, \len);
+			\draw[thick, -<-=at 0.5 with label {$\sigma$}](2*\len, 0) -- (0, 0);
+			\draw[thick, ->-=at 0.5 with label {$\sigma$}](\len, \len) -- (2*\len, \len);
+			\draw[thick, -<-=at 0.5 with label {$x_1$}](2*\len, \len) -- (2*\len, 0);
+			\draw[dashed, -*-=at 1.0 with label {$x_0$}] (0, 0) -- (\len, \len);
+		\end{tikzpicture}
+	\end{center}
+
+	The homotopy is $F:I\times I \to X$ defined as
+	\begin{equation*} 
+		F(s, t) \vcentcolon= \begin{cases}
+			x_0 & 0 \le 2s \le t,\\~\\
+			\sigma\left(\dfrac{2s - t}{2 - t}\right) & t \le 2s \le 2.
+		\end{cases}
+		\qedhere
+	\end{equation*}
+\end{proof}
+
+As one would expect, we have a lemma in the other direction as well.
+\begin{lem} \label{lem:rightid}
+	Let $x_1 \overset{\sigma}{\longrightarrow} x_0$ and $e_{x_0}$ be the constant path at $x_0.$ Then,
+	\begin{equation*} 
+		\sigma \simeq \sigma e_{x_0} \rel \{0, 1\}.
+	\end{equation*}
+\end{lem}
+
+\begin{proof} 
+	Similar as in the last case and we omit it.
+\end{proof}
+	
+The astute reader might have sensed a group sneaking around the corner.\\
+However, note that the product of equivalence classes defined above is not a binary operation unless the endpoints are the same. Due to this, we restrict ourselves to loops in the next theorem.
+
+\begin{thm}
+	Let $\pi_1(X, x_0)$ be the set of homotopy classes of loops in $X$ at $x_0.$\\
+	If multiplication in $\pi_1(X, x_0)$ is defined as above, $\pi_1(X, x_0)$ becomes a group, in which the neutral element is the class $[e_{x_0}]$ and the inverse of a class $[\sigma]$ is the class of the inverse $[\sigma^{-1}].$
+\end{thm}
+\begin{proof} 
+	Interpreting \crefrange{lem:prodassoc}{lem:rightid} as equalities of the equivalence classes shows that $\pi_1(X, x_0)$ verifies the group axioms.
+\end{proof}
+
+The next proposition tells us how $\pi_1(X, x_0)$ and $\pi_1(X, x_1)$ are related in the case that $x_0$ and $x_1$ lie in the same path-connected component. (In the case that they do not, nothing can be said.)
+
+\begin{prop}
+	Let $\alpha$ be a path from $x_0$ to $x_1.$ The mapping $\widehat{\alpha}$ defined by
+	\begin{equation*} 
+		[\sigma] \mapsto [\alpha^{-1}]*[\sigma]*[\alpha] = [\alpha^{-1}\sigma\alpha]
+	\end{equation*}
+	is an isomorphism of the group $\pi_1(X, x_0)$ onto $\pi_1(X, x_1).$
+\end{prop}
+Note that the above is well-defined since $*$ is well-defined.
+\begin{proof} 
+	We first note that if $[\sigma] \in \pi_1(X, x_0),$ then $\alpha^{-1}\sigma\alpha$ is path as follows:
+	\begin{equation*} 
+		x_1 \overset{\alpha^{-1}}{\longrightarrow} x_0 \overset{\sigma}{\longrightarrow} x_0 \overset{\alpha}{\longrightarrow} x_1
+	\end{equation*}
+	and thus, $[\alpha^{-1}\sigma\alpha]$ is indeed an element of $\pi_1(X, x_1).$\\
+	Moreover, note that
+	\begin{align*} 
+		\widehat{\alpha}([\sigma\sigma']) &= [\alpha^{-1}\sigma\sigma'\alpha]\\
+		&= [\alpha^{-1}\sigma][\sigma'\alpha]\\
+		&= [\alpha^{-1}\sigma][\alpha\alpha^{-1}][\sigma'\alpha]\\
+		&= [\alpha^{-1}\sigma\alpha][\alpha^{-1}\sigma'\alpha]\\
+		&= \widehat{\alpha}([\sigma])\widehat{\alpha}([\sigma']).
+	\end{align*}
+	This shows that $\widehat{\alpha}$ is a homomorphism. That this is an isomorphism follows by noting that it has as inverse $\widehat{\alpha^{-1}}.$
+\end{proof}
+\begin{cor}
+	If $X$ is pathwise connected, the group $\pi_1(X, x_0)$ is independent of the point $x_0,$ up to isomorphism.
+\end{cor}
+Note that if $C$ is a connected component of $X$ containing $x_0,$ then $\pi_1(X, x_0) = \pi_1(C, x_0)$ since any loop at $x_0$ must necessarily lie in $C.$ For this reason, we might as well only work with pathwise connected spaces.
+\begin{defn}
+	If $X$ is pathwise connected, we write $\pi_1(X)$ for $\pi_1(X, x_0)$ and call it \emph{the fundamental group} of $X.$
+\end{defn}
+Note that this group depends on $x_0$ in the sense that the elements of the group depend on the base point $x_0$ but the isomorphism class does not.\\
+\begin{defn}[Simply connected]
+	A space $X$ is called simply connected if it is pathwise connected and its fundamental group is trivial.
+\end{defn}
+\subsection{Functoriality}
+We now wish to turn $\pi_1$ into a functor. Since we need to take care of the base points, we look at the category of \emph{Pointed Topological spaces}.
+\begin{defn}[Pointed Topological Spaces]
+	The category $\mathsf{Top}_\bullet$ of \emph{pointed topological spaces} is the category whose objects and morphisms are given as follows:
+	\begin{itemize}
+		\item Objects: Pairs $(X, x_0)$ where $X$ is a topological space and $x_0 \in X,$
+		\item Morphisms: $f:(X, x_0) \to (Y, y_0)$ such that $f:X\to Y$ is a continuous function and $f(x_0) = y_0.$
+	\end{itemize}
+\end{defn}
+That the above is a category can be easily verified.
+
+\begin{defn}
+	Let $h:(X, x_0) \to (Y, y_0)$ be a morphism. Define
+	\begin{equation*} 
+		h_* : \pi_1(X, x_0) \to \pi_1(Y, y_0)
+	\end{equation*}
+	by the equation
+	\begin{equation*} 
+		h_*([\sigma]) = [h\circ \sigma].
+	\end{equation*}
+	The map $h_*$ is called the \emph{homomorphism induced by $h$}, relative to the base point $x_0.$
+\end{defn}
+To see that $h_*$ is well-defined, we note that if 
+\begin{equation*} 
+	F : \sigma \simeq \sigma' \rel \{0, 1\}
+\end{equation*}
+for loops $\sigma, \sigma'$ in $X$ at $x_0,$ then
+\begin{equation*} 
+	h \circ F : h\circ \sigma \simeq h\circ\sigma' \rel \{0, 1\}.
+\end{equation*}
+That is to say, if two loops at $x_0$ are homotopic, then so are the loops obtained by pre-composing $h.$\\~\\
+To see that $h_*$ is a homomorphism, first note that
+\begin{equation*} 
+	(h \circ \sigma)(h \circ \sigma') = h\circ(\sigma\sigma').
+\end{equation*}
+(This follows from the definition of the product of paths.)\\
+Then, we see that
+\begin{equation*} 
+	h_*([\sigma\sigma']) = [h\circ(\sigma\sigma')] = [h\circ\sigma][h\circ\sigma'] = h_*([\sigma])h_*([\sigma']).
+\end{equation*}
+
+\begin{thm}[Functoriality]
+	If $h:(X, x_0) \to (Y, y_0)$ and $k:(Y, y_0) \to (Z, z_0)$ are morphisms, then
+	\begin{equation*} 
+		(k \circ h)_* = k_* \circ h_*.
+	\end{equation*}
+	If $i:(X, x_0) \to (X, x_0)$ is the identity map, then $i_*$ is the identity homomorphism.
+\end{thm}
+\begin{proof} 
+	By definition, we have
+	\begin{align*} 
+		(k \circ h)_*([\sigma]) &= [(k \circ h) \circ \sigma]\\
+		&= [k \circ (h \circ \sigma)]\\
+		&= k_*([h\circ \sigma])\\
+		&= k_*(h_*([\sigma]))\\
+		&= (k_* \circ h_*)([\sigma]).
+	\end{align*}
+	Thus, $(k \circ h)_* = k_* \circ h_*.$\\~\\
+	Now, if $i$ is the identity map, then we have
+	\begin{equation*} 
+		i_*([\sigma]) = [i \circ \sigma] = [\sigma],
+	\end{equation*}
+	showing that $i_*$ is the identity map of $\pi_1(X, x_0).$
+\end{proof}
+The above then shows that $\pi_1$ defines a functor from the category $\mathsf{Top}_*$ to $\mathsf{Grp}.$\\
+Since functors preserve isomorphisms in general, we get the following corollary.
+\begin{cor}
+	If $h:(X, x_0) \to (Y, y_0)$ is a morphism such that $h:X \to Y$ is a homeomorphism, then
+	\begin{equation*} 
+		h_* : \pi_1(X, x_0) \to \pi_1(Y, y_0)
+	\end{equation*}
+	is an isomorphism.
+\end{cor}
+Since we aren't discussing Category Theory, we give a proof for this special example of functors.
+\begin{proof} 
+	Let $h^{-1}:Y \to X$ be the inverse, which is continuous since $h$ is a homeomorphism. Moreover, $h^{-1}(y_0) = x_0$ and thus, $h^{-1}:(Y, y_0) \to (X, x_0)$ is a morphism and the inverse of $h.$\\
+	Now, note that,
+	\begin{equation*} 
+		(h_*)\circ((h^{-1})^*) = (h\circ h^{-1})^* = (\id_{(Y, y_0)})^* = \id_{\pi_1(Y, y_0)},
+	\end{equation*}
+	by functoriality. Similarly, we have
+	\begin{equation*} 
+		((h^{-1})^*)\circ(h_*) = \id_{(X, x_0)},
+	\end{equation*}
+	proving the corollary.
+\end{proof}
+%
+%
+\section{Homotopy of Maps}
+%
+In the previous section, we talked about homotopy of special types of maps. More precisely, we only considered maps $I \to X.$ However, we can replace $I$ by an arbitrary topological space $Y.$ In the place of endpoints, we just consider a subspace $A \subset Y.$
+\begin{defn}[Relative homotopy]
+	Given maps $f, g:Y \to X$ such that $f|_A = g|_A,$ we say $f$ and $g$ are homotopic relative to $A$ written
+	\begin{equation*} 
+		f \simeq g \rel A
+	\end{equation*}
+	if there is a map $F:Y \times I \to X$ satisfying
+	\begin{enumerate}
+		\item $F(y, 0) = f(y)$ for all $y \in Y,$
+		\item $F(y, 1) = g(y)$ for all $y \in Y,$
+		\item $F(a, t) = f(a) = g(a)$ for all $a \in A, t \in I.$
+	\end{enumerate}
+	This map $F$ is called a homotopy from $f$ to $g$ relative to $A$ and we write
+	\begin{equation*} 
+		F:f\simeq g \rel A.
+	\end{equation*}
+\end{defn}
+Note that the ``second coordinate'' above is still $I.$\\
+Note that (3) is satisfied vacuously if $A = \emptyset$ and we have $f|_A = g|_A$ for all maps $f, g : Y \to X.$ Keeping this in mind, we have the following definition.
+\begin{defn}[Homotopy]
+	Maps $f, g:Y \to X$ are said to be \emph{homotopic} if $f$ and $g$ are homotopic relative to $\emptyset.$\\
+	We write this more simply as
+	\begin{equation*} 
+		f \simeq g.
+	\end{equation*}
+	Moreover, any $F$ as before is simply called a homotopy from $f$ to $g.$\\
+	As before, we write
+	\begin{equation*} 
+		F:f\simeq g.
+	\end{equation*}
+\end{defn}
+
+Once again, we obtain an equivalence. The homotopies defined as in the proof of \cref{prop:equivrel} work again.
+\begin{defn}[Contractible space] \label{def:contrac}
+	If $X$ is a topological space such that the identity map on $X$ is homotopic to a constant map on some point in $X,$ we say that $X$ is \emph{contractible}.
+\end{defn}
+
+\begin{prop} \label{prop:contracpathwise} % ex 3.1
+	$X$ is contractible if and only if for any space $Y,$ any two maps of $Y$ into $X$ are homotopic. A contractible space is pathwise connected.
+\end{prop}
+\begin{proof} 
+	$(\implies)$ Let $X$ be contractible and $Y$ be any space. Fix any $x_0 \in X$ such that $\id_X$ is homotopic to the constant map $e_{x_0}:X\to X.$ \\
+	Let $f_{x_0}:Y\to X$ denote the constant map $y \mapsto x_0.$\\
+	Now, given any map $f:Y\to X,$ we show that it is homotopic to $f_{x_0}.$ \\This will prove that any two maps of $Y$ into $X$ are homotopic since $\simeq$ is an equivalence relation.\\
+	Let $H:\id_X \simeq e_{x_0}$ be any homotopy. Then, we have
+	\begin{equation*} 
+		H(x, 0) = x,\quad H(x, 1) = x_0; \qquad \text{for all } x \in X.
+	\end{equation*}
+	(Note that $H$ is continuous.)\\
+	Now, we define $F:Y\times I \to X$ as
+	\begin{equation*} 
+		F(y, t) = H(f(y), t).
+	\end{equation*}
+	It is clear that $F$ is a map. (That is, $F$ is continuous.)\\
+	Moreover, note that
+	\begin{equation*} 
+		F(y, 0) = H(f(y), 0) = f(y), \quad F(y, 1) = H(f(y), 1) = x_0 = f_{x_0}(y); \qquad \text{for all } y \in Y.
+	\end{equation*}
+	This shows that $F:f\simeq f_{x_0},$ as desired.\\~\\
+	$(\impliedby)$ To show that $X$ is contractible, simply consider $Y = X$ and consider the maps $\id_X$ and $e_{x_0}.$ (Both of these are indeed continuous.)\\
+	By hypothesis, these maps are homotopic and by definition, $X$ is contractible.\\~\\
+	Now, we show that $X$ is pathwise connected assuming that it is contractible.\\
+	Let $x_0$ and $x_1$ be any two points in $X.$ As $X$ is contractible, $(\implies)$ tells us that the maps $e_{x_0}$ and $e_{x_1}$ are homotopic. \\
+	Let $F$ be any homotopy from $e_{x_0}$ and $e_{x_1}.$ Define $\sigma:I\to X$ as 
+	\begin{equation*} 
+		\sigma(t) \vcentcolon= F(x_0, t).
+	\end{equation*}
+	$\sigma$ is clearly continuous. Moreover, we have
+	\begin{align*} 
+		\sigma(0) &= F(x_0, 0) = e_{x_0}(x_0) = x_0,\\
+		\sigma(1) &= F(x_0, 1) = e_{x_1}(x_0) = x_1.
+	\end{align*}
+	Thus, $\sigma$ is path from $x_0$ to $x_1$ in $X,$ proving the proposition.
+\end{proof}
+\begin{ex}
+	Every convex subset $X$ of Euclidean space is contractible.\\
+	Given maps $f_1, f_2: Y \to X,$ we have a homotopy $F:f_1 \simeq f_2$ given by
+	\begin{equation*} 
+		F(y, t) = tf_2(y) + (1 - t)f_1(y), \quad y \in Y, t \in I.
+	\end{equation*}
+	By the convexity assumption, the above $F$ is indeed a map into $X.$\\
+	By the previous proposition, this shows that $X$ is contractible.
+\end{ex}
+\begin{ex}
+	$\mathbb{R}^n$ is contractible for any $n.$\\
+	To see this, we could either appeal to the previous example or do it directly by defining a homotopy $F: e_{0} \simeq \id_{\mathbb{R}^n}$ as
+	\begin{equation*} 
+		F(x, t) = tx.
+	\end{equation*}
+\end{ex}
+
+We would now like to show that any contractible space is simply connected. What we do know is that any loop would be homotopic to a point. However, we do not know if this homotopy is relative to $\{0, 1\}.$ Indeed, to show that we do have a homotopy relative to $\{0, 1\},$ we would need to use the fact that $X$ is contractible once again.\\
+Before proving that, we first look at a lemma.
+
+\begin{lem} \label{lem:gbad}
+	Let $F:I\times I \to X$ be a map. Set $\alpha(t) = F(0, t),$ $\beta(t) = F(1, t),$ $\gamma(s) = F(s, 0),$ and $\delta(s) = F(s, 1),$ as in the diagram
+	\begin{center}
+		\begin{tikzpicture}
+			\def \len{3}
+			\draw[thick, ->-=at 0.5 with label {$\alpha$}](0, 0) -- (0, \len);
+			\draw[thick, ->-=at 0.5 with label {$\delta$}](0, \len) -- (\len, \len);
+			\draw[thick, -<-=at 0.5 with label {$\beta$}](\len, \len) -- (\len, 0);
+			\draw[thick, -<-=at 0.5 with label {$\gamma$}](\len, 0) -- (0, 0);
+			\node[] at (\len/2, \len/2) {$F$};
+		\end{tikzpicture}
+	\end{center}
+	Then, $\delta = \alpha^{-1}\gamma\beta.$
+\end{lem}
+\begin{proof} 
+	The proof is quite intuitive. First, we define the paths
+	\begin{equation*} 
+		\sigma:I \to I\times I, \quad \tau:I \to I \times I
+	\end{equation*}
+	as
+	\begin{equation*} 
+		\sigma(s) \vcentcolon= (t, 1)
+	\end{equation*}
+	and
+	\begin{equation*} 
+		\tau(s) \vcentcolon= \begin{cases}
+			(0, 1 - 4s) & 0 \le 4s \le 1, \\
+			(4s - 1, 0) & 1 \le 4s \le 2, \\
+			(1, 2s - 1) & 1 \le 2s \le 2.
+		\end{cases}
+	\end{equation*}
+	These paths are the following ones in $I^2:$
+	\begin{center}
+		\begin{tikzpicture}
+			\def \len{3}
+			\draw[thick, ->-=at 0.5 with label {$\sigma$}](0, \len) -- (\len, \len);
+			\draw[red, thick, -<-=at 0.5 with label {}](0, 0) -- (0, \len);
+			\draw[red, thick, -<-=at 0.5 with label {}](\len, \len) -- (\len, 0);
+			\draw[red, thick, -<-=at 0.5 with label {$\tau$}](\len, 0) -- (0, 0);
+		\end{tikzpicture}
+	\end{center}
+	As it should be clear from the diagram (and one can easily check), we have
+	\begin{equation*} 
+		\delta = F \circ \sigma, \quad (\alpha^{-1}\gamma)\beta = F \circ \tau.
+	\end{equation*}
+	(Note that the bracketing in $(\alpha^{-1}\gamma)\beta$ is necessary.)\\
+	Also, since $I^2$ is convex, we see that $\sigma$ and $\tau$ are homotopic relative to $\{0, 1\}$ with $H:I\times I \to I\times I$ being a required homotopy defined as
+	\begin{equation*} 
+		H(s , t) \vcentcolon= (1 - t)\sigma(s) + t\tau(s).
+	\end{equation*}
+	Thus,
+	\begin{align*} 
+		F \circ H &: F \circ \sigma \simeq F \circ \tau \rel \{0, 1\}\\
+		\implies F \circ H &: \delta \simeq (\alpha^{-1}\gamma)\beta \rel \{0, 1\},
+	\end{align*}
+	as desired.
+\end{proof}	
+\begin{thm}
+	Let $X$ be a contractible space. Then, $X$ is simply connected.
+\end{thm}
+\begin{proof} 
+	Note that by \cref{prop:contracpathwise}, we know that $X$ is pathwise connected. Now we show that that $\pi_1(X)$ is trivial.\\
+	Let $x_0 \in X$ be arbitrary and $\alpha:I\to X$ be a loop at $x_0$ in $X.$\\
+	If we show that $\alpha \simeq e_{x_0} \rel \{0, 1\},$ then we are done.\\~\\
+	To do this, we will use the earlier lemma after constructing an appropriate $F.$\\
+	Using that $X$ is contractible, we fix a homotopy $H:\id_X \simeq f_{x_0}$ where $f_{x_0}:X\to X$ is the constant function $x \mapsto x_0.$\\
+	(This is different from $e_{x_0}$ since the domains are different in general.)\\
+	To recall, $H$ has the following properties:
+	\begin{equation*} 
+		H(x, 0) = x,\; H(x, 1) = x_0 \quad \text{for all } x \in X.
+	\end{equation*}
+	Now, we define $F:I\times I \to X$ as 
+	\begin{equation*} 
+		F(s, t) \vcentcolon= H(\sigma(s), t).
+	\end{equation*}
+	Now, note that if we set $\alpha, \beta, \gamma, \delta$ as in the previous lemma, we have
+	\begin{align*} 
+		\alpha(t) = F(0, t) = H(\sigma(0), t) &= H(x_0, t)\\
+		&= H(\sigma(1), t) = F(1, t) = \beta(t),
+	\end{align*}
+	\begin{equation*} 
+		\gamma(s) = F(s, 0) = H(\sigma(s), 0) = \sigma(s),
+	\end{equation*}
+	\begin{equation*} 
+		\delta(s) = F(s, 1) = H(\sigma(s), 1) = x_0.
+	\end{equation*}
+	In other words, we have
+	\begin{equation*} 
+		\alpha = \beta, \gamma = \sigma, \delta = e_{x_0}.
+	\end{equation*}
+	By the previous lemma, we know that $[\delta] = [\alpha^{-1}\gamma\beta],$ where $[.]$ is the homotopy class of a path relative to $\{0, 1\}.$ Thus, we have
+	\begin{align*} 
+		[e_{x_0}] &= [\alpha^{-1}\sigma\alpha]\\
+		\implies [\alpha][e_{x_0}][\alpha^{-1}] &= [\sigma]\\
+		\implies [e_{x_0}] &= [\sigma]\\
+		\implies e_{x_0} &\simeq \sigma \rel \{0, 1\},
+	\end{align*}
+	finishing the proof.
+\end{proof}
+
+\begin{prop}
+	Let $f, g:Y\to X$ be maps which are homotopic by means of a homotopy $F:Y \times I \to X.$ \\
+	Let $y_0 \in Y,$ $x_0 \vcentcolon= f(y_0) = F(y_0, 1),$ and $x_1 \vcentcolon= g(y_0) = F(y_0, 1).$\\
+	Let $\alpha:I \to X$ be a path from $x_0$ to $x_1$ given by
+	\begin{equation*} 
+		\alpha(t) = F(y_0, t) \quad t \in I.
+	\end{equation*}
+	Then, the following diagram commutes.
+	\begin{center}
+		\begin{tikzcd}
+			{\pi_1(Y, y_0)} \arrow[rr, "f_*"] \arrow[rrddd, "g_*"'] & & {\pi_1(X, x_0)} \arrow[ddd, "\widehat{\alpha}"] \\
+			&&\\&&\\
+			&& {\pi_1(X, x_1)}
+		\end{tikzcd}
+	\end{center}
+\end{prop}
+
+\begin{proof} 
+	The diagram commuting is just saying that
+	\begin{equation*} 
+		\widehat{\alpha} \circ f_* = g_*.
+	\end{equation*}
+	Let $[\sigma] \in \pi_1(Y, y_0)$ be arbitrary. Showing that the above is true is equivalent to showing that 
+	\begin{equation*} 
+		(\widehat{\alpha} \circ f_*)([\sigma]) = g_*([\sigma]).
+	\end{equation*}
+	Using the definitions of $\widehat{\alpha}$ and $f_*,$ we note that
+	\begin{align*} 
+		(\widehat{\alpha} \circ f_*)([\sigma]) &= g_*([\sigma])\\
+		\iff \widehat{\alpha}(f_*([\sigma])) &= g_*([\sigma])\\
+		\iff \widehat{\alpha}([f\circ \sigma]) &= [g\circ \sigma]\\
+		\iff [\alpha^{-1}(f\circ \sigma) \alpha] &= [g\circ \sigma].
+	\end{align*}
+	Now, defining $\tilde{F}:I\times I \to X$ as
+	\begin{equation*} 
+		\tilde{F}(s, t) = F(\sigma(s), t).
+	\end{equation*}
+	Then, we have the following diagram as in \cref{lem:gbad} which proves the proposition.
+	\begin{center}
+		\begin{tikzpicture}
+			\def \len{3}
+			\draw[thick, ->-=at 0.5 with label {$\alpha$}](0, 0) -- (0, \len);
+			\draw[thick, ->-=at 0.5 with label {$g\circ\sigma$}](0, \len) -- (\len, \len);
+			\draw[thick, -<-=at 0.5 with label {$\alpha$}](\len, \len) -- (\len, 0);
+			\draw[thick, -<-=at 0.5 with label {$f\circ\sigma$}](\len, 0) -- (0, 0);
+			\node[] at (\len/2, \len/2) {$\tilde{F}$};
+		\end{tikzpicture}
+	\end{center}
+	To see that the sides are indeed as labeled, recall that $\sigma$ is a loop at $y_0$ and note that
+	\begin{align*} 
+		\tilde{F}(0, t) &= F(\sigma(0), t) = F(y_0, t) = \alpha(t),\\
+		\tilde{F}(1, t) &= F(\sigma(1), t) = F(y_0, t) = \alpha(t),\\
+		\tilde{F}(s, 0) &= F(\sigma(s), 0) = g(\sigma(s)) = (g\circ \sigma)(s),\\
+		\tilde{F}(s, 1) &= F(\sigma(s), 1) = f(\sigma(s)) = (f\circ \sigma)(s).
+	\end{align*}
+	By the conclusion of \cref{lem:gbad}, we are done.
+\end{proof}
+Recall that $\widehat{\alpha}$ is an isomorphism and thus, we get the following corollary.
+\begin{cor}
+	With the same setup as above, $f_*$ is an isomorphism if and only if $g_*.$
+\end{cor}
+What the above corollary says is that if $f$ and $g$ are homotopic, then $f_*$ is an isomorphism iff $g_*$ is.
+
+\begin{defn}[Homotopy equivalence]
+	A map $f:Y \to X$ is said to be a \emph{homotopy equivalence} if there exists a map $f':X \to Y$ such that
+	\begin{align*} 
+		ff' & \simeq \id_X,\\
+		f'f & \simeq \id_Y.
+	\end{align*}
+	If such a map exists, we say that $X$ and $Y$ are \emph{homotopically equivalent spaces}.
+\end{defn}
+It can be checked that being homotopically equivalent is an ``equivalence relation.''
+
+\begin{cor}
+	If $f:Y \to X$ is a homotopy equivalence, then $f_*$ is an isomorphism
+	\begin{equation*} 
+		\pi_1(Y, y_0) \to \pi_1(X, f(y_0))
+	\end{equation*}	
+	for any $y_0 \in Y.$
+\end{cor}
+\begin{proof} 
+	Let $f':X \to Y$ be as in the definition.\\
+	Then, $ff' \simeq \id_X.$ By the previous corollary, we have that $(ff')_*$ is an isomorphism. (Since $(\id_X)_*$ is.)\\
+	Similarly, $(f'f)_*$ is an isomorphism. Since $(ff')_* = f_*\circ f'_*$ and $(f'f)_* = f'_* \circ f_*,$ we see that $f_*$ is a bijection and hence, an isomorphism.
+\end{proof}
+
+The above shows that the fundamental group of a path-connected space is a \emph{homotopy invariant}. We had shown earlier that this was a topological invariant. \\
+Note that being homotopically equivalent is a weaker concept than being topologically invariant (i.e., homeomorphic). Clearly, if $f:X \to Y$ is a homeomorphism, it also a homotopy equivalence with $f' = f^{-1}.$\\
+However, the closed interval $I$ is homotopically equivalent to the point space but clearly not homeomorphic. In fact, one can note that $X$ is contractible if and only if it is homeomorphic to a point.
+%
+%
+\section{Fundamental Group of the Circle}
+In this section, we prove a more general result. $S^1$ will turn out to be a special case of that. First, we need a lemma.
+\begin{lem} \label{lem:unifcont}
+	Let $K$ be a compact metric space and $G$ a topological group. Let $V \subset G$ be open such that $1 \in V.$\\
+	If $f:K\to G$ is continuous, then there exists $\delta > 0$ such that 
+	\begin{equation*} 
+		d(k, k') < \delta \implies f(k)(f(k'))^{-1} \in V.
+	\end{equation*}
+\end{lem}
+The above is essentially mimicking something like ``uniform continuity.''
+\begin{proof} \phantom{hi}
+
+	\begin{blockquote}
+		\textbf{Claim 1.} There exists an open set $U \subset G$ such that
+		\begin{enumerate}
+			\item $1 \in U \subset V,$
+			\item $g, g' \in U \implies gg^{-1} \in V.$
+		\end{enumerate}
+		\begin{proof} 
+			The function $\varphi:G \times G \to G$ defined as
+			\begin{equation*} 
+				\varphi(g, g') \vcentcolon= g(g')^{-1}
+			\end{equation*}
+			is continuous. Thus, $\varphi^{-1}(V)$ is open.\\
+			Note that $(1, 1) \in \varphi^{-1}(V).$ Thus, there exists a basis element of the form $U_1 \times U_2$ satisfying
+			\begin{equation*} 
+				(1, 1) \in U_1 \times U_2 \subset \varphi^{-1}(V).
+			\end{equation*}
+			Let $U\vcentcolon= U_1 \cap U_2 \cap V.$ Clearly, $U$ is open and $1 \in U \subset V.$ \\
+			Moreover,
+			\begin{align*} 
+				g, g' \in U \implies (g, g') \in U_1 \times U_2 \subset \varphi^{-1}(V) \implies \varphi(g, g') \in V \implies g(g')^{-1} \in V,
+			\end{align*}
+			as desired.
+		\end{proof}
+	\end{blockquote}
+		With this, we can mimic the proof of continuous functions being uniformly continuous on compact sets. (The above $U$ will help us use ``triangle inequality'' in the codomain.)\\
+		Let $U$ be as in the above claim.\\
+	\begin{blockquote}
+		\textbf{Claim 2.} Given any $k \in K,$ there exists $\delta_k > 0$ such that
+		\begin{align*} 
+			d(k, k') < \delta_k &\implies f(k)(f(k'))^{-1} \in U, \\
+			d(k, k') < \delta_k &\implies f(k')(f(k))^{-1} \in U.	
+		\end{align*}
+		\begin{proof} 
+			The function $f_k : K \to G$ defined by $f_k(k') = f(k)(f(k'))^{-1}$ is continuous with $f_k(k) = 1 \in U.$\\
+			Consider the open set $f_k^{-1}(U).$ Since it contains $k,$ there exists $\delta > 0$ such that $B_\delta(k) \subset f_k^{-1}(U).$ Thus, if $k' \in B_\delta(k),$ then $f_k(k') \in U,$ as desired for the first condition.\\~\\
+			Note that we can find a suitable $\delta_k'$ for the other condition as well. Taking the minimum of the two proves the claim.
+		\end{proof}
+	\end{blockquote}
+	Let $V_k = B_{\delta_k/2}(k).$ Clearly, $\{V_k\}_{k \in K}$ is an open cover of $K.$ Since $K$ is compact, we may extract a finite subcover.\\
+	Let $k_1, \ldots, k_n$ be the indices of one such. Set 
+	\begin{equation*} 
+		\delta \vcentcolon= \min_{1 \le i \le n} \dfrac{1}{2}\delta_{k_i}.
+	\end{equation*}
+	Clearly, $\delta > 0.$ Moreover, it satisfies the condition of the lemma. To see this, let $k, k' \in K$ be such that $d(k, k') < \delta.$\\
+	Since $\{V_{k_i}\}_{1 \le i \le n},$ is an open cover, $k$ lies in $V_{k_i}$ for some $1 \le i \le n.$ That is, $2d(k, k_i) < \delta_i.$ Now, using triangle inequality, note that
+	\begin{equation*} 
+		d(k', k_i) \le d(k', k) + d(k, k_i) < \delta + \frac{1}{2}\delta_i \le \dfrac{1}{2}\delta_i + \dfrac{1}{2}\delta_i = \delta_i.
+	\end{equation*}
+	Thus, both $k$ and $k'$ are at most $\delta_i$ from $k_i.$ By the definition of $\delta_i$ (from Claim 2), we see that $f(k)(f(k_i))^{-1} \in U$ and $f(k_i)(f(k'))^{-1} \in U.$\\
+	By the property of $U,$ we have
+	\begin{equation*} 
+		(f(k)(f(k_i))^{-1})((k_i)(f(k'))^{-1}) = f(k)(f(k'))^{-1} \in V,
+	\end{equation*}
+	as desired.
+\end{proof}
+
+Now, for the remainder of this section, we shall fix $G$ as any simply connected topological group and $H \le G$ is a \emph{discrete} normal subgroup of $G.$ We will show that $\pi_1(G/H, 1) \cong H.$\\
+(In the special case that $G = \mathbb{R}$ and $H = \mathbb{Z},$ we see that $\pi_1(S^1, 1) \cong \mathbb{Z}$ or simply, $\pi_1(S^1) \cong \mathbb{Z}.$)\\~\\
+We also fix the map $\varphi:G \to G/H$ to be the projection $g \mapsto gH.$\\
+\begin{lem} 
+	There exists an open neighbourhood $U$ of $1$ in $G$ which is mapped homeomorphically onto an open neighbourhood $V$ of $1$ in $G/H$ be $\varphi.$
+\end{lem}
+\begin{proof} 
+	Since $H$ is discrete, $\{1\}$ is open in $H.$ Thus, there exists an open neighbourhood $U_1$ of $1$ in $G$ such that $U_1 \cap H = \{1\}.$\\
+	As in claim 1 of the previous proof, we may find a subset $U \subset U_1$ such that $g, g' \in U \implies gg'^{-1} \in U_1.$ Clearly, $U \cap H =\{1\}$ as well. \\
+	\begin{blockquote}
+		\textbf{Claim 1.} $\varphi|_U$ is injective.
+	\begin{proof} 
+		Let $g_1, g_2 \in U$ with $\varphi(g_1) = \varphi(g_2).$\\
+		Then, $g_1H = g_2H$ or $Hg_1 = Hg_2$ or $Hg_1g_2^{-1} = H$ or $g_1g_2^{-1} \in H.$\\
+		Since $g_1, g_2 \in U,$ we also have $g_1g_2^{-1} \in U_1.$ Since $U_1 \cap H = \{1\},$ we see that $g_1g_2^{-1} = 1$ or $g_1 = g_2.$
+	\end{proof}
+	\end{blockquote}
+	Let $V = \varphi(U).$ Clearly, $\varphi$ maps $U$ bijectively onto $V$, in view of the previous claim. Moreover, this must be a homeomorphism. To see this, we recall a general result.
+	\begin{blockquote}
+		\textbf{Claim 2.} The quotient map $\phi:G \to G/H$ is open.
+	\begin{proof} 
+		Let $W$ be an open subset of $G.$ The set
+		\begin{equation*} 
+			WH = \{wh : w \in W, h \in H\}
+		\end{equation*}
+		is open since $WH = \displaystyle\bigcup_{h \in H}Wh,$ which is a union of open subsets of $G$ since right multiplication is a homeomorphism.\\
+		Note that $\varphi^{-1}(\varphi(W)) = WH.$ Since $\varphi$ is a quotient map and $WH$ is open, we see that $\varphi(W)$ is open, as desired.
+	\end{proof}
+	\end{blockquote}
+	Thus, we see that $\varphi|_U: U \to V$ is a bijective open map. In particular, it is a homeomorphism.
+\end{proof}
+For the remainder of this section, we fix $U \subset G$ and $V \subset G/H$ as above. Moreover, we fix
+\begin{equation*} 
+	\psi \vcentcolon= (\varphi|_U)^{-1}.
+\end{equation*}
+By our above discussion, $\psi:V \to U$ is a continuous function.\\
+For better clarity, we shall use $1$ for the identity of $G/H$ and $1_G$ for the identity of $G.$ \\~\\
+Now, we prove two key lemmas. 
+\begin{lem}[Lifting Lemma] \label{lem:lift}
+	If $\sigma$ is a path in $G/H$ with initial point $1,$ there is a unique path $\sigma'$ in $G$ with initial point $1_G$ such that
+	\begin{equation*} 
+		\varphi \circ \sigma' = \sigma.
+	\end{equation*}
+\end{lem}
+\begin{lem}[Covering Homotopy Lemma] \label{lem:covhomot}
+	If $\tau$ is also a path in $G/H$ with the initial point $1$ such that
+	\begin{equation*} 
+		F: \sigma \simeq \tau \rel \{0, 1\},
+	\end{equation*}
+	then there is a unique $F':I\times I \to G$ such that
+	\begin{align*} 
+		F' : \sigma' \simeq \tau' \rel \{0, 1\},\\
+		\varphi \circ F' = F.
+	\end{align*}
+\end{lem}
+(Note that $\tau'$ above is the unique path in $G$ as given by the \nameref{lem:lift}.)
+\begin{proof} 
+ 	We prove both results together.\\
+ 	Let $(K, f:Y\to G/H, 0 \in K)$ be either $(I, \sigma, 0 \in I)$ or $(I \times I, F, (0, 0) \in I \times I).$ The first choice corresponds to \cref{lem:lift} and the second to \cref{lem:covhomot}. \\~\\
+ 	For the sake of less ugly notation, we shall use $a/b$ or $\frac{a}{b}$ to denote $ab^{-1}$ for $a, b \in G/H.$ (Note that we are fixing this to mean $ab^{-1}$ without any assumption of abelianity.)\\~\\
+ 	Since $K$ is compact, there exists $\epsilon > 0$ such that 
+ 	\begin{equation*} 
+ 		|k - k'| < \epsilon \implies f(k)/(f(k')) \in V,
+ 	\end{equation*} by \cref{lem:unifcont}.\\
+ 	In particular, for such $k$ and $k',$ $\psi\left(\dfrac{f(k)}{f(k')}\right)$ is defined. Fix $N \in \mathbb{N}$ large enough such that
+ 	\begin{equation*} 
+ 		|k| < N\epsilon
+ 	\end{equation*}
+ 	for all $k \in K.$ (This can be done since $K$ is bounded by $2$.)\\
+ 	Now, define
+ 	\begin{equation*} 
+ 		f':K \to G
+ 	\end{equation*}
+ 	by
+ 	\begin{align*} 
+ 		f'(k) \vcentcolon= &\psi\left(f(k)/f\left(\dfrac{N-1}{N}k\right)\right)\\
+ 		& \cdot \psi\left(f\left(\dfrac{N-1}{N}k\right)\left/f\left(\dfrac{N-2}{N}k\right)\right.\right)\\
+ 		& \cdots \psi\left(f\left(\dfrac{1}{N}k\right)\left/f\left(0\right)\right.\right).
+ 	\end{align*}
+ 	Then, $f'$ is continuous $K \to G,$ $f'(0) = (\varphi(1))^N = 1_G,$ and $\varphi\circ f' = f.$ To see the last point, note that $\varphi$ is a homomorphism and thus,
+ 	\begin{align*} 
+ 		(\varphi\circ f')(k) = &\varphi\left[\psi\left(f(k)/f\left(\dfrac{N-1}{N}k\right)\right)\right]\\
+ 		& \cdot \varphi\left[\psi\left(f\left(\dfrac{N-1}{N}k\right)\left/f\left(\dfrac{N-2}{N}k\right)\right.\right)\right]\\
+ 		& \cdots \varphi\left[\psi\left(f\left(\dfrac{1}{N}k\right)\left/f\left(0\right)\right.\right)\right].
+ 	\end{align*}
+ 	Now, using that $\varphi\psi(k) = k,$ we see that the fractions cancel and we are left with
+ 	\begin{equation*} 
+ 		(\varphi\circ f')(k) = f(k)/f(0) = f(k),
+ 	\end{equation*}
+ 	since $f(0) = 1_G,$ in either case.\\~\\
+ 	Now, suppose we had $f'': K \to G$ satisfying $f''(0) = 1_G,$ and $\varphi\circ f'' = f.$\\
+ 	Then, we would have $[\varphi\circ(f'/f'')](s) = \varphi(f'(s))/\varphi(f''(s)),$ since $\varphi$ is a homomorphism. However, this equals $f(s)/f(s) = 1.$\\
+ 	Thus, $f'/f''$ is a continuous map from $Y$ into $\ker\varphi = H.$\\
+ 	Since $Y$ is connected and $H$ is discrete, $f'/f''$ is a constant. Since $f'(0)/f''(0) = 1_G,$ we see that $f' = f''.$\\
+ 	This proves the uniqueness of $f'.$\\~\\
+ 	Note that in the case of the first lemma (that is $Y = I$), we have $f'(0) = 1_G$ and thus, $f'$ is the required $\sigma'.$\\~\\
+ 	For the case of the second lemma, we still have to prove that $F' = f'$ is the desired (relative) homotopy.\\
+ 	First, we show that $F'$ is indeed a (not necessarily relative) homotopy. To see this, set $\alpha(s) \vcentcolon= F'(s, 0)$ and $\beta(s) = F'(s, 1).$\\
+ 	Note that $\varphi\circ \alpha(s) = \varphi \circ F'(s, 0) = F(s, 0) = \sigma(s)$ and $\alpha(0) = F'(0, 0) = 1_G.$ \\
+ 	Since $\sigma'$ is the unique such path, we see that $\alpha = \sigma'.$\\
+ 	Similarly, we can conclude $\beta = \tau$ if we show that $\beta(0) = 1_G.$ By definition, we have $\beta(0) = F'(0, 1).$ \\
+ 	Note that $F'$ is continuous and $\varphi \circ F'$ is $1$ on $\{0\} \times I.$ Thus, $F'|_{\{0\} \times I}$ maps into $\ker \varphi = H.$ As before, we see that $F'$ is constant on $\{0\} \times I.$ Thus, $F'(0, 1) = F'(0, 0) = 1_G$ and hence, $\beta = \tau'.$\\
+ 	In fact, we have even proven that $F'$ is constant on $\{0\} \times I.$ This shows that $F'$ is a homotopy relative to $\{0\}.$ All that remains is to show that it is constant on $\{1\} \times I$ as well.\\
+ 	For that, we once again note that $\varphi\circ F' = F$ is constant on $\{1\}\times I.$ Thus, $F'|_{\{1\}\times I}$ maps into a coset of $\ker \varphi = H.$ Since the coset is homeomorphic to $H,$ it must be discrete as well. This proves that $F'$ is constant on $\{1\} \times I$ as well, proving that
+ 	\begin{equation*} 
+ 		F' : \sigma' \simeq \tau' \rel \{0, 1\}. \qedhere
+ 	\end{equation*}
+ \end{proof} 
+
+\begin{cor} \label{cor:endpthomot}
+	The end point of $\sigma'$ only depends on the homotopy class of $\sigma.$\\
+	In particular, if $\sigma$ is a loop at $1,$ then $\sigma'(1) \in H.$
+\end{cor}
+\begin{proof} 
+	Let $\sigma, \tau$ be paths in the same homotopy class. Let $F:\sigma \simeq \tau \rel \{0, 1\}$ be a (relative) homotopy.\\
+	Then, $F'$ is a homotopy from $\sigma'$ to $\tau'$ relative to $\{0, 1\}.$\\
+	In particular, we have $\sigma'(1) = F(1, 0) = F(1, 1) = \tau'(1).$ This proves the first statement.\\~\\
+	For the second statement, note that $\varphi\circ\sigma'(1) = \sigma(1) = 1$ and thus, $\sigma'(1) \in \ker\varphi = H.$
+\end{proof}
+
+Now, we have the following theorem.
+\begin{thm}
+	If $G$ is a simply connected topological group, $H$ a discrete normal subgroup, then
+	\begin{equation*} 
+		\pi_1(G/H, 1) \cong H.
+	\end{equation*}
+\end{thm}
+\begin{proof} 
+	Using \cref{cor:endpthomot}, we define $\chi:\pi_1(G/H, 1) \to H$ by
+	\begin{equation*} 
+		\chi([\sigma]) = \sigma'(1).
+	\end{equation*}
+	\begin{blockquote}
+		\textbf{Claim 1.} $\chi$ is a homomorphism.
+		\begin{proof} 
+			Let $[\sigma], [\tau] \in \pi_1(G/H, 1).$\\
+			Let $h_1 = \sigma'(1)$ and $h_2 = \tau'(1).$ (Again, we see that these are well-defined and elements of $H$ by \cref{cor:endpthomot}.) \\
+			Let $\tau''$ be the path from $h_1$ to $h_1h_2$ in $G$ given by
+			\begin{equation*} 
+				\tau''(s) = h_1\tau'(s).
+			\end{equation*}
+			(Note that $\tau''(0) = \tau'(0)h_1 = 1_Gh_1 = h_1$ and $\tau''(1) = h_1\tau'(1) = h_1h_2.$)\\
+			Note that
+			\begin{equation*} 
+				(\varphi\circ\tau'')(s) = \varphi(\tau'(s)h_1) = \varphi(\tau'(s))\varphi(h_1) = \tau(s).
+			\end{equation*}
+			(Note that $\varphi(h_1) = 1$ since $h_1 \in H = \ker\varphi.$)\\
+			Since, $\sigma'(1) = \tau''(0) = h_1,$ we can consider the path $\tau''\sigma'$ in $G.$ Note that
+			\begin{equation*} 
+				\varphi\circ(\tau''\sigma')(s) = \begin{cases}
+					\varphi(\sigma'(2s)) & 0 \le 2s \le 1\\
+					\varphi(\tau''(2s - 1)) & 1 \le 2s \le 2.
+				\end{cases} = (\sigma\tau)(s).
+			\end{equation*}
+			Thus, $\tau''\sigma'$ is the unique lift of $\sigma\tau$ as given by the \nameref{lem:lift}. \\
+			Thus,
+			\begin{equation*} 
+				\chi([\sigma][\tau]) = \chi[\sigma\tau] = (\tau''\sigma')(1) = h_1h_2 = \chi[\sigma]\chi[\tau]. \qedhere
+			\end{equation*}
+
+		\end{proof}
+	\end{blockquote}
+	Now, we show that $\chi$ is bijective.
+	\begin{blockquote}
+		\textbf{Claim 2.} $\chi$ is injective.
+		\begin{proof} 
+			It suffices to show that $\ker \chi$ is trivial.\\
+			Let $[\sigma] \in \ker\chi.$ Then, $\sigma'(1) = 1_G.$\\
+			In other words, $\sigma'$ is a loop at $1_G$ in $G.$ Since $G$ is simply connected, $\sigma'$ is path homotopic to a constant loop. We may choose the constant loop to be $e_{1_G}.$\\
+			Thus, $\sigma' \simeq e_{1_G} \rel \{0, 1\}.$\\
+			Applying $\varphi,$ we get that $\sigma \simeq e_1 \rel \{0, 1\}$ or $[\sigma] = [e_1],$ the identity of $\pi_1(G/H, 1).$	
+		\end{proof}
+	\end{blockquote}
+	\begin{blockquote}
+		\textbf{Claim 3.} $\chi$ is surjective.	
+		\begin{proof} 
+			Let $h \in H$ be arbitrary.\\
+			Since $G$ is simply-connected, it is pathwise connected. Let $\sigma'$ be path from $1_G$ to $h$ in $G.$\\
+			Then, $\varphi\circ\sigma':I\to G/H$ is a loop at $1$ in $G/H$ with
+			\begin{equation*} 
+				\chi[\sigma] = \sigma'(1) = h. \qedhere
+			\end{equation*}
+		\end{proof}
+	\end{blockquote}
+	With that, we are done!
+\end{proof}
+\begin{cor}
+	The fundamental group of $S^1$ is (isomorphic to) $\mathbb{Z}.$
+\end{cor}
+(Since $S^1$ is pathwise connected, we need not care about base point.)\\
+In particular, the above corollary shows that $S^1$ is not simply connected. This is our first example of a non-simply connected space.
+% \begin{cor}
+% 	The fundamental group of a torus is (isomorphic to) $\mathbb{Z} \times \mathbb{Z}.$
+% \end{cor}
+% \begin{proof} 
+% 	The torus is (homeomorphic to) $S^1 \times S^1.$\\
+% 	Define $\varphi: \mathbb{R} \times \mathbb{R} \to S^1 \times S^1$ by
+% 	\begin{equation*} 
+% 		\varphi\left(s_1, s_2\right) \vcentcolon= (e^{2\pi is_1}, e^{2\pi is_2}).
+% 	\end{equation*}
+% 	Clearly, $\varphi$ is onto. Moreover it an open map since a basis element of the form $(a_1, b_1) \times (a_2, b_2)$ gets mapped to an open subset of $S^1 \times S^1$ as can be verified.\\
+% 	Thus, $\varphi$ is a quotient map. Moreover, 
+% \end{proof}
+\end{document}
