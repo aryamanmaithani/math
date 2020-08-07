@@ -1,0 +1,77 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage{thmtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta}
+\setlength\parindent{0pt}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\numberwithin{thm}{section}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{ex}{Example}
+
+
+\let\emptyset\varnothing
+\newcommand{\rel}{\;\;\operatorname{rel}\;}
+\newcommand{\id}{\operatorname{id}}
+
+\pagestyle{plain}
+
+% \usepackage{titlesec}
+% \titleformat{\section}[block]
+%   {\newpage\center\normalfont}{\S\thesection}{0.25cm}{\large}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\newpage\sffamily\Large\filcenter\bfseries}{\S\thesection.}{0.25cm}{\Large}
+\titleformat{\subsection}[block]{\large\bfseries\sffamily}{\S\S\thesubsection.}{0.2cm}{\large}
+
+
+\usepackage[a4paper]{geometry}
+\usepackage{lipsum}
+
+\usepackage{cleveref}
+\crefname{thm}{Theorem}{Theorems}
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{defn}{Definition}{Definitions}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{equation}{}{}
+
+\usepackage{mdframed}
+\newenvironment{blockquote}
+{\begin{mdframed}[skipabove=0pt, skipbelow=0pt, innertopmargin=4pt, innerbottommargin=4pt, bottomline=false,topline=false,rightline=false, linewidth=2pt]}
+{\end{mdframed}}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily{\S\textbf{\nouppercase{\leftmark}}}}
+\fancyhead[R]{\sffamily{\thepage}}
+% \renewcommand{\headrulewidth}{0pt}
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{tgtermes}
+
+\title{$\mathbb{R}$eal Analysis}
+\author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
+\date{Autumn Semester 2020-21}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Sets and stuff}
+\section{Topology}
+\section{Continuity and derivatives}
+\section{Integration}
+\section{Sequence and series of functions}
+
+\end{document}
