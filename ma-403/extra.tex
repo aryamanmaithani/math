@@ -4,10 +4,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[inline]{enumitem}
 \usepackage[colorlinks=true]{hyperref}
-\usepackage{tikz-cd}
-\usepackage{tikz}
-\usetikzlibrary{decorations.markings}
-\usetikzlibrary{arrows.meta}
 \setlength\parindent{0pt}
 
 \theoremstyle{definition}
@@ -21,17 +17,13 @@
 
 
 \let\emptyset\varnothing
-\newcommand{\rel}{\;\;\operatorname{rel}\;}
 \newcommand{\id}{\operatorname{id}}
+\newcommand{\hint}[1]{\textbf{HIDDEN:} {\color[rgb]{0.95, 0.95, 0.95}#1}}
 
 \pagestyle{plain}
 
-% \usepackage{titlesec}
-% \titleformat{\section}[block]
-%   {\newpage\center\normalfont}{\S\thesection}{0.25cm}{\large}
-
 \usepackage{titlesec}
-\titleformat{\section}[block]{\newpage\sffamily\Large\filcenter\bfseries}{\S\thesection.}{0.25cm}{\Large}
+\titleformat{\section}[block]{\sffamily\Large\filcenter\bfseries}{\S\thesection.}{0.25cm}{\Large}
 \titleformat{\subsection}[block]{\large\bfseries\sffamily}{\S\S\thesubsection.}{0.2cm}{\large}
 
 
@@ -56,10 +48,8 @@
 \fancyhf{}
 \fancyhead[L]{\sffamily{\S\textbf{\nouppercase{\leftmark}}}}
 \fancyhead[R]{\sffamily{\thepage}}
-% \renewcommand{\headrulewidth}{0pt}
 
 \renewcommand{\familydefault}{\sfdefault}
-\usepackage{tgtermes}
 
 \title{$\mathbb{R}$eal Analysis}
 \author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
@@ -68,10 +58,186 @@
 \begin{document}
 \maketitle
 \tableofcontents
-\section{Sets and stuff}
-\section{Topology}
-\section{Continuity and derivatives}
-\section{Integration}
-\section{Sequence and series of functions}
+\newpage\section{Sets and stuff}
+\newpage\section{Topology}
+\begin{enumerate}
+	\item Let $X$ be a metric space and let $U \subset X.$ Define the \emph{boundary} of $U$ as 
+	\begin{equation*} 
+		\partial U = \bar{U} \cap \overline{(U^c)}.
+	\end{equation*}
+	Show that $\partial U = U \setminus U^\circ.$
+	\item Prove or disprove that
+	\begin{equation*} 
+		(\partial U)^\circ = \emptyset
+	\end{equation*}
+	for any subset $U$ of any metric space $X.$\\
+	\hint{Disprove it. Even in the case that $X = \mathbb{R}^n.$}
+	%
+	\item Let $(X, d)$ be a metric space and $x \in X.$ Let $\delta > 0.$ Define the following sets:
+	\begin{align*} 
+	 	B_\delta(x) &\vcentcolon= \{y \in X \mid d(x, y) < \delta\},\\
+	 	C_\delta(x) &\vcentcolon= \{y \in X \mid d(x, y) \le \delta\}.
+	\end{align*} 
+	Show that $\overline{B_\delta(x)} \subset C_\delta(x).$\\
+	Can this inclusion be proper?\\
+	\hint{Not if you stay in $\mathbb{R}^n.$ Think about other spaces.}
+	%
+	\item \textbf{Topological Nim}\\
+	You and your friend want to play Topological Nim. Here's how it works:\\
+	Let $X$ be your favourite compact metric space and $r > 0$ your favourite (positive) real number.\\
+	Each player removes an open disk of radius $r$ from the space on their turn (only the center of the disk must not have been removed in a prior move), until one player—the winner—removes what remains of the space on his turn.\\~\\
+	Show that no matter what moves are played, the game stops after a finite number of moves. (In other words, there is no infinite sequence of legal moves.)\\~\\
+	\textbf{Bonus:} Fix $n \in \mathbb{N}$ and $r > 0.$ Assuming optimal play, who will win the game if
+	\begin{equation*} 
+		X = S^n = \{\mathbf{x} \in \mathbb{R}^{n+1} \mid \|x\| = 1\}
+	\end{equation*}
+	with the standard metric?\\
+	(The answer will depend on $r$.)\\~\\
+	Credits: \url{https://puzzling.stackexchange.com/questions/99859/}
+	%
+	\item Show that every open set $U$ in $\mathbb{R}$ can be written as a disjoint union of open intervals. Moreover, show that this set of open intervals is at most countable.\\
+	\hint{First part: Consider an equivalence relation $\sim$ on $U$ where $x \sim y$ iff $[x, y] \subset U.$\\
+	Second part: Each open interval contains a rational.}
+	%
+	\item Let $I \subset \mathbb{R}$ be such that every $x \in I$ is an isolated point.\\
+	Show that $I$ is at most countable.
+	%
+	\item Let $K$ be a compact subset of $\mathbb{R}^n$. Fix a constant $r>0.$ \\
+	Show that there exists a finite collection of points $x_1, \ldots, x_k\in K$ such that the collection of open balls $\{B(x_i,2r)\}_{i=1}^k$ forms an open cover of $K$ while $B(x_i, r)$ are mutually disjoint.
+\end{enumerate}
+\newpage\section{Continuity and derivatives}
+\begin{enumerate}
+	\item Prove or disprove:\\
+	Let $f:\mathbb{R} \to \mathbb{R}$ be continuously differentiable. If $f'(x_0) > 0$ for some $x_0 \in \mathbb{R},$ the there exists an interval $I$ containing $x_0$ such that $f$ is increasing on $I.$\\
+	\hint{Prove.}
+	%
+	\item Prove or disprove:\\
+	Let $f:\mathbb{R} \to \mathbb{R}$ be differentiable. If $f'(x_0) > 0$ for some $x_0 \in \mathbb{R},$ the there exists an interval $I$ containing $x_0$ such that $f$ is increasing on $I.$\\
+	\hint{Disprove.}
+	%
+	\item Let $\pi_1:\mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be the first projection map, that is,
+	\begin{equation*} 
+		\pi_1(x, y) = x.
+	\end{equation*}
+	Show that $\pi_1$ is an \emph{open map,} that is, $\pi_1(U)$ is open in $\mathbb{R}$ if $U$ is open in $\mathbb{R}^2.$\\
+	Is it a closed map?\\
+	\hint{No.}
+	%
+	\item \textbf{Pasting lemma.}\\
+	Let $X$ be a metric space and $\{U_\alpha\}_{\alpha \in I}$ be an open cover of $X.$\\
+	Let $Y$ be an arbitrary metric space. Suppose that for each $\alpha \in I,$ we have a continuous function
+	\begin{equation*} 
+		f_\alpha:U_\alpha \to Y.
+	\end{equation*}
+	Moreover, assume that whenever $x \in U_\alpha \cap U_\beta,$ then $f_\alpha(x) = f_\beta(x).$ (That is, the functions agree on their common domains.)\\~\\
+	Show the following:
+	\begin{enumerate}
+		\item There exists a unique function $f:X \to Y$ such that 
+		\begin{equation*} 
+			f|_{U_\alpha} = f_\alpha \quad \text{for all } \alpha \in I.
+		\end{equation*}
+		(What the above means is that: for all $\alpha \in I,$ for all $x \in U_\alpha,$ $f(x) = f_\alpha(x).$)
+		\item The above function $f$ is continuous.
+	\end{enumerate}
+	%
+	\item Show that the above is not true if we replace ``open'' with ``closed.'' \\
+	(In particular, observe very carefully where you used open-ness of $U_\alpha.$)
+	%
+	\item Show that the above becomes true once again after replacing ``open'' with ``closed'' if we further impose that $I$ be finite.\\~\\
+	\emph{Remark.} The above lemma for closed sets makes it especially easy to directly verify the continuity of ``piece-wise'' defined functions which agree on the intersections. A particular easy case is when the sets have empty intersection. (cf. \ref{q:nothomeo})
+	%
+	\item Give a counterexample if we further drop ``closed'' completely, even if $I$ is finite. (In fact, you can give one with $X = \mathbb{R}$ and $|I| = 2.$)
+	%
+	\item Given an example of a continuous bijection $f:X \to Y$ such that $f^{-1}:Y \to X$ is not continuous.
+	%
+	\item \label{q:nothomeo} Justify that the following is an example for the above question:\\
+	$f:[0, 1] \cup (2, 3] \to [0, 2]$ defined by
+	\begin{equation*} 
+		f(x) \vcentcolon= \begin{cases}
+			x & x \in [0, 1]\\
+			x - 1 & x \in (2, 3]
+		\end{cases}.
+	\end{equation*}
+	%
+	\item Let $f:X\to Y$ be a function between metric spaces.
+	\begin{enumerate}
+		\item $f$ is said to be \emph{open continuous} if $f^{-1}(U)$ is open in $X$ whenever $U$ is open in $Y.$
+		\item $f$ is said to be \emph{closed continuous} if $f^{-1}(U)$ is closed in $X$ whenever $U$ is closed in $Y.$
+	\end{enumerate}
+	Show that $f$ is continuous iff $f$ is open continuous iff $f$ is closed continuous.
+	%
+	\item Let $K$ be a compact metric space and $Y$ an arbitrary metric space.\\
+	Assume that $f:K\to Y$ is a continuous bijection.
+	\begin{enumerate}
+		\item Let $C \subset K$ be closed. Show that $C$ is compact.
+		\item Show that $f(C)$ is compact.
+		\item Show that $f(C)$ is closed.
+	\end{enumerate}
+	Conclude that $f^{-1}:Y \to K$ is continuous.
+	%
+	\item The following question appeared on a test:
+	\begin{blockquote}
+		Given an example of a continuous bijection $f:X \to Y$ such that \\
+		$f^{-1}:Y \to X$ is not continuous. 
+	\end{blockquote}
+	The lazy TA sees that a student has started their answer as
 
+	\begin{blockquote}
+		The following is example:\\
+		Let $f:S^1 \to S^1$ be defined as...
+	\end{blockquote}
+	The TA sees that and marks it wrong straight away. Was the TA justified (mathematically, not morally) in doing so? Why?
+	%
+	\item Let $I \subset \mathbb{R}$ and $f:I \to \mathbb{R}$ be continuous. We know that if $I$ is compact, then $f$ is uniformly continuous.\\
+	Show that if $I$ is not compact, then one can always construct a continuous $f$ which is \emph{not} uniformly continuous.
+	%
+	\item Let $I \subset \mathbb{R}$ and $f:I \to \mathbb{R}$ be continuous. We know that if $I$ is compact, then $f$ is bounded and it achieves (both) its bounds.\\
+	Show that if $I$ is not compact, then one can always construct:
+	\begin{enumerate}
+		\item a continuous $f$ which is not bounded,
+		\item a continuous $f$ which is bounded but fails to achieve one (or both) of its bounds.
+	\end{enumerate}
+	%
+	\item Let $f:\mathbb{R} \to \mathbb{R}$ be continuous such that
+	\begin{equation*} 
+		\lim_{x\to \infty}f(x) \text{ and } \lim_{x\to -\infty}f(x)
+	\end{equation*}
+	both exist and are finite.\\
+	Show that $f$ is bounded.
+	%
+	\item Let $f:\mathbb{R} \to \mathbb{R}$ be a continuously differentiable function such that $\displaystyle\lim_{x\to \infty}f(x)$ exists and is finite.\\
+	Prove or disprove:
+	\begin{equation*} 
+		\lim_{x\to \infty}f'(x) = 0.
+	\end{equation*}
+	\hint{The limit need not exist.}
+	%
+	\item Let $f:\mathbb{R} \to \mathbb{R}$ be a differentiable function such that $\displaystyle\lim_{x\to \infty}f(x)$ exists and is finite. Further assume that $f'$ is uniformly continuous. \\
+	Prove or disprove:
+	\begin{equation*} 
+		\lim_{x\to \infty}f'(x) = 0.
+	\end{equation*}
+	\hint{Prove.}
+	%
+	\item Suppose $f$ is continuous on $[0, 1]$ with $f(0) = f(1) = 0.$ For all $x\in (0, 1)$, there exists $h > 0$ with $0 \le x-h < x < x+h \le 1$ such that  $f(x)=\dfrac{f(x+h)+f(x-h)}{2}$. \\
+	Show that $f(x)=0$ for all $x \in [0, 1].$\\
+	(Note that given any $x,$ the above only says that there's a \emph{particular} $h$ with the given property.)
+\end{enumerate}
+\newpage\section{Integration}
+\begin{enumerate}
+	\item Does there exist a function $f:[0, 1] \to \mathbb{R}$ such that it takes only a finitely many values and is Riemann Integrable on $[0, 1]$ but is not locally constant?\\
+	\hint{Yes. Find/show the existence of one.}
+\end{enumerate}
+\newpage\section{Sequence and series of functions}
+\begin{enumerate}
+	\item \textbf{(Non-)converse of Weierstrass M-test}\\
+	Construct an example of a family $(f_n)_{n \in \mathbb{N}}$ of functions $f_n:\mathbb{R} \to \mathbb{R}$ such that $\sum f_n$ converges uniformly but $\sum M_n$ does not, where $M_n \vcentcolon= \displaystyle\sup_{x \in \mathbb{R}}|f_n(x)|.$\\
+	\hint{Consider $f_n$ such that $f_n$ takes value $1/n$ at $n$ and $0$ otherwise.}
+	%
+	\item Recall that if $f:K \to \mathbb{R}$ is a continuous function and $K$ is compact, then there exists a sequence $(P_n)_{n \in \mathbb{N}}$ of polynomials such that $P_n \to f$ uniformly on $K.$\\
+	Show that this need not be true if $K$ is not compact.\\
+	\hint{Consider $K = \mathbb{R}$ and $f = \exp.$}
+	%
+	\item Let $f:\mathbb{R} \to \mathbb{R}$ be continuous. Show that there exists a sequence $(P_n)_{n \in \mathbb{N}}$ of polynomials such that $P_n \to f$ \textbf{pointwise} on $\mathbb{R}.$
+\end{enumerate}
 \end{document}
