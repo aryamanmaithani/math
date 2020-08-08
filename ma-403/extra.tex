@@ -59,6 +59,37 @@
 \maketitle
 \tableofcontents
 \newpage\section{Sets and stuff}
+\begin{enumerate}
+	\item Let $i:A \to B$ and $j:B\to A$ be injections.\\
+	Show that there exists a bijection between $A$ and $B.$\\
+	\emph{Remark.} This is known as the \href{https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem}{Schröder–Bernstein theorem}. (The link has a proof of it as well.)
+	%
+	\item Show that if $S$ is infinite, then there is an injection $i:\mathbb{N} \to S.$
+	%
+	\item Show that if $S$ is infinite and if there exists an injection $j:S \to \mathbb{N},$ then $S$ is countable.
+	%
+	\item Let $C$ be a countably infinite set. Show that if $S$ is infinite and if there exists an injection $j:S \to C,$ then $S$ is countable.
+	%
+	\item Show that $\mathbb{Q}$ is countable.
+	%
+	\item Show that if $A$ is at most countable, then so is $A \times A.$ Conclude that $A^n$ is countable for all $n \ge 1.$
+	%
+	\item Show that $\mathbb{Q}^n$ is countable for all $n \ge 1.$
+	%
+	\item Let $\{0, 1\}^\mathbb{N}$ be the set of all sequences with entries from $\{0, 1\}.$\\
+	In other words, $\{0, 1\}^\mathbb{N}$ is the set of all functions from $\mathbb{N}$ to $\{0, 1\}.$\\
+	Show that $\{0, 1\}^\mathbb{N}$ is uncountable.
+	%
+	\item Show that $[0, 1]$ is countable. (Hence, so is $\mathbb{R}.$)
+	%
+	\item Show that there exists a bijection between any two of the following sets: 
+	\begin{equation*} 
+		(0, 1),\; [0, 1],\; (0, 1],\; \mathbb{R},\; \mathbb{R}\setminus\mathbb{Q}.
+	\end{equation*}
+	%
+	\item Show that there exists a bijection between $\mathcal{P}(\mathbb{N})$ and $\mathbb{R},$ where $\mathcal{P}(\mathbb{N})$ is the power set of $\mathbb{N}.$\\
+	(You can use properties such as binary/ternary expansions.)
+\end{enumerate}
 \newpage\section{Topology}
 \begin{enumerate}
 	\item Let $X$ be a metric space and let $U \subset X.$ Define the \emph{boundary} of $U$ as 
@@ -72,6 +103,9 @@
 	\end{equation*}
 	for any subset $U$ of any metric space $X.$\\
 	\hint{Disprove it. Even in the case that $X = \mathbb{R}^n.$}
+	%
+	\item Construct a set $A \subset [0, 1] \times [0, 1]$ such that $A$ contains at most one point on each horizontal and vertical line but $\partial A = [0, 1] \times [0, 1].$\\
+	\hint{It suffices to ensure that $A$ contains points in each quarter of the square $[0, 1] \times [0, 1]$ and also in each sixteenth, et cetera.}
 	%
 	\item Let $(X, d)$ be a metric space and $x \in X.$ Let $\delta > 0.$ Define the following sets:
 	\begin{align*} 
@@ -105,16 +139,8 @@
 	\item Let $K$ be a compact subset of $\mathbb{R}^n$. Fix a constant $r>0.$ \\
 	Show that there exists a finite collection of points $x_1, \ldots, x_k\in K$ such that the collection of open balls $\{B(x_i,2r)\}_{i=1}^k$ forms an open cover of $K$ while $B(x_i, r)$ are mutually disjoint.
 \end{enumerate}
-\newpage\section{Continuity and derivatives}
+\newpage\section{Continuity}
 \begin{enumerate}
-	\item Prove or disprove:\\
-	Let $f:\mathbb{R} \to \mathbb{R}$ be continuously differentiable. If $f'(x_0) > 0$ for some $x_0 \in \mathbb{R},$ the there exists an interval $I$ containing $x_0$ such that $f$ is increasing on $I.$\\
-	\hint{Prove.}
-	%
-	\item Prove or disprove:\\
-	Let $f:\mathbb{R} \to \mathbb{R}$ be differentiable. If $f'(x_0) > 0$ for some $x_0 \in \mathbb{R},$ the there exists an interval $I$ containing $x_0$ such that $f$ is increasing on $I.$\\
-	\hint{Disprove.}
-	%
 	\item Let $\pi_1:\mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be the first projection map, that is,
 	\begin{equation*} 
 		\pi_1(x, y) = x.
@@ -175,13 +201,12 @@
 	\end{enumerate}
 	Conclude that $f^{-1}:Y \to K$ is continuous.
 	%
-	\item The following question appeared on a test:
+	\item The following question appeared on a test:\\
 	\begin{blockquote}
 		Given an example of a continuous bijection $f:X \to Y$ such that \\
 		$f^{-1}:Y \to X$ is not continuous. 
 	\end{blockquote}
-	The lazy TA sees that a student has started their answer as
-
+	The lazy TA sees that a student has started their answer as\\
 	\begin{blockquote}
 		The following is example:\\
 		Let $f:S^1 \to S^1$ be defined as...
@@ -207,6 +232,20 @@
 	both exist and are finite.\\
 	Show that $f$ is bounded.
 	%
+	\item Suppose $f$ is continuous on $[0, 1]$ with $f(0) = f(1) = 0.$ For all $x\in (0, 1)$, there exists $h > 0$ with $0 \le x-h < x < x+h \le 1$ such that  $f(x)=\dfrac{f(x+h)+f(x-h)}{2}$. \\
+	Show that $f(x)=0$ for all $x \in [0, 1].$\\
+	(Note that given any $x,$ the above only says that there's a \emph{particular} $h$ with the given property.)
+\end{enumerate}
+\newpage\section{Derivatives}
+\begin{enumerate}
+	\item Prove or disprove:\\
+	Let $f:\mathbb{R} \to \mathbb{R}$ be continuously differentiable. If $f'(x_0) > 0$ for some $x_0 \in \mathbb{R},$ the there exists an interval $I$ containing $x_0$ such that $f$ is increasing on $I.$\\
+	\hint{Prove.}
+	%
+	\item Prove or disprove:\\
+	Let $f:\mathbb{R} \to \mathbb{R}$ be differentiable. If $f'(x_0) > 0$ for some $x_0 \in \mathbb{R},$ the there exists an interval $I$ containing $x_0$ such that $f$ is increasing on $I.$\\
+	\hint{Disprove.}
+	%
 	\item Let $f:\mathbb{R} \to \mathbb{R}$ be a continuously differentiable function such that $\displaystyle\lim_{x\to \infty}f(x)$ exists and is finite.\\
 	Prove or disprove:
 	\begin{equation*} 
@@ -221,11 +260,41 @@
 	\end{equation*}
 	\hint{Prove.}
 	%
-	\item Suppose $f$ is continuous on $[0, 1]$ with $f(0) = f(1) = 0.$ For all $x\in (0, 1)$, there exists $h > 0$ with $0 \le x-h < x < x+h \le 1$ such that  $f(x)=\dfrac{f(x+h)+f(x-h)}{2}$. \\
-	Show that $f(x)=0$ for all $x \in [0, 1].$\\
-	(Note that given any $x,$ the above only says that there's a \emph{particular} $h$ with the given property.)
+	\item Let $I$ be an open interval and $f:I\to \mathbb{R}$ be differentiable. Show that $f'$ need not be continuous.\\
+	Show that $f'$ has the intermediate value property. That is, if $a, b \in I$ with $f'(a) < r < f'(b),$ then there exists $c \in (\min\{a, b\}, \max\{a, b\})$ such that $f'(c) = r.$\\
+	This is known as Darboux's Theorem.
+	%
+	\item Let $I$ be an open interval and $f:I \to \mathbb{R}$ be differentiable.\\
+	Prove that $f'$ is continuous if and only if the inverse image under $f'$ of any point is a closed set.
+	%
+	\item Let $(X, d)$ be a complete metric space. (That is, every Cauchy sequence in $X$ converges.)\\
+	Let $f:X \to X$ be a function with the following property:\\
+	There exists $0 < K < 1$ such that
+	\begin{equation*} 
+		d(f(x), f(y)) \le Kd(f(x), f(y)) \quad \text{for all } x, y \in X.
+	\end{equation*}
+	Show that:
+	\begin{enumerate}
+		\item $f$ is (uniformly) continuous.
+		\item \label{fixedpoint} $f$ has a fixed point.\\
+		(That is, $f(x) = x$ for some $x \in X$.)
+		\item $f$ has a unique fixed point.
+	\end{enumerate}
+	%
+	\item Let $f:\mathbb{R} \to \mathbb{R}$ be differentiable such that $|f'(x)| \le K$ for all $x \in \mathbb{R},$ where $K < 1$ is some fixed positive constant.\\
+	Show that $\mathbb{R}$ has a unique fixed point.
+	%
+	\item Give an example of a differentiable function $f:\mathbb{R} \to \mathbb{R}$ with $|f'(x)| < 1$ such that $f$ has no unique fixed point.\\~\\
+	Contemplate on how this is different from the earlier question.
+	%
+	\item Show that $f:\mathbb{R} \to \mathbb{R}$ defined as 
+	\begin{equation*} 
+		f(x) = \exp\left(-\cos^2(x)\right)
+	\end{equation*}
+	has a unique fixed point.\\
+	(How would you calculate it numerically? Was your proof of \ref{fixedpoint} ``constructive''?)
 \end{enumerate}
-\newpage\section{Integration}
+\newpage\section{Integrals}
 \begin{enumerate}
 	\item Does there exist a function $f:[0, 1] \to \mathbb{R}$ such that it takes only a finitely many values and is Riemann Integrable on $[0, 1]$ but is not locally constant?\\
 	\hint{Yes. Find/show the existence of one.}
@@ -241,5 +310,27 @@
 	\hint{Consider $K = \mathbb{R}$ and $f = \exp.$}
 	%
 	\item Let $f:\mathbb{R} \to \mathbb{R}$ be continuous. Show that there exists a sequence $(P_n)_{n \in \mathbb{N}}$ of polynomials such that $P_n \to f$ \textbf{pointwise} on $\mathbb{R}.$
+	%
+	\item Let $K \subset \mathbb{R}.$ Let $(f_n)_{n \in \mathbb{N}}$ be a sequence of differentiable functions $f_n:K \to \mathbb{R}.$\\
+	Suppose that $f_n\to f$ uniformly on compact subsets of $K.$\\
+	Show that $f$ is continuous.\\
+	Show that it is not necessary that $f$ is differentiable (anywhere).\\
+	\hint{Consider $K$ to be compact and $f$ to be a Weierstrass type function.}\\~\\
+	\emph{Remark.} The above is different from the case in $\mathbb{C}$omplex Analysis where one has the following theorem:\\
+	\begin{blockquote}
+		\textbf{Montel's Theorem}.\\
+		Let $\Omega$ be an open set in $\mathbb{C}$ and $(f_n)$ a sequence of (complex) differentiable functions $f_n:\Omega \to \mathbb{C}.$\\
+		Suppose that $f_n\to f$ uniformly on compact subsets of $\Omega.$\\
+		Then, $f$ is also (complex) differentiable.\\
+		Further, $f_n' \to f'$ uniformly on compact subsets of $\Omega.$
+	\end{blockquote}
+	This is just one example of how much ``better'' things behave in $\mathbb{C}$ Analysis as compared to $\mathbb{R}.$ In $\mathbb{R},$ not only can $f$ fail to be differentiable but it can differentiable \emph{nowhere}.
+	%
+	\item Let $f_n:\mathbb{R} \to \mathbb{R}$ be defined as
+	\begin{equation*} 
+		f_n(x) \vcentcolon= \left(1 + \dfrac{z}{n}\right)^n.
+	\end{equation*}
+	Show that $f_n$ does not converge uniformly.
+	%
 \end{enumerate}
 \end{document}
