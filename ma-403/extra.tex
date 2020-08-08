@@ -57,30 +57,83 @@
 
 \begin{document}
 \maketitle
+\setcounter{section}{-1}
 \tableofcontents
-\newpage\section{Sets and stuff}
+\newpage\section{Notations} \label{sec:notations}
 \begin{enumerate}
+	\item $\mathbb{N} = \{1, 2, 3, \ldots\},$ the set of positive integers.
+	\item $\mathbb{Z}$ is the set of integers.
+	\item $\mathbb{Q}$ is the set of rational numbers.
+	\item $\mathbb{R}$ is the set of real numbers.
+	% \item $\mathbb{S}_{\ge 0} = \{s \in \mathbb{S} \mid s \ge 0\}.$ (So, that defines $\mathbb{Z}_{\ge 0}, \mathbb{Q}_{\ge 0}, \mathbb{R}_{\ge 0}.$)
+	% \item $\mathbb{S}^+ = \mathbb{S}_{> 0} = \{s \in \mathbb{S} \mid s > 0\}.$
+	\item $A \subset B$ is read as ``$A$ is a subset of $B.$'' In particular, note that $A \subset A$ is true for any set $A.$
+	\item $A \subsetneq B$ is read ``$A$ is a \emph{proper} subset of $B.$''
+	\item $\supset$ and $\supsetneq$ are defined similarly.
+	\item Given a set $S,$ the set $\mathcal{P}(S)$ is the \emph{power set} of $S,$ i.e., the set of all subsets of $\mathcal{P}(S).$
+	\item Given a function $f:X \to Y,$ $A \subset X,$ $B \subset Y,$ we define
+	\begin{align*} 
+		f(A) &= \{y \in Y \mid y = f(a) \text{ for some } a \in A\} \subset Y,\\
+		f^{-1}(B) &= \{x \in X \mid f(x) \in B\} \subset X.
+	\end{align*}
+	(Note that this $f^{-1}$ is different from the inverse of a function. In particular, this is always defined, even if $f$ is not bijective. However, the $f$ and $f^{-1}$ above need not be ``inverses.'' See \ref{q:funcinvproperties} of \S\ref{sec:sets}.)\\
+	\emph{Remark.} The above is essentially an abuse of notation since we are using $f:A \to B$ to get another function $\tilde{f}:\mathcal{P}(A) \to \mathcal{P}(B)$ which we are again denoting with $f.$ 
+	\item \label{funcrestrict} If $f:X \to Y$ is a function and $A \subset X,$ then $f|_A$ is a function
+	\begin{equation*} 
+		f|_A : A \to Y
+	\end{equation*}
+	defined as
+	\begin{equation*} 
+		f|_A(a) = f(a), \quad a \in A.
+	\end{equation*}
+	\item Since Rudin follows a non-usual definition for ``countable,'' I shall use the following, which makes it always clear:
+	\begin{enumerate}
+		\item At most countable: A set $S$ is at most countable if there exists an injection $i : S \to \mathbb{N}.$
+		\item Countably infinite: A set $S$ is countably infinite if it is at most countable and infinite.
+		\item Uncountable: A set $S$ is uncountable if it not at most countable.
+	\end{enumerate}
+	In particular, I will not use the term ``countable'' just by itself since Rudin uses it to mean ``countably infinite'' but usually people mean ``at most countable.''
+\end{enumerate}
+\newpage\section{Sets and stuff}\label{sec:sets}
+\begin{enumerate}
+	\item \label{q:funcinvproperties}% 
+	Given a function $f:X \to Y,$ $A \subset X,$ $B \subset Y,$ we define
+	\begin{align*} 
+		f(A) &= \{y \in Y \mid y = f(a) \text{ for some } a \in A\} \subset Y,\\
+		f^{-1}(B) &= \{x \in X \mid f(x) \in B\} \subset X.
+	\end{align*}
+	\begin{enumerate}
+		\item Show that $A \subset f^{-1}(f(A)).$ \\
+		Show that this inclusion can be proper. \\
+		Thus, it is possible that $A \neq f^{-1}(f(A)).$ \\
+		Show that equality holds if $f$ is injective.
+		\item Show that $B \supset f(f^{-1}(B)).$ \\
+		Show that this inclusion can be proper. \\
+		Thus, it is possible that $B \neq f(f^{-1}(B)).$ \\
+		Show that equality holds if $f$ is surjective.
+	\end{enumerate}
+	%
 	\item Let $i:A \to B$ and $j:B\to A$ be injections.\\
 	Show that there exists a bijection between $A$ and $B.$\\
 	\emph{Remark.} This is known as the \href{https://en.wikipedia.org/wiki/Schr%C3%B6der%E2%80%93Bernstein_theorem}{Schröder–Bernstein theorem}. (The link has a proof of it as well.)
 	%
 	\item Show that if $S$ is infinite, then there is an injection $i:\mathbb{N} \to S.$
 	%
-	\item Show that if $S$ is infinite and if there exists an injection $j:S \to \mathbb{N},$ then $S$ is countable.
+	\item Show that if $S$ is infinite and if there exists an injection $j:S \to \mathbb{N},$ then $S$ is at countably infinite.
 	%
-	\item Let $C$ be a countably infinite set. Show that if $S$ is infinite and if there exists an injection $j:S \to C,$ then $S$ is countable.
+	\item Let $C$ be a countably infinite set. Show that if $S$ is infinite and if there exists an injection $j:S \to C,$ then $S$ is countably infinite.
 	%
-	\item Show that $\mathbb{Q}$ is countable.
+	\item Show that $\mathbb{Q}$ is countably infinite.
 	%
-	\item Show that if $A$ is at most countable, then so is $A \times A.$ Conclude that $A^n$ is countable for all $n \ge 1.$
+	\item Show that if $A$ is at most countable, then so is $A \times A.$ Conclude that $A^n$ is at most countable for all $n \ge 1.$
 	%
-	\item Show that $\mathbb{Q}^n$ is countable for all $n \ge 1.$
+	\item Show that $\mathbb{Q}^n$ is countably infinite for all $n \ge 1.$
 	%
 	\item Let $\{0, 1\}^\mathbb{N}$ be the set of all sequences with entries from $\{0, 1\}.$\\
 	In other words, $\{0, 1\}^\mathbb{N}$ is the set of all functions from $\mathbb{N}$ to $\{0, 1\}.$\\
 	Show that $\{0, 1\}^\mathbb{N}$ is uncountable.
 	%
-	\item Show that $[0, 1]$ is countable. (Hence, so is $\mathbb{R}.$)
+	\item Show that $[0, 1]$ is uncountable. (Hence, so is $\mathbb{R}.$)
 	%
 	\item Show that there exists a bijection between any two of the following sets: 
 	\begin{equation*} 
@@ -89,6 +142,8 @@
 	%
 	\item Show that there exists a bijection between $\mathcal{P}(\mathbb{N})$ and $\mathbb{R},$ where $\mathcal{P}(\mathbb{N})$ is the power set of $\mathbb{N}.$\\
 	(You can use properties such as binary/ternary expansions.)
+	%
+	\item Given a set $I,$ $\{P_\alpha\}_{\alpha \in I}$ is a shorthand for writing a set of the form $\{P_\alpha \mid \alpha \in I\}.$ ($P_\alpha$ is defined given the context.)
 \end{enumerate}
 \newpage\section{Topology}
 \begin{enumerate}
@@ -129,12 +184,18 @@
 	(The answer will depend on $r$.)\\~\\
 	Credits: \url{https://puzzling.stackexchange.com/questions/99859/}
 	%
-	\item Show that every open set $U$ in $\mathbb{R}$ can be written as a disjoint union of open intervals. Moreover, show that this set of open intervals is at most countable.\\
-	\hint{First part: Consider an equivalence relation $\sim$ on $U$ where $x \sim y$ iff $[x, y] \subset U.$\\
-	Second part: Each open interval contains a rational.}
+	\item Let $\{I_\alpha\}_{\alpha \in \Lambda}$ be a collection of disjoint nonempty open intervals. \\
+	That is, for each $\alpha \in \Lambda,$ $I_\alpha$ is a nonempty open interval. \\
+	Moreover, if $\beta \in \Lambda$ with $\beta \neq \alpha,$ then $I_\alpha \cap I_\beta = \emptyset.$\\
+	Show that $\Lambda$ is at most countable.\\
+	\hint{Each interval contains a rational. Construct an \emph{injection} $\Lambda \to \mathbb{Q}.$}
 	%
 	\item Let $I \subset \mathbb{R}$ be such that every $x \in I$ is an isolated point.\\
-	Show that $I$ is at most countable.
+	Show that $I$ is at most countable.\\
+	\hint{Try to use the previous result.}
+	%
+	\item Show that every open set $U$ in $\mathbb{R}$ can be written as a disjoint union of nonempty open intervals. Moreover, show that this set of open intervals is at most countable.\\
+	\hint{Consider an equivalence relation $\sim$ on $U$ where $x \sim y$ iff $[x, y] \subset U.$}
 	%
 	\item Let $K$ be a compact subset of $\mathbb{R}^n$. Fix a constant $r>0.$ \\
 	Show that there exists a finite collection of points $x_1, \ldots, x_k\in K$ such that the collection of open balls $\{B(x_i,2r)\}_{i=1}^k$ forms an open cover of $K$ while $B(x_i, r)$ are mutually disjoint.
@@ -162,15 +223,22 @@
 		\begin{equation*} 
 			f|_{U_\alpha} = f_\alpha \quad \text{for all } \alpha \in I.
 		\end{equation*}
-		(What the above means is that: for all $\alpha \in I,$ for all $x \in U_\alpha,$ $f(x) = f_\alpha(x).$)
+		(Recall \ref{funcrestrict} from \S\ref{sec:notations}.)
 		\item The above function $f$ is continuous.
 	\end{enumerate}
 	%
 	\item Show that the above is not true if we replace ``open'' with ``closed.'' \\
 	(In particular, observe very carefully where you used open-ness of $U_\alpha.$)
 	%
-	\item Show that the above becomes true once again after replacing ``open'' with ``closed'' if we further impose that $I$ be finite.\\~\\
-	\emph{Remark.} The above lemma for closed sets makes it especially easy to directly verify the continuity of ``piece-wise'' defined functions which agree on the intersections. A particular easy case is when the sets have empty intersection. (cf. \ref{q:nothomeo})
+	\item Show that the above becomes true once again after replacing ``open'' with ``closed'' if we further impose that $I$ be finite. 
+	%
+	\item Show that the above is equivalent to the following formulation:\\
+	Let $f:X \to Y$ be a function between metric spaces.\\
+	Let $X = C_1 \cup \cdots \cup C_n$ where each $C_i$ is closed in $X.$\\
+	Assume that $f|_{C_i}:C_i \to Y$ is continuous for all $1 \le i \le n.$\\
+	Then, $f$ is continuous.\\
+	(Write the above formulation for open sets as well.)\\~\\
+	\emph{Remark.} The above lemma for closed sets makes it especially easy to directly verify the continuity of ``piece-wise'' defined functions, if each piece is closed in the ambient space. (cf. \ref{q:nothomeo})
 	%
 	\item Give a counterexample if we further drop ``closed'' completely, even if $I$ is finite. (In fact, you can give one with $X = \mathbb{R}$ and $|I| = 2.$)
 	%
@@ -232,9 +300,12 @@
 	both exist and are finite.\\
 	Show that $f$ is bounded.
 	%
-	\item Suppose $f$ is continuous on $[0, 1]$ with $f(0) = f(1) = 0.$ For all $x\in (0, 1)$, there exists $h > 0$ with $0 \le x-h < x < x+h \le 1$ such that  $f(x)=\dfrac{f(x+h)+f(x-h)}{2}$. \\
-	Show that $f(x)=0$ for all $x \in [0, 1].$\\
-	(Note that given any $x,$ the above only says that there's a \emph{particular} $h$ with the given property.)
+	\item Suppose $f$ is continuous on $[0, 1]$ with $f(0) = f(1) = 0.$ For all $x\in (0, 1)$, there exists $h > 0$ with $0 \le x - h < x < x + h \le 1$ such that 
+	\begin{equation*} 
+		f(x)=\dfrac{f(x + h) + f(x - h)}{2}.
+	\end{equation*} 
+	Show that $f(x) = 0$ for all $x \in [0, 1].$\\
+	(Note that given any $x,$ the above only says that there's \emph{one} particular $h$ with the given property.)
 \end{enumerate}
 \newpage\section{Derivatives}
 \begin{enumerate}
