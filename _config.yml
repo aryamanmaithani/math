@@ -25,12 +25,10 @@ navbar-links:
     href:  /
   - title: Academic
     subcategories:
+    - title: Math
+      href: /math/
     - title: Notes
       href:  /notes/
-    - title: Presentations
-      href:  /presentations/
-    - title: Reports
-      href:  /reports/
   - title: Tutorials
     href: /tuts/
     subcategories:
