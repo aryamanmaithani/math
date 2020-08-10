@@ -65,6 +65,8 @@
 	\item $\mathbb{Z}$ is the set of integers.
 	\item $\mathbb{Q}$ is the set of rational numbers.
 	\item $\mathbb{R}$ is the set of real numbers.
+	\item Whenever I refer to $\mathbb{R}$ or $\mathbb{R}^n$ or any of its subsets as a metric space, I shall always assume the standard metric unless I explicitly state so otherwise.
+	\item $S^1 = \{\mathbf{x} \in \mathbb{R}^2 \mid \|x\| = 1\} \subset \mathbb{R}^2.$ 
 	% \item $\mathbb{S}_{\ge 0} = \{s \in \mathbb{S} \mid s \ge 0\}.$ (So, that defines $\mathbb{Z}_{\ge 0}, \mathbb{Q}_{\ge 0}, \mathbb{R}_{\ge 0}.$)
 	% \item $\mathbb{S}^+ = \mathbb{S}_{> 0} = \{s \in \mathbb{S} \mid s > 0\}.$
 	\item $A \subset B$ is read as ``$A$ is a subset of $B.$'' In particular, note that $A \subset A$ is true for any set $A.$
@@ -147,6 +149,45 @@
 \end{enumerate}
 \newpage\section{Topology}
 \begin{enumerate}
+	\item Show that $\mathbb{Q}$ has empty interior considered as a subset of $\mathbb{R}.$
+	%
+	\item Given a metric space $(X, d),$ show that $X^\circ = X.$\\~\\
+	(Compare this with the earlier question to conclude that the interior of a set is not an ``inherent'' property of a space but depends on the bigger space. This is just like ``$U$ is open/closed'' depends on the bigger set.)
+	%
+	\item Just to illustrate the above point better, prove the following:
+	\begin{enumerate}
+		\item $\mathbb{Q}$ is neither open nor closed in $\mathbb{R}.$
+		\item $\mathbb{Q}$ is both open and closed in $\mathbb{Q}.$
+		\item $[0, 1]$ is closed but not open in $\mathbb{R}.$
+		\item $[0, 1]$ is closed in $I$ for any $I$ satisfying $[0, 1] \subset I \subset \mathbb{R}.$
+		\item $(0, 1]$ is neither open nor closed in $\mathbb{R}.$
+		\item $(0, 1]$ is open but not closed in $(-\infty, 1].$
+		\item $(0, 1]$ is closed but not open in $(0, \infty).$
+		\item $(0, 1]$ is both open and closed in $(0, 1] \cup [3, 5].$
+	\end{enumerate}
+	In each case, find its closure and interior in the given space. (Keep in mind that if it's closed (resp., open), then its closure (resp., interior) must equal itself.)
+	%
+	\item As opposed to the above, being connected/compact does not depend on the above property. Thus, the following questions make sense:
+	\begin{enumerate}
+		\item Show that $[0, 1]$ is compact and connected.
+		\item Show that $[0, 1]\cap \mathbb{Q}$ is neither compact nor connected.
+		\item Show that $(0, 1)$ is connected but not compact.
+		\item Show that $\{0, 1\}$ is compact but not connected.
+		\item Show that $(0, 1)\cap \mathbb{Q}$ is neither compact nor connected.
+		\item Give an example of a compact subset of $\mathbb{Q}$ which is not connected.\\
+		\hint{One such is $\{0\} \cup \left\{n^{-1} : n \in \mathbb{N}\right\}.$}
+		\item Can you give an example of a connected subset of $\mathbb{Q}$ which is not compact?\\
+		\hint{The next question might be helpful.}
+	\end{enumerate}
+	%
+	\item Show that the only nonempty connected subsets of $\mathbb{Q}$ are the singletons.
+	%
+	\item Show that $\mathbb{R}$ can be written as a union of two sets, each of which have empty interior.
+	%
+	\item Can you find a (countably infinite) collection $\{C_n\}_{n \in \mathbb{N}}$ of closed subsets of $\mathbb{R}$ such that $\displaystyle\bigcup_{n \in \mathbb{N}}C_n = \mathbb{R}?$\\
+	(Compare this with the previous question.)\\
+	\hint{No, you can't.}
+	%
 	\item Let $X$ be a metric space and let $U \subset X.$ Define the \emph{boundary} of $U$ as 
 	\begin{equation*} 
 		\partial U = \bar{U} \cap \overline{(U^c)}.
@@ -158,6 +199,17 @@
 	\end{equation*}
 	for any subset $U$ of any metric space $X.$\\
 	\hint{Disprove it. Even in the case that $X = \mathbb{R}^n.$}
+	%
+	\item Find the boundary of the following subsets (the ambient space is assumed to be $\mathbb{R}^n$, where the $n$ should be clear from the question):
+	\begin{enumerate}
+		\item $[0, 1],$
+		\item $(0, 1),$
+		\item $D^2 = \{\mathbf{x} \in \mathbb{R}^2 \mid \left|\mathbf{x}\right| \le 1\},$
+		\item $\{0\},$
+		\item $\mathbb{Q},$
+		\item $\mathbb{R}\setminus\mathbb{Q}.$
+	\end{enumerate}
+	(The first four should show that boundary agrees with the intuitive idea of a boundary. The last two should show that one cannot just depend on intuition.)
 	%
 	\item Construct a set $A \subset [0, 1] \times [0, 1]$ such that $A$ contains at most one point on each horizontal and vertical line but $\partial A = [0, 1] \times [0, 1].$\\
 	\hint{It suffices to ensure that $A$ contains points in each quarter of the square $[0, 1] \times [0, 1]$ and also in each sixteenth, et cetera.}
@@ -194,15 +246,69 @@
 	Show that $I$ is at most countable.\\
 	\hint{Try to use the previous result.}
 	%
+	\item Construct an at most countable set (in $\mathbb{R}$) which has no isolated point.\\
+	(That is, the converse to the previous question isn't true.)
+	%
+	\item Construct an uncountable set (in $\mathbb{R}$) with an isolated point.
+	%
 	\item Show that every open set $U$ in $\mathbb{R}$ can be written as a disjoint union of nonempty open intervals. Moreover, show that this set of open intervals is at most countable.\\
 	\hint{Consider an equivalence relation $\sim$ on $U$ where $x \sim y$ iff $[x, y] \subset U.$}
 	%
 	\item Let $K$ be a compact subset of $\mathbb{R}^n$. Fix a constant $r>0.$ \\
 	Show that there exists a finite collection of points $x_1, \ldots, x_k\in K$ such that the collection of open balls $\{B(x_i,2r)\}_{i=1}^k$ forms an open cover of $K$ while $B(x_i, r)$ are mutually disjoint.
+	%
+	\item Let $X$ be a metric space. A subspace $Y \subset X$ is said to be \emph{dense in $X$} if $\bar{Y} = X.$\\
+	For any subspace $Y \subset X,$ show that the following are equivalent:
+	\begin{enumerate}
+		\item $Y$ is dense in $X.$
+		\item For every $x \in X$ and every $r > 0,$ there exists a point $y \in Y$ such that $d(x, y) < r.$\\
+		In other words, $B_r(x) \cap Y \neq \emptyset$ for all $x \in X$ and $r > 0.$
+		\item For every nonempty open set $U \subset X,$ we have $U \cap Y \neq \emptyset.$	
+	\end{enumerate}
+	%
+	\item Show that $\mathbb{Q}$ is dense in $\mathbb{R}.$
+	%
+	\item Show that $\mathbb{R} \setminus \mathbb{Q}$ is dense in $\mathbb{R}.$
+	%
+	\item Is $\mathbb{Z}$ dense in $\mathbb{R}?$ Is $\mathbb{Z}$ dense in $\mathbb{Z}?$\\
+	\hint{No. Yes.}
+	%
+	\item Is there any open dense subset of $\mathbb{R}?$\\
+	\hint{Yes. $\mathbb{R}$ itself.}
+	%
+	\item Is there any open dense proper subset of $\mathbb{R}?$\\
+	\hint{Yes. $\mathbb{R}$ minus any finite amount of points.}
+	%
+	\item Is there any open dense subset $X$ of $\mathbb{R}$ such that $\mathbb{R} \setminus X$ is uncountable?\\
+	\hint{Yes. Take $\mathbb{Q}$ and try to add intervals to make it open but also keeping the complement uncountable.}
+	%
+	\item Consider any metric space $(X, d).$ \\
+	Define a new function $\bar{d}: X\times X \to \mathbb{R}$ as
+	\begin{equation*} 
+		\bar{d}(x, y) = \min\{d(x, y), 1\}, \quad x, y \in X.
+	\end{equation*}
+	\begin{enumerate}
+		\item Show that $\bar{d}$ defines a metric on $X.$
+		\item Show that the metrics $d$ and $\bar{d}$ \emph{induce the same topology on $X.$}\\
+		That is, show that any subset $U \subset X$ is open in $(X, d)$ if and only if it is open in $(X, \bar{d}).$\\
+		(If you think about it, the metric is pretty much only useful for telling us what sets are open. Almost everything else can be formulated in terms of just open sets. (This is pretty much what you'll see in topology.)\\
+		This exercise shows that the actual metric need not matter and some metric-dependent concepts like boundedness aren't very strong. As a more concrete example, see the next sub-questions.)	
+		\item Show that every set $S \subset X$ is bounded in $(X, \bar{d}).$
+		\item In particular, if we take $X = \mathbb{R}$ and $d$ as the standard metric, we see that every set is bounded in $(\mathbb{R}, \bar{d}).$\\
+		However, the open (and hence, closed) sets are the same in both $(\mathbb{R}, d)$ and $(\mathbb{R}, \bar{d}).$ This means that even compactness is the same in both spaces. (Why?)\\
+		In particular, $\mathbb{R}$ is \emph{not} compact in $(\mathbb{R}, \bar{d})$ even though it \emph{is} closed and bounded in $(\mathbb{R}, \bar{d}).$
+	\end{enumerate}
+\end{enumerate}
+\newpage\section{Sequence and series}
+\begin{enumerate}
+	\item Let $(a_n)$ be a sequence of rational numbers such that $\sum |a_n|$ converges to a rational number.\\
+	Is is necessary that $\sum a_n$ converges to a rational number?\\
+	\hint{No.}\\
+	The above is essentially whether ``absolute convergence $\implies$ convergence'' is true even in $\mathbb{Q}.$
 \end{enumerate}
 \newpage\section{Continuity}
 \begin{enumerate}
-	\item Let $\pi_1:\mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be the first projection map, that is,
+	\item \label{q:openmap} Let $\pi_1:\mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be the first projection map, that is,
 	\begin{equation*} 
 		\pi_1(x, y) = x.
 	\end{equation*}
@@ -253,6 +359,30 @@
 		\end{cases}.
 	\end{equation*}
 	%
+	\item Construct a function $f:\mathbb{Q} \to \mathbb{Q}$ such that
+	\begin{equation*} 
+		f(0) < 0, \quad f(2) > 0
+	\end{equation*}
+	but $f(x) \neq 0$ for any $x \in \mathbb{Q}.$\\
+	(Thus, we don't have something like the ``intermediate property'' for continuous function $\mathbb{Q} \to \mathbb{Q}.$ The completeness of $\mathbb{R}$ really gives $\mathbb{R}$ its structure.)
+	%
+	\item Construct a function $f:[0, 1] \cup [2, 3] \to \mathbb{R}$ such that 
+	\begin{equation*} 
+		f(0) = 0, \quad f(3) = 6
+	\end{equation*}
+	but $f(x) \neq 3$ for any $x$ in the domain.\\
+	(This shows the requirement that $f$ be defined on a \emph{connected} domain.)
+	%
+	\item Show that $X$ is connected iff the only clopen subsets of $X$ are $\emptyset$ and $X.$\\
+	(A subset is said to be clopen if it is both closed and open.)
+	%
+	\item A metric space $X$ is said to be \emph{discrete} if $\{x\}$ is open in $X$ for all $x \in X.$\\
+	Show that $\mathbb{N}$ and $\mathbb{Z}$ are discrete.
+	%
+	\item Let $X$ be a connected metric space and $Y$ a discrete one.\\
+	Show that if $f:X \to Y$ is continuous, then $f$ is constant.\\
+	\hint{Note that singletons in $Y$ are both open and closed. Consider the pre-image of any such singleton.}
+	%
 	\item Let $f:X\to Y$ be a function between metric spaces.
 	\begin{enumerate}
 		\item $f$ is said to be \emph{open continuous} if $f^{-1}(U)$ is open in $X$ whenever $U$ is open in $Y.$
@@ -268,6 +398,15 @@
 		\item Show that $f(C)$ is closed.
 	\end{enumerate}
 	Conclude that $f^{-1}:Y \to K$ is continuous.
+	%
+	\item Let $X$ and $Y$ be metric spaces; let $p: X \to Y$ be a surjection.\\
+	The map $p$ is said to be a \emph{quotient map} provided a subset $U$ of $Y$ is open in $Y$ if and only if $p^{-1}(U)$ is open in $X.$
+	\begin{enumerate}
+		\item Show that a quotient map is a continuous.
+		\item Show that if a continuous map is an open map, then it is a quotient map. (cf. \ref{q:openmap} for definition of an open map.)	
+		\item Show that if $q:X \to Y$ is surjective, $q$ is continuous, $X$ is compact, then $q$ is a quotient map.
+	\end{enumerate}
+	You will study more about quotient maps in Topology, the last property makes it easy to show that certain maps like $x \mapsto e^{2\pi ix}$ from $I$ to $S^1$ are quotient maps. (In fact, you can weaken the condition on $Y$ from being a metric space to just being a Hausdorff space and $X$ just being any compact space.)
 	%
 	\item The following question appeared on a test:\\
 	\begin{blockquote}
@@ -306,6 +445,10 @@
 	\end{equation*} 
 	Show that $f(x) = 0$ for all $x \in [0, 1].$\\
 	(Note that given any $x,$ the above only says that there's \emph{one} particular $h$ with the given property.)
+	%
+	\item Prove/disprove:\\
+	If $f:\mathbb{R} \to \mathbb{R}$ is continuous and bounded, then $f$ is uniformly continuous.\\
+	\hint{Disprove.}
 \end{enumerate}
 \newpage\section{Derivatives}
 \begin{enumerate}
@@ -369,6 +512,38 @@
 \begin{enumerate}
 	\item Does there exist a function $f:[0, 1] \to \mathbb{R}$ such that it takes only a finitely many values and is Riemann Integrable on $[0, 1]$ but is not locally constant?\\
 	\hint{Yes. Find/show the existence of one.}
+\end{enumerate}
+\newpage\section{A word on local properties}
+Given some property $P,$ we sometimes ask whether an object $X$ is \emph{locally} $P$. This usually means whether $P$ is satisfied on some small enough open sets.\\
+The next question formulate this more precisely.\\
+Terminology: Given a metric space $X$ and a point $x \in X,$ a \emph{neighbourhood} of $x$ is an open set $U \subset X$ such that $x \in U.$
+\begin{enumerate}
+	\item A function $f:X\to Y$ is said to be \emph{locally constant} if for every $x \in X,$ there exists a neighbourhood $U$ of $x$ such that $f|_U$ is constant.\\
+	Give a example of a function $f:[0, 1] \cup [2, 3] \to \mathbb{R}$ which is locally constant but not constant.
+	%
+	\item Show that if $f:X \to Y$ is locally constant and if $X$ is connected, then $f$ is constant.
+	%
+	\item A function $f:X \to \mathbb{R}$ is said to be \emph{locally bounded} if for every $x \in X,$ there exists a neighbourhood $U$ of $x$ such that $f|_U$ is bounded.\\
+	Give an example of a function $f:\mathbb{R} \to \mathbb{R}$ which is locally bounded but not bounded. (In fact, it might be tough for you to come up with a non-locally bounded function. Look up Conway's base-13 function as an example of this.)
+	%
+	\item Show that if $f:X\to\mathbb{R}$ is continuous, then it is locally bounded.
+	%
+	\item A metric space $X$ is said to be \emph{locally connected at $x$} if for every neighbourhood $U$ of $x,$ there is a connected neighbourhood $V$ of $x$ contained in $U.$\\
+	$X$ is said to be \emph{locally connected} if it is locally connected at $x$ for every $x \in X.$\\
+	Show that $[0, 1]\cup[2, 3]$ is locally connected but not connected.
+	%
+	\item A metric space $X$ is said to be \emph{locally compact at $x$} if there is some compact subspace $C$ of $X$ that contains a neighbourhood of $x.$\\
+	If $X$ is locally compact at each of its points, $X$ is said to be \emph{locally compact.}\\
+	Show that $\mathbb{R}$ is locally compact.
+	%
+	\item $f:X\to Y$ is said to be \emph{locally continuous} if for every $x \in X,$ there exists a neighbourhood $U$ of $x$ such that $f|_U$ is continuous.\\
+	Show that $f$ is locally continuous iff $f$ is continuous.\\
+	Due to the above reason, there actually isn't a concept of local continuity since continuity is a ``local property'' to begin with.
+	%
+	\item Show that the above is true for differentiation as well.
+	%
+	\item In each of the above cases, show that if the object is locally $P$ if it is $P$ to begin with.\\
+	(That is, show that constant functions are locally constant, et cetera.)
 \end{enumerate}
 \newpage\section{Sequence and series of functions}
 \begin{enumerate}
