@@ -95,6 +95,8 @@
 		\item Uncountable: A set $S$ is uncountable if it not at most countable.
 	\end{enumerate}
 	In particular, I will not use the term ``countable'' just by itself since Rudin uses it to mean ``countably infinite'' but usually people mean ``at most countable.''
+	%
+	\item Given a set $I,$ $\{P_\alpha\}_{\alpha \in I}$ is a shorthand for writing a set of the form $\{P_\alpha \mid \alpha \in I\}.$ ($P_\alpha$ is defined given the context.)
 \end{enumerate}
 \newpage\section{Sets and stuff}\label{sec:sets}
 \begin{enumerate}
@@ -144,8 +146,6 @@
 	%
 	\item Show that there exists a bijection between $\mathcal{P}(\mathbb{N})$ and $\mathbb{R},$ where $\mathcal{P}(\mathbb{N})$ is the power set of $\mathbb{N}.$\\
 	(You can use properties such as binary/ternary expansions.)
-	%
-	\item Given a set $I,$ $\{P_\alpha\}_{\alpha \in I}$ is a shorthand for writing a set of the form $\{P_\alpha \mid \alpha \in I\}.$ ($P_\alpha$ is defined given the context.)
 \end{enumerate}
 \newpage\section{Topology}
 \begin{enumerate}
@@ -574,9 +574,9 @@ Terminology: Given a metric space $X$ and a point $x \in X,$ a \emph{neighbourho
 	%
 	\item Let $f_n:\mathbb{R} \to \mathbb{R}$ be defined as
 	\begin{equation*} 
-		f_n(x) \vcentcolon= \left(1 + \dfrac{z}{n}\right)^n.
+		f_n(x) \vcentcolon= \left(1 + \dfrac{x}{n}\right)^n.
 	\end{equation*}
-	Show that $f_n$ does not converge uniformly.
+	Show that $(f_n)$ does not converge uniformly.
 	%
 \end{enumerate}
 \end{document}
