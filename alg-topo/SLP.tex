@@ -74,7 +74,7 @@ A path $\sigma$ in a space $X$ is a map $\sigma: I \to X.$ If $x_0 = \sigma(0)$ 
 \begin{equation*} 
 	x_0 \overset{\sigma}{\longrightarrow} x_1.
 \end{equation*}
-Moreover, $x_0$ and $x_1$ are called the \emph{end points} of $\sigma.$ In particular, $x_0$ is the initial point and $x_1$ is the final point.\\
+Moreover, $x_0$ and $x_1$ are called the \emph{end points} of $\sigma.$ In particular, $x_0$ is the initial point and $x_1$ is the terminal point.\\
 All the topological spaces are assumed to be nonempty.
 \section{Homotopy of Paths}
 %
@@ -217,7 +217,7 @@ The next proposition shows how this product behaves with the equivalence relatio
 		[\sigma]*[\tau] \vcentcolon= [\sigma*\tau].
 	\end{equation*}
 \end{defn}
-The above, of course, is defined only when the final point of $\sigma$ (and thus, any other representative of $[\sigma]$) equals the initial point of $\tau$ (and thus, any other representative of $[\tau]$).\\
+The above, of course, is defined only when the terminal point of $\sigma$ (and thus, any other representative of $[\sigma]$) equals the initial point of $\tau$ (and thus, any other representative of $[\tau]$).\\
 As before, we shall drop the $*$ and simply write $[\sigma][\tau].$
 
 \begin{lem} \label{lem:prodassoc}
@@ -413,6 +413,24 @@ Note that this group depends on $x_0$ in the sense that the elements of the grou
 \begin{defn}[Simply connected]
 	A space $X$ is called simply connected if it is pathwise connected and its fundamental group is trivial.
 \end{defn}
+\begin{lem} \label{lem:simpconnpathshomot}
+	Let $X$ be simply connected. If $\sigma$ and $\tau$ are paths in $X$ with the same initial and terminal points, then $\sigma \simeq \tau \rel \{0, 1\}.$
+\end{lem}
+\begin{proof} 
+	Let the initial and terminal points be $x_0$ and $x_1,$ respectively.\\
+	Consider the path $\sigma\tau^{-1},$ which is path at $x_0.$ Since $X$ is simply connected, we have
+	\begin{equation*} 
+		\sigma\tau^{-1} \simeq e_{x_0} \rel \{0, 1\}.
+	\end{equation*}
+	By the previously seen properties, we see that
+	\begin{equation*} 
+		(\sigma\tau^{-1})\tau \simeq e_{x_0}\tau \rel \{0, 1\}
+	\end{equation*}
+	or
+	\begin{equation*} 
+		\sigma \simeq \tau \rel \{0, 1\}. \qedhere
+	\end{equation*}
+\end{proof}
 \subsection{Functoriality}
 We now wish to turn $\pi_1$ into a functor. Since we need to take care of the base points, we look at the category of \emph{Pointed Topological spaces}.
 \begin{defn}[Pointed Topological Spaces]
@@ -697,7 +715,7 @@ Before proving that, we first look at a lemma.
 	finishing the proof.
 \end{proof}
 
-\begin{prop}
+\begin{prop} \label{prop:homsamehomo}
 	Let $f, g:Y\to X$ be maps which are homotopic by means of a homotopy $F:Y \times I \to X.$ \\
 	Let $y_0 \in Y,$ $x_0 \vcentcolon= f(y_0) = F(y_0, 1),$ and $x_1 \vcentcolon= g(y_0) = F(y_0, 1).$\\
 	Let $\alpha:I \to X$ be a path from $x_0$ to $x_1$ given by
@@ -755,7 +773,7 @@ Before proving that, we first look at a lemma.
 	By the conclusion of \cref{lem:gbad}, we are done.
 \end{proof}
 Recall that $\widehat{\alpha}$ is an isomorphism and thus, we get the following corollary.
-\begin{cor}
+\begin{cor} \label{cor:homsameiso}
 	With the same setup as above, $f_*$ is an isomorphism if and only if $g_*.$
 \end{cor}
 What the above corollary says is that if $f$ and $g$ are homotopic, then $f_*$ is an isomorphism iff $g_*$ is.
@@ -1047,16 +1065,597 @@ Now, we have the following theorem.
 \end{cor}
 (Since $S^1$ is pathwise connected, we need not care about base point.)\\
 In particular, the above corollary shows that $S^1$ is not simply connected. This is our first example of a non-simply connected space.
-% \begin{cor}
-% 	The fundamental group of a torus is (isomorphic to) $\mathbb{Z} \times \mathbb{Z}.$
-% \end{cor}
+\begin{cor}
+	The fundamental group of a torus is (isomorphic to) $\mathbb{Z} \times \mathbb{Z}.$
+\end{cor}
+\begin{proof} 
+	The torus is (homeomorphic to) $(\mathbb{R} \times \mathbb{R})/(\mathbb{Z} \times \mathbb{Z}).$
+\end{proof}
+Note that the torus is also homeomorphic to $S^1 \times S^1.$ Using this, we could've calculated the fundamental group in a different way with the help of the following proposition.
+\begin{prop}
+	Given spaces $X, Y, x_0 \in X, y_0 \in Y,$ we have
+	\begin{equation*} 
+		\pi_1(X \times Y, (x_0, y_0)) \cong \pi_1(X, x_0) \times \pi_1(Y, y_0).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	The isomorphism is obtained as follows. First, consider the maps of pointed topological spaces given by the projections
+	\begin{center}
+		\begin{tikzcd}
+			(X, x_0) &  & (X \times Y, (x_0, y_0)) \arrow[ll, "p_X"'] \arrow[rr, "p_Y"] &  & (Y, y_0).
+		\end{tikzcd}
+	\end{center}
+	These maps induce the homomorphisms
+	\begin{center}
+		\begin{tikzcd}
+			\pi_1(X, x_0) &  & \pi_1(X \times Y, (x_0, y_0)) \arrow[ll, "(p_X)_*"'] \arrow[rr, "(p_Y)_*"] &  & \pi_1(Y, y_0).
+		\end{tikzcd}
+	\end{center}
+	Using the universal property of product of groups, we get a homomorphism $\langle (p_X)_*, (p_Y)_*\rangle$ as follows
+	\begin{center}
+		\begin{tikzcd}
+		{\pi_1(X, x_0)} &  & {\pi_1(X \times Y, (x_0, y_0))} \arrow[ll, "(p_X)_*"'] \arrow[rr, "(p_Y)_*"] \arrow[dddd, "{\langle (p_X)_*, (p_Y)_*\rangle}" description] &  & {\pi_1(Y, y_0)} \\
+		&&&&\\&&&&\\&&&&\\
+		&&{\pi_1(X, x_0) \times \pi_1(Y, y_0)} \arrow[lluuuu, two heads] \arrow[rruuuu, two heads]                                         &  &      
+		\end{tikzcd}
+	\end{center}
+	such that the diagram commutes. (The $\twoheadrightarrow$s are the usual projections.)\\
+	Let $\varphi \vcentcolon= \langle (p_X)_*, (p_Y)_*\rangle.$ We show that this is an isomorphism by constructing an inverse $\psi:\pi_1(X, x_0) \times \pi_1(Y, y_0) \to \pi_1(X \times Y, (x_0, y_0))$ .\\~\\
+	%
+	Any element of $\pi_1(X, x_0) \times \pi_1(Y, y_0)$ is of the form $([\sigma], [\tau])$ for some loop $\sigma$ (resp., $\tau$) at $x_0$ (resp., $y_0$) in $X$ (resp., $Y$).\\
+	We define $\psi([\sigma], [\tau])$ as the class of the loop at $(x_0, y_0)$ in $X \times Y$ given by
+	\begin{equation*} 
+		(\sigma, \tau)(s) \vcentcolon= (\sigma(t), \tau(t)), \quad t \in I.
+	\end{equation*}
+	That is, $\psi([\sigma], [\tau]) = [(\sigma, \tau)].$ One can verify that this is well-defined.\\
+	(That is, if $\sigma \simeq \sigma'$ and $\tau \simeq \tau',$ then $(\sigma, \tau) \simeq (\sigma', \tau'),$ all relative to $\{0, 1\}.$)\\
+	Now, one can verify that $\varphi\circ\psi$ and $\psi\circ\varphi$ are both the respective identities. \\~\\
+	%
+	Alternately, as a more category theoretic proof, one can verify that the following diagram commutes.
+	\begin{center}
+		\begin{tikzcd}
+		{\pi_1(X, x_0)} &  & {\pi_1(X \times Y, (x_0, y_0))} \arrow[ll, "(p_X)_*"'] \arrow[rr, "(p_Y)_*"] &  & {\pi_1(Y, y_0)} \\
+		&&&&\\&&&&\\&&&&\\
+		&&{\pi_1(X, x_0) \times \pi_1(Y, y_0)} \arrow[uuuu, "{\psi}" description] \arrow[lluuuu, two heads] \arrow[rruuuu, two heads]                                         &  &      
+		\end{tikzcd}
+	\end{center}
+	Thus, given any object and arrows $\pi_1(X, x_0) \longleftarrow Z \longrightarrow \pi_1(Y, y_0),$ we get an arrow $\eta:Z \longrightarrow \pi_1(X, x_0) \times \pi_1(Y, y_0)$ such that the following diagram commutes.
+	\begin{center}
+		\begin{tikzcd}
+		{\pi_1(X, x_0)} &  & {\pi_1(X \times Y, (x_0, y_0))} \arrow[ll, "(p_X)_*"'] \arrow[rr, "(p_Y)_*"] &  & {\pi_1(Y, y_0)} \\
+		&&&&\\&&&&\\&&&&\\
+		&&{Z} \arrow[uuuu, "{\psi\circ\eta}" description] \arrow[lluuuu] \arrow[rruuuu]                                         &  &      
+		\end{tikzcd}
+	\end{center}
+	That is, $\pi_1(X \times Y, (x_0, y_0))$ satisfies the universal mapping property of a product. Since products are unique up to isomorphism, we see that
+	\begin{equation*} 
+		\pi_1(X \times Y, (x_0, y_0)) \cong \pi_1(X, x_0) \times \pi_1(Y, y_0). \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{defn}[Retract]
+	A subset $Y$ of a topological space $X$ is called a \emph{retract} if there exists a map $r:X \to Y$ such that
+	\begin{equation*} 
+		ri = \id_Y,
+	\end{equation*}
+	where $i:Y \hookrightarrow X$ is the inclusion map.
+\end{defn}
+\begin{thm}
+	The circle $S^1$ is not a retract of the closed disc $D^2.$
+\end{thm}
+\begin{proof} 
+	We prove a stronger result that $ri \simeq \id_{S^1}$ is impossible for any map $r:X \to Y.$\\
+	Indeed, assume the contrary and let $r:X \to Y$ be a map such that $ri \simeq \id_{S^1}.$ Then, $(ri)_* = r_*i_*$ is an isomorphism, by \cref{cor:homsameiso}.\\
+	However, note that 
+	\begin{center}
+		\begin{tikzcd}
+			\pi_1(S^1) \arrow[rr, "i_*"] \arrow[rrdd, "\id"'] &  & \pi_1(D^2) \arrow[dd, "r_*"] \\&&\\
+			&  & \pi_1(S^1)                  
+		\end{tikzcd}
+	\end{center}
+	Recalling that $\pi_1(S^1) \cong \mathbb{Z}$ and $\pi_1(D^2) = \{1\},$ we see that the above is impossible since $\mathbb{Z} \to \{1\} \to \mathbb{Z}$ cannot be an isomorphism. \\
+	(There is neither any injection $i_* : \mathbb{Z} \to \{1\}$ nor any surjection $r_* : \{1\} \to \mathbb{Z}.$)
+\end{proof}
+\begin{cor}[Special Brouwer Fixed Theorem]
+	Any continuous map of the closed disc into itself has a fixed point.
+\end{cor}
+\begin{proof} 
+	Suppose $f:D^2 \to D^2$ has no fixed point. We define $r:D^2 \to S^1$ as follows:\\
+	Take the ray joining $f(x)$ to $x$ and extend it until it reaches the circle $S^1.$ Call this point on $S^1$ $r(x).$\\
+	Clearly, if $x \in S^1,$ then $r(x) = x.$ Thus, $ri = \id_{S^1},$ a contradiction to the previous theorem.
+\end{proof}
+\emph{Remark.} This is a special case of Brouwer's fixed point theorem for $n = 2.$ The case $n = 1$ is simple by considering the function $g(x) = f(x) - x$ and noting that $g(-1) \ge 0$ and $g(1) \le 1$, thereby giving us that $g(c) = 0$ for some $c \in D^1 = [-1, 1].$\\~\\
+Note that it must be justified that the $r$ defined above is indeed continuous. This is a fairly straightforward calculation. An outline is as follows:\\
+Consider the ray $\zeta_x$ given by $\zeta_x(t) = (1 - t)f(x) + tx$ for $t \ge 0.$ We need a solution $t > 0$ for $\|\zeta_x(t)\| = 1.$ This turns out to be equivalent to solving
+\begin{equation*} 
+	\|x - f(x)\|^2 t^2 + 2(\langle x, f(x)\rangle - \|f(x)\|^2) + \|f(x)\|^2 - 1 = 0.
+\end{equation*} 
+By our assumption, $x \neq f(x)$ and thus, the above is a genuine quadratic expression for all $x.$ Moreover, using $\|f(x)\|^2 \le 1,$ one can show that the above has one unique positive root, call this $t(x).$ Clearly, $x \mapsto t(x)$ is continuous. (Quadratic formula.)\\
+Thus, $r(x) = (1 - t(x))f(x) + t(x)x$ is a continuous function of $x.$
+
+\begin{thm}
+	Let $X$ be a topological space and $x \in X.$ Suppose $\mathcal{U}$ is an open cover of $X$ with the following properties:
+	\begin{enumerate}
+		\item $U_i \cap U_j$ contains $x$ and is pathwise connected for all $U_i, U_j \in \mathcal{U}$,
+		\item $U$ is simply connected for all $U \in \mathcal{U}.$
+	\end{enumerate}
+	Then, $X$ is simply connected.
+\end{thm}
+\begin{proof} 
+	It is clear that $X$ is pathwise connected since it is the union of pathwise connected sets with a point in common. Thus, we just need to show that any loop is path homotopic to a constant loop. Of course, since $X$ is pathwise connected, we can choose any base point of our choice. We choose the point $x.$ \\~\\
+	Let $\sigma:I \to X$ be any loop at $x.$\\
+	By the Lebsgue number lemma, there exists a subdivision
+	\begin{equation*} 
+		[\sigma] = [\sigma_1]*\cdots*[\sigma_n]
+	\end{equation*}
+	such that each $\sigma_i(I)$ is contained in some $U_i \in \mathcal{U}.$ \\
+	Now, we define the paths $\tau_1, \ldots, \tau_{n+1}$ as follows:
+	\begin{itemize}
+		\item $\tau_1$ and $\tau_{n+1}$ are the constant loops at $x.$
+		\item For $1 < i \le n,$ $\tau_i$ is any path joining $\sigma_i(0)$ to $x$ lying in $U_{i-1} \cap U_i.$ \\
+		We can do so because $\sigma_i(0) = \sigma_{i_1}(1)$ is a point in $U_{i-1} \cap U_i.$ Since this intersection contains $x$ and is pathwise connected, we are done.
+	\end{itemize}
+	Now, note that the path $\tau_i^{-1}\sigma_i\tau_{i+1}$ is a loop that lies in $U_i$ for all $1 \le i \le n.$ Since $U_i$ is simply connected, we see that $[\tau_i^{-1}\sigma_i\tau_{i+1}]$ is the constant element $[e_{x}] \in \pi_1(X).$\\
+	Moreover, observe the following product taken over all $1 \le i \le n$ telescopes. That is,
+	\begin{align*} 
+		[\sigma] &= [\sigma_1]\cdots[\sigma_n]\\
+		&= \prod_{i = 1}^{n}[\tau_i^{-1}\sigma_i\tau_{i+1}]\\
+		&= \prod_{i = 1}^{n}[e_x]\\
+		&= [e_x],
+	\end{align*}
+	as desired. (Note that $[\tau_1^{-1}] = [\tau_{n+1}] = [e_x]$ as well.)
+\end{proof}
+\begin{prop}
+	The space $S^n$ is simply connected for $n \ge 2.$
+\end{prop}
+\begin{proof} 
+	We apply the above theorem with $X = S^n,$ $\mathcal{U} = \{U, V\}$ with $U = S^n\setminus\{(1, 0, \ldots, 0)\}$ and $V = S^n\setminus\{(-1, 0, \ldots, 0)\}.$\\
+	(In other words, $U$ is $S^n$ with one point removed and $V$ is $S^n$ with the opposite point removed.)\\
+	It is clear that $\mathcal{U}$ is open cover. Recall that $\mathbb{R}^n$ is homeomorphic to $S^n$ with a point removed.\\
+	Thus, both $U$ and $V$ are simply connected since $\mathbb{R}^n$ is.\\
+	Moreover, $U \cap V$ is homeomorphic to $\mathbb{R}^n$ with two points removed. Since $n \ge 2,$ this space is path connected.\\
+	Thus, $\mathcal{U}$ satisfies the criterion of the previous theorem and the result follows.
+\end{proof}
+%\\
+%
+\section{Covering spaces}
+%
+In this section, we try to generalise the ideas of earlier. The previous section let us calculate $\pi_1(X)$ in the particular case that $X$ was a topological group (and could be realised as a quotient group in a particular manner).\\
+In section, we shall consider $X$ which is not necessarily a group but represent it as a quotient space of a simply connected space $\tilde{X}.$ As before, we shall work in the case that the fibers of $\tilde{X} \to X$ are discrete.\\
+Towards this end, we have the following definition.
+
+\begin{defn}[Covering space]
+	$E \overset{p}{\longrightarrow} X$ is a \emph{covering space of $X$} if every $x \in X$ has an open neighbourhood $U$ such that $p^{-1}(U)$ is a disjoint union of open sets $S_i$ in $E,$ each of which is mapped homeomorphically onto $U$ by $p.$ Such $U$ are said to be \emph{evenly covered,} and the $S_i$ are called \emph{sheets} over $U.$
+\end{defn}
+\begin{prop}[Consequences]
+	From the above definition, the following results follow.
+	\begin{enumerate}
+		\item The fiber $p^{-1}(x)$ over any point is discrete;
+		\item $p$ is a local homeomorphism;
+		\item $p$ maps $E$ onto $X$ and $X$ has the quotient topology from $E.$
+		\item If $E$ is locally pathwise connected, then so is $X.$
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	\phantom{hi}
+	\begin{enumerate}
+		\item Let $x \in X$ and $U$ be a neighbourhood of $x$ which is evenly covered. Then, $p^{-1}(U) = \displaystyle\bigsqcup_{i \in I} S_i.$\\
+		Let $y \in p^{-1}(x).$ Then, $y \in S_i$ for some $i_0 \in I.$ Moreover, since $p:S_{i_0} \to U$ is homeomorphism, it is one-one and thus, $p(y') \neq x$ for any $y \neq y' \in S_{i_0}.$\\
+		In other words, $S_{i_0} \cap p^{-1}(x) = \{y\}$ and thus, $\{y\}$ is open in $p^{-1}(x).$ (Since $S_{i_0}$ was open.)\\
+		This shows that $p^{-1}(x)$ is discrete.
+		\item By definition, we need to show that given any $e \in E,$ there exists a neighbourhood $V$ of $e$ such that $p(V)$ is open in $X$ and $p|_V:V \to p(V)$ is a homeomorphism.\\~\\
+		To this end, let $e \in E$ be arbitrary and let $x = p(e).$\\
+		Let $U$ an evenly covered neighbourhood of $x$ and $S_{i_0}$ be the sheet (over $U$) containing $e.$\\
+		By definition (of covering spaces), we have that $p_{S_{i_0}}$ is a homeomorphism, as desired.
+		\item The fact that $p$ is onto follows straight from the definition. (Every $x \in X$ has a neighbourhood $U$ which is evenly covered and thus, a sheet maps onto $U$ and in particular, something gets mapped to $x \in U$.)\\~\\
+		Showing that $X$ has the quotient topology from $E$ is the same as showing that $p$ is a quotient map. Let $U \subset X.$ We need to show that $p^{-1}(U)$ is open iff $U$ is open. (We already know that $p$ is surjective.)\\
+		If $U$ is open, then $p^{-1}(U)$ is open since $p$ is continuous. (It is a local homeomorphism.)\\
+		Conversely, let $p^{-1}(U)$ be open. We show that $U$ is open. To this end, let $x \in U.$ Consider any $e \in E$ such that $p(e) = x.$ Then, $e \in p^{-1}(U).$ Since $p$ is a local homeomorphism and $p^{-1}(U)$ is open, we can find a neighbourhood $V$ of $e$ contained in $p^{-1}(U)$ such that $p(V)$ is open.\\
+		However, note that $x \in p(V) \subset U.$ This shows that $x$ is an interior point and thus, $U$ is open. (Since $x$ was arbitrary.)
+		\item Let $x \in X$ and $U$ be an arbitrary neighbourhood of $x.$\\
+		Choose a neighbourhood $U'$ of $x$ which is evenly covered and let $S'$ be a sheet over $U'.$ Then, $p|_{S'}$ is a homeomorphism. \\
+		Let $W = U \cap U'.$ Consider $p|_{S'}^{-1}(W);$ this is an open subset of $S'$ and hence, of $E.$\\
+		Since $E$ is locally pathwise connected, we can find a pathwise connected neighbourhood $V \subset p|_{S'}^{-1}(W)$ of $p|_{S'}^{-1}(x) \in S'.$\\
+		Then, its image $p_{S'}(V) \subset W \subset U$ is a neighbourhood of $x$ and is pathwise connected. (Since it is homeomorphic to $V.$)\\
+		This shows that $X$ is locally pathwise connected. \qedhere
+	\end{enumerate}
+\end{proof}
+
+Thus, covering spaces is the analogue of the previous section that we described earlier.\\
+We now give the analogues of \cref{lem:lift} and \cref{lem:covhomot}.
+
+\begin{thm}[Unique lifting theorem] \label{thm:uniquelift}
+	Let $(E, e_0) \overset{p}{\longrightarrow} (X, x_0)$ be a covering space with base points, $(Y, y_0) \overset{f}{\longrightarrow} (X, x_0)$ any map. Assume that $Y$ is connected. \emph{If} there is a map $(Y, y_0) \overset{E, e_0}{\longrightarrow}$ such that $pf' = f,$ \emph{then} it is unique.
+\end{thm}
+(Note that this is different from \cref{lem:lift} since we don't guarantee the \emph{existence} of an $f'.$)
+\begin{proof} 
+	With everything as in the lemma, assume that $f'':(Y, y_0) \to (E, e_0)$ is also a map such that $pf'' = f.$\\
+	We show that $f' = f''.$\\~\\
+	Define $A \subset Y$ as
+	\begin{equation*} 
+		A \vcentcolon= \{y \in Y \mid f'(y) = f''(y)\}.
+	\end{equation*}
+	Note that $A \neq \emptyset$ since $y_0 \in A.$ (Since $f'(y_0) = e_0 = f''(y_0),$ by assumption.)\\
+	We will show that $A$ is both open and closed. Then, since $Y$ is connected and $A$ is nonempty, it will follow that $A = Y.$ In turn, that will show that $f' = f''.$\\
+	\begin{blockquote}
+		\textbf{Claim 1.} $A$ is open.
+		\begin{proof} 
+			Let $y \in A.$ Let $U$ be an evenly covered neighbourhood of $f(y) = pf'(y).$\\
+			Then, $f'(y)$ lies on some sheet $S$ over $U.$ Since $y \in A,$ we have $f'(y) = f''(y).$ Thus, the set $B \vcentcolon= f'^{-1}(S) \cap f''^{-1}(S)$ is an open set containing $y.$\\
+			\begin{blockquote}
+				\textbf{Subclaim 1.1.} $B \subset A.$
+				\begin{proof} 
+					Let $y_1 \in B.$ Then, $y \in f'^{-1}(S) \cap f''^{-1}(S).$ \\
+					That is $f'(y_1) \in S \ni f''(y_1).$\\
+					Note that $p|_S$ is a homeomorphism and in particular, one-one. Since $pf'(y_1) = f(y_1) = pf''(y_1),$ we see that $f'(y_1) = f''(y_1)$ and hence, $y_1 \in A.$
+				\end{proof}
+			\end{blockquote}
+			Thus, we have seen that given any $y \in A,$ there exists an open set $B$ with $y \in B \subset A,$ showing that $A$ is open.
+		\end{proof}
+	\end{blockquote}
+	\begin{blockquote}
+		\textbf{Claim 2.} $A$ is closed.
+		\begin{proof} 
+			We show that $Y\setminus A$ is open. Let $y \in Y\setminus A.$\\
+			As before, let $U$ be an evenly covered neighbourhood of $f(y) = pf'(y).$\\
+			Since $p$ restricted to sheets is injective and $pf'(y) = pf''(y),$ it follows that $f'(y)$ and $f''(y)$ lie on different sheets, say $S_1$ and $S_2,$ respectively.\\
+			Let $B' \vcentcolon= f'^{-1}(S_1) \cap f''^{-1}(S_2).$ Clearly, $y \in B'.$\\
+			\begin{blockquote}
+				\textbf{Subclaim 2.1.} $B' \subset X\setminus A.$
+				\begin{proof} 
+					Let $y_1 \in B'.$ \\
+					Then, $f'(y_1) \in S_1$ and $f''(y_2) \in S_2.$ Since $S_1$ and $S_2$ are disjoint, the claim follows.
+				\end{proof}
+			\end{blockquote}
+			The above subclaim proves that $X\setminus A$ is open, as earlier.
+		\end{proof}
+	\end{blockquote}
+	Thus, we are done.
+\end{proof}
+\begin{thm}[Path Lifting Theorem] 
+	For $(E, e_0) \overset{p}{\longrightarrow} (X, x_0)$ a covering space with base points, if $\sigma$ is a path in $X$ with initial point $x_0,$ there is a unique path $\sigma_{e_0}'$ in $E$ with initial point $e_0$ such that $p\sigma_{e_0}' = \sigma.$
+\end{thm}
+\begin{proof} 
+	Note that $\sigma$ is actually a pointed map $(I, 0) \overset{\sigma}{\longrightarrow} (X, x_0)$ and $I$ is connected. Thus, uniqueness of $\sigma_{e_0}'$ follows from \nameref{thm:uniquelift}.\\~\\
+	\emph{Special case}: The whole space $X$ is evenly covered. \\
+	Let $S$ be the sheet (over $X$) containing $e_0.$ Then, $p|_S : S \to X$ is a homeomorphism. Let $\psi:X \to S$ be the inverse to this.\\
+	Then, $\sigma_{e_0}' = \psi\circ\sigma$ is the desired map.\\
+	Note that $p\sigma_{e_0}' = p\psi\sigma = \sigma$ and $\psi\sigma(0) = \psi(x_0) = e_0,$ since $p(e_0) = x_0.$ Thus, $\sigma_{e_0}'$ indeed is a pointed map.\\~\\
+	\emph{General case}: Note that $\sigma(I) \subset X$ is compact. Thus, we can find a finite open cover $\{U_i\}_{i = 0}^{n-1}$ of $\sigma(I)$ such that each $U_i$ is evenly covered.\\
+	Thus, by the Lebesgue number lemma, we can find a partition
+	\begin{equation*} 
+		0 = t_0 < t_1 < \cdots < t_n = 1
+	\end{equation*}
+	such that $\sigma([t_i, t_{i + i}])$ lies in the evenly covered neighbourhood $U_i$ of $\sigma(t_i)$ for all $0 \le i < n.$\\
+	(Well, not exactly but we can renumber $U_i$ wlog so that they satisfy the above condition.)\\
+	Thus, note that for each ``sub-path'' $s|_{[t_i, t_{i + 1}]} : [t_i, t_{i + 1}] \to U_i,$ we can apply the first case.\\
+	In particular, for $i = 0,$ we lift $s|_{[0, t_1]}$ to a path $\sigma_1':[0, t_i] \to E$ such that $\sigma_1'(0) = e_0.$\\
+	Assume, as induction, that we have lifted $\sigma|_{[0, t_i]}$ to a map $\sigma_i':[0, t_i] \to E$ such that $\sigma_i(0) = e_0.$ ($0 \le i < n - 1.$)\\
+	Also, observe that $p\sigma_i'(t_i) = \sigma(t_i).$\\
+	Then, we can lift $\sigma|_{[t_i, t_{i + 1}]}$ to a path $\tau_i:[t_i, t_{i + 1}] \to E$ with $\tau_i(t_i) = \sigma_i'(t_{i}).$ (This is because for the lifting theorem, all we used was that $e_0$ was a point that gets mapped to $x_0$ under $p$. By our previous observation, we see that $\sigma_i(t_i) \overset{p}{\mapsto}\sigma(t_i)$ and thus, we can lift a path preserving initial points like that.)\\
+	Thus, we get a path $\sigma_{i+1}':[0, t_{i + 1}] \to E$ given by joining $\sigma_i$ and $\tau_i.$\\~\\
+	Thus, by induction, we get a path $\sigma_n'$ which is our desired $\sigma_{e_0}'.$	
+\end{proof}
+% %
+% \begin{thm}[Covering Homotopy Theorem] \label{thm:covhomot}
+% 	Let $(E, e_0) \overset{p}{\longrightarrow}(X, x_0)$ be a covering space as above.\\
+% 	Let $(Y, y_0)$ be a connected (pointed) topological space and $f:(Y, y_0) \to (X, x_0)$ a map which has a lifting $f':(Y, y_0) \to (E, e_0).$ Then, any homotopy $F:Y\times I \to X$ with $F(y, 0) = f(y)$ for all $y \in Y$ can be lifted to a homotopy $F':Y \times I \to E$ with $F'(y, 0) = f'(y)$ for all $y \in Y.$
+% \end{thm}
 % \begin{proof} 
-% 	The torus is (homeomorphic to) $S^1 \times S^1.$\\
-% 	Define $\varphi: \mathbb{R} \times \mathbb{R} \to S^1 \times S^1$ by
-% 	\begin{equation*} 
-% 		\varphi\left(s_1, s_2\right) \vcentcolon= (e^{2\pi is_1}, e^{2\pi is_2}).
-% 	\end{equation*}
-% 	Clearly, $\varphi$ is onto. Moreover it an open map since a basis element of the form $(a_1, b_1) \times (a_2, b_2)$ gets mapped to an open subset of $S^1 \times S^1$ as can be verified.\\
-% 	Thus, $\varphi$ is a quotient map. Moreover, 
+% 	We prove this is three steps.
+% 	\begin{enumerate}
+% 		\item Assume the case that $X$ is evenly covered.\\
+% 		Let $S$ be the sheet (over $X$) containing $e_0$ and $\psi:X \to S$ be the inverse to the homeomorphism $p|_S.$\\
+% 		Define $F' = \psi\circ F.$ Clearly, $F'$ is a lift. We now show that $F'(y, 0) = f'(y)$ for all $y \in Y.$\\~\\
+% 		To this end, define $\alpha:Y \to X$ by $\alpha(y) = F'(y, 0).$\\
+% 		Note that $p\circ\alpha(y_0) = p\circ F'(y_0, 0) = F(y_0, 0) = f(y_0) = x_0.$\\
+% 		Note that, by definition, $\alpha$ must map into $S,$ the sheet containing $e_0.$ Thus, $\alpha(y_0) \in S$ is an element such that $p(\alpha(y_0)) = x_0.$ Since $p|_S$ is one-one and $p(e_0) = x_0,$ we see that
+% 		\begin{equation*} 
+% 			\alpha(y_0) = e_0.
+% 		\end{equation*}
+% 		Moreover, note that $p\alpha(y) = pF'(y, 0) = F(y, 0) = f(y)$ for all $y \in Y.$\\
+% 		Thus, $\alpha:(Y, y_0) \to (E, e_0)$ is a map such that $p\alpha = f.$ Since $f'$ is also one such, it follows that $f' = \alpha,$ by \nameref{thm:uniquelift}.\\~\\
+% 		Thus, we have
+% 		\begin{equation*} 
+% 			F'(y, 0) = \alpha(y) = f'(y), \text{ for all } y \in Y,
+% 		\end{equation*}
+% 		as desired.
+% 		\item 
+% 	\end{enumerate}
 % \end{proof}
+\begin{thm}[Covering Homotopy Theorem]
+	Let $(E, e_0) \overset{p}{\longrightarrow} (X, x_0)$ be a covering map as before. Let $F:I \times I \to X$ be a map with $F(0, 0) = x_0.$\\
+	There is a unique lifting of $F$ to a continuous map
+	\begin{equation*} 
+		F':I \times I \to E
+	\end{equation*}
+	such that $F'(0, 0) = e_0.$ Moreover, if $F$ is a path homotopy, then $F'$ is a path homotopy.
+\end{thm} 
+\begin{proof} 
+	We first define $F'(0, 0) = e_0.$ We will construct $F'$ piece-wise.\\
+	First, we use the preceding theorem to extend $F$ to the left edge $\{0\} \times I$ and bottom edge $I \times \{0\}.$ \\
+	Now, choose subdivision
+	\begin{align*} 
+		0 = s_0 < s_1 < \cdots < s_m = 1,\\
+		0 = t_0 < t_1 < \cdots < t_n = 1
+	\end{align*}
+	such that each rectangle 
+	\begin{equation*} 
+		I_i \times J_i = [s_{i - 1}, s_i] \times [t_{i - 1}, t_i] 
+	\end{equation*}
+	is mapped by $F$ into an open subset of $X$ which is evenly covered by $p.$ (This is for all $1 \le i \le m$ and $1 \le j \le n.$ Such a subdivision exists by the Lebesgue number lemma.)\\
+	We now define the lift $F'$ inductively. First we define it on $I_1 \times J_1,$ continuing with the other rectangles $I_i \times J_1$ in the bottom row from left to right, then with the rectangles $I_i \times J_2$ in the second row from left to and right, and so on.\\~\\
+	In general, given $i_0$ and $j_0,$ we assume that $F'$ has been defined on set
+	\begin{equation*} 
+		A = \bigcup_{\substack{j < j_0\\1 \le i \le n}}(I_i \times J_j) \cup \bigcup_{i < i_0}(I_i \times J_{j_0}) \cup \left(\{0\} \times I\right) \cup \left(I \times \{0\}\right).
+	\end{equation*}
+	(That is, $A$ is the union of the left and bottom edges along with the ``previous'' rectangles.)\\
+	We also assume that $F'$ defined on $A$ so far is a continuous lifting of $F|_A.$ Using this, we define $F'$ on $I_{i_0} \times J_{j_0}$ such that it's continuous on $A \cup (I_{i_0} \times J_{j_0}).$\\~\\
+	Choose an open set $U$ which is evenly covered by $p$ and contains $I_{i_0} \times J_{j_0}.$ (Such a $U$ exists by our construction of the subdivision.)\\
+	Let $\{S_\alpha\}$ be the set of sheets, each $S_\alpha$ being mapped homeomorphically onto $U$ by $p.$\\
+	Note that $F'$ is already defined on the subset of $I_{i_0} \times J_{j_0}$ given by $C = A \cap (I_{i_0} \times J_{j_0}).$ This subset is \emph{connected} and hence, $F'(C),$ being connected must lie entirely in one sheet.\\
+	Let $S_0$ be this sheet. Let $p_0 \vcentcolon= p|_{S_0}.$ Then,
+	\begin{equation*} 
+		p_0 : S_0 \to U
+	\end{equation*}
+	is a homeomorphism. Moreover, for $x \in C,$ we have
+	\begin{equation*} 
+		p_0(F'(x)) = p(F'(x)) = F(x),
+	\end{equation*}
+	since $F'$ is a lifting of $F|_A.$ Thus, for $x \in C,$ we have that
+	\begin{equation*} 
+		F'(x) = p_0^{-1}(F(x)).
+	\end{equation*}
+	Thus, if we now define
+	\begin{equation*} 
+		F'(y) = p_0^{-1}(F(y))
+	\end{equation*}
+	for $y \in I_{i_0} \times J_{j_0},$ we see that $F'$ must be continuous on $A \cup (I_{i_0}) \times (J_{j_0}),$ by the pasting lemma.\\
+	Moreover, it is clearly a lift of $F|_{A \cup (I_{i_0} \times J_{j_0})}$ as well. Thus, it satisfies our inductive hypothesis and we may carry out this process and define $F'$ on all of $I \times I.$\\~\\
+	To see uniqueness, note that we were forced to define $F'(0, 0) = e_0.$ Thus, considering $(Y, y_0)$ with $Y = I \times I$ and $y_0 = (0, 0),$ appealing to the \nameref{thm:uniquelift}, we see that at each step, there is a unique lift to $I_{i_0} \times J_{j_0}.$ Thus, defining $F'(0, 0)$ uniquely determines $F'.$\\~\\
+	Now, suppose that $F$ is a path homotopy. (Note that since we are not saying anything about the two paths between which it is a homotopy, all that matters is that $F$ is constant on the vertical edges.)\\
+	Then, the map $F$ carries $\{0\} \times I$ onto a singleton $\{x_0\}.$ Since $pF' = F,$ we must have that
+	\begin{equation*} 
+		(pF')(\{0\} \times I) = \{x_0\}.
+	\end{equation*}
+	In other words, $F'$ carries $\{0\} \times I$ into $p^{-1}(x_0).$ However, note that $\{0\} \times I$ is connected whereas $p^{-1}(x_0)$ is discrete. Thus, $F'$ must be constant on $\{0\} \times I.$\\
+	Similarly, it must be constant on $\{1\} \times I$ as well, proving the result.
+\end{proof}
+
+\begin{thm}
+	Let $(E, e_0) \overset{p}{\longrightarrow} (X, x_0)$ be a covering map as before. Let $f$ and $g$ be two paths in $X$ from $x_0$ to $x_1;$ let $f'$ and $g'$ be their respective liftings to paths in $E$ beginning at $e_0.$ If $f$ and $g$ are path homotopic, then so are $f'$ and $g'.$ In particular, $f'$ and $g'$ have the same terminal point.
+\end{thm}
+\begin{proof} 
+	Let $F:f\simeq g \rel \{0, 1\}$ be a path homotopy from $f$ to $g.$\\
+	Let $F'$ be given as in the preceding lemma. We wish to show that the bottom edge is $f'$ and top $g'.$\\
+	To this end, define $\alpha, \beta:I\to E$ as
+	\begin{align*} 
+		\alpha(s) &\vcentcolon= F'(s, 0),\\
+		\beta(s) &\vcentcolon= F'(s, 1).
+	\end{align*}
+	We show that $\alpha = f'$ and $\beta = g'.$\\
+	Note that $\alpha(0) = F'(0, 0) = e_0 = F'(0, 1) = \beta(0).$\\
+	Moreover, $p(\alpha(s)) = p(F'(s, 0)) = F(s, 0) = f(s)$ and similarly, $p(\beta(s)) = g(s).$\\
+	Thus, $\alpha$ and $\beta$ are some lifts of $f$ and $g$ starting at $e_0.$ By the \nameref{thm:uniquelift}, we are done.
+\end{proof}
+\begin{cor}
+	$p_* : \pi_1(E, e_0) \to \pi_1(X, x_0)$ is a monomorphism.
+\end{cor}
+\begin{proof} 
+	To see that $p_*$ is a monomorphism (i.e., that is is injective), it suffices to show that $\ker p_*$ is trivial.\\
+	Let $[\sigma] \in \pi_1(E, e_0)$ be an element of $\ker p_*.$\\
+	Then, $\sigma$ is a loop at $e_0$ in $E$ such that $p \circ \sigma$ is a loop at $x_0$ such that
+	\begin{equation*} 
+		p\circ \sigma \simeq e_{x_0} \rel \{0, 1\}.
+	\end{equation*}
+	(Where $e_{x_0}$ denotes the constant loop as usual.)\\
+	Lifting them back and using the previous theorem, we see that
+	\begin{equation*} 
+		\sigma \simeq e_{e_0} \rel \{0, 1\}. \qedhere
+	\end{equation*}
+\end{proof}
+
+Note that if $\sigma$ is a loop at $x_0$ in $X,$ its lifting $\sigma_{e_0}'$ in $X$ need not be a loop at $e_0.$ (For example, consider $(\mathbb{R}, 0) \overset{p}{\longrightarrow} (S^1, (1, 0))$ given by $p(x) = e^{2\pi ix}.$ The lift of the loop $\sigma$ in $S^1$ given by $s \mapsto e^{2\pi is}$ is the loop $\sigma_0'$ in $\mathbb{R}$ given by $s \mapsto s,$ which ends at $1.$)\\~\\
+However, its terminal point will be a point in $p^{-1}(x_0).$ Moreover, as we saw earlier, the endpoint only depends on the homotopy class of the loop. Thus, we get a well-defined operation
+\begin{equation*} 
+	\cdot:p^{-1}(x_0) \times \pi_1(X, x_0) \to p^{-1}(x_0)
+\end{equation*}
+given by
+\begin{equation*} 
+	e\cdot[\sigma] = \sigma_e'(1).
+\end{equation*}
+\begin{prop}[$\cdot$ is a group action]
+	The above operations satisfies the following properties:
+	\begin{enumerate}
+		\item $e\cdot 1 = e$ for all $e \in p^{-1}(x_0),$
+		\item $e\cdot([\sigma]*[\tau]) = (e \cdot [\sigma])\cdot[\tau]$ for all $e \in p^{-1}(x_0)$ and all $\sigma, \tau \in \pi_1(X, x_0).$
+	\end{enumerate}
+\end{prop}
+Thus, the above $\cdot$ is a \emph{right group action.}
+\begin{proof} 
+	Let $e \in p^{-1}(x_0),$ $[\sigma], [\tau] \in \pi_1(X, x_0)$ be arbitrary.
+	\begin{enumerate}
+		\item Note that $1 \in \pi_1(X, x_0)$ is simply the class of the constant loop $[e_{x_0}].$\\
+		The lift of the constant loop is again a constant loop. Thus, since $1_e'$ starts at $e,$ it must end at $e$ as well. In other words,
+		\begin{equation*} 
+			e = 1_e'(1) = e\cdot 1,
+		\end{equation*}
+		as desired.
+		\item Define $c \in p^{-1}(x_0)$ as $c \vcentcolon= \sigma_e'(1) = e\cdot[\sigma].$\\
+		We wish to show that
+		\begin{equation*} 
+			e\cdot([\sigma*\tau]) = (e \cdot [\sigma])\cdot[\tau].
+		\end{equation*}
+		In other words, we wish to show that
+		\begin{equation*} 
+			(\sigma*\tau)_e'(1) = \tau_c'(1).
+		\end{equation*}
+		Consider the path $\sigma_e'*\tau_c'$ in $E.$ The product is well defined since $\sigma_e'(1) = c = \tau_c'(0).$\\
+		Now, observe that
+
+		\begin{align*} 
+			p(\sigma_e'*\tau_c')(s) &= \begin{cases}
+				p(\sigma_e'(2s)) & 0 \le 2s \le 1,\\
+				p(\tau_c'(2s - 1)) & 1 \le 2s \le 2
+			\end{cases}\\
+			&= \begin{cases}
+				\sigma(2s) & 0 \le 2s \le 1,\\
+				\tau(2s - 1) & 1 \le 2s \le 2
+			\end{cases}\\
+			&= (\sigma*\tau)(s).
+		\end{align*}
+		In other words, $\sigma_e'*\tau_c'$ is a lift of $\sigma*\tau$ with initial point $e.$ By uniqueness of lifts, we see that
+		\begin{equation*} 
+			(\sigma*\tau)_e' = \sigma_e'*\tau_c'.
+		\end{equation*}
+		Thus, we see that
+		\begin{equation*} 
+			(\sigma*\tau)_e'(1) = \sigma_e'*\tau_c'(1) = \tau_c'(1),
+		\end{equation*}
+		as desired. \qedhere
+	\end{enumerate}
+\end{proof}
+\begin{prop}[Description of stabilisers]
+	The stabiliser of a point $e_0 \in p^{-1}(x_0)$ is the subgroup 
+	\begin{equation*} 
+		p_*\pi_(E, e_0) \subset \pi_1(X, x_0).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Note that $[\sigma] \in \pi_1(E, x_0)$ belongs to the stabiliser $S$ of $e_0$ iff $\sigma_{e_0}'(1) = e_0.$\\
+	In other words, $[\sigma] \in S$ iff $\sigma$ lifts to a loop at $e_0.$\\
+	If $\sigma = p \circ \sigma'$ for some loop $\sigma'$ at $e_0,$ then $[\sigma] \in S.$\\
+	Conversely, if $[\sigma] \in S,$ then $\sigma_{e_0}'(1) = e_0$ and thus, $[\sigma_{e_0}'] \in \pi_1(E, e_0)$ with $\sigma = p \circ \sigma_{e_0}'.$
+\end{proof}
+
+\begin{prop}
+	If $E$ is pathwise connected, $\pi_1(X, x_0)$ acts transitively.
+\end{prop}
+\begin{proof} 
+	Let $e, c \in p^{-1}(x_0).$ We wish to show that there exists $[\sigma] \in \pi_1(X, x_0)$ such that $e\cdot[\sigma] = c.$\\
+	Since $E$ is pathwise connected, we can find a path $\sigma'$ in $E$ from $e$ to $c.$ Then, $\sigma = p \circ \sigma'$ fits the bill.\\
+	To see this, note that $\sigma'$ is indeed the lift of $\sigma$ with initial point $\sigma.$ That is, $\sigma' = \sigma_e'.$ Moreover, since it ends at $c,$ we get
+	\begin{equation*} 
+		e\cdot[\sigma] = \sigma_e'(1) = \sigma'(1) = c. \qedhere
+	\end{equation*}
+\end{proof}
+
+Recall from group theory that given an action $\cdot:S \times G \to S$ with $s_0\cdot g = s_1,$ we have $G_{s_0} = gG_{s_1}g^{-1},$ where $G_s$ denotes the stabiliser of $s$ in $G.$\\
+Thus, if $E$ is pathwise connected, then all the different subgroups $p_*\pi_1(E, e)$ are conjugate, as $e$ runs over all points in $p^{-1}(x_0).$
+
+\begin{cor}
+	If $E$ is pathwise connected, the map $[\sigma] \mapsto e_0\cdot[\sigma]$ induces a bijection of the set of all cosets $p_*\pi_1(E, e_0)[\sigma]$ onto the fiber. In particular, if $p^{-1}(x_0)$ is finite, the number of points in the fiber is equal to the index of the subgroup $p_*\pi_1(E, e_0).$
+\end{cor}
+\begin{proof} 
+	In general, let $\cdot:S \times G \to S$ be a group action.\\
+	Let $G_s \le G$ be the stabiliser of $s \in S.$\\
+	Then, given any $g, ' \in G$ we have
+	\begin{equation*} 
+		s\cdot g = s\cdot g'
+	\end{equation*}
+	iff
+	\begin{equation*} 
+		g\cdot g'^{-1} \in G_s \text{ or } g \in G_sg'.
+	\end{equation*}
+	Thus, the map $G/G_s \to S$ given by
+	\begin{equation*} 
+		G_sg \mapsto s\cdot g
+	\end{equation*}
+	is well defined and an injection.\\
+	Moreover, if the action is transitive, then the above map is clearly surjective as well.\\
+	(In the above, $G/G_s$ is just the \emph{set} of right cosets, no assumptions of normality.) 
+\end{proof}
+
+\begin{defn}[Group of covering transformations]
+	Given a covering space $E \overset{p}{\longrightarrow} X,$ the group $G$ of \emph{covering transformations} is the group of all homeomorphisms of $E$ which preserves the fibers, that is, all those $\varphi$ such that $p\varphi = p.$
+
+	\begin{center}
+		\begin{tikzcd}
+			{E} \arrow[rr, "\varphi"]\arrow[rdd, "p"'] && {E} \arrow[ldd, "p"]\\
+			&&\\
+			& X &
+		\end{tikzcd}
+	\end{center}
+\end{defn}
+
+\begin{thm}
+	Given a covering space $(E, e_0) \overset{p}{\longrightarrow} (X, x_0)$ with group of covering transformation $G.$ If $E$ is simply connected and locally pathwise connected, $G$ is canonically isomorphic to $\pi_1(X, x_0).$
+\end{thm}
+This achieves the result we described at the beginning of the section.
+\begin{proof} 
+	First, we define a homomorphism 
+	\begin{equation*} 
+		\chi:G \to \pi_1(X, x_0).
+	\end{equation*}
+	Let $\varphi \in G.$ Since $E$ is simply connected, all paths from $e_0$ to $\varphi(e_0)$ are homotopic relative $\{0, 1\}.$ (By \cref{lem:simpconnpathshomot}.)\\
+	Thus, if $\sigma'$ is such a path, then $p_*([\sigma'])$ depends only on $e_0$ and $\varphi(e_0);$ we define
+	\begin{equation*} 
+		\chi(\varphi) = [p \circ \sigma'].
+	\end{equation*}
+	(That is, we define $\chi(\varphi)$ to be $p_*([\sigma'])$ for any path $\sigma'$ from $e_0$ to $\varphi(e_0).$ Note that $e_0$ is fixed.)\\
+	Note that since $p\varphi = p,$ we see that $p(\varphi(e_0)) = p(e_0) = x_0$ and hence, $p\circ \sigma'$ is indeed a \emph{loop} at $x_0.$ Thus, the above map $\chi$ indeed is a map from $G$ to $\pi_1(X, x_0).$\\
+	
+	\begin{blockquote}
+		\textbf{Claim 1.} $\chi$ is a homomorphism.
+		\begin{proof} 
+			Let $\varphi, \psi \in G.$ Let $\sigma'$ be any path from $e_0$ to $\varphi(e_0)$ and $\tau'$ be any path from $e_0$ to $\psi(e_0).$\\
+			Define the path $\alpha' = \psi\circ\sigma'.$ This is clearly a path from $\psi(e_0)$ to $\psi(\varphi(e_0)).$ In particular, $\tau'*\beta'$ is a path from $e_0$ to $\psi(\varphi(e_0)).$ \\
+			Moreover, since $\psi \in G,$ we have
+			\begin{equation*} 
+				p\circ\alpha' = p\circ\psi\circ\sigma' = p\circ\sigma'.
+			\end{equation*}
+			Thus, we have
+			\begin{align*} 
+				\chi(\psi\circ\varphi) &= [p\circ(\tau'*\alpha')]\\
+				&=[p\circ\tau']*[p\circ\alpha']\\
+				&=[p\circ\tau']*[p\circ\sigma']\\
+				&=\chi(\psi)*\chi(\varphi). \qedhere
+			\end{align*}
+		\end{proof}
+	\end{blockquote}
+
+	\begin{blockquote}
+		\textbf{Claim 2.} $\chi$ is injective.
+		\begin{proof} 
+			By definition, it is clear that 
+			\begin{equation*} 
+				\varphi(e_0) = e_0\cdot\chi(\varphi).
+			\end{equation*}
+			Hence, $\chi(\varphi) = 1$ implies that $\varphi(e_0) = e_0\cdot1 = e_0,$ i.e., $\varphi$ fixes $e_0.$\\
+			However, note that being a covering transformation, we have that $p\varphi = p;$ in other words, $\varphi$ lifts $p.$ By \ref{thm:uniquelift}, there is only one lift of $p$ which fixes $e_0.$ Since the identity is one such, we see that $\chi(\varphi) = 1 \implies \varphi = \id,$ the identity of $\pi_1(X, x_0),$ proving that $\chi$ is injective. 
+		\end{proof}
+	\end{blockquote}
+
+	\begin{blockquote}
+		\textbf{Claim 3.} $\chi$ is surjective.
+		\begin{proof} 
+			Let $[\sigma]\in\pi_1(X, x_0)$ be arbitrary. We construct a $\varphi \in G$ such that $\chi(\varphi) = [\sigma].$\\
+			We define $\varphi$ as follows:\\
+			Let $e \in E,$ let $\tau'$ be any path from $e_0$ to $e,$ and let $\tau = p\circ\tau'.$ Note that $\tau$ is a path from $p(e_0) = x_0$ to $p(e) =\vcentcolon x.$ Then, $\tau^{-1}\sigma\tau$ is a loop at $x.$ We define
+			\begin{equation*} 
+				\varphi(e) \vcentcolon= e\cdot[\tau^{-1}\sigma\tau],
+			\end{equation*}
+			where the $\cdot$ is as before. (The endpoint of the unique lift of $\tau^{-1}\sigma\tau$ in $E$ starting at $e.$)\\
+			Note that the above does not depend on $\tau'$ since $E$ is simply connected. (As earlier, we use \cref{lem:simpconnpathshomot}.)\\
+			In other words, $\varphi$ just depends on $[\sigma].$\\
+			Now, taking $e = e_0,$ we may take $\tau'$ as the constant map and we see that $\varphi(e_0) = e_0\cdot[\sigma] = \sigma_{e_0}'(1).$\\
+			Thus, to compute $\chi(\varphi)$ using the definition of $\chi,$ we may take the path joining $e_0$ and $\varphi(e_0)$ to be $\sigma_{e_0}'$ and we get
+			\begin{equation*} 
+				\chi(\varphi) = [p \circ \sigma_{e_0}'] = [\sigma],
+			\end{equation*}
+			as would be desired. Thus, we just need to show that $\varphi \in G.$\\~\\
+			It is easy to see that that $p\varphi = p.$ Indeed, since $\varphi(e)$ is the endpoint of a lift of a \emph{loop} at $p(e),$ we see that that it must belong to the fiber $p^{-1}(x).$ Thus, $p(\varphi(e)) = x = p(e).$\\
+			Moreover, $\varphi$ has an inverse of the same type that is obtained by replacing $\sigma$ with $\sigma^{-1}$ in the definition. Thus, we just need to show that $\varphi$ is continuous. (The same will show that $\varphi^{-1}$ is also continuous.)\\~\\
+			To do so, we will show the following: For every $e_1 \in E$ and every neighbourhood $V'$ of $\varphi(e_1),$ there exists a neighbourhood $V$ of $e_1$ such that $\varphi(V) \subset V'.$\\
+			To this end, let $e_1 \in E$ be arbitrary. Consider $x_1 = p(e_1) \in X.$\\
+			Let $U$ be an open neighbourhood of $x_1$ which is evenly covered. Since $E$ is locally pathwise connected, so is $X$ and thus, we may assume so is $U.$ (Or we replace $U$ by a smaller pathwise connected neighbourhood, which will still be evenly covered.)\\
+			Then, $e_1 \in S_1$ and $\varphi(e_1) \in S_1'$ for some sheets $S_1, S_1'$ over $U.$ (Recall that $e_1$ and $\varphi(e_1)$ belong to the same fiber $p^{-1}(x_1).$) \\
+			We claim that $\varphi(S_1) \subset S_1'.$ \\
+			To see this, note that if $e \in S_1,$ we can join $e_1$ to $e$ by some path $\alpha'$ in $S_1$ (since $E$ is locally pathwise connected); then, consider the path $p\circ \tau$ in $X$ from $x_1$ to $p(e);$ lifting this to a path $\tau_{\varphi(e_1)}',$ we see that it is in $S_1'.$ In particular, its end point is a point in $S_1'.$ This end point is just $\varphi(e).$ Thus, we have that shown $\varphi(e) \in S_1'$ or that $\varphi(S_1) \subset S_1'.$\\~\\
+			Now, given any neighbourhood $V'$ of $\varphi(e_1),$ we can find a neighbourhood $S_1' \subset V'$ of $\varphi(e_1)$ of the above type. (That is, a neighbourhood of $\varphi(e_1)$ which is a sheet over some open neighbourhood $U$ of $x_1 \in X.$)\\
+			This proves that $\varphi$ is continuous and thus, $\varphi \in G.$
+		\end{proof}
+	\end{blockquote}
+	With that, we are done!
+\end{proof}
 \end{document}
