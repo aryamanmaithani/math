@@ -100,6 +100,11 @@
 \end{enumerate}
 \newpage\section{Sets and stuff}\label{sec:sets}
 \begin{enumerate}
+	%
+	\item Suppose $S$ is an ordered set. Let $E_1 \subset E_2 \subset S$ be such that $E_1$ when considered as a subset of $E_2$ has a least upper bound in $E_2.$\\
+	Is it necessary that $E_1$ being considered as a subset of $S$ must also have a least upper bound?\\
+	\hint{No. Give a counterexample.}
+	%
 	\item \label{q:funcinvproperties}% 
 	Given a function $f:X \to Y,$ $A \subset X,$ $B \subset Y,$ we define
 	\begin{align*} 
@@ -557,26 +562,100 @@ Terminology: Given a metric space $X$ and a point $x \in X,$ a \emph{neighbourho
 	%
 	\item Let $f:\mathbb{R} \to \mathbb{R}$ be continuous. Show that there exists a sequence $(P_n)_{n \in \mathbb{N}}$ of polynomials such that $P_n \to f$ \textbf{pointwise} on $\mathbb{R}.$
 	%
-	\item Let $K \subset \mathbb{R}.$ Let $(f_n)_{n \in \mathbb{N}}$ be a sequence of differentiable functions $f_n:K \to \mathbb{R}.$\\
-	Suppose that $f_n\to f$ uniformly on compact subsets of $K.$\\
+	\item Let $f_n:\mathbb{R} \to \mathbb{R}$ be defined as
+	\begin{equation*} 
+		f_n(x) \vcentcolon= \left(1 + \dfrac{x}{n}\right)^n.
+	\end{equation*}
+	Show that $(f_n)$ does not converge uniformly.
+	%
+\end{enumerate}
+%
+\newpage\section{\texorpdfstring{$\mathbb{R}$ versus $\mathbb{C}$}{R versus C}}
+In this section, I point out some differences in how complex differentiable function behave. (How they're so much ``nicer.'')\\
+The definition of a complex differentiable function is how one would expect it to be.
+
+\begin{defn}[Complex differentiability]
+\begin{blockquote}
+	Let $\Omega \subset \mathbb{C}$ be open.\\
+	A function $f:\Omega \to \mathbb{C}$ is said to be complex differentiable at $z \in \Omega$ if the limit
+	\begin{equation*} 
+		\lim_{z\to z_0}\dfrac{f(z) - f(z_0)}{z - z_0}
+	\end{equation*}
+	exists. In which case, it is denoted by $f'(z).$ \\
+	If $f$ is complex differentiable at all points in $\Omega,$ $f$ is simply said to be complex differentiable. In which case, we get a new function $f':\Omega \to \mathbb{C}.$
+\end{blockquote}
+\end{defn}
+Note that I'm saying ``complex differentiable'' in the above only to emphasise that this is different from the definition seen in the course since that was for real functions. Also, note that $z \to z_0$ in the limit is in the complex plane.\\~\\
+%
+In the next few exercises, I will ask you to construct an example of something going ``bad'' in $\mathbb{R}$ and then follow it with a ``good'' fact from $\mathbb{C}.$\\~\\
+In the following $U$ will always be a nonempty open subset of $\mathbb{R}$ and $\Omega$ a nonempty open subset of $\mathbb{C}.$ Moreover, whenever I ask you to construct an example involving $U,$ you are free to choose $U$ as per your liking. (Of course, it should be a nonempty open set.)
+\begin{enumerate}
+	\item Construct a function $f:U \to \mathbb{R}$ which is differentiable once but $f'$ is not differentiable (anywhere).\\
+	In fact, given any $n \in \mathbb{N},$ construct a function $f:U\to \mathbb{R}$ which is differentiable $n$ times but $f^{(n)}$ is not differentiable anywhere.\\
+	\begin{blockquote}
+		If a function $f:\Omega \to \mathbb{C}$ is complex differentiable, then so is $f'.$\\
+		(Which implies so is $f'', f''',$ et cetera. Thus, differentiable once implies differentiable always.)
+	\end{blockquote}
+	%
+	\item Pick $U$ to be connected: Construct a non-constant differentiable function $f:U\to \mathbb{R}$ such that $|f|$ has a local maximum. \\
+	\begin{blockquote}
+		If $\Omega$ is connected and $f:\Omega \to \mathbb{C}$ is a non-constant complex differentiable, then $|f|$ cannot have a local maximum.
+	\end{blockquote}
+	%
+	\item Construct a non-constant differentiable function $f:\mathbb{R} \to \mathbb{R}$ which is bounded.\\
+	\begin{blockquote}
+		\textbf{Liouville's Theorem.}\\
+		If $f:\mathbb{C} \to \mathbb{C}$ is a bounded complex differentiable function, then $f$ is bounded.
+	\end{blockquote}
+	In fact, an even stronger fact is true.\\
+	\begin{blockquote}
+		\textbf{Little Picard's Theorem.}\\
+		If $f:\mathbb{C} \to \mathbb{C}$ is a non-constant complex differentiable function, then $\left|\mathbb{C}\setminus f(\mathbb{C})\right| \le 1.$
+	\end{blockquote}
+	That is, the image of $f$ misses at most one point. (It may or may not miss anything. For example, the identity map misses nothing whereas the exponential map misses $0.$ The above fact tells you that you can't miss two or more points.)\\
+	This is stronger because the first fact don't disallow the possibility that the image of $f$ is contained in, say, $\{z \in \mathbb{C} \mid \Im z > 0\},$ the upper half plane.
+	%
+	\item Pick $U$ to be connected and let $S \subset U$ be such that $S$ has a limit point \textbf{in} $U$: Construct functions differentiable $f, g:U \to \mathbb{R}$ such that $f|_S = g|_S$ but $f \neq g.$\\
+	(As an example, you can pick $U = \mathbb{R}$ and $K = \{0\} \cup \{n^{-1} \mid n \in \mathbb{N}\}.$)\\
+	\begin{blockquote}
+		Let $\Omega$ be connected and $S \subset \Omega$ be such that $S$ has a limit point \textbf{in} $\Omega.$ Let $f, g:\Omega \to \mathbb{C}$ be complex differentiable functions such that $f|_S = g|_S.$\\
+		Then, $f = g.$
+	\end{blockquote}
+	(That is, $f$ and $g$ being equal on $S$ is sufficient for them to be equal everywhere.)\\
+	Note that the connectivity is important and so is the fact that $S$ has a limit point \textbf{in} $\Omega.$ For example, taking $\Omega = \{z \in \mathbb{C} \mid \Re z > 0\}$ and $S = \{n^{-1} \mid n \in \mathbb{N}\}$ does not work.
+	%
+	\item 
+
+	\begin{defn}[Power series representation]
+		\begin{blockquote}
+		A function $f:U \to \mathbb{R}$ is said to \emph{admit a power series representation at $x_0$} exists a neighbourhood $B_r(x_0) \subset U$ and a sequence of real numbers $(a_n)$ such that 
+		\begin{equation*} 
+			f(x) = a_0 + a_1(x - x_0) + a_2(x - x_0)^2 + \cdots
+		\end{equation*}
+		for all $x \in B_r(x_0).$\\~\\
+		An entirely analogous definition is there for $f:\Omega \to \mathbb{C}$ as well.
+		\end{blockquote}
+	\end{defn}
+	It can be shown that such a function must be infinitely differentiable at $x_0$ and that $a_n = \dfrac{f^{(n)}(x_0)}{n!}.$\\~\\
+	Construct a function $f:U \to \mathbb{R}$ which is infinitely differentiable but there exists $x_0 \in U$ such that $f$ does not admit a power series representation at $x_0.$\\
+	(In fact, one can find a function which does not admit a power series representation \emph{anywhere}.)\\
+	\begin{blockquote}	
+		Let $f:\Omega \to \mathbb{C}$ be complex differentiable. \\
+		Then, for every $z_0 \in \Omega,$ $f$ admits a power series representation. Moreover, this representation is valid on the largest open disc centered at $z_0$ contained in $\Omega.$
+	\end{blockquote}
+	\item Let $(f_n)_{n \in \mathbb{N}}$ be a sequence of differentiable functions $f_n:U \to \mathbb{R}.$\\
+	Suppose that $f_n\to f$ uniformly on compact subsets of $U.$\\
 	Show that $f$ is continuous.\\
 	Show that it is not necessary that $f$ is differentiable (anywhere).\\
-	\hint{Consider $K$ to be compact and $f$ to be a Weierstrass type function.}\\~\\
-	\emph{Remark.} The above is different from the case in $\mathbb{C}$omplex Analysis where one has the following theorem:\\
+	\hint{Consider $U$ to be bounded and $f$ to be a Weierstrass type function.}\\~\\
 	\begin{blockquote}
-		\textbf{Montel's Theorem}.\\
+		\textbf{Montel's Theorem.}\\
 		Let $\Omega$ be an open set in $\mathbb{C}$ and $(f_n)$ a sequence of (complex) differentiable functions $f_n:\Omega \to \mathbb{C}.$\\
 		Suppose that $f_n\to f$ uniformly on compact subsets of $\Omega.$\\
 		Then, $f$ is also (complex) differentiable.\\
 		Further, $f_n' \to f'$ uniformly on compact subsets of $\Omega.$
 	\end{blockquote}
 	This is just one example of how much ``better'' things behave in $\mathbb{C}$ Analysis as compared to $\mathbb{R}.$ In $\mathbb{R},$ not only can $f$ fail to be differentiable but it can differentiable \emph{nowhere}.
-	%
-	\item Let $f_n:\mathbb{R} \to \mathbb{R}$ be defined as
-	\begin{equation*} 
-		f_n(x) \vcentcolon= \left(1 + \dfrac{x}{n}\right)^n.
-	\end{equation*}
-	Show that $(f_n)$ does not converge uniformly.
 	%
 \end{enumerate}
 \end{document}
