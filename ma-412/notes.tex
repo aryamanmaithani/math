@@ -1,0 +1,950 @@
+\documentclass[12pt,oneside]{book}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+\usepackage{thmtools}
+\usepackage[utf8]{inputenc}
+\usepackage[inline]{enumitem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\numberwithin{thm}{chapter}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+
+\setlength\parindent{0pt}
+
+\let\emptyset\varnothing
+\newcommand{\Arg}{\operatorname{Arg}}
+
+\pagestyle{plain}
+
+\usepackage{titlesec}
+\titleformat{\section}[block]{\sffamily\Large\filcenter\bfseries}{\S\thesection.}{0.25cm}{\Large}
+\titleformat{\subsection}[block]{\large\bfseries\sffamily}{\S\S\thesubsection.}{0.2cm}{\large}
+
+\usepackage[a4paper]{geometry}
+\usepackage{lipsum}
+
+\usepackage{cleveref}
+\crefname{thm}{Theorem}{Theorems}
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{defn}{Definition}{Definitions}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{equation}{}{}
+
+\newcommand{\downsym}{[$\downarrow$]}
+\newcommand{\upsym}{[$\uparrow$]}
+
+\usepackage{mdframed}
+\newenvironment{blockquote}
+{\begin{mdframed}[skipabove=0pt, skipbelow=0pt, innertopmargin=4pt, innerbottommargin=4pt, bottomline=false,topline=false,rightline=false, linewidth=2pt]}
+{\end{mdframed}}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily{\S\textbf{\nouppercase{\rightmark}}}}
+\fancyhead[R]{\sffamily{\thepage}}
+
+\title{MA-412\\ Complex Analysis}
+\author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
+\date{Spring Semester 2019-20}
+
+\begin{document}
+\maketitle
+\input{arrow-config}
+\chapter{The Basics}
+This chapter lists the basic definitions and facts that will be assumed later on.
+
+\textbf{Notation:} The following notation will be used through the notes:
+\begin{enumerate}
+	\item $\mathbb{N}$ will denote the set of \textbf{positive} integers. That is, $\mathbb{N} = \{1, 2, \ldots\}.$
+	\item $\mathbb{Z}$ will denote the set of integers.
+	\item $\mathbb{Z}_{\ge 0}$ will denote the set of all \textbf{non-negative} integers. \\
+	That is, $\mathbb{Z}_{\ge 0} = \{0, 1, 2, \ldots\} = \mathbb{N} \cup \{0\}.$
+	\item $\mathbb{Q}$ will denote the set of rationals.
+	\item $\mathbb{R}$ will denote the set of real numbers.
+	\item $\mathbb{R}^+$ will denote the set of \textbf{positive} reals. That is, $\mathbb{R}^+ = \{x \in \mathbb{R} \mid x > 0\}.$
+	\item $\mathbb{R}_{\ge0}$ will denote the set of \textbf{non-negative} reals. \\
+	That is, $\mathbb{R}^+ = \{x \in \mathbb{R} \mid x \ge 0\} = \mathbb{R}^+\cup \{0\}.$
+	\item $\mathbb{R}^\times$ will denote the set of \textbf{non-zero} reals. That is, $\mathbb{R}^\times = \mathbb{R}\setminus\{0\}.$
+	\item $\mathbb{C}$ will denote the set of complex numbers.
+	\item $\mathbb{C}^\times$ will denote the set of \textbf{non-zero} complex numbers. That is, $\mathbb{C}^\times = \mathbb{C}\setminus\{0\}.$
+	\item For $\Omega \subset \mathbb{R}^2,$ $\mathcal{C}^n(\Omega)$ denotes the set of real-valued functions defined on $\Omega$ with all $n$-th partial derivatives continuous. (Partial derivatives refer to the usual derivatives of real functions.)
+	\item We shall write $a_n \to l$ as a shorthand for $\displaystyle\lim_{n\to \infty}a_n = l.$
+\end{enumerate}
+By abuse of notation, the above symbols will also be used to denote not only the set but the algebraic structure as well. That is, $\mathbb{R}$ will also denote the \emph{field} of real numbers, et cetera.\\
+More abuse of notation will be done when we will regard a set $\Omega$ as a subset of both $\mathbb{C}$ and $\mathbb{R}^2.$
+
+The letter $i$ will always be used to denote a root of $x^2 + 1 = 0.$ We fix one such root of the rest of our discussion.
+
+\begin{defn}[Real and imaginary part]
+	Given any complex number $z \in \mathbb{C},$ it can be written as
+	\begin{equation*} 
+		z = x + iy
+	\end{equation*}
+	for unique real numbers $x$ and $y$, which we call the \emph{real} part and \emph{imaginary} part of $z,$ respectively.\\
+	We also denote them by $\Re z$ and $\Im z,$ respectively.
+\end{defn}
+
+\begin{defn}[Conjugate]
+	Given any complex number $z \in \mathbb{C},$ its conjugate $\bar{z}$ is defined as
+	\begin{equation*} 
+		\bar{z} = z - 2i\Im z.
+	\end{equation*}
+\end{defn}
+In other words, if $z = x + iy$ for $x, y \in \mathbb{R},$ then $\bar{z} = x - iy.$
+
+\begin{defn}[Absolute value]
+	The \emph{absolute value} (or \emph{modulus}) of a complex number $z$ is denoted by $|z|$ and is defined as
+	\begin{equation*} 
+		|z| = \sqrt{(\Re z)^2 + (\Im z)^2}.
+	\end{equation*}
+\end{defn}
+Where $\sqrt{.}$ denotes the nonnegative square of a real number.
+
+\begin{defn}[Principal argument]
+	Assume $z \in \mathbb{C}^\times,$ so that $|z| \neq 0$ and $\dfrac{\Re z}{|z|}$ and $\dfrac{\Im z}{|z|}$ are both real numbers in $[-1, 1].$ Moreover, the point $\left(\dfrac{\Re z}{|z|}, \dfrac{\Im z}{|z|}\right)$ lies on the unit circle centered at the origin.\\
+	Them, there exists a \emph{unique} $\theta \in (-\pi, \pi]$ such that
+	\begin{equation*} 
+		\dfrac{\Re z}{|z|} = \cos \theta,\quad \dfrac{\Im z}{|z|} = \sin \theta.
+	\end{equation*}
+	This $\theta$ is called the \emph{principal argument} of the complex number $z$ and is denoted by $\Arg z.$
+\end{defn}
+
+With the above, every nonzero complex number can be written as
+\begin{equation*} 
+	z = \Re z + i\Im z = |z|\left(\cos\left(\Arg z\right) + \sin\left(\Arg z\right)\right).
+\end{equation*}
+
+\begin{thm}[$n$-th roots]
+	Every non-zero complex number has precisely $n$ $n$-th roots.
+\end{thm}
+\begin{proof} 
+	Let $r = |z|$ and $\theta = \Arg z.$\\
+	Define $\zeta \vcentcolon= \cos\left(\dfrac{2\pi}{n}\right) + i\sin\left(\dfrac{2\pi}{n}\right).$\\
+	Define $\xi = r^{1/n}\left(\cos\left(\dfrac{\theta}{n}\right) + i\sin\left(\dfrac{\theta}{n}\right)\right).$\\
+	(Where $r^{1/n}$ denotes the unique positive real number whose $n$-th power is $r$. Its existence is given by Real Analysis.)\\
+	One can verify that $\zeta, \ldots, \zeta^{n}$ are $n$ distinct $n$-th roots of $1$ and $\xi^n = z.$ Thus, we get that
+	\begin{equation*} 
+		\xi\zeta, \xi\zeta^2, \ldots, \xi\zeta^n
+	\end{equation*}
+	are $n$ distinct $n$-th roots of $z.$
+\end{proof}
+
+We shall assume that the reader is familiar with basic topological terms such as open sets, closed sets, connected sets, closure (and interior) of a set, limit points, et cetera.
+
+\begin{defn}[Domain]
+	A \emph{domain} is a non-empty, open-connected subset of $\mathbb{C}.$
+\end{defn}
+
+In these notes, $\Omega$ will always denote an open subset of $\mathbb{C}.$ (Which need not necessarily be a domain.)
+
+\begin{defn}[Convex domain]
+	A domain is said to be \emph{convex} if the line segment joining any of its points lies entirely within it.
+\end{defn}
+\begin{defn}[Star-shaped domain]\label{def:starshaped}
+	A domain $\Omega$ is said to be \emph{star-shaped} if there exists $z_0 \in \Omega$ such that given any $z \in \Omega,$ the line segment joining $z$ and $z_0$ lies within $\Omega.$
+\end{defn}
+\begin{defn}[Balls]
+	For $\delta > 0$ and $z \in \mathbb{C},$ the open ball $B_\delta(z)$ is defined as
+	\begin{equation*} 
+		B_\delta(z) = \{z' \in \mathbb{C} \mid |z - z'| < \delta\}.
+	\end{equation*}
+\end{defn}
+We now state a lemma for $\mathbb{C}$ that will be useful later.
+\begin{restatable}[]{lem}{compcover}
+\label{lem:compcover}
+	Let $\Omega \subset \mathbb{C}$ be open.\\
+	Suppose $C \subset \Omega$ is compact. Then, there exists a compact set $D \subset \Omega$ such that $C \subset \operatorname{int} D.$
+\end{restatable}
+\begin{flushright}\hyperref[lem:compcover2]{\downsym}\end{flushright}
+
+\chapter{Differentiation}
+\section{Definition}
+\begin{defn}[Differentiable at a point]
+	Let $\Omega$ be an open set in $\mathbb{C}$ and $f:\Omega \to \mathbb{C}$ be a function. We say that $f$ is differentiable at $z_0 \in \Omega$ if the limit
+	\begin{equation*} 
+		\lim_{z\to z_0}\dfrac{f(z) - f(z_0)}{z - z_0}
+	\end{equation*}
+	exists, in which case, we denote it by $f'(z_0)$ and call it the derivative of $f$ at $z_0.$
+\end{defn}
+\begin{defn}[Holomorphy]
+	We say that $f:\Omega \to \mathbb{C}$ is holomorphic if $f$ is differentiable at each point in $\Omega.$
+\end{defn}
+Note very carefully that we have only talked about differentiability of functions defined on \emph{open} sets.
+
+\begin{defn}[$A(\Omega)$]
+	For $\Omega \subset \mathbb{C}$ open, we define $A(\Omega)$ to be the ring of holomorphic functions defined on $\Omega.$
+\end{defn}
+(The ring operations are the natural point-wise ones. That this is a ring is an easy check.)
+
+The usual rules of differentiation from real analysis still hold and can be derived similarly. To name a few, we have:
+\begin{enumerate}
+	\item If $f$ is differentiable at a point, then $f$ is continuous at that point.
+	\item $(f + g)'(z_0) = f'(z_0) + g'(z_0).$
+	\item $(fg)'(z_0) = f(z_0)g'(z_0) + f'(z_0)g(z_0).$
+	\item Constant functions are differentiable with derivative $0.$
+	\item For any $n\in \mathbb{N},$ the function $f:\mathbb{C}\to\mathbb{C}$ defined as $z\mapsto z^n$ is differentiable with $f'(z_0) = nz_0^{n-1}.$
+	\item Polynomials are differentiable.
+	\item If $f$ and $g$ are differentiable at $z_0$ with $g(z_0) \neq 0$, then $f/g$ is differentiable at $z_0$ with
+	\begin{equation*} 
+		\left(\dfrac{f}{g}\right)'(z_0) = \dfrac{g(z_0)f'(z_0) - g'(z_0)f(z_0)}{(f(z_0))^2}.
+	\end{equation*}
+\end{enumerate}
+\begin{prop}[Increment lemma]
+	Let $f:\Omega\to\mathbb{C}$ be differentiable at $z_0.$ TFAE:
+	\begin{enumerate}[label = (\roman*)]
+		\item $f$ is complex differentiable at $z_0.$
+		\item There exists function $\psi:\Omega\to\mathbb{C}$ such that
+		\begin{equation*} 
+			f(z) = f(z_0) + (z - z_0)\psi(z)
+		\end{equation*}
+		and $\psi$ is continuous at $z_0.$\\
+		In this case $\psi(z_0) = f'(z_0).$	
+	\end{enumerate}
+\end{prop}
+\begin{prop}[Chain rule]
+	Suppose $f:\Omega_1\to\mathbb{C}$ is differentiable at $z_0$ and $g:\Omega_2\to\mathbb{C}$ is differentiable at $f(z_0).$ (Of course, $f(z_0)\subset\Omega_2$.)\\
+	Then, $g\circ f$ is differentiable at $z_0$ with
+	\begin{equation*} 
+	 	(g \circ f)'(z_0) = g'(f(z_0))f'(z_0).
+	\end{equation*} 
+\end{prop}
+\section{Cauchy Riemann Equations}
+Let $f:\Omega \to \mathbb{C}$ be a function. We can decompose it into its real and imaginary parts as follows:\\
+Define the functions $u, v:\Omega \to \mathbb{C}$ as
+\begin{equation*} 
+	u(z) \vcentcolon= \Re f(z), \quad v(z) \vcentcolon= \Im f(z).
+\end{equation*}
+
+For the remainder of these notes, whenever we write $f = u + iv,$ it is to be understood that $u$ and $v$ have the above meaning.\\
+We will also regard $u$ and $v$ as real valued functions of the real part and imaginary part of $z.$ \\
+To be more precise, we also have the functions $\tilde u, \tilde v$ defined on $\tilde{\Omega} = \{(x, y) \in \mathbb{R}^2 \mid x + iy \in \Omega\}$ as
+\begin{equation*} 
+ 	\tilde u(x, y) \vcentcolon= u(x + iy), \quad \tilde v(x, y) \vcentcolon= v(x + iy).
+ \end{equation*} 
+ By abuse of notation, we will drop the $\tilde {}$ and just write $u$ and $v.$ (Note that $\tilde{\Omega}$ is just $\Omega$ regarded as a subset of $\mathbb{R}^2.$)
+
+\begin{thm}[The Cauchy-Riemann Equations]\label{thm:cr}
+	Suppose $f:\Omega\to\mathbb{C}$ is differentiable at $z_0 = x_0 + iy_0.$ Then,
+	\begin{align} 
+		\dfrac{\partial u}{\partial x}(x_0, y_0) &= \dfrac{\partial v}{\partial y}(x_0, y_0), \text{ and} \label{eq:cr1}\\
+		\dfrac{\partial u}{\partial y}(x_0, y_0) &= -\dfrac{\partial v}{\partial x}(x_0, y_0). \label{eq:cr2}
+	\end{align}
+	Further,
+	\begin{equation*} 
+		f'(z_0) = \dfrac{\partial u}{\partial x}(x_0, y_0) + i\dfrac{\partial v}{\partial x}(x_0, y_0).
+	\end{equation*}
+\end{thm}
+Note that the last equation only has partial derivatives with respect to $x.$\\
+\crefrange{eq:cr1}{eq:cr2} are called the Cauchy-Riemann equations or CR equations, for short.
+\begin{cor}
+	Suppose $\Omega$ is an open set in $\mathbb{C}$ and $f:\Omega \to \mathbb{C}$ holomorphic.\\
+	Regard $f$ as a map $\Omega \to \mathbb{R}^2$ and $\Omega$ as an open set in $\mathbb{R}^2.$ Then,
+	\begin{equation*} 
+		(\operatorname{Jacobian} f)(x, y) = |f'(x+iy)|^2.
+	\end{equation*}
+\end{cor}
+\begin{thm}[A converse]
+	Suppose $u, v \in \mathcal{C}^1(\Omega)$ and $u, v$ satisfy \crefrange{eq:cr1}{eq:cr2}.\\
+	Then, $f = u + iv$ is differentiable at $z_0 = x_0 + iy_0.$
+\end{thm}
+\begin{cor}\label{cor:crconv}
+	If $u, v$ satisfy \crefrange{eq:cr1}{eq:cr2} throughout $\Omega,$ then $f = u + iv \in A(\Omega)$.
+\end{cor}
+
+\begin{defn}[Harmonic conjugate]
+	Suppose $\Omega$ is an open set in $\mathbb{C}$ and $(u, v)$ is a pair of real values $\mathcal{C}^1$ functions satisfying the CR equations. Then, we say that $v$ is a harmonic conjugate of $u.$
+\end{defn}
+Note that if $v$ is a harmonic conjugate of $u,$ then a harmonic conjugate of $v$ is $-u.$
+
+\begin{defn}[Harmonic functions]
+	The $\Delta$ operator is defined as
+	\begin{equation*} 
+		\Delta = \dfrac{\partial^2}{\partial x^2} + \dfrac{\partial^2}{\partial y^2}.
+	\end{equation*}
+	Any solution of the equation $\Delta f = 0$ is called a \emph{harmonic function}.
+\end{defn}
+
+\begin{prop}
+	Suppose $u, v \in \mathcal{C}^2(\Omega)$ and the pair $(u, v)$ satisfies the CR equations. Then, $\Delta u = \Delta v = 0.$\\
+	In other words, $u$ and $v$ are harmonic functions.
+\end{prop}
+
+\begin{defn}[Entire functions]
+	An entire function is a function which is holomorphic on $\mathbb{C}.$
+\end{defn}
+
+% --------------
+
+\chapter{Power Series}
+The reader familiar with basic definition like those of $e,$ absolute convergence, root test, et cetera can skip to \cref{sec:powseries}.
+\section{Preliminaries}
+
+\begin{restatable}[AM-GM-HM]{thm}{amgmhm}
+\label{thm:amgmhm}
+	Let $a_1, \ldots, a_n \in \mathbb{R}^+.$ Then,
+	\begin{equation*} 
+		\dfrac{n}{\frac{1}{a_1} + \cdots + \frac{1}{a_n}} \le \sqrt[n]{a_1\cdots a_n} \le \dfrac{a_1 + \cdots + a_n}{n}.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:amgmhm2]{\downsym}\end{flushright}
+
+\begin{restatable}[]{cor}{coramgmhm}
+\label{cor:coramgmhm}
+	\begin{enumerate}[label = (\roman*)]
+		\item if $a > 0,$ then $\sqrt[n]{a} \to 1,$
+		\item $\sqrt[n]{n} \to 1$,
+		\item For any $x \in \mathbb{R},$ \\
+		$a_n \vcentcolon= \left(1 + \dfrac{x}{n}\right)^n$ is bounded above and eventually monotonically increasing,\\
+		$b_n \vcentcolon= \left(1 - \dfrac{x}{n}\right)^{-n}$ is bounded below and eventually monotonically decreasing.\\
+		Moreover, both $(a_n)$ and $(b_n)$ have a common limit, denoted by $e^x.$
+	\end{enumerate}
+\end{restatable}
+\begin{flushright}\hyperref[cor:coramgmhm2]{\downsym}\end{flushright}
+Note that the above is the definition of $e^x$ for real $x.$ The constant $e$ is, by definition, $e^1.$
+
+\begin{restatable}[Cauchy's first limit theorem]{thm}{cauchyfirst}
+\label{thm:cauchyfirst}
+	Suppose $(a_n)$ is a sequence of complex or real numbers and $a_n \to l.$\\
+	Then, $\dfrac{1}{n}(a_1 + \cdots + a_n) \to l.$
+\end{restatable}
+\begin{flushright}\hyperref[thm:cauchyfirst2]{\downsym}\end{flushright}
+
+\begin{restatable}[]{cor}{corcauchfirst}
+\label{cor:corcauchfirst}
+	Let $(a_n)$ be a sequence of positive reals converging to $l.$\\
+	Then, $(a_1\cdots a_n)^{1/n} \to l.$
+\end{restatable}
+\begin{flushright}\hyperref[cor:corcauchfirst2]{\downsym}\end{flushright}
+
+\begin{restatable}[Cauchy's second limit theorem]{thm}{cauchysecond}
+\label{thm:cauchysecond}
+	If $(a_n)$ is a sequence of positive reals such that
+	\begin{equation*} 
+		\dfrac{a_{n+1}}{a_n} \to l,
+	\end{equation*}
+	then
+	\begin{equation*} 
+		\sqrt[n]{a_n} \to l.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:cauchysecond2]{\downsym}\end{flushright}
+
+\begin{restatable}[]{cor}{cauchysecondcor}
+\label{cor:cauchysecondcor}
+	\begin{equation*} 
+		\dfrac{\sqrt[n]{n!}}{n} \to \dfrac{1}{e}.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[cor:cauchysecondcor2]{\downsym}\end{flushright}
+
+\section{Infinite series}
+\begin{defn}[Infinite series]
+	Given a sequence $(z_n)$ of complex numbers, the formal expression $\displaystyle\sum_{n=1}^{\infty}z_n$ is called an infinite series. \\
+	Define the sequence of \emph{partial sums} as $S_n \vcentcolon= \displaystyle\sum_{k=1}^{n}z_k.$\\
+	We say the series $\sum z_n$ converges if $S_n$ converges and we write $\sum z_n = \displaystyle\lim_{n\to \infty}S_n.$\\
+	Otherwise, we say the series $\sum z_n$ diverges.
+\end{defn}
+
+
+\begin{thm}[Cauchy criterion]\label{thm:cauchcrit}
+	A series $\sum z_n$ of complex numbers converges if and only if the following condition (known as Cauchy criterion) holds:
+
+	Given any $\epsilon > 0,$ there exists $N \in \mathbb{N}$ such that $\displaystyle\left|\sum_{k=N}^{N+m}z_n\right| < \epsilon$ for all $m \in \mathbb{Z}_{\ge 0}.$
+\end{thm}
+The above is simply a consequence of the fact that $\mathbb{C}$ is a complete metric space since the criterion above is just the usual Cauchy criterion for sequences applied to the sequence of partial sums.
+
+\begin{prop}[Some results]\label{prop:res}
+	\begin{enumerate}
+		\item If $\sum a_n$ converges, then $a_n \to 0.$ \label{divergencetest}
+		\item The series $\sum ar^n$ converges for any $a \in \mathbb{C}$ if $|r| < 1.$ If $a = 0,$ it converges for all $r \in \mathbb{C}.$ If $a \neq 0,$ then it diverges for $|r| \ge 1.$ ($r \in \mathbb{C}.$)
+		\item A series of (real) nonnegative terms converges if and only if its partial sums form a bounded sequence.
+	\end{enumerate}
+\end{prop}
+
+\begin{restatable}[Comparison test]{thm}{comptest}
+\label{thm:comptest}
+	Let $(a_n)$ be a sequence of complex numbers and $(c_n), (d_n)$ be real sequences.
+	\begin{enumerate}[label = (\roman*)]
+		\item If $|a_n| \le c_n$ for $n$ sufficiently large, and if $\sum c_n$ converges, then $\sum a_n$ converges.
+		\item If $a_n \ge d_n \ge 0$ for $n$ sufficiently large, and if $\sum d_n$ diverges, then $\sum a_n$ diverges.
+	\end{enumerate}
+	Part (ii) assumes that $a_n$ is eventually real and nonnegative.
+\end{restatable}
+\begin{flushright}\hyperref[thm:comptest2]{\downsym}\end{flushright}
+
+\begin{restatable}[Cauchy's condensation test]{thm}{cauchycondens}
+\label{thm:cauchycondens}
+	Suppose $(a_n)$ is a monotone decreasing sequence of nonnegative reals. Then,
+	\begin{equation*} 
+		\sum_{n=1}^{\infty}a_n \text{ converges if and only if } \sum_{n=0}^{\infty}2^na_{2^n} \text{ converges}.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:cauchycondens2]{\downsym}\end{flushright}
+
+\begin{cor}
+	For $p \in \mathbb{R},$ the series $\displaystyle\sum_{n=1}^{\infty}\dfrac{1}{n^p}$ converges iff $p > 1.$
+\end{cor}
+
+\begin{restatable}[Alternating series test]{thm}{altseries}
+\label{thm:altseries}
+	Suppose that $(a_n)$ is a monotone decreasing sequence of real numbers.\\
+	The series $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}a_n$ converges if and only if $a_n \to 0.$
+\end{restatable}
+\begin{flushright}\hyperref[thm:altseries2]{\downsym}\end{flushright}
+
+\begin{defn}[$\limsup$]
+	Recall the definition of $\limsup$ of a sequence $(a_n)$ of real numbers.\\
+	For each $n \in \mathbb{N},$ define the sequence $s_n$ as 
+	\begin{equation*} 
+		s_n \vcentcolon= \sup\{a_m \mid m \ge n.\}
+	\end{equation*}
+	Then $(s_n)$ is a decreasing sequence and thus, $\alpha = \displaystyle\lim_{n\to \infty}s_n$ exists. We denote $\alpha$ as $\limsup_{n\to\infty}a_n.$
+\end{defn}
+Note in the above that $s_n$ can be eventually $\infty$ or that $\alpha$ can be $\infty.$
+
+\begin{restatable}[Root test]{thm}{roottest}
+\label{thm:roottest}
+	Given $\sum a_n,$ put $\alpha = \displaystyle\limsup_{n\to\infty}\sqrt[n]{|a_n|}.$\\
+	Then,
+	\begin{enumerate}[label = (\roman*)]
+		\item if $\alpha < 1,$ $\sum a_n$ converges,
+		\item if $\alpha > 1,$ $\sum a_n$ converges,
+		\item if $\alpha = 1,$ the test gives no information.
+	\end{enumerate}
+\end{restatable}
+\begin{flushright}\hyperref[thm:roottest2]{\downsym}\end{flushright}
+
+Note that the above test is particularly useful when $\left(\sqrt[n]{|a_n|}\right)$ is a decreasing sequence for then $\limsup$ can be replaced with $\lim.$
+
+\begin{restatable}[]{thm}{expdef}
+\label{thm:expdef}
+	For $x \in \mathbb{R},$ the series $\displaystyle\sum_{n=1}^{\infty}\dfrac{x^n}{n!}$ equals $e^x.$
+\end{restatable}
+\begin{flushright}\hyperref[thm:expdef2]{\downsym}\end{flushright}
+
+\section{Absolute convergence}
+
+\begin{defn}[Absolutely converging series]
+	The series $\sum a_n$ (of complex numbers) is said to be absolutely convergent if $\sum |a_n|$ converges.
+\end{defn}
+
+\begin{prop}
+	An absolutely convergent series is convergent.
+\end{prop}
+The above follows directly from the \nameref{thm:comptest}.
+
+\begin{defn}[Conditionally convergent series]
+	A series which is convergent but not absolutely convergent is called conditionally convergent.
+\end{defn}
+
+\begin{defn}[Rearrangements]
+	Suppose that $\sigma:\mathbb{N}\to\mathbb{N}$ is a bijection. \\
+	We say that $\displaystyle\sum_{n=1}^{\infty}a_{\sigma(n)}$ is a rearrangement of the series $\displaystyle\sum_{n=1}^{\infty}a_n.$
+\end{defn}
+In general, the rearrangement of a series can behave differently from the original one. It may be possible that one diverges while the other converges or that both converge but to different limits. The following theorem sheds more light on this.
+
+\begin{thm}[Riemann]
+	Given a conditionally convergent series of \emph{real numbers,} and $c \in \mathbb{R},$ we can find a rearrangement of the series such that it converges to $c.$
+\end{thm}
+
+However, absolutely convergent series behave much better as seen by the following theorem.
+
+\begin{restatable}[Dirichlet]{thm}{absconvdir}
+\label{thm:absconvdir}
+	Every rearrangement of an absolutely convergent series (of complex numbers) is absolutely convergent and converges to the same limit.
+\end{restatable}
+\begin{flushright}\hyperref[thm:absconvdir2]{\downsym}\end{flushright}
+
+\begin{defn}[Cauchy product]\label{def:cauchprod}
+	Suppose $\displaystyle\sum_{n=0}^{\infty}a_n, \displaystyle\sum_{n=0}^{\infty}b_n$ are two infinite series.\\
+	Their Cauchy product is the series $\displaystyle\sum_{n=0}^{\infty}c_n$ where $c_n \vcentcolon= \displaystyle\sum_{j=0}^{n}a_{j}b_{n-j}.$
+\end{defn}
+
+\begin{restatable}[Cauchy product convergence]{thm}{cauchprodconv}
+\label{thm:cauchprodconv}
+	If $\displaystyle\sum_{n=0}^{\infty}a_n, \displaystyle\sum_{n=0}^{\infty}b_n$ converge absolutely, then their Cauchy product converges absolutely to $\left(\displaystyle\sum_{n=0}^{\infty}a_n\right)\left(\displaystyle\sum_{n=0}^{\infty}b_n\right).$
+\end{restatable}
+\begin{flushright}\hyperref[thm:cauchprodconv2]{\downsym}\end{flushright}
+
+\section{Power series}\label{sec:powseries}
+\begin{defn}[Power series]
+	Let $(a_n)$ be a sequence of complex numbers and $z_0 \in \mathbb{C}.$ The series
+	\begin{equation} \label{eq:pow}
+		\sum_{n=0}^{\infty}a_n(z - z_0)^n
+	\end{equation}
+	is said to be a power series with center at $z_0.$
+\end{defn}
+In the above, it is to be understood that $(z - z_0)^0 = 1$ for all $z.$
+
+\begin{restatable}[]{prop}{discconv}
+\label{prop:discconv}
+	If a power series \cref{eq:pow} converges at a point $z_1$ such that $z_1 \neq z_0,$ then it converges absolutely throughout the open disc
+	\begin{equation*} 
+		D = \{z \in \mathbb{C} \mid |z - z_0| < |z - z_1|\}.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[prop:discconv2]{\downsym}\end{flushright}
+
+The above proposition then lets us characterise precisely the region of convergence of a power series.
+
+\begin{restatable}[Region of convergence]{thm}{regconv}
+\label{thm:regconv}
+	Given a power series \cref{eq:pow}, precisely one of the following holds:
+	\begin{enumerate}[label = (\roman*)]
+		\item The series converges for $z = z_0$ and no other $z \in \mathbb{C},$
+		\item The series converges for all $z \in \mathbb{C},$ or
+		\item There exists a real number $R > 0$ such that the power series converges absolutely for all $z \in \{z \mid |z-z_0| < R\}$ and diverges for all $z \in \{z \mid |z-z_0| > R\}.$\\
+		Moreover, the above $R$ is unique.
+	\end{enumerate}
+\end{restatable}
+\begin{flushright}\hyperref[thm:regconv2]{\downsym}\end{flushright}
+Note that in the third case, we make no comment about the convergence on the \emph{boundary} itself.
+\begin{defn}[Radius of convergence]
+	Given a power series $\displaystyle\sum_{n=0}^{\infty}a_n(z - z_0)^n,$ as per the three possibilities above, the radius of convergence is defined to be
+	\begin{enumerate}[label = (\roman*)]
+		\item $0,$
+		\item $\infty,$ or
+		\item $R.$
+	\end{enumerate}
+\end{defn}
+In other words, it equals $\sup \left\{R \in \mathbb{R} \;\left|\; \displaystyle\sum_{n=0}^{\infty}a_n(z - z_0)^n \text{ converges for all } z \text{ satisfying } |z - z_0| < R\right.\right\}.$
+
+\textbf{Examples.}
+\begin{enumerate}
+	\item $\displaystyle\sum_{n=1}^{\infty}n^nz^n$ has radius of convergence $0.$
+	\item $\displaystyle\sum_{n=0}^{\infty}\dfrac{z^n}{n!}$ has radius of convergence $\infty.$
+	\item $\displaystyle\sum_{n=0}^{\infty}z^n$ has radius of convergence $1.$
+\end{enumerate}
+
+\begin{restatable}[Calculating the radius of convergence]{thm}{radconvcalc}
+\label{thm:radconvcalc}
+	Given the power series $\sum a_nz^n,$ put
+	\begin{equation*} 
+		\alpha = \limsup_{n\to\infty}\sqrt[n]{|a_n|}, \quad R = \alpha^{-1}.
+	\end{equation*}
+	(If $\alpha = 0,$ then $R = \infty$ and if $\alpha = \infty,$ then $R = 0.$)\\
+	Then, $R$ is the radius of convergence.
+\end{restatable}
+\begin{flushright}\hyperref[thm:radconvcalc2]{\downsym}\end{flushright}
+
+\begin{defn}[Disc of convergence]
+	Given a power series with nonzero radius of convergence, the union of all the open discs on which it converges it called its disc of convergence.
+\end{defn}
+If the radius of convergence is $\infty,$ then the disc is $\mathbb{C},$ else it is the disc $D = \{z \mid |z - z_0| < R\}$ where $z_0$ is the center of the power series and $R$ is its radius of convergence.\\
+Note that $D$ is always open. Moreover, we have that the series converges \emph{absolutely} within $D.$
+
+\begin{restatable}[]{lem}{diffseries}
+\label{lem:diffseries}
+	Suppose $\displaystyle\sum_{n=0}^{\infty}a_n(z - z_0)^n$ has $D$ as its disc of convergence with positive radius, then $\displaystyle\sum_{n=1}^{\infty}na_n(z - z_0)^{n-1}$ also converges absolutely on $D.$
+\end{restatable}
+\begin{flushright}\hyperref[lem:diffseries2]{\downsym}\end{flushright}
+Likewise, we have the convergence of $\displaystyle\sum_{n=2}^{\infty}n(n-1)a_n(z - z_0)^{n-2}.$
+
+\begin{restatable}[Differentiation theorem]{thm}{diffdisc}
+\label{thm:diffdisc}
+	Suppose $\displaystyle\sum_{n=0}^{\infty}a_n(z - z_0)^n$ is a power series with positive radius of convergence and $D$ as its disc of convergence. The sum $f$ is holomorphic on $D.$\\
+	Further,
+	\begin{equation*} 
+		f'(z) = \displaystyle\sum_{n=1}^{\infty}na_n(z - z_0)^{n-1}.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:diffdisc2]{\downsym}\end{flushright}
+
+\begin{restatable}[Abel's limit theorem]{thm}{abellim}
+\label{thm:abellim}
+	Suppose $\displaystyle\sum_{n=0}^{\infty}a_n$ converges and $f(z) \vcentcolon= \displaystyle\sum_{n=0}^{\infty}a_nz^n$ for $|z| < 1.$ Then,
+	\begin{equation*} 
+		\lim_{\substack{z \to 1^-\\z\in\mathbb{R}}}f(z) = \sum_{n=0}^{\infty}a_n.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:abellim2]{\downsym}\end{flushright}
+Note that the above limit reads
+\begin{equation*} 
+	\lim_{z\to 1^-}\lim_{n\to \infty}\sum_{j=0}^{n}a_jz^j = \lim_{n\to \infty}\lim_{z\to 1^-}\sum_{j=0}^{n}a_jz^j.
+\end{equation*}
+That is, there is an interchange of limits at play.
+
+We note the following corollary of the theorem which states another result about the \nameref{def:cauchprod}.
+\begin{restatable}[]{cor}{cauchabel}
+\label{cor:cauchabel}
+	Suppose $\displaystyle\sum_{n=0}^{\infty}a_n, \displaystyle\sum_{n=0}^{\infty}b_n$ are two series converging to $A$ and $B,$ respectively.\\
+	Assume that their Cauchy product also converges. Let $C$ be this sum.\\
+	Then, $C = AB.$
+\end{restatable}
+\begin{flushright}\hyperref[cor:cauchabel2]{\downsym}\end{flushright}
+
+\begin{defn}[Some familiar functions]
+	For $z \in \mathbb{R},$ we define the following functions as power series:
+	\begin{enumerate}
+		\item $\exp z \vcentcolon= \displaystyle\sum_{n=0}^{\infty}\dfrac{x^n}{n!}.$
+		\item $\sin z \vcentcolon= \displaystyle\sum_{n=0}^{\infty}(-1)^n\dfrac{x^{2n+1}}{(2n+1)!}.$
+		\item $\cos z \vcentcolon= \displaystyle\sum_{n=0}^{\infty}(-1)^n\dfrac{x^{2n}}{(2n)!}.$
+	\end{enumerate}
+\end{defn}
+Note that the above are entire functions.
+
+By \cref{thm:expdef}, $\exp x$ agrees with $e^x \vcentcolon= \displaystyle\lim_{n\to \infty}\left(1 + \frac{x}{n}\right)^n$ for real $x.$ (Well, the earlier proof had been incomplete and only proven the result for $x \ge 0.$ The case $x < 0$ required the following theorem. Note, however, that there has not been any circular reasoning.)
+
+\begin{restatable}[Exponential addition theorem]{thm}{expadd}
+\label{thm:expadd}
+	For $z, w \in \mathbb{C},$ we have
+	\begin{equation*} 
+		\exp(z + w) = \exp(z)\exp(w).
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:expadd2]{\downsym}\end{flushright}
+
+We shall also use the notation $e^z$ instead of $\exp z.$
+
+\chapter{Cauchy Integral Theorem and elementary properties of holomorphic functions}
+\section{Preliminaries}
+In what follows, $\Omega$ is an open subset of $\mathbb{R}^2.$
+\begin{defn}[Paths]
+	A \emph{path} in $\Omega$ is a continuous, piecewise smooth function $\gamma:[a, b] \to \Omega.$\\
+	Namely, there exists a partition $a = t_0 < t_1 < \cdots < t_n = b$ such that for all $j \in \{1, \ldots, n\},$:
+	\begin{enumerate}[label = (\roman*)]
+		\item $\gamma$ is differentiable on $(t_{j-1}, t_j),$
+		\item $\gamma'$ is continuous on $(t_{j-1}, t_j),$
+		\item $\displaystyle\lim_{t\to t_{j-1}^+}\gamma'(t)$ an d $\displaystyle\lim_{t\to t_{j}^-}\gamma'(t)$ exist.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Perimeter]
+	The \emph{perimeter} of a path $\gamma:[a, b]\to \Omega$ is defined to be
+	\begin{equation*} 
+		\int_{a}^{b} \left|\gamma'(t)\right| \mathrm{d}t.
+	\end{equation*}
+\end{defn}
+The above is an ordinary Riemann integral which will exist since $\gamma'$ is continuous on $[a, b]$ except possibly on finitely many points. Note that $\gamma'$ above is the one from real multivariable calculus. To be explicit, if $\gamma(t) = (\gamma_1(t), \gamma_2(t)),$ then $\left|\gamma'(t)\right| = \sqrt{(\gamma_1'(t))^2 + (\gamma_2'(t))}.$
+
+\begin{defn}[Reverse path]
+	Let $\gamma:[a, b] \to \Omega$ be a path. The \emph{reverse path} of $\gamma$ is denoted by $\bar{\gamma}$ where $\bar{\gamma}:[a, b]\to \Omega$ is defined by
+	\begin{equation*} 
+		\bar{\gamma}(t) = \gamma(a + b - t).
+	\end{equation*}
+\end{defn}
+\begin{defn}[Juxtaposition of two paths]
+	Suppose $\gamma:[a, b] \to \Omega$ and $\sigma:[b, c] \to\Omega$ are two paths such that $\gamma(b) = \sigma(b)$. Their \emph{juxtaposition} is the path $\gamma*\sigma:[a, c] \to \Omega$ given by
+	\begin{equation*} 
+	 	(\gamma*\sigma)(t) \vcentcolon= \begin{cases}
+	 		\gamma(t) & a \le t \le b\\
+	 		\sigma(t) & b < t \le c.
+	 	\end{cases}
+	\end{equation*} 
+\end{defn}
+Note that it should be verified that the juxtaposition is indeed a path.
+
+\begin{defn}[A proper reparameterisation]
+	Suppose $\gamma:[a, b] \to \Omega$ is a path. A \emph{proper reparameterisation} is a path $\sigma\circ\gamma:[c, d] \to \Omega$ where $\sigma:[c, d] \to [a, b]$ is a strictly increasing bijection such that $\sigma'$ exists and is positive except possibly at finitely many points such that the one sided limits exist at these exceptional points.
+\end{defn}
+
+\begin{defn}[Line integrals of vector fields]
+	Suppose $\Phi:\Omega\to\mathbb{R}^2$ is a continuous function and $\gamma$ is a path in $\Omega.$\\
+	Suppose $\Phi(x, y) = (P(x, y), Q(x, y))$ and $\gamma(t) = (\gamma_1(t), \gamma_2(t)).$ Then,
+	\begin{equation*} 
+		\int_\gamma \Phi \vcentcolon= \int_{a}^{b} \left[P(\gamma(t))\gamma_1'(t) + Q(\gamma(t))\gamma_2'(t)\right] \mathrm{d}t
+	\end{equation*}
+\end{defn}
+The integral on the right exists as an ordinary Riemann integral by our assumption on $\Phi$ and $\gamma.$\\
+We may also denote (by abuse) the above integral as
+\begin{equation*} 
+	\int_\gamma P\mathrm{d}x + Q\mathrm{d}y \text{ or } \int_\gamma\Phi\cdot\mathrm{d}r.
+\end{equation*}
+
+\begin{defn}[Integrals of complex functions]
+	Let $f:\Omega \to \mathbb{C}$ be a complex continuous function. As usual, let $f = u + iv.$ We define
+	\begin{equation*} 
+		\int_\gamma f \vcentcolon= \int_\gamma u\mathrm{d}x - v\mathrm{d}y + i\int_\gamma u\mathrm{d}y + v\mathrm{d}x.
+	\end{equation*}
+\end{defn}
+Where the integrals on the right were defined earlier. We may also denote the above integral as
+\begin{equation*} 
+	\int_\gamma f(z)\mathrm{d}z.
+\end{equation*}
+One can check that the above integral is the same as
+\begin{equation*} 
+	\int_{a}^{b} f(\gamma(t))(\gamma_1'(t) + i\gamma_2'(t)) \mathrm{d}t.
+\end{equation*}
+
+Note that in the above, we have regarded $\Omega$ as a subset of $\mathbb{R}^2$. We shall now resume to use $\Omega$ as a subset of $\mathbb{C}$ and thus, it would make sense to talk about holomorphic functions. It is clear how one can define $\gamma$ to be either of the form $(\gamma_1(t), \gamma_2(t))$ or of the form $\gamma_1(t) + i\gamma_2(t).$
+
+\textbf{Examples}
+\begin{enumerate}
+	\item Let $\gamma(t) = (\cos t, \sin t)$ for $t \in [0, 2\pi].$\\
+	If $k \in \mathbb{Z}\setminus\{-1\},$ then
+	\begin{equation*} 
+		\int_\gamma z^k \mathrm{d}z = 0.
+	\end{equation*}
+	(The above being true for negative $k$ as well.)\\
+	On the other hand,
+	\begin{equation*} 
+		\int_\gamma \dfrac{1}{z}\mathrm{d}z = 2\pi i.
+	\end{equation*}
+\end{enumerate}
+
+\begin{restatable}[FTC]{thm}{fundcalc}
+\label{thm:fundcalc}
+	Suppose $f:\Omega \to \mathbb{C}$ is holomorphic and $f'$ is continuous. The, for any path $\gamma$ is $\Omega,$ we have
+	\begin{equation*} 
+		\int_\gamma f' = f(\gamma(b)) - f(\gamma(a)).
+	\end{equation*}
+	In particular, if $\gamma$ is closed, the integral is zero.
+\end{restatable}
+\begin{flushright}\hyperref[thm:fundcalc2]{\downsym}\end{flushright}
+Note that $f'$ above is of course, the complex derivative.
+
+\begin{cor}\label{cor:intzeroprim}
+	Suppose $f:\Omega \to \mathbb{C}$ admits a primitive $F.$ (That is, a function $F:\Omega \to \mathbb{C}$ such that $F' = f.$)\\
+	Then, $\displaystyle\int_\gamma f = 0$ for any closed path $\gamma$ in $\Omega.$
+\end{cor}
+
+\begin{restatable}[M-L inequality]{lem}{estimate}
+\label{lem:estimate}
+	Let $f:\Omega \to \mathbb{C}$ be a continuous function and $\gamma:[a, b] \to \Omega$ be a path. Then,
+	\begin{equation*} 
+		\left|\int_\gamma f\right| \le \left(\sup_{t \in [a, b]}|f(\gamma(t))|\right)\cdot\left(\operatorname{perimeter}(\gamma)\right).
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[lem:estimate2]{\downsym}\end{flushright}
+
+\section{Some results}
+
+\begin{defn}[Some useful notations]
+	\phantom{line}
+	\begin{enumerate}
+		\item For complex numbers $z_1, z_2,$ we shall use $l[z_1, z_2]$ to denote the line segment joining $z_1$ and $z_2.$ That is,
+		\begin{equation*} 
+			l[z_1, z_2] = \{(1 - t)z_1 + tz_2 \mid t \in [0, 1]\}.	
+		\end{equation*}
+		\item For complex numbers $z_1$ and $z_2,$ we shall write $\displaystyle\int_{z_1}^{z_2} f(z) \mathrm{d}z$ to mean the integral $\displaystyle\int_{\gamma}^{} f$ where $\gamma:[0, 1]\to \mathbb{C}$ is defined as $\gamma(t) = (1 - t)z_1 + tz_2,$ the line segment starting at $z_1$ and ending at $z_2.$
+	\end{enumerate}
+\end{defn}
+
+\begin{restatable}[Goursat's lemma]{thm}{goursat}
+\label{thm:goursat}
+	Suppose $\Omega$ is open and convex and $f:\Omega\to\mathbb{C}$ is differentiable. Then, 
+	\begin{equation*} 
+		\int_T f = 0
+	\end{equation*}
+	for any closed triangle $T \subset \Omega.$
+\end{restatable}
+\begin{flushright}\hyperref[thm:goursat2]{\downsym}\end{flushright}
+Note that we cannot appeal to \cref{thm:fundcalc} (or \cref{cor:intzeroprim}) since we do not know, a priori, that $f$ admits a primitive.\\
+Also, note from the proof that we can actually weaken the hypothesis to conclude the following:
+\begin{prop}[Stronger Goursat's lemma]\label{prop:stronkgours}
+	Suppose $\Omega$ is open (not necessarily convex) and $f:\Omega \to \mathbb{C}$ is holomorphic.\\
+	Let $T \subset \Omega$ be a triangle satisfying the following:
+
+	There exists a set $C \subset \Omega$ such that $\widehat{T} \subset \operatorname{int} C,$ where $\widehat{T}$ denotes the convex hull of $T$ and $\operatorname{int} C,$ the interior of $C.$
+
+	Then, 
+	\begin{equation*} 
+		\int_T f = 0.
+	\end{equation*}
+\end{prop} 
+
+\begin{restatable}[Cauchy's theorem for convex domains]{cor}{primexists}
+\label{cor:primexists}
+	Let $\Omega \subset \mathbb{C}$ be open and convex and $f:\Omega \to \mathbb{C}$ be holomorphic. Then, $f$ admits a primitive. That is, there exists $F:\Omega \to \mathbb{C}$ such that $F$ is holomorphic and $F' = f.$\\
+	In particular, 
+	\begin{equation*} 
+		\int_{\gamma}^{} f(z) \mathrm{d}z
+	\end{equation*}
+	for all closed paths $\gamma.$
+\end{restatable}
+\begin{flushright}\hyperref[cor:primexists2]{\downsym}\end{flushright}
+
+\begin{restatable}[Cauchy's theorem for star-shaped domains]{cor}{starprimitive}
+\label{cor:starprimitive}
+	If $\Omega \subset \mathbb{C}$ is open and star-shaped and $f:\Omega \to \mathbb{C}$ is holomorphic, then $f$ admits a primitive.\\
+	In particular, 
+	\begin{equation*} 
+		\int_{\gamma}^{} f(z) \mathrm{d}z
+	\end{equation*}
+	for all closed paths $\gamma.$
+\end{restatable}
+\begin{flushright}\hyperref[cor:starprimitive2]{\downsym}\end{flushright}
+\section{Consequences of holomorphy}
+\begin{restatable}[Cauchy integral formula]{thm}{cif}
+\label{thm:cif}
+	Let $\Omega$ be an open convex set in $\mathbb{C}.$\\
+	Suppose $f:\Omega \to \mathbb{C}$ is holomorphic.\\
+	Let $p \in \Omega$ and $r > 0$ be such that $\overline{B_r(p)} \subset \Omega.$\\
+	Then, for any point $z \in B_r(p),$ we have
+	\begin{equation*} 
+		f(z) = \dfrac{1}{2\pi i}\int_{\gamma}^{} \dfrac{f(\xi)}{\xi - z} \mathrm{d}\xi,
+	\end{equation*}
+	where $\gamma$ is the circle $\partial \overline{B_r(p)}$ traced counterclockwise.\\
+	(That is, $\gamma(t) = p + re^{it}$ for $t \in [0, 2\pi].$)
+\end{restatable}
+\begin{flushright}\hyperref[thm:cif2]{\downsym}\end{flushright}
+
+\begin{restatable}[Holomorphic functions are analytic]{cor}{holoanalytic}
+\label{cor:holoanalytic}
+	Suppose $\Omega \subset \mathbb{C}$ is open and $f:\Omega \to \mathbb{C}$ is holomorphic. Then, for each $p \in \Omega,$ there exists $r > 0$ such that $B_r(p) \subset \Omega$ and on $B_r(p),$ $f$ admits a power series representation. That is,
+	\begin{equation} \label{eq:holopowser}
+		f(z) = \displaystyle\sum_{n=0}^{\infty}a_n(z - p)^n
+	\end{equation}
+	for all $z \in B_r(p).$\\
+	In fact, the above is true for any $r$ such that $B_r(p) \subset \Omega.$\\
+	In particular, if $f$ is differentiable once, then $f$ is infinitely differentiable. (Since power series are clearly infinitely differentiable in view of \nameref{thm:diffdisc}.)
+\end{restatable}
+\begin{flushright}\hyperref[cor:holoanalytic2]{\downsym}\end{flushright}
+
+As the proof of the above theorem shows, we have an explicit formula for $a_n.$
+
+\begin{cor}
+	With everything as in the above theorem, we have
+	\begin{equation} \label{eq:powsercoeff}
+		a_n = \dfrac{1}{2\pi i}\int_{\gamma}^{} \dfrac{f(\xi)}{(\xi - p)^{n+1}} \mathrm{d}\xi,
+	\end{equation}
+	where $\gamma(t) = p + re^{it}$ for $t \in [0, 2\pi].$
+\end{cor}
+
+\begin{restatable}[Cauchy's estimate]{thm}{cauchest}
+\label{thm:cauchest}
+	With notation as earlier, if $\overline{B_R(p)} \subset \Omega,$ then
+	\begin{equation*} 
+		|f^{(k)}(p)| \le \dfrac{k!}{R^k}\sup_{B_R(p)}|f|.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:cauchest2]{\downsym}\end{flushright}
+
+\begin{restatable}[Bounded entire functions]{thm}{boundedentire}
+\label{thm:boundedentire}
+	A bounded entire function is constant.
+\end{restatable}
+\begin{flushright}\hyperref[thm:boundedentire2]{\downsym}\end{flushright}
+
+\begin{cor}[Fundamental Theorem of Algebra]
+	Every non-constant polynomial with complex coefficients has a complex root.
+\end{cor}
+
+Recall Green's theorem from multivariable calculus.
+\begin{thm}[Green's Theorem] \label{thm:greens}
+	Suppose that $P$ and $Q$ are continuously differentiable on an open set $\Omega \subset \mathbb{R}^2$ and $\gamma$ is a simple closed curve lying in $\Omega$ such that $\operatorname{int}(\gamma) \subset \Omega.$ Then,
+	\begin{equation*} 
+		\oint_\gamma P(x, y)\mathrm{d}x + Q(x, y)\mathrm{d}y = \iint_{\operatorname{int} \gamma}\left(\dfrac{\partial P}{\partial x} - \dfrac{\partial Q}{\partial y}\right)\mathrm{d}(x, y),
+	\end{equation*}
+	where the curve $\gamma$ is traced counterclockwise.
+\end{thm}
+(Note that in the above, $\operatorname{int}\gamma$ is not the usual interior.)\\
+Note that now we know that if $f$ is differentiable once, then its derivative is continuous. Using Green's theorem, we can now strengthen the result of \nameref{cor:primexists} as follows.
+
+\begin{restatable}[Cauchy's Integral Theorem (basic)]{thm}{cauchyintegral}
+\label{thm:cauchyintegral}
+	Suppose $f:\Omega \to \mathbb{C}$ is holomorphic. Let $\gamma$ be a simple closed curve in $\Omega$ such that $\operatorname{int} \gamma \subset \Omega.$ Then,
+	\begin{equation*} 
+		\int_{\gamma}^{} f(z) \mathrm{d}z = 0.
+	\end{equation*}
+\end{restatable}
+\begin{flushright}\hyperref[thm:cauchyintegral2]{\downsym}\end{flushright}
+
+Note that similarly, \nameref{thm:cif} can be improved to the following. The proof is left to the reader.
+
+\begin{thm}[Cauchy's Integral Formula]\label{thm:cifreal}
+	Suppose $f:\Omega \to \mathbb{C}$ is holomorphic. Let $\gamma$ be a simple closed curve in $\Omega$ (oriented positively) such that $\operatorname{int} \gamma \subset \Omega.$ If $z_0 \in \operatorname{int}\gamma$, then
+	\begin{equation*} 
+		f(z) = \frac{1}{2\pi i}\int_{\gamma}^{} \frac{f(z)}{z - z_0} \mathrm{d}z.
+	\end{equation*}
+\end{thm}
+
+Now, we see an important lemma that helps us prove other powerful results about holomorphic functions.
+
+\begin{restatable}[]{lem}{constnbd}
+\label{lem:constnbd}
+	Let $\Omega$ be a \textbf{connected} open set in $\mathbb{C}.$ Let $f:\Omega \to \mathbb{C}$ be holomorphic. Let $p \in \Omega.$ Suppose $f$ is constant in a neighbourhood of $p.$ Then, $f$ is constant on $\Omega.$
+\end{restatable}
+\begin{flushright}\hyperref[lem:constnbd2]{\downsym}\end{flushright}
+
+\begin{restatable}[]{thm}{preiden}
+\label{thm:preiden}
+	Let $\Omega$ be a \textbf{connected} open set in $\mathbb{C}$ and $f:\Omega \to \mathbb{C}$ be holomorphic.\\
+	TFAE:
+	\begin{enumerate}[label = (\roman*)]
+		\item $f \equiv 0$ on $\Omega,$
+		\item There exists a sequence $(p_n)$ of distinct points of $\Omega$ such that $p_n \to p \in \Omega$ and $f(p_n) = 0$ for all $n \in \mathbb{N},$ (note that the limit is in $\Omega$)
+		\item There exists a point $p \in \Omega$ such that $f^{(k)}(p) = 0$ for all $k \ge 0.$
+	\end{enumerate}
+\end{restatable}
+\begin{flushright}\hyperref[thm:preiden2]{\downsym}\end{flushright}
+
+\begin{cor}[Identity Theorem]
+	Suppose $\Omega$ is a \textbf{connected} open set in $\mathbb{C}$ and $f, g:\Omega \to \mathbb{C}$ are holomorphic. If the set
+	\begin{equation*} 
+		\{z \in \Omega \mid g(z) = f(z)\}
+	\end{equation*}
+	has a limit point \emph{in} $\Omega,$ then $f \equiv g.$
+\end{cor}
+Note very carefully that we require the limit point to be in $\Omega.$
+
+\begin{cor}
+	The zeroes of a holomorphic function defined on an open connected set must be isolated.
+\end{cor}
+
+Now, we state (and prove) a converse of sorts to Cauchy's theorem.
+\begin{restatable}[Morera's Theorem]{thm}{morera}
+\label{thm:morera}
+	Let $\Omega$ be an open set in $\mathbb{C}$ and $f:\Omega \to \mathbb{C}$ be continuous. Assume that 
+	\begin{equation*} 
+		\int_T f = 0
+	\end{equation*}
+	for all triangles $T \subset \Omega.$ Then, $f$ is holomorphic on $\Omega.$
+\end{restatable}
+\begin{flushright}\hyperref[thm:morera2]{\downsym}\end{flushright}
+
+\begin{restatable}[Montel's theorem]{cor}{montel}
+\label{cor:montel}
+	Let $\Omega$ be an open set in $\mathbb{C}$ and $(f_n)$ be a sequence of functions in $A(\Omega)$ converging uniformly to $f$ on compact subsets of $\Omega.$\\
+	Then, the limit function $f$ is also holomorphic. Further, $f_n' \to f'$ uniformly on compact subsets of $\Omega.$
+\end{restatable}
+\begin{flushright}\hyperref[cor:montel2]{\downsym}\end{flushright}
+In particular, if $\sum f_n$ is an infinite series of holomorphic functions converging uniformly on compact subset of $\Omega$ to $f,$ then $f' = \sum f_n'.$
+
+\begin{restatable}[]{lem}{constmodconst}
+\label{lem:constmodconst}
+	Let $\Omega$ be a connected open set and $f:\Omega\to\mathbb{C}$ be holomorphic. If $\left|f\right|$ is constant, then so is $f.$
+\end{restatable}
+\begin{flushright}\hyperref[lem:constmodconst2]{\downsym}\end{flushright}
+
+\begin{restatable}[Maximum Modulus Theorem]{thm}{maxmod}
+\label{thm:maxmod}
+	Suppose $\Omega$ is a connected open set in $\mathbb{C}$ and $f:\Omega \to \mathbb{C}$ is holomorphic such that $\left|f\right|$ attains a local maximum at a point $p \in \Omega.$ Then, $f$ is constant.
+\end{restatable}
+\begin{flushright}\hyperref[thm:maxmod2]{\downsym}\end{flushright}
+
+\begin{cor} \label{cor:modinterior}
+	Let $D$ be a (bounded) closed disc and $f:D\to \mathbb{C}$ be a non-constant continuous function which is holomorphic on the interior of $D.$\\
+	Then, 
+	\begin{equation*} 
+		\sup_{z \in D}\left|f(z)\right| = \sup_{z \in \partial D}\left|f(z)\right|.
+	\end{equation*}
+	Furthermore, for any $p \in D^\circ,$ we have
+	\begin{equation*} 
+		f(p) < \sup_{z \in \partial D}\left|f(z)\right|.	
+	\end{equation*}
+\end{cor}
+The proof is simple. Since $f$ is continuous and $D$ is compact, we know that $f$ achieves its supremum. By \nameref{thm:maxmod}, we know that this cannot be achieved at any point in the interior.
+
+\begin{restatable}[Open Mapping Theorem]{thm}{openmapping}
+\label{thm:openmapping}
+	If $\Omega$ is a \textbf{connected} open set in $\mathbb{C}$ and $f:\Omega \to \mathbb{C}$ is a non-constant holomorphic function, then $f$ is an open mapping.\\
+	That is, for every open $U \subset \Omega,$ the set $f(U)$ is open in $\mathbb{C}.$ In particular, $f(\Omega)$ is open.
+\end{restatable}
+\begin{flushright}\hyperref[thm:openmapping2]{\downsym}\end{flushright}
+
+\input{proofs}
+\end{document}
