@@ -12,10 +12,10 @@ description: Click on the links to explore!
 # *** If you're not sure what this mean, then leave this section as it is. Only modify the url and baseurl if you know what you're doing!***
 
 # url is the the website domain URL without a trailing slash
-url: "https://aryamanmaithani.github.io"
+#url: "https://example.com"
 
 # baseurl should be an empty string
-baseurl: ""
+#baseurl: ""
 
 # --- Navigation bar options --- #
 
@@ -38,6 +38,8 @@ navbar-links:
       href:  /tuts/ma-106/
     - title: MA 108
       href:  /tuts/ma-108/
+    - title: MA 205
+      href: /tuts/ma-205/
   - title: More
     subcategories:
     - title: Courses
@@ -46,7 +48,21 @@ navbar-links:
       href:  /blog/
   - title: About Me
     href:  /aboutme/
-
+  # Academic:
+  #   - Notes: "notes/"
+  #   - Reports: "reports/"
+  #   - Presentations: "presentations/"
+  # About Me: "aboutme/"
+  # Tutorials:
+  #   - MA 105: "tuts/ma-105/"
+  #   - MA 106: "tuts/ma-106/"
+  #   - MA 108: "tuts/ma-108/"
+  # More:
+  #   - Courses: "aboutme/courses/"
+  #   - Blog: "blog/"
+  #Dropdown:
+  #  - Item 1: "http://www.google.com/"
+  #  - Item 2: "http://www.github.com/"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
@@ -302,4 +318,3 @@ collections:
 anon-form: "https://forms.gle/faFYkmjNnevF5nBK9"
 plugins:
   - jekyll-target-blank
-  
