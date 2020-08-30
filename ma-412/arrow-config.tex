@@ -1,0 +1,13 @@
+\tikzset{lab dis/.store in=\LabDis,
+  lab dis=0.3,
+  ->-/.style args={at #1 with label #2}{decoration={
+    markings,
+    mark=at position #1 with {\arrow{>}; \node at (0,\LabDis) {#2};}},postaction={decorate}},
+    -<-/.style args={at #1 with label #2}{decoration={
+    markings,
+    mark=at position #1 with {\arrow{<}; \node at (0,\LabDis)
+    {#2};}},postaction={decorate}},
+   -*-/.style={decoration={
+    markings,
+    mark=at position #1 with {\fill (0,0) circle (1.5pt);}},postaction={decorate}},
+  }
