@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
-\input{insbox}
+% \input{insbox}
 \usepackage{thmtools}
 \usepackage[utf8]{inputenc}
 \usepackage[inline]{enumitem}
@@ -2938,12 +2938,12 @@ The main property that we shall by using of this topology is the following:
 \begin{proof} 
 	Let $(\sigma_0, t_0) \in X^I\times I$ be arbitrary and $V \subset X$ be a neighbourhood of $\omega(\sigma_0, t_0) = \sigma_0(t_0).$\\
 	We wish to find a neighbourhood of $(\sigma_0, t_0)$ that is mapped into $V$ via $\omega.$\\
-	Since $\sigma$ is continuous and $V$ is open, there exists an open interval $U$ of $t_0$ such that $\sigma(U) \subset V.$ We may find a smaller bounded open interval such that $\bar{W} \subset U.$ Note that $\bar{W}$ is compact. \\
-	Note that $[\bar{W}, V]$ is one of the subbasis elements of $X^I$ and hence, is open. Thus, $T = [\bar{W}, V]\times W$ is a neighbourhood of $(\sigma_0, t_0).$\\
-	Now, if $(\sigma', t') \in T,$ then $\sigma'(t') \in V$ since $\sigma' \in [\bar{W}, V]$ maps $W$ into $V.$ In other words, $\omega(\sigma', t') \in V,$ as desired. ($T$ is the desired neighbourhood that gets mapped in $V$ by $\omega.$)
+	Since $\sigma$ is continuous and $V$ is open, there exists an open interval $U$ of $t_0$ such that $\sigma(U) \subset V.$ We may find a smaller bounded open interval such that $\overline{W} \subset U.$ Note that $\overline{W}$ is compact. \\
+	Note that $[\overline{W}, V]$ is one of the subbasis elements of $X^I$ and hence, is open. Thus, $T = [\overline{W}, V]\times W$ is a neighbourhood of $(\sigma_0, t_0).$\\
+	Now, if $(\sigma', t') \in T,$ then $\sigma'(t') \in V$ since $\sigma' \in [\overline{W}, V]$ maps $W$ into $V.$ In other words, $\omega(\sigma', t') \in V,$ as desired. ($T$ is the desired neighbourhood that gets mapped in $V$ by $\omega.$)
 \end{proof}
 
-\begin{prop}[A bijective correspondence]
+\begin{prop}[A bijective correspondence]\label{prop:correspondencefuncspace}
 	Let $X$ and $Y$ be topological spaces. There is a bijective correspondence between maps
 	\begin{equation*} 
 		f:Y\to X^I \quad \text{and} \quad F:Y\times I \to X.
@@ -2966,8 +2966,14 @@ The main property that we shall by using of this topology is the following:
 	By the earlier proposition, we see that $F$ is continuous.
 
 	Conversely, assume that $F$ is continuous. To show that $f$ is continuous, it suffices to show that $f^{-1}([K, U])$ is open for any arbitrary subbasis element $[K, U] \subset X^I.$\\
-	Choose $y \in f^{-1}([K, U]).$ This means that given any $k \in K \subset I,$ we have $f(y)(k) \in U$ or $F(y, k) \in U.$ Thus, we see that $F(\{y\} \times K) \subset U.$\\
-	Since $F$ is continuous, the image 
+	Choose $y \in f^{-1}([K, U]).$ \\
+	This means that given any $k \in K \subset I,$ we have $f(y)(k) \in U$ or $F(y, k) \in U.$ Thus, we see that $F(\{y\} \times K) \subset U.$\\
+	Since $F$ is continuous, there exist open sets $V \subset Y$ and $W \subset X$ such that $y \in V$ and $K \subset W$ with the property that $F(V \times W) \subset U.$ \\
+	Now, note that if $y' \in V$ and $k \in K \subset W,$ then $f(y')(k) = F(y, k) \in U.$ In other words
+	\begin{equation*} 
+		f(y') \in [K, U].
+	\end{equation*}
+	This shows that $f$ maps $V$ into $[K, U]$ proving that $f^{-1}([K, U])$ is open. 
 \end{proof}
 
 We will now turn our attention to a specific subspace of $X^I.$
@@ -2986,22 +2992,13 @@ We will now turn our attention to a specific subspace of $X^I.$
 	$\sigma, \tau \in \Omega_{x_0}$ are in the same path-connected components iff $\sigma \simeq \tau \rel \{0, 1\}.$
 \end{prop}
 \begin{proof} 
-	($\implies$) Assume that $\sigma$ and $\tau$ belong to the same path-connected component. Thus, there is a path
+	Given a path $f:I\to X^I,$ we get a function $F:I\times I \to X$ and vice-versa by the relation
 	\begin{equation*} 
-		f:I \to \Omega_{x_0}
+		f(s)(t) = F(s, t).
 	\end{equation*}
-	such that $f(0) = \sigma$ and $f(1) = \tau.$\\
-	From this, we define the map $F:I\times I \to X$ as
-	\begin{equation*} 
-		F(s, t) \vcentcolon= f(s)(t).
-	\end{equation*}
-	The continuity of $f$ follows due to the previous proposition. Indeed, we have the factorisation
+	As we saw in \cref{prop:correspondencefuncspace}, $f$ is continuous iff $F$ is.
 
-	\begin{equation*} 
-		I \times I \overset{f \times \id_I}{\longrightarrow} \Omega_{x_0}\times I \overset{\omega}{\longrightarrow} X.	
-	\end{equation*}
-
-	Note that
+	Now, if $f$ is a path from $\sigma$ to $\tau,$ then $F$ can be verified to be a homotopy. Indeed, one notes that
 	\begin{equation*} 
 		F(0, t) = f(0)(t) = \sigma(t), \quad \text{ for all } t \in I.
 	\end{equation*}
@@ -3010,25 +3007,8 @@ We will now turn our attention to a specific subspace of $X^I.$
 	\begin{equation*} 
 		F(s, 0) = f(s)(0) = x_0 = f(s)(1) = F(s, 1), \quad \text{ for all } s \in I.
 	\end{equation*}
-	In other words, we get that
-	\begin{equation*} 
-		F:\sigma\simeq\tau\rel\{0, 1\}.
-	\end{equation*}
+	Thus, $F:\sigma\simeq\tau\rel\{0, 1\}.$
 
-	($\impliedby$) It is clear how the above construction can reversed. More precisely, let $\sigma, \tau$ be loops and $F$ a homotopy such that
-	\begin{equation*} 
-		F:\sigma\simeq\tau\{0, 1\}.
-	\end{equation*}
-	Then, define $f:I \to \Omega_{x_0}$ as
-	\begin{equation*} 
-		f(s) \in \Omega_{x_0}
-	\end{equation*}
-	being the path defined as
-	\begin{equation*} 
-		f(s)(t) \vcentcolon= F(s, t), \quad \text{ for all } t \in I,
-	\end{equation*}
-	for all $s \in I.$\\
-	Note that for each $s \in I,$ $f(s)$ is firstly a path since $F$ is continuous and secondly, a loop at $x_0$ since $F$ is a homotopy relative to $\{0, 1\}.$\\
-	Moreover, the map $f:I\to \Omega_{x_0}$ is continuous
+	Conversely, if $F$ is a path homotopy, then $f$ defined above is seen to clearly satisfy $f(0) = \sigma$ and $f(1) = \tau.$ Moreover, one notes that $f(s)(0) = x_0 = f(s)(1)$ for all $s \in I.$ This shows that $f$ indeed maps into $\Omega_{x_0},$ completing the proof.
 \end{proof}
 \end{document}
