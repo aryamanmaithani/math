@@ -517,7 +517,7 @@
 	\end{enumerate}
 	%
 	\item Let $f:\mathbb{R} \to \mathbb{R}$ be differentiable such that $|f'(x)| \le K$ for all $x \in \mathbb{R},$ where $K < 1$ is some fixed positive constant.\\
-	Show that $\mathbb{R}$ has a unique fixed point.
+	Show that $f$ has a unique fixed point.
 	%
 	\item Give an example of a differentiable function $f:\mathbb{R} \to \mathbb{R}$ with $|f'(x)| < 1$ such that $f$ has no unique fixed point.\\~\\
 	Contemplate on how this is different from the earlier question.
@@ -536,7 +536,7 @@
 \end{enumerate}
 \newpage\section{A word on local properties}
 Given some property $P,$ we sometimes ask whether an object $X$ is \emph{locally} $P$. This usually means whether $P$ is satisfied on some small enough open sets.\\
-The next question formulate this more precisely.\\
+The next questions formulate this more precisely.\\
 Terminology: Given a metric space $X$ and a point $x \in X,$ a \emph{neighbourhood} of $x$ is an open set $U \subset X$ such that $x \in U.$
 \begin{enumerate}
 	\item A function $f:X\to Y$ is said to be \emph{locally constant} if for every $x \in X,$ there exists a neighbourhood $U$ of $x$ such that $f|_U$ is constant.\\
@@ -545,7 +545,7 @@ Terminology: Given a metric space $X$ and a point $x \in X,$ a \emph{neighbourho
 	\item Show that if $f:X \to Y$ is locally constant and if $X$ is connected, then $f$ is constant.
 	%
 	\item A function $f:X \to \mathbb{R}$ is said to be \emph{locally bounded} if for every $x \in X,$ there exists a neighbourhood $U$ of $x$ such that $f|_U$ is bounded.\\
-	Give an example of a function $f:\mathbb{R} \to \mathbb{R}$ which is locally bounded but not bounded. (In fact, it might be tough for you to come up with a non-locally bounded function. Look up Conway's base-13 function as an example of this.)
+	Give an example of a function $f:\mathbb{R} \to \mathbb{R}$ which is locally bounded but not bounded. (Look up Conway's base-13 function as an example of a function which is not locally bounded anywhere.)
 	%
 	\item Show that if $f:X\to\mathbb{R}$ is continuous, then it is locally bounded.
 	%
@@ -563,8 +563,9 @@ Terminology: Given a metric space $X$ and a point $x \in X,$ a \emph{neighbourho
 	%
 	\item Show that the above is true for differentiation as well.
 	%
-	\item In each of the above cases, show that if the object is locally $P$ if it is $P$ to begin with.\\
-	(That is, show that constant functions are locally constant, et cetera.)
+	\item In each of the above cases, prove/disprove that if the object is locally $P$ if it is $P$ to begin with.\\
+	(That is, prove/disprove that constant functions are locally constant, et cetera.)\\
+	\hint{Connectedness does not imply locally so.}
 \end{enumerate}
 \newpage\section{Sequence and series of functions}
 \begin{enumerate}
