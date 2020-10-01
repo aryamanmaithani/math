@@ -325,7 +325,7 @@
 	\hint{No.}\\
 	The above is essentially whether ``absolute convergence $\implies$ convergence'' is true even in $\mathbb{Q}.$
 \end{enumerate}
-\newpage\section{Continuity}
+\newpage\section{Continuity}\label{sec:continuity}
 \begin{enumerate}
 	\item \label{q:openmap} Let $\pi_1:\mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be the first projection map, that is,
 	\begin{equation*} 
@@ -611,7 +611,7 @@ In the following $U$ will always be a nonempty open subset of $\mathbb{R}$ and $
 	In fact, given any $n \in \mathbb{N},$ construct a function $f:U\to \mathbb{R}$ which is differentiable $n$ times but $f^{(n)}$ is not differentiable anywhere.\\
 	\begin{blockquote}
 		If a function $f:\Omega \to \mathbb{C}$ is complex differentiable, then so is $f'.$\\
-		(Which implies so is $f'', f''',$ et cetera. Thus, differentiable once implies differentiable always.)
+		(Which implies so are $f'', f''',$ et cetera. Thus, differentiable once implies differentiable always.)
 	\end{blockquote}
 	%
 	\item Pick $U$ to be connected: Construct a non-constant differentiable function $f:U\to \mathbb{R}$ such that $|f|$ has a local maximum. \\
@@ -630,7 +630,7 @@ In the following $U$ will always be a nonempty open subset of $\mathbb{R}$ and $
 		If $f:\mathbb{C} \to \mathbb{C}$ is a non-constant complex differentiable function, then $\left|\mathbb{C}\setminus f(\mathbb{C})\right| \le 1.$
 	\end{blockquote}
 	That is, the image of $f$ misses at most one point. (It may or may not miss anything. For example, the identity map misses nothing whereas the exponential map misses $0.$ The above fact tells you that you can't miss two or more points.)\\
-	This is stronger because the first fact don't disallow the possibility that the image of $f$ is contained in, say, $\{z \in \mathbb{C} \mid \Im z > 0\},$ the upper half plane.
+	This is stronger because the first fact don't disallow the possibility that the image of $f$ is contained in, say, $\{z \in \mathbb{C} \mid \Im z > 0\},$ the upper half plane. (Or at least, not directly. However, we can be smarter and still conclude using only Liouville by considering the transformation $z \mapsto \dfrac{z - \iota}{z + \iota}.$ Look up ``Cayley transformations.'')
 	%
 	\item Pick $U$ to be connected and let $S \subset U$ be such that $S$ has a limit point \textbf{in} $U$: Construct functions differentiable $f, g:U \to \mathbb{R}$ such that $f|_S = g|_S$ but $f \neq g.$\\
 	(As an example, you can pick $U = \mathbb{R}$ and $K = \{0\} \cup \{n^{-1} \mid n \in \mathbb{N}\}.$)\\
@@ -674,5 +674,10 @@ In the following $U$ will always be a nonempty open subset of $\mathbb{R}$ and $
 	\end{blockquote}
 	This is just one example of how much ``better'' things behave in $\mathbb{C}$ Analysis as compared to $\mathbb{R}.$ In $\mathbb{R},$ not only can $f$ fail to be differentiable but it can differentiable \emph{nowhere}.
 	%
+	\item Find a non-constant differentiable function $f:U\to \mathbb{R}$ such that the image $f(U)$ is not open.\\~\\
+	\begin{blockquote}
+		\textbf{Open Mapping Theorem.}\\
+		If $f:\Omega \to \mathbb{C}$ is a nonconstant complex differentiable function, then $f$ is an open mapping (as defined in \ref{q:openmap} of \S\ref{sec:continuity}). In particular, $f(\Omega)$ is open.
+	\end{blockquote}
 \end{enumerate}
 \end{document}
