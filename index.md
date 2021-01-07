@@ -33,10 +33,8 @@ Here are notes I've made when taking various courses.
 <ul>
   {%- for blink in site.data.notes-links -%}
     {%- assign link = blink[1] -%}
-    <article class="post-preview">
       <li> <a href="/math{{ blink[0] | relative_url }}">
       <h2 class="post-title">{{ link.tit }}</h2>
       </a> </li>
-    </article>
   {%- endfor -%}
 </ul>
