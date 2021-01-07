@@ -1,23 +1,6 @@
-ma-412:
-  tit: Complex Analysis
-
-ma-214:
-  tit: Numerical Analysis 
-  desc: A compilation of the formulae done in the course
-
-ma-108:
-  tit: Methods in ODE 
-  desc: A summary of the first undergraduate ODE course
-
 group-theory-gd:
   tit: Group theory GD
   desc: Presentation on an introduction to Group Theory
-
-ma-419:
-  tit: Group Theory notes
-
-ma-107:
-  tit: MA 107 notes
 
 cat-theory:
   tit: Category Theory notes
