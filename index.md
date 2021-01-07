@@ -27,8 +27,8 @@ To view those, you can go to the appropriate folder that you may find [here](htt
     {%- endfor -%}
 </div>
 
-## Class Notes
-Here are notes I've made when taking various courses. 
+# Class Notes
+Here are notes I've made for various courses. 
 
 <ul>
   {%- for blink in site.data.notes-links -%}
