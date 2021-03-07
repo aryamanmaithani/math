@@ -115,7 +115,7 @@
 
     \uncover<8->{Recall that we had seen that $\{\varphi_t\}_{t > 0}$ constitutes an approximate identity. }
 \end{frame}
-\begin{frame}{The identity theorem}
+\begin{frame}{The Main Theorem}
     \begin{thm}[Main theorem]
         \uncover<2->{Suppose that $\varphi$ is non-negative. }\uncover<3->{Further assume that $\psi_0$ is in $L^1(\mathbb{R}^n)$ and is decreasing. }\uncover<4->{Let $f \in L^1(\mathbb{R}^n).$ }\uncover<5->{Then,
         \begin{equation*} 
@@ -164,10 +164,10 @@
     Fix a point $x \in \Leb(f)$ and let $\epsilon > 0$ be arbitrary.\\
     \uncover<2->{By definition of Lebesgue set, there exists $\delta > 0$ such that }\uncover<3->{
     \begin{equation} \tag{$L$} \label{eq:02}
-        \int_{\md{t} < r}^{} \md{f(x - u) - f(x)} \,{\mathrm{d}}u < \epsilon r^n
-    \end{equation} }\uncover<4->{for all $0 < r \le \delta.$ }
+        \only<4->{\phantom{\frac{1}{r^n}}}\only<3>{\frac{1}{r^n}}\int_{\md{t} < r}^{} \md{f(x - u) - f(x)} \,{\mathrm{d}}u < \epsilon \only<4->{r^n}\only<3>{\phantom{r^n}}
+    \end{equation} }\uncover<5->{for all $0 < r \le \delta.$ }
     
-    \uncover<5->{Note that for all $t > 0,$ we have $\displaystyle\int_{\mathbb{R}^n} \varphi_t = \int_{\mathbb{R}^n} \varphi = \int_{\mathbb{R}^n} \md{\varphi} = 1.$ }
+    \uncover<6->{Note that for all $t > 0,$ we have $\displaystyle\int_{\mathbb{R}^n} \varphi_t = \int_{\mathbb{R}^n} \varphi = \int_{\mathbb{R}^n} \md{\varphi} = 1.$ }
 \end{frame}
 \begin{frame}{Still proving the Main Theorem}
     \uncover<2->{Thus, for all $t > 0,$ we have }
