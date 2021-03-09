@@ -34,9 +34,9 @@
 \maketitle
 \begin{enumerate} 
 	\item Let $I = [a, b] \subset \mathbb{R}$ for some $a < b$ and $g:I\to I$ be a twice differentiable function such that there exists some $k \in \mathbb{R}$ such that $|g'(x)| \le k < 1$ for all $x \in I.$\\
-	Let $\xi$ denote the unique fixed point of $g.$ Suppose that $g'(\xi) = 0$ and $g''(\xi) = 0.$ Show that the fixed point iteration has quadratic rate of convergence.\\~\\
+	Let $\xi$ denote the unique fixed point of $g.$ Suppose that $g'(\xi) = 0$ and $g''(\xi) \neq 0.$ Show that the fixed point iteration has quadratic rate of convergence.\\~\\
 	\textbf{Solution.}\\
-	Note that $g$ is twice continuously differentiable and thus, by Taylor, we have that for any $h \in \mathbb{R},$:
+	Note that $g$ is twice continuously differentiable and thus, by Taylor, we have that for any $h \in \mathbb{R}$:
 	\[g(\xi + h) = g(\xi) + g'(\xi)h + \frac{1}{2}g''(c)h^2,\]
 	for some $c$ between $\xi$ and $\xi + h.$\\
 	As $g(\xi) = \xi$ and $g'(\xi) = 0,$ we get that
@@ -61,7 +61,7 @@
 	Let $g(x) := x - \dfrac{2f(x)}{f'(x)}$ when $f'(x) \neq 0.$ At $\xi,$ we define it to be the limit.\\
 	I will also be assuming that $g$ is nice enough, that is, differentiable twice continuously. (Also assuming that $f$ is continuously differentiable thrice.)\\
 	Note that 
-	\[\lim_{x\to \xi} = \lim_{x\to \xi}\left(x - 2\frac{f(x)}{f'(x)}\right) = \xi - \lim_{x \to \xi}2\frac{f'(x)}{f''(x)} = \xi.\]
+	\[\lim_{x\to \xi}g(x) = \lim_{x\to \xi}\left(x - 2\frac{f(x)}{f'(x)}\right) = \xi - \lim_{x \to \xi}2\frac{f'(x)}{f''(x)} = \xi.\]
 	Thus, $g(\xi) = \xi.$\\
 	Now, differentiating gives us $g'(x) = 1 - 2\dfrac{(f'(x))^2 - f(x)f''(x)}{(f'(x))^2} = -1 + 2\dfrac{f(x)f''(x)}{(f'(x))^2}.$\\~\\
 	Computing $\displaystyle\lim_{x\to \xi}g'(x)$ is easy using L'Hospital and you get $g'(\xi) = 0.$\\
