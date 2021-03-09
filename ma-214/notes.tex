@@ -90,6 +90,22 @@ Sometimes, I also change the order in the notes compared to how it was taught in
 	\end{align*}
 	\emph{Remarks.} Note that $x - x_n$ does not appear in the last term.\\
 	Note that given $P_n(x),$ it is simple to construct $P_{n+1}(x).$
+
+	Also, the exact value of $f$ at a point is given as
+	\begin{equation*} 
+		f(x) = P_n(x) + f[x_0, \ldots, x_n, x]\Psi_n(x),
+	\end{equation*}
+	where $\Psi_n(x) = (x - x_0)\cdots(x - x_n).$
+
+	\begin{thm}
+		Let $x_0, \ldots, x_k \in [a, b]$ and $f$ be $k + 1$ times differentiable. Then,
+		\begin{equation*} 
+			f[x_0, \ldots, x_k] = \frac{f^{(k + 1)}(\xi)}{(k + 1)!}
+		\end{equation*}
+		for some $\xi \in [a, b].$
+	\end{thm}
+
+
 	\item \textbf{Osculatory Interpolation}\\
 	This is essentially the same as the previous case. \\
 	I'll state the problem in the form I think is the simplest. (Any other form can be reduced to this.)\\
@@ -352,7 +368,7 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	Then, $x_n \to \xi.$
 	\item \textbf{Aitken's} $\mathbf{\Delta^2}$ \textbf{Process}\\
 	\textbf{Definition.} Given a sequence $(x_n),$ let $\Delta x_n \vcentcolon= x_{n+1} - x_n.$\\
-	Then, $\Delta^2x_n = x_{n+2} - 2x_{n+1} + x_n.$\\~\\
+	Then, $\Delta^2x_n = x_{n+2} - 2x_{n+1} + x_n.$
 	
 	Given a sequence $x_0, x_1, \ldots$ converging to $\xi,$ calculate $\widehat{x_1}, \widehat{x_2}, \ldots$ by
 	\[\widehat{x_n} \vcentcolon= x_{n+1} - \frac{(\Delta x_n)^2}{\Delta^2x_{n-1}}.\]
