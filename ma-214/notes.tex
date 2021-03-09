@@ -1,35 +1,43 @@
-\documentclass{article}
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
 \usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
 \usepackage[utf8]{inputenc}
 \usepackage[inline]{enumitem}
 \usepackage{cancel}
 \usepackage{soul}
-\usepackage{hyperref}
+\usepackage[colorlinks=true]{hyperref}
 \usepackage{datetime2}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lem}{Lemma}
-\newtheorem{defn}{Definition}
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
 \usepackage{hyperref}
 
 \setlength\parindent{0pt}
+\newcommand{\md}[1]{{\left\lvert #1 \right\lvert}}
+\DeclareMathOperator{\cond}{cond}
 
 \usepackage{xcolor}
 \definecolor{mybgcolor}{RGB}{50, 50, 50} %46, 51, 63
 
 \usepackage{pagecolor}
-\pagecolor{mybgcolor}
-\color{white}
+% \pagecolor{mybgcolor}
+% \color{white}
 
-\usepackage{geometry}
-\geometry{
-    a4paper,
-    total={170mm,257mm},
-    left=20mm,
-    top=20mm,
-}
+% \usepackage{geometry}
+% \geometry{
+%     a4paper,
+%     total={170mm,257mm},
+%     left=20mm,
+%     top=20mm,
+% }
 
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
+\usepackage{parskip}
+
+\renewcommand{\familydefault}{\sfdefault}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -60,23 +68,23 @@ Sometimes, I also change the order in the notes compared to how it was taught in
 	Let $x_0,\;x_1,\;\ldots,\;x_{n}$ be $n+1$ distinct points in $[a, b].$ Let $f:[a, b] \to \mathbb{R}$ be a function whose value is known at those aforementioned points. \\
 	We want to construct a polynomial $p(x)$ of degree $\le n$ such that $p(x_i) = f(x_i)$ for all $i \in \{0, \ldots, n\}.$\\
 	Towards this end, we define the polynomials $I_k(x)$ for $k \in \{0, \ldots, n\}$ in the following manner:
-	\[I_k(x) := \prod_{i = 0, i \neq k}^{n}\frac{x - x_i}{x_k - x_i}.\]
+	\[I_k(x) \vcentcolon= \prod_{i = 0, i \neq k}^{n}\frac{x - x_i}{x_k - x_i}.\]
 	(Intuitive understanding: $I_k$ is a degree $n$ polynomial such that $I_k(x_j) = 0$ if $k \neq j$ and $I_k(x_k) = 1.$)\\
 	Now, define $p(x)$ as follows:
-	\[p(x) := \sum_{i=0}^{n}f(x_i)I_i(x)\]
+	\[p(x) \vcentcolon= \sum_{i=0}^{n}f(x_i)I_i(x)\]
 	\item \textbf{Newton's form}\\
 	Let $x_0, x_1, \ldots, x_n$ be $n+1$ distinct points in $[a, b].$ Let $f:[a, b] \to \mathbb{R}$ be a function whose value is known at those aforementioned points. \\
 	We want to construct a polynomial $P_n(x)$ of degree $\le n$ such that $p(x_i) = f(x_i)$ for all $i \in \{0, \ldots, n\}.$\\~\\
 	We define the divided differences (recursively) as follows:
 	\begin{align*} 
-		f[x_0] &:= f(x_0)\\
-		f[x_0, x_1, \ldots, x_k] &:= \dfrac{f[x_1, \ldots, x_k] - f[x_0, \ldots, x_{k-1}]}{x_k - x_0} & \text{ for all } 1 < k \le n
+		f[x_0] &\vcentcolon= f(x_0)\\
+		f[x_0, x_1, \ldots, x_k] &\vcentcolon= \dfrac{f[x_1, \ldots, x_k] - f[x_0, \ldots, x_{k-1}]}{x_k - x_0} & \text{ for all } 1 < k \le n
 	\end{align*}
 	With this in place, the desired polynomial $P_n(x)$ is (not so) simply:
 	\begin{align*} 
-		P_n(x) := f[x_0]  +& f[x_0, x_1](x - x_0)\\
+		P_n(x) \vcentcolon= f[x_0]  +& f[x_0, x_1](x - x_0)\\
 						 +& f[x_0, x_1, x_2](x - x_0)(x - x_1)\\
-						 +& \ldots\\
+						 +& \cdots\\
 						  &\vdots\\
 						 +& f[x_0, x_1, \ldots, x_n](x - x_0)(x - x_1)\cdots(x - x_{n-1})
 	\end{align*}
@@ -93,18 +101,18 @@ Sometimes, I also change the order in the notes compared to how it was taught in
 		&\vdots\\
 		f^{(0)}(x_k), f^{(1)}(x_k)&, \ldots, f^{(m_k-1)}(x_k)\\
 	\end{align*}
-	(Notation: $f^{(0)}(x) = f(x)$ and $f^{(n)}(x)$ is the $n^{\text{th}}$ derivative.)\\
+	(Notation: $f^{(0)}(x) = f(x)$ and $f^{(j)}(x)$ is the $j^{\text{th}}$ derivative.)\\
 	Thus, we are given $m_1 + m_2 + \cdots m_k =: n+1$ data. As usual, we now want to compute a polynomial $P_n(x)$ that agrees with $f$ at all the data. (That is, all the given derivatives must also be same.) As it goes without saying, $P_n(x)$ must have degree $\le n.$\\~\\
 	To do this, we list the above points as follows:
 	\[\underbrace{x_0, x_0, \ldots x_0}_{m_1}, \underbrace{x_1, x_1, \ldots, x_1}_{m_2}, \ldots, \underbrace{x_k, x_k, \ldots, x_k}_{m_k}.\]
 	Now, we just apply the above (Newton's) formula with the following modification in the definition of the divided difference:
-	\[f[\underbrace{x_i, x_i, \ldots, x_i}_{p+1 \text{ times}}] := \dfrac{f^{(p)}(x_i)}{p!}.\]
+	\[f[\underbrace{x_i, x_i, \ldots, x_i}_{p+1 \text{ times}}] \vcentcolon= \dfrac{f^{(p)}(x_i)}{p!}.\]
 	\item \label{rich}\textbf{Richardson Extrapolation}\\
 	Suppose that for sufficiently small $h \neq 0,$ we have the formula:
 	\[M = N_1(h) + k_1h + k_2h^2 + k_3h^3 + \cdots,\]
 	for some constants $k_1, k_2, k_3,\ldots.$\\
 	Define the following:
-	\[N_j(h) := N_{j-1}(h/2) + \frac{N_{j-1}(h/2) - N_{j-1}(h)}{2^{j-1} - 1} \quad \text{ for } j \ge 2.\]
+	\[N_j(h) \vcentcolon= N_{j-1}(h/2) + \frac{N_{j-1}(h/2) - N_{j-1}(h)}{2^{j-1} - 1} \quad \text{ for } j \ge 2.\]
 	Choose some $h$ \emph{sufficiently small} (whatever that means). Then, $N_j(h)$ keeps becoming a better approximation of $M$ as $j$ increases.\\
 	We create a table of $h$ and $N_j(h)$ as follows:\\
 		\[
@@ -123,39 +131,48 @@ Sometimes, I also change the order in the notes compared to how it was taught in
 	Sometimes, we may have the following scenario:
 	\[M = N_1(h) + k_2h^2 + k_4h^4 + \cdots.\]
 	In this case, we define:
-	\[N_j(h) := N_{j-1}(h/2) + \frac{N_{j-1}(h/2) - N_{j-1}(h)}{4^{j-1} - 1} \quad \text{ for } j \ge 2.\]
+	\[N_j(h) \vcentcolon= N_{j-1}(h/2) + \frac{N_{j-1}(h/2) - N_{j-1}(h)}{4^{j-1} - 1} \quad \text{ for } j \ge 2.\]
 	Then, we do the remaining stuff as before.\\
 	We define 
-	\[R_h^k := \frac{N_k(h) - N_k(2h)}{N_k(h/2) - N_k(h)}.\]
+	\[R_h^k \vcentcolon= \frac{N_k(h) - N_k(2h)}{N_k(h/2) - N_k(h)}.\]
 	The closer that $R_h^k$ is to $4^k,$ the better is the approximation.
 \end{enumerate}
 
 \section{Numerical Integration}
-\[I = \int_{a}^{b} f(x) \text{d}x\]
+\[I = \int_{a}^{b} f(x) {\mathrm d}x\]
+(Derivation: by approximating $f$ in different ways using Newton's method.)
 \begin{enumerate} 
 	\itemsep1em
 	\item \textbf{Rectangle Rule}
 		\[I \approx (b - a)f(a)\]
 		\[E^R = f'(\eta)\frac{(b-a)^2}{2},\;\text{for some }\eta\in[a, b]\]
-	
+		$x_0 = a.$	
+
 	\item \textbf{Midpoint Rule}
 		\[I \approx (b - a)f\left(\frac{a + b}{2}\right) \]
 		\[E^M = \frac{f''(\eta)}{24}(b - a)^3,\;\text{for some }\eta\in[a, b]\]
-	
+		$x_0 = \frac{a + b}{2}.$
+		
 	\item \textbf{Trapezoidal Rule}
-	\[I \approx \frac{1}{2}(b - a)[f(a) + f(b)]\]
-	\[E^T = -f''(\eta)\frac{(b - a)^3}{12},\;\text{for some }\eta\in[a, b]\]
+		\[I \approx \frac{1}{2}(b - a)[f(a) + f(b)]\]
+		\[E^T = -f''(\eta)\frac{(b - a)^3}{12},\;\text{for some }\eta\in[a, b]\]
+		$x_0 = a,\;x_1 = b.$
 
 	\item \textbf{Corrected Trapezoidal}
-	\[I \approx \frac{1}{2}(b - a)[f(a) + f(b)] + \frac{(b - a)^2}{12}(f'(a) - f'(b))\]
-	\[E^{CT} = f^{(4)}(\eta)\frac{(b - a)^5}{720},\;\text{for some }\eta\in[a, b]\]
+		\[I \approx \frac{1}{2}(b - a)[f(a) + f(b)] + \frac{(b - a)^2}{12}(f'(a) - f'(b))\]
+		\[E^{CT} = f^{(4)}(\eta)\frac{(b - a)^5}{720},\;\text{for some }\eta\in[a, b]\]
+		$x_0 = x_1 = a,\;x_2 = x_3 = b.$
+
 	\item \textbf{Composite Trapezoidal}
-	\[I \approx \frac{h}{2}\left[f(x_0) + 2\sum_{i=1}^{N-1}f(x_i) + f(x_N)\right]\]
-	\[E_C^{T} = -f''(\xi)\frac{h^2(b-a)}{12},\;\text{for some }\xi\in[a, b]\]
-	Here, $Nh = b-a$ and $x_i = a + ih.$\\
+		\[I \approx \frac{h}{2}\left[f(x_0) + 2\sum_{i=1}^{N-1}f(x_i) + f(x_N)\right]\]
+		\[E_C^{T} = -f''(\xi)\frac{h^2(b-a)}{12},\;\text{for some }\xi\in[a, b]\]
+		Here, $Nh = b-a$ and $x_i = a + ih.$\\
+
 	\item \textbf{Simpson's Rule}
-	\[I \approx \frac{b - a}{6}\left\{f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right\}\]
-	\[E^S = -\frac{1}{90}f^{(4)}(\eta)\left(\frac{b-a}{2}\right)^5,\;\text{for some }\eta\in[a, b]\]
+		\[I \approx \frac{b - a}{6}\left\{f(a) + 4f\left(\frac{a + b}{2}\right) + f(b)\right\}\]
+		\[E^S = -\frac{1}{90}f^{(4)}(\eta)\left(\frac{b-a}{2}\right)^5,\;\text{for some }\eta\in[a, b]\]
+		$x_0 = a,\;x_1 = \frac{a + b}{2},\;x_2 = b.$
+
 	\item \textbf{Composite Simpson's}
 	\[I \approx \frac{h}{6}\left[f(x_0) + 2\sum_{i=1}^{N-1}f(x_i) + 4\sum_{i=1}^{N}f\left(x_{i-1} + \frac{h}{2}\right) + f(x_N)\right]\]
 	\[E_C^{S} = -f^{(4)}(\xi)\frac{(h/2)^4(b-a)}{180},\;\text{for some }\xi\in[a, b]\]
@@ -164,57 +181,68 @@ Sometimes, I also change the order in the notes compared to how it was taught in
 	Let $Q_{n+1}(x)$ denote the $(n+1)^{\text{th}}$ Legendre polynomial.\\
 	Let $r_0, \ldots, r_{n+1}$ be its roots. (These will be distinct, symmetric about the origin and will lie in the interval $[-1, 1].$)\\
 	For each $i \in \{0, \ldots, n\},$ we define $c_i$ as follows:
-	\[c_i := \int_{-1}^{1} \left(\prod_{k = 0, k \neq i}^{n}\frac{x - x_k}{x_i - x_k}\right) \text{d}x.\]
+	\[c_i \vcentcolon= \int_{-1}^{1} \left(\prod_{k = 0, k \neq i}^{n}\frac{x - x_k}{x_i - x_k}\right) {\mathrm d}x.\]
 	Then, we have
-	\[\int_{-1}^{1} f(x) \text{d}x \approx \displaystyle\sum_{i=0}^{n}f(r_i)c_i.\]
+	\[\int_{-1}^{1} f(x) {\mathrm d}x \approx \displaystyle\sum_{i=0}^{n}f(r_i)c_i.\]
 	Moreover, if $f$ is a polynomial of degree $\le 2n+1,$ then the above is ``approximation'' is exact.\\~\\
 	Standard values: \\
-	$n = 0:$ $Q_1(x) = x$ and $x_0 = 0.$ $c_0 = 2.$\\
-	$n = 1:$ $Q_2(x) = x^2 - \frac{1}{3}$ and $x_0 = -\frac{1}{\sqrt{3}},\;x_1 = \frac{1}{\sqrt{3}}.$ $c_0 = c_1 = 1.$\\
-	$n = 2:$ $Q_3(x) = x^3 - \frac{3}{5}x$ and $x_0 = -\sqrt{\frac{3}{5}},\;x_1 = 0,\; x_2 = \sqrt{\frac{3}{5}}.$ $c_0 = c_2 = 5/9,\;c_1 = 8/9.$
+	$n = 0:$ $Q_1(x) = x$ and $r_0 = 0.$ $c_0 = 2.$\\
+	$n = 1:$ $Q_2(x) = x^2 - \frac{1}{3}$ and $r_0 = -\frac{1}{\sqrt{3}},\;r_1 = \frac{1}{\sqrt{3}}.$ $c_0 = c_1 = 1.$\\
+	$n = 2:$ $Q_3(x) = x^3 - \frac{3}{5}x$ and $r_0 = -\sqrt{\frac{3}{5}},\;r_1 = 0,\; r_2 = \sqrt{\frac{3}{5}}.$ $c_0 = c_2 = 5/9,\;c_1 = 8/9.$
+	%
 	\item \textbf{Improper integrals using Taylor series method}\\
-	Suppose we have $f(x) = \frac{g(x)}{(x - a)^p}$ for some $0 < p < 1$ and are asked to calculate $I = \displaystyle\int_{a}^{b} f(x) \text{d}x.$\\
-	For the sake of simplicity, I assume $a = 0$ and $b = 1.$\\
+	Suppose we have $f(x) = \frac{g(x)}{(x - a)^p}$ for some $0 < p < 1$ and are asked to calculate $I = \displaystyle\int_{a}^{b} f(x) {\mathrm d}x.$\\
+	For the sake of simplicity, I assume $a = 0$ and $b = 1.$
+
 	Let $P_4(x)$ denote the fourth Taylor polynomial of $g$ around $a.$ (In this case $0$.)\\
-	Now, compute $I_1 = \displaystyle\int_{0}^{1} \frac{P_4(x)}{x^p} \text{d}x.$ This can be integrated exactly. \hfill (Why?)\\
+	Now, compute $I_1 = \displaystyle\int_{0}^{1} \frac{P_4(x)}{x^p} {\mathrm d}x.$ This can be integrated exactly. \hfill (Why?)\\
 	Now, we approximate $I - I_1.$\\
 	Define
-	\[G(x) := \left\{\begin{array}{ll}
-		\frac{g(x) - P_4(x)}{x^p} & \text{ if } 0 < x \le 1\\
+	\[G(x) \vcentcolon= \begin{cases}
+		\dfrac{g(x) - P_4(x)}{x^p} & \text{ if } 0 < x \le 1\\
 		0 & \text{ if } x = 0
-	\end{array}
-	\right.\]
-	Then, approximate $I_2 = \displaystyle\int_{0}^{1} G(x) \text{d}x$ using the composite Simpson's rule.\\
+	\end{cases}
+	\]
+	Then, approximate $I_2 = \displaystyle\int_{0}^{1} G(x) {\mathrm d}x$ using the composite Simpson's rule.\\
 	Then, $I = I_1 + I_2.$\\~\\
 	For the case of $a = 0,\; b = 1$ and $N = 2$ for the composite Simpson's part, we get that \\
 	$I_2 \approx \frac{1}{12}[2G(0.5) + 4G(0.25) + 4G(0.75) + G(1)].$\\~\\
 	That is, finally:
-	\[I \approx \int_{0}^{1} \frac{P_4(x)}{x^p} \text{d}x + \frac{1}{12}[2G(0.5) + 4G(0.25) + 4G(0.75) + G(1)].\]
+	\[I \approx \int_{0}^{1} \frac{P_4(x)}{x^p} {\mathrm d}x + \frac{1}{12}[2G(0.5) + 4G(0.25) + 4G(0.75) + G(1)].\]
 	%
 	\item \textbf{Adaptive Quadrature}\\
-	Let $I = \displaystyle\int_{a}^{b} f(x) \text{d}x$ be the integral that we want to approximate.\\
-	Suppose that $\epsilon$ is the accuracy to which we want $I.$ That is, we want a number $P$ such that $|P - I| < \epsilon.$\\
+	Let $I = \displaystyle\int_{a}^{b} f(x) {\mathrm d}x$ be the integral that we want to approximate.\\
+	Suppose that $\epsilon$ is the accuracy to which we want $I.$ That is, we want a number $P$ such that $|P - I| < \epsilon.$
+
 	Here is what you do:\\
-	Subdivide $[a, b]$ into $N$ intervals: $[x_0, x_1],\;[x_1, x_2],\;\ldots,\;[x_{n-1}, x_n].$ (Naturally, $a = x_0 \le x_1 \le \ldots \le x_n = b$.)\\
-	Now, for each subinterval, compute the following values:\\~\\
-	$S_i = \dfrac{h}{6}\left(f(x_i) + 4f\left(x_i + \dfrac{h}{2}\right) + f\left(x_{i+1}\right)\right),$ and\\~\\
-	$\overline{S_i} = \dfrac{h}{12}\left(f(x_i) + 4f\left(x_i + \dfrac{h}{2}\right) + 2f\left(x_i + \dfrac{h}{2}\right) + 4f\left(x_i + \dfrac{3h}{4}\right) + f(x_{i+1})\right).$\\~\\
-	Now, calculate $E_i = \frac{1}{15}|\overline{S_i} - S_i|.$\\~\\
-	Now, if $E_i \le \frac{x_{i} - x_{i-1}}{b - a}\epsilon,$ then move on to the next interval.\\
-	Otherwise, subdivide again to better approximate $\displaystyle\int_{x_{i-1}}^{x_i} f(x) \text{d}x.$\\~\\
+	Subdivide $[a, b]$ into $N$ intervals: $[x_0, x_1],\;[x_1, x_2],\;\ldots,\;[x_{n-1}, x_n].$ \\
+	(Naturally, $a = x_0 < x_1 < \ldots < x_n = b$.)\\
+	Now, for each subinterval, compute the following values:
+
+	$S_i = \dfrac{h}{6}\left(f(x_i) + 4f\left(x_i + \dfrac{h}{2}\right) + f\left(x_{i+1}\right)\right),$ and
+
+	$\overline{S_i} = \dfrac{h}{12}\left(f(x_i) + 4f\left(x_i + \dfrac{h}{2}\right) + 2f\left(x_i + \dfrac{h}{2}\right) + 4f\left(x_i + \dfrac{3h}{4}\right) + f(x_{i+1})\right).$
+
+	Now, calculate $E_i = \frac{1}{15}|\overline{S_i} - S_i|.$
+
+	Now, if $E_i \le \dfrac{x_{i} - x_{i-1}}{b - a}\epsilon,$ then move on to the next interval.
+
+	Otherwise, subdivide again to better approximate $\displaystyle\int_{x_{i-1}}^{x_i} f(x) {\mathrm d}x.$
+
 	Finally, sum up all the $\overline{S_i}$s and that's the answer. That is,
 	\[I \approx P = \sum_{i=1}^{n}\overline{S_i}.\]
 	Check slide 25 of Lecture 6 for example.
 	%
 	\item \textbf{Romberg Integration}\\
 	Essentially the baby of composite Trapezoidal rule and Richardson extrapolation.\\
-	Suppose we want to calculate $\displaystyle\int_{a}^{b} f(x) \text{d}x.$\\
+	Suppose we want to calculate $\displaystyle\int_{a}^{b} f(x) {\mathrm d}x.$\\
 	Let $N$ be a power of $2$.\\
-	$T_N := \dfrac{h}{2}\left[f(x_0) + 2\displaystyle\sum_{i=1}^{N-1}f(a + ih) + f(x_N)\right],$ where $Nh = b-a.$\\~\\
+	$T_N \vcentcolon= \dfrac{h}{2}\left[f(x_0) + 2\displaystyle\sum_{i=1}^{N-1}f(a + ih) + f(x_N)\right],$ where $Nh = b-a.$\\~\\
 	Note that $T_N$ can be computed using $T_{N/2}$ (assuming $N \neq 2^0$) as:
 	\[T_N = \frac{T_{N/2}}{2} + h\sum_{i=1}^{N/2}f\left(a + (2i - 1)h\right).\]
-	In the above, we have $2Nh = b - a.$ (That is, it's not the same as the previous $h.$)\\
-	Now for $m \ge 1,$ we define:
+	In the above, we have $Nh = b - a.$ % (That is, it's not the same as the previous $h.$)\\
+
+	Now, for $m \ge 1,$ we define:
 	\[T^{m}_N = T^{m-1}_N + \frac{T^{m-1}_N - T^{m-1}_{N/2}}{4^m - 1}.\]
 	(Where $T^{0}_N$ is just $T_N.$)\\
 	(Also, for some reason, $T'_N$ has been used instead of $T^1_N$.)\\
@@ -256,7 +284,7 @@ Sometimes, I also change the order in the notes compared to how it was taught in
 	Suppose that we want to solve the following (linear) ODE:
 	\[y''(x) + f(x)y'(x) + g(x)y = q(x)\]
 	in the interval $[a, b]$ such that we know $y(a) = \alpha,$ and $y(b) = \beta.$ \\~\\
-	Set $h := \frac{b - a}{N}$ for some $N \in \mathbb{N}$ and $x_i = a + ih$ for $h \in \{0, 1, \ldots, N\}.$\\
+	Set $h \vcentcolon= \frac{b - a}{N}$ for some $N \in \mathbb{N}$ and $x_i = a + ih$ for $h \in \{0, 1, \ldots, N\}.$\\
 	Using central difference approximation, we set up $N-1$ linear equations as follows:
 	\[\frac{y_{i-1} - 2y_i + y_{i+1}}{h^2} + f(x_i)\frac{y_{i+1} - y_{i-1}}{2h} + g(x_i)(y_i) = q(x_i)\]
 	\[i = 1, 2, \ldots, N-1\]
@@ -280,8 +308,10 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	%
 	\item \textbf{Regula-falsi or false-position method}\\
 	Set $n = 0$ to start with.\\
-	Loop over the following:\\
-	Set $w = \frac{f(b_n)a_n - f(a_n)b_n}{f(b_n) - f(a_n)}.$\\
+	Loop over the following:
+
+	Set $w = \dfrac{f(b_n)a_n - f(a_n)b_n}{f(b_n) - f(a_n)}.$
+
 	If $f(a_n)f(w) < 0,$ then set $a_{n+1} = a_n$ and $b_{n+1} = w.$\\
 	Else, set $a_{n+1} = w$ and $b_{n+1} = b_n.$\\
 	Increase $n$ by one.\\
@@ -290,8 +320,10 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	\item \textbf{Modified regula-falsi}\\
 	Set $n = 0$ and $w_0 = a_0$ to start with.\\
 	Loop over the following:\\
-	Set $F = f(a_n)$ and $G = f(b_n).$\\
-	Set $w_{n+1} = \dfrac{Ga_n -Fb_n}{G - F}.$\\
+	Set $F = f(a_n)$ and $G = f(b_n).$
+
+	Set $w_{n+1} = \dfrac{Ga_n -Fb_n}{G - F}.$
+
 	If $f(a_n)f(w_{n+1}) \le 0,$ then set $a_{n+1} = a_n$ and $b_{n+1} = w_{n+1}$ and $G =f(w_{n+1}).$\\
 	Furthermore, if we also have $f(w_{n})f(w_{n+1}) > 0,$ set $F = \frac{F}{2}.$\\
 	Else, set $a_{n+1} = w_{n+1}$ and $b_{n+1} = b_n$ and $F = f(w_{n+1}).$\\
@@ -316,14 +348,14 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	\item \textbf{Fixed point iteration}\\
 	Let $I$ be a closed interval in $\mathbb{R}.$ Let $f:I\to I$ be a differentiable function such that there exists some $K \in [0, 1)$ such that $|f'(x)| \le K$ for all $x \in I.$\\
 	Then, there is a unique $\xi \in I$ such that $f(\xi) = \xi.$ To find this fixed point, choose any $x_0 \in I$ and define the sequence
-	\[x_n := f(x_{n-1}) \quad n \ge 1.\]
+	\[x_n \vcentcolon= f(x_{n-1}) \quad n \ge 1.\]
 	Then, $x_n \to \xi.$
 	\item \textbf{Aitken's} $\mathbf{\Delta^2}$ \textbf{Process}\\
-	\textbf{Definition.} Given a sequence $(x_n),$ let $\Delta x_n := x_{n+1} - x_n.$\\
+	\textbf{Definition.} Given a sequence $(x_n),$ let $\Delta x_n \vcentcolon= x_{n+1} - x_n.$\\
 	Then, $\Delta^2x_n = x_{n+2} - 2x_{n+1} + x_n.$\\~\\
 	
 	Given a sequence $x_0, x_1, \ldots$ converging to $\xi,$ calculate $\widehat{x_1}, \widehat{x_2}, \ldots$ by
-	\[\widehat{x_n} := x_{n+1} - \frac{(\Delta x_n)^2}{\Delta^2x_{n-1}}.\]
+	\[\widehat{x_n} \vcentcolon= x_{n+1} - \frac{(\Delta x_n)^2}{\Delta^2x_{n-1}}.\]
 	Then, $\widehat{x_n} \to \xi.$\\~\\
 	%
 	If the sequence $x_0, x_1, \ldots$ converges linearly to $\xi,$ that is, if
@@ -362,7 +394,7 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	\[\lim_{n\to \infty}\frac{|e_{n+1}|}{|e_n|^P} = \left|\frac{1}{2}\frac{f''(\xi)}{f'(\xi)}\right|^{1/P},\;\text{ provided }f'(\xi) \neq 0.\]
 \end{enumerate}
 
-\begin{theorem} 
+\begin{thm} 
 	Let $f:[a, b] \to \mathbb{R}$ be in $C^2[a, b]$ and let the following conditions be satisfied:
 	\begin{enumerate}[nosep] 
 		\item $f(a)f(b) < 0,$
@@ -372,7 +404,7 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 		\[\frac{|f(a)|}{|f'(a)|} \le b - a \text{ and }\frac{|f(b)|}{|f'(b)|} \le b - a.\]
 	\end{enumerate}
 	Then, the Newton's method converges to the unique solution $\xi$ of $f(x) = 0$ in $[a, b]$ for any choice $x_0 \in [a, b].$
-\end{theorem}
+\end{thm}
 
 \section{Solving systems of linear equations}
 \subsection{LU Factorisation}
@@ -380,9 +412,9 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	We want solve $Ax = b$ where $A$ is some known $n\times n$ matrix, $b$ a known $n\times1$ matrix and $x$ is unknown.\\
 	\emph{Assumption}: $Ax = b$ can be solved without any row interchange.\\
 	We define (finite) sequences of matrices $A^{(n)} = [a^{(n)}_{ij}]$ and $b^{(n)}.$ \\
-	Define $A^{(1)} := A.$ Let $m_{ji} := \dfrac{a^{(i)}_{ji}}{a^{(i)}_{ii}}.$\\~\\
+	Define $A^{(1)} \vcentcolon= A.$ Let $m_{ji} \vcentcolon= \dfrac{a^{(i)}_{ji}}{a^{(i)}_{ii}}.$\\~\\
 	Define $M^{(1)}$ as
-	\[M^{(1)} := 
+	\[M^{(1)} \vcentcolon= 
 	\begin{bmatrix}
 		1 & 0 & 0 & \cdots & 0\\
 		-m_{21} & 1 & 0 & \cdots & 0\\
@@ -392,10 +424,10 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 		-m_{n1} & 0 & 0 & \cdots & 1\\
 	\end{bmatrix}\]
 	Thus, we can write $M^{(1)}A^{(1)}x = M^{(1)}b.$\\
-	Let $A^{(2)} := M^{(1)}A^{(1)}$ and $b^{(2)} = M^{(1)}b^{(1)}.$\\
+	Let $A^{(2)} \vcentcolon= M^{(1)}A^{(1)}$ and $b^{(2)} = M^{(1)}b^{(1)}.$\\
 	Note that $A^{(2)}$'s first column will just have the top element non-zero and everything below will be zero.\\~\\
 	We can similarly construct the later matrices that perform the row operations. In general, we have:
-	\[M^{(k)} := 
+	\[M^{(k)} \vcentcolon= 
 	\begin{bmatrix}
 		1 & 0 & \cdots & 0 & \cdots & 0\\
 		0 & 1 & \cdots & 0 & \cdots & 0\\
@@ -417,7 +449,7 @@ Then, we have
 	m_{31} & m_{32} & 1 & \cdots & 0\\
 	\vdots & \vdots & \vdots & \ddots & \vdots\\
 	m_{n-1, 1} & m_{n-1, 2} & m_{n-1, 3} & \cdots & 0\\
-	m_{n1} & m_{n2} & m_{n3} & \cdots 1
+	m_{n1} & m_{n2} & m_{n3} & \cdots & 1
 \end{bmatrix}.\] 
 Thus, we have $A = LU.$ Now, set $y = Ux.$ We solve $Ly = b$ for $y.$ This is easy because $L$ is lower triangular.\\
 Then, we solve $Ux = y$ for $x.$\\~\\
@@ -443,21 +475,21 @@ Given any positive definite matrix $A,$ we can write $A = LL^t,$ where $L$ is lo
 The algorithm to do so is as follows:\\
 Let $L = (l_{ij}).$ We now construct these entries.\\~\\
 \texttt{
-	set $l_{ii} := \sqrt{a_{11}}.$\\
+	set $l_{ii} \vcentcolon= \sqrt{a_{11}}.$\\
 	for $j = 2, 3, \ldots, n:$ \\
-	\phantom{123456} set $l_{j1} := \frac{a_{j1}}{l_{11}}.$\\
+	\phantom{123456} set $l_{j1} \vcentcolon= \frac{a_{j1}}{l_{11}}.$\\
 	for $i = 2, 3, \ldots, n - 1:$\\~\\
-	\phantom{123456} set $l_{ii} := \sqrt{\displaystyle a_{ii} - \sum_{k=1}^{i-1}l_{ik}^2}$\\~\\
+	\phantom{123456} set $l_{ii} \vcentcolon= \sqrt{\displaystyle a_{ii} - \sum_{k=1}^{i-1}l_{ik}^2}$\\~\\
 	\phantom{123456} for $j = i+1, \ldots, n:$ \\
-	\phantom{123456}\phantom{123456}set $l_{ji} := \displaystyle a_{ji} - \frac{\displaystyle\sum_{k=1}^{i-1}l_{jk}l_{ik}}{l_{ii}}.$\\~\\
-	set $l_{nn} := \sqrt{a_{nn} - \displaystyle\sum_{k=1}^{n-1}l_{nk}^2}.$
+	\phantom{123456}\phantom{123456}set $l_{ji} \vcentcolon= \displaystyle a_{ji} - \frac{\displaystyle\sum_{k=1}^{i-1}l_{jk}l_{ik}}{l_{ii}}.$\\~\\
+	set $l_{nn} \vcentcolon= \sqrt{a_{nn} - \displaystyle\sum_{k=1}^{n-1}l_{nk}^2}.$
 }\\~\\
 Note that in the above, we've only defined $l_{ij}$ for when $i \ge j.$ The others are obviously $0.$\\~\\
 Cholevsky's algorithm requires $\theta(n^3/6)$ multiplication and division and $\theta(n^3/6)$ addition and subtraction.
 
 \subsection{Scaled partial pivoting}
 Suppose we want to solve $Ax = b.$ This could lead to round off errors (check slide 17 of Lecture 12). One possible way to combat this is to do the following:\\~\\
-First, define the scale factor $s_i$ of row $i$ as the maximum modulus of any element in the row. More precisely, $s_i := \displaystyle\max_{1 \le j \le n} |a_{ij}|.$\\
+First, define the scale factor $s_i$ of row $i$ as the maximum modulus of any element in the row. More precisely, $s_i \vcentcolon= \displaystyle\max_{1 \le j \le n} |a_{ij}|.$\\
 (Note that we assume that $A$ is invertible and thus, every $s_i$ will be nonzero.)\\~\\
 Now, along the first column, we find the row which has the greatest ratio $\dfrac{|a_{k1}|}{s_k}.$ Suppose this is achieved for row $p,$ that is,
 \[\frac{|a_{p1}|}{s_p} = \max_{1 \le k \le n}\frac{|a_{k1}|}{s_k}.\]
@@ -470,4 +502,354 @@ Two things I would like to point out:\\
 2. When considering the ratios $\dfrac{|a_{ki}|}{s_k}$ for column $i,$ we will consider the $a_{ki}$ that is currently present. That is, in this case, we will consider the values that we get after performing all the operations that have been performed until that point.\\~\\
 Consider the example given in slide 22 of Lecture 12. After doing $R_1 \leftrightarrow R_3, R_2 - \frac{4.01}{1.09}R_1,$ and $R_3 - \frac{2.11}{1.09}R_1,$ we \emph{do not} recalculate $s_i.$ (We do exchange the values.)\\
 However, when considering the ratios, we consider the new matrix for taking $a_{k2}$ obtained after the above subtractions.
+
+\section{Matrices}
+\begin{defn}[Norm]
+	A norm is a function $a \mapsto \|a\|$ from $\mathbb{R}^n$ to $\mathbb{R}$ such that:
+	\begin{enumerate}
+		\item $\|a\| \ge 0$ for all $a \in \mathbb{R}^n$ and $\|a\| = 0 \iff a = 0,$
+		\item $\|ra\| = \md{r} \|a\|$ for all $r \in \mathbb{R}$ and $a \in \mathbb{R}^n,$
+		\item $\|a + b\| \le \|a\| + \|b\|$ for all $a, b \in \mathbb{R}^n.$
+	\end{enumerate}
+\end{defn}
+
+Following are \emph{some} examples of norms on $\mathbb{R}^n:$
+\begin{enumerate}
+	\item $\|x\|_1 = \md{x_1} + \cdots \md{x_n},$
+	\item $\|x\|_2 = \sqrt{x_1^2 + \cdots + x_n^2},$
+	\item $\|x\|_{\infty} = \max\{\md{x_1}, \ldots, \md{x_n}\}.$
+\end{enumerate}
+(In the above, $x = (x_1, \ldots, x_n)$ as usual.)
+
+\begin{defn}[Matrix norm]
+	A norm is a function $A \mapsto \|A\|$ from $M_n(\mathbb{R})$ (set of all $n \times n$ real matrices) to $\mathbb{R}$ such that:
+	\begin{enumerate}
+		\item $\|A\| \ge 0$ for all $A \in M_n(\mathbb{R})$ and $\|A\| = 0 \iff A = 0,$
+		\item $\|rA\| = \md{r} \|A\|$ for all $r \in \mathbb{R}$ and $A \in M_n(\mathbb{R}),$
+		\item $\|A + B\| \le \|A\| + \|B\|$ for all $A, B \in M_n(\mathbb{R}),$
+		\item $\|AB\| \le \|A\| \|B\|$ for all $A, B \in M_n(\mathbb{R}).$
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Induced norm]
+	Given a norm $\|\cdot\|$ on $\mathbb{R}^n,$ we get an induced matrix norm $\|\cdot\|$ on $M_n(\mathbb{R})$ defined as
+	\begin{equation*} 
+		\|A\| \vcentcolon= \max_{\|x\| = 1}\|Ax\|.
+	\end{equation*}
+\end{defn}
+(The $\|\cdot\|$ on the right is the norm on $\mathbb{R}^n$ that we started with.)
+
+\begin{thm}
+	One has the equalities:
+	\begin{align*} 
+		\|A\|_\infty &= \max_{1 \le i \le n}\sum_{j = 1}\md{a_{ij}}\\
+		\|A\|_1 &= \max_{1 \le j \le n}\sum_{i = 1}\md{a_{ij}}.
+	\end{align*}
+	That is, $\|A\|_\infty$ is the maximum of (modulus) row sums and $\|A\|_1$ of column.
+\end{thm}
+
+\begin{prop}[Some properties]
+	Let $\|\cdot\|$ be a norm on $\mathbb{R}^n$ and let it also denote the corresponding induced norm. Fix a matrix $A \in M_n(\mathbb{R}).$
+	\begin{enumerate}
+		\item $\|I\| \ge 1,$ where $I$ is the identity matrix.
+		\item $\|Az\| \le \|A\|\|z\|$ for all $z \in \mathbb{R}^n.$
+		\item If $A$ is invertible and $z \in \mathbb{R}^n,$ then
+		\begin{equation*} 
+			\frac{\|z\|}{\|A^{-1}\|} \le \|Az\| \le \|A\| \|z\|.
+		\end{equation*}
+		\item If $A$ is invertible, then $\|A\|\|A^{-1}\| \ge 1.$
+	\end{enumerate}
+\end{prop}
+
+\begin{defn}[Condition number]
+	For an invertible matrix $A,$ $\cond(A) \vcentcolon= \|A\|\|A^{-1}\|.$
+\end{defn}
+Note that the condition is not intrinsic to $A,$ it depends on the norm chosen as well.
+\begin{thm}
+	Let $A$ be invertible. Then,
+	\begin{equation*} 
+		\frac{1}{\cond A} = \left\{\frac{\|A - B\|}{\|B\|} : B \text{ is invertible}\right\}.
+	\end{equation*}
+	In particular, if $B$ is a matrix such that $\|A - B\| < \frac{1}{\|A^{-1}\|},$ then $B$ is invertible.
+\end{thm}
+The above is useful because one can pick any singular matrix $B$ of choice and compute $\|A - B\|^{-1}$ to get a lower bound on $\|A^{-1}\|.$
+\begin{prop}
+	Let $A \in M_n(\mathbb{R})$ be invertible and \textbf{upper triangular}. Then,
+	\begin{equation*} 
+		\cond A \ge \frac{\|A\|_{\infty}}{\min_{1 \le i \le n}\md{a_{ii}}}.
+	\end{equation*}
+\end{prop}
+(The $\cond A$ on the left is with respect to the induced $\|\cdot\|_\infty$ norm.)
+
+\subsection{Solving Linear Equations}
+\begin{defn}[Error and residual error]
+	Suppose that we wish to solve $Ax = b.$ Let $\bar{x}$ denote the exact solution and $\hat{x}$ the calculated solution. Then, we define the \emph{error} $e$ as 
+	\begin{equation*} 
+		e \vcentcolon= \bar{x} - \hat{x}
+	\end{equation*}
+	and the \emph{residual error} $r$ as
+	\begin{equation*} 
+		r \vcentcolon= Ae = b - A\hat{x}.
+	\end{equation*}
+\end{defn}
+Note that we always that the matrix $A$ is invertible. In turn, we may assume $b \neq 0$ since $Ax = 0$ only has the trivial solution.
+
+\begin{prop}
+	We have the following inequalities
+	\begin{align*} 
+		\frac{\|r\|}{\|A\|} &\le \|e\| \le \|A^{-1}\|\|r\|,\\
+		\frac{\|b\|}{\|A\|} &\le \|\bar{x}\| \le \|A^{-1}\|\|b\|,\\
+		\frac{1}{\cond A}\frac{\|r\|}{\|b\|} &\le \frac{\|e\|}{\|\bar{x}\|} \le \cond A \frac{\|r\|}{\|b\|}.
+	\end{align*}
+\end{prop}
+(The second actually follows from the first by taking $\hat{x} = 0.$)
+
+\textbf{Iterative improvement of solution}
+
+Let $Ax = b$ be the system we wish to solve.\\
+Compute a first solution $\hat{x}^{(1)}.$\\
+Consider the system $Ae = b - A\hat{x}^{(1)}$ for $e$ unknown.\\
+Let $\hat{e}^{(1)}$ be a calculated (approximate) solution of the above.\\
+Then, $\hat{x}^{(2)} = \hat{x}^{(1)} + \hat{e}^{(1)}$ is a ``better'' solution.\\
+Now solve $Ae = b - A\hat{x}^{(2)}$ for a new solution $\hat{e}^{(2)}$ and continue ad nauseam.
+
+\textbf{Iteration functions}
+
+\begin{defn}[Contraction]
+	Let $S \subset \mathbb{R}^n$ be closed. A map $g : S \to S$ is said to be a \emph{contraction} if there exists $k < 1$ such that
+	\begin{equation*} 
+		\|g(x) - g(y)\| \le k\|x - y\|
+	\end{equation*}
+	for all $x, y \in S.$
+\end{defn}
+It is okay if you do not recall what closed means. We will work with $S = \mathbb{R}^n$ anyway.
+\begin{prop}
+	Let $g : S \to S$ be a contraction. Then, $g$ has a unique fixed point $\xi$ in $S.$ Moreover, starting with any $x_0 \in S$ and defining 
+	\begin{equation*} 
+		x_{n + 1} = g(x_n)
+	\end{equation*}
+	produces a sequence converging to $\xi.$
+\end{prop}
+
+\begin{defn}[Approximate inverse]
+	Let $A$ be \emph{any} real $n \times n$ matrix. $C \in M_n(\mathbb{R})$ is said to be an \emph{approximate inverse} for $A$ if there exists some matrix norm $\|\cdot\|$ such that
+	\begin{equation*} 
+		\|I - CA\| < 1.
+	\end{equation*}
+\end{defn}
+Note that a priori, we have not required for $A$ or $C$ to be invertible.
+
+\begin{thm}
+	Let $A, C \in M_n(\mathbb{R})$ be such that $C$ is an approximate inverse of $A.$ Then, $A$ and $C$ are both invertible.
+\end{thm}
+
+Let $C$ now denote an approximate inverse of $A.$ As usual, we wish to solve $Ax = b.$
+
+Define the function $g : \mathbb{R}^n \to \mathbb{R}^n$ as
+\begin{equation*} 
+	g(x) = Cb + (I - CA)x = x + C(b - Ax).
+\end{equation*}
+
+Then, $A\xi = b$ iff $g(\xi) = \xi.$ Thus, solving the system is equivalent to finding a fixed point for $g.$ Note that
+\begin{equation*} 
+	\|g(x) - g(y)\| \le \|I - CA\|\|x - y\|.
+\end{equation*}
+Since $\|I - CA\| < 1,$ the map $g$ is a contraction. Thus, any starting $x^{(0)}$ will yield a sequence converging to $\xi.$ We have
+\begin{equation*} 
+	x^{(m + 1)} = x^{(m)} + C(b - Ax^{(m)})
+\end{equation*}
+for $m \ge 0$ that converges to $\xi.$
+
+There are two common choices of $C.$ Both follow by first defining $\hat{L},$ $\hat{D},$ and $\hat{U}$ as in:
+\begin{align*} 
+	\begin{array}{ll}
+		\hat{L} = (l_{ij}) & l_{ij} = \begin{cases}
+			a_{ij} & \text{ if } i > j,\\
+			0 & \text{ if } i \le j,
+		\end{cases}\\
+		\hat{D} = (d_{ij}) & d_{ij} = \begin{cases}
+			a_{ij} & \text{ if } i = j,\\
+			0 & \text{ if } i \neq j,
+		\end{cases}\\
+		\hat{U} = (u_{ij}) & u_{ij} = \begin{cases}
+			a_{ij} & \text{ if } i < j,\\
+			0 & \text{ if } i \ge j.
+		\end{cases}
+	\end{array}
+\end{align*}
+(Basically take $A$ and decompose it into an upper-triangular, diagonal and lower-triangular matrix.)
+
+We may assume that all diagonal entries of $A$ are non-zero. (Otherwise we may do row operations to make that the case.) Thus, $\hat{D}$ is invertible.
+
+Now, the two choices of $C$ are:
+\begin{enumerate}
+	\item (\textbf{Jacobi iteration}) $C = \hat{D}^{-1}.$ \\
+	Letting $x^{(m)}_i$ denote the $i$-th component of $x^{(m)},$ we get the recurrence
+	\begin{equation*} 
+		x^{(m + 1)}_i = \frac{1}{a_{ii}}\left(b_i - \displaystyle\sum_{i \neq j}a_{ij}x_j^{(m)}\right),
+	\end{equation*}
+	for $i = 1, \ldots, n.$
+
+	\item (\textbf{Gauss-Seidel}) $C = (\hat{L} + \hat{D})^{-1}.$ \\
+	With notation as earlier, we have
+	\begin{equation*} 
+		x^{(m + 1)}_i = \frac{1}{a_{ii}}\left(b_i - \displaystyle\sum_{j < i}a_{ij}x^{(m + 1)}_j - \sum_{j > i}a_{ij}x^{(m)}_j\right),
+	\end{equation*}
+	for $i = 1, \ldots, n.$
+\end{enumerate}
+
+Note that we are guessing that the above are actually approximate identities. For the second one, note that $I - CA = (\hat{L} + \hat{D})^{-1}\hat{U}.$ Thus, the desired $C$ is an approximate inverse iff
+\begin{equation*} 
+	\|C\hat{U}\| < 1
+\end{equation*}
+for some matrix norm.
+
+\begin{lem} 
+	Suppose that $A$ is strictly diagonally dominant. Then, the Jacobi iteration converges.
+\end{lem}
+Recall that $A$ is said to be \emph{strictly diagonally dominant} if the each diagonal entry has a greater absolute value than the sum of the absolute values of the other elements in its row. That is,
+\begin{equation*} 
+	\md{a_{ii}} \ge \sum_{j \neq i}\md{a_{ij}} \quad \forall\, i = 1, \ldots, n.	
+\end{equation*}
+
+\begin{defn}[Spectral radius]
+	Given a matrix $B \in M_n(\mathbb{R}),$ we define its spectral radius $\rho(B)$ as
+	\begin{equation*} 
+		\rho(B) = \max \{\md{\lambda} : \lambda \text{ is an eigenvalue of }B\}.
+	\end{equation*}
+\end{defn}
+
+\begin{thm}
+	$C$ is an approximate inverse of $A$ $\iff$ $\rho(I - CA) < 1.$
+\end{thm}
+
+\section{Initial Value Problem}
+We now wish to solve an ODE of the form
+\begin{align*} 
+	\frac{{\mathrm d}y}{{\mathrm d}x} &= f(x, y)\\
+	y(x_0) &= y_0
+\end{align*}
+in some neighbourhood of $(x_0, y_0).$ We also assume that all partial derivatives of $f$ exist.
+
+The idea is to differentiate the equation with respect to $x,$ keeping in mind that $y$ is also a function of $x.$ By abuse of notation, we use $f'$ to denote the derivative of the function $x \mapsto f(x, y(x)).$ (Here $y$ is a solution of the DE.)
+
+For example, if we have
+\begin{align*} 
+	\frac{{\mathrm d}y}{{\mathrm d}x} &= f(x, y) \vcentcolon= y - x^2 + 1\\
+	y(0) &= 0.5
+\end{align*}
+on $0 \le x \le 2.$ Then, we have
+\begin{equation*} 
+	f'(x) = y'(x) - 2x = (y - x^2 + 1) - 2x.
+\end{equation*}
+Similarly, we may compute $f''$ by substituting $y'$ as $y - x^2 + 1$ again and so on.
+
+In general, we have
+\begin{align*} 
+	y' &= f(x, y),\\
+	y'' &= f' = f_x + f_yf,\\
+	y''' &= f'' = f_{xx} + f_{xy}f + f_{yx}f + f_{yy}f^2 + f_yf_x + f_y^2f.
+\end{align*}
+
+Now, note that we know that value of $y$ of $x_0.$ Instead of solving it throughout, we will now approximate fix some \emph{step} $h$ and define the points $x_n = x + nh$ for $n = 0, 1, \ldots$ and let $y_n$ denote the \emph{approximate} solution at $x_n.$ (The exact solution will always be denoted by $y(x_n)$ and approximate as $y_n.$)
+
+In other words, we solve the problem \emph{discretely.}
+
+Define $T_k$ so that we have
+\begin{equation*} 
+	{\color{red}h}T_k(x, y) = hf(x, y) + \frac{h^2}{2!}f'(x, y) + \frac{h^3}{3!}f''(x, y) + \cdots + \frac{h^k}{k!}f^{(k - 1)}(x, y).
+\end{equation*}
+(Note that $h$ is there on the right.)
+
+\subsection{Taylor algorithm of order \texorpdfstring{$k$}{k}}
+
+We wish to find an approximate solution to
+\begin{equation*} 
+	y' = f(x, y), \quad y(a) = y_0
+\end{equation*}
+over the interval $[a, b].$
+
+Algorithm:
+\begin{enumerate}
+	\item Fix some $N$ and let $h = \frac{b - a}{N}.$ As mentioned, define $x_n \vcentcolon= a + nh$ for $n = 0, \ldots, N.$
+	\item Define $y_{n + 1}$ recursively as
+	\begin{equation*} 
+		y_{n + 1} = y_n + {\color{red}h}T_k(x_n, y_n)
+	\end{equation*}
+	for $n = 0, \ldots, N.$ (Note that $y_0$ is given already as $y(a).$)
+\end{enumerate}
+The local error is given as
+\begin{equation*} 
+	E = \frac{h^{k + 1}}{(k + 1)!}y^{(k + 1)}(\xi) = \frac{h^{k + 1}}{(k + 1)!}f^{(k)}(\xi, y(\xi))
+\end{equation*}	
+for some $\xi \in [x_n, x_n + h].$
+
+The Taylor method of order $k = 1$ is called \textbf{Euler's method}. More explicitly, we have
+\begin{equation*} 
+	y_{n + 1} = y_n + hf(x_n, y_n),
+\end{equation*}
+nice and simple. The local error is
+\begin{equation*} 
+	E = \frac{h^2}{2}y''(\xi), \quad x_n \le \xi \le x_{n + 1}.
+\end{equation*}
+Note that it is $O(h^2).$
+
+Note that we have
+\begin{equation*} 
+	y(x_{n + 1}) = y(x_n) + hy'(x_n) + \frac{h^2}{2}y''(\xi_n), \quad x_n \le \xi_n \le x_{n + 1}.
+\end{equation*}
+(Note that the above have the exact values.)
+
+Letting $e_n$ denoting the error $y(x_n) - y_n$ gives
+\begin{equation*} 
+	e_{n + 1} = e_n + h[f(x_n, y(x_n)) - f(x_n, y_n)] + \frac{h^2}{2}y''(\xi_n).
+\end{equation*}
+Applying MVT, the above reduces to
+\begin{equation*} 
+	e_{n + 1} = e_n + hf_x(x_n, \bar{y}_n)e_n + \frac{h^2}{2}y''(\xi_n).
+\end{equation*}
+
+\begin{thm}
+	Let $y_n$ denote the approximate solution obtained via Euler's method to
+	\begin{equation*} 
+		y' = f(x, y), \quad y(a) = y_0.
+	\end{equation*}
+	If the exact solution $y$ of the above DE has continuous second derivatives on $[a, b]$ and if we have the inequalities
+	\begin{equation*} 
+		\md{f_y(x, y)} \le L, \quad \md{y''(x)} \le Y
+	\end{equation*}
+	on the interval for fixed $L$ and $Y,$ then
+	\begin{equation*} 
+		\md{e_n} \le \frac{hY}{2L}\left(e^{(x_n - x_0)L} - 1\right).
+	\end{equation*}
+\end{thm}
+
+\subsection{Runge-Kutta (R-K) Method}
+We continue with the same notations as before.
+
+\textbf{R-K Method of Order 2}
+
+We have the recurrence
+\begin{equation*} 
+	y_{n + 1} = y_n + \frac{1}{2}(K_1 + K_2),
+\end{equation*}
+where $K_1 = hf(x_n, y_n)$ and $K_2 = hf(x_n + h, y_n + K_1).$
+
+The local error is $O(h^3).$ 
+
+\textbf{R-K Method of Order 4}
+
+We have the recurrence
+\begin{equation*} 
+	y_{n + 1} = y_n + \frac{1}{6}(K_1 + 2K_2 + 2K_3 + K_4),
+\end{equation*}
+where 
+\begin{align*} 
+	K_1 &= hf(x_n, y_n),\\
+	K_2 &= hf\left(x_n + \frac{h}{2}, y_n + \frac{1}{2}K_1\right),\\
+	K_3 &= hf\left(x_n + \frac{h}{2}, y_n + \frac{1}{2}K_2\right),\\
+	K_4 &= hf(x_n + h, y_n + K_3).
+\end{align*}
+
+The local error is $O(h^5).$ 
 \end{document}
