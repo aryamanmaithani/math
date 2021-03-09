@@ -568,9 +568,9 @@ Note that the condition is not intrinsic to $A,$ it depends on the norm chosen a
 \begin{thm}
 	Let $A$ be invertible. Then,
 	\begin{equation*} 
-		\frac{1}{\cond A} = \left\{\frac{\|A - B\|}{\|B\|} : B \text{ is invertible}\right\}.
+		\frac{1}{\cond A} = \left\{\frac{\|A - B\|}{\|B\|} : B \text{ is not invertible}\right\}.
 	\end{equation*}
-	In particular, if $B$ is a matrix such that $\|A - B\| < \frac{1}{\|A^{-1}\|},$ then $B$ is invertible.
+	In particular, if $B$ is a matrix such that $\|A - B\| < \dfrac{1}{\|A^{-1}\|},$ then $B$ is invertible.
 \end{thm}
 The above is useful because one can pick any singular matrix $B$ of choice and compute $\|A - B\|^{-1}$ to get a lower bound on $\|A^{-1}\|.$
 \begin{prop}
