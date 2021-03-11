@@ -47,7 +47,7 @@
 \title{MA 214: Numerical Analysis Notes}
 \author{Aryaman Maithani}
 \date{\DTMnow\\
-Until: Lecture 12}
+Until: Lecture 16}
 
 \begin{document}
 \maketitle
@@ -386,7 +386,7 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	Calculate $\Delta x_1$ and $\Delta^2x_0.$\\~\\
 	Set $y_{n+1} = x_2 - \dfrac{(\Delta x_1)^2}{\Delta^2x_0}.$\\~\\
 	Increase $n$ by 1.\\~\\
-	Note that we get a sequence $y_0, y_1, y_2, \ldots.$ However, we only ever have $x_0, x_1$ and $x_2.$
+	Note that we get a sequence $y_0, y_1, y_2, \ldots.$ However, we only ever defined $x_0, x_1$ and $x_2.$ (These get updated, though.)
 \end{enumerate}
 
 \begin{defn} 
@@ -402,7 +402,7 @@ Let $f$ be a continuous function on $[a_0, b_0]$ such that $f(a_0)f(b_0) < 0$ in
 	$\xi$ fixed point of $g:I\to I$ and $g'(\xi) \neq 0.$\\
 	$P = 1$ and $C = |g'(\xi)|.$
 	\item \textbf{Newton's method}\\
-	$\displaystyle\lim_{n\to \infty}\frac{|e_{n+1}|}{|e_n|} = \frac{1}{2}\left|\frac{f''(\xi)}{f'(\xi)}\right|.$\\
+	$\displaystyle\lim_{n\to \infty}\frac{|e_{n+1}|}{|e_n|^2} = \frac{1}{2}\left|\frac{f''(\xi)}{f'(\xi)}\right|.$\\
 	(If $\xi$ is a double root, then $P = 1.$)
 	\item \textbf{Secant method}
 	\[|e_{n+1}| = C|e_n||e_{n-1}|\]
