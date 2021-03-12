@@ -201,12 +201,12 @@ Clearly, $\mathcal{M} \subset \overline{\mathcal{M}}$ since $\emptyset$ is a nul
 \begin{defn}[Outer measure]
 	An \deff{outer measure} on $X$ is a map
 	\begin{equation*} 
-		\mu^* : \mathcal{P}(X) \to [0, 1]
+		\mu^* : \mathcal{P}(X) \to [0, \infty]
 	\end{equation*}
 	satisfying
 	\begin{enumerate}
 		\item $\mu^*(\emptyset) = 0,$
-		\item $A \subset B \implies \mu*^(A) \le \mu^*(B),$
+		\item $A \subset B \implies \mu^*(A) \le \mu^*(B),$
 		\item $\mu\left(\bigcup_{i = 1}^\infty E_i\right) \le \sum_{i = 1}^{\infty} \mu(E_i).$
 	\end{enumerate}
 \end{defn}
@@ -259,14 +259,14 @@ Note that the above had just the bare minimum requirement for both $\rho$ and $\
 		\item $\mu_0(\emptyset) = 0,$
 		\item if $\{A_i\}_{i = 1}^\infty \subset \mathcal{F}$ are pairwise disjoint such that $\bigsqcup_{i = 1}^\infty A_i \in \mathcal{F},$ then
 		\begin{equation*} 
-			\mu_)\left(\bigsqcup_{i = 1}^\infty A_i\right) = \sum_{i = 1}^{\infty} \mu_)(A_i).
+			\mu_0\left(\bigsqcup_{i = 1}^\infty A_i\right) = \sum_{i = 1}^{\infty} \mu_0(A_i).
 		\end{equation*}
 	\end{enumerate}
 \end{defn}
 Note that by putting all but finitely many $A_i = \emptyset,$ the above equality holds for finite unions as well. (The finite union \emph{will} be in $\mathcal{F}$ since it's an algebra.)
 
 \begin{prop}
-	Suppose $\mu_0$ is a pre-measure on an algebra $\mathcal{F}.$ Then, if $\mu_*$ is the outer measure as defined in \Cref{prop:constructoutermeasure} (with $\rho = \mu_0$), then
+	Suppose $\mu_0$ is a pre-measure on an algebra $\mathcal{F}.$ Then, if $\mu^*$ is the outer measure as defined in \Cref{prop:constructoutermeasure} (with $\rho = \mu_0$), then
 	\begin{enumerate}
 		\item $\mu^*|\mathcal{F} = \mu_0,$
 		\item every set in $\mathcal{F}$ is $\mu^*$-measurable.
@@ -309,5 +309,31 @@ Note that by putting all but finitely many $A_i = \emptyset,$ the above equality
 	
 	Then, $\mu_0$ is a well-defined pre-measure on $\mathcal{F}.$
 \end{prop}
+
+\section{} % Lecture 3
+\begin{defn}[Borel measure]
+	A measure $\mu$ on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is called a \deff{Borel measure} on $\mathbb{R}.$
+\end{defn}
+
+\begin{defn}
+	Let $(X, \mathcal{M}, \mu)$ be a measure space.
+	\begin{enumerate}
+		\item If $\mu(X) < \infty,$ then $\mu$ is called \deff{finite}.
+		\item If $X = \bigcup_{j = 1}^\infty E_j,$ where $E_j \in \mathcal{M}$ and $\mu(E_j) < \infty$ for all $j,$ then $\mu$ is called \deff{$\sigma$-finite}.
+		\item If for each $E \in \mathcal{M}$ with $\mu(E) = \infty,$ there exists $F \in \mathcal{M}$ with $F \subset E$ and $0 < \mu(F) < \infty,$ then $\mu$ is called \deff{semifinite}.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}
+	If $F : \mathbb{R} \to \mathbb{R}$ is any increasing, right continuous function, there is a unique Borel measure $\mu_F$ on $\mathbb{R}$ such that $\mu_F((a, b]) = F(b) - F(a)$ for all $a, b.$ If $G$ is another such function, we have $\mu_F = \mu_G$ iff $F - G$ is constant. Conversely, if $\mu$ is a Borel measure on $\mathbb{R}$ that is finite on all bounded Borel sets and we define
+	\begin{equation*} 
+		F(x) \vcentcolon= \begin{cases}
+			\mu\left((0, x]\right) & x > 0,\\
+			0 & x = 0,\\
+			-\mu\left((-x, 0]\right) & x < 0,
+		\end{cases}
+	\end{equation*}
+	then $F$ is increasing and right continuous, and $\mu = \mu_F.$
+\end{thm}
 \end{document}	
 
