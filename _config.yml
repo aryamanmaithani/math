@@ -2,7 +2,7 @@
 # bundle exec jekyll serve
 # Name of website
 title: Aryaman
-tagline: I didn't exist
+tagline: I wasn't
 
 # Short description of your site
 description: Click on the links to explore!
@@ -35,7 +35,7 @@ navbar-links:
     - title: MA 105
       href:  /tuts/ma-105/
     - title: MA 106
-      href:  /tuts/ma-106/
+      href:  /tuts/ma-106-2021/
     - title: MA 108
       href:  /tuts/ma-108/
     - title: MA 109
