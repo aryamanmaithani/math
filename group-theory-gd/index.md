@@ -3,9 +3,9 @@ layout: page
 title: Group Theory GD
 ---
 
-#### Without pauses: [PDF](/math/group-theory-gd/presentation.pdf)
+### Without pauses: [PDF](/math/group-theory-gd/presentation.pdf)
 
-#### With pauses: [PDF](/math/group-theory-gd/presentation-with-pauses.pdf)
+### With pauses: [PDF](/math/group-theory-gd/presentation-with-pauses.pdf)
 
 ### [TEX](https://github.com/aryamanmaithani/math/tree/master/group-theory-gd)
 
