@@ -612,6 +612,7 @@ R                                   &  & \mathfrak{p}_1 \arrow[r,symbol=\supset]
 \begin{cor}
 	Let $\varphi : R \to S$ be a ring homomorphism, where $R$ and $S$ are affine $\mathsf{k}$-algebras. Let $\mathfrak{m} \in \mSpec(S).$ Then, $\varphi^{-1}(\mathfrak{m}) \in \mSpec(R).$
 \end{cor}
+(We had used the fact that if we have an algebraic extension $K \subset F$ of fields and an integral domain $R$ such that $K \subset R \subset F,$ then $R$ is a field.)
 
 \begin{thm}[Weak Nullstellensatz]
 	If $\mathsf{k}$ is algebraically closed, then maximal ideals $\mathfrak{m} \in \mSpec \mathsf{k}[x_1, \ldots, x_n]$ are precisely those of the form $\mathfrak{m}_a = (x_1 - a_1, \ldots, x_n - a_n)$ for some $(a_1, \ldots, a_n) \in \mathsf{k}^n.$
@@ -705,7 +706,7 @@ R                                   &  & \mathfrak{p}_1 \arrow[r,symbol=\supset]
 	\begin{equation*} 
 		\mathfrak{p}_0 \subsetneq \mathfrak{p}_1 \subsetneq \cdots \subsetneq \mathfrak{p}_n
 	\end{equation*}
-	of prime ideals such that no prime ideal can be inserted strictly in between anywhere above. (In other words, there exists no $i \in \{0, \ldots, n - 1\}$ and no $\mathfrak{q} \in \Spec(R)$ such that $\mathfrak{p}_i \subset \mathfrak{q} \subset \mathfrak{p}_{i + 1}.$)
+	of prime ideals such that no prime ideal can be inserted strictly in between anywhere above. (In other words, there exists no $i \in \{0, \ldots, n - 1\}$ and no $\mathfrak{q} \in \Spec(R)$ such that $\mathfrak{p}_i \subsetneq \mathfrak{q} \subsetneq \mathfrak{p}_{i + 1}.$)
 
 	The \deff{length} of the above chain is $n.$ The \deff{dimension} of $R$ is defined as
 	\begin{equation*} 
