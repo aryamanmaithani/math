@@ -1,0 +1,96 @@
+\documentclass[handout, dvipsnames]{beamer}
+\mode<presentation>{}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools, mathrsfs}
+\setbeamertemplate{theorems}[numbered]
+\title{Galois correspondence in Algebraic Topology}
+\author{Aryaman Maithani}
+\date[16-10-2020]{16th October 2020}
+\institute[IITB]{IIT Bombay}
+\usetheme{Warsaw}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{tikz-cd}
+\tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}%
+  }
+}
+\setbeamercolor{footline}{fg=blue}
+\setbeamerfont{footline}{series=\bfseries}
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+% \usepackage{tikz}
+% \usecolortheme{beetle}
+% \usepackage{graphicx}
+\let\emptyset\varnothing
+
+\newcommand{\id}{\operatorname{id}}
+% \renewcommand{\exp}{\operatorname{exp}}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Galois correspondence: Proof (contd.)}
+    \textbf{Existence.} \uncover<2->{Let $(\tilde{X}, \widetilde{x_0})$ be the universal covering space. }\uncover<3->{Let $G$ be the group of covering transformations.}\\
+    \uncover<4->{Recall the isomorphism ${\color{ForestGreen}\Phi}:\pi_1(X, x_0) \to G.$ }\uncover<5->{Let $H' = \Phi(H).$ }\uncover<6->{$H'$ acts evenly on $\tilde{X}.$ }
+
+    \uncover<7->{Consider $(E, e_0) \vcentcolon= (\tilde{X}/H', H'\widetilde{x_0}).$ }\uncover<8->{Now, we get an induced covering map $p$ as follows. }
+
+    \uncover<9->{\begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+            {(\tilde{X}, \widetilde{x_0})} \arrow[dd, "\pi"'] \arrow[rrdd, "q"] \& \&\\
+            \&  \&\\
+            {(E, e_0)} \arrow[rr, "p"'] \& \& {(X, x_0)}
+        \end{tikzcd}
+    \end{center} }
+\end{frame}
+\begin{frame}{Galois correspondence: Proof (contd.)}
+    We now show that $p_*\pi_1(E, e_0) = H.$
+
+    \uncover<2->{$(\supset)$} \uncover<3->{Let $[\sigma] \in H.$ }\uncover<4->{$\Phi([\sigma]) \in H'.$ }
+
+    \uncover<5->{Let $\tilde{\sigma}$ be a lift to $\tilde{X}$ with $\tilde{\sigma}(0) = \widetilde{x_0}.$ }\uncover<6->{Put $\widetilde{x_1} \vcentcolon= \tilde{\sigma}(1).$ }
+
+    \uncover<7->{Then, there is a homeomorphism $h \in H'$ such that $h(\widetilde{x_0}) = \widetilde{x_1}.$ }\uncover<8->{Thus, $H'\widetilde{x_0} = H'\widetilde{x_1}$ and hence, $\pi\circ\tilde{\sigma}$ is a loop. }\uncover<9->{But we have $p\circ\pi\circ\tilde{\sigma} = q\circ\tilde{\sigma} = \sigma.$ }
+
+    \uncover<10->{Thus, $[\sigma] = p_*([\pi\circ\tilde{\sigma}]) \in p_*\pi_1(E, e_0).$ }
+\end{frame}
+\begin{frame}{Galois correspondence: Proof (contd.)}
+    $(\subset)$ \uncover<2->{Consider a loop $\tau$ in $E$ at $e_0.$ }\uncover<3->{We wish to show $[p\circ\tau] \in H.$ }
+
+    \uncover<4->{Let $\sigma = p\circ\tau.$ }\uncover<5->{This is a loop in $X$ at $x_0.$ Consider a lift $\tilde{\sigma}$ in $\tilde{X}$ with $\tilde{\sigma}(0) = \widetilde{x_0}.$ }
+
+    \uncover<6->{Now, note that $\tau = \pi\circ\tilde{\sigma}$ is a loop in $E.$ }\uncover<7->{Thus, $\pi(\widetilde{x_0}) = \pi(\widetilde{x_1}).$ }\uncover<8->{This tells us that $H'\widetilde{x_0} = H'\widetilde{x_1}.$ }
+
+    \uncover<9->{In other words, there exists $h \in H'$ such that $h(\widetilde{x_0}) = \widetilde{x_1}.$ }\uncover<10->{Thus, $\Phi([\sigma]) \in H'$ or $[\sigma] \in H,$ }\uncover<11->{as desired. }\hfill\uncover<12->{$\qed$ }
+\end{frame}
+\begin{frame}{Galois correspondence: Proof (contd.)}
+    We now show that $p_*\pi_1(E, e_0) = H.$
+
+    Let $[\sigma]$ be an arbitrary element of $\pi_1(X, x_0).$ 
+
+    Consider the lift $\tilde{\sigma}$ in $\tilde{X}$ with $\tilde{\sigma}(0) = \widetilde{x_0}.$ Put $\widetilde{x_1} \vcentcolon= \tilde{\sigma}(1).$
+
+    Let $\tau = \pi\circ\tilde{\sigma}.$ This is a path in $E$ starting at $e_0.$ Moreover, it is the unique lift of $\sigma$ starting at $e_0.$ \\
+    Thus, if $\tau$ is a loop, then $[\sigma] = p_*([\tau]) \in p_*\pi_1(E, e_0).$ \\
+    More importantly, if $\tau$ is \emph{not} a loop, then $[\sigma] \notin p_*\pi_1(E, e_0).$
+
+    Note that $\tau$ is a loop iff $\pi_1(\widetilde{x_0}) = \pi_1(\widetilde{x_1})$ iff there is a homeomorphism $h \in H'$ such that $h(\widetilde{x_0}) = \widetilde{x_1}$ iff $\Phi([\sigma]) \in H'$ iff $[\sigma] \in H.$
+
+    Thus, $[\sigma] \in H \iff [\sigma] \in p_*\pi_1(E, e_0).$
+\end{frame}
+\end{document}

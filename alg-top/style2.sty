@@ -1,0 +1,265 @@
+% -------------------
+% Packages
+% -------------------
+\usepackage{
+	amsmath,			% Math Environments
+  	amssymb,			% Math Symbols
+  	amsthm,			    % Theorem Environments
+  	bookmark,        	% Replaces (and loads) hyperref
+	% chngcntr,			% Use counterwithin
+	cleveref,			% Use clever references
+	% enumerate,		    % Enumerate Environments
+	enumitem,			% Labeling of enum
+	fancyhdr,			% Better Headers
+	float,				% Force Image Placement
+	framed,				% Pretty theorems
+  	mathrsfs,           % More Math Scripts
+  	mathtools,       	% Allows Prescript
+  	% microtype,       	% Improved Appearance
+	% multicol,			% Use Multi-columns
+	% multirow,			% Use Multi-rows
+	% nicefrac,			% Alternative Fractions
+	parskip,			% Paragraph space
+	% relsize,			% Bigger Math Symbols
+	% stmaryrd,			% Power Series Brackets
+  	thmtools,           % Custom Theorem Environments
+  	titlesec,			% Set (sub)section formatting
+	% thm-restate,		% For Re-stateable Theorems
+	% totcount,			% Define counters
+	witharrows,			% Arrow transitions
+	xcolor,			    % Define Colors
+}
+
+\renewcommand{\sfdefault}{cmr}
+\setlength\parindent{0pt}
+
+% -------------------
+% Section formatting
+% -------------------
+
+\titleformat{\section}[block]{\newpage\sffamily\Large\filcenter\bfseries}{\S\thesection.}{0.25cm}{\Large}
+\titleformat{\subsection}[block]{\large\bfseries\sffamily}{\S\S\thesubsection.}{0.2cm}{\large}
+
+% -------------------
+% Hyperref
+% -------------------
+\usepackage[all]{xy}
+\hypersetup{
+	colorlinks = true,
+	% citecolor = blue,
+  	% linkcolor  = blue,
+  	% urlcolor   = blue
+}
+\PassOptionsToPackage{hyphens}{url}
+
+
+% -------------------
+% BibTex
+% -------------------
+% \usepackage[
+% 	hyperref = true,      	% Link to online documents
+%   	backend  = bibtex,      % Use bibtex instead of biber
+%   	sorting  = nyt,       	% Sorts by (name, year, title)
+%   	style  = alphabetic 	% Citations look like [Har77]
+% ]{biblatex}
+% \addbibresource{mat999_bib.bib}	% Change to match bib file
+
+
+% -------------------
+% Font
+% -------------------
+% \usepackage[adobe-utopia, cal=cmcal]{mathdesign}
+% \let\mathcal\undefined
+% \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}	
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{charter}
+
+
+% -------------------
+% Colors
+% -------------------
+\definecolor{UnivColor}{RGB}{212,69,0}
+
+
+% -------------------
+% Header & Footer
+% -------------------
+% \pagestyle{fancy}
+% \fancyhf{}
+
+% % \fancyhead[CE]{}
+% \fancyhead[CO]{}
+% % \fancyhead[RE]{\thepage}
+% \fancyhead[LO]{\thepage}
+
+% \headheight=14pt
+% \footskip=14pt
+\pagestyle{fancy}
+\setlength{\headheight}{16pt}
+\fancyhf{}
+\fancyhead[L]{\sffamily{\S\textbf{\nouppercase{\leftmark}}}}
+\fancyhead[R]{\sffamily{\thepage}}
+
+% -------------------
+% Tikz & PGF
+% -------------------
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{
+	% calc,
+	% decorations.pathmorphing,
+	% hobby,
+	% matrix,arrows,
+	% positioning,
+	% shapes.geometric,
+	decorations.markings,
+	arrows.meta,
+}
+% \usepackage{pgfplots}
+% \pgfplotsset{compat=newest}
+
+
+% -------------------
+% Commands
+% -------------------
+
+% Special Characters
+% \newcommand{\N}{\mathbb{N}}
+% \newcommand{\Z}{\mathbb{Z}}
+% \newcommand{\Q}{\mathbb{Q}}
+% \newcommand{\R}{\mathbb{R}}
+% \newcommand{\F}{\mathbb{F}}
+% \newcommand{\C}{\mathbb{C}}
+% \renewcommand{\O}{\mathcal{O}}
+% \newcommand{\fp}{\mathfrak{p}}
+
+% Math Operators
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Max}{Max}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Spec}{Spec}
+
+% Special Commands
+\newcommand{\xqed}{\hfill \lower-0.3ex\hbox{$\triangleleft$}}
+% \newcommand{\ov}[1]{\overline{#1}}
+% \newcommand*{\defeq}{\stackrel{\text{def}}{=}}
+% \newcommand{\pf}{\noindent\emph{Proof. }}
+% \newcommand{\pfsk}{\noindent\emph{Proof (Sketch). }}
+\newcommand{\two}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
+
+% Counter Commands
+% \newcounter{problem}
+% \newcommand{\prob}{
+% 	\stepcounter{problem}%
+% 	\noindent\textbf{Problem \theproblem: }
+% }
+
+
+% -------------------
+% Theorem Environments
+% -------------------
+\numberwithin{equation}{section}
+\theoremstyle{definition}
+
+\newtheorem{fakethm}{Theorem}[section]
+\newtheorem{fakeprop}[fakethm]{Proposition}
+\newtheorem{fakelem}[fakethm]{Lemma}
+\newtheorem{fakecor}[fakethm]{Corollary}
+\newtheorem{fakerem}[fakethm]{Remark}
+
+\newtheorem{fakedefn}[fakethm]{Definition}
+\newtheorem{fakeex}{Example}[section]
+\newtheorem{fakeexe}{Exercise}[section]
+% \newtheorem*{conject}{Conjecture}
+
+% -------------------
+% Coloured theorem
+% -------------------
+
+\newenvironment{thm}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakethm}}
+{\end{fakethm}\end{shaded}}
+
+\newenvironment{prop}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakeprop}}
+{\end{fakeprop}\end{shaded}}
+
+\newenvironment{lem}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakelem}}
+{\end{fakelem}\end{shaded}}
+
+\newenvironment{cor}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakecor}}
+{\end{fakecor}\end{shaded}}
+
+\newenvironment{rem}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakerem}}
+{\end{fakerem}\end{shaded}}
+
+\newenvironment{defn}
+{\colorlet{shadecolor}{green!7}\begin{shaded}\begin{fakedefn}}
+{\end{fakedefn}\end{shaded}}
+
+\newenvironment{exe}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeexe}}
+{\end{fakeexe}\end{shaded}}
+
+\newenvironment{ex}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakeex}}
+{\end{fakeex}\end{shaded}}
+
+% -------------------
+% Cleverref setup
+% -------------------
+
+\crefname{fakethm}{Theorem}{Theorems}
+\crefname{fakelem}{Lemma}{Lemmas}
+\crefname{fakedefn}{Definition}{Definitions}
+\crefname{fakeprop}{Proposition}{Propositions}
+\crefname{fakecor}{Corollary}{Corollaries}
+\crefname{fakeexe}{Exercise}{Exercises}
+\crefname{fakeex}{Example}{Examples}
+\crefname{fakerem}{Remark}{Remarks}
+\crefname{equation}{}{}
+
+% -------------------
+% First Pages
+% -------------------
+
+% Title Page
+\newcommand{\coverpage}{%
+\pagestyle{empty}
+    \begin{center}
+	\begin{tabular}{c}
+	\raisebox{-.5\height}{\includegraphics[scale=\scalesize]{\imagename}} %& {\color{UnivColor} \Huge \univname} \\
+	\end{tabular}
+    \end{center}
+\vspace{3in}
+
+{\color{UnivColor} \Huge\noindent\coursenum \par\vspace{0.2cm}\noindent\coursename \par\vspace{0.1cm} \noindent\rule{0.65\textwidth}{0.05cm}\par\vspace{0.2cm}}
+
+{\color{UnivColor} \large \noindent Professor: \professor \par\noindent Notes By: \student}
+
+\vfill
+\begin{center} {\huge \color{UnivColor} \semesteryear} \end{center}
+}
+
+
+% Last Updated
+\newcommand{\updated}[1]{%
+\newpage
+\vspace*{\fill} 
+    \begin{quote} 
+    \centering 
+    Last Updated: #1 
+    \end{quote}
+\vspace*{\fill}
+\newpage
+}
