@@ -1,0 +1,93 @@
+\chapter{Algebraic Closure of a Field}
+
+\section{Existence}
+
+\begin{defn}%[]
+    A field $\mathbb{K}$ is called a \deff{algebraically closed field} if every non-constant polynomial $f(x) \in \mathbb{K}[x]$ has a root in $\mathbb{K}.$
+\end{defn}
+
+\begin{defn}%[]
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension. We say that $\mathbb{K}$ is an \deff{algebraic closure} if $\mathbb{K}$ is algebraically closed and $\mathbb{K}/\mathbb{F}$ is an algebraic extension.
+\end{defn}
+
+We have the following simple proposition.
+\begin{prop}
+    \phantom{hi}
+    \begin{enumerate}
+        \item $\mathbb{K}$ is algebraically closed iff every non-constant polynomials factors as a product of linear factors.
+        \item $\mathbb{C}$ is algebraically closed.
+        \item If $\mathbb{K}$ is algebraically closed and $\mathbb{L}/\mathbb{K}$ is an algebraic extension, then $\mathbb{L} = \mathbb{K}.$
+    \end{enumerate}
+\end{prop}
+
+\begin{restatable}[]{prop}{alglcosureinalgclosedisclosed}
+\label{prop:alglcosureinalgclosedisclosed}
+    Let $\mathbb{F} \subset \mathbb{K}$ be an extension where $\mathbb{K}$ is algebraically closed. Define,
+    \begin{equation*} 
+        \mathbb{A} \vcentcolon= \{\alpha \in \mathbb{K} : \alpha \text{ is algebraic over }\mathbb{F}\}.
+    \end{equation*}
+    Then, $\mathbb{A}$ is an algebraic closure of $\mathbb{F}.$ \hfill\hyperref[prop:alglcosureinalgclosedisclosed2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{lem}{unionoffields}
+\label{lem:unionoffields}
+    Let $\{\mathbb{F}_i\}_{i \ge 1}$ be a sequence of fields as
+    \begin{equation*} 
+        \mathbb{F}_1 \subset \mathbb{F}_2 \subset \cdots.
+    \end{equation*}
+    Then, $\mathbb{F} \vcentcolon= \bigcup_{i \ge 1}\mathbb{F}_i$ is a field with the following operations:
+    Given $a, b \in \mathbb{F},$ there exist smallest $i, j \in \mathbb{N}$ with $a \in \mathbb{F}_i$ and $b \in \mathbb{F}_j.$ Then, $a, b \in \mathbb{F}_{i + j}.$ Define $a + b$ and $ab$ to be the corresponding elements from $\mathbb{F}_{i + j}.$
+
+    Moreover, each $\mathbb{F}_i$ is a subfield of $\mathbb{F}.$ \hfill\hyperref[lem:unionoffields2]{\downsym}
+\end{restatable}
+
+Note that the ``smallest'' above is just to ensure that the operations are well-defined. Since $\mathbb{F}_i \subset \mathbb{F}_j$ (note that we always use this to mean ``is a subfield of'') for $i \le j,$ we can actually pick any $i$ and $j.$
+
+\begin{restatable}[Existence of Algebraic Closed Extension]{thm}{algclosedext}
+\label{thm:algclosedext}
+    Let $\mathbb{F}$ be a field. Then, there exists an algebraically closed field containing $\mathbb{F}.$ \hfill\hyperref[thm:algclosedext2]{\downsym}
+\end{restatable}
+The proof we have given is due to Artin.
+
+\begin{restatable}[Existence of Algebraic Closure]{cor}{algclosure}
+\label{cor:algclosure}
+    Every field $\mathbb{F}$ has an algebraic closure. \hfill\hyperref[cor:algclosure2]{\downsym}
+\end{restatable}
+
+\section{Uniqueness}
+
+\begin{restatable}[]{prop}{rootsandextensions}
+\label{prop:rootsandextensions}
+    Let $\sigma : \mathbb{F} \to \mathbb{L}$ be an embedding of fields where $\mathbb{L}$ is \underline{algebraically closed}. Let $\alpha \in \mathbb{K} \supset \mathbb{F}$ be algebraic over $\mathbb{F}$ and $p(x) = \irr(\alpha, \mathbb{F}).$ \\
+    Write $p(x) = \sum a_i x^i$ and define $p^{\sigma}(x) \vcentcolon= \sum \sigma(a_i) x^i.$ Then, $\tau \mapsto \tau(\alpha)$ is a bijection between the sets
+    \begin{equation*} 
+        \{\tau : \mathbb{F}(\alpha) \to \mathbb{L} \mid \tau \text{ is an embedding and }\tau|_{\mathbb{F}} = \sigma\} \leftrightarrow \{\beta \in L \mid p^{\sigma}(\beta) = 0\}.
+    \end{equation*} \hfill\hyperref[prop:rootsandextensions2]{\downsym}
+\end{restatable}
+
+\begin{rem}
+    The above proposition says that the number of ways to extend from $\mathbb{F}$ to $\mathbb{F}(\alpha)$ is precisely the number of roots of that $p(x)$ has in $\mathbb{L}.$ (Not exactly, we need to apply $\sigma$ to the coefficients. This is essentially saying that we consider $\mathbb{F}$ as a subfield under $\mathbb{L}.$) In particular, this set is non-empty since $\mathbb{L}$ is algebraically closed. \\
+    Note that this number need not be $\deg(f(x)).$ We shall see in the next chapter that a polynomial may be irreducible but still have repeated roots in its splitting field.
+\end{rem}
+
+\begin{restatable}[]{thm}{extendtoalgextension}
+\label{thm:extendtoalgextension}
+    Let $\sigma : \mathbb{F} \to \mathbb{L}$ be an embedding where $\mathbb{L}$ is algebraically closed. Let $\mathbb{K}/\mathbb{F}$ be an algebraic extension. Then, there exists an embedding $\tau : \mathbb{K} \to \mathbb{L}$ extending $\sigma.$ \\
+    Moreover, if $\mathbb{K}$ is an algebraic closure of $\mathbb{F}$ and $\mathbb{L}$ of $\sigma(\mathbb{K}),$ then $\tau$ is an isomorphism extending $\sigma.$ \hfill\hyperref[thm:extendtoalgextension2]{\downsym}
+\end{restatable}
+
+\begin{cor}[Isomorphism of algebraic closures]
+    If $\mathbb{K}_1$ and $\mathbb{K}_2$ are two algebraic closures of $\mathbb{F},$ then they are $\mathbb{F}$-isomorphic.
+\end{cor}
+\begin{proof} 
+    Apply previous proposition to the inclusion $i : \mathbb{F} \hookrightarrow \mathbb{E}_2$ to extend it to an $\mathbb{F}$-isomorphism $\tau : \mathbb{E}_1 \to \mathbb{E}_2.$
+\end{proof}
+
+\begin{defn}%[]
+    Given a field $\mathbb{F},$ we use $\overline{\mathbb{F}}$ to denote an algebraic closure of $\mathbb{F}.$ 
+\end{defn}
+
+\begin{restatable}[Isomorphism of splitting fields]{thm}{isosplitting}
+\label{thm:isosplitting}
+    Let $\mathbb{E}$ and $\mathbb{E}'$ be two splitting fields of a non-constant polynomial $f(x) \in \mathbb{F}[x]$ over $\mathbb{F}.$ Then, they are $\mathbb{F}$-isomorphic. \hfill\hyperref[thm:isosplitting2]{\downsym}
+\end{restatable}

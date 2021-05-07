@@ -1,0 +1,709 @@
+\chapter{Proofs}
+
+\finextisalg*\label{prop:finextisalg2}
+\begin{flushright}\hyperref[prop:finextisalg]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{K}/\mathbb{F}$ be a finite extension with $n \vcentcolon= \dim_{\mathbb{F}}(\mathbb{K}).$ Let $b \in \mathbb{K}$ be arbitrary. Consider the multiset $\{1, b, \ldots, b^{n}\}.$ It has $n + 1$ elements and thus, is linearly dependent. Thus, there exist $a_0, \ldots, a_{n} \in \mathbb{F}$ not all $0$ such that
+    \begin{equation*} 
+        a_0 + a_1b + \cdots + a_nb^n = 0.
+    \end{equation*}
+    Then, $f(x) \vcentcolon= a_0 + a_1b + \cdots + a_nx^n \in \mathbb{F}[x]$ is a non-zero polynomial such that $f(b) = 0.$
+\end{proof}
+
+\uniquemonicirred*\label{prop:uniquemonicirred2}
+\begin{flushright}\hyperref[prop:uniquemonicirred]{\upsym}\end{flushright}
+\begin{proof}
+    Define $\psi : \mathbb{F}[x] \to \mathbb{K}$ by $p(x) \mapsto p(\alpha).$ Since $\alpha$ is algebraic, $I \vcentcolon= \ker(\psi)$ is non-zero.
+
+    Since $\mathbb{F}[x]$ is a PID, we have $I = \langle f(x)\rangle$ for some $0 \neq f(x) \in \mathbb{F}[x].$ Since $\mathbb{F}[x]/I$ is isomorphic to a subring of $\mathbb{K},$ it is an integral domain and hence, $f(x)$ is irreducible. By scaling, we may assume that $f(x)$ is monic. Clearly, any other $g(x)$ as in the proposition is in the kernel and hence, $f(x) \mid g(x).$
+
+    In particular, if $g(x)$ is irreducible and monic, then $f(x) \mid g(x) \implies g(x) = af(x)$ for some $a \in \mathbb{F}^\times.$ Since $g(x)$ is also monic, we have $a = 1.$
+\end{proof}
+
+\adjoiningalg*\label{prop:adjoiningalg2}
+\begin{flushright}\hyperref[prop:adjoiningalg]{\upsym}\end{flushright}
+\begin{proof}
+    Consider the substitution homomorphism $\psi : \mathbb{F}[x] \to \mathbb{F}[\alpha]$ given by $p(x) \mapsto p(\alpha).$
+
+    By \Cref{prop:uniquemonicirred}, we know that $\ker(\psi) = \langle f(x)\rangle.$ Since $f(x) \neq 0,$ the ideal $\langle f(x)\rangle$ is maximal. 
+
+    Since $\psi$ is onto and $\ker(\psi)$ maximal, we see that $\mathbb{F}[\alpha]$ is in fact a field and hence, $\mathbb{F}[\alpha] = \mathbb{F}(\alpha).$
+
+    Consider $B = \{1, \alpha, \ldots, \alpha^{n - 1}\}.$ \\
+    Using $f(x),$ we may recursively write all higher powers of $\alpha$ as an $\mathbb{F}$-linear combination of elements of $B.$ Thus, $B$ spans $\mathbb{F}[\alpha].$ \\
+    For linear independence, suppose that $a_0, \ldots, a_{n - 1} \in \mathbb{F}$satisfy
+    \begin{equation*} 
+        a_0 + a_1\alpha + \cdots + a_{n - 1}\alpha^{n - 1} = 0.
+    \end{equation*}
+    Then, we get a polynomial $g(x) = a_0 + a_1x + \cdots a_{n - 1}x^{n - 1} \in \mathbb{F}[x]$ satisfied by $\alpha.$ Since $\deg(g(x)) < \deg(f(x)),$ we see that $g(x) = 0,$ again by \Cref{prop:uniquemonicirred}.
+\end{proof}
+
+\isocarryingalphtobet*\label{prop:isocarryingalphtobet2}
+\begin{flushright}\hyperref[prop:isocarryingalphtobet]{\upsym}\end{flushright}
+\begin{proof}
+    $(\implies)$ Let $\psi : \mathbb{F}(\alpha) \to \mathbb{F}(\beta)$ be as mentioned.\\
+    Put $f(x) \vcentcolon= \irr(\alpha, \mathbb{F})$ and $g(x) \vcentcolon= \irr(\beta, \mathbb{F}).$ Then, 
+    \[\begin{WithArrows}[displaystyle]
+        0 &= \psi(0) \\
+        &= \psi(f(\alpha)) \Arrow{$\psi$ is an $\mathbb{F}$-isomorphism} \\
+        &= f(\psi(\alpha)) \\
+        &= f(\beta).
+    \end{WithArrows}\]
+     Thus, $g(x) \mid f(x).$ Since both are irreducible and monic, $g(x) = f(x).$
+
+     $(\impliedby)$ Let $f(x) \vcentcolon= \irr(\alpha, \mathbb{F}) = \irr(\beta, \mathbb{F}).$ \\
+     The isomorphisms $\mathbb{F}(\alpha) \cong \mathbb{F}[x]/\langle f(x)\rangle \cong \mathbb{F}(\beta)$ are $\mathbb{F}$-isomorphisms and so is their composition.
+\end{proof}
+
+\towerlaw*\label{thm:towerlaw2}
+\begin{flushright}\hyperref[thm:towerlaw]{\upsym}\end{flushright}
+\begin{proof}
+    If $\mathbb{K}/\mathbb{F}$ is a finite extension, then so are $\mathbb{K}/\mathbb{E}$ (pick a finite basis of $\mathbb{K}/\mathbb{F},$ it is a spanning set for $\mathbb{K}/\mathbb{E}$) and $\mathbb{E}/\mathbb{F}$ ($\mathbb{E}$ is an $\mathbb{F}$-subspace of $\mathbb{K}.$)
+
+    Thus, if either of $\mathbb{K}/\mathbb{E}$ or $\mathbb{E}/\mathbb{F}$ is not a finite extension, then neither is $\mathbb{K}/\mathbb{F}.$
+
+    Now, assume that both $n \vcentcolon= [\mathbb{K} : \mathbb{E}]$ and $m \vcentcolon= [\mathbb{E} : \mathbb{F}]$ are finite. Let $\{\alpha_i\}_{i = 1}^n \subset \mathbb{K}$ be an $\mathbb{E}$-basis and $\{\beta_j\}_{j = 1}^m \subset \mathbb{E}$ be an $\mathbb{F}$-basis.
+
+    Put $B \vcentcolon= \{\alpha_i\beta_j : 1 \le i \le n,\; 1 \le j \le m\} \subset \mathbb{K}.$ We show that $B$ is an $\mathbb{F}$-basis of $\mathbb{K}.$
+
+    \textbf{Spanning.} Let $a \in \mathbb{K}$ be arbitrary. Write 
+    \begin{equation*} 
+        a = \sum_{i = 1}^{n} a_i \alpha_i
+    \end{equation*}
+    for $a_i \in \mathbb{E}.$ For each $i = 1, \ldots, n,$ write
+    \begin{equation*} 
+        a_i = \sum_{j = 1}^{m} b_{ij} \beta_j
+    \end{equation*}
+    for $j \in \mathbb{F}.$ Then,
+    \begin{equation*} 
+        a = \sum_{i = 1}^{n}\sum_{j = 1}^{m}b_{ij} (\alpha_i\beta_j)
+    \end{equation*}
+    is an $\mathbb{F}$-linear combination of elements of $B.$
+
+    \textbf{Linear independence.} Let $\{b_{ij} : 1 \le i \le n,\; 1 \le j \le m\} \subset \mathbb{F}$ be such that
+    \begin{equation*} 
+        \sum_{\substack{1 \le i \le n \\ 1 \le j \le m}} b_{ij}\alpha_i\beta_j = 0.
+    \end{equation*} 
+    Group the above to get
+    \begin{equation*} 
+        \sum_{i = 1}^{n}\left[\sum_{j = 1}^{m}b_{ij} \alpha_i\right]\beta_j = 0.
+    \end{equation*}
+    Linear independence of $\{\beta_j\}$ forces $\sum_{j = 1}^{m}b_{ij} \alpha_i = 0$ for all $i.$ In turn, linear independence of $\{\alpha_i\}$ that forces each $b_{ij}$ to be $0.$
+
+    Note that $B$ actually has cardinality $mn.$ (Why?) This finishes the proof.
+\end{proof}
+
+\adjoinalgsfinext*\label{prop:adjoinalgsfinext2}
+\begin{flushright}\hyperref[prop:adjoinalgsfinext]{\upsym}\end{flushright}
+\begin{proof}
+    Consider the tower
+    \begin{equation*} 
+        \mathbb{F} \subset \mathbb{F}(\alpha_1) \subset \mathbb{F}(\alpha_1, \alpha_2) \subset \cdots \subset \mathbb{F}(\alpha_1, \ldots, \alpha_n).
+    \end{equation*}
+    At each stage, an element being adjoined is algebraic over the previous field. (\Cref{prop:decompalgisalg}.)
+
+    Thus, each consecutive degree above is finite. (\Cref{cor:adjoinalgisfin}.)
+
+    By the \nameref{thm:towerlaw}, so is the overall degree.
+\end{proof}
+
+\compalgisalg*\label{cor:compalgisalg2}
+\begin{flushright}\hyperref[cor:compalgisalg]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\alpha \in \mathbb{K}.$ Let $\irr(\alpha, \mathbb{E}) =\vcentcolon f(x) = a_0 + \cdots + a_{n - 1}x^{n - 1} + x^n.$
+
+    Let $\mathbb{L} \vcentcolon= \mathbb{F}(a_0, \ldots, a_{n - 1}).$
+
+    Then, $\mathbb{L}$ is finite over $\mathbb{F}$ since each $a_i \in \mathbb{R}$ is algebraic over $\mathbb{F}.$ Moreover, $0 \neq f(x) \in \mathbb{L}[x].$ Thus, $\alpha$ is algebraic over $\mathbb{L}$ and hence, $\mathbb{L}(\alpha)$ is finite over $\mathbb{L}.$
+
+    By the \nameref{thm:towerlaw}, $\mathbb{L}/\mathbb{F}$ is finite and thus, $\alpha$ is algebraic over $\mathbb{F}.$ (\Cref{prop:finextisalg}.)
+\end{proof}
+
+\algclosureisfield*\label{cor:algclosureisfield2}
+\begin{flushright}\hyperref[cor:algclosureisfield]{\upsym}\end{flushright}
+\begin{proof}
+    $\mathbb{F} \subset \mathbb{A}$ is clear. We show that $\mathbb{A}$ is a subfield. Let $\alpha, \beta \in \mathbb{A}$ with $\beta \neq 0.$ Then, $\mathbb{L} \vcentcolon= \mathbb{F}(\alpha, \beta)$ is a finite extension over $\mathbb{F}.$ \\
+    Thus, all elements of $\mathbb{L}$ are algebraic over $\mathbb{F}.$ In particular, so are $\alpha \pm \beta,$ $\alpha\beta$ and $\alpha\beta^{-1}.$
+\end{proof}
+
+\intdomfinextfield*\label{prop:intdomfinextfield2}
+\begin{flushright}\hyperref[prop:intdomfinextfield]{\upsym}\end{flushright}
+\begin{proof}
+    We only need to show that every non-zero element of $R$ has a multiplicative inverse (in $R$). Let $0 \neq a \in R$ be arbitrary. Since $\dim_{\mathbb{F}}(R) < \infty,$ there is a smallest $n \ge 1$ such that the set $\{1, a, \ldots, a^n\}$ is linearly dependent. Then, let $b_0, \ldots, b_{n} \in \mathbb{F}$ be not all zero such that
+    \begin{equation*} 
+        b_0 + b_1a + \cdots b_na^n = 0.
+    \end{equation*} 
+    If $b_n = 0,$ then the minimality of $n$ is contradicted. If $b_0 = 0,$ then we may cancel $a$ ($R$ is an integral domain and $a \neq 0$) and again contradict the minimality of $n.$ Thus, we get
+    \begin{equation*} 
+        a(b_1 + \cdots + b_na^{n - 1}) = -b_0.
+    \end{equation*}
+    This shows that
+    \begin{equation*} 
+        -\frac{1}{b_0}(b_1 + \cdots + b_na^{n - 1}) \in R
+    \end{equation*}
+    is a multiplicative inverse of $a.$
+\end{proof}
+
+\descofcompositum*\label{prop:descofcompositum2}
+\begin{flushright}\hyperref[prop:descofcompositum]{\upsym}\end{flushright}
+\begin{proof}
+    Simple computations show that $\mathbb{L}$ is indeed a subring of $\mathbb{K}.$ If $\{\alpha_1, \ldots, \alpha_n\}$ and $\{\beta_1, \ldots, \beta_m\}$ are $\mathbb{F}$-bases for $\mathbb{E}_1$ and $\mathbb{E}_2,$ then clearly $\{\alpha_i\beta_j : 1 \le i \le n,\; 1 \le j \le m\}$ spans $\mathbb{L}$ over $\mathbb{F}.$ Thus, $\dim_{\mathbb{F}}(\mathbb{L}) \le mn = d.$ 
+    
+    Since $\mathbb{L}$ is a subring of $\mathbb{K},$ it is an integral domain and hence, $\mathbb{L}$ is a field, by \Cref{prop:intdomfinextfield}.
+
+    Lastly, note that $[\mathbb{E}_i : \mathbb{F}]$ divides $[\mathbb{L} : \mathbb{F}],$ in view of the \nameref{thm:towerlaw}. In particular, if $\gcd(m, n) = 1,$ then $mn \mid [\mathbb{L} : \mathbb{F}].$ Since $[\mathbb{L} : \mathbb{F}] \le mn,$ we are done.
+\end{proof}
+
+\rootcanbeadjoined*\label{thm:rootcanbeadjoined2}
+\begin{flushright}\hyperref[thm:rootcanbeadjoined]{\upsym}\end{flushright}
+\begin{proof}
+    Let $g(x)$ be an irreducible factor of $f(x).$
+
+    Put $\mathbb{K} = \mathbb{F}[x]/\langle g(x)\rangle.$ Since $g(x)$ is irreducible and non-zero, the quotient is indeed a field. Clearly, $\mathbb{F}$ is a subfield under the identification $a \mapsto \bar{a}.$ Moreover, $\bar{x}$ is a root of $g(x).$
+\end{proof}
+
+\splitfieldexists*\label{thm:splitfieldexists2}
+\begin{flushright}\hyperref[thm:splitfieldexists]{\upsym}\end{flushright}
+\begin{proof}
+    Let $n \vcentcolon= \deg(f).$ By \Cref{thm:rootcanbeadjoined2}, there exists a field $\mathbb{F}_1 \supset \mathbb{F}$ such that $f(x)$ has a root in $\mathbb{F}_1.$ Calling this root $a_1,$ we see that
+    \begin{equation*} 
+        f(x) = (x - a_1)f_1(x)
+    \end{equation*}
+    with $\deg(f_1) = n - 1.$ Continuing inductively, we get fields
+    \begin{equation*} 
+        \mathbb{F}_n \supset \cdots \supset \mathbb{F}_1 \supset \mathbb{F}
+    \end{equation*}
+    with $a_i \in \mathbb{F}_i,$ such that
+    \begin{equation*} 
+        f(x) = a(x - a_1) \cdots (x - a_n).
+    \end{equation*}
+    Then, $\mathbb{K} = \mathbb{F}(a_1, \ldots, a_n) \subset \mathbb{F}_n$ is a splitting field.
+\end{proof}
+
+\FTSP*\label{thm:FTSP2}
+\begin{flushright}\hyperref[thm:FTSP]{\upsym}\end{flushright}
+\begin{proof}
+    \textbf{Existence.} We apply induction on $n.$ The case $n = 1$ is clear since every polynomial is symmetric and $\sigma_1 = u_1.$ So, $g = f$ itself works\footnote{Being slightly sloppy since the indeterminates are different. We mean that you must take the same coefficients}.
+
+    Suppose the theorem is true for $n - 1.$ Now, to prove the theorem for $n,$ apply induction on $\deg(f).$ If $f$ is constant, then again $g = f$ works. Suppose $\deg(f) \ge 1.$ Define
+    \begin{equation*} 
+        f^0 \vcentcolon= f(u_1, \ldots, u_{n - 1}, 0) \in R[u_1, \ldots, u_{n - 1}].
+    \end{equation*}
+    Then, $f^0$ is a symmetric polynomial in $n - 1$ variables. By induction hypothesis (on variables), there exists $g \in R[x_1, \ldots, x_{n - 1}]$ such that
+    \begin{equation*} 
+        f^0(u_1, \ldots, u_{n - 1}) = g(\sigma_1^0, \ldots, \sigma_{n - 1}^0).
+    \end{equation*}
+    Define $f_1 \in R[u_1, \ldots, u_n]$ by
+    \begin{equation*} 
+        f_1(u_1, \ldots, u_n) = f(u_1, \ldots, u_n) - g(\sigma_1, \ldots, \sigma_{n - 1}).
+    \end{equation*}
+    Then, $f_1(u_1, \ldots, u_{n - 1}, 0) = 0.$ Thus, $u_n \mid f_1.$ However, note that $f_1$ is symmetric and thus, $\sigma_n \mid f_1.$ Thus, we can write
+    \begin{equation*} 
+        f_1(u_1, \ldots, u_n) = \sigma_n h(u_1, \ldots, u_n)
+    \end{equation*}
+    for some $h \in R[u_1, \ldots, u_n].$ Since $\sigma_n$ is not a zero-divisor in $R[u_1, \ldots, u_n],$ we see that $h$ is also symmetric with $\deg(h) < \deg(f).$ Thus, by inductive hypothesis, $h$ is a polynomial in $\sigma_1, \ldots, \sigma_n$ and hence, $f$ is so.
+
+    \textbf{Uniqueness.} It suffices to show that the elementary symmetric polynomials are algebraically independent. That is, to show that the map
+    \begin{equation*} 
+        \varphi : R[z_1, \ldots, z_n] \to R[u_1, \ldots, u_n]
+    \end{equation*}
+    defined by 
+    \begin{equation*} 
+        z_i \mapsto \sigma_i \andd \varphi|_R = \id_R
+    \end{equation*}
+    is an injection.
+
+    We prove this by induction on $n.$ For $n = 1,$ it is clear since $\sigma_1 = u_1,$ an indeterminate. Assume that $n \ge 1$ and that the result is true for $n - 1.$ If $\varphi$ is not an injection, then we pick a nonzero polynomial $f(z_1, \ldots, z_n) \in \ker(\varphi)$ of least degree. Write $f$ as a polynomial in $z_n$ as
+    \begin{equation*} 
+        f(z_1, \ldots, z_n) = f_0(z_1, \ldots, z_{n - 1}) + \cdots + f_d(z_1, \ldots, z_{n - 1})z_n^d
+    \end{equation*}
+    with $f_d \neq 0.$ Minimality of $d$ (and the fact that $\sigma_n$ is not a zero-divisor) forces that $f_0 \neq 0.$ Since $f \in \ker(\varphi),$ we have
+    \begin{equation*} 
+        f_0(\sigma_1, \ldots, \sigma_{n - 1}) + \cdots + f_d(\sigma_1, \ldots, \sigma_{n - 1})\sigma_n^d = 0.
+    \end{equation*}
+    The above is an equality in $R[u_1, \ldots, u_n].$ Put $u_n = 0$ to get
+    \begin{equation*} 
+        f_0(\sigma_1^0, \ldots, \sigma_{n - 1}^0) = 0.
+    \end{equation*}
+    But the above shows that the corresponding $\varphi$ for $n - 1$ variables is not injective. A contradiction.
+\end{proof}
+
+\powersumformulae*\label{thm:powersumformulae2}
+\begin{flushright}\hyperref[thm:powersumformulae]{\upsym}\end{flushright}
+\begin{proof}
+    Let $z$ be an indeterminate over $S \vcentcolon= R[u_1, \ldots, u_n].$ Note that 
+    \begin{equation} \label{eq:001}
+        (1 - u_1z) \cdots (1 - u_nz) = 1 - \sigma_1z + \cdots + (-1)^n \sigma_n z^n =\vcentcolon \sigma(z).
+    \end{equation}
+    Define $w(z) \in S[\![z]\!]$ as
+    \begin{align*} 
+        w(z) &= \sum_{k = 1}^{\infty} w_kz^k\\
+        &= \sum_{k = 1}^{\infty}\left(\sum_{i = 1}^{n}u_i^k\right)z^k\\
+        &= \sum_{i = 1}^{n} \left(\sum_{k = 1}^{\infty}(u_iz)^k\right)\\
+        &= \sum_{i = 1}^{n} \frac{u_iz}{1 - u_iz}.
+    \end{align*}
+    Now, since $\sigma(z) = (1 - u_1z) \cdots (1 - u_nz),$ we get
+    \begin{equation*} 
+        \sigma'(z) = - \sum_{i = 1}^{n} \frac{u_i \sigma(z)}{1 - u_i z},
+    \end{equation*}
+    where we have taken the formal derivative in $S[\![z]\!].$ Rearranging the above gives
+    \begin{equation*} 
+        -\frac{z\sigma'(z)}{\sigma(z)} = \sum_{i = 1}^{n}\frac{u_i z}{1 - u_i z} = w(z)
+    \end{equation*}
+    and hence,
+    \begin{equation*} 
+        w(z)\sigma(z) = -z\sigma'(z).
+    \end{equation*}
+    Computing $\sigma'(z)$ from \Cref{eq:001} gives
+    \begin{equation*} 
+        w(z)\sigma(z) = \sigma_1z - 2\sigma_2z^2 + \cdots + (-1)^{n + 1}n\sigma_nz^n.
+    \end{equation*}
+    Comparing the coefficients of $x^k$ on both sides gives the result.
+\end{proof}
+
+\independencediscriminant*\label{prop:independencediscriminant2}
+\begin{flushright}\hyperref[prop:independencediscriminant]{\upsym}\end{flushright}
+\begin{proof}
+    Let $r_1, \ldots, r_n \in \mathbb{K}$ be such that $f(x) = (x - r_1) \cdot (x - r_n).$
+
+    Consider the Vandermonde matrix
+    \begin{equation*} 
+        M = \begin{bmatrix}
+            1 & 1 & \cdots & 1\\
+            r_1 & r_2 & \cdots & r_n\\
+            r_1^2 & r_2^2 & \cdots & r_n^2\\
+            \vdots & \vdots & \ddots & \vdots \\
+            r_1^{n - 1} & r_2^{n - 1} & \cdots & r_n^{n - 1}\\
+        \end{bmatrix}.
+    \end{equation*}
+    Then, $\disc_{\mathbb{K}}(f(x)) = (\det(M))^2 = \det(MM^{\mathsf{T}}).$ As before, let $\sigma_1, \ldots, \sigma_n \in R[u_1, \ldots, u_n]$ be the elementary symmetric polynomials. Put
+    \begin{equation*} 
+        s_i \vcentcolon= \sigma_i(r_1, \ldots, r_n).
+    \end{equation*}
+    Then, note that
+    \begin{equation*} 
+        f(x) = x^n - s_1x^{n - 1} + \cdots + (-1)^ns_n
+    \end{equation*}
+    and hence, $s_i \in \mathbb{F}$ for all $i = 1, \ldots, n.$ Also, define
+    \begin{equation*} 
+        v_k \vcentcolon= r_1^k + \cdots + r_n^k
+    \end{equation*}
+    for all $k \ge 1.$ In view of \nameref{thm:powersumformulae}, we see that each $v_k \in \mathbb{F}$ as well. Moreover, note that
+    \begin{equation*} 
+        MM^{\mathsf{T}} = \begin{bmatrix}
+            n & v_1 & \cdots & v_{n - 1}\\
+            v_1 & v_2 & \cdots & v_n\\
+            v_2 & v_3 & \cdots & v_{n + 1}\\
+            \vdots & \vdots & \ddots & \vdots \\
+            v_{n - 1} & v_n & \cdots & v_{2n - 2}\\
+        \end{bmatrix}.
+    \end{equation*} 
+    Thus, $\disc_{\mathbb{K}}(f(x)) = \det(MM^{\mathsf{T}}) \in \mathbb{F}.$
+
+    Note that since $v_k$ can be calculated directly in terms of $s_i,$ which are coefficients of $\mathbb{F}.$ Thus, the discriminant does not depend on the choice of the splitting field.
+\end{proof}
+
+\discderivative*\label{prop:discderivative2}
+\begin{flushright}\hyperref[prop:discderivative]{\upsym}\end{flushright}
+\begin{proof}
+    Note that
+    \begin{equation*}
+        f'(x) = \sum_{i = 1}^{n}\frac{f(x)}{x - r_i} = \sum_{i = 1}^{n}\prod_{\substack{j = 1 \\ j \neq i}}^{n}(x- r_j)
+    \end{equation*}
+    and thus,
+    \begin{equation*} 
+        f'(r_i) = \prod_{\substack{j = 1 \\ j \neq i}}^{n}(r_i - r_j).
+    \end{equation*}
+    The result now follows.
+\end{proof}
+
+\FTAprelim*\label{lem:FTAprelim2}
+\begin{flushright}\hyperref[lem:FTAprelim]{\upsym}\end{flushright}
+\begin{proof} 
+    The first follows from intermediate value property. For the second, given $a + b \iota \in \mathbb{C}$ with $a, b \in \mathbb{R},$ define $c, d \in \mathbb{R}$ by
+    \begin{equation*} 
+        c \vcentcolon= \sqrt{\frac{1}{2}[a + \sqrt{a^2 + b^2}]} \andd d \vcentcolon= \sqrt{\frac{1}{2}[-a + \sqrt{a^2 + b^2}]}.
+    \end{equation*}
+    Then, $(c + d \iota)^2 = z.$
+\end{proof}
+\FTA*\label{thm:FTA2}
+\begin{flushright}\hyperref[thm:FTA]{\upsym}\end{flushright}
+\begin{proof}
+    Let $g(x) \in \mathbb{C}[x]$ be a non-constant polynomial. Then, $f(x) = g(x)\bar{g}(x)$ is a non-constant polynomial with real coefficients. Here, $\bar{g}(x)$ denotes the polynomial whose coefficients are complex conjugates of those of $g(x).$ Note that if $f(z) = 0$ for some $z \in \mathbb{C},$ then $g(z) = 0$ or $\bar{g}(z) = 0.$ If $\bar{g}(z) = 0,$ then $g(\bar{z}) = 0.$ In either case, $g$ has a complex root.
+
+    Thus, it suffices to show that all non-constant real polynomials have a root in $\mathbb{C}.$ Given any $f(x) \in \mathbb{R}[x],$ we can write $\deg(f) = 2^nq$ for unique $n \ge 0$ and odd $q \in \mathbb{N}.$
+
+    We prove the statement by induction on $n.$ If $n = 0,$ then $f$ has odd degree and hence, has a real root. \\
+    Suppose $n \ge 1$ and the statement is true for $n - 1.$ Let $d \vcentcolon= \deg(f)$ and $\mathbb{K} = \mathbb{C}(\alpha_1, \ldots, \alpha_d)$ be a splitting field of $f(x)$ over $\mathbb{C},$ where the $\alpha_i$ are the roots of $f(x).$ For $r \in \mathbb{R},$ define
+    \begin{equation*} 
+        y_{ij}(r) = \alpha_i + \alpha_j + r\alpha_i\alpha_j
+    \end{equation*}
+    for $1 \le i \le j \le d.$ There are $\binom{d + 1}{2}$ such pairs $(i, j).$ Hence, the polynomial
+    \begin{equation*} 
+        h_r(x) \vcentcolon= \prod_{1 \le i \le j \le d} (x - y_{ij}(r))
+    \end{equation*}
+    has degree
+    \begin{equation*} 
+        \deg(h(x)) = \binom{d + 1}{2} = \frac{d}{2}(d + 1) = 2^{n - 1}\underbrace{q(d + 1)}_{\text{odd}}.
+    \end{equation*}
+    Note that the coefficients of $h_r(x)$ are elementary symmetric polynomials in $y_{ij}$s. Thus, they are symmetric polynomials in $\alpha_i, \ldots, \alpha_d.$ Hence, they are polynomials in the coefficients of $f(x).$ Thus, $h(x) \in \mathbb{R}[x].$ By inductive hypothesis (on $n$), we see that $h_r(x)$ has a root $z_r \in \mathbb{C} \subset \mathbb{K}.$ Thus, $z_r = y_{i(r)j(r)}(r)$ for some pair $(i(r), j(r))$ with $1 \le i(r) \le j(r) \le d.$
+
+    Let $P = \{(i, j) : 1 \le i \le j \le d\}$ and define $\varphi : \mathbb{R} \to P$ by $r \mapsto (i(r), j(r)).$ Since $P$ is finite and $\mathbb{R}$ is not, $\varphi$ is not one-one and thus, there exist $c \neq d \in \mathbb{R}$ with
+    \begin{equation*} 
+        (i(c), j(c)) = (i(d), j(d)) =\vcentcolon (a, b) \in P.
+    \end{equation*}
+    Thus,
+    \begin{equation*} 
+        z_c = \alpha_a + \alpha_b + c\alpha_a\alpha_b = z_d = \alpha_a + \alpha_b + d\alpha_a\alpha_b.
+    \end{equation*}
+    Note that a priori, we only know that $\alpha_a, \alpha_b \in \mathbb{K}.$ But note that
+    \begin{equation*} 
+        \alpha_a\alpha_b = \frac{z_c - z_d}{d - c} \in \mathbb{C}
+    \end{equation*}
+    and consequently,
+    \begin{equation*} 
+        \alpha_a + \alpha_b = z_c - c\alpha_a\alpha_b \in \mathbb{C}.
+    \end{equation*}
+    Thus, $\alpha_a\alpha_b$ and $\alpha_a + \alpha_b \in \mathbb{C}.$ However, these are roots of the quadratic
+    \begin{equation*} 
+        x^2 - (\alpha_a + \alpha_b)x + \alpha_a\alpha_b \in \mathbb{C}[x].
+    \end{equation*}
+    Thus, $\alpha_a \in \mathbb{C}.$ But $\alpha_a$ was a root of $f(x),$ as desired.
+\end{proof}
+
+
+\alglcosureinalgclosedisclosed*\label{prop:alglcosureinalgclosedisclosed2}
+\begin{flushright}\hyperref[prop:alglcosureinalgclosedisclosed]{\upsym}\end{flushright}
+\begin{proof}
+    By \Cref{cor:algclosureisfield}, we already know that $\mathbb{A}/\mathbb{F}$ is actually an algebraic extension. We just need to show that $\mathbb{A}$ is algebraically closed. To this end, let $f(x) \in \mathbb{A}[x]$ be non-constant. Then, $f(x)$ has a root $\alpha \in \mathbb{K}.$ But then, $\alpha$ is algebraic over $\mathbb{A}$ and hence, over $\mathbb{F}.$ (\Cref{cor:compalgisalg}.) Thus, $\alpha \in \mathbb{A}.$
+\end{proof}
+
+\unionoffields*\label{lem:unionoffields2}
+\begin{flushright}\hyperref[lem:unionoffields]{\upsym}\end{flushright}
+\begin{proof}
+    The operations are clearly well-defined. It is easy to see that the desired commutative and associative laws hold since they hold in each $\mathbb{F}_i.$ The $0$ and $1$ are those of each $\mathbb{F}_i.$ The appropriate inverses of any $a \in \mathbb{F}$ also exist in any $\mathbb{F}_i$ containing $a.$ The last sentence is also easy to check.
+\end{proof}
+\algclosedext*\label{thm:algclosedext2}
+\begin{flushright}\hyperref[thm:algclosedext]{\upsym}\end{flushright}
+\begin{proof}
+    We first show that given any field $\mathbb{F},$ we can create a field $\mathbb{F}_1 \supset \mathbb{F}$ containing roots of any non-constant polynomial in $\mathbb{F}[x].$ Let $S$ be a set of indeterminates which are in one-to-one correspondence with set of all polynomials in $\mathbb{F}[x]$ with degree $\ge 1.$ Let $x_f \in S$ denote the indeterminate corresponding to $f.$
+
+    Consider the (very large) polynomial ring $\mathbb{F}[S].$ Let 
+    \begin{equation*} 
+        I = \langle f(x_f)  : f \in \mathbb{F}[x],\;\deg(f) \ge 1\rangle
+    \end{equation*}
+    be the ideal generated by the polynomials $f(x_f) \in \mathbb{F}[S].$ We contend that $1 \notin I.$ Suppose the contrary. Then,
+    \begin{equation*} 
+        1 = g_1 f_1(x_{f_1}) + \cdots + g_n f_n(x_{f_n})
+    \end{equation*}
+    for some $g_1, \ldots, g_n \in \mathbb{F}[S].$ Note that these polynomials $g_j$ only involve finitely many variables. Let $x_i \vcentcolon= x_{f_i}$ for $i = 1, \ldots, n$ and let $x_{n + 1}, \ldots, x_m$ be the remaining variables in $g_1, \ldots, g_n.$ Then, we have
+    \begin{equation*} 
+        \sum_{i = 1}^{n} g_i(x_1, \ldots, x_n, x_{n + 1}, \ldots, x_m)f_i(x_i) = 1.
+    \end{equation*}
+    Now, let $\mathbb{E} \supset \mathbb{F}$ be an extension containing roots $\alpha_i$ of $f_i.$ (Note that $\deg(f_i) \ge 1$ and thus, we may use \Cref{thm:rootcanbeadjoined}.) Then, putting $x_i = \alpha_i$ for $i = 1, \ldots, n$ and putting $x_{n + 1} = \cdots = x_m = 0$ in the above equation gives a contradiction.
+
+    Thus, $1 \notin I$ and hence, $I$ is a proper ideal of $\mathbb{F}[S].$ Thus, it is contained in some maximal ideal $\mathfrak{m} \subset \mathbb{F}[S].$ Put $\mathbb{F}_1 \vcentcolon= \mathbb{F}[S]/\mathfrak{m}.$ Then, $\mathbb{F}_1$ is a field extension of $\mathbb{F}.$ \\
+    Note that $\overline{x_f} = x_f + \mathfrak{m} \in \mathbb{F}_1$ is a root of $f(x) \in \mathbb{F}[x].$ Thus, we have constructed a field $\mathbb{F}_1$ in which every non-constant polynomial of $\mathbb{F}[x]$ has a root.
+
+    Repeating the procedure, we get fields 
+    \begin{equation*} 
+        \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \mathbb{F}_2 \subset \mathbb{F}_3 \subset \cdots
+    \end{equation*} 
+    such that every non-constant polynomial in $\mathbb{F}_i$ has a root in $\mathbb{F}_{i + 1}.$
+
+    Now, put $\mathbb{K} = \bigcup_{i \ge 0}\mathbb{F}_i.$ This is a field as per \Cref{lem:unionoffields}, having each $\mathbb{F}_i$ as a subfield. 
+
+    Now, if $f(x) \in \mathbb{K}[x],$ then $f(x) \in \mathbb{F}_n[x]$ for some $n.$ This has a root in $\mathbb{F}_{n + 1} \subset \mathbb{K},$ as desired.
+\end{proof}
+
+\algclosure*\label{cor:algclosure2}
+\begin{flushright}\hyperref[cor:algclosure]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{L} \supset \mathbb{F}$ be algebraically closed. (Existence given by \Cref{thm:algclosedext}.) Define
+    \begin{equation*} 
+        \mathbb{K} \vcentcolon= \{\alpha \in \mathbb{L} : \alpha \text{ is algebraic over }\mathbb{K}\}.
+    \end{equation*}
+    By \Cref{prop:alglcosureinalgclosedisclosed}, $\mathbb{K}$ is an algebraic closure of $\mathbb{F}.$
+\end{proof}
+
+\rootsandextensions*\label{prop:rootsandextensions2}
+\begin{flushright}\hyperref[prop:rootsandextensions]{\upsym}\end{flushright}
+\begin{proof}
+    First, we note that the map is indeed well-defined. Let $\tau$ be an embedding extending $\sigma.$ Then,
+    \begin{equation*} 
+        \tau(p(\alpha)) = p^{\sigma}(\tau(\alpha)) = 0
+    \end{equation*}
+    and thus, $\tau(\alpha)$ is indeed a root of $p^{\sigma}.$ 
+
+    Now, let $\beta \in L$ be such that $p^{\sigma}(\beta) = 0.$ Define $\tau_{\beta} : \mathbb{F}(\alpha) \to \mathbb{L}$ by $\tau_{\beta}(f(\alpha)) = f^{\sigma}(\beta)$ for $f(x) \in \mathbb{F}[x].$\footnote{Note that elements of $\mathbb{F}(\alpha)$ are precisely polynomials in $\alpha.$} We now show that $\tau_{\beta}$ is well-defined. 
+
+    Suppose $f(\alpha) = g(\alpha).$ Then, $p(x) \mid f(x) - g(x)$ and hence, $p^{\sigma}(x) \mid f^{\sigma}(x) - g^{\sigma}(x).$ Thus, $f^{\sigma}(\beta) = g^{\sigma}(\beta).$ Thus, $\tau_{\beta}$ is well-defined. It is clearly a homomorphism (and hence, an embedding). Moreover, it extends $\sigma.$
+
+    It is now easily seen that $\beta \mapsto \tau_{\beta}$ is a two-sided inverse of the map $\tau \mapsto \tau(\alpha).$
+\end{proof}
+
+\extendtoalgextension*\label{thm:extendtoalgextension2}
+\begin{flushright}\hyperref[thm:extendtoalgextension]{\upsym}\end{flushright}
+\begin{proof}
+    Consider the set
+    \begin{equation*} 
+        \Sigma \vcentcolon= \{(\mathbb{E}, \tau) \mid \mathbb{F} \subset \mathbb{E} \subset \mathbb{K} \text{ are fields and } \tau : \mathbb{E} \to \mathbb{L} \text{ such that }\tau|_{\mathbb{F}} = \sigma\}.
+    \end{equation*}
+    Note that $\Sigma \neq \emptyset$ since $(\mathbb{F}, \sigma) \in \Sigma.$ Define the relation $\le$ on $\Sigma$ by
+    \begin{equation*} 
+        (\mathbb{E}, \tau) \le (\mathbb{E}', \tau') \iff \mathbb{E} \subset \mathbb{E}' \text{ and } \tau'|_{\mathbb{E}} = \tau.
+    \end{equation*}
+    Then, $(\Sigma, \le)$ is a partially ordered set. Moreover, if $\Lambda = \{(\mathbb{E}_\alpha, \tau_\alpha)\}_{\alpha \in I}$ is a chain in $\Sigma,$ then $\mathbb{E} \vcentcolon= \bigcup_{\alpha \in I}\mathbb{F}_\alpha$ is a subfield of $\mathbb{E}$ and $\tau : \mathbb{E} \to \mathbb{L}$ defined as $\tau(x) \vcentcolon= \tau_\alpha(x)$ for $x \in \mathbb{F}_\alpha$ is well-defined. (The proof is similar to that of \Cref{lem:unionoffields}.) Moreover, $(\mathbb{E}, \tau)$ is an upper bound of $\Lambda.$   
+
+    Thus, by Zorn's lemma, there exists a maximal element $(\mathbb{E}, \tau) \in \Sigma.$ We contend that $\mathbb{E} = \mathbb{K}.$ If not, then pick $\alpha \in \mathbb{K} \setminus \mathbb{E}.$ By \Cref{prop:rootsandextensions}, we can extend $\tau$ to an embedding $\tau' : \mathbb{E}(\alpha) \to \mathbb{L}.$ But this contradicts maximality of $(\mathbb{E}, \tau).$
+
+    Now, suppose that $\mathbb{K}$ is an algebraic closure of $\mathbb{F}$ and $\mathbb{L}$ of $\sigma(\mathbb{F}).$ We have
+    \begin{equation*} 
+        \sigma(\mathbb{F}) \subset \tau(\mathbb{K}) \subset \mathbb{L}
+    \end{equation*}
+    and thus, $L/\tau(\mathbb{K})$ is also algebraic. But $\tau(\mathbb{K})$ is also algebraically closed and thus, $\mathbb{L} = \tau(\mathbb{K}).$
+\end{proof}
+
+\isosplitting*\label{thm:isosplitting2}
+\begin{flushright}\hyperref[thm:isosplitting]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\overline{\mathbb{E}}$ be an algebraic closure of $\mathbb{E}.$ Then, it is also one of $\mathbb{F}.$ Thus, there exists an embedding $\tau : \mathbb{E}' \to \overline{\mathbb{E}}$ extending the inclusion $i : \mathbb{F} \hookrightarrow \overline{\mathbb{E}}.$
+
+    Let $f(x) = a(x - \alpha_1) \cdots (x - \alpha_n)$ be a factorisation of $f(x)$ in $\mathbb{E}'[x].$ Then,
+    \begin{equation*} 
+        f^{\tau}(x) = (x - \tau(\alpha_1)) \cdots (x - \tau(\alpha_n)) \in \overline{\mathbb{E}}[x].
+    \end{equation*}
+    Note that we have $\mathbb{E}' = \mathbb{F}(\alpha_1, \ldots, \alpha_n)$ and so, $\tau(\mathbb{E}') = \mathbb{F}(\tau(\alpha_1), \ldots, \tau(\alpha_n)).$ Thus, $\tau(\mathbb{E}')$ is a splitting field of $f^{\tau}.$ But $f^{\tau} = f$ since $f(x) \in \mathbb{F}[x]$ and $\tau$ extends the inclusion map. Thus, $\tau(\mathbb{E}') = \mathbb{E},$ since any algebraic closure contains a unique splitting field.
+\end{proof}
+
+
+\multindepsplitting*\label{prop:multindepsplitting2}
+\begin{flushright}\hyperref[prop:multindepsplitting]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{E}$ and $\mathbb{K}$ be splitting fields for $f(x)$ over $\mathbb{F}.$ By \Cref{thm:isosplitting}, there exists an $\mathbb{F}$-isomorphism $\tau : \mathbb{E} \to \mathbb{K}.$ In turn, we get an isomorphism
+    \begin{align*} 
+        \varphi_\tau : \mathbb{E}[x] &\to \mathbb{K}[x]\\
+        \sum a_i x^i &\mapsto \sum \tau(a_i) x^i.
+    \end{align*}
+    Now, let $f(x) = \prod_{i = 1}^{g}(x - r_i)^{e_i}$ be the unique factorisation of $f(x)$ in $\mathbb{E}[x].$ The above isomorphism shows that 
+    \begin{equation*} 
+        f(x)= \prod_{i = 1}^{g}(x - \tau(r_i))^{e_i}
+    \end{equation*}
+    is the unique factorisation of $f(x)$ in $\mathbb{K}[x].$ The result follows.
+\end{proof}
+
+\derivcritreproot*\label{prop:derivcritreproot2}
+\begin{flushright}\hyperref[prop:derivcritreproot]{\upsym}\end{flushright}
+\begin{proof}
+    \forward If $r$ is a repeated root, then write $f(x) = (x - r)^2g(x)$ for $g \in \mathbb{E}[x].$ Then, taking the derivative gives
+    \begin{equation*} 
+        f'(x) = 2(x - r)g(x) + (x - r)^2g'(x).
+    \end{equation*}
+    Thus, $f'(r) = 0.$
+
+    \backward Write $f(x) = (x - r)g(x).$ Then,
+    \begin{equation*} 
+        0 = f'(r) = (r - r)g'(r) + g(r) = g(r).
+    \end{equation*}
+    Thus, $(x - r) \mid g(x)$ and hence, $(x - r)^2 \mid f(x).$
+\end{proof}
+
+\derivcritsep*\label{thm:derivcritsep2}
+\begin{flushright}\hyperref[thm:derivcritsep]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{E}$ be a splitting field of $f(x).$
+    \begin{enumerate}
+        \item Let $r \in \mathbb{E}$ be a root of $f(x).$ Then, $f'(r) = 0,$ by hypothesis and thus, $r$ is a repeated root, by \Cref{prop:derivcritreproot}.
+        %
+        \item Suppose $f'(x) \neq 0.$\\
+        \forward Suppose $f(x)$ has simple roots. We need to show that $f(x)$ and $f'(x)$ have no common root. Let $r$ be a root of $f(x).$ Then $f'(r) \neq 0,$ by \Cref{prop:derivcritreproot}.
+
+        \backward Suppose $\gcd(f(x), f'(x)) = 1$ and $r \in \mathbb{E}$ is an arbitrary root of $f(x).$ Then, $f'(r) \neq 0.$ Thus, $r$ is a simple root. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\irredsepderiv*\label{prop:irredsepderiv2}
+\begin{flushright}\hyperref[prop:irredsepderiv]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{E}$ be a splitting field of $f(x)$ over $\mathbb{F}.$
+    \begin{enumerate}
+        \item \forward $f(x)$ has no repeated roots and thus, $f'(x) \neq 0,$ by \Cref{prop:irredsepderiv}.
+
+        \backward Suppose $f'(x) \neq 0$ and $f(x)$ has a repeated root $r \in \mathbb{E}.$ Then, by \Cref{prop:derivcritreproot}, $f'(r) = 0.$ Thus, $g(x) \vcentcolon= \gcd(f(x), f'(x)) \neq 1.$ Irreducibility of $g(x)$ forces $f(x) = g(x).$ But then, $f(x) \mid f'(x),$ which is a contradiction since $\deg(f'(x)) < \deg(f(x)).$
+        %
+        \item If $f(x)$ is non-constant, then $f'(x) \neq 0.$ The previous part applies.
+    \end{enumerate} 
+\end{proof}
+
+\xppolyirredorroot*\label{prop:xppolyirredorroot2}
+\begin{flushright}\hyperref[prop:xppolyirredorroot]{\upsym}\end{flushright}
+\begin{proof}
+    Suppose $f(x)$ is not irreducible. Write $f(x) = g(x)h(x)$ with $1 \le \deg(g(x)) =\vcentcolon m < p.$ Let $b \in \mathbb{E}$ be a root in a splitting field $\mathbb{E}$ of $f(x)$ over $\mathbb{F}.$ Then, $b^p = a.$ Thus, $f(x)$ factorises in $\mathbb{E}[x]$ as
+    \begin{equation*} 
+        f(x) = x^p - b^p = (x - b)^p.
+    \end{equation*}
+    Since $\mathbb{E}[x]$ is a UFD, we see that $g(x) = (x - b)^m.$ (We may assume that $g(x)$ is monic.) However, note that the coefficient of $x^{m - 1}$ is $mb.$ By assumption, $mb \in \mathbb{F}.$ Since $1 \le m < p,$ we see that $b \in \mathbb{F}.$ Thus, $a = b^p \in \mathbb{F}^p.$     
+\end{proof}
+
+\nonseppowerp*\label{prop:nonseppowerp2}
+\begin{flushright}\hyperref[prop:nonseppowerp]{\upsym}\end{flushright}
+\begin{proof}
+    Since $f(x)$ is irreducible and not separable, we must have $f'(x) = 0.$ Write
+    \begin{equation*} 
+        f(x) = a_0 + a_1x + \cdots + a_nx^n
+    \end{equation*}
+    and note that
+    \begin{equation*} 
+        0 = f'(x) = a_1 + 2a_2x + \cdots + n a_n x^{n - 1}.
+    \end{equation*}
+    Thus, $ka_k = 0$ for all $k = 1, \ldots, n.$ If $\gcd(k, p) = 1,$ then we may cancel $k$ to see that $a_k = 0$ whenever $p \nmid k.$ Thus, $f(x)$ is of the form
+    \begin{equation*} 
+        f(x) = a_0 + a_px^p + \cdots + a_{mp} x^{mp}
+    \end{equation*}
+    for some $m \in \mathbb{N}.$ Thus, $g(x) = a_0 + a_p x + \cdots + a_{mp} x^m$ works.
+\end{proof}
+
+\perfectiffppower*\label{thm:perfectiffppower2}
+\begin{flushright}\hyperref[thm:perfectiffppower]{\upsym}\end{flushright}
+\begin{proof}
+    \forward Suppose $\mathbb{F} \neq \mathbb{F}^p.$ Pick $\alpha \in \mathbb{F} \setminus \mathbb{F}^p.$ Then, $x^p - \alpha$ is irreducible (by \Cref{prop:xppolyirredorroot}) but not separable, by \Cref{prop:irredsepderiv}.
+
+    \backward Suppose $\mathbb{F} = \mathbb{F}^p$ and $f(x) \in \mathbb{F}[x]$ is irreducible and not separable. By \Cref{prop:nonseppowerp}, we can write 
+    \begin{equation*} 
+        f(x) = \sum_{i = 0}^{m} a_i x^{ip}.
+    \end{equation*} 
+    Let $b_i \in \mathbb{F}$ be such that $a_i = b_i^p.$ Then,
+    \begin{equation*} 
+        f(x) = \sum_{i = 0}^{m} a_i x^{ip} = \sum_{i = 0}^{m} b_i^p x^{ip} = \left(\underbrace{\sum_{i = 0}^{m}b_i x^i}_{\in \mathbb{F}[x]}\right)^p,
+    \end{equation*}
+    contradicting the irreducibility of $f(x)$ in $\mathbb{F}[x].$
+\end{proof}
+
+\finitefieldperfect*\label{cor:finitefieldperfect2}
+\begin{flushright}\hyperref[cor:finitefieldperfect]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{F}$ be a finite field of characteristic $p > 0.$ We show that $\mathbb{F} = \mathbb{F}^p.$ 
+
+    Note that $\md{\mathbb{F}} = p^n$ for some $n \in \mathbb{N}.$ Thus, by Lagrange's theorem from group theory, we see that $\alpha^{p^n - 1} = 1$ for all $\alpha \in \mathbb{F}^\times.$ Thus, $\alpha^{p^n} = \alpha$ for all $\alpha \in \mathbb{F}.$ (This holds for $\alpha = 0$ as well.)
+
+    Thus, given any arbitrary $\alpha \in \mathbb{F},$ put $\beta = \alpha^{p^{n - 1}}$ to get $\alpha = \beta^p \in \mathbb{F}^p.$
+\end{proof}
+
+\samemultirredpoly*\label{prop:samemultirredpoly2}
+\begin{flushright}\hyperref[prop:samemultirredpoly]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\overline{\mathbb{F}} \supset \mathbb{F}$ be an algebraic closure of $\mathbb{F}.$ Let $\alpha, \beta \in \overline{\mathbb{F}}$ be roots of $f.$ We have an $\mathbb{F}$-isomorphism $\sigma : \mathbb{F}(\alpha) \to \mathbb{F}(\beta)$ determined by $\alpha \mapsto \beta.$ 
+
+    Thus, $\sigma$ can be extended to an automorphism $\tau$ of $\overline{\mathbb{F}}.$ Then, write $f(x) = (x - \alpha)^mh(x)$ where $m$ is the multiplicity of $\alpha$ and $h(x) \in \overline{\mathbb{F}}[x].$ Applying $\tau,$ we get
+    \begin{equation*} 
+        f(x) = f^\tau(x) = (x - \beta)^m h^\tau(x).
+    \end{equation*}
+    Thus, the multiplicity of $\beta$ is at least $m.$ By symmetry, we have equality.
+
+    If $\chr(\mathbb{F}) = 0,$ then $f(x)$ is separable (\Cref{thm:derivcritsep}) and thus, all roots are simple.
+
+    Now, assume that $\chr(\mathbb{F}) =\vcentcolon p > 0.$ Let $n \in \mathbb{N}_0$ be the largest such that there exists a polynomial $g(x) \in \mathbb{F}[x]$ with $f(x) = g(x^{p^n}).$ (Note that we can take $g = f$ and $n = 0$ if no positive $n$ exists.)
+
+    Then, $g$ is irreducible since $f$ is so. Moreover, $g$ must be separable. Indeed, if not, then we can write $g(x) = h(x^p)$ for some $h(x) \in \mathbb{F}[x],$ by \Cref{prop:irredsepderiv}. Then, $f(x) = g(x^{p^{n + 1}})$ contradicting maximality of $n.$
+
+    Thus, $g(x)$ factors in $\overline{\mathbb{F}}$ as $g(x) = (x - r_1) \cdots (x - r_g)$ for distinct $r_g.$ Since $\overline{\mathbb{F}}$ is algebraically closed, we can find $s_1, \ldots, s_g$ necessarily distinct such that $s_i^{p^n} = r_i.$ Then, we have
+    \begin{equation*} 
+        f(x) = g(x^{p^n}) = (x - s_1)^{p^n} \cdots (x - s_g)^{p^n},
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\separabledegreedef*\label{thm:separabledegreedef2}
+\begin{flushright}\hyperref[thm:separabledegreedef]{\upsym}\end{flushright}
+\begin{proof}
+    If $\widetilde{\sigma} \in S_\sigma,$ then for any $x \in \mathbb{F},$ we have
+    \begin{equation*} 
+        (\lambda \circ \widetilde{\sigma})(x) = \lambda(\sigma(x)) = (\tau \circ \sigma^{-1})(\sigma(x)) = \tau(x).
+    \end{equation*}
+    Thus, $\psi$ actually maps into $S_\tau.$ Since $\lambda$ is an isomorphism, $\psi$ is easily seen to be a bijection. Explicitly, the inverse of $\psi$ can be seen to be $\widetilde{\tau} \mapsto \lambda^{-1} \circ \tau.$
+\end{proof}
+
+\towerlawsep*\label{thm:towerlawsep2}
+\begin{flushright}\hyperref[thm:towerlawsep]{\upsym}\end{flushright}
+\begin{proof}
+    First, we show that the separable degree is multiplicative. Let $n \vcentcolon= [\mathbb{K} : \mathbb{E}]_s$ and $m \vcentcolon= [\mathbb{E} : \mathbb{F}]_s$ and $\sigma : \mathbb{F} \to \mathbb{L}$ be an embedding into an algebraically closed field $\mathbb{L}.$ 
+
+    Let $\sigma_1, \ldots, \sigma_m : \mathbb{E} \to \mathbb{L}$ be extensions of $\mathbb{F}.$ Then, each $\sigma_i$ has extensions $\sigma_i^{(1)}, \ldots, \sigma_i^{(n)} : \mathbb{K} \to \mathbb{L}.$ Note that $\{\sigma_i^{(j)} : 1 \le i \le m,\; 1 \le j \le n\}$ has cardinality $mn.$ (All the extensions obtained are distinct.)
+
+    Clearly, any embedding $\tau : \mathbb{K} \to \mathbb{L}$ extending $\tau$ is obtained this way. ($\tau|_{\mathbb{E}}$ is $\sigma_i$ for some $i$ and thus, $\tau = \sigma_i^{(j)}$ for some $j.$) 
+
+    Thus, $[\mathbb{K} : \mathbb{F}]_s = mn,$ as desired. 
+
+    Now, since $\mathbb{E}/\mathbb{F}$ is finite, we can construct $\alpha_1, \ldots, \alpha_g$ such that $\mathbb{E} = \mathbb{F}(\alpha_1, \ldots, \alpha_g).$ We have the chain
+    \begin{equation*} 
+        \mathbb{F} \subset \mathbb{F}(\alpha_1) \subset \mathbb{F}(\alpha_1, \alpha_2) \subset \cdots \subset \mathbb{F}(\alpha_1, \ldots, \alpha_n).
+    \end{equation*}
+    Note that by \Cref{prop:sepdeglessthannordeg}, we know that 
+    \begin{equation*} 
+        [\mathbb{F}(\alpha_1, \ldots, \alpha_{i + 1}) : \mathbb{F}(\alpha_1, \ldots, \alpha_i)]_s \le [\mathbb{F}(\alpha_1, \ldots, \alpha_{i + 1}) : \mathbb{F}(\alpha_1, \ldots, \alpha_i)]
+    \end{equation*}
+    for all $i = 0, \ldots, n - 1.$ Since both degrees are multiplicative, we are done.
+\end{proof}
+
+\sepiffdegequal*\label{thm:sepiffdegequal2}
+\begin{flushright}\hyperref[thm:sepiffdegequal]{\upsym}\end{flushright}
+\begin{proof}
+     Write $\mathbb{E} = \mathbb{F}(\alpha_1, \ldots, \alpha_n)$ for $\alpha_i \in \mathbb{E}.$ (Note that $\mathbb{E}/\mathbb{F}$ is a finite extension.)
+
+    Put 
+    \begin{equation*} 
+        \mathbb{F}_0 \vcentcolon= \mathbb{F} \andd \mathbb{F}_i \vcentcolon= \mathbb{F}(\alpha_1, \ldots, \alpha_i),
+    \end{equation*} 
+    for $i = 1, \ldots, n.$
+
+    \forward Assume $\mathbb{E}/\mathbb{F}$ is separable. Then, since each $\alpha_i$ is separable over $\mathbb{F},$ it follows that $\alpha_i$ is separable over $\mathbb{F}$ for $i = 1, \ldots, n.$ (Note that $\irr(\alpha, \mathbb{F}_i) \mid \irr(\alpha, \mathbb{F}).$) Thus, we see that 
+    \begin{equation*} 
+        [\mathbb{F}_{i} : \mathbb{F}_{i - 1}]_s = [\mathbb{F}_{i} : \mathbb{F}_{i - 1}]
+    \end{equation*}
+    for all $i = 1, \ldots, n.$ Multiplying gives $[\mathbb{E} : \mathbb{F}]_s = [\mathbb{E}:\mathbb{F}].$
+
+    \backward Let $\alpha \in \mathbb{E}$ be arbitrary. Consider the tower
+    \begin{equation*} 
+        \mathbb{F} \subset \mathbb{F}(\alpha) \subset \mathbb{E}.
+    \end{equation*}
+    Since, we have the equality $[\mathbb{E} : \mathbb{F}]_s = [\mathbb{E} : \mathbb{F}],$ we also have the equality $[\mathbb{F}(\alpha) : \mathbb{F}]_s = [\mathbb{F}(\alpha) : \mathbb{F}],$ by the previous corollary. Thus, $\alpha$ is separable over $\mathbb{F},$ by \Cref{prop:sepdeglessthannordeg}.
+\end{proof}
+
+\compdecompsep*\label{prop:compdecompsep2}
+\begin{flushright}\hyperref[prop:compdecompsep]{\upsym}\end{flushright}
+\begin{proof}
+    For both parts, we first note that if $\alpha \in \mathbb{K}$ is algebraic over $\mathbb{F},$ then it is also algebraic over $\mathbb{E}.$ Moreover, $\irr(\alpha, \mathbb{E}) \mid \irr(\alpha, \mathbb{F}).$ (The divisibility is in $\mathbb{E}[x].$)
+
+    \forward Let $\alpha \in \mathbb{K}$ be arbitrary. Then, $\alpha$ is algebraic over $\mathbb{F}$ and hence, over $\mathbb{E}.$ Since $\irr(\alpha, \mathbb{F})$ has no repeated roots, neither does its factor $\irr(\alpha, \mathbb{E}).$ Thus, $\mathbb{K}/\mathbb{E}$ is separable. \\
+    Now, let $\beta \in \mathbb{E}$ be arbitrary. Then, $\beta \in \mathbb{K}$ and thus, $\irr(\alpha, \mathbb{F})$ is separable. Thus, $\mathbb{E}/\mathbb{F}$ is separable.
+
+    \backward Let $\alpha \in \mathbb{K}$ be arbitrary. Note that $\alpha$ is algebraic over $\mathbb{E},$ since it is separable over $\mathbb{E}.$ Let $\irr(\alpha, \mathbb{E}) = a_1 + \cdots + a_{n }x^{n - 1} + x^n \in \mathbb{E}[x].$ 
+
+    Put 
+    \begin{equation*} 
+        \mathbb{F}_0 \vcentcolon= \mathbb{F} \andd \mathbb{F}_i \vcentcolon= \mathbb{F}(a_1, \ldots, a_i),
+    \end{equation*} 
+    for $i = 1, \ldots, n.$ By \forward, we see that $a_i$ is separable over $\mathbb{F}_{i - 1}$ and hence, 
+    \begin{equation} \label{eq:002} \tag{$*$}
+        [\mathbb{F}_i : \mathbb{F}_{i - 1}]_s = [\mathbb{F}_i : \mathbb{F}_{i - 1}]
+    \end{equation} 
+    for all $i = 1, \ldots, n.$
+
+    Finally, put $\mathbb{F}_{n + 1} \vcentcolon= \mathbb{F}_n(\alpha).$ Then, \Cref{eq:002} holds for $i = n + 1$ as well, since $\alpha$ is separable over $\mathbb{F}_n.$ (Note that $\irr(\alpha, \mathbb{F}_n) = \irr(\alpha, \mathbb{E}),$ by our construction and the latter is separable by assumption.)
+
+    Thus, upon multiplying, we get $[\mathbb{F}_{n + 1} : \mathbb{F}]_s = [\mathbb{F}_{n + 1} : \mathbb{F}]$ and hence, $\mathbb{F}_{n + 1}/\mathbb{F}$ is separable. Since $\alpha \in \mathbb{F}_{n + 1},$ we see that $\alpha$ is separable over $\mathbb{F}$ and hence, $\mathbb{K}/\mathbb{F}$ is separable.
+\end{proof}
+
+\sepdegdividesdeg*\label{prop:sepdegdividesdeg2}
+\begin{flushright}\hyperref[prop:sepdegdividesdeg]{\upsym}\end{flushright}
+\begin{proof}
+    Clearly the statement is true if $\chr(\mathbb{F}) = 0$ since we have equality of degrees. Suppose $\chr(\mathbb{F}) =\vcentcolon p > 0.$
+
+    First, suppose that $\mathbb{E} = \mathbb{F}(\alpha)$ for some $\alpha \in \mathbb{E}.$ Let $p(x) \vcentcolon= \irr(\alpha, \mathbb{F})$ and $d \vcentcolon= \deg(p(x)).$ By \Cref{prop:samemultirredpoly}, $p(x)$ factors in $\overline{\mathbb{F}}[x]$ as
+    \begin{equation*} 
+        p(x) = (x - \alpha)^{p^n} (x - \alpha_2)^{p^n} \cdots (x - \alpha_g)^{p^n},
+    \end{equation*}
+    where $\alpha_2, \ldots, \alpha_g \in \overline{\mathbb{F}}\setminus\{\alpha\}$ are distinct. Note that we have $gp^n = d.$ By \Cref{prop:rootsandextensions}, we know that $[\mathbb{F}(\alpha) : \mathbb{F}]_s = g.$ Thus, the statement is true.
+
+    For a general finite extension $\mathbb{E}/\mathbb{F},$ write $\mathbb{E} = \mathbb{F}(\beta_1, \ldots, \beta_k)$ and use the fact that degrees are multiplicative.
+\end{proof}

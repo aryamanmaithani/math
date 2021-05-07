@@ -1,0 +1,188 @@
+
+\chapter{Symmetric Polynomials}
+
+\begin{defn}%[]
+    Given a ring $R,$ consider the polynomial ring $S = R[u_1, \ldots, u_n].$ Let $S_n$ denote the symmetric group. Then, any $\tau \in S_n$ induces an automorphism $g_{\tau} : S \to S$ by
+    \begin{equation*} 
+        g_{\tau}(f(u_1, \ldots, u_n)) = f(u_{\tau(1)}, \ldots, u_{\tau(n)}).
+    \end{equation*}
+\end{defn}
+
+\begin{ex}
+    Consider $R = \mathbb{Z}$ and $n = 3.$ Suppose $\tau = (12).$ Consider the polynomial $f = u_1 + u_2^2 + u_3^3.$ Then, $g_{\tau}(f) = u_2 + u_1^2 + u_3^3.$
+\end{ex}
+
+\begin{defn}%[]
+    A polynomial $f \in R[u_1, \ldots, u_n]$ is said to be a \deff{symmetric polynomial (in $n$ variables)} if 
+    \begin{equation*} 
+        f(u_1, \ldots, u_n) = f(u_{\tau(1)}, \ldots, u_{\tau(n)})
+    \end{equation*} 
+    for all $\tau \in S_n.$
+\end{defn}
+
+\begin{defn}%[]
+    Let $S = R[u_1, \ldots, u_n].$ Consider $f(T) \in S[T]$ given by
+    \begin{equation*} 
+        f(T) = (T - u_1) \cdots (T - u_n).
+    \end{equation*}
+    Write $f(T)$ as 
+    \begin{equation*} 
+        f(T) = T^n - \sigma_1 T^{n - 1} + \cdots + (-1)^n \sigma_n,
+    \end{equation*}
+    for $\sigma_1, \ldots, \sigma_n \in S.$
+
+    Then, $\sigma_1, \ldots, \sigma_n$ are symmetric polynomials, which are called the \deff{elementary symmetric polynomials (in $n$ variables)}.
+\end{defn}
+
+\begin{rem}
+    Note that one can explicitly write down the elementary symmetric polynomials. We have
+    \begin{align*} 
+        \sigma_1 &= \sum_{i = 1}^{n} u_i,\\
+        \sigma_2 &= \sum_{1 \le i_1 < i_1 \le n} u_{i_1}u_{i_2},\\
+        & \vdots \\
+        \sigma_n &= u_1 \cdots u_n.
+    \end{align*}
+    It is now easy to verify that these are all indeed symmetric polynomials.
+\end{rem}
+
+\section{Fundamental theorem of Symmetric Polynomials}
+
+\begin{defn}%[]
+    Given an elementary symmetric polynomial $\sigma_i \in R[u_1, \ldots, u_n]$ in $n$ variables (for $n \ge 1$), we define the elementary symmetric polynomial $\sigma_i^0$ in $(n - 1)$ variables as
+    \begin{equation*} 
+        \sigma_i^0 \vcentcolon= \sigma_1(u_1, \ldots, u_{n - 1}, 0).
+    \end{equation*}
+\end{defn}
+
+\begin{ex}
+    Consider $n = 3.$ Then, $\sigma_2 = u_1u_2 + u_1u_3 + u_2u_3.$ Then, $\sigma_2^0 = u_1u_2.$ This is the second symmetric polynomial in two variables. 
+
+    In fact, any elementary symmetric polynomial in $n - 1$ variables is of the form $\sigma_i^0$ for the corresponding elementary symmetric polynomial $\sigma_i$ in $n$ variables.
+\end{ex}
+
+\begin{restatable}[Fundamental Theorem of Symmetric Polynomials]{thm}{FTSP}
+\label{thm:FTSP}
+    Let $R$ be a commutative ring. Then, every symmetric polynomial in $S \vcentcolon= R[u_1, \ldots, u_n]$ is a polynomial in the elementary symmetric polynomials in a unique way.
+
+    More precisely, if $f(u_1, \ldots, u_n)$ is symmetric, then there exists a unique $g \in R[x_1, \ldots, x_n]$ such that
+    \begin{equation*} 
+        g(\sigma_1, \ldots, \sigma_n) = f(u_1, \ldots, u_n).
+    \end{equation*}
+    (The above is equality in $S.$) \hfill\hyperref[thm:FTSP2]{\downsym}
+\end{restatable}
+
+\section{Newton's identities for power sum symmetric polynomials}
+
+\begin{defn}%[]
+    Let $S = R[u_1, \ldots, u_n].$ For $k \ge 1,$ define
+    \begin{equation*} 
+        w_k = u_1^k + \cdots + u_n^k.
+    \end{equation*}
+\end{defn}
+
+\begin{restatable}[Newton's Identities]{thm}{powersumformulae}
+\label{thm:powersumformulae}
+    We have
+    \begin{equation} \label{eq:newident}
+        w_k = \begin{cases}
+            \sigma_1 w_{k - 1} - \sigma_2w_{k - 2} + \cdots + (-1)^k \sigma_{k - 1}w_1 + (-1)^{k + 1}\sigma_k k & k \le n,\\
+            \sigma_1 w_{k - 1} - \sigma_2w_{k - 2} + \cdots + (-1)^{n + 1} \sigma_{n}w_{k - n} & k > n.\\
+                
+        \end{cases}
+    \end{equation} 
+    \hfill\hyperref[thm:powersumformulae2]{\downsym}
+\end{restatable}
+
+Note that the last term is $(-1)^{k + 1} \sigma_k {\color{red}k}.$ One might have expected that it would be an `$n$' instead but that is not the case.
+
+\section{Discriminant of a polynomial}
+
+\begin{defn}%[]
+    Let $f(x) \in \mathbb{F}[x]$ be a non-constant monic polynomial and $\mathbb{K}$ be a splitting field of $f(x)$ over $\mathbb{F}.$ Write
+    \begin{equation*} 
+        f(x) = (x - r_1) \cdots (x - r_n)
+    \end{equation*}
+    for $r_1, \ldots, r_n \in \mathbb{K}.$ Then, the \deff{discriminant of $f(x)$} is defined as
+    \begin{equation*} 
+        \disc_{\mathbb{K}}(f(x)) \vcentcolon= \prod_{1 \le i < j \le n} (r_i - r_j)^2.
+    \end{equation*}
+\end{defn}
+
+\begin{rem} \label{rem:discrepeatedroots}
+    Note that $\disc_{\mathbb{K}}(f(x)) = 0 \iff f(x)$ has repeated roots in $\mathbb{K}.$
+\end{rem}
+
+\begin{restatable}[]{prop}{independencediscriminant}
+\label{prop:independencediscriminant}
+    Let $f(x) \in \mathbb{F}[x]$ be non-constant and monic. Suppose $\mathbb{K}$ and $\mathbb{K}'$ are two splitting fields of $f(x)$ over $\mathbb{F}.$ Then,
+    \begin{equation*} 
+        \disc_{\mathbb{K}}(f(x)) = \disc_{\mathbb{K}'}(f(x)) \in \mathbb{F}.
+    \end{equation*} 
+
+    In other words, the discriminant takes values in $\mathbb{F}$ and is independent of the splitting field chosen. \hfill\hyperref[prop:independencediscriminant2]{\downsym}
+\end{restatable}
+
+In view of the (proof of the) above proposition, we have the following alternate definition of discriminant.
+
+\begin{defn}%[]
+    Let $f(x) = x^n - \sigma_1x^{n - 1} + \cdots + (-1)^n\sigma_n \in \mathbb{F}[x]$ be a monic polynomial. Define $w_k$ for $k = 1, \ldots, 2n - 2$ as in \Cref{eq:newident}. Then, 
+    \begin{equation*} 
+        \disc(f(x)) \vcentcolon= \det \begin{bmatrix}
+            n & w_1 & \cdots & w_{n - 1}\\
+            w_1 & w_2 & \cdots & w_n\\
+            w_2 & w_3 & \cdots & w_{n + 1}\\
+            \vdots & \vdots & \ddots & \vdots \\
+            w_{n - 1} & w_n & \cdots & w_{2n - 2}\\
+        \end{bmatrix}.
+    \end{equation*}
+\end{defn}
+
+\begin{restatable}[Discriminant in terms of derivative]{prop}{discderivative}
+\label{prop:discderivative}
+    Suppose $f(x) = \prod_{i = 1}^{n}(x - r_i).$ Then, $\disc(f(x)) = (-1)^{\binom{n}{2}}\prod_{i = 1}^{n}f'(r_i).$ \hfill\hyperref[prop:discderivative2]{\downsym}
+\end{restatable}
+
+\begin{ex}[Discriminant of a quadratic]
+    Let $x^2 + bx + c \in \mathbb{F}[x]$ be a quadratic. We have $\sigma_1 = -b,$ $\sigma_2 = c.$ Thus, we have
+    \begin{align*} 
+        w_1 &= -b,\\
+        w_2 &= b^2 - 2c.
+    \end{align*}
+    Thus,
+    \begin{equation*} 
+        \disc(f(x)) = \det\begin{bmatrix}
+            2 & -b\\
+            -b & b^2 - 2c
+        \end{bmatrix} = b^2 - 4c.
+    \end{equation*}
+    This is the usual discriminant of a quadratic.
+\end{ex}
+
+\begin{ex}[Discriminant of a special cubic]
+    Let $x^3 + px + q \in \mathbb{F}[x]$ be a cubic. Here, $\sigma_1 = 0,$ $\sigma_2 = p,$ and $\sigma_3 = -q.$ Then, Newton's identities become
+    \begin{align*} 
+        w_1 &= 0,\\
+        w_2 &= -2p,\\
+        w_3 &= -3q,\\
+        w_4 &= 2p^2.
+    \end{align*}
+    Thus, $\disc(f(x)) = -4p^3 - 27q^2.$
+\end{ex}
+
+\section{The Fundamental Theorem of Algebra}
+
+Recall the following facts.
+
+\begin{restatable}[]{lem}{FTAprelim}
+\label{lem:FTAprelim}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Every real polynomial of odd degree has a real root.
+        \item Every complex number has a square root. Thus, every complex quadratic polynomial has a root in $\mathbb{C}.$ \hfill\hyperref[lem:FTAprelim2]{\downsym}
+    \end{enumerate} 
+\end{restatable}
+
+\begin{restatable}[Fundamental Theorem of Algebra]{thm}{FTA}
+\label{thm:FTA}
+    Every non-constant complex polynomial has a root in $\mathbb{C}.$ \hfill\hyperref[thm:FTA2]{\downsym}
+\end{restatable}

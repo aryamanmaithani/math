@@ -1,0 +1,152 @@
+\chapter{Preliminaries}
+
+\section{Notations}
+\begin{enumerate}
+    \item $\mathbb{N}$ will denote the set of \textbf{positive} integers. That is, $\mathbb{N} = \{1, 2, \ldots\}.$
+    \item $\mathbb{Z}$ will denote the set of integers.
+    \item $\mathbb{N}_0$ will denote the set of all \textbf{non-negative} integers. \\
+    That is, $\mathbb{N}_0 = \{0, 1, 2, \ldots\} = \mathbb{N} \cup \{0\}.$
+    \item $\mathbb{Q}$ will denote the set of rationals.
+    \item $\mathbb{R}$ will denote the set of real numbers.
+    \item $\mathbb{C}$ will denote the set of complex numbers.
+    \item Blackboard letters like $\mathbb{F}, \mathbb{E}, \mathbb{K}, \mathbb{L}$ will denote an arbitrary field.
+    \item Given any field $\mathbb{F},$ $\mathbb{F}^\times$ denotes the group of units of $\mathbb{F}.$ That is, $\mathbb{F} = \mathbb{F}\setminus\{0\}.$
+    \item Whenever we write ``$F \subset E$ are fields,'' we mean that $\mathbb{E}$ is a field and $\mathbb{F}$ is a subfield of $\mathbb{E}.$
+    \item $\zeta_n \vcentcolon= \exp\left(\dfrac{2\pi\iota}{n}\right).$
+\end{enumerate}
+
+\section{Field Theory}
+
+We shall assume that the reader is familiar with the definitions and basic properties of groups and rings. All rings in this document will be assumed to be commutative with identity. 
+
+We list some basic definition and properties. The proofs might be a bit terse and you should not have much problem filling in the details. (This won't be the case in the later chapters!)
+
+\begin{defn}%[]
+    An \deff{integral domain} is a ring with $0 \neq 1$ such $ab = 0 \implies a = 0$ or $b = 0.$
+\end{defn}
+
+\begin{defn}%[Field]
+    A \deff{field} $(\mathbb{F}, +, \cdot)$ is a ring with $0 \neq 1$ such that every non-zero element has a multiplicative inverse.
+\end{defn}
+
+\begin{ex}
+    $\mathbb{Q}, \mathbb{R}, \mathbb{C}$ are all fields.
+\end{ex}
+
+\begin{defn}%[]
+    Given an integral domain $R,$ the field of fractions of $R$ is denoted by $\Frac(R).$
+\end{defn}
+
+\begin{defn}%[]
+    A \deff{ring homomorphism} is a map $\varphi : R \to S$ between rings such that
+    \begin{enumerate}
+        \item $\varphi(ab) = \varphi(a)\varphi(b)$ for all $a, b \in R,$
+        \item $\varphi(a + b) = \varphi(a) + \varphi(b)$ for all $a, b \in R,$
+        \item $\varphi(1_R) = 1_S.$
+    \end{enumerate}
+    A \deff{field homomorphism} is a ring homomorphism between fields.
+\end{defn}
+
+\begin{defn}%[]
+    Given a prime $p \in \mathbb{N},$ $\mathbb{Z}/p\mathbb{Z}$ is a field, which we denote as $\mathbb{F}_p.$
+\end{defn}
+
+\begin{defn}%[]
+    Let $\mathbb{F}$ be a field. The \deff{characteristic} of $\mathbb{F}$ is defined to be the smallest positive integer $n$ such that
+    \begin{equation*} 
+        \underbrace{1_{\mathbb{F}} + \cdots + 1_{\mathbb{F}}}_{n} = 0_{\mathbb{F}}.
+    \end{equation*}
+    If no such $n$ exists, then the characteristic is defined to be $0.$ 
+
+    This is denoted by $\chr \mathbb{F}.$
+\end{defn}
+
+From now on, we shall omit the subscript $\mathbb{F}$ when it is clear what the $0$ and $1$ are.
+
+\begin{prop}
+    If $\chr \mathbb{F} > 0,$ then $\chr \mathbb{F}$ is prime.
+\end{prop}
+\begin{proof} 
+    Let $n \vcentcolon= \chr \mathbb{F}$ and let $n = ab$ for some $a, b \in \mathbb{F}.$ By distributivity and definition of $n,$ we have
+    \begin{equation*} 
+        \underbrace{(1 + \cdots + 1)}_{a}\underbrace{(1 + \cdots + 1)}_{b} = 0.
+    \end{equation*}
+    Since $\mathbb{F}$ is a field, one of the above two terms is $0.$ Without loss of generality, the first term is $0.$ By definition, $n = \chr \mathbb{F} \le a.$ But $a \mid n \implies a \le n.$
+
+    Thus, $a = n.$
+\end{proof}
+
+\begin{prop}
+    Every field contains an isomorphic copy of either $\mathbb{Q}$ or $\mathbb{F}_p$ for some prime $p.$ In fact, this copy is precisely $\Frac(\mathbb{Z}/\langle \chr\mathbb{F}\rangle).$
+\end{prop}
+\begin{proof} 
+    Given a field $\mathbb{F},$ consider the ring homomorphism $\varphi : \mathbb{Z} \to \mathbb{F}$ given by $1 \mapsto 1.$ \\
+    Then, $\mathbb{F}$ contains an isomorphic copy of $\mathbb{Z}/\ker \varphi.$ Note that $\varphi = \langle n\rangle,$ where $n = \chr\mathbb{F}.$ If $n > 0,$ then $n$ is prime and we are done.
+
+    If $n = 0,$ then $\mathbb{F}$ contains an isomorphic copy of $\mathbb{Z}.$ Thus, it must contain $\mathbb{Q}.$\footnote{Either argue by explicitly constructing an isomorphism or use the universal property of fraction fields.}
+\end{proof}
+
+\begin{defn}%[]
+    Given a field $\mathbb{F},$ the \deff{prime subfield} of $\mathbb{F}$ is defined as the smallest subfield of $\mathbb{F}.$ It is the intersection of all subfields of $\mathbb{F}.$ 
+\end{defn}
+
+\begin{prop}
+    \phantom{hi}
+    \begin{enumerate}
+        \item The prime subfield of $\mathbb{F}$ is isomorphic to $\Frac(\mathbb{Z}/\langle \chr\mathbb{F}\rangle).$
+        \item Let $\varphi : \mathbb{F} \to \mathbb{E}$ be a field homomorphism. Then, $\chr \mathbb{F} = \chr \mathbb{E}$ and $\varphi$ is injective. 
+        \item Let $\mathbb{F} \subset \mathbb{E}$ be fields. $\mathbb{F}$ and $\mathbb{E}$ have the same prime subfield. Any field homomorphism $\varphi : \mathbb{F} \to \mathbb{E}$ fixes this prime subfield.
+    \end{enumerate}
+\end{prop}
+
+\begin{defn}%[]
+    Since any field homomorphism is injective, we also call them \deff{embeddings}.
+\end{defn}
+
+\begin{defn}
+    Given fields $\mathbb{F} \subset \mathbb{E}_1, \mathbb{E}_2,$ and \deff{$\mathbb{F}$-isomorphism} from $\mathbb{E}_1$ to $\mathbb{E}_2$ is a field homomorphism $\varphi : \mathbb{E}_1 \to \mathbb{E}_2$ fixing $\mathbb{F}.$
+\end{defn}
+
+\begin{defn}%[]
+    Given rings $R \subset S,$ and $\alpha \in S,$ we define $R[\alpha]$ to be the smallest subfield of $S$ containing $\alpha$ and $R.$ 
+
+    Given fields $\mathbb{F} \subset \mathbb{K},$ and $\alpha \in \mathbb{K},$ we define $\mathbb{F}(\alpha)$ to be the smallest subfield of $\mathbb{K}$ containing $\alpha$ and $\mathbb{F}.$ 
+\end{defn}
+
+\begin{prop}
+    If $\mathbb{F}$ is a finite field, then $\chr(\mathbb{F}) =\vcentcolon p > 0$ and $\md{\mathbb{F}} = p^n$ for some $n \in \mathbb{N}.$
+\end{prop}
+\begin{proof} 
+    $\chr(\mathbb{F}) = 0$ is not possible since $\mathbb{Z}$ is infinite and so, the homomorphism $\varphi : \mathbb{Z} \to \mathbb{F}$ given by $1 \mapsto 1$ cannot be injective.
+
+    Now, $\mathbb{F}$ contains $\mathbb{F}_p$ as a subfield and hence, is a vector space over $\mathbb{F}.$ Since $\md{\mathbb{F}} < \infty,$ we have $\dim_{\mathbb{F}_p}(\mathbb{F}) =\vcentcolon n < \infty.$
+
+    It is clear now that $\md{\mathbb{F}} = \md{\mathbb{F}_p}^n = p^n.$
+\end{proof}
+
+\begin{thm}
+    Let $f(x) \in \mathbb{F}[x]$ have a degree $n \ge 1.$ Then, $f(x)$ has at most $n$ roots in $\mathbb{F}.$
+\end{thm}
+\begin{proof} 
+    Induct on $n$ and use the fact that if $ab = 0 \implies a = 0$ or $b = 0,$ in a field.
+\end{proof}
+
+\begin{thm}
+    Let $\mathbb{F}$ be a field. Let $U$ be a finite subgroup of $\mathbb{F}^\times.$ Then, $U$ is cyclic. 
+\end{thm}
+We give two proofs.
+\begin{proof} 
+    This proof uses the following fact: Let $G$ be an abelian group and $a, b \in G$ have orders $m$ and $n.$ Then, there exist $c \in G$ with order $\operatorname{lcm}(m, n).$ (This needs a little argument. $c = ab$ works if $\gcd(m, n) = 1.$ The general case has to be reduced to that.)
+
+    Let $n \vcentcolon= \md{U}.$ Let $a \in U$ be an element with maximal order, say $d.$ Then, we have
+    \begin{equation*} 
+        d = \operatorname{lcm} \{\operatorname{order}(u) \mid u \in U\}.
+    \end{equation*}
+    Thus, all $n$ elements of $U \subset \mathbb{F}$ satisfy the polynomial $x^d - 1 \in \mathbb{F}[x].$ Since $\mathbb{F}$ is a field, we have $n \le d.$ Thus, $d = n$ and $U = \langle a\rangle.$
+\end{proof}
+
+\begin{proof} 
+    This prove uses the structure theorem of abelian groups. Let $n \vcentcolon= \md{U}.$
+
+    Write $U \cong \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_r\mathbb{Z}$ where $1 < d_1 \mid d_2 \mid \cdots \mid d_r$ and $n = d_1 \cdots d_r.$ Now, every element of $U$ satisfies $x^{d_r} - 1.$ Thus, as earlier, we have $d_r = n$ and hence, $n = 1.$ This means $U \cong \mathbb{Z}/n\mathbb{Z}$ is cyclic. 
+\end{proof}

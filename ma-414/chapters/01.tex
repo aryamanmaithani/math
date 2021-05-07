@@ -1,0 +1,255 @@
+
+\chapter{Algebraic extensions}
+
+\begin{defn}%[]
+    Let $\mathbb{F}$ be a subfield of $\mathbb{K}.$ We say that $\mathbb{K}$ is an \deff{extension field} of $\mathbb{F}$ and $\mathbb{F}$ is called the base field. We also denote this by $\mathbb{K}/\mathbb{F}.$
+\end{defn}
+
+\begin{rem}
+    The above is not to be confused with any sort of quotient. In fact, since the only ideals of a field $\mathbb{K}$ are $0$ and $\mathbb{K},$ there is no discussion about quotienting.
+\end{rem}
+
+\begin{defn}%[]
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension. Then, we may regard $\mathbb{K}$ as a vector space over $\mathbb{F}.$ We denote $\dim_{\mathbb{F}}\mathbb{K}$ by $[K : F]$ and call it the \deff{degree} of the field extension $\mathbb{K}/\mathbb{F}.$
+\end{defn}
+
+\begin{defn}%[]
+    The field extension $\mathbb{K}/\mathbb{F}$ is said to be a \deff{finite extension} if $[\mathbb{K} : \mathbb{F}]$ is finite. 
+\end{defn}
+
+\begin{defn}%[]
+    The field extension $\mathbb{K}/\mathbb{F}$ is said to be a \deff{simple extension} if there exists $\alpha \in \mathbb{K}$ such that $\mathbb{K} = \mathbb{F}(\alpha).$
+\end{defn}
+
+\begin{defn}
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension and let $\alpha \in \mathbb{K}.$ $\alpha$ is said to be \deff{algebraic over $\mathbb{F}$} if there exists a non-zero polynomial $f(x) \in \mathbb{F}[x]$ such that $f(\alpha) = 0.$
+
+    $\alpha$ is said to be \deff{transcendental over $\mathbb{F}$} if it is not algebraic over $\mathbb{F}.$
+
+    If every element of $\mathbb{K}$ is algebraic over $\mathbb{F},$ then $\mathbb{K}/\mathbb{F}$ is called an \deff{algebraic extension}.
+\end{defn}
+
+\begin{ex}
+    Note that every element of $\mathbb{F}$ is algebraic over $\mathbb{F}.$
+\end{ex}
+
+Here's a simple proposition that we leave as an easy exercise.
+
+\begin{prop} \label{prop:decompalgisalg}
+    Let $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}$ be fields and $\alpha \in \mathbb{K}.$ \\
+    If $\alpha$ is algebraic over $\mathbb{F},$ then $\alpha$ is algebra over $\mathbb{E}.$ \\
+    If $\mathbb{K}/\mathbb{F}$ is algebraic, then so are $\mathbb{K}/\mathbb{E}$ and $\mathbb{E}/\mathbb{F}.$
+\end{prop}
+
+\begin{restatable}[]{prop}{finextisalg}
+\label{prop:finextisalg}
+    Every finite extension is an algebraic extension. \hfill\hyperref[prop:finextisalg2]{\downsym}
+\end{restatable}
+
+
+\begin{ex}
+    Consider the extensions $\mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}$ and $\pi\iota \in \mathbb{C}.$
+
+    It is known that $\pi \in \mathbb{R}$ is transcendental over $\mathbb{Q}.$ An easy consequence of this is that $\pi\iota \in \mathbb{C}$ is also transcendental over $\mathbb{Q}.$ However, $\pi\iota$ is algebraic over $\mathbb{R}$ since it satisfies $x^2 + \pi^2 \in \mathbb{R}[x] \setminus \{0\}.$
+
+    Thus, the property of being algebraic/transcendental depends on the base field. In particular, $\mathbb{C}/\mathbb{Q}$ is not an algebraic extension. However, in view of the earlier proposition, $\mathbb{C}/\mathbb{R}$ is.
+\end{ex}
+
+\begin{ex}
+    Let $\mathbb{K}$ be a finite field and $\mathbb{F}$ be its prime subfield. Then, $\mathbb{K}$ is a finite dimensional $\mathbb{F}$-vector space and thus, $\mathbb{K}/\mathbb{F}$ is an algebraic extension.
+\end{ex}
+
+\begin{rem}
+    The converse of the proposition is not true. We shall see later that
+    \begin{equation*} 
+        \mathbb{A} \vcentcolon= \{\alpha \in \mathbb{C} : \alpha \text{ is algebraic over }\mathbb{Q}\}
+    \end{equation*}
+    is a subfield of $\mathbb{C}$ such that $\dim_{\mathbb{Q}}(\mathbb{A}) = \infty.$ However, $\mathbb{A}/\mathbb{Q}$ is clearly algebraic, by construction.
+\end{rem}
+
+\begin{restatable}[]{prop}{uniquemonicirred}
+\label{prop:uniquemonicirred}
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension and $\alpha \in \mathbb{K}$ be algebraic over $\mathbb{F}.$ Then, the following are true. 
+    \begin{enumerate}
+        \item There exists a unique monic irreducible polynomial $f(x) \in \mathbb{F}[x]$ such that $f(\alpha) = 0.$ 
+        \item $f(x)$ generates the kernel of the map $\mathbb{F}[x] \to \mathbb{F}[\alpha] \subset \mathbb{K}$ given by $p(x) \mapsto p(\alpha).$
+        \item If $g(x) \in \mathbb{F}[x]$ is such that $g(\alpha) = 0,$ then $f(x) \mid g(x).$ 
+        \item In particular, $f(x)$ has the least positive degree among all polynomials in $\mathbb{F}[x]$ satisfied by $\alpha.$ \hfill\hyperref[prop:uniquemonicirred2]{\downsym}
+    \end{enumerate}
+
+\end{restatable}
+
+Of course, ``irreducible'' above means ``irreducible in $\mathbb{F}[x].$''
+
+\begin{defn}%[]
+    Given a field extension $\mathbb{K}/\mathbb{F}$ and $\alpha \in \mathbb{K}$ with is algebraic over $\mathbb{F},$ the irreducible monic polynomial $f(x) \in \mathbb{F}[x]$ having $\alpha$ as a root is called the \deff{irreducible monic polynomial of $\alpha$ over $\mathbb{F}.$} It is denoted by $\irr(\alpha, \mathbb{F}).$
+
+    The degree of $\irr(\alpha, \mathbb{F})$ is called the \deff{degree of $\alpha$} and is denoted by $\deg_{\mathbb{F}}\alpha.$
+\end{defn}
+
+\begin{ex}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Let $\alpha \in \mathbb{C}$ be a square root of $\iota.$ Then, $\alpha$ satisfies $f(x) \vcentcolon= x^4 + 1.$ Show that $f(x) = \irr(\alpha, \mathbb{Q}).$
+
+        However, $\irr(\alpha, \mathbb{Q}(i)) = x^2 - \iota.$ Thus, degree also depends on the base field.
+        \item Let $p$ be a prime and $\zeta_p \vcentcolon= \exp\left(\dfrac{2\pi\iota}{p}\right) \in \mathbb{C}.$ Then, $\zeta_p^p = 1.$ Note that $x^p - 1 = (x - 1)\Phi_p(x)$ where
+        \begin{equation*} 
+            \Phi_p(x) \vcentcolon= x^{p - 1} + \cdots + 1.
+        \end{equation*}
+        Then, $\Phi_p(\zeta_p) = 0.$ Use Eisenstein's criterion on $\Phi_p(x + 1)$ to conclude that $\Phi_p(x)$ is irreducible in $\mathbb{Q}[x]$ and hence, $\Phi_p(x) = \irr(\zeta_p, \mathbb{Q}).$
+    \end{enumerate}
+\end{ex}
+
+\begin{restatable}[]{prop}{adjoiningalg}
+\label{prop:adjoiningalg}
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension and $\alpha \in \mathbb{K}$ be algebraic over $\mathbb{F}.$ Let $f(x) \vcentcolon= \irr(\alpha, \mathbb{F})$ and $n \vcentcolon= \deg f(x).$ Then,
+    \begin{enumerate}
+         \item $\mathbb{F}[\alpha] = \mathbb{F}(\alpha) \cong \mathbb{F}[x]/\langle f(x)\rangle.$
+         \item $\dim_{\mathbb{F}}(\mathbb{F}(\alpha)) = n$ and $\{1, \alpha, \ldots, \alpha^{n - 1}\}$ is an $\mathbb{F}$-basis of $\mathbb{F}(\alpha).$ \hfill\hyperref[prop:adjoiningalg2]{\downsym}
+     \end{enumerate} 
+\end{restatable}
+
+\begin{cor} \label{cor:adjoinalgisfin}
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension and $\alpha \in \mathbb{K}$ be algebraic over $\mathbb{F}.$ Then, $\mathbb{F}(\alpha)/\mathbb{F}$ is a finite and hence, algebraic extension, by \Cref{prop:finextisalg}.
+\end{cor}
+
+\begin{restatable}[]{prop}{isocarryingalphtobet}
+\label{prop:isocarryingalphtobet}
+    Let $\alpha, \beta \in \mathbb{K} \supset \mathbb{F}$ be algebraic over $\mathbb{F}.$ Then, there exists and $\mathbb{F}$-isomorphism $\psi : \mathbb{F}(\alpha) \to \mathbb{F}(\beta)$ such that $\psi(\alpha) = \beta$ iff $\irr(\alpha, \mathbb{F}) = \irr(\beta, \mathbb{F}).$ \hfill\hyperref[prop:isocarryingalphtobet2]{\downsym}
+\end{restatable}
+
+\begin{defn}%[]
+    The extension $\mathbb{K}/\mathbb{F}$ is said to be \deff{a quadratic extension} if $[\mathbb{K} : \mathbb{F}] = 2.$
+\end{defn}
+
+\begin{rem}
+    Note that if $\mathbb{K}/\mathbb{F}$ is a quadratic extension and $\alpha \in \mathbb{K}\setminus\mathbb{F},$ then $[\mathbb{F}(\alpha) : \mathbb{F}] > 1$ and hence, $\mathbb{F}(\alpha) = 2.$ Thus, $\mathbb{F}(\alpha) = \mathbb{K}.$
+
+    That is, all quadratic extensions are simple.
+\end{rem}
+
+\begin{restatable}[Tower law]{thm}{towerlaw}
+\label{thm:towerlaw}
+    Let $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}$ be a tower of fields. Then,
+    \begin{equation*} 
+        [\mathbb{K} : \mathbb{F}] = [\mathbb{K} : \mathbb{E}][\mathbb{E} : \mathbb{F}].
+    \end{equation*}
+    In particular, the left side is $\infty$ iff the right side is. \hfill\hyperref[thm:towerlaw2]{\downsym}
+\end{restatable}
+
+\begin{cor}
+    Let $\mathbb{K}/\mathbb{F}$ be a finite extension and $\alpha \in \mathbb{K}.$ Then, $\deg_{\mathbb{F}} \alpha \mid [\mathbb{K} : \mathbb{F}].$
+\end{cor}
+\begin{proof}
+    Consider the tower $\mathbb{F} \subset \mathbb{F}(\alpha) \subset \mathbb{K}.$
+\end{proof}
+
+\begin{restatable}[]{prop}{adjoinalgsfinext}
+\label{prop:adjoinalgsfinext}
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension and let $\alpha_1, \ldots, \alpha_n \in \mathbb{K}$ be algebraic over $\mathbb{F}.$ Then, $\mathbb{F}(\alpha_1, \ldots, \alpha_n)$ is a finite (and hence, algebraic) extension of $\mathbb{F}.$ \hfill\hyperref[prop:adjoinalgsfinext2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{cor}{compalgisalg}
+\label{cor:compalgisalg}
+   Let $\mathbb{F} \subset \mathbb{E}$ and $\mathbb{E} \subset \mathbb{K}$ be algebraic extensions. Then, $\mathbb{F} \subset \mathbb{K}$ is an algebraic extension.  \hfill\hyperref[cor:compalgisalg2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{cor}{algclosureisfield}
+\label{cor:algclosureisfield}
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension. Then,
+    \begin{equation*} 
+        \mathbb{A} \vcentcolon= \{\alpha \in \mathbb{K} : \alpha \text{ is algebraic over }\mathbb{F}\}
+    \end{equation*} is a subfield of $\mathbb{K}$ containing $\mathbb{F}.$ \\
+    Moreover, $\mathbb{A}/\mathbb{F}$ is an algebraic extension. \hfill\hyperref[cor:algclosureisfield2]{\downsym}
+\end{restatable}
+
+\section{Compositum of fields}
+
+\begin{defn}%[]
+    Let $\mathbb{E}_1, \mathbb{E}_2 \subset \mathbb{K}$ be fields. The \deff{compositum} of $\mathbb{E}_1$ and $\mathbb{E}_2$ is the smallest subfield of $\mathbb{K}$ containing $\mathbb{E}_1$ and $\mathbb{E}_2.$ It is denoted by $\mathbb{E}_1\mathbb{E}_2.$
+\end{defn}
+
+\begin{ex}
+    Suppose $\mathbb{F} \subset \mathbb{E}_1, \mathbb{E}_2 \subset \mathbb{K}$ and $\mathbb{E}_1 = \mathbb{F}(\alpha_1, \ldots, \alpha_n).$ Then,
+    \begin{equation*} 
+        \mathbb{E}_1\mathbb{E}_2 = \mathbb{E}_2(\alpha_1, \ldots, \alpha_n).
+    \end{equation*}
+\end{ex}
+
+\begin{ex}
+    Let $m$ and $n$ be coprime positive integers. Consider the subfields $\mathbb{F} \vcentcolon= \mathbb{Q}(\zeta_m)$ and $\mathbb{E} \vcentcolon= \mathbb{Q}(\zeta_n)$ of $\mathbb{C}.$ Then,
+    \begin{equation*} 
+        \mathbb{E}\mathbb{F} = \mathbb{Q}(\zeta_{mn}).
+    \end{equation*}
+    $\subset$ is clear since $\zeta_n = \zeta_{mn}^m$ and similarly, $\zeta_m = \zeta_{mn}^n.$
+
+    On the other hand, since $\gcd(m, n) = 1,$ there exist integers $a, b \in \mathbb{Z}$ such that $am + bn = 1.$ Thus,
+    \begin{equation*} 
+        \frac{a}{n} + \frac{b}{m} = \frac{1}{mn}
+    \end{equation*}
+    and hence
+    \begin{equation*} 
+        \zeta_{mn} = \zeta_n^a\zeta_m^b.
+    \end{equation*}
+\end{ex}
+
+\begin{restatable}[]{prop}{intdomfinextfield}
+\label{prop:intdomfinextfield}
+    Let $\mathbb{F}$ be a field which is a subring of an integral domain $R.$ Suppose $R$ is finite dimensional as an $\mathbb{F}$ vector space. Then, $R$ is a field. \hfill\hyperref[prop:intdomfinextfield2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{descofcompositum}
+\label{prop:descofcompositum}
+    Let $\mathbb{F} \subset \mathbb{E}_1, \mathbb{E}_2 \subset \mathbb{K}$ be fields. Consider
+    \begin{equation*} 
+        \mathbb{L} = \left\{\sum_{i = 1}^{n} \alpha_i\beta_i : n \in \mathbb{N}, \alpha_i \in \mathbb{E}_1, \beta_i \in \mathbb{E}_2\right\}.
+    \end{equation*}
+    That is, let $\mathbb{L}$ be the set of all finite sums of products of elements of $\mathbb{E}_1$ and $\mathbb{E}_2.$
+
+    Suppose $d \vcentcolon= [\mathbb{E}_1 : \mathbb{K}][\mathbb{E}_2 : \mathbb{K}] < \infty.$ \\
+    Then $\mathbb{L} = \mathbb{E}_1\mathbb{E}_2$ and $[\mathbb{L} : \mathbb{F}] \le d.$ 
+
+     If $[\mathbb{E}_1 : \mathbb{F}]$ and $[\mathbb{E}_2 : \mathbb{F}]$ are coprime, then equality holds. \hfill\hyperref[prop:descofcompositum2]{\downsym}
+\end{restatable}
+
+Diagrammatically, this can be depicted as
+\begin{center}
+    \begin{tikzcd}
+                                       & \mathbb{K} \arrow[d, no head]                                                       &              \\
+                                       & \mathbb{E}_1\mathbb{E}_2 \arrow[ld, "\le m"', no head] \arrow[rd, "\le n", no head] &              \\
+\mathbb{E}_1 \arrow[rd, "n"', no head] &                                                                                     & \mathbb{E}_2 \\
+                                       & \mathbb{F} \arrow[ru, "m"', no head]                                                &             
+    \end{tikzcd}
+\end{center}
+
+\section{Splitting Fields}
+
+\begin{defn}%[]
+    Let $\mathbb{F}$ be a field and $f(x) \in \mathbb{F}[x]$ be a non-constant monic polynomial of degree $n$ with leading coefficient $a \in \mathbb{F}^\times.$ A field $\mathbb{K} \supset \mathbb{F}$ is called a \deff{splitting field of $f(x)$ over $\mathbb{F}$} if there exist $r_1, \ldots, r_n \in \mathbb{K}$ so that $f(x) = a(x - r_1)\cdots(x - r_n)$ and $\mathbb{K} = \mathbb{F}(r_1, \ldots, r_n).$
+\end{defn}
+
+Note that $r_1, \ldots, r_n$ above need not be distinct.
+
+\begin{ex}
+    Consider $\mathbb{F} = \mathbb{Q},$ $f(x) = x^2 + 1 \in \mathbb{Q}[x]$ and $\mathbb{K} = \mathbb{C}.$ While $f(x)$ does factor linearly over $\mathbb{C},$ $\mathbb{C}$ is \textbf{not} a splitting field of $f(x)$ over $\mathbb{Q}$ since $\mathbb{C} \neq \mathbb{Q}(\iota, -\iota).$
+
+    On the other hand, $\mathbb{C}$ \emph{is} a splitting field of $f(x) \in \mathbb{R}[x]$ over $\mathbb{R}.$
+\end{ex}
+
+\begin{cor}
+    Let $f(x) \in \mathbb{F}[x]$ be non-constant and $\mathbb{K}$ be a splitting field of $f(x)$ over $\mathbb{F}.$ Then, $\mathbb{K}/\mathbb{F}$ is an algebraic extension.
+\end{cor}
+\begin{proof} 
+    Follows from \Cref{prop:adjoinalgsfinext}.
+\end{proof}
+
+\begin{restatable}[]{thm}{rootcanbeadjoined}
+\label{thm:rootcanbeadjoined}
+    Let $\mathbb{F}$ be a field and $f(x) \in \mathbb{F}[x]$ be non-constant. Then, there exists a field $\mathbb{K} \supset \mathbb{F}$ such that $f(x)$ has a root in $\mathbb{K}.$ \hfill\hyperref[thm:rootcanbeadjoined2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[Existence of Splitting Field]{thm}{splitfieldexists}
+\label{thm:splitfieldexists}
+    Let $\mathbb{F}$ be a field. Any polynomial $f(x) \in \mathbb{F}[x]$ of positive degree has a splitting field. \hfill\hyperref[thm:splitfieldexists2]{\downsym}
+\end{restatable}

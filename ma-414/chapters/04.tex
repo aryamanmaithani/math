@@ -1,0 +1,226 @@
+\chapter{Separable extensions}
+
+\section{Derivatives}
+
+\begin{defn}%[]
+    Let $\mathbb{F}$ be a field. Define the $\mathbb{F}$-linear map $\D_{\mathbb{F}} : \mathbb{F}[x] \to \mathbb{F}[x]$ by
+    \begin{equation*} 
+        \D_{\mathbb{F}}\left(\sum_{i = 0}^{n} a_ix^i\right) = \sum_{i = 1}^{n}ia_i x^{i - 1}.
+    \end{equation*}
+    Given $f(x) \in \mathbb{F}[x],$ we call $\D_{\mathbb{F}}(f(x))$ the \deff{derivative} of $f(x)$ and also denote it by $f'(x).$
+\end{defn}
+
+\begin{rem}
+    Note that the above definition requires no notion of limits. For the case of $\mathbb{F} = \mathbb{R}$ or $\mathbb{C},$ then it coincides with the usual definition if we identify a polynomial with the function it represents. We shall not require this, however.
+\end{rem}
+
+We have the follow easy-to-check proposition.
+\begin{prop}
+    Let $f(x), g(x) \in \mathbb{F}[x]$ and $a \in \mathbb{F}$ be arbitrary. Then,
+    \begin{enumerate}
+        \item $(f \pm ag)'(x) = f'(x) \pm ag'(x),$
+        \item $(fg)'(x) = f'(x)g(x) + f(x)g'(x).$
+    \end{enumerate}
+\end{prop}
+The first point is just verifying that $\D_{\mathbb{F}}$ is indeed $\mathbb{F}$-linear.
+
+\begin{prop}
+    Let $\mathbb{F} \subset \mathbb{E}$ be a field extension. Then, $\D_{\mathbb{E}}|_{\mathbb{F}} = \D_{\mathbb{F}}.$ Thus, the notation $f'(x)$ is unambiguous.
+\end{prop}
+
+\begin{defn}%[]
+    Let $f(x) \in \mathbb{F}[x]$ be a non-constant monic polynomial. Let $\mathbb{E}$ be a splitting field of $f(x)$ over $\mathbb{F}.$ In $\mathbb{E}[x],$ factorise $f(x)$ uniquely as
+    \begin{equation*} 
+        f(x) = (x - r_1)^{e_1} \cdots (x - r_g)^{e_g},
+    \end{equation*}
+    where $r_1, \ldots, r_g \in \mathbb{E}$ are distinct and each $e_i \in \mathbb{N}.$ 
+
+    The numbers $e_1, \ldots, e_g$ are called the \deff{multiplicities} of the roots $r_1, \ldots, r_n.$ \\
+    If $e_i = 1$ for some $i,$ then $r_i$ is called a \deff{simple root} and a \deff{repeated root} otherwise.
+
+    If each $e_i = 1,$ then $f(x)$ is said to be a \deff{separable polynomial}.
+
+    If $f$ is not monic, we have the same definitions upon division by the leading coefficient.
+\end{defn}
+
+\begin{rem}
+    Note that the definition of ``separable polynomial'' is ad hoc since the separability presumably depends on the splitting field. However, in view of \Cref{rem:discrepeatedroots}, we see that separability depends only on $\disc(f(x)),$ which we have seen to be independent of the splitting field.\\
+    The next proposition shows something even stronger.
+
+    Also, note that one might think that an irreducible polynomial is always separable. We will see an example of how that is not true, in general. Over fields of characteristic $0,$ however, it is true. We shall prove that as well.
+\end{rem}
+
+\begin{restatable}[]{prop}{multindepsplitting}
+\label{prop:multindepsplitting}
+    The number of roots and their multiplicities are independent of the splitting field chosen for $f(x)$ over $\mathbb{F}.$ \hfill\hyperref[prop:multindepsplitting2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{derivcritreproot}
+\label{prop:derivcritreproot}
+    Let $f(x) \in \mathbb{F}[x]$ be a monic and let $r \in \mathbb{E} \supset \mathbb{F}$ be a root of $f(x).$ \\
+    Then, $r$ is a repeated root iff $f'(r) = 0.$ \hfill\hyperref[prop:derivcritreproot2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[The Derivative Criterion for Separability]{thm}{derivcritsep}
+\label{thm:derivcritsep}
+    Let $f(x) \in \mathbb{F}[x]$ be a monic polynomial.
+    \begin{enumerate}
+         \item If $f'(x) = 0,$ then every root of $f(x)$ is a multiple root.
+         \item If $f'(x) \neq 0,$ then $f(x)$ has simple roots iff $\gcd(f(x), f'(x)) = 1.$ \hfill\hyperref[thm:derivcritsep2]{\downsym}
+     \end{enumerate} 
+\end{restatable}
+
+\begin{restatable}[]{prop}{irredsepderiv}
+\label{prop:irredsepderiv}
+    Let $f(x) \in \mathbb{F}[x]$ be irreducible and non-constant.
+    \begin{enumerate}
+         \item $f(x)$ is separable iff $f'(x) \neq 0.$
+         \item If $\chr(\mathbb{F}) = 0,$ then $f(x)$ is separable. 
+     \end{enumerate} 
+     In other words, irreducible polynomials over fields of characteristic $0$ are separable. \hfill\hyperref[prop:irredsepderiv2]{\downsym}
+\end{restatable}
+
+\begin{ex}
+    Let $p \in \mathbb{N}$ be a prime. Consider the field $\mathbb{F}_p(X)$ and the polynomial $f(T) = T^p - X \in \mathbb{F}_p(X)[T].$ \\
+    Then, $f(T)$ is irreducible, by applying Eisenstein at the prime $X.$ However, $f'(T) = 0$ and hence, not separable.
+
+    In fact, as we shall see, the existence of $p$-th roots will play an important role.
+\end{ex}
+
+\begin{defn}%[]
+    Let $\mathbb{F}$ be a field of prime characteristic $p.$ Define
+    \begin{equation*} 
+        \mathbb{F}^p \vcentcolon= \{\alpha^p \in \mathbb{F} : \alpha \in \mathbb{F}\}.
+    \end{equation*}
+    That is, $\mathbb{F}^p$ is the set of all $p$-th powers of elements of $\mathbb{F}.$
+\end{defn}
+
+\begin{prop}
+    $\mathbb{F}^p$ is a subfield of $\mathbb{F}.$
+\end{prop}
+\begin{proof} 
+    Only closure under addition is not so obvious. Note that $(x + y)^p = x^p + y^p$ for all $x, y \in \mathbb{F}.$
+\end{proof}
+
+\begin{restatable}[]{prop}{xppolyirredorroot}
+\label{prop:xppolyirredorroot}
+    Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) = p > 0.$ Then, $x^p - a \in \mathbb{F}[x]$ is either irreducible in $\mathbb{F}[x]$ or $a \in \mathbb{F}^p.$ \hfill\hyperref[prop:xppolyirredorroot2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{nonseppowerp}
+\label{prop:nonseppowerp}
+    Let $f(x) \in \mathbb{F}[x]$ be an irreducible polynomial and let $p \vcentcolon= \chr(\mathbb{F}) > 0.$ If $f(x)$ is not separable, then there exists $g(x) \in \mathbb{F}[x]$ such that $f(x) = g(x^p).$ \hfill\hyperref[prop:nonseppowerp2]{\downsym}
+\end{restatable}
+
+\section{Perfect fields}
+\begin{defn}%[]
+    Let $\mathbb{F} \subset \mathbb{K}$ be a field extension. 
+
+    An algebraic element $\alpha \in \mathbb{K}$ over $\mathbb{F}$ is called a \deff{separable element over $\mathbb{F}$} if $\irr(\alpha, \mathbb{F})$ is separable over $\mathbb{F}.$
+
+    We say that $\mathbb{K}/\mathbb{F}$ is a \deff{separable field extension} if every $\alpha \in \mathbb{K}$ is separable (and in particular, algebraic). 
+
+    We say that $\mathbb{F}$ is a \deff{perfect field} if every algebraic extension of $\mathbb{F}$ is separable. Equivalently, every irreducible polynomial in $\mathbb{F}[x]$ is separable.
+\end{defn}
+
+\begin{ex}
+    \phantom{hi}
+    \begin{enumerate}
+        \item We had seen that $\mathbb{F}_p(X)$ is not perfect for any prime $p.$
+        \item By \Cref{prop:irredsepderiv}, we have that every field of characteristic $0$ is perfect.
+    \end{enumerate}
+\end{ex}
+
+\begin{restatable}[]{thm}{perfectiffppower}
+\label{thm:perfectiffppower}
+    Let $\mathbb{F}$ be a field with characteristic $p > 0.$ Then, $\mathbb{F}$ is perfect iff $\mathbb{F} = \mathbb{F}^p.$ \hfill\hyperref[thm:perfectiffppower2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{cor}{finitefieldperfect}
+\label{cor:finitefieldperfect}
+    Every finite field is perfect. \hfill\hyperref[cor:finitefieldperfect2]{\downsym}
+\end{restatable}
+
+\section{Extensions of embeddings}
+\begin{restatable}[]{prop}{samemultirredpoly}
+\label{prop:samemultirredpoly}
+    Let $f(x) \in \mathbb{F}[x]$ be an irreducible monic polynomial. Then, all roots of $f(x)$ have equal multiplicity (in any splitting field). \\
+    If $\chr(\mathbb{F}) = 0,$ then all roots are simple. \\
+    If $\chr(\mathbb{F}) =\vcentcolon p > 0,$ then all roots have multiplicity $p^n$ for some $n \in \mathbb{N}_0.$ \hfill\hyperref[prop:samemultirredpoly2]{\downsym}
+\end{restatable}
+Note that by \Cref{prop:multindepsplitting}, the $n$ also does not depend on choice of splitting field.
+
+\begin{restatable}[]{thm}{separabledegreedef}
+\label{thm:separabledegreedef}
+    Let $\sigma : \mathbb{F} \to \mathbb{L}$ be an embedding of fields where $\mathbb{L}$ is an algebraic closure of $\sigma(\mathbb{F}).$ Similarly, let $\tau : \mathbb{F} \to \mathbb{L}'$ be an embedding of fields where $\mathbb{L}'$ is an algebraic closure of $\tau(\mathbb{F}).$ Let $\mathbb{E}$ be an algebraic extension of $\mathbb{F}.$
+
+    Let $S_\sigma$ (resp. $S_\tau$) denote the set of extensions of $\sigma$ (resp. $\tau$) to embeddings of $\mathbb{E}$ into $\mathbb{L}$ (resp. $\mathbb{L}'$). Let $\lambda : \mathbb{L} \to \mathbb{L}'$ be an isomorphism extending $\tau \circ \sigma^{-1} : \sigma(\mathbb{F}) \to \tau(\mathbb{F}).$  
+
+    The map $\psi : S_\sigma \to S_\tau$ given by $\psi(\widetilde{\sigma}) = \lambda \circ \widetilde{\sigma}$ is a bijection. \hfill\hyperref[thm:separabledegreedef2]{\downsym}
+\end{restatable}
+
+\begin{center}
+        \begin{tikzcd}
+        \mathbb{L}' \arrow[dd, no head]                  &  &                                                                                                     &  & \mathbb{L} \arrow[llll, "\lambda"'] \arrow[dd, no head] \\
+                                                         &  &                                                                                                     &  &                                                         \\
+        \widetilde{\tau}(\mathbb{E}) \arrow[dd, no head] &  & \mathbb{E} \arrow[ll, "\widetilde{\tau} \in S_\tau"'] \arrow[rr, "\widetilde{\sigma} \in S_\sigma"] &  & \widetilde{\sigma}(\mathbb{E}) \arrow[dd, no head]      \\
+                                                         &  &                                                                                                     &  &                                                         \\
+        \tau(\mathbb{F})                                 &  & \mathbb{F} \arrow[rr, "\sigma"] \arrow[ll, "\tau"']                                                 &  & \sigma(\mathbb{F})                                     
+        \end{tikzcd}
+\end{center}  
+
+\begin{rem}
+    What the above proposition is really saying is that the ``number'' (cardinality) of extensions does not depend on $\mathbb{L}$ \textbf{\emph{or}} on the embedding $\sigma.$ Note that since $\mathbb{E}$ is an arbitrary algebraic extension, the set $S_\sigma$ need not be finite. 
+
+    Thus, we may assume $\mathbb{L} \supset \mathbb{F}$ to be an algebraic closure and $\sigma$ to be the natural inclusion.
+\end{rem}
+
+\begin{defn}%[]
+    If $\mathbb{E}/\mathbb{F}$ is an algebraic extension, then the cardinality of $S_\sigma$ (as in \Cref{thm:separabledegreedef}) is called the \deff{separable degree} of $\mathbb{E}/\mathbb{F}$ and is denoted $[\mathbb{E} : \mathbb{F}]_s.$
+\end{defn}
+
+\begin{rem}
+    Note that if $\sigma : \mathbb{F} \to \mathbb{L}$ is an embedding into an algebraically closed field $\mathbb{L},$ and $\widetilde{\sigma} : \mathbb{E} \to \mathbb{L}$ is an extension of $\sigma,$ where $\mathbb{E}/\mathbb{F}$ is algebraic, then $\widetilde{\sigma}(\mathbb{E})$ is actually contained in the algebraic closure of $\sigma(\mathbb{F})$ within $\mathbb{L}.$ Thus, it is fine even if $\mathbb{L}$ is not an algebraic closure of $\sigma(\mathbb{F}).$
+\end{rem}
+
+\begin{prop} \label{prop:sepdeglessthannordeg}
+    Let $\alpha \in \mathbb{E} \supset \mathbb{F}$ be algebraic over $\mathbb{F}$ and $n \vcentcolon= \deg(\irr(\alpha, \mathbb{F})).$ Then, $[\mathbb{F}(\alpha) : \mathbb{F}]_s \le n = [\mathbb{F}(a) : \mathbb{F}]$ with equality iff $\alpha$ is separable over $\mathbb{F}.$
+\end{prop}
+\begin{proof} 
+    By \Cref{prop:rootsandextensions}, we know that $[\mathbb{F}(\alpha) : \mathbb{F}]_s$ is exactly the number of roots of $p(x) = \irr(\alpha, \mathbb{F})$ in $\overline{\mathbb{F}}.$ This is at most $n = \deg(p(x)).$ Moreover, equality implies that all roots are distinct and hence, $\alpha$ is separable.
+\end{proof}
+
+\begin{restatable}[Tower Law for separable degree]{thm}{towerlawsep}
+\label{thm:towerlawsep}
+    Let $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}$ be a tower of finite algebraic extensions. Then, $[\mathbb{E} : \mathbb{F}]_s \le [\mathbb{E} : \mathbb{F}]$ and
+    \begin{equation*} 
+        [\mathbb{K} : \mathbb{F}]_s = [\mathbb{K} : \mathbb{E}]_s [\mathbb{E} : \mathbb{F}]_s.
+    \end{equation*} \hfill\hyperref[thm:towerlawsep2]{\downsym}
+\end{restatable}
+
+\begin{cor}
+    Let $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}$ be a tower of finite algebraic extensions. Then, $[\mathbb{K} : \mathbb{F}] = [\mathbb{K} : \mathbb{F}]_s$ iff equality holds at each stage.
+\end{cor}
+
+\begin{restatable}[]{thm}{sepiffdegequal}
+\label{thm:sepiffdegequal}
+    Let $\mathbb{E}/\mathbb{F}$ be a finite extension. Then, $\mathbb{E}/\mathbb{F}$ is separable iff $[\mathbb{E} : \mathbb{F}]_s = [\mathbb{E} : \mathbb{F}].$ \hfill\hyperref[thm:sepiffdegequal2]{\downsym}
+\end{restatable}
+
+\begin{cor}
+    Let $\alpha \in \mathbb{E} \supset \mathbb{F}$ be separable over $\mathbb{F}.$ Then, $\mathbb{F}(\alpha)/\mathbb{F}$ is a separable extension.
+\end{cor}
+\begin{proof}
+    By \Cref{prop:sepdeglessthannordeg}, we have $[\mathbb{F}(\alpha) : \mathbb{F}]_s = [\mathbb{F}(\alpha) : \mathbb{F}].$ By \Cref{thm:sepiffdegequal}, this means that $\mathbb{F}(\alpha)/\mathbb{F}$ is separable.
+\end{proof}
+
+\begin{restatable}[]{prop}{compdecompsep}
+\label{prop:compdecompsep}
+    Let $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}$ be a tower of fields. Then,\\
+    $\mathbb{K}/\mathbb{F}$ is separable iff $\mathbb{K}/\mathbb{E}$ and $\mathbb{E}/\mathbb{F}$ are separable. \hfill\hyperref[prop:compdecompsep2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{sepdegdividesdeg}
+\label{prop:sepdegdividesdeg}
+    Let $\mathbb{E}/\mathbb{F}$ be a finite extension. Then, $[\mathbb{E} : \mathbb{F}]_s$ divides $[\mathbb{E} : \mathbb{F}].$ If $\chr(\mathbb{F}) =\vcentcolon p > 0,$ then quotient $\dfrac{[\mathbb{E} : \mathbb{F}]}{[\mathbb{E} : \mathbb{F}]_s}$ is a power of $p.$ \hfill\hyperref[prop:sepdegdividesdeg2]{\downsym}
+\end{restatable}
