@@ -1,0 +1,1233 @@
+\section{Notations and Preliminaries}
+\setcounter{subsection}{-1}
+\subsection{Notations}
+$\mathbb{C}$ will denote the field of complex numbers and $V, W$ vector spaces over $\mathbb{C}.$ (We will stick to finite dimensional vector spaces.)
+
+\begin{enumerate}
+	\item If $V$ is a vector space and $W$ a subspace, then we write $W \le V.$
+	\item If $X \subset V,$ then $\mathbb{C}X = \spn X.$ (cf. \Cref{subsec:linearisation} for the definition of $\mathbb{C}X$ when $X$ is an arbitrary set.)
+	\item $R^*$ denotes the group of units of a ring $R.$
+	\item $M_{m \times n}(\mathbb{C})$ is the vector space $m \times n$ matrices with entries in $\mathbb{C}.$
+	\item $M_n(\mathbb{C}) = M_{n \times n}(\mathbb{C}).$
+	\item $\Hom_{\mathbb{C}}(V, W)$ is the vector space of linear maps from $V$ to $W.$
+	\item $\End(V) = \Hom_{\mathbb{C}}(V, V)$ is the \emph{ring of endomorphisms}. This is isomorphic to $M_{\dim V}(V).$
+	\item $\GL(V) = \{A \in \End(V) \mid A \text{ is invertible}\} = \End(V)^*$ is the \emph{general linear group} of $V.$
+	\item $\GL_n(\mathbb{C}) = M_n(\mathbb{C})^*.$ This is isomorphic to $\GL(\mathbb{C}^n).$
+	\item We have the usual sets $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}, S_n, \mathbb{Z}/n\mathbb{Z}.$ For us, $0 \notin \mathbb{N}.$ We note $\mathbb{N}_0 \vcentcolon= \mathbb{N} \cup \{0\}.$
+	\item $D_n$ will denote the dihedral group with $2n$ elements. 
+	\item Given $\mathbb{C}_n,$ we denote by $e_i,$ the $i$-th standard basis vector.
+	\item $\omega_n \vcentcolon= \exp\left(\dfrac{2\pi\iota}{n}\right).$
+	\item We use $\sqcup$ to denote disjoint union.
+\end{enumerate}
+
+\begin{defn}%[Transversal]
+	\label{defn:transversal}
+	Let $X$ be a set and $\sim$ an equivalence relation on $X.$ A subset $Y \subset X$ is called a \deff{transversal} if $Y$ intersects each equivalence class in exactly one element.	
+\end{defn}
+
+\begin{ex}
+	If $G$ is a group and $H$ is a subgroup, then the left cosets of $H$ partition $G.$ In particular, they give rise to an equivalence relation. Assuming that the index $m = [G:H]$ is finite, a transversal in this context is simply a set $\{t_1, \ldots, t_m\}$ of representatives of distinct cosets.
+
+	We shall often denote this by writing ``Let $t_1, \ldots, t_m$ be a transversal of the cosets.''
+\end{ex}
+
+%
+%
+\subsection{Linear Algebra Preliminaries}
+\subsubsection{Inner product spaces}
+\begin{defn}
+	Let $V$ be a vector space and $T \in \End(V).$ If $W \le V$ is such that $Tw \in W$ for all $w \in W,$ then $W$ is said to be \deff{$T$-invariant.}
+\end{defn}
+
+\begin{prop} \label{prop:TinvariantiffimageW}
+	Let $W \le V$ be vector spaces and $T \in \GL(V).$ Then, $W$ is $T$-invariant iff $T(W) = W.$
+\end{prop}
+\begin{proof} 
+	$\impliedby$ is trivial. We prove the other direction.
+
+	By hypothesis, we know that $T(W) \le W.$ However, since $W$ is finite-dimensional and $T$ an isomorphism, we see that
+	\begin{equation*} 
+		\dim(T(W)) = \dim(W)
+	\end{equation*}
+	and hence, $T(W) = W.$ (If a subspace of a finite dimensional vector space has the same dimension, then the subspace must be the whole space.)
+\end{proof}
+
+\begin{prop} \label{prop:Tinverseinvariance}
+	Let $W \le V$ be vector spaces and $T \in \GL(V)$ be such that $W$ is $T$-invariant. Then, $W$ is also $T^{-1}$-invariant.
+\end{prop}
+\begin{proof} 
+	Using \Cref{prop:TinvariantiffimageW}, we know that $T(W) = W.$ Since $T$ is a bijection, this immediately yields that $W = T^{-1}(W),$ proving the desired result.
+\end{proof}
+
+\begin{prop} \label{prop:STinvariance}
+	Let $W \le V$ be vector spaces and $T, S \in \GL(V)$ be such that $W$ is $T$-invariant and $S$-invariant. Then, $W$ is also $S \circ T$-invariant.
+\end{prop}
+\begin{proof} 
+	Let $w \in W.$ Then, $Tw \in W$ since $W$ is $T$-invariant. In turn, $S(Tw) \in W$ since $W$ is $S$-invariant. Thus, $(S \circ T)(w) \in W$ for all $w \in W,$ as desired.
+\end{proof}
+
+\begin{defn}%[Adjoint of an operator]
+	Let $(V, \langle \cdot, \cdot\rangle)$ be a finite dimensional inner product space and $T \in \End(V).$ The \deff{adjoint of $T$} is the unique linear operator $T^*$ such that the following equality holds for all $v, w \in V:$
+	\begin{equation*} 
+		\langle Tv, w\rangle = \langle v, T^*w\rangle.
+	\end{equation*}
+\end{defn}
+
+\begin{prop} \label{prop:Tadjointinvariance}
+	Let $(V, \langle \cdot, \cdot\rangle)$ be an inner product space and $T \in \End(V).$ Suppose that $W \le V$ is $T$-invariant. Then, $W^\perp$ is $T^*$-invariant.
+\end{prop}
+\begin{proof} 
+	Let $v \in W^\perp$ and $w \in W$ be arbitrary. It suffices to show that $\langle T^*v, w\rangle = 0.$ However, this is immediate since
+	\begin{equation*} 
+		0 = \langle v, Tw\rangle = \langle T^*v, w\rangle.
+	\end{equation*}
+	The first equality is true since $Tw \in W$ by $T$-invariance of $W$ and $v \in W^\perp,$ by hypothesis.
+\end{proof}
+
+\begin{defn}%[Unitary operator] 
+	\label{defn:unitaryoperator}
+	Let $V$ be an inner product space and $U \in \GL(V).$ $U$ is said to be \deff{unitary} if 
+	\begin{equation*} 
+		\langle Uv, Uw\rangle = \langle v, w\rangle
+	\end{equation*}
+	for all $v, w \in V.$ The subset $U(V) \subset \GL(V)$ of all unitary operators forms a subgroup.
+\end{defn}
+In other words, one sees that
+\begin{equation*} 
+	\langle v, U^*Uw\rangle = \langle v, w\rangle
+\end{equation*}
+for all $v, w \in V.$ In other words, $U^*U$ is the adjoint of the identity map. However, since identity is its own adjoint, we see that $U^*U$ is the identity map. In other words, $U^* = U^{-1}.$
+
+\begin{defn}%[Unitary matrix] 
+	\label{defn:unitarymatrix}
+	A matrix $U \in \GL_n(\mathbb{C})$ is said to be \deff{unitary} if $UU^* = I.$ A set of all such matrices is denoted by $U_n(\mathbb{C})$ and forms a subgroup of $\GL_n(\mathbb{C}).$
+\end{defn}
+As usual, $U^*$ denotes the conjugate transpose of $U.$ One can show that the matrix $U$ is unitary (\Cref{defn:unitarymatrix}) iff the corresponding linear operator is unitary (\Cref{defn:unitaryoperator}), with respect to the standard inner product on $\mathbb{C}^n.$
+
+\begin{cor} \label{cor:unitaryinvariance}
+	Let $(V, \langle \cdot, \cdot\rangle)$ be an inner product space and $T \in U(V).$ Suppose that $W$ is $T$-invariant. Then, $W^\perp$ is also $T$-invariant.
+\end{cor}
+\begin{proof} 
+	By \Cref{prop:Tadjointinvariance}, we see that $W^\perp$ is $T^*$ invariant and hence, $T^{-1}$-invariant.\\
+	(Note that $T^{-1} = T^*$ since $T$ is unitary.)\\
+	By \Cref{prop:Tinverseinvariance}, we then see that $W^\perp$ is $T$-invariant. \\
+	(We are using that $(T^{-1})^{-1} = T.$)
+\end{proof}
+
+\subsubsection{Minimal polynomials and diagonalisation} 
+
+\begin{defn}%[Minimal polynomial]
+	Let $T \in \End(V).$ The \deff{minimal polynomial} of $T$ is the unique monic polynomial $m(X) \in \mathbb{C}[X]$ such that $m(T)$ is the zero operator.
+\end{defn} 
+
+\begin{defn}%[Diagonalisable]
+	Let $T \in \End(V).$ $T$ is said to be \deff{diagonalisable} if there exists a basis $B$ of $V$ consisting of eigenvectors of $T.$
+\end{defn}
+
+For the remainder, $T$ will denote an element of $\End(V)$ and $m(X)$ its minimal polynomial.
+
+\begin{prop} \label{prop:minimalpolyroots}
+	Let $p(X) \in \mathbb{C}[X]$ be any polynomial such that $p(T) = 0.$ Then $p(\lambda) = 0$ for any eigenvalue $\lambda \in \mathbb{C}$ of $T.$ In particular, all eigenvalues of $T$ (in $\mathbb{C}$) are roots of the minimal polynomial.	
+\end{prop}
+\begin{proof} 
+	Let $\lambda \in \mathbb{C}$ be an eigenvalue of $T.$ Let $v \neq 0$ be an eigenvector corresponding to $\lambda.$ Then, note that
+	\begin{equation*} 
+		T^k v = \lambda^k v
+	\end{equation*}
+	for all $k \ge 0.$ In particular, if 
+	\begin{equation*} 
+		p(X) = a_0 + a_1X + \cdots + a_rX^r,
+	\end{equation*}
+	then we have
+	\begin{align*} 
+		0 = p(T)v &= (a_0 + a_1T + \cdots + a_rT^r)v\\
+		&= a_0v + a_1Tv + \cdots + a_rT^rv\\
+		&= a_0v + a_1\lambda v + \cdots + a_r\lambda^r v\\
+		&= p(\lambda)v.
+	\end{align*}
+	Thus, $p(\lambda)v = 0.$ But since $v \neq 0,$ we get that $p(\lambda) = 0,$ as desired.
+\end{proof}
+
+\begin{rem}
+	Of course, the eigenvalues of $T$ are precisely the roots of the characteristic polynomial of $T.$ Thus, the above proposition tells us that the minimal polynomial and characteristic polynomial have precisely the same roots. (One way implication is in the above, the other is obvious since the minimal polynomial must divide the characteristic polynomial.)
+\end{rem}
+
+\begin{prop}
+	If $T$ is diagonalisable, then $m(X)$ has distinct roots.
+\end{prop}
+\begin{proof} 
+	Let $\lambda_1, \ldots, \lambda_r \in \mathbb{C}$ be the distinct eigenvalues of $T.$ Let
+	\begin{equation*} 
+		p(X) = (X - \lambda_1)\cdots(X - \lambda_r).
+	\end{equation*}
+	Then, by the previous proposition, we know that $p(X) \mid m(X).$ Since both are monic, it suffices to show that $m(X) \mid p(X)$ to conclude that $m(X) = p(X).$ And to do that, it suffices to show that $p(T)$ is the zero operator. And to do \emph{that}, it suffices to show that $p(T)$ annihilates some basis of $V.$ To this end, let $B$ be an eigenbasis of $V$ with respect to $T$ (which exists since $T$ is diagonalisable). Then, any $v \in B$ is annihilated by some $T - \lambda_i.$ Since all the $T - \lambda_j$ commute, we see that $p(T)v = 0$ and we are done.
+\end{proof}
+
+\begin{prop}
+	Suppose that $m(X)$ has distinct roots. Then, $T$ is diagonalisable.
+\end{prop}
+\begin{proof} 
+	By hypothesis, $m(X) = (X - \lambda_1)\cdots(X - \lambda_r)$ for some distinct $\lambda_1, \ldots, \lambda_r \in \mathbb{C}.$\\
+	Since $m(X)$ divides the characteristic polynomials, it follows that each $\lambda_i$ is an eigenvalue. We wish to show that
+	\begin{equation*} 
+		V = E_{\lambda_1} \oplus \cdots \oplus E_{\lambda_r}.
+	\end{equation*}
+	Note that since we know that eigenspaces intersect trivially, it suffices to show that
+	\begin{equation*} 
+		V = E_{\lambda_1} + \cdots + E_{\lambda_r}.
+	\end{equation*}
+	Now, consider the polynomials
+	\begin{equation*} 
+		f_i(X) = \dfrac{m(X)}{X - \lambda_i} = \prod_{j \neq i}(X - \lambda_j)
+	\end{equation*}
+	for $i = 1, \ldots, r.$ Put
+	\begin{equation*} 
+		g_i(X) = \dfrac{f_i(X)}{f_i(\lambda_i)}.
+	\end{equation*}
+	(Note that each $f_i(\lambda_i)$ is non-zero since the roots are distinct.)\\
+	Note that $g_i(\lambda_j) = \delta_{i, j}.$
+
+	Now, note that
+	\begin{equation*} 
+		1 = \sum_{i = 1}^{r} g_i(X).
+	\end{equation*}
+	(Both sides are polynomials of degree at most $r - 1$ which agree on the $r$ points $\lambda_1, \ldots, \lambda_r.$)\\
+	Thus, $g_i(T)$ is the identity operator.
+
+	Thus, given any $v \in V,$ we have
+	\begin{equation} \tag{$\sum$} \label{eq:sumeigenvectors}
+		v = \sum_{i = 1}^{r} g_i(T)v.
+	\end{equation}
+	However, note now that
+	\begin{align*} 
+		(T - \lambda_i)g_i(T)v &= (T - \lambda_i)\dfrac{f_i(T)}{f_i(\lambda_i)}v\\
+		&= \dfrac{p(T)}{f_i(\lambda_i)}v\\
+		&= 0.
+	\end{align*}
+	Thus, $g_i(T)v \in E_{\lambda_i}$ for each $i$ and \Cref{eq:sumeigenvectors} shows that $V = \bigoplus E_{\lambda_i}.$ 
+\end{proof}	
+
+The above two propositions are summarised in the following theorem.
+
+\begin{thm} \label{thm:splitdistinctdiagonalise}
+	Let $V$ be a vector space over $\mathbb{C}.$ Let $T \in \End(V)$ and $m(X) \in \mathbb{C}[X]$ be the minimal polynomial of $T.$ Then, $T$ is diagonalisable if and only if $m(X)$ has distinct roots.	
+\end{thm}
+
+\subsubsection{Linearisation} \label{subsec:linearisation}
+\begin{defn}[Linearisation] \label{defn:linearisation}
+	Given a non-empty \underline{finite} set $X,$ we define a $\mathbb{C}$-vector space $\mathbb{C}X$ whose elements are formal linear combinations
+	\begin{equation*} 
+		\sum_{x \in X} c_x x
+	\end{equation*}
+	where $c_x \in \mathbb{C}.$
+
+	The addition is given by adding the corresponding scalar coefficients and scalar multiplication is defined similarly.
+
+	$X$ is identified as a subset of $\mathbb{C}X$ be identifying $x$ with $1x.$ Under this, $X$ is a basis for $\mathbb{C}X.$
+
+	This is an inner product space with the product defined as
+	\begin{equation*} 
+		\left\langle \sum_{x \in X} a_xx, \sum_{x \in X} b_xx\right\rangle = \sum_{x \in X} a_x \overline{b_x}.
+	\end{equation*}
+	Under this, $X$ is an \emph{orthonormal} basis for $\mathbb{C}X.$
+\end{defn}
+
+Note very carefully that we have assumed that $X$ is finite. This avoids the complication of having to make sure that the sums are finite.
+
+The above construction has the following property.
+\begin{prop} \label{prop:linearfuncextend}
+	Given non-empty finite sets $X,$ $Y$ and a function $f : X \to Y,$ there exists a unique linear transformation 
+	\begin{equation*} 
+		\mathbb{C}f : \mathbb{C}X \to \mathbb{C}Y
+	\end{equation*}
+	such that $\mathbb{C}f|_X = f.$
+\end{prop}
+
+Those familiar with category theory can actually verify that the above defines a \emph{functor} from the category of sets (and functions) to that of $\mathbb{C}$-vector spaces (and $\mathbb{C}$-linear function).
+
+We can also note the following construction.
+
+\begin{prop} \label{prop:extendingactiontorep}
+	Let $G$ be a group which acts on a set $X.$ Then, extending the action in the natural way gives an action on $\mathbb{C}X.$ In other words, we get a homomorphism $\varphi : G \to S_{\mathbb{C}X}.$ Moreover, we have the property that not only is $\varphi(g)$ is a bijection for each $g \in G$ but also an isomorphism.
+\end{prop}
+\begin{proof} 
+	The ``natural way'' of extension is to define
+	\begin{equation*} 
+		\cdot : G \times \mathbb{C}X \to \mathbb{C}X
+	\end{equation*}
+	as
+	\begin{equation*} 
+		g\cdot\left(\sum_{x \in X} c_x x\right) \vcentcolon= \sum_{x \in X} c_x (g \cdot x).
+	\end{equation*}
+	The $\cdot$ on the right is the original action.\\
+	(The right hand side makes sense because $g \cdot x \in X.$)
+
+	With the above explicit formula, it is clear that the group action axioms are satisfied. We now show that the last part. It suffices to show that $\varphi(g)$ is linear.
+
+	In other words, we need to show that $g \cdot (v_1 + v_2) = g \cdot v_1 + g \cdot v_2$ for all $g \in G$ and $v_1, v_2 \in V.$ This is simple, for we note that
+	\begin{align*} 
+		g \cdot \left(\sum_{x \in X} c_xx + \sum_{x \in X} d_xx \right) &= g \cdot \left(\sum_{x \in X} (c_x + d_x)x \right)\\
+		&= \sum_{x \in X} (c_x + d_x)(g \cdot x)\\
+		&= \sum_{x \in X} c_x g \cdot x + \sum_{x \in X} d_x g \cdot x\\
+		&= g \cdot \left(\sum_{x \in X} c_x x\right) + g \cdot \left(\sum_{x \in X}d_x x\right). \qedhere
+	\end{align*}
+\end{proof}
+
+In other words, what we have above is actually a \emph{representation}, the central topic of study in this report.
+
+%
+%
+\subsection{Group Theory Preliminaries}
+\begin{lem} \label{lem:determininggrouphomoring}
+	Let $G$ be a group, $R$ a commutative ring with identity and $\varphi : G \to R$ a function. Suppose that $\varphi\left(1_G\right) = 1_R$ and $\varphi(g_1g_2) = \varphi(g_1)\varphi(g_2)$ for all $g_1, g_2 \in G.$ Then, $\varphi$ is a homomorphism into $R^\times,$ the group of units of $R.$
+\end{lem}
+\begin{proof} 
+	We only need to show that $\varphi$ is a function into $R^\times.$ The fact that it is a homomorphism would then follow from the fact that it is multiplicative.
+
+	To see that, we simply note 
+	\begin{equation*} 
+		\varphi(g)\varphi(g^{-1}) = \varphi(gg^{-1}) = \varphi\left(1_G\right) = 1_R = \varphi(g^{-1})\varphi(g)
+	\end{equation*}
+	and hence, $\varphi(g)$ is invertible for all $g \in G$ with inverse $\varphi(g^{-1}).$
+\end{proof}
+
+\begin{rem} \label{rem:monoidhomo}
+	Note that the above proof does not require the complete ring structure of $R.$ The reader familiar with monoids can observe that we could replace $R$ with a monoid $M$ and the above would hold.
+\end{rem}
+
+\subsubsection{Group of complex homomorphisms}
+\begin{defn} \label{defn:dualgroup}
+	Given a group $G,$ let the $\widehat{G}$ denote the set of all group homomorphisms from $G$ to $\mathbb{C}^*.$ This is a group under point-wise operations and is called the \deff{dual group} of $G.$
+\end{defn}
+
+\begin{prop}
+	Let $G,\;G_1,$ and $G_2$ be (not necessarily abelian) groups. If $G = G_1 \times G_2,$ then $\widehat{G} \cong \widehat{G_1} \times \widehat{G_2}.$ 
+\end{prop}
+\begin{proof} 
+	Given $\varphi \in \widehat{G},$ we define $\varphi_1 : \widehat{G_1} \to \mathbb{C}^*$ by
+	\begin{equation*} 
+		\varphi_1(g_1) \vcentcolon= \varphi(g_1, 1)
+	\end{equation*}
+	and similarly, $\varphi_2 : \widehat{G_1} \to \mathbb{C}^*$ by
+	\begin{equation*} 
+		\varphi_2(g_2) \vcentcolon= \varphi(1, g_2).
+	\end{equation*}
+	It is easy to see that each $\varphi_i$ is a homomorphism. That is, $\varphi_i \in \widehat{G_i}$ for $i = 1, 2.$ 
+
+	Now, we define $\Phi:\widehat{G} \to \widehat{G_1} \times \widehat{G_2}$ as follows:	
+	\begin{equation*} 
+		\Phi(\varphi) = (\varphi_1, \varphi_2).
+	\end{equation*}
+
+	It is easy to verify that $\Phi$ is a homomorphism using the fact that
+	\begin{equation*} 
+		(\varphi\varphi')_i = \varphi_i\varphi'_i
+	\end{equation*}
+	for every $\varphi, \varphi' \in \widehat{G}$ and $i = 1, 2.$
+
+	Moreover, if $\Phi(\varphi) = (1, 1),$ then $\varphi_1(g_1) = 1 = \varphi_2(g_2)$ for all $(g_1, g_2) \in G.$ Thus, $\varphi \equiv 1,$ showing that $\Phi$ is injective.
+
+	To show surjectivity, let $(\rho, \rho') \in \widehat{G_1} \times \widehat{G_2}$ be arbitrary. Then, define $\varphi:G \to \mathbb{C}^*$ by
+	\begin{equation*} 
+		\varphi(g_1, g_2) = \rho(g_1)\rho'(g_2).
+	\end{equation*}
+	Note that
+	\begin{align*} 
+		\varphi(g_1g'_1, g_2g'_2) &= \rho(g_1g'_1)\rho'(g_2g'_2)\\
+		&= \rho(g_1)\rho(g'_2)\rho'(g_2)\rho'(g'_2)\\
+		&= \rho(g_1)\rho'(g_2)\rho(g'_2)\rho'(g'_2)\\
+		&= \varphi(g_1, g_2)\varphi(g'_1, g'_2)
+	\end{align*}
+	and hence, $\varphi \in \widehat{G}.$ It is now easy to see that
+	\begin{equation*} 
+		\Phi(\varphi) = (\rho, \rho'),
+	\end{equation*}
+	proving surjectivity.	
+\end{proof}
+
+\begin{prop} \label{prop:ZnZconghatZnZ}
+	If $G = \mathbb{Z}/n\mathbb{Z},$ then $G \cong \widehat{G}.$
+\end{prop}
+\begin{proof} 
+	Note that we have the $n$ distinct homomorphisms $\varphi^{(0)}, \ldots, \varphi^{(n-1)}$ given by
+	\begin{equation*} 
+		\varphi^{(k)}([m]) = \omega_n^{km}.
+	\end{equation*}
+	(It can be verified easily that this is indeed a well-defined map and a homomorphism by using the fact that $\omega_n^n = 1$ and $\omega^a\omega^b = \omega^{a + b}.$)
+
+	Moreover, these are the only homomorphisms since any homomorphism is uniquely determined once we map $[1]$ to an element, and that element is forced to be an $n$-th root of unity.
+
+	This shows that $\md{\widehat{G}} = n.$ To show that it is cyclic, we simply observe that
+	\begin{equation*} 
+		\left(\varphi^{(1)}\right)^k = \varphi^{(k)}. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{cor} \label{cor:GconghatG}
+	Let $G$ be a finite abelian group, then $G \cong \widehat{G}.$
+\end{cor}
+\begin{proof} 
+	Using the structure theorem of finite abelian groups, we know that
+	\begin{equation*} 
+		G \cong G_1 \times \cdots \times G_n
+	\end{equation*}
+	for some finite cyclic groups $G_1, \ldots, G_n.$ From the previous two propositions, the result follows.
+\end{proof}
+
+\subsubsection{Sign of a permutation}
+
+In the following, $e_i$ denotes the $i$-th standard basis vector of $\mathbb{C}^n.$
+
+\begin{defn}[Matrix of a permutation]
+	We define $M:S_n \to M_n(\mathbb{C})$ as follows:\\
+	Given $\sigma \in S_n,$ we define $M(\sigma)$ to be the matrix representing the linear transformation determined by $e_i \mapsto e_{\sigma(i)}.$
+\end{defn}
+
+We immediately note that $M$ actually maps into $M_n(\mathbb{Z})$ since the $i$-th column of $M(\sigma)$ is simply $e_{\sigma(i)},$ i.e., all $0$s with a $1$ in the $i$-th place.
+
+\begin{prop}[$M$ is multiplicative]
+	Given $\sigma, \tau \in S_n,$ we have
+	\begin{equation*} 
+		M(\sigma\tau) = M(\sigma)M(\tau).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	It suffices to those that the matrices on either side of the equation act the same way on each $e_i.$ To this end, note that
+	\begin{align*} 
+		M(\sigma\tau)e_i &= e_{(\sigma\tau)(i)}\\
+		&= e_{\sigma(\tau(i))}\\
+		&= M(\sigma)e_{\tau(i)}\\
+		&= M(\sigma)M(\tau)e_i. \qedhere
+	\end{align*}
+\end{proof}
+
+We now state corollaries of the above proposition.
+
+\begin{cor}
+	Given any $\sigma \in S_n,$ the matrix $M(\sigma)$ has determinant $\pm 1.$	In particular, each such matrix is invertible.
+\end{cor}
+\begin{proof} 
+	Note $M(\id) = I$ and thus,
+	\begin{equation*} 
+		M(\sigma)M(\sigma^{-1}) = I,
+	\end{equation*}
+	by the above proposition.
+
+	Since $M(\sigma)$ and $M(\sigma^{-1})$ have integer entries, their determinants are also integers. Taking $\det$ on both sides above yields the result.
+\end{proof}
+
+\begin{defn}[Sign of a permutation] \label{defn:signofperm}
+	Define the function $\sign:S_n \to \{-1, 1\}$ as the following composition
+	\begin{equation*} 
+		S_n \overset{M}{\longrightarrow} M_n(\mathbb{C}) \overset{\det}{\longrightarrow}\{-1, 1\}.
+	\end{equation*}
+\end{defn}
+
+By the above corollary, the above composition is well-defined.
+
+\begin{cor} \label{cor:signisahomo}
+	The $\sign$ function is a homomorphism from $S_n$ to $\{-1, 1\} = \mathbb{Z}^\times.$
+\end{cor}
+\begin{proof} 
+	Follows from the above proposition and the fact that $\det$ is multiplicative.
+\end{proof}
+
+\begin{prop}[Sign in terms of transpositions]
+	Let $\sigma \in S_n$ and suppose that we can write
+	\begin{equation*} 
+		\sigma = \tau_1\cdots\tau_n
+	\end{equation*}
+	for transpositions $\tau_i \in S_n.$
+
+	Then, $\sign\sigma$ is $1$ iff $n$ is even.
+\end{prop}
+\begin{proof} 
+	Let $\tau$ be a transposition, say $(ij).$ Then, $M(\tau)$ is the elementary row matrix that swaps the rows $i$ and $j.$ Thus, 
+	\begin{equation*} 
+		\sign(\tau) = \det M(\tau) = -1.
+	\end{equation*} By the earlier proposition, it follows that
+	\begin{equation*} 
+		M(\sigma) = M(\tau_1)\cdots M(\tau_n)
+	\end{equation*}
+	and hence,
+	\begin{equation*} 
+		\sign(\sigma) = (-1)^n,
+	\end{equation*}
+	which immediately proves the result.
+\end{proof}
+
+\begin{cor}
+	Given any decompositions of a permutation into transpositions, the parity of the number of transpositions is fixed.
+\end{cor}
+
+\begin{rem}
+	The above way seems to have avoided all difficulties of showing that $\sign$ is well-defined by avoiding the definition in terms of transpositions. In fact, we get that as a corollary!\\
+	It seems that the work has gone in the fact that $\det$ is multiplicative. Note that we are actually using this result from linear algebra (over fields, that is) and not necessarily that from ring theory.
+\end{rem}
+
+\subsubsection{Conjugacy classes of \texorpdfstring{$S_n$}{Sn}} \label{subsubsec:conjclassofSn}
+
+\begin{prop}
+	Let $\sigma, \tau \in S_n.$ Suppose that a disjoint cycle decomposition of $\sigma$ is given as
+	\begin{equation*} 
+		(a_1 \ldots a_{m_1})(a_{m_1 + 1} \ldots a_{m_2})\ldots(a_{m_{k-1} + 1} \ldots a_{m_k}),
+	\end{equation*}
+	where $\{a_1, \ldots, a_{m_k}\} = \{1, \ldots, n\}$ and $m_k = n.$ Then, the cycle decomposition of $\tau\sigma\tau^{-1}$ is given by
+	\begin{equation*} 
+		(\tau(a_1) \ldots \tau(a_{m_1}))(\tau(a_{m_1 + 1}) \ldots \tau(a_{m_2}))\ldots(\tau(a_{m_{k-1} + 1}) \ldots \tau(a_{m_k})).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Let 
+	\begin{equation*} 
+		\rho \vcentcolon= (\tau(a_1) \ldots \tau(a_{m_1}))(\tau(a_{m_1 + 1}) \ldots \tau(a_{m_2}))\ldots(\tau(a_{m_{k-1} + 1}) \ldots \tau(a_{m_k})).
+	\end{equation*}
+	We wish to show that $\tau\sigma\tau^{-1} = \rho.$ It suffices to show that $\tau\sigma = \rho\tau.$ To this end, let $i \in [n].$ Then, $i = a_{j}$ for some $j.$ 
+
+	If $j$ is of the form $m_r,$ then (with $m_0 \vcentcolon= 0$)
+	\begin{equation*} 
+		\rho(\tau(i)) = \rho(\tau(a_{m_r})) = \tau(a_{m_{r-1} + 1}) = \tau(\sigma(a_{m_r})) = \tau(\sigma(i)).
+	\end{equation*}
+	Otherwise, we have
+	\begin{equation*} 
+		\rho(\tau(i)) = \rho(\tau(a_j)) = \tau(a_{j+1}) = \tau(\sigma(a_j)) = \tau(\sigma(i)),
+	\end{equation*}
+	completing the proof.
+\end{proof}
+
+\begin{cor}
+	Any two conjugates have the same cycle type.
+\end{cor}
+\begin{proof} 
+	Immediate.
+\end{proof}
+
+\begin{cor}
+	If two permutations have the same cycle type, then they are conjugates.
+\end{cor}
+\begin{proof} 
+	Let $\sigma$ and $\sigma'$ have the same cycle type. Then, we have write
+	\begin{align*} 
+		\sigma &= (a_1 \ldots a_{m_1})(a_{m_1 + 1} \ldots a_{m_2})\ldots(a_{m_{k-1} + 1} \ldots a_{m_k})\\
+		\sigma' &= (b_1 \ldots b_{m_1})(b_{m_1 + 1} \ldots b_{m_2})\ldots(b_{m_{k-1} + 1} \ldots b_{m_k})
+	\end{align*}
+	Then, define $\tau:[n] \to [n]$ by
+	\begin{equation*} 
+		\tau(a_i) = b_i.
+	\end{equation*}
+	This defines a bijection since both $(a_1, \ldots, a_{m_k})$ and $(b_1, \ldots, b_{m_k})$ are permutations of $[n].$ By the earlier proposition, $\tau$ conjugates $\sigma$ to $\sigma'.$
+\end{proof}
+
+The above two corollaries put together gives us:
+\begin{thm}[Description of conjugacy classes] \label{thm:descconjclassSn}
+	The conjugacy classes of $S_n$ consist precisely of permutations of the same cycle type.
+\end{thm}
+
+\begin{rem}
+	We have assumed that every permutation does have a (unique, up to ordering) disjoint cycle decomposition.
+\end{rem}
+
+\subsubsection{Group actions} \label{subsubsec:groupactions}
+
+\begin{defn}%[Group action]
+	An \deff{action} of a group $G$ on a (finite) set $X$ is a homomorphism $\sigma : G \to S_X.$ We often write $\sigma_g$ for $\sigma(g).$ The cardinality of $X$ is called the \deff{degree} of the action.
+
+	For $g \in G$ and $x \in X,$ we often denote $\sigma_g(x)$ by $g \cdot x.$ 
+\end{defn}
+
+\begin{rem}
+	We shall implicitly assume that $\md{X} \neq 2$ from hereon, even though the definition doesn't explicitly demand that. Note that $S_X$ would be the trivial group if $\md{X} = 0, 1$ and there isn't much to discuss about that.
+\end{rem}
+
+\begin{rem}
+	In the more suggestive notation $g \cdot x$ for $\sigma_g(x),$ we get the following identities for all $g_1, g_2 \in G$ and $x \in X$:
+	\begin{enumerate}
+		\item $1 \cdot x = x,$
+		\item $(g_1g_2) \cdot x = g_1 \cdot (g_2 \cdot x).$
+	\end{enumerate}
+	Both follow from the fact that $\sigma$ is a homomorphism and hence, $\sigma_1 = \id_X$ and $\sigma_{g_1g_2} = \sigma_{g_1} \circ \sigma_{g_2}.$
+\end{rem}
+
+\begin{rem}
+	In fact, an alternate definition group action is a map $\cdot : G \times X \to X$ satisfying the above two properties. Note that a map $G \times X \to X$ can be seen as a map $f : G \to \Hom(X, X),$ where $\Hom(X, X)$ is the set of all \emph{functions} from $X$ to itself.
+
+	This set is actually a monoid under the composition operation. In view of \Cref{rem:monoidhomo} and the properties of action, we actually see that $f$ maps into group of invertible elements. However, this is precisely $S_X.$
+\end{rem}
+
+% At this point, it would be educational to recall \Cref{rem:groupaction}.
+
+\begin{defn}%[Orbit]
+	Let $\sigma : G \to S_X$ be a group action. Then \deff{orbit} of $x \in X$ under $G$ is the set
+	\begin{equation*} 
+		G \cdot x = \{\sigma_g(x) \mid g \in G\} = \{g \cdot x \mid g \in G\}.
+	\end{equation*}
+\end{defn}
+
+\begin{prop} \label{prop:orbitspartitionX}
+	The orbits form a partition of $X.$
+\end{prop}
+\begin{proof} 
+	We define the relation $\sim$ on $X$ by $x_1 \sim x_2$ iff there exists $g \in G$ such that $\sigma_g(x_1) = x_2.$
+
+	From the definition, it is clear that $G \cdot x$ is simply the collection of all those $y \in X$ such that $x \sim y.$ Thus, to prove the proposition, it suffices to prove that $\sim$ is an equivalence relation. 
+
+	\begin{enumerate}
+		\item (Reflexive) Note that $1 \cdot x = x$ for all $x \in X.$
+		\item (Symmetric) Note that $g \cdot x = y \implies x = g^{-1} \cdot y$ for all $x, y \in X$ and $g \in G.$
+		\item (Transitive) Let $x, y, z \in X$ and $g_1, g_2 \in G$ be such that
+		\begin{equation*} 
+			g_1 \cdot x = y \andd g_2 \cdot y = z.
+		\end{equation*}
+		Then,
+		\begin{equation*} 
+			(g_2g_1) \cdot x = z. \qedhere
+		\end{equation*}
+	\end{enumerate}
+\end{proof}
+
+\begin{defn}%[Transitive]
+	A group action $\sigma : G \to S_X$ is said to be \deff{transitive} if there is a unique orbit.
+\end{defn}
+
+\begin{rem}
+	By the earlier proposition, it is clear that the above definition is equivalent to saying that given any $x, y \in X,$ there exists $g \in G$ such that $\sigma_g(x) = y.$
+\end{rem}
+
+\begin{ex}[Regular action] \label{ex:regularaction}
+	Let $G$ be a group and consider $X = G.$ Then, $G$ acts on $X$ by left multiplication. That is, $\lambda : G \to S_X$ defined by
+	\begin{equation*} 
+		\lambda_g(x) = gx
+	\end{equation*}
+	for all $g, x \in G$ is a group action.
+
+	This is a transitive action as can be easily verified.
+\end{ex}
+
+% \begin{rem}
+% 	Recall \Cref{defn:regularrepresentation} from earlier. The ``Regular'' there and in the previous example are indeed related. This will be made more precise in the next subsection.
+% \end{rem}
+
+\begin{ex}[Coset action] \label{ex:cosetaction}
+	Let $G$ be a group and $H$ a (not necessarily normal) subgroup. Let $G/H$ be the set of all \emph{left} cosets of $H.$ Then, $G$ acts on $G/H$ by left multiplication. That is, $\sigma : G \to S_{G/H}$ defined by
+	\begin{equation*} 
+		\sigma_g(C) = gC
+	\end{equation*}
+	for all $g \in G$ and $c \in G/H$ is a group action.
+
+	Let us check this. Note that for $g_1, g_2 \in C,$ we have
+	\begin{align*} 
+		\sigma_{g_1g_2}(C) &= (g_1g_2)C\\
+		&= \{g_1g_2c \mid c \in C\}\\
+		&= g_1\{g_2c \mid c \in C\}\\
+		&= g_1 (g_2 C)\\
+		&= \sigma_{g_1}(\sigma_{g_2}(C)),
+	\end{align*}
+	proving that
+	\begin{equation*} 
+		\sigma_{g_1g_2} = \sigma_{g_1} \cdot \sigma_{g_2}.
+	\end{equation*}
+	Using the fact that $\sigma_1 = \id_{G/H},$ we see that each $\sigma_g$ is a bijection and that $\sigma$ is a homomorphism.
+
+	Moreover, this a transitive. Indeed, given any two cosets $x_1H, x_2H \in G/H,$ we see that $g = x_2x_1^{-1}$ satisfies
+	\begin{equation*} 
+		\sigma_g(x_1H) = x_2H. 
+	\end{equation*}
+\end{ex}
+
+\begin{defn}%[2-transitive]
+	An action $\sigma : G \to S_X$ on $X$ is \deff{2-transitive} if given any two pairs of \underline{distinct} elements $(x, y) \in X^2$ and $(x', y') \in X^2,$ there exists $g \in G$ such that
+	\begin{equation*} 
+		\sigma_g(x) = x' \andd \sigma_g(y) = y'.
+	\end{equation*}
+\end{defn}
+Note that the ``distinct'' above means that $x \neq y$ and $x' \neq y'.$ 
+
+\begin{prop} \label{prop:2transistrans}
+	A 2-transitive action is transitive.
+\end{prop}
+\begin{proof} 
+	Let $x, y \in X$ be arbitrary. We wish to show that there exists $g \in G$ such that $\sigma_g(x) = y.$ Note that since $\sigma_1(x) = x,$ we may assume $x \neq y.$
+
+	Put $(x', y') = (y, x).$ By 2-transitivity, there exists $g \in G$ such that 
+	\begin{equation*} 
+		\sigma_g(x) = x' = y,
+	\end{equation*}
+	as desired.
+\end{proof}
+
+\begin{ex}[Action of $D_4$]
+	The converse of the above is not true. Consider the action of $D_4$ on the four vertices of a square. It is easy to see that his action is transitive. 
+
+	Label the vertices $1, \ldots, 4.$ Any $g \in D_4$ takes opposite vertices to opposite vertices. Thus, considering the pairs
+	\begin{equation*} 
+		(x, y) = (1, 3) \andd (x', y') = (2, 3)
+	\end{equation*}
+	shows that the action is not 2-transitive.
+\end{ex}
+
+\begin{ex}[Action of symmetric groups] \label{ex:actsymgroups}
+	As before, there's a natural action of $S_n$ on $X \vcentcolon= \{1, \ldots, n\}.$ 
+
+	To be more explicit, we define $\tau \cdot i = \tau(i)$ for all $\tau \in S_n$ and $i \in X.$
+
+	For $n \ge 2,$ this action is 2-transitive. Indeed, let $i \neq j$ and $i' \neq j'$ be elements in $X.$ Define 
+	\begin{equation*} 
+		Y_1 \vcentcolon= X \setminus \{i, j\} \andd Y_2 \vcentcolon= X \setminus \{i', j'\}.
+	\end{equation*}
+	Since $\md{Y_1} = \md{Y_2},$ there exists a bijection $\alpha : Y_1 \to Y_2.$ Define $\tau \in S_n$ by
+	\begin{equation*} 
+		\tau(k) = \begin{cases}
+			i' & k = i,\\
+			j' & k = j,\\
+			\alpha(k) & \text{otherwise}.
+		\end{cases}
+	\end{equation*}
+	The above is an element of $S_n$ precisely because $i \neq j$ and $i' \neq j'.$ Noting that $\tau \cdot i = i'$ and $\tau \cdot j = j'$ establishes that the action is 2-transitive.
+
+	In terms of cycles, we can see that $\tau$ is simply $(ii')(jj'),$ assuming that all four are distinct. One can take different cases considering $i = i'$ and so on to explicitly get a cycle representation in each case.
+\end{ex}
+
+\begin{defn}%[Orbital]
+	Let $\sigma : G \to S_X$ be a group action. Define $\sigma^2 : G \to S_{X \times X}$ by
+	\begin{equation*} 
+		\sigma_g^2(x_1, x_2) = (\sigma_g(x_1), \sigma_g(x_2)).
+	\end{equation*}
+	This is a group action of $G$ on $S \times S.$ An orbit of $\sigma^2$ is called an \deff{orbital} of $\sigma.$ The number of orbitals is called the \deff{rank} of $\sigma.$
+\end{defn}
+
+\begin{rem}
+	Let $\Delta = \{(x, x) \mid x \in X\}.$ Note that 
+	\begin{equation*} 
+		\sigma_g^2(x, x) = (\sigma_g(x), \sigma_g(x)) \in \Delta.
+	\end{equation*}
+	That is $\Delta$ is \emph{closed} under the action of $\sigma^2.$ Moreover, $\Delta$ is an orbital iff $\sigma$ is transitive.
+\end{rem}
+
+\begin{rem}
+	Note that $\sigma$ being 2-transitive is precisely the same as saying that
+	\begin{equation*} 
+		X^2 \setminus \Delta = \{(x, y) \in X \times X \mid x \neq y\}
+	\end{equation*}
+	is an orbital.
+\end{rem}
+
+\begin{prop} \label{prop:2transiffrank2}
+	Let $\sigma : G \to S_X$ be a group action (with $\md{X} \ge 2$). Then, $\sigma$ is 2-transitive if and only if $\sigma$ is transitive with $\rank(\sigma) = 2.$
+\end{prop}
+
+\begin{proof} 
+	Assume that $\sigma$ is 2-transitive. By \Cref{prop:2transistrans}, it follows that $\sigma$ is transitive. By the earlier remarks, we see that $\Delta$ and $X^2 \setminus \Delta$ are (distinct) orbitals. Since their union is $X^2,$ it follows that $\rank(\sigma) = 2.$
+
+	Conversely, suppose that $\sigma$ is transitive and $\rank(\sigma) = 2.$ Since $\Delta$ is an orbital and orbitals partition $X \times X$ (\Cref{prop:orbitspartitionX}), it follows that $X^2 \setminus \Delta$ is the other orbital. As before, this is precisely saying that $\sigma$ is 2-transitive.
+\end{proof}
+	
+In the above, we $\md{X} \ge 2$ was implicitly used in asserting that $X^2 \setminus \Delta$ is nonempty.
+
+\begin{rem}
+	The proof also shows that the rank is at least $2,$ whenever $\md{X} > 1,$ regardless of $\sigma$ being transitive.	
+\end{rem}
+
+
+\begin{ex}[Rank of $D_4$]
+	As noted earlier, the action of $D_4$ on $\{1, \ldots, 4\}$ is not 2-transitive. Let us now compute the rank. Since the action is transitive, we know that $\Delta$ is an orbital.
+
+	We now see how to partition $X^2 \setminus \Delta$ into orbitals. Note that if $(i, j) \in X^2 \setminus \Delta,$ then $i \neq j.$ There are precisely two distinct possibilities: Either $i$ and $j$ are adjacent, or $i$ and $j$ are opposite.
+
+	It is easy to see that if $(i, j)$ and $(i', j')$ are both adjacent (resp. opposite) pairs of vertices, then they are in the same orbit. Moreover, as commented earlier, no opposite pair is in the orbit of any adjacent pair.
+
+	Thus, there are precisely three orbitals:
+	\begin{align*} 
+		\Delta &= \{(x, y) \in X \times X \mid x = y\},\\
+		\mathcal{O}_{\text{opp}} &= \{(x, y) \in X \times X \mid x - y \equiv 2 \bmod 4\},\\
+		\mathcal{O}_{\text{adj}} &= \{(x, y) \in X \times X \mid x - y \equiv 1 \bmod 2\}.
+	\end{align*}
+\end{ex}
+
+\begin{ex}[Rank of $S_n$]
+	As noted in \Cref{ex:actsymgroups}, the (natural) action of $S_n$ is 2-transitive if $n \ge 2.$ Thus, it has rank $2.$
+\end{ex}
+
+\begin{defn}
+	Let $\sigma : G \to S_X$ be a group action. For $g \in G,$ we define
+	\begin{equation*} 
+		\Fix(g) = \{x \in X \mid \sigma_g(x) = x\}
+	\end{equation*}
+	to be the set of \deff{fixed points} of $g.$ Let $\Fix^2(g)$ denote the set of fixed points of $g$ for the action $\sigma^2.$
+\end{defn}
+
+Note that $\Fix^2(g)$ could also possibly denote the Cartesian product of the set $\Fix(g)$ with itself. The following proposition states that this is unambiguous since the two are equal.
+
+\begin{prop} \label{prop:fix2isfix2}
+	Let $\sigma : G \to S_X$ be a group action. Then,
+	\begin{equation*} 
+		\Fix^2(g) = \Fix(g) \times \Fix(g).
+	\end{equation*}
+	In particular, $\md{\Fix^2(g)} = \md{\Fix(g)}^2.$
+\end{prop}
+
+\begin{proof} 
+	Let $(x, y) \in X \times X.$ Then
+	\begin{align*} 
+		(x, y) \in \Fix^2(g) &\iff \sigma^2_g(x, y) = (x, y)\\
+		& \iff (\sigma_g(x), \sigma_g(y)) = (x, y)\\
+		& \iff \sigma_g(x) = x \andd \sigma_y(y) = y\\
+		& \iff x \in \Fix(g) \andd y \in \Fix(g)\\
+		& \iff (x, y) \in \Fix(g) \times \Fix(g). \qedhere
+	\end{align*}
+\end{proof}
+% \subsection{Some more group actions}
+% \begin{defn}
+% 	Let $G$ act on a set $X$ and $x \in X$
+% \end{defn}
+
+\begin{defn}%[$G$-equivalence relation]
+	\label{defn:leftcongruence}
+	Let $X$ be a set and $\cdot : G \times X \to X$ an action. An equivalence relation $\sim$ on $X$ is said to be a \deff{$G$-equivalence relation} if $x \sim y$ implies $g \cdot x \sim g \cdot y$ for all $x, y \in X$ and $g \in G.$
+\end{defn}
+
+\begin{prop} \label{prop:leftcongruence}
+	Let $G$ act on a set $X.$ Suppose that $\sim$ is an equivalence relation on $X$ which is a $G$-equivalence relation. Then, $G$ acts on $X/{\sim}$ with the action defined by $g \cdot [x] = [g \cdot x]$ for all $(g, x) \in G \times X.$
+\end{prop}
+\begin{proof} 
+	The definition is well-defined precisely because $\sim$ is a $G$-equivalence relation. To see that it is indeed an action, note that 
+	\begin{equation*} 
+		1 \cdot [x] = [1 \cdot x] = [x]
+	\end{equation*}
+	and
+	\begin{equation*} 
+		g_1 \cdot (g_2 \cdot [x]) = g_1 \cdot [g_2 \cdot x] = [g_1 \cdot (g_2 \cdot x)] = [(g_1 g_2) \cdot x] = (g_1 g_2) \cdot [x]. \qedhere
+	\end{equation*}
+\end{proof}
+
+\subsubsection{Double cosets} \label{subsubsec:doublecosets}
+
+\begin{defn}%[Double cosets]
+	\label{defn:doublecosets}
+	Let $G$ be a group and $H, K$ be subgroups of $G.$ Then, the map $\sigma : H \times K \to S_G$ defined as
+	\begin{equation*} 
+		\sigma_{(h, k)}(g) = hgk^{-1}
+	\end{equation*}
+	is a group action. The orbit of $g$ under $H \times K$ is then the set
+	\begin{equation*} 
+		HgK \vcentcolon= \{hgk^{-1} \mid h \in H,\; k \in K\} = \{hgk \mid h \in H,\; k \in K\}
+	\end{equation*}
+	and is called a \deff{double coset} of $g.$ We write $\dcos{H}{G}{K}$ for the set of all double cosets of $H$ and $K$ in $G.$
+\end{defn}
+
+\begin{rem}
+	Note that $H \times K$ is indeed a group. For this action, we only consider $G$ to be a \emph{set}. To see that this is a group action, we note that
+	\begin{equation*} 
+		\sigma_{(1, 1)}(g) = 1g1^{-1} = 1
+	\end{equation*}
+	and
+	\begin{equation*} 
+		\sigma_{(hh', kk')}(g) = (hh')g(kk'^{-1}) = h(h'gk'^{-1})k^{-1} = h\sigma_{(h', k')}(g)k^{-1} = \left(\sigma_{(h, k)} \circ \sigma_{(h', k')}\right)(g).
+	\end{equation*}
+\end{rem}
+
+\begin{prop}
+	Distinct double cosets are disjoint and $G$ is the union of all double cosets. In other words, the double cosets partition $G.$
+\end{prop}
+\begin{proof} 
+	The double cosets are just the cosets under the action defined above. Thus, we are done by \Cref{prop:orbitspartitionX}.
+\end{proof}
+
+\begin{prop} \label{prop:dcosetsofnormal}
+	Suppose $H \unlhd G.$ Then, $\dcos{H}{G}{H} = G/H.$
+\end{prop}
+\begin{proof} 
+	We show that given $g \in G,$ we have $gH = HgH.$ This would prove the proposition.
+
+	Note that $gH \subset HgH$ is clear since $1 \in H.$
+
+	Conversely, note that
+	\begin{equation*} 
+		h_1gh_2 = g\underbrace{g^{-1}h_1g}_{\in H}h_2 \in gH. \qedhere
+	\end{equation*}
+\end{proof}
+
+\subsection{Partitions and Tableaux} \label{subsec:partsandtableaux}
+\begin{defn}%[Partition]
+	\label{defn:partition}
+	Let $n \in \mathbb{N}.$ A \deff{partition} of $n$ is a tuple $\lambda = (\lambda_1, \ldots, \lambda_l)$ of positive integers $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_l$ such that $\lambda_1 + \cdots + \lambda_l = n.$ We denote this by $\lambda \vdash n.$
+\end{defn}
+
+\begin{ex}
+	$(4, 3, 2, 1),\;(5, 5),\;(10)$ are partitions of $10$ but $(1, 2, 3, 4)$ is not and neither is $(4, 2, 4).$
+\end{ex}
+
+\begin{defn}%[Cycle type]
+	Given any permutation $\sigma \in S_n,$ we define the \deff{cycle type} $\type(\sigma)$ of $\sigma$ as 
+	\begin{equation*} 
+		\type(\sigma) = (\lambda_1, \ldots, \lambda_l),
+	\end{equation*} 
+	where $\lambda_1, \ldots, \lambda_l$ are the lengths of the disjoint cycles of $\sigma$ written in decreasing order, with multiplicity. We include the cycles of length $1$ as well.
+\end{defn}
+\begin{rem}
+	Note that given any $\sigma \in S_n,$ we have $\type(\sigma) \vdash n;$ that is, the cycle type of $n$ gives a partition of $n.$ Conversely, given any partition $\lambda \vdash n,$ there exists a permutation $\sigma \in S_n$ such that $\type(\sigma) = \lambda.$
+\end{rem}
+
+\begin{ex}
+	Let $n = 5$ and consider the cycle types of the following permutations.
+	\begin{align*} 
+		\type(\id) &= (1, 1, 1, 1, 1)\\
+		\type\left((12)(345)\right) &= (3, 2)\\
+		\type\left((12)\right) &= (2, 1, 1, 1)\\
+		\type\left((12)(13)\right) &= (3, 1, 1)\\
+		\type\left((12345)\right) &= (5).
+	\end{align*}
+	Note that for the fourth one, we must first convert $(12)(13)$ to have a disjoint cycle representation. This is done by noting that $(12)(13) = (132).$
+\end{ex}
+
+\begin{defn}%[Young diagram]
+	\label{defn:youngdiag}
+	If $\lambda = (\lambda_1, \ldots, \lambda_l)$ is a partition of $n,$ then the \deff{Young diagram} (or simply, the \deff{diagram}) of $\lambda$ consists of $n$ boxes placed into $l$ rows where the $i$-th row has $\lambda_i$ boxes.
+\end{defn}
+
+\begin{ex}
+	For the partition $(3, 1)$ of $4,$ we have the diagram as \ydiagram{3, 1}.
+\end{ex}
+
+% \begin{defn}%[Conjugate partition]
+% 	\label{defn:conjpartition}
+% 	If $\lambda \vdash n,$ then the \deff{conjugate partition} $\lambda^\mathsf{T}$ of $\lambda$ is the partition whose Young diagram is the transpose of the diagram of $\lambda.$
+% \end{defn}
+
+% \begin{ex}
+% 	For $\lambda = (3, 1)$ as before, the transpose of its diagram is the diagram
+% 	\begin{equation*} 
+% 		\ydiagram{2, 1, 1,}
+% 	\end{equation*}
+% 	and thus, $\lambda^\mathsf{T} = (2, 1, 1).$
+% \end{ex}
+
+We now put an order on the partitions of $n.$
+\begin{defn}%[Domination order]
+	\label{defn:domorder}
+	Suppose that $\lambda = (\lambda_1, \ldots, \lambda_l)$ and $\mu = (\mu_1, \ldots, \mu_m)$ are partitions of $n.$ Then, $\lambda$ is said to \deff{dominate} $\mu$ if
+	\begin{equation*} 
+		\lambda_1 + \cdots + \lambda_i \ge \mu_1 + \cdots + \mu_i
+	\end{equation*}
+	for all $i \ge 1.$ Here, we set $\lambda_i = 0$ if $i > l$ and $\mu_i = 0$ if $i > m.$
+
+	We denote this by $\lambda \unrhd \mu.$
+\end{defn}
+
+\begin{rem}
+	The above definition is simply saying that for all $i,$ the number of blocks in the first $i$ rows of the diagram of $\lambda$ is at least that in the first $i$ rows of the diagram of $\mu.$
+\end{rem}
+
+\begin{ex}
+	$(5, 1) \unrhd (3, 3)$ since $5 \ge 3$ and $5 + 1 \ge 3 + 3.$
+
+	However, neither of $(3, 3, 1) \unrhd (4, 1, 1, 1)$ or $(4, 1, 1, 1) \unrhd (3, 3, 1)$ is true. Indeed, note that
+	\begin{equation*} 
+		\lambda = (3, 3, 1) = \ydiagram{3, 3, 1} \andd \mu = (4, 1, 1, 1) = \ydiagram{4, 1, 1, 1}.
+	\end{equation*}
+	If we consider the first row, then $\mu$ has more boxes than $\lambda.$ However, if we look at the first two rows, then the situation is reversed.
+\end{ex}
+\begin{ex}
+	\begin{equation*} 
+		\ytableausetup{centertableaux}
+		\ydiagram{4} \unrhd \ydiagram{3, 1} \unrhd \ydiagram{2, 2} \unrhd \ydiagram{2, 1, 1,} \unrhd \ydiagram{1, 1, 1, 1}
+	\end{equation*}
+\end{ex}
+\begin{ex}
+	Note that the partitions $(1, \ldots, 1) \vdash n$ and $(n)$ are the minimum and maximum elements of the poset. That is, given any partition $\lambda \vdash n,$ one has
+	\begin{equation*} 
+		(n) \unrhd \lambda \unrhd (1, \ldots, 1).
+	\end{equation*}
+\end{ex}
+
+\begin{prop}
+	Let $\lambda, \mu, \rho$ be any partitions of $n.$ Then:
+	\begin{enumerate}
+		\item (Reflexivity) $\lambda \unrhd \lambda,$
+		\item (Anti-symmetry) $\lambda \unrhd \mu$ and $\mu \unrhd \lambda$ implies $\lambda = \mu,$
+		\item (Transitivity) $\lambda \unrhd \mu$ and $\mu \unrhd \rho$ implies $\lambda \unrhd \rho.$
+	\end{enumerate}
+	In other words, the set of all partitions of $n$ along with $\unrhd$ forms a \emph{poset}.
+\end{prop}
+\begin{proof} 
+	Reflexivity and transitivity are obvious. We prove anti-symmetry. Suppose $\lambda = (\lambda_1, \ldots, \lambda_l)$ and $\mu = (\mu_1, \ldots, \mu_m)$ are partitions of $n$ such that $\lambda \unrhd \mu$ and $\mu \unrhd \lambda.$ \\
+	Without loss of generality, we may assume that $l \le m.$ Note that we have
+	\begin{equation*} 
+		\lambda_1 + \cdots + \lambda_i \le \mu_1 + \cdots + \mu_i \le \lambda_1 + \cdots + \lambda_i
+	\end{equation*}
+	for all $i$ and hence, we have the following \emph{equality} for all $i:$
+	\begin{equation*} 
+		\lambda_1 + \cdots + \lambda_i = \mu_1 + \cdots + \mu_i.
+	\end{equation*}
+	Successively putting $i = 1, \ldots, l$ shows that $\lambda_k = \mu_k$ for $k = 1, \ldots, l.$ Now, since
+	\begin{equation*} 
+		\lambda_1 + \cdots + \lambda_l = n = \mu_1 + \cdots + \mu_l + \cdots + \mu_m,
+	\end{equation*}
+	we see that $m = l.$ (Since each $m_k$ is positive.) Thus, we have $\lambda = \mu.$
+\end{proof}
+
+\begin{defn}%[Young tableau]
+	\label{defn:youngtableau}
+	If $\lambda \vdash n,$ then a \deff{$\lambda$-tableau}\footnotemark (or \deff{Young tableau of shape $\lambda$}) is an array $t$ of integers by placing $1, \ldots, n$ into the boxes of the Young diagram for $\lambda.$
+\end{defn}
+\footnotetext{plural: tableaux}
+Given a $\lambda \vdash n,$ there are $n!$ $\lambda$-tableaux. In fact, there is a natural action of $S_n$ on the set of all $\lambda$-tableaux.
+
+\begin{defn}%[]
+	For $n \in \mathbb{N}$ and $\lambda \vdash n,$ we see that $S_n$ acts transitively on the set of all $\lambda$-tableaux. The action of $\sigma \in S_n$ on $t$ is given by applying $\sigma$ to all the elements of $t.$ This tableau is denoted by $\sigma t.$
+\end{defn}
+
+\begin{ex}
+	Given $\lambda = (3, 2, 1),$ the following are few (of the $720$ many) $\lambda$-tableaux:
+	\begin{equation*} 
+		\begin{ytableau}
+			1 & 2 & 3 \\
+			4 & 5  \\
+			6
+		\end{ytableau},\;\;
+		\begin{ytableau}
+			3 & 1 & 2 \\
+			6 & 5  \\
+			4
+		\end{ytableau},\;\;
+		\begin{ytableau}
+			3 & 2 & 6 \\
+			1 & 4  \\
+			5
+		\end{ytableau}.
+	\end{equation*}
+\end{ex}
+
+\begin{prop} \label{prop:domprop}
+	Let $\lambda = (\lambda_1, \ldots, \lambda_l)$ and $\mu = (\mu_1, \ldots, \mu_m)$ be partitions of $n.$ Suppose that $t^\lambda$ is a $\lambda$-tableau and $s^\mu$ is a $\mu$-tableau such that if two entries are in the same row of $s^\mu,$ then they are in different columns of $t^\lambda.$ In such a case, there exists a $\lambda$-tableau $u^\lambda$ such that:
+	\begin{enumerate}[label = (\alph*)]
+		\item \label{item:008} The $j$-th columns of $t^\lambda$ and $u^\lambda$ contain the same elements for $1 \le j \le l;$
+		\item \label{item:009} The entries of the first $i$ rows of $s^\mu$ belong to the first $i$ rows of $u^\lambda$ for each $1 \le i \le m.$
+	\end{enumerate}
+	In particular, $l \le m.$
+\end{prop}
+
+\begin{ex}
+	Let us look at an example of what the proposition is really saying. Consider
+	\begin{equation*} 
+		t^\lambda = \begin{ytableau}
+			8 & 5 & 4 & 2 & 7\\
+			1 & 3 \\
+			6
+		\end{ytableau}
+		\andd
+		s^\mu = \begin{ytableau}
+			1 & 2 & 3 & 4\\
+			5 & 6\\
+			7 & 8
+		\end{ytableau}.
+	\end{equation*}
+	Note that each of $1, \ldots, 4$ appear in different columns in $t^\lambda.$ The same is true for $5, 6$ and $7, 8.$ Thus, the tableaux satisfy the hypothesis of the proposition.
+
+	Can we take $u^\lambda = t^\lambda?$ No, the problem is that $1, 3$ appear in the first row of $s^\mu$ but not in the first row of $t^\lambda.$ To remedy this, we may swap $(1, 8)$ and $(3, 5)$ in $t^\lambda$ to get:
+	\begin{equation*} 
+		t_1^\lambda = \begin{ytableau}
+			1 & 3 & 4 & 2 & 7\\
+			8 & 5 \\
+			6
+		\end{ytableau}.
+	\end{equation*}
+	Note that since we only swapped within columns, \ref{item:008} is maintained.\\
+	Can we now take $t_1^\lambda$ as $u^\lambda?$ The answer is still ``no.'' The first row is all good but note that $6$ appears in the first two rows of $s^\mu$ but not of $t_1^\lambda.$ Thus, we swap $(6, 8)$ to get
+
+	\begin{equation*} 
+		t_2^\lambda = \begin{ytableau}
+			1 & 3 & 4 & 2 & 7\\
+			6 & 5 \\
+			8
+		\end{ytableau}.
+	\end{equation*}
+	Can we now take $t_2^\lambda = u^\lambda?$ The answer is now ``yes.'' \\
+	The condition \ref{item:008} is satisfied as can be seen by noting that that each column of $u^\lambda$ is obtained as a permutation of the corresponding column of $t^\lambda.$
+
+	That the condition \ref{item:009} is satisfied can also be observed by simply checking each row.
+\end{ex}
+In fact, the proof of the proposition is simply giving an algorithm on constructing the $u^\lambda$ following steps similar to the ones above. As an exercise, the reader can try showing that for the same $\mu$ as in the above example and for $\lambda = (3, 3, 2),$ one cannot find $t^\lambda$ and $s^\mu$ which satisfy the hypothesis of the proposition.
+
+\begin{proof} 
+	For each $1 \le r \le m,$ we construct a $\lambda$-tableau $t_r^\lambda$ such that:
+	\begin{enumerate}[label = (\alph*')]
+		\item \label{item:010} The $j$-th column of $t^\lambda$ and $t_r^\lambda$ contain the same elements for $1 \le j \le \lambda_1;$
+		\item \label{item:011} The entries of the first $i$ rows of $s^\mu$ belong to the first $i$ rows of $t_r^\lambda$ for each $1 \le i \le r.$
+	\end{enumerate}
+	Note that taking $u^\lambda = t_m^\lambda$ would then prove the proposition. The construction is by induction on $r.$ Set $t_0^\lambda \vcentcolon= t^\lambda.$ \\
+	Suppose that $t_0^\lambda, \ldots, t^r_\lambda$ have been constructed where $0 \le r \le m - 1.$ We define $t_{r+1}^\lambda$ as follows:
+
+	For each $k$ in the $(r + 1)$-th row of $s^\mu,$ let $c(k)$ be the column of $t_r^\lambda$ in which $k$ appears. Note that by the hypothesis and \ref{item:010}, it follows that if $k \neq k',$ then $c(k) \neq c(k').$\footnote{Note that $s^\mu$ is fixed throughout the process.}\\
+	Now, if $k$ already appears in the first $r + 1$ rows of $t_r^\lambda,$ then we do nothing. Thus, let us assume that $k$ does not appear in the first $r + 1$ rows of $t_r^\lambda.$ From this, it follows that $c(k)$ intersects row $r + 1$ of $t_r^\lambda.$\\
+	
+	\begin{blockquote}
+		To see why $c(k)$ must intersect row $r + 1:$ note that if $c(k)$ does not intersect row $r + 1,$ then $c(k)$ cannot intersect any later row either. (The sizes of the rows are non-increasing.) This means that all elements of $c(k)$ are in the first $r$ rows. However, we know that $k$ is an element of $c(k)$ not in the first $r$ rows.
+	\end{blockquote}
+
+	Now, we simply swap $k$ with the element appearing in the intersection of $c(k)$ with row $r + 1.$ This preserves \ref{item:010} since we are only permuting within the same column. This also preserves \ref{item:011} since the first $r$ rows are left unchanged. \\
+	Moreover, note that since different $k$ correspond to different $c(k),$ the order in which we do the swap does not matter and the previous changes are unaffected. Thus, we get \ref{item:011} for $t^\lambda_{r + 1}$ as well.
+
+	This finishes the construction. The final statement follows from the fact that the numbers $1$ through $n$ all appear in the first $m$ rows of $s^\mu$ and hence, of $t^\lambda.$ Thus, $t^\lambda$ cannot have any more rows.
+\end{proof}
+\begin{rem}
+	It is possible that $l < m$ in the above. Indeed, consider
+	\begin{equation*} 
+		u^\lambda = \ydiagram{2} \andd \mu^s = \ydiagram{1, 1}
+	\end{equation*}
+	filled in any manner.
+\end{rem}
+
+\begin{lem}[Dominance lemma] \label{lem:domlemma}
+	Let $\lambda$ and $\mu$ be partitions of $\mu$ and suppose that $t^\lambda$ and $s^\mu$ are tableaux of the respective partitions. Further suppose that integers in the same row of $s^\mu$ are located in different columns of $t^\lambda.$ Then, $\lambda \unrhd \mu.$
+\end{lem}
+\begin{proof} 
+	Let $u^\lambda$ be as in \Cref{prop:domprop}. Let $\lambda = (\lambda_1, \ldots, \lambda_l)$ and $\mu = (\mu_1, \ldots, \mu_m).$ Note that for each $i,$ the number $\lambda_1 + \cdots + \lambda_i$ denotes the number of boxes in the first $i$ rows of $\lambda.$ (The same is true for $\mu$ instead of $\lambda$ as well.)\\
+	However, since the numbers in the first $i$ rows of $s^\mu$ appear in $u^\lambda,$ we see that
+	\begin{equation*} 
+		\lambda_1 + \cdots + \lambda_i \ge \mu_1 + \cdots + \mu_i
+	\end{equation*}
+	for all $i \ge 1.$ Thus, $\lambda \unrhd \mu.$
+\end{proof}
+
+\subsection{Number Theory} \label{subsec:numbertheory}
+\begin{defn}%[Algebraic integer]
+	\label{defn:alginteger}
+	A complex number $\alpha$ is said to be an \deff{algebraic integer} if it is a root of a \emph{monic} polynomial with integer coefficients. In other words, there exists $n > 0$ and integers $a_0, \ldots, a_{n - 1}$ such that
+	\begin{equation*} 
+		\alpha^n + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0.
+	\end{equation*}
+	The set of all algebraic integers is denoted by $\mathbb{A}.$
+\end{defn}
+
+\begin{ex}[Non-example]
+	Note that the ``monic'' makes an important difference. For example, $\frac{1}{2}$ is a root of the polynomial $2z - 1$ but it is in fact not an algebraic integer. (\Cref{prop:rationalalgintareint}.)
+\end{ex}
+
+\begin{ex}[Integers]
+	Any integer $m$ is trivially an algebraic integer since it is a root of the monic $z - m.$
+\end{ex}
+
+\begin{ex}[$n$-th roots] \label{ex:nrootsalgint}
+	More generally, given any $m \in \mathbb{Z}$ and $n \in \mathbb{N},$ any $n$-th root of $m$ is an algebraic integer, in view of the polynomial $z^n - m.$ Thus, each $\omega_m^k$ is an algebraic integer and so is $\sqrt[n]{2}.$ Moreover, so is $\sqrt[3]{2}\omega_3.$ As we shall see later, product of two algebraic integers is always an algebraic integer.
+\end{ex}
+
+\begin{ex}[Eigenvalues of integer matrices] \label{ex:eigenintmatrix}
+	Let $A = (a_{ij})$ be a matrix with integer entries. Then, the eigenvalues of $A$ are precisely the roots of $\det(zI - A).$ Now, $\det(zI - A)$ is a monic polynomial in $z$ and each coefficient is an integer because each $a_{ij}$ is so. Thus, each eigenvalue is an algebraic integer.
+\end{ex}
+
+\begin{ex}[Additive inverse of algebraic integers]
+	Let $\alpha \in \mathbb{C}$ be an algebraic integer and let $p(z)$ be a monic integer polynomial of degree $n$ such that $p(\alpha) = 0.$ Then, $q(z) \vcentcolon= (-1)^np(-z)$ is again a monic integer polynomial. Moreover, $q(-\alpha) = (-1)^np(\alpha) = 0.$
+
+	Thus, $\mathbb{A}$ is closed under additive inverses.
+\end{ex}
+
+\begin{ex}[Conjugate of algebraic integers]
+	Let $\alpha \in \mathbb{C}$ be an algebraic integer and let $p(z)$ be a monic integer polynomial such that $p(\alpha) = 0.$ Since $p(z)$ is a real polynomial, we see that $p(\overline{\alpha}) = 0.$
+
+	Thus, $\mathbb{A}$ is closed under conjugation.
+\end{ex}
+
+\begin{prop} \label{prop:rationalalgintareint}
+	If $\alpha \in \mathbb{Q}$ is an algebraic integer, then $\alpha \in \mathbb{Z}.$ In other words, the rational algebraic integers are precisely the integers.
+\end{prop}
+\begin{proof} 
+	Let $r = p/q \in \mathbb{Q}$ be algebraic with $p \in \mathbb{Z}, q \in \mathbb{N}$ and $\gcd(p, q) = 1.$ Since $r$ is algebraic, there exist $a_0, \ldots, a_{n-1}$ such that
+	\begin{equation*} 
+		r^n + a_{n - 1}r^{n - 1} + \cdots + r_0 = 0.
+	\end{equation*}
+	Multiplying the above with $q^n,$ we get
+	\begin{equation*} 
+		p^n + a_{n - 1}p^{n - 1}q + \cdots + r_0q^n = 0.
+	\end{equation*}
+	Clearly, every term except for the first is divisible by $q.$ Thus, so is the first term. That is, $q \mid p^n.$ Since $\gcd(p, q) = 1$ and $q > 0,$ we get $q = 1.$ Thus, $r = p \in \mathbb{Z},$ as desired.
+\end{proof}
+
+We would like to show that $\mathbb{A}$ is closed under sums and products. Since $0, 1 \in \mathbb{A}$ and $\mathbb{A}$ is closed under inverses, this would show that $\mathbb{A}$ is a subring of $\mathbb{C}.$ For that, we see an alternate characterisation of elements of $\mathbb{A}.$
+
+\begin{prop} \label{prop:characalgint}
+	An element $y \in \mathbb{C}$ is an algebraic integer if and only if there exist $y_1, \ldots, y_t \in \mathbb{C}$ not all zero and a $t \times t$ integer matrix $A$ such that
+	\begin{equation*} 
+		\begin{bmatrix}
+			yy_1\\
+			yy_2\\
+			\vdots\\
+			yy_t
+		\end{bmatrix} = A\begin{bmatrix}
+			y_1\\
+			y_2\\
+			\vdots\\
+			y_t
+		\end{bmatrix}.
+	\end{equation*}
+	In other words, each $yy_i$ is an integral linear combination of the $y_j.$
+\end{prop}
+\begin{proof} 
+	$(\implies)$ Suppose that $y \in \mathbb{A}.$ Let $y$ be a root of 
+	\begin{equation*} 
+		p(z) = z^t + a_{t - 1}y^{t - 1} + \cdots + a_0.
+	\end{equation*}
+	Thus, we have $y^t = -a_{t - 1}y^{t - 1} - \cdots - a_0.$ Putting $y_i = y^{i - 1}$ for $1 \le i \le n$ gives
+	\begin{equation*} 
+		\begin{bmatrix}
+			yy_1\\
+			yy_2\\
+			\vdots\\
+			yy_{t - 1}\\
+			yy_t
+		\end{bmatrix} = \begin{bmatrix}
+			y^1\\
+			y^2\\
+			\vdots\\
+			y^{t - 1}\\
+			y^t
+		\end{bmatrix} = \begin{bmatrix}
+			0 & 1 & 0 & \cdots & 0 & 0\\
+			0 & 0 & 1 & \cdots & 0 & 0\\
+			\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+			0 & 0 & 0 & \cdots & 0 & 1\\
+			-a_0 & -a_1 & -a_2 & \cdots & -a_{t - 2} & -a_{t - 1}
+		\end{bmatrix}\begin{bmatrix}
+			1\\
+			y^1\\
+			\vdots\\
+			y^{t - 2}\\
+			y^{t - 1}
+		\end{bmatrix}
+	\end{equation*}
+
+	$(\impliedby)$ Let $y_1, \ldots, y_t$ and $A$ be as in the statement. Define 
+	\begin{equation*} 
+		Y = \begin{bmatrix}
+			y_1\\
+			y_2\\
+			\vdots\\
+			y_t
+		\end{bmatrix} \in \mathbb{C}^t.
+	\end{equation*}
+	Then, we have
+	\begin{equation*} 
+		AY = yY,
+	\end{equation*}
+	by assumption. Since $y_1, \ldots, y_t$ are not all zero, we see $Y \neq 0.$ Thus, $Y$ is an eigenvector with eigenvalue $y.$ By \Cref{ex:eigenintmatrix}, $y$ is an algebraic integer.
+\end{proof}	
+
+\begin{prop} \label{prop:algintsubring}
+	The set $\mathbb{A}$ of algebraic integers is a subring of $\mathbb{C}.$ In other words, $0 \in \mathbb{A}$ and if $\alpha, \beta \in \mathbb{A},$ then $\alpha \pm \beta, \alpha\beta \in \mathbb{A}.$
+\end{prop}
+\begin{proof} 
+	We have already noted that $0 \in \mathbb{A}$ and that it is closed under (additive) inverses. Thus, we only need to show that it is closed under sums and products.
+
+	Let $\alpha, \beta \in \mathbb{A}.$ Corresponding to each, we get $y_1, \ldots, y_t \in \mathbb{C}$ not all zero and $y'_1, \ldots, y'_s \in \mathbb{C}$ not all zero such that
+	\begin{equation*} 
+		\alpha y_i = \sum_{j = 1}^{t}a_{ij}y_j \andd \beta y'_k = \sum_{j = 1}^{s}b_{kj}y'_j.
+	\end{equation*}
+	(The above equalities hold for all $1 \le i \le t$ and $1 \le k \le s.$ Each $a_{ij}$ and $b_{kj}$ is an integer.) 
+
+	Now, we consider the elements $\{y_iy'_k : 1 \le i \le t, 1 \le k \le s\}.$ These are not all zero. Moreover, the above equation gives
+	\begin{equation*} 
+		(\alpha + \beta)y_iy'_k = \alpha y_iy'_k + \beta y'_ky_i = \sum_{j = 1}^{t}a_{ij}y_jy_k + \sum_{j = 1}^{s}b_{kj}y_iy'_j.
+	\end{equation*}
+	Thus, each $(\alpha + \beta)y_iy'_k$ is an integral linear combination of $y_jy'_l.$ This implies that $\alpha + \beta$ is an algebraic integer.
+
+	Similarly, $\alpha\beta$ is written as an integral linear combination of the $y_jy'_l,$ finishing the proof.
+\end{proof}

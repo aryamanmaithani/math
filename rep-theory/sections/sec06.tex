@@ -1,0 +1,669 @@
+\section{Representation Theory of the Symmetric Groups}
+
+At this point, we suggest the reader to recall \Cref{subsec:partsandtableaux}.
+
+There will be a lot of new notation involved in this part. A table can be found on Page \pageref{bookkeeping} to keep track of the various objects involved.
+
+\begin{rem} \label{rem:irredrepsconjclassSn}
+	Recall that we had seen \Cref{thm:descconjclassSn} which said that $\sigma$ and $\sigma'$ are conjugates in $S_n$ iff $\type(\sigma) = \type(\sigma').$ Thus, the number of irreducible representations of $S_n$ is precisely the number of partitions of $n.$ (\Cref{cor:numirredrepsconjclass}.) We wish to give an explicit bijection.
+\end{rem}
+
+\begin{defn}%[]
+	If $X \subset \{1, \ldots, n\},$ we identity $S_X$ with the subgroup of $S_n$ consisting of permutations that fix elements outside $X.$ Note that $\md{S_{X}} = \md{X}!.$
+\end{defn}
+Note that the above involves a bit of abuse of notation since the same $X$ can be a subset of $\{1, \ldots, n\}$ for different $n.$ However, the ambient $n$ will be clear from context.
+
+\begin{defn}%[Column stabiliser]
+	Let $t$ be a Young tableau. Then, the \deff{column stabiliser} of $t$ is the subgroup $C_t$ of $S_n$ preserving the columns of $t.$ That is, $\sigma \in C_t$ if and only if $\sigma(i)$ and $i$ are in the same column for each $i \in \{1, \ldots, n\}.$
+\end{defn}
+
+With the above definition, we could have written \Cref{item:008} of \Cref{prop:domprop} as ``There exists $\sigma \in C_{[T^\lambda]}$ such that $\sigma [T^\lambda] = u^\lambda$.''
+
+\begin{ex}
+	Consider the tableau
+	\begin{equation*} 
+		t = \begin{ytableau}
+			1 & 3 & 7\\
+			4 & 5\\
+			2 & 6
+		\end{ytableau}.
+	\end{equation*}
+	Then, $C_t \le S_7$ is given by $S_{\{1, 2, 4\}}S_{\{3, 5, 6\}}S_{\{7\}}.$ (Recall that given a group $G$ and subsets $S, T \subset G$, the subset $ST \subset G$ is defined by $ST = \{st \mid s \in S, t \in S\}.$ This extends to any finite product of subsets.)\\
+	We have
+	\begin{equation*} 
+		C_t = S_{\{1, 2, 4\}}S_{\{3, 5, 6\}}S_{\{7\}} \cong S_{\{1, 2, 4\}} \times S_{\{3, 5, 6\}} \times S_{\{7\}},
+	\end{equation*}
+	where the last isomorphism follows because the sets appearing are subgroups such that the pairwise intersection is trivial and that the elements from any two subgroups commute with each other.
+
+	Thus, we have $\md{C_t} = 3!\cdot3!\cdot1! = 36.$
+\end{ex}
+
+\begin{lem} \label{lem:colstabrelation}
+	Let $t$ be a $\lambda$-tableau and $\sigma \in S_n.$ Then, $C_{\sigma t} = \sigma C_t \sigma^{-1}.$
+\end{lem}
+\begin{proof} 
+	Let $\tau \in S_n.$ If $X_i$ is the set of entries in the $i$-th column of $t,$ then $\sigma(X_i)$ is that of the $i$-th column of $\sigma t.$ Thus, $\tau$ stabilises $X_i$ iff $\tau\sigma^{-1}$ is a bijection from $\sigma(X_i)$ to $X_i$ iff $\sigma\tau\sigma^{-1}$ stabilises $\sigma(X_i).$
+\end{proof}
+
+\begin{ex}
+	If $t = \begin{ytableau}
+		1 & 2 & 3\\
+		4
+	\end{ytableau}$ and $\sigma = (24),$ then $\sigma t =\begin{ytableau}
+		1 & 4 & 3\\
+		2
+	\end{ytableau}.$
+
+	We have $C_{\sigma t} = \{1, (12)\} = (24)\{1, (14)\}(24)^{-1}.$
+\end{ex}
+
+\begin{defn}%[]
+	Fix an $n$ and a partition $\lambda$ of $n.$ The relation $\sim$ is defined on set of $\lambda$-tableaux by putting $t_1 \sim t_2$ if they have the same entries in each row.
+\end{defn}
+\begin{ex}
+	For $n = 6$ and $\lambda = (3, 3),$ one example is
+	\begin{equation*} 
+		\begin{ytableau}
+			1 & 2 & 3\\
+			4 & 5 & 6
+		\end{ytableau} \sim 
+		\begin{ytableau}
+			3 & 2 & 1\\
+			5 & 6 & 4
+		\end{ytableau}.
+	\end{equation*}
+\end{ex}
+
+\begin{defn}%[Tabloid]
+	An equivalence class of $\sim$ is called a \deff{$\lambda$-tabloid} (or a \deff{tabloid of shape $\lambda$}). The tabloid of a tableau $t$ is denoted by $[t].$ The set of all tabloids of shape $\lambda$ is denoted $[T^\lambda].$
+\end{defn}
+Note that we had not given any notation for the set of all $\lambda$-tableaux. The $[\cdot]$ is to remind ourselves that elements of $[T^\lambda]$ are equivalence classes of tableaux.
+
+% \begin{defn}%[]
+% 	Given $\lambda = (\lambda_1, \ldots, \lambda_l),$ the tabloid $T_\lambda$ is defined to be the equivalence class of the $\lambda$-tableau which has $j$ in the $j$-th box. \\
+% 	In other words, it is the equivalence class consisting of those tableaux which have $1, \ldots, \lambda_1$ in row $1$ and 
+% 	\begin{equation*} 
+% 		\lambda_1 + \cdots + \lambda_{i - 1} + 1, \ldots, \lambda_1 + \cdots + \lambda_{i}
+% 	\end{equation*}
+% 	in row $i$ for $i \ge 2.$
+% \end{defn}
+% \begin{ex}
+% 	$T_{(3, 2)}$ is the equivalence class of $\begin{ytableau}
+% 		1 & 2 & 3\\
+% 		4 & 5
+% 	\end{ytableau}.$ Five other elements in the tabloid are
+% 	\begin{align*} 
+% 		\begin{ytableau}
+% 		1 & 3 & 2\\
+% 		4 & 5
+% 	\end{ytableau},\;\; \begin{ytableau}
+% 		2 & 1 & 3\\
+% 		4 & 5
+% 	\end{ytableau},\;\; \begin{ytableau}
+% 		2 & 3 & 1\\
+% 		4 & 5
+% 	\end{ytableau},\\
+% 	\begin{ytableau}
+% 		3 & 1 & 2\\
+% 		4 & 5
+% 	\end{ytableau},\;\; \begin{ytableau}
+% 		3 & 2 & 1\\
+% 		4 & 5
+% 	\end{ytableau}.
+% 	\end{align*}
+% 	The tabloid consists of twelve elements in total. The remaining six are obtained from the above six by swapping $(4, 5).$
+% \end{ex}
+
+Recall we had defined what a \hyperref[defn:leftcongruence]{$G$-equivalence relation} was.
+
+\begin{prop}%[]
+	The equivalence relation $\sim$ defined above is a $G$-equivalence relation.
+\end{prop}
+\begin{proof} 
+	Let $t_1 \sim t_2$ and $\sigma \in S_n.$ We need to show that $\sigma t_1 \sim \sigma t_2.$\\
+	Let $i$ and $j$ be two elements in the same row of $\sigma t_1.$ This is possible iff $\sigma^{-1}(i)$ and $\sigma^{-1}(j)$ are in the same row of $t_1.$ In turn, that happens iff $\sigma^{-1}(i)$ and $\sigma^{-1}(j)$ are in the same row of $t_2$ which is iff $i$ and $j$ are in the same row of $\sigma t_2.$
+\end{proof}
+
+\begin{cor}
+	$S_n$ acts transitively on $[T^\lambda]$ by $\sigma [t] \vcentcolon= [\sigma t].$
+\end{cor}
+\begin{proof} 
+	That the above defines a well-defined action follows from \Cref{prop:leftcongruence}. That it is transitive follows from the fact that $S_n$ acted transitively on the set of $\lambda$-tableaux to begin with.
+\end{proof}
+
+% \begin{defn}%[Young subgroup]
+% 	Let $\lambda$ be a partition of $n.$ The stabiliser of $T_\lambda$ is denoted $S_\lambda$ and called the \deff{Young subgroup} associate to the partition $\lambda.$
+% \end{defn}
+
+% \begin{prop}
+% 	For $\lambda = (\lambda_1, \ldots, \lambda_l),$ the isomorphism 
+% 	\begin{equation*} 
+% 		S_\lambda \cong S_{\{1, \ldots, \lambda_1\}} \times S_{\{\lambda_1 + 1, \ldots, \lambda_1 + \lambda_2\}} \times \cdots \times S_{\{\lambda_1 + \cdots \lambda_{l-1}, \ldots, n\}}
+% 	\end{equation*}
+% 	holds. In particular, $\md{[T^\lambda]} = n!/(\lambda_1!\cdots\lambda_l!).$
+% \end{prop}
+% \begin{proof} 
+% 	We first show that
+% 	\begin{equation*} 
+% 		S_\lambda = S_{\{1, \ldots, \lambda_1\}} S_{\{\lambda_1 + 1, \ldots, \lambda_1 + \lambda_2\}} \cdots S_{\{\lambda_1 + \cdots \lambda_{l-1}, \ldots, n\}}.
+% 	\end{equation*}
+% 	$(\supset)$ is clear. To see the reverse containment, let $\sigma \in S_\lambda.$ Considering the disjoint cycle representation of $\sigma,$ we see that each cycle must belong to one the subgroups listed on the right. (For example, $1$ and $\lambda_1 + 1$ cannot appear in the same cycle since the rows must be preserved.)\\
+% 	Noting that any two elements picked from distinct subgroups on the right commute finishes the argument.
+
+% 	The commuting fact along with the fact that intersection of two of the above subgroups is trivial also proves the isomorphism in the theorem. From that, it follows that 
+% 	\begin{equation*} 
+% 		\md{S_\lambda} = \lambda_1!\cdots\lambda_l!
+% 	\end{equation*}
+% 	and thus,
+% 	\begin{equation*} 
+% 		\md{T_\lambda} = \frac{\md{S_n}}{\md{S_\lambda}} = \frac{n!}{\lambda_1!\cdots\lambda_l!},
+% 	\end{equation*}
+% 	by the orbit-stabiliser theorem.
+% \end{proof}
+
+\begin{defn}%[]
+	For a partition $\lambda \vdash n,$ set $M^\lambda = \mathbb{C}[T^\lambda]$ and let $\varphi^\lambda : S_n \to \GL(M^\lambda)$ be the associated \hyperref[defn:permrep]{permutation representation}.
+\end{defn}
+% Note the superscript $^\lambda$ above. To recall, $[T^\lambda]$ was the set of all $\lambda$-tabloids and $S_n$ acted on it. Thus, we get a representation $\varphi^\lambda : S_n \to \GL(\mathbb{C}[T^\lambda])$ as in \Cref{defn:permrep}.
+
+\begin{ex} \label{ex:trivialtabloidrep}
+	Suppose $\lambda = (n).$ In this case, there is only one $\lambda$-tabloid and thus, $M^\lambda$ is one-dimensional and the representation is the trivial one.
+\end{ex}
+
+\begin{ex} \label{ex:standardtabloidrep}
+	Suppose $\lambda = (n-1, 1).$ In this case, two tableaux are equivalent iff they have the same entry in the second row. Thus, there are $n$ $\lambda$-tabloids, which we denote by $[1], \ldots, [n];$ here $[k]$ denotes the equivalence class consisting of the tableaux with $k$ in the lower row.
+
+	Thus, $[T^\lambda] = \{[1], \ldots, [n]\}$ forms a basis for $M^\lambda.$ Moreover, the action (representation) is the natural one with
+	\begin{equation*} 
+		\varphi^\lambda_{\sigma} [k] = [\sigma(k)].
+	\end{equation*}
+	Thus, $\varphi^\lambda$ is just the \hyperref[ex:standardrepSn]{standard representation of $S_n$}.
+\end{ex}
+
+\begin{ex} \label{ex:alttabloidrep1}
+	Suppose $\lambda = (1, \ldots, 1).$ Then, each row has exactly one element and hence, each $\lambda$-tabloid consists of only one tableau. Moreover, each $\lambda$-tableau (and hence, $\lambda$-tabloid) can be identified with a representation. (Consider the element in the $i$-th box.) This gives a one-to-one correspondence between $[T^\lambda]$ and $S_n.$ Under this identification, we see that $\varphi^\lambda$ is just the \hyperref[defn:regularrepresentation]{regular representation}.
+
+	Recalling \Cref{rem:regrepcontainsallreps}, we note that all the irreducible representations of $S_n$ are contained in $\varphi^\lambda.$
+\end{ex}
+
+Recall that we had seen that permutation representations are not irreducible unless the set being acted upon is a singleton (\Cref{cor:nontrivialpermred}) and hence, unless $\lambda = (n),$ $\varphi^\lambda$ is not irreducible. However, it contains a special irreducible constituent that we now wish to isolate.
+
+\begin{defn}%[Polytabloid]
+	Let $\lambda, \mu \vdash n.$ Let $t$ be a $\lambda$-tableau and define the linear operator $A^\mu_t : M^\mu \to M^\mu$ by
+	\begin{equation*} 
+		A^\mu_t = \sum_{\pi \in C_t} \sign(\pi)\varphi^\mu_\pi.
+	\end{equation*}
+	If $\mu = \lambda,$ then we write $A^\lambda_t = A_t$ and the element
+	\begin{equation*} 
+		e_t = A_t[t] = \sum_{\pi \in C_t} \sign(\pi)\varphi^\lambda_\pi[t] = \sum_{\pi \in C_t} \sign(\pi)\pi[t] \in M^\lambda
+	\end{equation*}
+	is called the \deff{polytabloid} associated to $t.$
+\end{defn}	
+\begin{rem}
+	It is easy to see that any polytabloid is non-zero. To see this, it suffices to show that if $1 \neq \pi \in C_t,$ then $\pi[t] = [\pi t] \neq [t].$ From this, it would follow that the coefficient of $[t]$ in $e_t$ is $1.$
+
+	To see why the claim is true, note that if $[\pi t] = [t],$ then $\pi$ stabilises the rows of $t.$ On the other hand, we assumed $\pi \in C_t.$ Thus, $\pi$ also stabilises the columns of $t.$ From this, it follows that every element is fixed. (Indeed, it can neither change its row nor its column.) Thus, $\pi$ is the identity permutation.
+\end{rem}
+
+There is a lot to absorb in the above definition. It is best to do it with an example.
+\begin{ex}
+	Let $n = 5.$ Consider $\lambda = (3, 2)$ and $\mu = (4, 1).$ Let 
+	\begin{equation*} 
+		t = \begin{ytableau}
+			1 & 2 & 3\\
+			4 & 5
+		\end{ytableau}.
+	\end{equation*}
+	Recall that $C_t$ is the column stabiliser of $t.$ In this case, we have $C_t = S_{\{1, 4\}}S_{\{2, 5\}}S_{\{3\}}.$ More explicitly, we have
+	\begin{equation*} 
+		C_t = \{1, (14), (25), (14)(25)\},
+	\end{equation*}
+	where $1$ denotes the identity element. 
+
+	As noted earlier in \Cref{ex:standardtabloidrep}, $M^\mu$ is a five dimensional vector space with basis $\{[1], \ldots, [5]\}.$ (The notation is the same as in the example.) As an example, we may note that
+	\begin{align*} 
+		A^\mu_t([1]) &= \sum_{\tau \in C_t}\sign(\pi)\varphi^\mu_\pi([1])\\
+		&= \sum_{\tau \in C_t}\sign(\pi)[\pi(1)]\\
+		&= 1\cdot[1] + (-1)\cdot[4] + (-1)\cdot[1] + 1\cdot[4]\\
+		&= 0.
+	\end{align*}
+	Similarly, we have
+	\begin{align*} 
+		A^\mu_t([2]) &= 1\cdot[2] + (-1)\cdot[2] + (-1)\cdot[5] + 1\cdot[5] = 0,\\
+		A^\mu_t([3]) &= 1\cdot[3] + (-1)\cdot[3] + (-1)\cdot[3] + 1\cdot[3] = 0.
+	\end{align*}
+	By symmetry, it follows that $A^\mu_t([4]) = A^\mu_t([5]) = 0.$ Thus, we see that $A^\mu_t$ is the zero operator in this case.
+
+	Let us compute the polytabloid now. For ease of notation, we define the $\lambda$-tableaux $t_1, t_2, t_3$ as
+	\begin{align*} 
+	 	t_1 &= \begin{ytableau}
+			4 & 2 & 3\\
+			1 & 5
+		\end{ytableau},\\
+		t_2 &= \begin{ytableau}
+			1 & 5 & 3\\
+			4 & 2
+		\end{ytableau},\\
+		t_3 &= \begin{ytableau}
+			4 & 5 & 3\\
+			1 & 2
+		\end{ytableau}.
+	\end{align*} 
+	Note that the above are simply the tableaux obtained by acting the elements of $C_t$ on $t.$ Moreover, note that each tableaux is in a different equivalence class.
+
+	Now, we have
+	\begin{align*} 
+		e_t = A_t[t] &= \sum_{\pi \in C_t} \sign(\pi)\pi[t]\\
+		&= [t] - [t_1] - [t_2] + [t_3].
+	\end{align*}
+\end{ex}
+
+\begin{ex}
+	Let $t$ be as in the previous example. Consider $\sigma = (123).$ Then, we have
+	\begin{align*} 
+		\varphi^\lambda_\sigma e_t &= [\sigma t] - [\sigma t_1] - [\sigma t_2] + [\sigma t_3]\\
+		&= \left[\begin{ytableau}
+			2 & 3 & 1\\
+			4 & 5
+		\end{ytableau}\right] - \left[\begin{ytableau}
+			4 & 3 & 1\\
+			2 & 5
+		\end{ytableau}\right] - \left[\begin{ytableau}
+			2 & 5 & 1\\
+			4 & 3
+		\end{ytableau}\right] + \left[\begin{ytableau}
+			4 & 5 & 1\\
+			2 & 3
+		\end{ytableau}\right].
+	\end{align*}
+
+	On the other hand, let us compute $e_{\sigma t}.$ First, we note that
+	\begin{equation*} 
+		\sigma t = \begin{ytableau}
+			2 & 3 & 1\\
+			4 & 5
+		\end{ytableau}.
+	\end{equation*}
+	Secondly, we note that
+	\begin{equation*} 
+		C_{\sigma t} = \{1, (24), (35), (24)(35)\}.
+	\end{equation*}
+	Thus, we have
+	\begin{equation*} 
+		e_{\sigma t} = \left[\begin{ytableau}
+			2 & 3 & 1\\
+			4 & 5
+		\end{ytableau}\right] - \left[\begin{ytableau}
+			4 & 3 & 1\\
+			2 & 5
+		\end{ytableau}\right] - \left[\begin{ytableau}
+			2 & 5 & 1\\
+			4 & 3
+		\end{ytableau}\right] + \left[\begin{ytableau}
+			4 & 5 & 1\\
+			2 & 3
+		\end{ytableau}\right].
+	\end{equation*}
+	Thus, we see that $\varphi^\lambda_\sigma e_t = e_{\sigma t}.$ We shall now see that this is the case in general.
+\end{ex}
+
+\begin{lem}
+	If $\sigma \in S_n$ and $t$ is a $\lambda$-tableau, then $\varphi^\lambda_\sigma \circ A_t = A_{\sigma t} \circ \varphi^\lambda_\sigma.$
+\end{lem}
+\begin{proof} 
+	From \Cref{lem:colstabrelation}, we know that $C_{\sigma t} = \sigma C_{t}\sigma^{-1}.$ Now, note that
+	\begin{align*} 
+		\varphi^\lambda_\sigma \circ A_t &= \sum_{\pi \in C_t} \sign(\pi)\varphi^\lambda_\sigma \circ \varphi^\lambda_\pi\\
+		&= \sum_{\pi \in C_t} \sign(\pi)\varphi^\lambda_{\sigma\pi}\\
+		&= \sum_{\tau \in \sigma C_t \sigma^{-1}} \sign(\sigma^{-1}\tau\sigma)\varphi^\lambda_{\tau\sigma}\\
+		&= \sum_{\tau \in C_{\sigma t}} \sign(\tau)\varphi^\lambda_{\tau\sigma}\\
+		&= \sum_{\tau \in C_{\sigma t}} \sign(\tau)\varphi^\lambda_{\tau}\circ\varphi^\lambda_{\sigma}\\
+		&= A_{\sigma t} \circ \varphi^\lambda_\sigma. \qedhere
+	\end{align*}
+\end{proof}
+
+\begin{cor}
+	If $\sigma \in S_n$ and $t$ is a $\lambda$-tableau, then $\varphi^\lambda_\sigma e_t = e_{\sigma t}.$
+\end{cor}
+\begin{proof} 
+	\begin{equation*} 
+		\varphi^\lambda_\sigma e_t = \varphi^\lambda_\sigma(A_t[t]) = A_{\sigma t}(\varphi^\lambda_\sigma)[t] = A_{\sigma t}[\sigma t] = e_{\sigma t}. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{cor}
+	The subspace $S^\lambda = \mathbb{C}\{e_t \mid t \text{ is a } \lambda\text{-tableau}\} \le M^\lambda$ is $S_n$-invariant with respect to $\varphi^\lambda.$
+\end{cor}
+\begin{proof} 
+	It suffices to show that $\varphi^\lambda_\sigma(e_t) \in S^\lambda$ for all $\lambda$-tableaux $t$ and all $\sigma \in S_n.$ By the previous, we have that $\varphi^\lambda_\sigma e_t = e_{\sigma t}.$ Since $\sigma t$ is again a $\lambda$-tableau, we are done.
+\end{proof}
+
+\begin{ex} \label{ex:alttabloidrep2}
+	Let us revisit \Cref{ex:alttabloidrep1} where we had $\lambda = (1, \ldots, 1).$ Fix a $\lambda$-tableau $t.$ Note that in this case, $C_t = S_n.$ Thus,
+	\begin{equation*} 
+		e_t = \sum_{\pi \in S_n} \sign(\pi)\pi[t].
+	\end{equation*}
+	On one hand, we know that $\varphi^\lambda_\sigma e_t = e_{\sigma t}.$ Let us now compute it more explicitly. Applying $\varphi^\lambda_\sigma$ on both sides, we note
+	\begin{align*} 
+		\varphi^\lambda_\sigma e_t &= \sum_{\pi \in S_n} \sign(\pi)\varphi^\lambda_\sigma[\pi t]\\
+		&= \sum_{\pi \in S_n} \sign(\pi)[\sigma\pi t]\\
+		&= \sum_{\tau \in S_n} \sign(\sigma^{-1}\tau)[\tau t]\\
+		&= \sign(\sigma^{-1})\sum_{\tau \in S_n} \sign(\tau)[\tau t]\\
+		&= \sign(\sigma^{-1})e_t.
+	\end{align*}
+	Since $\sign(\sigma) = \sign(\sigma^{-1}),$ we see that
+	\begin{equation*} 
+		\varphi^\lambda_\sigma e_t = e_{\sigma t} = \sign(\sigma) e_t.
+	\end{equation*}
+	In particular, note that each $e_{\sigma t}$ is simply a scalar multiple of $e_t$ and hence, $\{e_{\sigma t}\}_{\sigma \in S_n}$ is a linearly dependent set if $n > 1.$
+\end{ex}
+
+\begin{defn}%[Sprecht representation]
+	\label{defn:sprechtrepresentation}
+	Let $\lambda$ be a partition of $n.$ Define $S^\lambda$ to be the subspace of $M^\lambda$ spanned by the polytabloids
+	\begin{equation*} 
+		\{e_t \mid t \text{ is a } \lambda\text{-tableau}\}.
+	\end{equation*}
+	$S^\lambda$ is $S_n$-invariant. Let $\psi^\lambda : S_n \to \GL(S^\lambda)$ be the corresponding subrepresentation. This is called the \deff{Sprecht representation} associated to $\lambda.$
+\end{defn}
+
+\begin{rem}
+	Note that $\{e_t \mid t \text{ is a } \lambda\text{-tableau}\}$ is simply a \emph{spanning} set for $S^\lambda.$ As \Cref{ex:alttabloidrep2} shows, this set need not be linearly independent.
+\end{rem}
+
+\begin{ex}
+	Let $\lambda = (1, \ldots, 1).$ 
+	By our calculations in \Cref{ex:alttabloidrep2}, we saw that $e_{\sigma t} = \sign(\sigma)e_t.$ Thus, $S^\lambda$ is a one-dimensional subspace of $M^\lambda.$ (Recall that no polytabloid $e_t$ is zero.)
+
+	Now, fix a $\lambda$-tableau $t.$ We have $S^\lambda = \mathbb{C}e_t.$
+
+	We note that
+	\begin{equation*} 
+		\psi^\lambda_\sigma(e_t) = \varphi^\lambda_\sigma(e_t) = \sign(\sigma)e_t
+	\end{equation*}
+	and thus, $\psi^\lambda$ is equivalent to the $\sign$ representation of $S_n.$
+\end{ex}
+
+We now wish to show that all Sprecht representations are irreducible. We do this via a series of lemmata.
+
+\begin{lem} \label{lem:Amutsnonzero}
+	Let $\lambda, \mu \vdash n$ and suppose that $[T^\lambda]$ is a $\lambda$-tableau and $s^\mu$ a $\mu$-tableau such that $A^\mu_{[T^\lambda]}[s^\mu] \neq 0.$ Then, elements in the same row of $s^\mu$ appear in different columns of $[T^\lambda].$\\
+	In particular, $\lambda \unrhd \mu.$
+\end{lem}
+\begin{proof} 
+	Note that the last statement follows from \nameref{lem:domlemma}. Thus, we simply need to show that no two elements in the same row of $s^\mu$ are in the same column of $[T^\lambda].$
+
+	To this end, suppose that $i, j$ are distinct elements in the same row of $s^\mu$ and same column of $[T^\lambda].$ Consider the transposition $\rho = (i\;j).$ \\
+	By the definition of equivalence relation on tableaux, we see that $[s^\mu] = [\rho s^\mu]$ and thus, 
+	\begin{equation} \tag{$*$} \label{eq:009}
+		\varphi^\mu_1[s^\mu] - \varphi^\mu_{\rho}[s^\mu] = 0.
+	\end{equation}
+	(As usual, $1$ denotes the identity permutation.)
+
+	On the other hand, by definition of $C_{[T^\lambda]},$ we see that $H = \{1, \rho\}$ is a subgroup of $C_{[T^\lambda]}.$ Let $S$ be a transversal of left coset representatives of $H$ in $C_{[T^\lambda]}.$ We then see
+	\[\begin{WithArrows}[displaystyle]
+		A^\mu_{[T^\lambda]}[s^\mu] &= \sum_{\pi \in C_{[T^\lambda]}} \sign(\pi)\varphi^\mu_\pi[s^\mu]\\
+		&= \sum_{\sigma \in S}\left(\sign(\sigma)\varphi^\mu_\sigma[s^\mu] + \sign(\sigma\rho)\varphi^\mu_{\sigma\rho}[s^\mu]\right)\\
+		&= \sum_{\sigma \in S}\sign(\sigma)\varphi^\mu_\sigma\left(\varphi^\mu_1[s^\mu] - \varphi^\mu_{\rho}[s^\mu]\right) \Arrow{\Cref{eq:009}}\\
+		&= 0,
+	\end{WithArrows}\]
+	a contradiction since we assumed that $A^\mu_{[T^\lambda]}[s^\mu] \neq 0.$
+\end{proof}
+
+\begin{lem}
+	Let $\lambda \vdash n$ and $t, s$ be $\lambda$-tableaux such that $A_t[s] \neq 0.$ Then, $A_t[s] \in \{\pm e_t\}.$
+\end{lem}
+\begin{proof} 
+	Let $u = u^\lambda$ be as given by \Cref{prop:domprop}. (By the previous lemma, it follows that the hypothesis is indeed followed.)\\
+	Let $\sigma$ be the unique permutation such that $u = \sigma t.$ Note that since $u$ and $t$ have the same entries in each column, it follows that $\sigma \in C_{t}.$\\
+	Moreover, note that $s$ and $u$ have the same element in each row. (As per the proposition, the elements in the first $i$ rows of $s$ were in the first $i$ rows of $u.$ Since both the tableaux are of shape $\lambda,$ it follows that the row-wise entries are all same.)\\
+	In other words, $[u] = [s].$
+
+	Thus, we get
+	\[\begin{WithArrows}[displaystyle]
+		A_{t}[s] &= A_{t}[u]\\
+		&= \sum_{\pi \in C_t} \sign(\pi)\varphi^\lambda_\pi[u]\\
+		&= \sum_{\pi \in C_t} \sign(\pi)[\pi u] \Arrow{$\pi \mapsto \tau\sigma^{-1}$ (note $\sigma \in C_t$)}\\
+		&= \sum_{\tau \in C_t} \sign(\tau\sigma^{-1})[\tau\sigma^{-1}u]\\
+		&= \sign(\sigma^{-1})\sum_{\tau \in C_t}\sign(\tau)[\tau \lambda]\\
+		&= \sign(\sigma^{-1})e_t
+	\end{WithArrows}\]
+	and hence, $A_t[s] \in \{\pm e_t\}.$
+\end{proof}
+
+\begin{lem} \label{lem:imageofAt}
+	Let $t$ be a $\lambda$-tableau. Then, the image of the operator $A_t$ is $\mathbb{C}e_t.$
+\end{lem}
+\begin{proof} 
+	Note that $A_t[t] = e_t,$ by definition and thus, only $\im A_t \subset \mathbb{C}e_t$ needs to be shown.
+
+	It suffices to show that $A_t[s] \in \mathbb{C}e_t$ for every $\lambda$-tableau $s,$ since the set of all (distinct) $[s]$ form a basis for $M^\lambda.$
+
+	However, this is simple for the previous lemma tells us that $A_t[s] \in \{0, \pm e_t\} \subset \mathbb{C}e_t.$
+\end{proof}
+
+Recall that $M = \mathbb{C}[T^\lambda]$ comes with an inner product (\Cref{defn:linearisation}) such that $[T^\lambda]$ is an orthonormal basis. Moreover, the permutation representation $\varphi^\lambda$ is unitary with respect to this. (\Cref{prop:permrepisunitary}.)
+
+\begin{lem} 
+	If $t$ is a $\lambda$-tableau, then $A_t = A_t^*.$ That is, $A_t$ is self-adjoint.
+\end{lem}
+\begin{proof} 
+	We have
+	\[\begin{WithArrows}[displaystyle]
+		A_t^* &= \sum_{\pi \in C_t}\sign(\pi)(\varphi^\lambda_\pi)^* \Arrow{$\varphi^\lambda$ is unitary}\\
+		&= \sum_{\pi \in C_t}\sign(\pi)(\varphi^\lambda_\pi)^{-1}\\
+		&= \sum_{\pi \in C_t}\sign(\pi)\varphi^\lambda_{\pi^{-1}}\\
+		&= \sum_{\pi \in C_t}\sign(\pi^{-1})\varphi^\lambda_{\pi^{-1}} \Arrow{$\pi \mapsto \pi^{-1}$ is a bijection}\\
+		&= A_t,
+	\end{WithArrows}\]
+	as desired.
+\end{proof}
+
+\begin{thm}[Subrepresentation theorem] \label{thm:subrepresentation}
+	Let $\lambda$ be a partition of $n$ and suppose that $V$ is an $S_n$-invariant subspace of $M^\lambda$ with respect to $\varphi^\lambda.$ Then, either $S^\lambda \subset V$ or $V \subset (S^\lambda)^\perp.$
+\end{thm}
+
+Said differently, the above says that either $S^\lambda \subset V$ or $S^\lambda \subset V^\perp.$
+
+\begin{proof} The proof splits into two cases.
+
+	\textbf{Claim 1.} If there exists a $\lambda$-tableau $t$ and $v \in V$ such that $A_tv \neq 0,$ then $S^\lambda \subset V.$
+
+	\begin{proof} 
+		By \Cref{lem:imageofAt}, it follows that $A_tv \in \mathbb{C}e_t.$ Since $V$ is $S_n$-invariant, we also have $A_tv \in V.$\footnote{$A_t$ is a linear combination of $\varphi^\lambda_\sigma$s and $V$ is invariant for each.} Since $A_tv \neq 0,$ we see that $\mathbb{C}e_t \cap V$ is not trivial.\\
+		Since $\mathbb{C}e_t$ is one-dimensional, it follows that $\mathbb{C}e_t \subset V$ or $e_t \in V.$ From this, it follows that
+		\begin{equation*} 
+			e_{\sigma t} = \varphi^\lambda_\sigma e_t \in V
+		\end{equation*}
+		for all $\sigma \in S_n.$ Since $S_n$ acts transitively on $[T^\lambda],$ it follows that $S = \mathbb{C}\{e_s\} \subset V.$
+	\end{proof}
+
+	\textbf{Claim 2.} If $A_tv = 0$ for all $\lambda$-tableaux $t$ and all $v \in V,$ then $V \subset (S^\lambda)^\perp.$
+
+	\begin{proof}
+		Let $v \in V$ and $[t] \in [T^\lambda]$ be arbitrary. Then, 
+		\begin{equation*} 
+			\langle v, e_t\rangle = \langle v, A_t[t]\rangle = \langle A_tv, [t]\rangle = \langle 0, [t]\rangle = 0
+		\end{equation*}
+		and hence, $V \subset (S^\lambda)^\perp.$ (The second equality above follows from $A_t$ being self-adjoint.)
+	\end{proof}
+
+	From the above claims, the theorem follows at once.
+\end{proof}
+
+\begin{cor} \label{cor:psilambdaisirred}
+	Let $\lambda \vdash n.$ Then, $\psi^\lambda : S_n \to \GL(S^\lambda)$ is irreducible.
+\end{cor}
+\begin{proof} 
+	Let $V$ be a proper $S_n$-invariant subspace of $S^\lambda$ (with respect to $\psi^\lambda$). We show that $V = \{0\}.$\\
+	Note that $\psi^\lambda$ is the restriction of $\varphi^\lambda.$ Thus, we get that $V$ is an $S_n$-invariant subspace of $M^\lambda$ with respect to $\varphi^\lambda.$ Thus, by \Cref{thm:subrepresentation}, it follows that $V \subset (S^\lambda)^\perp$ since $V$ is assumed to be a proper subspace of $S^\lambda.$
+
+	However, this means that $V \subset S^\lambda \cap (S^\lambda)^\perp = \{0\},$ as desired.
+\end{proof}
+
+\begin{aside}
+	Let us recap what we have done so far.
+
+	For each partition $\lambda \vdash n,$ we defined a vector space $M^\lambda = \mathbb{C}[T^\lambda]$ and a representation $\varphi^\lambda : S_n \to \GL(M^\lambda).$ We noted that $\varphi^\lambda$ is not irreducible but then we defined $S^\lambda \le M^\lambda$ which turned out to be $S_n$-invariant. Moreover, we have shown that the subrepresentation $\psi^\lambda : S_n \to \GL(S^\lambda)$ is irreducible.
+
+	Thus, we have a function
+	\begin{align*} 
+		\{\text{partitions of } n\} &\to \{\text{irreducible representations of } n \text{ modulo equivalence}\}\\
+		\lambda &\mapsto \psi^\lambda.
+	\end{align*}
+	By our earlier remark (\Cref{rem:irredrepsconjclassSn}), we know that both the sets above have the same (finite) cardinality. Thus, if we can show that the above function is injective, then we would have shown that the above is a bijection.
+
+	Our goal now is to show precisely that. In other words, we show that if $\lambda \neq \mu$ are partitions of $n,$ then $\psi^\lambda \not\sim \psi^\mu.$
+\end{aside}
+
+% We are now close to proving what we had wished to do, in \Cref{rem:irredrepsconjclassSn}. Indeed, for each partition $\lambda \vdash n,$ we have constructed an irreducible representation $\psi^\lambda$ of $S_n.$ All that remains is to show that these are pairwise inequivalent. We would then have found all the representations of $S_n.$
+
+\begin{lem} \label{lem:morphismkerdom}
+	Suppose that $\lambda, \mu \vdash n$ and let $T \in \Hom_{S_n}(\varphi^\lambda, \varphi^\mu).$ If $S^\lambda \not\subset \ker T,$ then $\lambda \unrhd \mu.$ \\
+	Moreover, if $\lambda = \mu,$ then $T|_{S^\lambda}$ restricts to a linear operator on $S^\lambda$ and is a scalar multiple of the identity map $\id_{S^\lambda}.$
+\end{lem}
+Note that by ``restricts to a linear operator,'' we mean that $\im(T|_{S^\lambda}) \subset S^\lambda.$
+\begin{proof} 
+	Note that by \Cref{prop:Ginvmorphism}, $\ker T$ is $S_n$-invariant with respect to $\varphi^\lambda.$ By \nameref{thm:subrepresentation}, it follows that $\ker T \subset (S^\lambda)^\perp.$ Thus, $\ker(T) \cap S^\lambda = \{0\}.$ In particular, $Te_t \neq 0$ for any $t.$
+
+	Now, we note that
+	\begin{align*} 
+		A^\mu_tT[t] &= \sum_{\pi \in C_t}\sign(\pi)\varphi^\mu_\pi T[t]\\
+		&= \sum_{\pi \in C_t}\sign(\pi)T\varphi^\lambda_\pi[t]\\
+		&= T\sum_{\pi \in C_t}\sign(\pi)\varphi^\lambda_\pi[t]\\
+		&= Te_t \neq 0
+	\end{align*}
+	and thus, $A^\mu_tT[t] \neq 0.$ However, $T[t]$ is a linear combination of $\mu$-tabloids $[s].$ Thus, there is some $[s]$ such that $A^\mu_t[s] \neq 0.$ By \Cref{lem:Amutsnonzero}, it follows that $\lambda \unrhd \mu.$ This proves the first part.
+
+	Now, suppose that $\mu = \lambda.$ By \Cref{lem:imageofAt}, it follows that
+	\begin{equation*} 
+		Te_t = A_tT[t] \in \mathbb{C}e_t \subset S^\lambda.
+	\end{equation*}
+	Since the polytabloids $e_t$ span $S^\lambda,$ the above tells us that $S^\lambda$ is $T$-invariant. Thus, $T$ restricts to a linear operator on $S^\lambda$ and hence, we see that
+	\begin{equation*} 
+		T|_{S^\lambda} \in \Hom_{S_n}(\psi^\lambda, \psi^\lambda)
+	\end{equation*}
+	and hence, $T|_{S^\lambda}$ is a multiple of $\id_{S^\lambda},$ by \nameref{lem:schur}. (We knew that $\psi^\lambda$ is irreducible, by \Cref{cor:psilambdaisirred}.)
+\end{proof}
+
+\begin{lem} 
+	If $\Hom_{S_n}(\psi^\lambda, \varphi^\mu) \neq 0,$ then $\lambda \unrhd \mu.$ Moreover, if $\lambda = \mu,$ then $\dim \Hom_{S_n}(\psi^\lambda, \varphi^\mu) = 1.$
+\end{lem}
+(Note in the above that it is $\psi^\lambda,$ not $\varphi^\lambda.$)
+
+\begin{proof} 
+	Let $0 \neq T \in \Hom_{S_n}(\psi^\lambda, \varphi^\mu).$
+
+	Thus, $T : S^\lambda \to M^\lambda$ is a linear map such that
+	\begin{center}
+		\begin{tikzcd}
+			{S^\lambda} \arrow[rr, "\psi^\lambda_\sigma"]\arrow[dd, "T"'] & & {S^\lambda}\arrow[dd, "T"]\\
+			& & \\
+			{M^\lambda} \arrow[rr, "\varphi^\mu_\sigma"'] & & {M^\lambda}
+		\end{tikzcd}
+	\end{center}
+	commutes for all $\sigma \in S_n.$
+
+	We wish to extend $T$ to a map $\widetilde{T} : M^\lambda \to M^\lambda.$ Note that $M^\lambda = S^\lambda \oplus (S^\lambda)^\perp.$ \\
+	Let $\pi_1 : M^\lambda \to S^\lambda \hookrightarrow M^\lambda$ and $\pi_2 : M^\lambda \to (S^\lambda)^\perp \hookrightarrow M^\lambda$ denote the projection maps.
+
+	We define $\widetilde{T} : M^\lambda \to M^\lambda$ by 
+	\begin{equation*} 
+		\widetilde{T} = T \circ \pi_1.
+	\end{equation*}
+
+	We now show that $\widetilde{T} \in \Hom_{S_n}(\varphi^\lambda, \varphi^\mu).$ (Note that now we have $\varphi^\lambda.$) Note that $(S^\lambda)^\perp$ is again $S_n$-invariant with respect to $\varphi^\lambda$ since $\varphi^\lambda$ is unitary. Thus, 
+	\begin{equation} \tag{$*$} \label{eq:010}
+		\pi_1 \circ \varphi^\lambda_\sigma \circ \pi_2 = 0
+	\end{equation} 
+	for all $\sigma \in S_n.$
+
+	Hence, for an arbitrary $\sigma \in S_n,$ we obtain
+	\[\begin{WithArrows}[displaystyle]
+		\widetilde{T} \circ \varphi^\lambda &= T \circ \pi_1 \circ \varphi^\lambda_\sigma \Arrow{$\id_{M^\lambda} = \pi_1 + \pi_2$} \\
+		&= T \circ \pi_1 \circ \varphi^\lambda_\sigma \circ [\pi_1 + \pi_2] \Arrow{\Cref{eq:010}}\\
+		&= T \circ \pi_1 \circ \varphi^\lambda_\sigma \circ \pi_1\\
+		&= T \circ \psi^\lambda_\sigma \circ \pi_1\Arrow{$T \in \Hom_{S_n}(\psi^\lambda, \varphi^\mu)$}\\
+		&= \varphi^\mu_\sigma \circ T \circ \pi_1 \\
+		&= \varphi^\mu_\sigma \circ \widetilde{T},
+	\end{WithArrows}\]
+	as desired.
+
+	% \[\begin{WithArrows}[displaystyle]
+	% 	\widetilde{T}(\varphi^\lambda_\sigma(v + w)) &= \widetilde{T}(\varphi^\lambda_\sigma v + \varphi^\lambda_\sigma w) \Arrow{$\varphi^\lambda_\sigma w \in (S^\lambda)^\perp$}\\
+	% 	&= T(\varphi^\lambda_\sigma v)\\
+	% 	&= T(\psi^\lambda_\sigma v) \Arrow{$T \in \Hom_{S_n}(\psi^\lambda, \varphi^\mu_\sigma)$}\\
+	% 	&= \varphi^\mu_\sigma(Tv)\\
+	% 	&= \varphi^\mu_\sigma(\widetilde{T}(v + w)).
+	% \end{WithArrows}\]
+
+	Now, since $T \neq 0,$ it follows that $S^\lambda \not\subset \ker \widetilde{T}$ and thus, $\lambda \unrhd \mu,$ by \Cref{lem:morphismkerdom}.
+
+	Moreover, if $\mu = \lambda,$ then $T = \widetilde{T}|_{S^\lambda}$ be a must scalar multiple of inclusion map, by \Cref{lem:morphismkerdom} again. Since this is a non-zero map, we get that $\dim \Hom_{S_n}(\psi^\lambda, \varphi^\mu) = 1.$
+\end{proof}
+
+\begin{cor}
+	Suppose $\mu \vdash n.$ Then $\psi^\mu$ appears with multiplicity one as an irreducible constituent of $\varphi^\mu.$ Any other irreducible constituent $\psi^\lambda$ of $\varphi^\mu$ satisfies $\lambda \unrhd \mu.$
+\end{cor}
+\begin{proof} 
+	Both parts follow from \Cref{cor:extractmultiplicitywithhom} along with the previous lemma.
+\end{proof}
+
+With that, we now conclude the final result.
+
+\begin{thm}
+	The Sprecht representations $\psi^\lambda$ with $\lambda \vdash n$ form a complete set of inequivalent irreducible representations of $S_n.$
+\end{thm}
+\begin{proof} 
+	It just remains to show that $\psi^\lambda \sim \psi^\mu$ implies $\lambda = \mu.$ To this end, assume that $\psi^\lambda \sim \psi^\mu.$ Then, there is a non-zero (iso)morphism $T \in \Hom_{S_n}(\psi^\lambda, \psi^\mu).$ However, we have the inclusion
+	\begin{equation*} 
+		\Hom_{S_n}(\psi^\lambda, \psi^\mu) \subset \Hom_{S_n}(\psi^\lambda, \varphi^\mu)
+	\end{equation*}
+	and thus, $\Hom_{S_n}(\psi^\lambda, \varphi^\mu) \neq 0.$ In turn, the previous lemma implies that $\lambda \unrhd \mu.$ 
+
+	By symmetry, we also see that $\mu \unrhd \lambda.$ It follows that $\lambda = \mu,$ as desired.
+\end{proof}
+
+% \begin{ex}[Character table of $S_5$]
+% 	Let us now compute the character table of $S_5.$ Note that we have the following partitions of $5:$
+% 	\begin{enumerate}
+% 		\item $\lambda_1 =(5)$
+% 		\item $\lambda_2 =(4, 1)$
+% 		\item $\lambda_3 =(3, 2)$
+% 		\item $\lambda_4 =(3, 1, 1)$
+% 		\item $\lambda_5 =(2, 2, 1)$
+% 		\item $\lambda_6 =(2, 1, 1, 1)$
+% 		\item $\lambda_7 =(1, 1, 1, 1, 1)$
+% 	\end{enumerate}
+% 	(How do we know that we have gotten all? Simply compute the number of permutations having that cycle type and see that the sum is $5! = 120.$)
+% 	% amnote: This always works!
+
+% 	Thus, we shall get seven characters. 
+
+% 	$\bullet\; \lambda_1$ This is is trivial character, as observed in \Cref{ex:trivialtabloidrep}.
+
+% 	$\bullet\; \lambda_2$ 
+% \end{ex}
+
+\newpage
+\textbf{Book-keeping} 
+
+\begin{tabular}{|l|l|}
+	\hline
+	$\lambda$ & A partition of $n$\\
+	$t,$ a $\lambda$-tableau & Fill the Young diagram of $\lambda$ from $1$ to $n$\\
+	$\sigma t$ & The $\lambda$-tableau obtained by acting $\sigma$ on each box of $t.$ \\
+	$C_t$ & Subgroup of $S_n$ stabilising columns of $t.$\\
+	$[t],$ a $\lambda$-tabloid & Equivalence class of $t$ of tableaux having same row elements.\\
+	$[T^\lambda]$ & Set of all $\lambda$-tabloids.\\
+	$M^\lambda = \mathbb{C}[T^\lambda]$ & $\mathbb{C}$-vector space with $\lambda$-tabloids as basis.\\
+	$\varphi^\lambda$ & Natural representation $S_n \to \GL(M^\lambda).$\\
+	$\varphi^\lambda_\sigma = \varphi^\lambda(\sigma)$ & Linear transform $M^\lambda \to M^\lambda$ given as $\varphi^\lambda_\sigma[t] = [\sigma t]$ on basis.\\
+	$A^\mu_t$ & $t$ is a $\lambda$-tableau and there's another partition $\mu.$ $A_t : M^\mu \to M^\mu$ is linear.\\
+	$A_t$ & $A^\lambda_t,$ i.e., take $\mu = \lambda$ above.\\
+	$e_t$ & $e_t = A_t[t] \in M^\lambda$ is a $\mathbb{C}$-linear combination of tabloids, called a polytabloid.\\
+	$S^\lambda$ & Subspace of $M^\lambda$ spanned by $\{e_t \mid t \text{ a } \lambda\text{-tableau}\}$. It is $S_n$-invariant.\\
+	$\psi^\lambda$ & The subrepresentation of $\varphi^\lambda$ corresponding to $S^\lambda.$\\
+	\hline
+\end{tabular}
+\label{bookkeeping}

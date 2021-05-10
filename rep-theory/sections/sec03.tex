@@ -1,0 +1,162 @@
+\section{The Dimension Theorem}
+In this section, we establish the result that the degree of any irreducible representation of a group divides the order of the group. For this, we require result about algebraic integers from number theory and the reader is encouraged to read \Cref{subsec:numbertheory}.
+
+\begin{prop} \label{prop:charisalgint}
+	Let $\chi$ be a character of $G.$ Then, $\chi(g)$ is an algebraic integer for all $g \in G.$
+\end{prop}
+\begin{proof} 
+	Follows immediately from \Cref{cor:chargrouprootsunity}, \Cref{ex:nrootsalgint}, and \Cref{prop:algintsubring}.
+\end{proof}
+
+We now set up some notation for the next few results and proofs.
+
+\begin{aside}
+	\textbf{Setup.}
+
+	$G$ is a finite group with conjugacy classes $\{1\} = C_1, \ldots, C_s.$ For $i \in \{1, \ldots, s\},$ we define $h_i = \md{C_i}.$
+
+	$\varphi : G \to \GL(V)$ will denote a representation and $\chi_i$ the value of $\chi_\varphi$ on $C_i.$ (Recall that characters are constant on conjugacy classes, \Cref{prop:charconstonconjclasses}.)
+
+	We define the operators $T_1, \ldots, T_s$ by
+	\begin{equation*} 
+		T_i = \sum_{x \in C_i} \varphi_x.
+	\end{equation*}
+\end{aside}
+
+\begin{lem}
+	If $\varphi$ is irreducible, then $T_i = \frac{h_i}{d}\chi_i \cdot I.$
+\end{lem}
+\begin{proof} 
+	We first show that $T_i \in \Hom_{G}(\varphi, \varphi).$ Indeed, let $g \in G$ be arbitrary. Then, we have
+	\begin{equation*} 
+		\varphi_gT_i\varphi_g^{-1} = \sum_{x \in C_i} \varphi_{gxg^{-1}} = \sum_{y \in C_i} \varphi_y = T_i.
+	\end{equation*}
+	Thus, by \nameref{lem:schur}, we see that $T_i = \lambda_iI$ for some $\lambda_i \in \mathbb{C}.$ We now wish to show that $\lambda_i = h_i\chi_i/d.$ By considering the $\trace$ of both operators, we see that
+	\begin{equation*} 
+		d\lambda_i = \trace(T_i) = \sum_{x \in C_i} \trace(\varphi_x) = \sum_{x \in C_i} \chi_\varphi(x) = \sum_{x \in C_i} \chi_i = \md{C_i}\chi_i = h_i\chi_i
+	\end{equation*}
+	and thus, $\lambda_i = h_i\chi_i/d,$ as desired.
+\end{proof}
+
+We now show that the $T_i$ satisfy a relation like in \Cref{prop:characalgint}.
+
+\begin{lem} 
+	Let $\varphi$ be a (not necessarily irreducible) representation. \\
+	Then, $T_i \circ T_j = \displaystyle\sum_{k = 1}^{s}a_{ijk}T_k$ for some $\{a_{ijk}\}_{1 \le i, j, k \le s} \subset \mathbb{Z}.$
+\end{lem}
+\begin{proof} 
+	We note that
+	\begin{equation*} 
+		T_iT_j = \sum_{x \in C_i}\varphi_x\sum_{y \in C_j} \varphi_y = \sum_{x \in C_i, y \in C_j}\varphi_{xy} = \sum_{g \in G}a_{ijg}\varphi_g,
+	\end{equation*}
+	where $a_{ijg}$ denotes the cardinality of $X_{ijg} = \{(x, y) \in C_i \times C_j : xy = g\}.$
+
+	Assume for the moment that $a_{ijg}$ depends only on the conjugacy class of $g$ (along with $i$ and $j$). Then, we let $a_{ijk}$ denote the common value of $a_{ijg}$ for $g \in C_k.$ We get
+	\begin{equation*} 
+		T_iT_j = \sum_{g \in G}a_{ijg}\varphi_g = \sum_{k = 1}^{s}\sum_{g \in C_k} a_{ijg}\varphi_g = \sum_{k = 1}^{s}a_{ijk} \sum_{g \in C_k}\varphi_g = \sum_{k = 1}^{s}a_{ijk}T_k,
+	\end{equation*}
+	as desired.
+
+	Now, we prove that $a_{ijg}$ depends only the conjugacy class of $g.$ Let $g'$ be in the conjugacy class of $g.$ It suffices to construct a bijection $\psi : X_{ijg} \to X_{ijg'}.$ Write $g' = kgk^{-1}$ and define $\psi$ as
+	\begin{equation*} 
+		\psi(x, y) = (kxk^{-1}, kyk^{-1}).
+	\end{equation*}
+	Clearly, $\psi(x, y) \in X_{ijg'}$ since the product of the two elements in the tuple above is indeed $g'$ and both the coordinates are elements of the desired conjugacy class. Moreover, $\psi$ is indeed a bijection as it has inverse $(x' , y') \mapsto (k^{-1}x'k, k^{-1}y'k).$
+\end{proof}
+
+\begin{cor}
+	With the same notations as earlier, we have
+	\begin{equation*} 
+		\left(\frac{h_i}{d}\chi_i\right)\left(\frac{h_j}{d}\chi_j\right) = \sum_{k = 1}^{s}a_{ijk}\frac{h_k}{d}\chi_k.
+	\end{equation*}
+\end{cor}
+
+\begin{thm} \label{thm:hchidisalgint}
+	Let $\varphi : G \to \GL(V)$ be an irreducible representation of a finite group $G$ of degree $d.$ Let $g \in G$ and let $h$ be the size of the conjugacy class of $g.$ Then, $h\chi_\varphi(g)/d$ is an algebraic integer.
+\end{thm}
+\begin{proof}
+	In our earlier notation, we wish to show that $h_i\chi_i/d_i$ is an algebraic integer for all $i = 1, \ldots, s.$
+
+	This follows at once from the previous corollary and \Cref{prop:characalgint}. (Note that $\chi_1 \neq 0.$)
+\end{proof}
+
+\begin{thm}[Dimension Theorem] \label{thm:dimthm}
+	Let $\varphi$ be an irreducible representation $G$ of degree $d.$ Then, $d$ divides $\md{G}.$
+\end{thm}
+\begin{proof} 
+	By \Cref{cor:irrediffnormone}, we know that $\langle \chi_\varphi, \chi_\varphi\rangle = 1.$ Thus, we get
+	\begin{equation*} 
+		1 = \langle \chi_\varphi, \chi_\varphi\rangle = \frac{1}{\md{G}} \sum_{g \in G} \chi_\varphi(g)\overline{\chi_\varphi(g)}
+	\end{equation*}
+	and thus,
+	\begin{equation*} 
+		\frac{\md{G}}{d} =  \sum_{g \in G} \frac{\chi_\varphi(g)}{d}\overline{\chi_\varphi(g)} = \sum_{i = 1}^{s}\sum_{g \in C_i} \frac{\chi_i}{d}\overline{\chi_i} = \sum_{i = 1}^{s}\left(h_i\frac{\chi_i}{d}\right)\overline{\chi_i}.
+	\end{equation*}
+	Note the expression on the right. Each $\chi_i$ is an algebraic integer, by \Cref{prop:charisalgint} and so is each $h_i\frac{\chi_i}{d},$ by \Cref{thm:hchidisalgint}. Since $\mathbb{A}$ is closed under products, conjugates, and sums, we see that $\frac{\md{G}}{d}$ is an algebraic integer. However, this is clearly rational. Thus, by \Cref{prop:rationalalgintareint}, it follows that $\frac{\md{G}}{d}$ is an integer or equivalently, $d \mid \md{G}.$
+\end{proof}
+
+% \begin{cor}
+% 	Let $p$ be a prime and let $G$ be a group of order $p^2.$ Then, $G$ is abelian.
+% \end{cor}
+% \begin{proof} 
+% 	Let $d_1, \ldots, d_s$ be the degrees of the irreducible representations of $G.$ Due to the trivial representation, we know that one of the degrees is $1.$ Without loss of generality, $d_1 = 1.$ Thus, we get
+% 	\begin{equation*} 
+% 		p^2 = \md{G} = 1 + d_2^2 + \cdots + d_s^2.
+% 	\end{equation*}
+% 	Now, each $d_i \neq 1$ is either $p$ or $p^2.$ Clearly, neither is possible since then the right side would exceed the left. Thus, each $d_i$ is $1$ and thus, $G$ is abelian, by \Cref{cor:numberofirredrepsofG}.
+% \end{proof}
+
+\begin{cor}
+	Let $p, q$ be primes with $p \le q$ and $q \not\equiv 1 \bmod p.$ Then, any group $G$ of order $pq$ is abelian. In particular, so are groups of order $p^2.$
+\end{cor}
+\begin{proof} 
+	Let $d_1, \ldots, d_s$ be the degrees of the irreducible representations of $G.$ Our aim is to show that $d_i = 1$ for all $i.$ Then, the result will follow, in view of \Cref{cor:numberofirredrepsofG}. 
+
+	Without loss of generality, we may assume $d_1 = 1.$ (Since we always have the trivial representation.) We have
+	\begin{equation*} 
+		pq = 1 + d_2^2 + \cdots + d_s^2.
+	\end{equation*}
+	Now, we know that $d_i \in \{1, p, q, pq\}$ for each $i,$ by the \Cref{thm:dimthm}. Clearly, $(pq)^2 > q^2 \ge pq$ and thus, $d_i = q$ or $pq$ is not possible. (If $q = p$, then we are done at this stage.) 
+
+	Now, let $m$ be the number of degree $1$ representations and $n$ of degree $p.$ Thus, we wish to show that $m = \md{G} = pq.$ We have
+	\begin{equation*} 
+		pq = m + np^2.
+	\end{equation*}
+	The above shows that $p \mid m.$ Writing $m = pm'$ gives
+	\begin{equation} \tag{$*$} \label{eq:011}
+		q = m' + np.
+	\end{equation}
+	By \Cref{cor:numdegoneirrepsdivG}, we know that $m \mid pq$ and hence, $m' \mid q.$ Thus, $m' = 1$ or $q.$ If $m' = 1,$ then \Cref{eq:011} contradicts that $q \not\equiv 1 \mod p.$ Therefore, $m' = q$ and hence, $m = pq.$
+\end{proof}
+
+\begin{rem}
+	Note that the above corollary is a basic fact from group theory that is usually proven using class equations and Sylow theorems.
+\end{rem}
+
+In fact, the proof of the above corollary also gave us the following result.
+
+\begin{cor}
+	Let $G$ be a group of order $pq$ with $p < q.$ Then, all irreducible representations of $G$ have degree either $1$ or $p.$ Moreover, $G$ has an irreducible representation of degree $p$ iff $G$ is non-abelian.
+\end{cor}
+
+\begin{cor}
+	Let $G$ be a group of order $pq$ with $p < q.$ Then, the index of the normal subgroup $[G, G]$ in $G$ is a multiple of $p,$ i.e., it is either $p$ or $pq.$ The former happens iff $G$ is non-abelian.
+\end{cor}
+\begin{proof} 
+	The proof is similar to the previous case. Let $d_1, \ldots, d_s$ be the degrees of the irreducible representations of $G.$ Then, $d_i = 1$ or $p.$ Let $m$ denote the number of degree one representations and $n$ the number of degree $p$ representations. Note that $m$ is precisely the index of $[G, G]$ in $G,$ by \Cref{cor:numdegoneirrepsdivG}.
+
+	We have
+	\begin{equation*} 
+		pq = m + np^2.
+	\end{equation*}
+	Thus, $p \mid m,$ as desired. The later parts of the result follow easily.
+\end{proof}
+
+\begin{rem}
+	Once again, the above can be proved using just group theory as well. 
+
+	Note that $G$ must have a subgroup $H$ of order $q$ (by Sylow theorems or even Cauchy's theorem). \\
+	This subgroup has index $p,$ the smallest prime dividing $\md{G}.$ \\
+	Thus, $H$ is normal and $G/H$ is a group of order $p$ and hence, abelian. This implies $[G, G] \le H.$ \\
+	Since $H$ is of prime order, either $[G, G] = H$ or $[G, G] = \{1\}.$ In either case, the index is a multiple of $p.$ As before, the former happens iff $G$ is non-abelian.
+\end{rem}

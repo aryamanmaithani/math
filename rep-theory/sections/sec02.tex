@@ -1,0 +1,1324 @@
+\section{Character Theory and the Orthogonality Relations}
+\subsection{Morphisms of Representations}
+
+\begin{defn}%[Morphism]
+	Let $\varphi:G \to \GL(V)$ and $\rho:G \to \GL(W)$ be representations. A \deff{morphism} from $\varphi$ to $\rho$ is a linear map $T : V \to W$ such that the following diagram commutes
+	\begin{center}
+		\begin{tikzcd}
+			{V} \arrow[rr, "\varphi_g"]\arrow[dd, "T"'] & & {V}\arrow[dd, "T"]\\
+			& & \\
+			{W} \arrow[rr, "\rho_g"'] & & {W}
+		\end{tikzcd}
+	\end{center}
+	\underline{for all $g \in G.$}
+
+	The set of all morphisms from $\varphi$ to $\rho$ is denoted by $\Hom_{G}(\varphi, \rho).$ 
+\end{defn}
+Note that $\Hom_{G}(\varphi, \rho) \subset \Hom(V, W).$ % amnote : notation here, should keep \Bbb C?
+
+The above definition can be seen as follows: Recall from \Cref{rem:groupaction} that a representation can be viewed as giving a group action. With this understanding, we may write $gv$ for $\varphi_gv$ and $gw$ for $\rho_gw$ (where $v \in V$ and $w \in W$). Now, under this notation, we see that a morphism from $\varphi$ to $\rho$ is simply a linear transformation $T : V \to W$ such that
+\begin{equation*} 
+	Tgv = gTv
+\end{equation*}
+for all $g \in G$ and all $v \in V.$
+
+\begin{rem}
+	If $T \in \Hom_{G}(\varphi, \rho)$ is an isomorphism, then $T$ is actually an \emph{equivalence} and $\varphi\sim\rho.$
+\end{rem}
+
+\begin{rem} \label{rem:commutingmorphisms}
+	$T \in \Hom(V, V)$ is an element of $\Hom_{G}(\varphi, \varphi)$ if and only if $T \circ \varphi_g = \varphi_g \circ T$ for all $g \in G.$ In other words, $T$ commutes with every element of $\varphi(G).$ In particular, the identity map is always an element of $\Hom_{G}(\varphi, \varphi).$
+\end{rem}
+
+\begin{prop} \label{prop:Ginvmorphism}
+	Let $T : V \to W$ be in $\Hom_{G}(\varphi, \rho).$ Then $\ker T$ and $\im T$ are $G$-invariant subspaces of $V$ and $W$ with respect to $\varphi$ and $\rho,$ respectively.
+\end{prop}
+\begin{proof} 
+	$\ker T:$ Let $v \in \ker T$ and $g \in G$ be arbitrary. Then, 
+	\begin{equation*} 
+		T(\varphi_gv) = \rho_g(Tv) = \rho_g(0) = 0
+	\end{equation*}
+	and hence, $\varphi_gv \in \ker T,$ as desired.
+
+	$\im T:$ Let $w \in \im T$ and $g \in G$ be arbitrary. Then, $w = Tv$ for some $v \in V.$ Then,
+	\begin{equation*} 
+		\rho_gw = \rho_g(Tv) = T(\varphi_gv)
+	\end{equation*}
+	showing that $\rho_gw \in \im T,$ as desired.
+\end{proof}
+
+As we had earlier observed, $\Hom_{G}(\varphi, \rho) \subset \Hom(V, W).$ In fact, more is true as the following proposition shows.
+
+\begin{prop} \label{prop:morphismssubspace}
+	Let $G$ be a group and $\varphi:G \to \GL(V),\;\rho:G \to \GL(W)$ be representations. Then, $\Hom_{G}(\varphi, \rho)$ is a subspace of the vector space $\Hom(V, W).$
+\end{prop}
+\begin{proof} 
+	Clearly, the zero operator $0:V \to W$ is an element of $\Hom_{G}(\varphi, \rho).$
+
+	Now, suppose that $S, T \in \Hom_{G}(\varphi, \rho)$ and $\alpha \in \mathbb{C}$ are arbitrary. Let $g \in G$ and $v \in V$ be arbitrary. Then,
+	\[\begin{WithArrows}[displaystyle]
+		(S + \alpha T)(\varphi_gv) &= S(\varphi_gv) + \alpha T(\varphi_gv) \Arrow{$S, T \in \Hom_{G}(\varphi, \rho)$} \\
+		&= \rho_gSv + \alpha \rho_gTv \Arrow{$\rho_g$ is linear}\\
+		&= \rho_g(Sv + \alpha Tv).
+	\end{WithArrows}\]
+	Thus, $S + \alpha T \in \Hom_{G}(\varphi, \rho).$
+\end{proof}
+
+\begin{prop} \label{prop:equivrepisoHoms}
+	Let $\varphi : G \to \GL(V),\;\varphi' : G \to \GL(V'),\;\rho : G \to \GL(W),\;$ and $\rho' : G \to \GL(W')$ be representations.
+
+	If $\varphi \sim \varphi'$ and $\rho \sim \rho',$ then $\dim\Hom_{G}(\varphi, \rho) = \dim\Hom_{G}(\varphi', \rho').$
+\end{prop}
+\begin{proof} 
+	Let $T : V \to V'$ and $T' : W \to W'$ be isomorphisms showing the equivalences $\varphi\sim\varphi'$ and $\rho\sim\rho',$ respectively. (That is, they make the desired rectangles commute.) 
+
+	Then, define the obvious map $\Phi:\Hom_{G}(\varphi, \rho) \to \Hom_{G}(\varphi', \rho')$ by
+	\begin{equation*} 
+		\Phi(S) = T' \circ S \circ T^{-1}.
+	\end{equation*}
+	That is, we wish to make the following diagram commute:
+	\begin{center}
+		\begin{tikzcd}
+			{V} \arrow[rr, "T"]\arrow[dd, "S"'] & & {V'}\arrow[dd, "\Phi(S)"]\\
+			& & \\
+			{W} \arrow[rr, "T'"'] & & {W'}
+		\end{tikzcd}
+	\end{center}
+	First, we verify that $\Phi$ actually maps into $\Hom_{G}(\varphi', \rho').$ This is simple. Let $g \in G,$ $S \in \Hom_{G}(\varphi, \rho)$ and $v' \in V'$ be arbitrary. We then note
+	\[\begin{WithArrows}[displaystyle]
+		\Phi(S)(\varphi'_gv') &= (T' \circ S \circ T^{-1})(\varphi'_gv')\\
+		&= T'S(T^{-1}(\varphi'_gv')) \Arrow{$T$ and hence, $T^{-1}$ is an equivalence}\\
+		&= T'S(\varphi_gT^{-1}v') \Arrow{$S \in \Hom_{G}(\varphi, \rho)$}\\
+		&= T'(\rho_gST^{-1}v') \Arrow{$T'$ is an equivalence}\\
+		&= \rho'_g(T'ST^{-1}v')\\
+		&= \rho'_g(\Phi(S)v'),
+	\end{WithArrows}\]
+	as desired.
+
+	It is easy to see that $\Phi$ is linear. Indeed, this follows simply because $T$ is linear. Lastly, to see that it is a bijection, note that we have a two-sided inverse for $\Phi$ defined in the similar manner.
+\end{proof}
+
+\begin{lem}[Schur's lemma] \label{lem:schur}
+	Let $\varphi, \rho$ be irreducible representations of $G,$ and $T \in \Hom_{G}(\varphi, \rho).$ Then either $T$ is invertible or $T = 0.$ Consequently:
+	\begin{enumerate}
+		\item If $\varphi \not\sim \rho,$ then $\Hom_{G}(\varphi, \rho) = 0$;
+		\item If $\varphi = \rho,$ then $T = \lambda I$ with $\lambda \in \mathbb{C}.$ In other words, $T$ is simply multiplication with a scalar. (Here is where we use that the base field is $\mathbb{C}.$)
+	\end{enumerate}
+\end{lem}
+\begin{proof} 
+	Let $\varphi : G \to \GL(V)$ and $\rho : G \to \GL(W)$ be irreducible representations.
+
+	If $T = 0,$ then we are done. Thus, assume that $T \neq 0.$ In this case, $\ker T \neq V.$ On the other hand, by \Cref{prop:Ginvmorphism}, we know that $\ker T$ is $G$-invariant. Hence, irreducibility of $\varphi$ forces that $\ker T = 0.$ In other words, $T$ is injective.
+
+	Similarly, we know that $\im T$ is $G$-invariant and hence, $\im T = 0$ or $\im T = W.$ As $T \neq 0,$ the former is not possible. Thus, we see that $\im T	= W,$ i.e., $T$ is onto.
+
+	Thus, we conclude that $T$ is invertible. We now prove the consequences.
+	\begin{enumerate}
+		\item This is immediate for if $\varphi\not\sim\rho,$ then $T$ cannot be invertible for otherwise it would be an equivalence. Thus, the only possible morphism is the zero map.
+		\item Let $\lambda$ be an eigenvalue of $T$ (which exists because the base field is the algebraically closed $\mathbb{C}$).\\
+		Now, recall that the identity map $I$ is an element of $\Hom_{G}(\varphi, \varphi).$ (\Cref{rem:commutingmorphisms})\\
+		By \Cref{prop:morphismssubspace}, we then see that $T - \lambda I \in \Hom_{G}(\varphi, \varphi).$ Now, by definition of an eigenvalue, $T - \lambda I$ cannot be invertible. Thus, $T - \lambda I = 0$ which establishes the consequence.
+	\end{enumerate}
+	Thus, we are done.
+\end{proof}
+
+\begin{cor} \label{cor:schurdimone}
+	If $\varphi$ and $\rho$ are equivalent irreducible representations, then $\dim \Hom_{G}(\varphi, \rho) = 1.$
+\end{cor}
+\begin{proof} 
+	By \Cref{prop:equivrepisoHoms}, it suffices to show that $\dim \Hom_{G}(\varphi, \varphi) = 1.$ By the previous part, we see that $\{I\}$ is a basis for $\Hom_{G}(\varphi, \varphi).$
+\end{proof}
+
+\begin{prop} \label{prop:homoplusiso}
+	Let $\varphi : G \to \GL(V), \rho_1 \to \GL(W_1), \rho_2 \to \GL(W_2)$ be representations. Then, the isomorphism
+	\begin{equation*} 
+		\Hom_{G}(\varphi, \rho_1 \oplus \rho_2) \cong \Hom_{G}(\varphi, \rho_1) \oplus \Hom_{G}(\varphi, \rho_2)
+	\end{equation*}
+	holds and in particular, we have
+	\begin{equation*} 
+		\dim\Hom_{G}(\varphi, \rho_1 \oplus \rho_2) = \dim\Hom_{G}(\varphi, \rho_1) + \dim\Hom_{G}(\varphi, \rho_2).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Let $T \in \Hom_{G}(\varphi, \rho_1 \oplus \rho_2).$ Thus, $T$ is of the form $T : V \to W_1 \oplus W_2.$ Letting $\pi_i$ denote the projection map, we see that $\pi_i \circ T : V \to W_i$ are linear.\\
+	Moreover, $\pi_i \circ T$ is a morphism. Indeed, for $g \in G$ and $v \in V,$ we note that
+	\begin{align*} 
+		((\pi_i \circ T)\circ\varphi_g)(v) &= \pi_i(T(\varphi_g(v)))\\
+		&= \pi_i\left((\rho_1 \oplus \rho_2)_g(Tv)\right)\\
+		&= \rho_i(g)(T(v)).
+	\end{align*}
+	Thus, $\pi_i \circ T \in \Hom_{G}(\varphi, \rho_i)$ for $i = 1, 2.$ 
+
+	Conversely, given a morphisms $T_i \in \Hom_{G}(\varphi, \rho_i)$ for $i = 1, 2,$ the function
+	\begin{equation*} 
+		T : V \to W_1 \oplus W_2
+	\end{equation*}
+	defined by
+	\begin{equation*} 
+		T(v) = (T_1(v), T_2(v))
+	\end{equation*}
+	is again a morphism. The correspondence $(T_1, T_2) \leftrightarrow T$ is $\mathbb{C}$-linear and bijective. This yields the desired isomorphism.
+\end{proof}
+
+\begin{cor} \label{cor:extractmultiplicitywithhom}
+	Suppose $\varphi^{(1)}, \ldots, \varphi^{(s)}$ are pairwise inequivalent irreducible representations of $G.$ Put
+	\begin{equation*} 
+		\varphi = \underbrace{\varphi^{(1)} \oplus \cdots \oplus \varphi^{(1)}}_{m_1} \oplus \cdots \oplus \underbrace{\varphi^{(s)} \oplus \cdots \oplus \varphi^{(s)}}_{m_s}
+	\end{equation*}
+	for positive integers $m_1, \ldots, m_s.$ Then, 
+	\begin{equation*} 
+		\dim\Hom_{G}(\varphi^{(r)}, \varphi) = m_r
+	\end{equation*}
+	for $1 \le r \le m.$
+\end{cor}
+\begin{proof} 
+	By \Cref{prop:homoplusiso}, it follows that
+	\begin{equation*} 
+		\dim\Hom_{G}(\varphi^{(r)}, \varphi) = \sum_{i = 1}^{m}m_i\dim\Hom_{G}(\varphi^{(r)}, \varphi^{(i)}).
+	\end{equation*}
+	By \Cref{lem:schur} and \Cref{cor:schurdimone}, it follows that only $r = i$ survives in which case the dimension is one.
+\end{proof}
+
+We now generalise the result of \Cref{thm:irredcyclicgroup} (in fact, this also gives an alternate proof of \Cref{thm:irredcyclicgroup}).
+
+\begin{thm}[Irreducible representations of abelian groups] \label{thm:irredabelgroup}
+	Let $G$ be an abelian group. Then any irreducible representation of $G$ has degree $1.$
+\end{thm}
+\begin{proof} 
+	The idea is simple. We first show that every $\varphi_h$ is a morphism from $\varphi$ to itself. Using that, we construct a dimension one invariant subspace of $V$ forcing $V$ to be one dimensional.
+
+	To this end, fix $h \in H.$ Put $T \vcentcolon= \varphi_h$ and let $g \in G$ be arbitrary. Then, we have
+	\begin{equation*} 
+		T\varphi_g = \varphi_h\varphi_g = \varphi_{hg} = \varphi_{gh} = \varphi_g\varphi_h = \varphi_gT
+	\end{equation*}
+	proving that $\varphi_h \in \Hom_{G}(\varphi, \varphi).$ Consequently, \autoref{lem:schur} (which is applicable since $\varphi$ is \underline{irreducible}) tells us that $\varphi_h = \lambda_h I$ for some $\lambda_h \in \mathbb{C}.$ 
+
+	Now, fix a non-zero vector $v \in V.$ Then, $\varphi_hv = \lambda_hv \in \mathbb{C}v.$ This shows that $\mathbb{C}v$ is $\varphi_h$ invariant. Note that $h$ was arbitrary and $v$ did not dependent on $h.$ Thus, $\mathbb{C}v$ is a $G$-invariant subspace and irreducibility forces $V = \mathbb{C}v.$
+\end{proof}
+
+\begin{rem}
+	By \Cref{cor:deg1repsfinabel}, we already have a description of the degree one representations of the finite abelian groups.
+\end{rem}
+
+\begin{cor} \label{cor:finabelrepdiagonal}
+	Let $G$ be a finite abelian group and $\varphi : G \to \GL_n(\mathbb{C})$ a representation. Then, there exists an invertible matrix $T$ such that $T^{-1}\varphi_gT$ is invertible all $g \in G.$
+\end{cor}
+Note that the matrix $T$ is independent of $g.$ 
+\begin{proof} 
+	Since $G$ is finite, $\varphi$ is completely reducible, by \Cref{thm:maschke}. Thus, we can write
+	\begin{equation*} 
+		\varphi \sim \varphi^{(1)} \oplus \cdots \oplus \varphi^{(m)}
+	\end{equation*}
+	where each $\varphi^{(i)}$ is irreducible. By the previous corollary, it follows that that each $\varphi^{(i)}$ is of degree $1$ and hence, we also get $m = n.$
+
+	If $T : \mathbb{C}^n \to \mathbb{C}^n$ is an isomorphism giving the above equivalence, then we see that 
+	\begin{equation*} 
+		T^{-1}\varphi_gT = \diag\left(\varphi^{(1)}_g, \ldots, \varphi^{(n)}_g\right),
+	\end{equation*}
+	as desired.
+\end{proof}
+
+\begin{cor} \label{cor:finorderdiagonalisable}
+	Let $A \in \GL_m(\mathbb{C})$ be a matrix of finite order. Then, $A$ is diagonalisable.
+\end{cor}
+\begin{proof}
+	Let $n > 0$ be the order of $A.$ Then, we get a representation $\varphi:\mathbb{Z}/n\mathbb{Z} \to \GL_m(\mathbb{C})$ given by $\varphi\left([k]\right) = A^k.$ Then, by \Cref{cor:finabelrepdiagonal}, $\varphi\left([1]\right) = A$ is diagonalisable. (In fact, the collection $I, \ldots, A^{n-1}$ is \emph{simultaneously} diagonalisable.)
+\end{proof}
+
+\subsection{The Orthogonality Relations}
+
+\begin{disc}
+	From now on, for the rest of the report, the group $G$ will be assumed to be finite unless otherwise mentioned.
+\end{disc}
+
+\begin{defn}%[Group algebra] 
+	\label{defn:groupalg}
+	Let $G$ be a group and let $L(G)$ denote the set of all functions from $G$ to $\mathbb{C}.$ That is,
+	\begin{equation*} 
+		L(G) \vcentcolon= \mathbb{C}^G = \{f \mid f : G \to \mathbb{C}\}.
+	\end{equation*}
+	Then, $L(G)$ is a vector space over $\mathbb{C}$ in the natural way. It is also an inner product space with inner product defined as
+	\begin{equation*} 
+		\langle f_1, f_2\rangle \vcentcolon= \dfrac{1}{\md{G}}\sum_{g \in G} f_1(g) \overline{f_2(g)}.
+	\end{equation*}
+	$L(G)$ is called the \deff{group algebra} of the group $G.$
+\end{defn}
+The last sum makes sense without any convergence issues because $G$ is finite.
+\begin{defn}%[Norm]
+	\label{defn:norm} 
+	Given a group $G$ and $f \in L(G),$ the \deff{norm} of $f$ is defined as
+	\begin{equation*} 
+		\|f\| \vcentcolon= \sqrt{\langle f, f\rangle}.
+	\end{equation*}
+\end{defn}
+
+Note that given a representation $\varphi : G \to \GL_n(\mathbb{C}),$ we get $n^2$ functions $\varphi_{ij} : G \to \mathbb{C},$ corresponding to the $n^2$ entries. We now wish to study properties of $\varphi_{ij} \in L(G)$ when $\varphi$ is irreducible and unitary.
+
+Our eventual goal will be to prove \Cref{thm:schurorthorel}.
+
+\begin{prop} \label{prop:Thash}
+	Let $\varphi : G \to \GL(V)$ and $\rho : G \to \GL(W)$ be representations and suppose that $T : V \to W$ is a linear transformation. Then,
+	\begin{enumerate}
+		\item\label{item:001} $T^{\#} = \frac{1}{\md{G}}\sum_{g \in G} \rho_{g^{-1}}T\varphi_g \in \Hom_{G}(\varphi, \rho).$
+		\item\label{item:002} If $T \in \Hom_{G}(\varphi, \rho),$ then $T^{\#} = T.$
+		\item\label{item:003} The map $P : \Hom_{\mathbb{C}}(V, W) \to \Hom_{G}(\varphi, \rho)$ defined by $T \mapsto T^{\#}$ is an onto linear map.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	The proof of (\ref{item:001}) is by direct computation. Let $h \in G$ be arbitrary. Note that
+	\begin{equation*} 
+		T^{\#}\varphi_h = \frac{1}{\md{G}}\sum_{g \in G} \rho_{g^{-1}}T\varphi_{gh} = \frac{1}{\md{G}}\sum_{g' \in G} \rho_{hg'^{-1}}T\varphi_{g'} = \rho_hT^{\#}.
+	\end{equation*}
+	The middle inequality follows by the (bijective) change of variable $gh = g'.$ The above then establishes (\ref{item:001}).
+
+	Now, if $T \in \Hom_{G}(\varphi, \rho),$ then we get
+	\begin{equation*} 
+		T^{\#} =  \frac{1}{\md{G}}\sum_{g \in G} \rho_{g^{-1}}T\varphi_g = \frac{1}{\md{G}}\sum_{g \in G} \rho_{g^{-1}}\rho_gT = \frac{1}{\md{G}}\md{G}T = T,
+	\end{equation*}
+	which proves (\ref{item:002}).
+
+	Note that the above also proves that $T \mapsto T^{\#}$ is onto. Thus, to prove (\ref{item:003}), we only need to prove linearity of $P.$ This again follows by direct computation. Let $c \in \mathbb{C}$ and $T_1, T_2 \in \Hom_{\mathbb{C}}(V, W)$ be arbitrary.
+	\begin{align*} 
+		P(cT_1 + T_2) &= \frac{1}{\md{G}}\sum_{g \in G} \rho_{g^{-1}}(cT_1 + T_2)\varphi_g\\
+		&=c\frac{1}{\md{G}}\sum_{g \in G} \rho_{g^{-1}}(T_1)\varphi_g + \frac{1}{\md{G}}\sum_{g \in G} \rho_{g^{-1}}(T_2)\varphi_g\\
+		&= cP(T_1) + P(T_2),
+	\end{align*}
+	as desired.
+\end{proof}
+
+\begin{prop} \label{prop:hashpropertiesirredrep}
+	Let $\varphi : G \to \GL(V)$ and $\rho : G \to \GL(W)$ be \underline{irreducible} representations of $G$ and let $T : V \to W$ be a linear map. Then:
+	\begin{enumerate}
+		\item \label{item:004} If $\varphi \not\sim \rho,$ then $T^{\#} = 0;$
+		\item \label{item:005} If $\varphi = \rho,$ then $T^{\#} = \frac{\trace T}{\deg \varphi}I.$
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(\ref{item:004}) is simple for $T^{\#} \in \Hom_{G}(\varphi, \rho) = 0,$ by \nameref{lem:schur}. Now, if $\varphi = \rho,$ then $T^{\#} = \lambda I$ for some $\lambda \in \mathbb{C},$ again by \nameref{lem:schur}. We now wish to determine $\lambda.$
+
+	Note that $\trace T^{\#} = \trace(\lambda I) = \lambda \dim V = \lambda \deg \varphi.$ That is,
+	\begin{equation} \tag{$*$} \label{eq:001}
+		T^{\#} = \lambda I = \dfrac{\trace T^{\#}}{\deg \varphi}I.
+	\end{equation}
+	We may also calculate $\trace T^{\#}$ separately, using the definition of $T^{\#}$ and the fact that $\trace(ABC) = \trace(CAB).$ This gives us that
+	\begin{align*} 
+		\trace(T^{\#}) &= \dfrac{1}{\md{G}}\sum_{g \in G} \trace(\varphi_{g^{-1}}T\varphi_g)\\
+		&=\dfrac{1}{\md{G}}\sum_{g \in G} \trace(\varphi_g\varphi_{g^{-1}}T)\\
+		&=\dfrac{1}{\md{G}}\sum_{g \in G} \trace(T)\\
+		&= \trace(T).
+	\end{align*}
+	Putting the above back in \Cref{eq:001}, we get
+	\begin{equation*} 
+		T^{\#} = \dfrac{\trace T}{\deg \varphi}I. \qedhere
+	\end{equation*}
+\end{proof}
+
+If we consider $V = \mathbb{C}^n$ and $\GL(V) = \GL_n(\mathbb{C})$ (and similarly for $W = \mathbb{C}^m$), then \Cref{prop:Thash} tells us that we can consider $P$ as a linear from $\GL(V, W) = M_{m \times n}(\mathbb{C})$ to itself. It is now natural to ask what is the matrix representation of $P$ with respect to the standard basis $\{E_{ij}\}.$ (Recall that $E_{ij}$ is the $m \times n$ matrix with $1$ in the $(i, j)$-th entry and $0$ everywhere else.)
+
+\begin{lem} \label{lem:matmult}
+	Let $A \in M_{r \times m}(\mathbb{C}),$ $E_{ki} \in M_{m \times n}(\mathbb{C}),$ and $B \in M_{n \times s}(\mathbb{C}).$ Then, we have 
+	\begin{equation*} 
+		(AE_{ki}B)_{lj} = a_{lk}b_{ij},
+	\end{equation*}
+	where $A = (a_{ij})$ and $B = (b_{ij}).$
+\end{lem}
+\begin{proof} 
+	By definition, we have
+	\begin{equation*} 
+		(AE_{ki}B)_{lj} = \sum_{x, y} a_{lx}(E_{ki})_{xy}b_{yj}.
+	\end{equation*}
+	The only (possibly) non-zero term appearing in the summation is when $(x, y) = (k, i)$ which proves the result since $(E_{ki})_{ki} = 1.$
+\end{proof}
+
+\begin{lem} \label{lem:Ahashinnerprod}
+	Let $\varphi : G \to U_n(\mathbb{C})$ and $\rho : G \to U_m(\mathbb{C})$ be unitary representations of $G.$ Let $A = E_{ki} \in M_{m \times n}(\mathbb{C}).$ Then, $A^{\#}_{lj} = \langle \varphi_{ij}, \rho_{kl}\rangle.$
+\end{lem}
+Note that we had remarked earlier that given a function $\varphi:G \to U_n(\mathbb{C}),$ we actually get $n^2$ $\mathbb{C}$-valued functions. The inner product appearing in the above lemma is the one defined in \Cref{defn:groupalg}. 
+\begin{proof} 
+	Let $g \in G.$ Then $\rho_g \in U_n(\mathbb{C}).$ Note that we have
+	\begin{equation*} 
+		\rho_{g^{-1}} = \left(\rho_g\right)^{-1} = \rho_g^*
+	\end{equation*}
+	because $\rho_g$ is unitary.
+
+	Thus, we see that
+	\begin{equation*} 
+		\rho_{lk}(g^{-1}) = \overline{\rho_{kl}(g)}.
+	\end{equation*}
+
+	With the above, we note that
+	\[\begin{WithArrows}[displaystyle]
+		A^{\#}_{lj} &= \dfrac{1}{\md{G}}\sum_{g \in G} (\rho_{g^{-1}}E_{ki}\varphi_g)_{lj} \Arrow{\Cref{lem:matmult}}\\
+		&= \dfrac{1}{\md{G}}\sum_{g \in G} \rho_{lk}(g^{-1})\varphi_{ij}(g)\\
+		&= \dfrac{1}{\md{G}}\sum_{g \in G} \overline{\rho_{kl}(g)}\varphi_{ij}(g) \Arrow{\Cref{defn:groupalg}}\\
+		&= \langle \varphi_{ij}, \rho_{kl}\rangle,
+	\end{WithArrows}\]
+	as desired.
+\end{proof}
+
+We now prove the desired theorem.
+
+\begin{thm}[Schur's orthogonality relations] \label{thm:schurorthorel}
+	Let $G$ be a finite group.\\
+	Suppose that $\varphi : G \to U_n(\mathbb{C})$ and $\rho : G \to U_m(\mathbb{C})$ are inequivalent \underline{irreducible} unitary representations. Then:
+	\begin{enumerate}
+		\item \label{item:006} $\langle \varphi_{ij}, \rho_{kl}\rangle = 0,$
+		\item \label{item:007} $\langle \varphi_{ij}, \varphi_{kl}\rangle = \begin{cases}
+			1/n & \text{if } (i, j) = (k, l),\\
+			0 & \text{otherwise}.
+		\end{cases}$
+	\end{enumerate}
+	In particular, $\{\varphi_{ij} \mid 1 \le i, j \le n\} \cup \{\rho_{kl} \mid 1 \le k, l \le m\}$ is a linearly independent set.
+\end{thm}
+The last part follows since the theorem tells us that the above set of functions form an orthogonal set of non-zero vectors.
+\begin{proof} 
+	Letting $A = E_{ki} \in M_{m \times n}(\mathbb{C}),$ we see that $A^{\#} = 0$ by \Cref{item:004} of \Cref{prop:hashpropertiesirredrep}. On the other hand, $\langle \varphi_{ij}, \rho_{kl}\rangle = (A^{\#})_{lj},$ by \Cref{lem:Ahashinnerprod}. This proves (\ref{item:006}).
+
+	Now, we put $\rho = \varphi.$ We apply the same proposition and lemma again. Letting $A = E_{ki} \in M_{n}(\mathbb{C}),$ we see that 
+	\begin{equation*} 
+		A^{\#} = \frac{\trace A}{n}I
+	\end{equation*} 
+	by \Cref{item:005} of \Cref{prop:hashpropertiesirredrep}. By \Cref{lem:Ahashinnerprod}, we see that
+	\begin{equation*} 
+		\langle \varphi_{ij}, \varphi_{kl}\rangle = (A^{\#})_{lj} = \frac{\trace A}{n}I_{lj}.
+	\end{equation*}
+	Now if $i \neq k,$ then $\trace A = 0.$ On the other hand, if $l \neq j,$ then $I_{lj} = 0.$ Now, if $(i, j) = (k, l),$ then $\trace A = 1$ and $I_{lj} = 1.$ These three cases put together prove (\ref{item:007}).
+\end{proof}
+
+\begin{cor} \label{cor:schurorthonormal}
+	Let $\varphi$ be an \underline{irreducible} unitary representation of $G$ of degree $n.$ Then, the following set of $n^2$ functions
+	\begin{equation*} 
+		\left\{\sqrt{n}\varphi_{ij} \mid 1 \le i, j \le n\right\}
+	\end{equation*}
+	forms an ortho\underline{normal} set.
+\end{cor}
+\begin{proof} 
+	By the previous theorem, we already know that any two distinct elements of the set are orthogonal. The multiplication by $\sqrt{n}$ simply makes all the functions have unit norm.
+\end{proof}
+
+\begin{prop} \label{prop:fingroupirredbounds}
+	Let $G$ be a finite group. Then, the following hold.
+	\begin{enumerate}
+		\item There are only finitely many equivalence classes of irreducible representations of $G.$
+
+		\item Let $\varphi^{(1)}, \ldots, \varphi^{(s)}$ be a transversal of unitary representatives of irreducible representations of $G.$ Set $d_i \vcentcolon= \deg \varphi^{(i)}.$ Then, the set of functions
+		\begin{equation*} 
+			\left\{\sqrt{d_k}\varphi_{ij}^{(k)} \mid 1 \le k \le s,\;1 \le i, j \le d_k\right\}
+		\end{equation*}
+		forms an orthonormal set in $L(G).$	
+		\item In particular, $s \le d_1^2 + \cdots + d_s^2 \le \md{G}.$
+	\end{enumerate}
+\end{prop}
+\begin{proof} All of these follow from \Cref{cor:schurorthonormal}.
+	\begin{enumerate}
+		\item Note that given any set of equivalence classes of (not necessarily irreducible) representations, each class contains a unitary representation, by \Cref{prop:repoffingroupisunitary}. Now, since $\dim L(G) = \md{G},$ no linearly independent set of vectors from $L(G)$ can contain more than $\md{G}$ many elements. Since orthonormal sets are linearly independent, \Cref{cor:schurorthonormal} shows that there can only be finitely many classes of \underline{irreducible} representations.
+		\item This part again follows mainly from \Cref{cor:schurorthonormal}. The orthogonality of two functions of representations of different degrees follows from \nameref{thm:schurorthorel} since the representations $\varphi^{(i)}$ and $\varphi^{(j)}$ are inequivalent if $d_i \neq d_j.$
+		\item $s \le d_1^2 + \cdots + d_s^2$ is clear since each $d_i^2$ is at least $1.$ On the other hand, the orthonormal set given has $d_1^2 + \cdots + d_s^2$ elements in a vector space of dimension $\md{G},$ proving the second inequality. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{rem}
+	We shall later see that we actually have the equality 
+	\begin{equation*} 
+		\md{G} = d_1^2 + \cdots + d_s^2.
+	\end{equation*}
+\end{rem}
+
+\subsection{Some Examples}
+\begin{ex}[Degree one representations of $D_n$] \label{ex:degonerepsDn}
+	Recall that $D_n$ has the following presentation
+	\begin{equation*} 
+		D_n = \langle r, s \mid r^n = s^2 = rsrs = 1\rangle.
+	\end{equation*}
+	In other words, to define a representation $z : G \to \mathbb{C}^*,$ we only need to specify $z_r$ and $z_s$ which satisfy the above relations. (In the sense that this gives all the representations and that every representation is obtained this way.)
+
+	Note that since $\mathbb{C}^*$ is commutative, for the last relation, we only need
+	\begin{equation*} 
+		z_r^2z_s^2 = 1.
+	\end{equation*}
+	However, the second relation already tells us that $z_s^2 = 1.$ Thus, we now have the equivalent job of finding $z_r, z_s \in \mathbb{C}^*$ satisfying
+	\begin{equation*} 
+		z_r^n = 1,\;z_r^2 = 1,\; z_s^2 = 1.
+	\end{equation*}
+	Note that, in the above, we have separated the relations into those for $z_r$ and $z_s$ separately. Thus, we have precisely two choices for $z_s$ (namely, $\pm 1$) for every choice for $z_r.$
+
+	We now turn to the case of determining $z_r.$ There are two cases.
+
+	\textbf{Case 1.} $n$ is even. In this case, the relation $z_r^n = 1$ is implied by $z_r^2 = 1.$ Thus, we get precisely two choices for $z_r:$ $\pm 1.$
+
+	\textbf{Case 2.} $n$ is odd. Then, since $\gcd(n, 2) = 1,$ one can conclude that $z_r^{1} = 1$ and thus, we have only one choice.
+
+	Thus, we get the number of degree one representations of $D_n$ as:
+	\begin{enumerate}
+		\item $4,$ if $n$ is even,
+		\item $2,$ if $n$ is odd.
+	\end{enumerate}
+
+	Note that all of these are inequivalent since distinct degree one representations are inequivalent. (\Cref{prop:distinctdeg1inequiv}.)
+\end{ex}
+
+\begin{ex}[An irreducible representation of $D_n$] \label{ex:anirredrepDn}
+	Consider the regular $n$-polygon as a subset of $\mathbb{C}$ with vertices as the $n$-th roots of unity. We can think of its set of symmetries as $D_n.$ This gives us an embedding as follows
+	\begin{equation*} 
+		\varphi : D_n \to \GL_2(\mathbb{C})
+	\end{equation*}
+	defined as
+	\begin{equation*} 
+		\varphi_r \vcentcolon= \two{\cos \theta_n}{\sin \theta_n}{-\sin \theta_n}{\cos \theta_n} \andd \varphi_s \vcentcolon= \two{1}{0}{0}{-1},
+	\end{equation*}
+	where $\theta_n = \frac{2\pi}{n}.$ 
+
+	(Alternately, one can verify that $\varphi_r^n = \varphi_s^2 = (\varphi_r\varphi_s)^2 = 1.$)
+
+	Now, to see that it is irreducible, we note that the eigenvectors of $\varphi_s$ (up to scaling) are $e_1$ and $e_2.$ Thus, $\varphi_r$ and $\varphi_s$ have no common eigenvectors (note that $\sin\theta_n \neq 0$) and hence, $\varphi$ is irreducible.
+\end{ex}
+
+\begin{ex}[All irreducible representations of $D_3$ and $D_4$]
+	Note that by \Cref{ex:degonerepsDn}, we already know that there are $2$ (inequivalent irreducible) degree one representations of $D_3$ and $4$ of $D_4.$
+
+	By \Cref{ex:anirredrepDn}, we also have $1$ irreducible degree two representation of both.
+
+	On the other hand, note that
+	\begin{align*} 
+		1^1 + 1^1 + 2^2 &= 6 = \md{D_3},\\
+		1^1 + 1^1 + 1^1 + 1^1 + 2^2 &= 8 = \md{D_4}.
+	\end{align*}
+
+	Thus, by \Cref{prop:fingroupirredbounds}, we see that we have actually found all irreducible representations of $D_3$ and $D_4$! Note that \Cref{ex:anirredrepDn} and \Cref{ex:D4irreddeg2} are two distinct degree two representations of $D_4.$ The above analysis however tells us that the two are equivalent, even without us explicitly constructing any equivalence.
+\end{ex}
+
+\subsection{Characters and Class Functions}
+In this subsection, we will prove the uniqueness of decompositions. (That is, the uniqueness of the decomposition given in \nameref{thm:maschke}.)
+
+We start by introducing the character of a representation. Recall that given a endomorphism of a (finite dimensional) vector space, we can talk about its trace. This is defined as the trace of any matrix representation obtained after fixing an ordered basis. It is easy to see that this is basis invariant.
+
+\begin{defn}%[Character]
+	Let $\varphi : G \to \GL(V)$ be a representation. The \deff{character} $\chi_\varphi : G \to \mathbb{C}$ of $\varphi$ is defined by $\chi_\varphi(g) = \trace \varphi_g.$ The character of an irreducible representation is called an \deff{irreducible character}.
+\end{defn}
+
+As remarked earlier, the computation of character is independent of the basis we choose. For this reason, we may assume without loss of generality that we are talking about matrix representations. (In the cases where the general case is as simple, we need not do so.)
+
+If $\varphi : G \to \GL_n(\mathbb{C})$ is a representation given by $\varphi_g = (\varphi_{ij}(g)),$ then
+\begin{equation*} 
+	\chi_\varphi(g) = \sum_{i = 1}^{n}\varphi_{ii}(g).
+\end{equation*}
+
+\begin{rem}
+	If $z : G \to \mathbb{C}^* \hookrightarrow \mathbb{C}$ is a degree one representation, then $\chi_z = z.$ From now on, we shall treat degree one representations and their characters as the same.
+\end{rem}
+
+\begin{prop} \label{prop:charatidisdeg}
+	If $\varphi : G \to \GL(V)$ is a representation, then $\chi_\varphi(1) = \deg \varphi.$
+\end{prop}
+\begin{proof} 
+	$\chi_\varphi(1) = \trace \varphi_1 = \trace \id_V = \dim V = \deg \varphi.$
+\end{proof}
+
+\begin{prop} \label{prop:equivrepssamechar}
+	If $\varphi$ and $\rho$ are equivalent representations, then $\chi_\varphi = \chi_\rho.$
+\end{prop}
+\begin{proof} 
+	As remarked earlier, we may assume the representations in the form
+	\begin{equation*} 
+		\varphi, \rho : G \to \GL_n(\mathbb{C}).
+	\end{equation*}
+	Since the representations are equivalent, there exists an invertible matrix $T \in \GL_n(\mathbb{C})$ such that
+	\begin{equation*} 
+		\varphi_g = T\rho_gT^{-1}
+	\end{equation*}
+	for all $g \in G.$ Now fix $g \in G$ and using $\trace(ABC) = \trace(CAB),$ we see that
+	\begin{align*} 
+		\chi_\varphi(g) &= \trace \varphi_g\\
+		&= \trace (T\rho_gT^{-1})\\
+		&= \trace (T^{-1}T\rho_g)\\
+		&= \trace \rho_g\\
+		&= \chi_\rho (g),
+	\end{align*}
+	as desired.
+\end{proof}
+
+\begin{cor} \label{cor:chargrouprootsunity}
+	Let $G$ be a group of order $n$ and $\chi$ a character of degree $m$ of $G.$ Then, $\chi(g)$ is a sum of $m$ $n$-th roots of unity, for each $g \in G.$
+\end{cor}
+\begin{proof} 
+	Since characters only depend up to equivalence, we may assume that the representation is of the form $\varphi : G \to \GL_m(\mathbb{C})$ with character $\chi.$ Fix $g \in G.$ Then, $\varphi_g^n = I$ and thus, $\varphi_g$ is diagonalisable, by \Cref{cor:finorderdiagonalisable}. Hence, as before, we may assume that $\varphi_g$ is diagonal. It has eigenvalues $\lambda_1, \ldots, \lambda_m$ where each $\lambda_i$ is an $n$-th root of unity.\\
+	The character or trace is now simply the sum of all $\lambda_i.$
+\end{proof}
+
+The same proof as earlier also tells us that the function $\chi_\varphi : G \to \mathbb{C}$ is constant on the conjugacy classes of $G.$ More precisely:
+\begin{prop} \label{prop:charconstonconjclasses}
+	Let $\varphi$ be a representation of $G.$ Then, for all $g, h \in G,$ we have that $\chi_\varphi(g) = \chi_\varphi(hgh^{-1}).$
+\end{prop}
+\begin{proof} 
+	Let $g, h \in G$ and note
+	\begin{align*} 
+		\chi_\varphi(g) &= \trace \varphi_g\\
+		&= \trace (\varphi_{h^{-1}}\varphi_h\varphi_g)\\
+		&= \trace (\varphi_h\varphi_g\varphi_{h^{-1}})\\
+		&= \trace \varphi_{hgh^{-1}}\\
+		&= \chi_\varphi(hgh^{-1}). \qedhere
+	\end{align*}
+\end{proof}
+
+Functions with the above property have a special name.
+\begin{defn}%[Class functions]
+	A function $f : G \to \mathbb{C}$ is called a \deff{class function} if $f(g) = f(hgh^{-1})$ for all $g, h \in G.$ The space of all class functions is denoted $Z(L(G)).$
+\end{defn}
+
+Thus, we have shown that characters are class functions. Given a conjugacy class $C \subset G$ and a class function $f : G \to \mathbb{C},$ $f(C) \in \mathbb{C}$ will denote the (constant) value taken by elements of $C.$
+
+\begin{prop}
+	$Z(L(G))$ is a subspace of the vector space $L(G).$
+\end{prop}
+\begin{proof} 
+	Let $c \in \mathbb{C},$ $f_1, f_2 \in L(G),$ and $h, g \in G$ be arbitrary. Then,
+	\begin{align*} 
+		(cf_1 + f_2)(hgh^{-1}) &= cf_1(hgh^{-1}) + f_2(hgh^{-1})\\
+		&= cf_1(g) + f_2(g)\\
+		&= (cf_1 + f_2)(g),
+	\end{align*}
+	showing that $Z(L(G))$ is closed under linear combinations. Also, note that the zero map is an element of $Z(L(G))$ proving that $Z(L(G)) \le L(G).$
+\end{proof}
+
+\begin{defn}
+	Given a group $G,$ the set of conjugacy classes of $G$ is denoted $\Cl(G).$ For $C \in \Cl(G),$ we define $\delta_C : G \to \mathbb{C}$ as
+	\begin{equation*} 
+		\delta_C(g) = \begin{cases}
+			1 & g \in C,\\
+			0 & g \notin C.	
+		\end{cases}
+	\end{equation*}
+\end{defn}
+In other words, $\delta_C$ is just the indicator function of $C \subset G.$
+
+\begin{prop} \label{prop:dimZLGCLG}
+	The set $B = \{\delta_C \mid C \in \Cl(G)\}$ is a basis for $Z(L(G)).$ In particular, $\dim Z(L(G)) = \md{\Cl(G)}.$
+\end{prop}
+\begin{proof} 
+	It is clear $\delta_C \in Z(L(G))$ for each $C \in \Cl(G).$ (Note that conjugacy classes partition $G$ and thus, distinct conjugacy classes have empty intersection.)
+
+	\textbf{Spanning.} Let $f \in Z(L(G)).$ One verifies
+	\begin{equation*} 
+		f = \sum_{C \in \Cl(G)} f(C)\delta_C
+	\end{equation*}
+	by computing each side at an arbitrary $g \in G.$ This proves that $\spn B = Z(L(G)).$
+
+	\textbf{Linear independence.} Note that
+	\begin{equation*} 
+		\langle \delta_C, \delta_{C'}\rangle = \frac{1}{\md{G}}\sum_{g \in G} \delta_C(g)\overline{\delta_{C'}(g)} = \begin{cases}
+			0 & C \neq C',\\
+			\frac{\md{C}}{\md{G}} & C = C'.
+		\end{cases}
+	\end{equation*}
+	Thus, $B$ is a set of orthogonal non-zero vectors and hence, is linearly independent.
+
+	Lastly, note that $\md{B} = \md{\Cl(G)}$ since $C \neq C' \implies \delta_C \neq \delta_{C'}.$ Thus, $\dim Z(L(G)) = \md{B} = \md{\Cl(G)}.$
+\end{proof}
+
+\begin{thm}[First orthogonality relations] \label{thm:firstorthorel}
+	Let $\varphi, \rho$ be \underline{irreducible} representations of $G.$ Then
+	\begin{equation*} 
+		\langle \chi_\varphi, \chi_\rho\rangle = \begin{cases}
+			1 & \varphi \sim \rho,\\
+			0 & \varphi \not\sim \rho.
+		\end{cases}
+	\end{equation*}
+	Thus, the irreducible characters of $G$ form an orthonormal set of class functions. In particular, they are linearly independent.	
+\end{thm}
+Note that technically, we should have said ``distinct irreducible characters'' in the last line but \Cref{prop:equivrepssamechar} tells us that equivalent representations have equal characters.
+
+\begin{proof} 
+	By \Cref{prop:repoffingroupisunitary} and \Cref{prop:equivrepssamechar}, we may assume that $\varphi : G \to U_n(\mathbb{C})$ and $\rho : G \to U_m(\mathbb{C}).$ Now, note that
+	\begin{align*} 
+		\langle \chi_\varphi, \chi_\rho\rangle &= \frac{1}{\md{G}}\sum_{g \in G} \chi_\varphi(g) \overline{\chi_\rho(g)}\\
+		&= \frac{1}{\md{G}}\sum_{g \in G}\left[\left(\sum_{i = 1}^{n}\varphi_{ii}(g)\right)\left(\sum_{j = 1}^{m}\overline{\rho_{jj}(g)}\right)\right]\\
+		&= \sum_{\substack{1 \le i \le n\\1 \le j \le m}}\left[\dfrac{1}{\md{G}}\sum_{g \in G}\varphi_{ii}(g)\overline{\rho_{jj}(g)}\right]\\
+		&= \sum_{\substack{1 \le i \le n\\1 \le j \le m}}\langle \varphi_{ii}, \rho_{jj}\rangle.
+	\end{align*}
+	Now, if $\varphi \not\sim \rho,$ then all the terms in the summation are $0,$ by \nameref{thm:schurorthorel}. Now, if $\rho \sim \varphi,$ then we may assume $\rho = \varphi,$ by \Cref{prop:equivrepssamechar}. (Since we are making a statement about the characters only.)
+
+	In this case, \nameref{thm:schurorthorel} tell us that the only non-zero terms in the summation are when $i = j,$ in which case
+	\begin{equation*} 
+		\langle \varphi_{ii}, \rho_{jj}\rangle = \langle \varphi_{ii}, \varphi_{ii}\rangle = \frac{1}{n}
+	\end{equation*}
+	and so,
+	\begin{equation*} 
+		\langle \chi_\varphi, \chi_\rho\rangle = n\cdot\frac{1}{n} = 1.	 \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{cor}
+	Given two irreducible inequivalent representations $\varphi$ and $\rho$ of $G,$ we have $\chi_\varphi \neq \chi_\rho.$
+\end{cor}
+\begin{proof} 
+	Note that $\langle \chi_\varphi, \chi_\rho\rangle = 0.$ If $\chi_\varphi = \chi_\rho,$ this would force $\chi_\varphi = 0.$ However, this is not possible since $\langle \chi_\varphi, \chi_\varphi\rangle = 1 \neq 0.$
+\end{proof}
+Note that \Cref{prop:equivrepssamechar} already told us that equivalent characters have the same character. We have now proven the converse for irreducible representations. Thus, we have the following.
+
+\begin{thm} \label{thm:irredrepsequiviffsamechar}
+	Two irreducible representations are equivalent if and only they have the same character.
+\end{thm}
+
+\begin{cor}
+	There are at most $\md{\Cl(G)}$ equivalence classes of irreducible representations of $G.$
+\end{cor}
+\begin{proof} 
+	We have already shown that distinct equivalence classes will have distinct characters. Moreover, we have shown that picking a character from each set gives us a orthonormal (and hence, linearly independent) subset of $Z(L(G))$ and in turn, there can be at most $\dim Z(L(G)) = \md{\Cl(G)}$ many such.
+\end{proof}
+
+We now introduce some notation for ease of writing.
+
+\begin{defn}
+	If $V$ is a vector space, $\varphi$ a representation, and $m \in \mathbb{N},$ then
+	\begin{equation*} 
+		mV \vcentcolon= \underbrace{V \oplus \cdots \oplus V}_{m} \andd m\varphi \vcentcolon= \underbrace{\varphi \oplus \cdots \oplus \varphi}_{m}.
+	\end{equation*}
+	If $m = 0,$ then we define $0V$ to be the zero vector space and $0\varphi$ to be the degree zero representation.
+\end{defn}
+
+\begin{rem}
+	Note that we had said that we won't consider degree zero representations and we shall continue to do so. The only reason for considering $m = 0$ above is so that when we write an expression as
+	\begin{equation*} 
+		\rho \sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s\varphi^{(s)},
+	\end{equation*}
+	then we allow that possibility for some $m_i$ to be $0.$ In that case, we simply ignore $\varphi^{(i)}.$ It will never be the case that each $m_i$ is $0.$
+\end{rem}
+
+Our immediate goal now is to prove the uniqueness of decomposition. More precisely, if we are given a transversal of irreducible representatives $\varphi^{(1)}, \ldots, \varphi^{(s)}$ and have
+\begin{equation*} 
+	\rho \sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s \varphi^{(s)},
+\end{equation*}
+we want to show that each $m_i$ is uniquely determined. We shall see that this information can be extracted from just the character of $\rho.$
+
+\begin{lem} \label{lem:charactersadd}
+	Let $\varphi = \rho \oplus \psi.$ Then $\chi_\varphi = \chi_\rho + \chi_\psi.$
+\end{lem}
+\begin{proof} 
+	We may assume that $\rho : G \to \GL_n(\mathbb{C})$ and $\psi : G \to \GL_m(\mathbb{C}).$ Then, we have the block matrix form for $\varphi : G \to \GL_{n + m}(\mathbb{C})$ with
+	\begin{equation*} 
+		\varphi_g = \two{\rho_g}{}{}{\psi_g}
+	\end{equation*}
+	for all $g \in G.$ From the above, it follows that
+	\begin{equation*} 
+		\trace \varphi_g = \trace \rho_g + \trace \psi_g
+	\end{equation*}
+	for all $g \in G,$ as desired.
+\end{proof}
+
+\begin{thm} \label{thm:innerprodwithchi}
+	Let $\varphi^{(1)}, \ldots, \varphi^{(s)}$ be transversal of irreducible representations of $G.$ Suppose $\rho$ is a representation such that
+	\begin{equation*} 
+		\rho \sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s\varphi^{(s)}.
+	\end{equation*}
+	Then, $m_i = \langle \chi_\rho, \chi_{\varphi^{(i)}}\rangle.$
+\end{thm}
+\begin{proof} 
+	Note that by definition, $\varphi^{(i)} \not\sim \varphi^{(j)}$ if $i \neq j.$ Thus, by \Cref{thm:firstorthorel}, it follows that 
+	\begin{equation} \tag{$*$} \label{eq:002}
+		\langle \chi_{\varphi^{(i)}}, \chi_{\varphi^{(j)}}\rangle = \begin{cases}
+			0 & i \neq j,\\
+			1 & i = j.
+		\end{cases}
+	\end{equation}
+
+	From the previous lemma, it follows that
+	\begin{equation*} 
+		\chi_\rho = m_1\chi_{\varphi^{(1)}} + \cdots + m_s\chi_{\varphi^{(s)}}.
+	\end{equation*}
+	Taking the inner product with $\chi_{\varphi^{(i)}}$ and using \Cref{eq:002} prove the result.
+\end{proof}	
+
+\begin{cor}
+	The composition of $\rho$ into irreducible characters is unique.
+\end{cor}
+This is immediate for the ``unique'' just means that $m_i$ is uniquely determined. This actually tells us that we can make sense of something as the ``multiplicity'' of an irreducible representation. This leads to \Cref{defn:multiplicity}.
+
+\begin{cor} \label{cor:characbyequiv}
+	$\rho$ is determined, up to equivalence by its character. In particular, \Cref{thm:irredrepsequiviffsamechar} is true in general; that is, two representations are equivalent if and only if their characters are equal.
+\end{cor}
+\begin{proof} 
+	Let $f \vcentcolon= \chi_\rho.$ We show that we can construct a representation equivalent to $\rho$ just in terms of $f.$
+
+	To this end, define $n_i \vcentcolon= \langle f, \chi_{\varphi^{(i)}}\rangle$ and set
+	\begin{equation*} 
+		\varphi \vcentcolon= n_1\varphi^{(1)} \oplus \cdots \oplus n_s\varphi^{(s)}.
+	\end{equation*}
+
+	We claim that $\varphi \sim \rho.$ To see this, note that by \nameref{thm:maschke}, $\rho$ is completely reducible and there exists a decomposition of $\rho$ as 
+	\begin{equation*} 
+		\rho \sim \rho^{(1)} \oplus \cdots \oplus \rho^{(s')}.
+	\end{equation*}
+	By construction, $\varphi^{(1)}, \ldots, \varphi^{(s)}$ are the only irreducible representations, up to equivalence. Thus, each $\rho^{(j)}$ is equivalent to some $\varphi^{(i)}.$ By clubbing the representations in the same equivalence class together, we get
+	\begin{equation*} 
+		\rho \sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s\varphi^{(s)}.
+	\end{equation*}
+	However, $m_i = n_i$ for each $i,$ by the previous theorem and hence, $\rho \sim \varphi.$
+\end{proof}
+
+\begin{cor} \label{cor:irrediffnormone}
+	A representation $\rho$ is irreducible if and only if $\langle \chi_\rho, \chi_\rho\rangle = 1.$
+\end{cor}
+\begin{proof} 
+	As before, write $\rho \sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s\varphi^{(s)}$ and note that 
+	\begin{equation*} 
+		\langle \chi_\rho, \chi_\rho\rangle = m_1^2 + \cdots + m_s^2.
+	\end{equation*}
+	Thus, $\langle \chi_\rho, \chi_\rho\rangle = 1$ iff there exists $j$ such that $m_j = 1$ and $m_i = 0$ for all $i \neq j$ iff $\rho \sim \varphi^{(j)}$ for some $j$ iff $\rho$ is irreducible.
+\end{proof}
+
+\begin{rem} \label{rem:normcharacisnatural}
+	The above calculation also shows us that $\|\chi\|$ is always a positive integer.
+\end{rem}
+\begin{cor} \label{cor:innerprodproperties}
+	In fact, we have the following observations:
+	\begin{enumerate}
+		\item $\|\chi\| \in \mathbb{N}$ with $\|\chi\| = 1$ iff $\chi$ is irreducible.
+		\item $\langle \chi_1, \chi_2\rangle \in \mathbb{N}_0.$ In particular, the inner product is always real. Note that the characters themselves are complex valued and not necessarily real.
+	\end{enumerate}
+\end{cor}
+
+\begin{cor} \label{cor:multiplyingdegonerep}
+	Let $z : G \to \mathbb{C}^*$ be a degree one representation and $\rho : G \to \GL_n(\mathbb{C})$ a representation. Then, $\varphi : G \to \GL_n(\mathbb{C})$ defined as
+	\begin{equation*} 
+		\varphi_g = z_g \rho_g
+	\end{equation*}
+	is a representation. Furthermore, the equalities
+	\begin{equation*} 
+		\chi_\varphi = z \chi_\rho \andd \langle \chi_\varphi, \chi_\varphi\rangle = \langle \chi_\rho, \chi_\rho\rangle
+	\end{equation*}
+	hold.
+
+	In particular,
+	\begin{enumerate}
+		\item $\varphi$ is irreducible if and only if $\rho$ is;
+		\item if there exists $g_0 \in G$ such that $z_{g_0} \neq 1$ and $\chi_\varphi(g_0) \neq 0,$ then $\rho \not\sim \varphi.$
+	\end{enumerate} 
+\end{cor}
+\begin{proof} 
+	First we show that $\varphi$ is indeed a representation. This simple for $z_{g_2}\rho_{g_1} = \rho_{g_1}z_{g_2}$ for any $g_1, g_2 \in G$ which gives
+	\begin{equation*} 
+		\varphi_{g_1g_2} = \varphi_{g_1} \varphi_{g_2},
+	\end{equation*}
+	as desired.
+
+	Moreover, we also note that
+	\begin{equation*} 
+		\trace \varphi_g = \trace (z_g \rho_g) = z_g \trace \rho_g
+	\end{equation*}
+	or
+	\begin{equation} \tag{$\star$} \label{eq:004}
+		\chi_\varphi(g) = z_g \chi_\rho(g).
+	\end{equation}
+	This proves the first equality. The above also yields
+	\begin{equation*} 
+		\md{\chi_\varphi(g)}^2 = \md{z_g}^2 \md{\chi_\rho(g)}^2.
+	\end{equation*}
+	Recall that since $G$ is finite, $z_g^{\md{G}} = 1$ and hence, $\md{z_g} = 1,$ which gives us
+	\begin{equation} \tag{$*$} \label{eq:003}
+		\md{\chi_\varphi(g)}^2 = \md{\chi_\rho(g)}^2.
+	\end{equation}
+
+	To see that the second equality, note that
+	\[\begin{WithArrows}[displaystyle]
+		\langle \chi_\varphi, \chi_\varphi\rangle &= \frac{1}{\md{G}}\sum_{g \in G} \chi_\varphi(g)\overline{\chi_\varphi(g)}\\
+		&= \frac{1}{\md{G}} \sum_{g \in G} \md{\chi_\varphi(g)}^2 \Arrow{\Cref{eq:003}}\\
+		&= \frac{1}{\md{G}} \sum_{g \in G} \md{\chi_\rho(g)}^2\\
+		&= \langle \chi_\rho, \chi_\rho\rangle
+	\end{WithArrows}\]
+	By \Cref{cor:irrediffnormone}, irreducibility is equivalent to the above inner product being $1.$
+
+	We now prove the last statement. For this, we will use \Cref{prop:equivrepssamechar}. \\
+	Let $g_0$ be as in the theorem; then, by \Cref{eq:004}, we see that
+	\begin{equation*} 
+		\chi_\rho(g_0) = z_{g_0}^{-1} \chi_\varphi (g_0) \neq \chi_\varphi (g_0).
+	\end{equation*}
+	Thus, by \Cref{prop:equivrepssamechar}, we have $\rho \not\sim \varphi.$
+\end{proof}
+
+\begin{rem}
+	Note that the last part of the theorem is really just asking us to look at the characters of $\rho$ and $\varphi$ and conclude inequivalence.
+
+	Also, note that \Cref{eq:004} tells us that the character of $\varphi$ is obtained by multiplying $\chi_z$ and $\chi_\rho.$ (Recall that character of a degree one representation is the representation itself.)
+\end{rem}
+
+\begin{ex}
+	Let us use the above corollary to show that the representation $\rho$ of $S_3$ in \Cref{ex:S3GL2Crho} is irreducible. (We had already done this earlier in \Cref{ex:showingS3GL2Crhoisirred}.)
+
+	Recalling \nameref{thm:descconjclassSn}, we see that there are exactly three conjugacy classes in $S_3,$ namely, $[1],\;[(12)],\;[(123)].$ These have cardinalities $1,\;3,\;2,$ respectively. 
+
+	Note that $\chi_\rho(1) = 2,$ $\chi_\rho\left((12)\right) = 0,$ and $\chi_\rho\left((123)\right) = -1.$
+
+	Since characters are class functions, we see that
+	\begin{align*} 
+		\langle \chi_\rho, \chi_\rho\rangle &= \frac{1}{6}\sum_{\sigma \in S_3} \chi_p(\sigma)\overline{\chi_p(\sigma)}\\
+		&= \frac{1}{6}(1\cdot2^2 + 3\cdot0^2 + 2\cdot(-1)^2)\\
+		&= \frac{1}{6}(6) = 1.
+	\end{align*}
+\end{ex}
+\begin{ex}[Character table of $S_3$]
+	The previous example gives us an irreducible degree two representation of $S_3.$ \Cref{ex:degonerepsSn} had given us two degree one (inequivalent and irreducible) representations. Since the number of conjugacy classes of $S_3$ is $3,$ these are all. (Of course, using that $S_3 \cong D_3,$ we knew this already.)
+
+	Let $\chi_1$ denote the character of the the trivial representation, $\chi_2$ of the $\sign$ representation, and $\chi_3$ of the representation from the previous example.
+
+	Each of these are class functions, that is, constant on the conjugacy classes. Thus, we can construct something called the ``character table.''
+
+	\captionsetup{type=figure}
+	\[\begin{array}{rrrr}
+		 & [1] & [(12)] & [(123)]\\
+		\thiccline
+		\chi_1 & 1 & 1 & 1\\
+		\chi_2 & 1 & -1 & 1\\
+		\chi_3 & 1 & 0 & -1	
+	\end{array}\]
+	\captionof{table}{Character table of $S_3$} \label{tab:charS3}
+	
+\end{ex}
+
+\begin{ex}[Revisiting a representation of $S_3$]
+	Let us again turn back to \Cref{ex:S3GL2Crho}. We had remarked that we shall show that $\rho \oplus \psi$ is equivalent to the standard representation from \Cref{ex:standardrepSn}.
+
+	To see this, now we simply compute the character of the standard representation $\varphi.$
+
+	Computing it at $1,\;(12),\;(123),$ we see that the table is as follows.
+
+	\[\begin{array}{rrrr}
+		 & [1] & [(12)] & [(123)]\\
+		\thiccline
+		\chi_\varphi & 3 & 1 & 0
+	\end{array}\]
+
+	From the above table, it is evident that
+	\begin{equation*} 
+		\chi_\varphi = \chi_1 + \chi_3,
+	\end{equation*}
+	where we have retained the notation from the previous example. In turn, this establishes the desired equivalence.
+\end{ex}
+
+\begin{defn}%[Multiplicity]
+	\label{defn:multiplicity}
+	Let $G$ be a finite group and $\varphi^{(1)}, \ldots, \varphi^{(s)}$ be a transversal of irreducible unitary representations of $G.$ Set $d_i \vcentcolon= \deg \varphi^{(i)}.$
+
+	If $\rho \sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s\varphi^{(s)},$ then $m_i$ is called the \deff{multiplicity} of $\varphi^{(i)}$ in $\rho.$ If $m_i > 0,$ then we say that $\varphi^{(i)}$ is an \deff{irreducible constituent} of $\rho.$
+\end{defn}
+
+\begin{rem}
+	With the same notation, we have
+	\begin{equation*} 
+		\deg \rho = m_1d_1 + \cdots + m_sd_s.
+	\end{equation*}
+\end{rem}
+
+The result in the proof of \Cref{cor:characbyequiv} is important and so, we isolate it below.
+
+\begin{thm} \label{thm:calcequivfromchar}
+	Let $G$ be a finite group and $\rho$ a representation. Let $\varphi^{(1)}, \ldots, \varphi^{(s)}$ be as earlier. Define, $m_i \vcentcolon= \langle \chi_\rho, \chi_{\varphi^{(i)}}\rangle.$ Then,
+	\begin{equation*} 
+		\rho \sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s\varphi^{(s)}.
+	\end{equation*}
+\end{thm}
+
+Note the similarity with inner product spaces where the coefficients of a vector with respect to an orthonormal basis is given by the inner product. The similarity is not surprising since the theorems and corollaries above actually tell us how the above equivalence of representations translates to equality of characters in the inner product space $Z(L(G)).$
+
+\subsection{The Regular Representation}
+Recall from \Cref{subsec:linearisation}, the concept of \nameref{defn:linearisation}.
+
+\begin{defn}%[Regular representation]
+	\label{defn:regularrepresentation}
+	Let $G$ be a finite group. The \deff{regular representation} of $G$ is the homomorphism $L : G \to \GL(\mathbb{C}G)$ defined by
+	\begin{equation*} 
+		L_g\left(\sum_{h \in G} c_h h\right) = \sum_{h \in G} c_hgh = \sum_{x \in G} c_{g^{-1} x}x
+	\end{equation*}
+	for all $g \in G.$
+\end{defn}
+
+\begin{rem} \label{rem:degofregrep}
+	Note that since $G$ is a basis for $\mathbb{C}G,$ we have that $\deg L = \md{G}.$
+\end{rem}
+\begin{rem}
+	Of course, one must now verify that $L_g$ is actually an element of $\GL(\mathbb{C}G)$ and that $L$ is a homomorphism.
+	
+	The above can be seen permuting the coefficients of a given element of $\mathbb{C}G.$ Its action on the (natural) basis vectors can be seen as follows:
+	\begin{equation*} 
+		L_gh = gh.
+	\end{equation*}
+	In other words, $L_g$ acts on basis vectors by (left) multiplication by $g$ and the (unique) map obtained by extending it linearly to all of $\mathbb{C}G$ gives us the map $L_g.$ (cf. \Cref{prop:linearfuncextend}.) The $L$ stands for ``left.''
+\end{rem}
+
+\begin{prop}
+	The regular representation is a unitary representation of $G.$ In particular, it is indeed a representation.
+\end{prop}
+\begin{proof} 
+	% As remarked earlier, $L_g$ is indeed linear for all $g \in G.$ Now, let $g_1, g_2 \in G$ and let $h \in G \hookrightarrow \mathbb{C}G$ be a basis element. Note that
+	% \begin{equation*} 
+	% 	(L_{g_1} \circ L_{g_2})(h) = L_{g_1}(g_2h) = g_1g_2h = L_{g_1g_2}(h).
+	% \end{equation*}
+	% Thus, $L_{g_1} \circ L_{g_2}$ and $L_{g_1g_2}$ are linear transformations which agree on all basis elements. Thus, they must be equal. This proves the invertibility of $L_g$ (for all $g \in G$) as well as the fact that $L$ is a homomorphism.
+
+	% Thus, $L$ is a representation. 
+
+	The fact that $L$ is a representation follows from \Cref{prop:extendingactiontorep}.
+
+	To see that it is unitary, note that
+	\[\begin{WithArrows}[displaystyle]
+		\left\langle L_g\sum_{h \in G} c_hh, L_g\sum_{h \in G} k_hh\right\rangle &= \left\langle \sum_{x \in G} c_{g^{-1}x} x, \sum_{x \in G} k_{g^{-1}x} x\right\rangle\\
+		&= \sum_{x \in G} c_{g^{-1}x}\overline{k_{g^{-1}x}} \Arrow{$x \mapsto gy$}\\
+		&= \sum_{y \in G} c_y\overline{k_y}\\
+		&= \left\langle \sum_{h \in G} c_hh, \sum_{h \in G} k_hh \right\rangle,
+	\end{WithArrows}\]
+	as desired.
+\end{proof}
+
+\begin{prop} \label{prop:charofregrep}
+	The character of the regular representation $L$ is given as
+	\begin{equation*} 
+		\chi_L(g) = \begin{cases}
+			\md{G} & g = 1,\\
+			0 & g \neq 1.
+		\end{cases}
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	For $g = 1,$ note that $\chi_L(1) = \deg L,$ by \Cref{prop:charatidisdeg} and $\deg L = \md{G},$ by \Cref{rem:degofregrep}.
+
+	We now compute the character for $g \neq 1.$ Let $n \vcentcolon= \md{G}$ and write
+	\begin{equation*} 
+		G = (g_1, \ldots, g_n).
+	\end{equation*}
+	(We are using tuple notation to denote that we have fixed an order.) 
+
+	Now, we look at the matrix representation $[L_g]$ of $L_g$ with respect to this ordered basis $G.$
+
+	We contend that all the diagonal entries of $[L_g]$ are $0.$\\
+	Indeed, for any $g_i \in G,$ we have $gg_i = g_j \neq g_i.$ (Since $g \neq 1.$) \\
+	Thus, the $i$-the entry in the $i$-th column will be $0.$ It follows at once that 
+	\begin{equation*} 
+		\chi_L(g) = \trace L_g = \trace [L_g] = 0,
+	\end{equation*} 
+	as desired.
+\end{proof}
+
+\begin{rem}
+	Note that from the above, we can conclude the following.
+	\begin{align*} 
+		\langle \chi_L, \chi_L\rangle &= \frac{1}{\md{G}}\sum_{g \in G} \chi_L(g)\overline{\chi_L(g)}\\
+		&= \dfrac{1}{\md{G}}\md{G}^2\\
+		&= \md{G}.
+	\end{align*}
+	In particular, if $G$ is non-trivial, then $L$ is \emph{not} irreducible. In fact, the next proposition shows us exactly the description of $L$ in terms of its decomposition.
+\end{rem}
+
+We shall now fix the following notation: $G$ is a finite group and $\left\{\varphi^{(1)}, \ldots, \varphi^{(s)}\right\}$ is a transversal of inequivalent irreducible \textbf{unitary} representatives of $G.$ As usual, $d_i \vcentcolon= \deg \varphi^{(i)}.$ Moreover, $\chi_i \vcentcolon= \chi_{\varphi^{(i)}}.$
+
+\begin{prop} \label{prop:descripofL}
+	Let $L$ denote the regular representation of $G.$ Then,
+	\begin{equation*} 
+		L \sim d_1 \varphi^{(1)} \oplus \cdots \oplus d_s \varphi^{(s)}.
+	\end{equation*}
+	In particular, the equality $\md{G} = d_1^2 + \cdots + d_s^2$ holds.
+\end{prop}
+\begin{proof} 
+	By \Cref{thm:calcequivfromchar}, it suffices to show that $\langle \chi_L, \chi_i\rangle = d_i$ holds. To that end, note that
+	\begin{align*} 
+		\langle \chi_L, \chi_i\rangle &= \dfrac{1}{\md{G}}\sum_{g \in G} \chi_L(g)\overline{\chi_i(g)}\\
+		&= \dfrac{1}{\md{G}}\chi_L(1)\overline{\chi_i(1)}\\
+		&= \dfrac{1}{\md{G}}\md{G}\deg \varphi^{(i)}\\
+		&= \deg \varphi^{(i)} = d_i,
+	\end{align*}
+	as desired.
+
+	Now, note that by the \Cref{prop:descripofL} and \Cref{lem:charactersadd}, we see that
+	\begin{equation*} 
+		\chi_L = d_1\chi_1 + \cdots + d_s\chi_s.
+	\end{equation*}
+	Evaluating both sides at $1$ finishes the proof.
+\end{proof}
+
+\begin{rem} \label{rem:regrepcontainsallreps}
+	The above shows that every irreducible representation of $G$ appears as a constituent in its regular representation.
+\end{rem}
+
+\begin{cor} \label{cor:orthnormalbasis}
+	The set $B = \left\{\sqrt{d_k}\varphi_{ij}^{(k)} \mid 1 \le k \le s,\;1 \le i, j \le d_k\right\}$ is an orthonormal basis of $L(G).$
+\end{cor}
+\begin{proof}
+	By \Cref{prop:fingroupirredbounds}, we already know that it is orthonormal and hence, linearly independent. On the other hand, note that
+	\begin{equation*} 
+		\md{B} = d_1^2 + \cdots + d_s^2 = \md{G} = \dim L(G). \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{ex}[Number of irreducible representations of $D_n$] \label{ex:numirredrepsDn}
+	Note that by \Cref{ex:degonerepsDn}, we know the exact number of degree one representations of $D_n.$ By \Cref{ex:irredrepDndegbound}, we know that all other irreducible representations must have degree two.
+
+	Now, let $t_n$ denote the number of inequivalent irreducible degree two representations of $D_n.$ We shall now calculate $t_n,$ using \Cref{prop:descripofL}.
+
+	\textbf{Case 1.} $n = 2k + 1.$\\
+	In this case, there are $2$ inequivalent degree one representations. Thus, we see that
+	\begin{equation*} 
+		2 \cdot 1^2 + t_n \cdot 2^2 = \md{D_n} = 4k + 2
+	\end{equation*}
+	which gives us
+	\begin{equation*} 
+		t_n = k = \frac{n - 1}{2}.
+	\end{equation*}
+
+	\textbf{Case 2.} $n = 2k.$\\
+	In this case, there are $4$ inequivalent degree one representations. Thus, we see that
+	\begin{equation*} 
+		4 \cdot 1^2 + t_n \cdot 2^2 = \md{D_n} = 4k
+	\end{equation*}
+	which gives us
+	\begin{equation*} 
+		t_n = k - 1 = \frac{n}{2} - 1.
+	\end{equation*}
+
+	Thus, we get the total number of inequivalent irreducible representations as
+	\begin{align*} 
+		\frac{n + 3}{2} &\quad \text{if }n \text{ is odd,}\\
+		\frac{n}{2} + 3 &\quad \text{if }n \text{ is even.}
+	\end{align*}
+\end{ex}
+
+\begin{ex}[Finishing off $D_n$] \label{ex:finishingDn}
+	With the above calculations, we now finish the study of irreducible representations of $D_n.$ Fix $n \ge 3.$
+
+	Let us first set up the notation as follows: $\theta \vcentcolon= \frac{2\pi}{n}$ and
+	\begin{equation*} 
+		A_k \vcentcolon= \two{\cos k\theta}{\sin k\theta}{-\sin k\theta}{\cos k\theta}
+	\end{equation*}
+	for $k \in \{0, \ldots, n - 1\}.$
+
+	Also, let
+	\begin{equation*} 
+		A \vcentcolon= \two{1}{0}{0}{-1}.
+	\end{equation*}
+
+	As the reader might have guessed, the above matrices do indeed satisfy the following relations:
+	\begin{equation*} 
+		A_k^n = A^2 = (A_kA)^2 = I_n
+	\end{equation*}
+	and hence $r \mapsto A_k,\; s \mapsto A$ defines a two dimensional representation $\varphi_k$ of $D_n.$
+
+	Our goal is now to identify as many irreducible and pairwise inequivalent representations as possible. We shall end up showing that we get precisely $t_n$ many. ($t_n$ being as in \Cref{ex:numirredrepsDn}.)
+
+	First, we note that the eigenvector of $A$ (up to scaling) are $e_1$ and $e_2.$ Thus, if $\sin k\theta \neq 0,$ then $\varphi_k$ is irreducible. (\Cref{prop:deg2repirreducible}.) Thus, we need to ensure that $k\theta \neq 0, \pi.$
+
+	Second, we need to see when two irreducible representations above are actually inequivalent. The answer is actually quite simple, in view of \Cref{thm:irredrepsequiviffsamechar}. One notes that
+	\begin{equation*} 
+		\chi_{\varphi_k}(r) = \trace \varphi_k(r) = 2\cos k\theta
+	\end{equation*}
+	and hence, $\varphi_k \not\sim \varphi_{k'}$ if $\cos k\theta \neq \cos k'\theta.$ Noting that $k\theta, k'\theta \in [0, 2\pi),$ simple trigonometry tells us that
+	\begin{equation*} 
+		\cos k\theta = \cos k'\theta \iff k = k', \frac{2\pi}{\theta} - k \iff k = k', n - k.
+	\end{equation*}
+
+	Thus, if we looks at $k \in \{1, \ldots, n - 1\}$ such that $k\theta < \pi,$ we see that all the $\varphi_k$ are pairwise inequivalent.
+
+	If $n$ is even, then there are $\frac{n}{2} - 1$ such $k$ and if $n$ is odd, then there are $\frac{n-1}{2}$ many such. However, by \Cref{ex:numirredrepsDn}, there are no more and we are done!
+\end{ex}
+
+\begin{thm} \label{thm:onbforzlg}
+	The set $B = \{\chi_1, \ldots, \chi_s\}$ is an orthonormal basis for $Z(L(G)).$
+\end{thm}
+\begin{proof} 
+	We shall assume that $\varphi^{(i)} : G \to U_{d_i}(\mathbb{C})$ since we wish to use \Cref{prop:hashpropertiesirredrep}. Since our statement is about characters, which is unaffected by equivalence, our claim follows.
+
+	Note that we know that $B \subset Z(L(G))$ since characters are indeed class functions. Moreover, we know that $B$ is an orthonormal set, by \nameref{thm:firstorthorel}. Thus, only spanning needs to be shown.
+
+	To this end, let $f \in Z(L(G)) \le L(G)$ be given. By the previous corollary, we see that
+	\begin{equation*} 
+		f = \sum_{i, j, k} c_{ij}^{(k)}\varphi_{ij}^{(k)},
+	\end{equation*}
+	for some $c_{ij}^{(k)} \in \mathbb{C},$ $1 \le k \le s,$ $1 \le i, j \le d_k.$ Let $x \in G$ be arbitrary. Note that
+
+	\[\begin{WithArrows}[displaystyle]
+		f(x) &= \dfrac{1}{\md{G}}\sum_{g \in G} f(x) \Arrow{$f \in Z(L(G))$}\\
+		&=\dfrac{1}{\md{G}}\sum_{g \in G} f(g^{-1}xg)\\
+		&=\dfrac{1}{\md{G}}\sum_{g \in G} \sum_{i, j, k} c_{ij}^{(k)}\varphi_{ij}^{(k)}(g^{-1}xg)\\
+		&= \sum_{i, j, k}\dfrac{1}{\md{G}}\sum_{g \in G} c_{ij}^{(k)}\varphi_{ij}^{(k)}(g^{-1}xg)\\
+		&= \sum_{i, j, k} c_{ij}^{(k)}\dfrac{1}{\md{G}}\sum_{g \in G}\varphi_{ij}^{(k)}(g^{-1}xg)\\
+		&= \sum_{i, j, k} c_{ij}^{(k)}\dfrac{1}{\md{G}}\sum_{g \in G}\left[\varphi^{(k)}(g^{-1}xg)\right]_{ij}\\
+		&= \sum_{i, j, k} c_{ij}^{(k)}\left[\dfrac{1}{\md{G}}\sum_{g \in G}\varphi^{(k)}(g^{-1}xg)\right]_{ij} \Arrow{$\varphi^{(k)}$ is a representation}\\
+		&= \sum_{i, j, k} c_{ij}^{(k)}\left[\dfrac{1}{\md{G}}\sum_{g \in G}\varphi_{g^{-1}}^{(k)}\varphi_{x}^{(k)}\varphi_{g}^{(k)}\right]_{ij} \Arrow{$\#$ with respect to $(\varphi, \varphi)$}\\
+		&= \sum_{i, j, k} c_{ij}^{(k)}\left[(\varphi_x^{(k)})^{\#}\right]_{ij} \Arrow{\Cref{item:005} of \Cref{prop:hashpropertiesirredrep}}\\
+		&= \sum_{i, j, k} c_{ij}^{(k)}\frac{\trace \varphi_x^{(k)}}{\deg \varphi^{(k)}}I_{ij}\Arrow{$I_{ij} = 0$ if $i \neq j$ and $I_{ii} = 1$}\\
+		&= \sum_{i, k} c_{ii}^{(k)}\frac{\trace \varphi_x^{(k)}}{\deg \varphi^{(k)}} \Arrow{definition of $d_k$ and $\chi$}\\
+		&= \sum_{i, k} c_{ii}^{(k)}\frac{\chi_k(x)}{d_k}.
+	\end{WithArrows}\]
+
+	This shows that
+	\begin{equation*} 
+		f = \sum_{1 \le k \le s} \left[\sum_{1 \le i \le d_k}\frac{c_{ii}^{(k)}}{d_k}\right]\chi_k. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{cor} \label{cor:numirredrepsconjclass}
+	The number of equivalence classes of irreducible representations of $G$ is number of conjugacy classes of $G.$
+\end{cor}
+\begin{proof} 
+	By the above theorem, we have $s = \dim Z(L(G)).$ By \Cref{prop:dimZLGCLG}, we have $\dim Z(L(G)) = \md{\Cl(G)},$ as desired.
+\end{proof}
+
+\begin{ex}[Number of conjugacy classes of $D_n$]
+	By \Cref{ex:numirredrepsDn}, we know the number of inequivalent irreducible representations of $D_n.$ By the previous corollary, this is also the number of conjugacy classes of $D_n.$
+\end{ex}
+
+\begin{cor} \label{cor:numberofirredrepsofG}
+	Let $G$ be a finite group. Then, $G$ has $\md{G}$ equivalence classes of irreducible representations if and only if $G$ is abelian.
+\end{cor}
+\begin{proof} 
+	$\md{G} = \md{\Cl(G)}$ holds if and only if $G$ is abelian.
+\end{proof}
+
+\begin{cor}
+	Let $G$ be a finite group. Then, $G$ is abelian if and only if all the irreducible representations of $G$ have degree one.
+\end{cor}
+\begin{proof} 
+	The ``only if'' was proven in \Cref{thm:irredabelgroup}.
+
+	To prove the ``if'' part, note that if $G$ is not abelian, then $s < \md{G}.$ On the other hand
+	\begin{equation*} 
+		d_1^2 + \cdots + d_s^2 = \md{G}.
+	\end{equation*}
+	Thus, at least one $d_i$ is at least $2.$ In other words, there is a non-degree-one irreducible representation of $G.$
+\end{proof}
+
+\begin{defn}%[Character table]
+	\label{defn:charactertable}
+	Let $G$ be a finite group with irreducible $\chi_1, \ldots, \chi_s$ and conjugacy classes $C_1, \ldots, C_s.$ The \deff{character table} of $G$ is the $s \times s$ matrix $\mathsf{X}$ with $\mathsf{X}_{ij} = \chi_i(C_j).$ In other words, the rows of $\mathsf{X}$ are indexed by the characters of $G$ and columns by the conjugacy classes; the $(ij)$-th entry of $\mathsf{X}$ denotes the value of the $i$-th character on the $j$-th conjugacy class.
+\end{defn}
+
+Note that the fact that the above table is square (that is, the number of irreducible characters equals the number of conjugacy classes) is due to \Cref{cor:numirredrepsconjclass}. We had seen an example of the character table of $S_3.$ (Recall \Cref{tab:charS3}.)
+
+\begin{ex}[Character table of $\mathbb{Z}/n\mathbb{Z}$]
+	As noted earlier, the character of a degree one representation is simply the representation itself. Thus, we get the table as follows. To make the table look more natural, we shall consider $\mathbb{Z}/n\mathbb{Z}$ as the $n$-th roots of unity.
+
+	Recall the $n$ representations $\varphi^{(0)}, \ldots, \varphi^{(n-1)}$ from \Cref{ex:ZnZCstardeg1}. Letting $\chi_k \vcentcolon= \chi_{\varphi^{(k)}},$ we get the following character table.
+
+	\captionsetup{type=figure}
+	\[\begin{array}{rrrrr}
+		 & [1] & [\omega_n] & \cdots & [\omega_n^{n-1}]\\
+		\thiccline
+		\chi_0 & 1 & 1 & \cdots & 1\\
+		\chi_1 & 1 & \omega_n & \cdots & \omega_n^{n-1} \\
+		\chi_2 & 1 & \omega_n^2 & \cdots & \omega_n^{2(n - 1)}\\
+		\vdots & \vdots & \vdots & \ddots & \vdots\\
+		\chi_{n-1} & 1 & \omega_n^{n-1} & \cdots & \omega_n^{(n-1)^2}
+	\end{array}\]
+	\captionof{table}{Character table of $\mathbb{Z}/n\mathbb{Z}$} \label{tab:charZnZ}
+
+	The astute reader might have noticed that the columns are orthogonal. To make things more concrete, let us consider $n = 4,$ in which case the table becomes as follows.
+
+	\[\begin{array}{rrrrr}
+		 & [1] & [\iota] & [-1] & [-\iota]\\
+		\thiccline
+		\chi_0 & 1 & 1 & 1 & 1\\
+		\chi_1 & 1 & \iota & -1 & -\iota\\
+		\chi_2 & 1 & -1 & 1 & -1\\
+		\chi_3 & 1 & -\iota & -1 & \iota
+	\end{array}\]
+
+	Note that this was the case in \Cref{tab:charS3}. In could do a computation for two general columns in \Cref{tab:charZnZ} and conclude the same. Instead of doing that, we now prove that this is always the case.	
+\end{ex}
+
+To do that, we first note that if $C$ and $C'$ are conjugacy classes of $G,$ then the inner product of their columns is given by
+\begin{equation*} 
+	\sum_{i = 1}^{s}\chi_i(g)\overline{\chi_i(h)},
+\end{equation*}
+where $g$ (resp. $h$) is any element of $C$ (resp. $C'$).
+
+Retaining the notation as in \Cref{defn:charactertable}, we get the following theorem.
+
+\begin{thm}[Second orthogonality relations] \label{thm:secondorthorel}
+	Let $C, C'$ be conjugacy classes of $G$ and let $g \in C$ and $h \in C'.$ Then
+	\begin{equation*} 
+		\sum_{i = 1}^{s} \chi_i(g)\overline{\chi_i(h)} = \begin{cases}
+			\md{G}/\md{C} & C = C',\\
+			0 & C \neq C'.
+		\end{cases}
+	\end{equation*}
+	Consequently, the columns of the character table are orthogonal and the matrix $\mathsf{X}$ is invertible.
+\end{thm}
+
+\begin{proof} 
+	Note that since $\{\chi_i\}$ form an orthonormal basis for $Z(L(G))$ and $\delta_{C'} \in Z(L(G)),$ we get that
+	\begin{equation*} 
+		\delta_{C'} = \sum_{i = 1}^{s} \langle \delta_{C'}, \chi_i\rangle \chi_i.
+	\end{equation*}
+	Thus, (where $g$ is as in the theorem) we get
+	\begin{align*} 
+		\delta_{C'}(g) &= \sum_{i = 1}^{s} \langle \delta_{C'}, \chi_i\rangle \chi_i(g)\\
+		&= \sum_{i = 1}^{s} \dfrac{1}{\md{G}}\sum_{x \in G} \delta_{C'}(x)\overline{\chi_i(x)} \chi_i(g)\\
+		&= \sum_{i = 1}^{s} \frac{1}{\md{G}} \sum_{x \in C'} \delta_{C'}(x)\overline{\chi_i(x)} \chi_i(g)\\
+		&= \frac{1}{\md{G}}\sum_{i = 1}^{s} \sum_{x \in C'}\overline{\chi_i(x)} \chi_i(g).
+	\end{align*}
+	Noting that $\chi_i$ is a class function and that $h \in C',$ the above simplifies as following.
+	\begin{align*} 
+		\delta_{C'}(g) &= \frac{1}{\md{G}}\sum_{i = 1}^{s} \sum_{x \in C'}\overline{\chi_i(h)} \chi_i(g)\\
+		&= \frac{1}{\md{G}}\sum_{i = 1}^{s} \md{C'}\overline{\chi_i(h)} \chi_i(g)\\
+		&= \frac{\md{C'}}{\md{G}}\sum_{i = 1}^{s} \chi_i(g)\overline{\chi_i(h)}.
+	\end{align*}
+	Rearranging gives us
+	\begin{equation*} 
+		\sum_{i = 1}^{s} \chi_i(g)\overline{\chi_i(h)} = \frac{\md{G}}{\md{C'}}\delta_{C'}(g).
+	\end{equation*}
+	Noting that $\delta_{C'}(g) \neq 0 \iff \delta_{C'}(g) = 1 \iff g \in C' \iff C = C'$ yields the result.
+\end{proof}
+
+\subsection{Representations of Abelian Groups}
+We now conclude this section with completing our discussion of finite abelian groups. By \Cref{thm:irredabelgroup}, we know that every degree one representation of $G$ has degree one. Moreover, by \Cref{cor:numberofirredrepsofG}, we know that there are $\md{G}$ many such. We now explicitly calculate all of these.
+
+Note that the structure theorem of finite abelian groups tells us that every such group is a direct product of cyclic groups. Since we already know explicitly these representations (and their character tables) by \Cref{ex:ZnZCstardeg1}, we would get a complete description for all abelian groups.
+
+\begin{prop}
+	Let $G_1,$ $G_2$ be finite abelian groups with $m = \md{G_1}$ and $n = \md{G_2}.$ Suppose that $\rho_1, \ldots, \rho_m$ and $\varphi_1, \ldots, \varphi_n$ are all the irreducible representations of $G_1$ and $G_2,$ respectively. The functions $\alpha_{ij} : G_1 \times G_2 \to \mathbb{C}$ with $1 \le i \le m$ and $1 \le j \le n$ given by
+	\begin{equation*} 
+		\alpha_{ij}(g_1, g_2) = \rho_i(g_1)\varphi_j(g_2)
+	\end{equation*}
+	form a complete set of irreducible representations of $G_1 \times G_2.$
+\end{prop}
+\begin{proof} 
+	Note that it suffices to show that each $\alpha_{ij}$ is a homomorphism. Indeed, the fact that each $\alpha_{ij}$ irreducible follows from the fact that it is degree one. Moreover, the fact that $\{\alpha_{ij}\}_{1 \le i \le m}^{1 \le j \le n}$ forms a complete set will follow once we show that all the $mn$ $\alpha_{ij}$s are distinct.
+
+	\textbf{Homomorphism.} Note that a degree one representation is simply a map into $\mathbb{C}^*$ and thus, commutativity gives us that
+
+	\begin{align*} 
+		\alpha_{ij}\left((g_1, g_2)(g_1', g_2')\right) &= \alpha_{ij}(g_1g_1', g_2g_2')\\
+		&= \rho_i(g_1g_1')\varphi_j(g_2g_2')\\
+		&= \rho_i(g_1)\rho_i(g_1')\varphi_j(g_2)\varphi_j(g_2')\\
+		&= \rho_i(g_1)\varphi_j(g_2)\rho_i(g_1')\varphi_j(g_2')\\
+		&= \alpha_{ij}(g_1, g_2)\alpha_{ij}(g_1', g_2').
+	\end{align*}
+
+	\textbf{Distinctness.} Suppose that $\alpha_{ij} = \alpha_{kl}.$ Then, note that
+	\begin{equation*} 
+		\rho_i(g_1) = \alpha_{ij}(g_1, 1) = \alpha_{kl}(g_1, 1) = \rho_k(g_1),
+	\end{equation*}
+	for all $g_1 \in G_1.$ Thus, $i = k.$ Similarly, analysing $\alpha_{ij}(1, g_2)$ for $g_2 \in G_2$ yields $j = l,$ as desired.	
+\end{proof}
+
+Note that character of a degree one representation is the representation itself. The above proposition easily gives us the character table of the products now.
+
+\begin{ex}[Character table of the Klein group]
+	Note that we have the following character table for $\mathbb{Z}/2\mathbb{Z}.$
+
+	\[\begin{array}{rrr}
+		 & [0] & [1]\\
+		\thiccline
+		\chi_1 & 1 & 1\\
+		\chi_2 & 1 & -1
+	\end{array}\]
+
+	Looking at the products, we get the following table for $\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}.$
+
+	\captionsetup{type=figure}
+	\[\begin{array}{rrrrr}
+		 & [(0, 0)] & [(0, 1)] & [(1, 0)] & [(1, 1)]\\
+		\thiccline
+		\chi_{11} & 1 & 1 & 1 & 1\\
+		\chi_{12} & 1 & -1 & 1 & -1\\
+		\chi_{21} & 1 & 1 & -1 & -1 \\
+		\chi_{22} & 1 & -1 & -1 & 1
+	\end{array}\]
+	\captionof{table}{Character table of Klein group} \label{tab:charklein}
+\end{ex}

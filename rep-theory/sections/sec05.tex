@@ -1,0 +1,845 @@
+\section{Induced Representations}
+\subsection{Induced Characters and Frobenius Reciprocity}
+
+Note that if we are given a representation $\rho : H \to \GL(V)$ of a group $H$ and a group homomorphism $\psi : G \to H,$ then we get a representation of $G,$ namely $\varphi = \rho \circ \psi.$ Moreover, if $\rho$ is irreducible and $\psi$ onto, then we know that $\varphi$ is also irreducible. (\Cref{thm:ontogrouphomogivesirredrep}.) 
+
+In particular, the above shows how one can get (irreducible) representations of $G$ if we are given (irreducible) representations of a quotient of $G.$ We would now like to examine the case when $H$ is a subgroup of $G.$ Given a representation of $H,$ can we get an induced representation for $G?$
+
+\begin{defn}%[Restriction]
+	Let $H \le G.$ If $f : G \to \mathbb{C}$ is a function, then we can restrict $f$ to $H$ and get a function $f|_H : H \to \mathbb{C}.$ We denote this \deff{restriction} by $\Res^{G}_{H}f.$
+\end{defn}
+
+Recall that we had defined the group algebra $L(G)$ of a group $G.$ (\Cref{defn:groupalg}.) Thus, the above is a function
+\begin{equation*} 
+	\Res^{G}_{H} : L(G) \to L(H).
+\end{equation*}
+Recall that we had also defined the subspace $Z(L(G))$ of class functions. We now show that the restriction of a class function is again a class function.
+
+\begin{prop}
+	Let $H \le G.$ Then, $\Res^{G}_{H} : Z(L(G)) \to Z(L(H))$ is a linear map.
+\end{prop}
+\begin{proof} 
+	First, we show that if $f \in Z(L(G)),$ then $\Res^{G}_{H}f \in Z(L(H)).$ This is simple for if $x, h \in H,$ then $x, h \in G$ as well and we have
+	\begin{equation*} 
+		\Res^{G}_{H}f(x^{-1}hx) = f(x^{-1}hx) = f(h) = \Res^{G}_{H}f(h),
+	\end{equation*}
+	where the middle equality follows since $f$ was a class function.
+
+	Second, we show that $\Res^{G}_{H}$ is linear. This too is simple; let $c \in \mathbb{C},$ $f_1, f_2 \in Z(L(G))$ be arbitrary. Then,
+	\begin{align*} 
+		\Res^{G}_{H}(cf_1 + f_2)(h) &= (cf_1 + f_2)(h)\\
+		&= cf_1(h) + f_2(h)\\
+		&= c\Res^{G}_{H}f_1(h) + \Res^{G}_{H}f_2(h)\\
+		&= (c\Res^{G}_{H}f_1 + \Res^{G}_{H}f_2)(h)
+	\end{align*}
+	for all $h \in H$ and hence,
+	\begin{equation*} 
+		\Res^{G}_{H}(cf_1 + f_2) = c\Res^{G}_{H}f_1 + \Res^{G}_{H}f_2. \qedhere
+	\end{equation*}
+\end{proof}
+
+Thus, the restriction of a class function (on $G$) is again a class function (on $H$). The same is true for characters as well, as we shall see later. (In fact, the obvious candidate works.)
+
+We now wish to construct a map $Z(L(H)) \to Z(L(G)).$
+
+\begin{defn}
+	If $H \le G$ and $f : H \to \mathbb{C},$ we define $\hat{f} : G \to \mathbb{C}$ by
+	\begin{equation*} 
+		\hat{f}(x) \vcentcolon= \begin{cases}
+			f(x) & x \in H,\\
+			0 & x \notin H.
+		\end{cases}
+	\end{equation*}
+\end{defn}
+\begin{rem}
+	Note that the notation does not explicitly mention $H$ or $G.$ However, from context it would be clear what $G$ is. ($H$ is recovered as the domain of $f.$)
+\end{rem}
+
+\begin{lem} \label{lem:overdotislinear}
+	$f \mapsto \hat{f}$ is a linear map from $L(H)$ to $L(H).$
+\end{lem}
+\begin{proof} 
+	Let $c \in \mathbb{C}$ and $f, g \in L(H)$ be arbitrary. Then,
+	\begin{align*} 
+		\widehat{(cf + g)}(x) &= \begin{cases}
+			(cf + g)(x) & x \in H,\\
+			0 & x \notin G
+		\end{cases}\\
+		&= \begin{cases}
+			cf(x) + g(x) & x \in H,\\
+			c0 + 0 & x \notin G
+		\end{cases}\\
+		&= c\hat{f}(x) + \hat{g}(x)
+	\end{align*}
+	for all $x \in G.$
+\end{proof}
+
+\begin{defn}%[Induction]
+	Let $H \le G.$ We define the \deff{induction} map $\Ind^{G}_{H} : Z(L(H)) \to Z(L(G))$ by the formula
+	\begin{equation*} 
+		\Ind^{G}_{H}f(g) = \frac{1}{\md{H}}\sum_{x \in G} \hat{f}(x^{-1}gx).
+	\end{equation*}
+	If $\chi$ is a character of $H,$ $\Ind^{G}_{H}\chi$ is called the \deff{induced character} of $\chi$ on $G.$
+\end{defn}
+
+We shall show later that the \emph{induced character} is indeed a \emph{character}.	As earlier, we have check that $\Ind^{G}_{H}f$ is indeed a class function if $f$ is.
+
+\begin{prop}
+	Let $H \le G.$ Then, $\Ind^{G}_{H} : Z(L(H)) \to Z(L(G))$ is a linear map.
+\end{prop}
+\begin{proof} 
+	First, we show that if $f \in Z(L(H)),$ then $\Ind^{G}_{H}f \in Z(L(G)).$ This is simple for if $y, g \in G,$ then we have
+	\[\begin{WithArrows}[displaystyle]
+		\Ind^{G}_{H}f(y^{-1}gy) &= \frac{1}{\md{H}}\sum_{x \in G} \hat{f}(x^{-1}y^{-1}gyx)\\
+		&= \frac{1}{\md{H}}\sum_{x \in G} \hat{f}\left((yx)^{-1} g (yx)\right) \Arrow{$x \mapsto y^{-1}z$}\\
+		&= \frac{1}{\md{H}}\sum_{z \in G} \hat{f}(z^{-1}gz)\\
+		&= \Ind^{G}_{H}f(g).
+	\end{WithArrows}\]
+	
+	Second, we show that the map is linear. We use the fact that $f \mapsto \hat{f}$ is linear. (\Cref{lem:overdotislinear}.) Let $c \in \mathbb{C}$ and $f_1, f_2 \in Z(L(G))$ be arbitrary. Then, we have
+	\begin{align*} 
+		\Ind^{G}_{H}(cf_1 + f_2)(g) &= \frac{1}{\md{H}}\sum_{x \in G}\widehat{(cf_1 + f_2)}(x^{-1}gx)\\
+		&= \frac{1}{\md{H}}\sum_{x \in G}\left[c\hat{f_1}(x^{-1}gx) + \hat{f_2}(x^{-1}gx)\right]\\
+		&= c\frac{1}{\md{H}}\sum_{x \in G}\hat{f_1}(x^{-1}gx) + \frac{1}{\md{H}}\sum_{x \in G}\hat{f_2}(x^{-1}gx)\\
+		&= c\Ind^{G}_{H}f_1(g) + \Ind^{G}_{H}f_2(g),
+	\end{align*}
+	for all $g \in G.$ Thus,
+	\begin{equation*} 
+		\Ind^{G}_{H}(cf_1 + f_2) = c\Ind^{G}_{H}f_1 + \Ind^{G}_{H}f_2. \qedhere
+	\end{equation*}
+	
+\end{proof}
+
+\begin{thm}[Frobenius reciprocity] \label{thm:frobeniusreciprocity}
+	Suppose that $H$ is a subgroup of $G.$ Let $a \in Z(L(H))$ and $b \in Z(L(G)).$ Then, the equality
+	\begin{equation*} 
+		\langle \Ind^{G}_{H}a, b\rangle = \langle a, \Res^{G}_{H}b\rangle
+	\end{equation*}
+	holds.
+\end{thm}
+Note that $\Ind^{G}_{H}a, b \in Z(L(G)) \le L(G)$ and hence, the left side is the inner product in the space $L(G).$ On the other hand, the product on the right is in the space $L(H).$ The above is saying $\Ind^{G}_{H}$ and $\Res^{G}_{H}$ act as \emph{adjoints} of each other.
+
+The above can be interpreted as follows: Suppose $\chi$ is an irreducible character of $G$ and $\theta$ of $H.$ Then, the multiplicity of $\chi$ in the induced character $\Ind^{G}_{H}\theta$ is exactly the same as the multiplicity of $\theta$ in $\Res^{G}_{H}\chi.$
+
+\begin{proof} 
+	The proof is a simple computation.
+	\[\begin{WithArrows}[displaystyle]
+		\langle \Ind^{G}_{H}a, b\rangle &= \frac{1}{\md{G}}\sum_{g \in G} \Ind^{G}_{H}a(g) \overline{b(g)}\\
+		&= \frac{1}{\md{G}}\sum_{g \in G} \frac{1}{\md{H}}\sum_{x \in G} \hat{a}(x^{-1}gx)\overline{b(g)}\\
+		&= \frac{1}{\md{G}\md{H}} \sum_{x \in G} \sum_{g \in G} \hat{a}(x^{-1}gx)\overline{b(g)} \Arrow{$g \mapsto x^{-1}gx$ is a bijection}\\
+		&= \frac{1}{\md{G}\md{H}} \sum_{x \in G} \sum_{g \in G} \hat{a}(g)\overline{b(xgx^{-1})} \Arrow{$b \in Z(L(G))$}\\
+		&= \frac{1}{\md{G}\md{H}} \sum_{x \in G} \sum_{g \in G} \hat{a}(g)\overline{b(g)} \Arrow{$\hat{a}$ vanishes outisde $H$}\\
+		&= \frac{1}{\md{G}\md{H}} \sum_{x \in G} \sum_{h \in H} a(h)\overline{b(h)}\\
+		&= \frac{1}{\md{G}\md{H}} \sum_{x \in G} \sum_{h \in H} a(h)\overline{\Res^{G}_{H}b(h)}\\
+		&= \frac{1}{\md{G}} \sum_{x \in G} \langle a, \Res^{G}_{H}b\rangle\\
+		&= \langle a, \Res^{G}_{H}b\rangle,
+	\end{WithArrows}\]
+	as desired.
+\end{proof}
+
+We now give an alternate way of computed the induction, in terms of coset representatives.
+
+\begin{prop} \label{prop:shortindformula}
+	Let $G$ be a group and $H$ a subgroup of $G.$ Let $T = \{t_1, \ldots, t_m\}$ be a transversal of the cosets of $H$ in $G.$ Then, the formula
+	\begin{equation*} 
+		\Ind^{G}_{H}f(g) = \sum_{i = 1}^{m} \hat{f}(t_i^{-1}gt_i)
+	\end{equation*}
+	holds for any $f \in Z(L(H))$ and $g \in G.$
+
+	Equivalently,
+	\begin{equation*} 
+		\Ind^{G}_{H}f(g) = \sum_{\substack{t \in T \\ t^{-1}gt \in H}} f(t^{-1}gt).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Fix $g \in G$ and $f \in Z(L(H)).$
+
+	Note that we have the disjoint union 
+	\begin{equation*} 
+		G = t_1H \sqcup \cdots \sqcup t_mH
+	\end{equation*}
+	and hence,
+	\begin{align*} 
+		\Ind^{G}_{H}f(g) &= \frac{1}{\md{H}} \sum_{x \in G} \hat{f}(x^{-1}gx)\\
+		&= \frac{1}{\md{H}} \sum_{i = 1}^{m} \sum_{x \in t_iH} \hat{f}(x^{-1}gx)\\
+		&= \frac{1}{\md{H}} \sum_{i = 1}^{m} \sum_{h \in H} \hat{f}(h^{-1}t_i^{-1}gt_ih).
+	\end{align*}
+	Thus, we have
+	\begin{equation} \tag{$*$} \label{eq:005}
+		\Ind^{G}_{H}f(g) = \frac{1}{\md{H}} \sum_{i = 1}^{m} \sum_{h \in H} \hat{f}(h^{-1}t_i^{-1}gt_ih).
+	\end{equation}
+
+	Now, note that if $t_i^{-1}gt_i \notin H,$ then $h^{-1}t_i^{-1}gt_ih \notin H$ and hence,
+	\begin{equation*} 
+		\hat{f}(h^{-1}t_i^{-1}gt_ih) = 0 = \hat{f}(t_i^{-1}gt_i).
+	\end{equation*}
+	On the other hand, if $t_i^{-1}gt_i \in H,$ then $h^{-1}t_i^{-1}gt_ih \in H$ and hence,
+	\begin{equation*} 
+		\hat{f}(h^{-1}t_i^{-1}gt_ih) = f(h^{-1}t_i^{-1}gt_ih) = f(t_i^{-1}gt_i) = \hat{f}(t_i^{-1}gt_i),
+	\end{equation*}
+	where the middle inequality follows since $f$ is class function \underline{on $H$}.
+
+	Thus, we have shown that
+	\begin{equation*} 
+		\hat{f}(h^{-1}t_i^{-1}gt_ih) = \hat{f}(t_i^{-1}gt_i)
+	\end{equation*}
+	for all $h \in H$ and $i = 1, \ldots, m.$
+
+	Substituting this in \Cref{eq:005} gives us that
+	\begin{align*} 
+		\Ind^{G}_{H}f(g) &= \frac{1}{\md{H}} \sum_{i = 1}^{m} \sum_{h \in H} \hat{f}(h^{-1}t_i^{-1}gt_ih)\\
+		&=  \frac{1}{\md{H}} \sum_{i = 1}^{m} \sum_{h \in H} \hat{f}(t_i^{-1}gt_i)\\
+		&= \sum_{i = 1}^{m} \hat{f}(t_i^{-1}gt_i). \qedhere
+	\end{align*}
+\end{proof}
+
+\subsection{Induced Representations}
+
+In the previous subsection, we saw that induction and restriction of class functions give class functions. We now wish to show that the same is true for characters as well. The restriction part is easy.
+
+\begin{prop}
+	If $\varphi : G \to \GL(V)$ is a representation and $H \le G,$ then we can restrict $\varphi$ to $H$ to obtain a representation
+	\begin{equation*} 
+		\Res^{G}_{H}\varphi : H \to \GL(V).
+	\end{equation*}
+	Then
+	\begin{equation*} 
+		\chi_{\Res^{G}_{H}\varphi} = \Res^{G}_{H}\chi_\varphi.
+	\end{equation*}
+\end{prop}
+Note we have not formally defined $\Res^{G}_{H}\varphi$ since we had defined $\Res^{G}_{H}$ only on $L(G),$ but it has its natural meaning.
+
+\begin{proof} 
+	We need to show equality of two functions of $H.$ To this end, let $h \in H$ be arbitrary. Then,
+	\begin{equation*} 
+		\chi_{\Res^{G}_{H}\varphi}(h) = \trace \Res^{G}_{H}\varphi(h) = \trace \varphi(h) = \chi_\varphi(h) = \Res^{G}_{H}\chi_\varphi(h). \qedhere
+	\end{equation*}
+\end{proof}
+
+Thus, restriction of a character is again a character. We would like to show the same for induction but that direction is not as easy. \\
+Let us first look at some examples where we show that the induction of a character is actually the character of some known representation. (Note that unlike the case of restriction, we are not actually constructing a representation \emph{yet}. We are simply observing some specific examples and comparing it with \emph{known} characters.)
+
+\begin{ex}[Regular representation]\label{ex:regrepinduct}
+	Let $G$ be a group and consider $H = \{1\} \le G.$ Let $\chi_1$ denote the trivial character of $H.$ Computing the induced character, we write
+	\begin{equation} \tag{$*$} \label{eq:006}
+		\Ind^{G}_{H}\chi_1(g) = \sum_{x \in G} \hat{\chi}_1(x^{-1}gx).
+	\end{equation}
+	However, note that $x^{-1}gx \in \{1\} \iff g = 1.$ Thus, we see that the right side of \Cref{eq:006} is $0$ if $g \neq 1.$ On the other hand, if $g = 1,$ then we have
+	\begin{equation*} 
+		\Ind^{G}_{H}\chi_1(g) = \sum_{x \in G} \hat{\chi}_1(x^{-1}1x) = \sum_{x \in G} \hat{\chi}_1(1) = \md{G}.
+	\end{equation*}
+	Thus, we get that 
+	\begin{equation*} 
+		\Ind^{G}_{\{1\}}\chi_1(g) = \begin{cases}
+			\md{G} & g = 1,\\
+			0 & g \neq 1.
+		\end{cases}
+	\end{equation*}
+	The above is precisely the character of the regular representation of $G.$ (\Cref{prop:charofregrep}.)
+\end{ex}
+
+\begin{ex}[Permutation representation]\label{ex:permrepinduct}
+	We can generalise the above example by taking a general subgroup $H$ of $G.$ As earlier, let $\chi_1$ be the trivial character \underline{on $H$}. We wish to identify $\Ind^{G}_{H}\chi_1$ as a character \underline{on $G$}.
+
+	Recall the action from \Cref{ex:cosetaction}. We had
+	\begin{equation*} 
+		\sigma : G \to S_{G/H}
+	\end{equation*}
+	given by 
+	\begin{equation*} 
+		\sigma_g(xH) = gxH.
+	\end{equation*}
+	Note that $xH \in \Fix(g)$ iff $gxH = xH$ iff $x^{-1}gx \in H.$
+
+	Now, note that there $\md{H}$ many elements $x \in G$ which give the same coset $xH.$ Thus, $\md{\Fix(g)}$ is $1/\md{H}$ times the number of elements $x \in G$ such that $x^{-1}gx \in H.$
+
+	Observe that we have
+	\begin{equation*} 
+		\hat{\chi}_1(x^{-1}gx) = \begin{cases}
+			1 & x^{-1}gx \in H,\\
+			0 & x^{-1}gx \notin H.
+		\end{cases}
+	\end{equation*}
+
+	Thus, we see that
+	\begin{equation*} 
+		\Ind^{G}_{H}\chi_1(g) = \frac{1}{\md{H}}\sum_{x \in G} \hat{\chi}_1(x^{-1}gx) = \md{\Fix(g)}.
+	\end{equation*}
+
+	The above is precisely the character $\chi_{\widetilde{\sigma}}$ on $G.$ (\Cref{prop:charofpermrep}.)
+\end{ex}
+
+Let us now construct the induced representation. Fix a group $G$ and a subgroup $H \le G.$ Let $m = [G : H]$ be the index of $H$ in $G$ and let
+\begin{equation*} 
+	t_1, \ldots, t_m
+\end{equation*}
+be a transversal of cosets of $H$ in $G.$ 
+
+\begin{defn}
+	Given a vector space $V,$ we define the vector space
+	\begin{equation*} 
+		W = \bigoplus_{i = 1}^m t_iV
+	\end{equation*}
+	as the direct sum of $m$ isomorphic copies of $V.$ Instead of using the tuple notation, we denote the elements of $W$ as formal sums of the form
+	\begin{equation*} 
+		\sum_{i = 1}^{m} t_i v_i,
+	\end{equation*}
+	where $v_i \in V$ for $i = 1, \ldots, m.$
+\end{defn}
+
+\begin{defn}
+	\label{defn:gttghg}
+	Note that since $t_1, \ldots, t_m$ is a transversal, for each $g \in G$ and $i \in \{1, \ldots, m\},$ there exists a unique $g(i) \in \{1, \ldots, m\}$ and $h_g(i) \in H$ such that
+	\begin{equation*} 
+		gt_i = t_{g(i)}h_g(i).
+	\end{equation*}
+\end{defn}
+
+\begin{defn}%[Induced representation abstract]
+	\label{defn:inducedrep2}
+	Let $\varphi : H \to \GL(V)$ be a representation.\\
+	Put $W = \bigoplus_{i = 1}^m t_iV_i.$
+	The \deff{induced representation} $\Ind^{G}_{H}\varphi : G \to \GL(W)$ is defined as:
+	\begin{equation} \label{eq:inducedrepabs}
+		\Ind^{G}_{H}\varphi(g)\left(\sum_{i = 1}^{m}t_iv_i\right) = \sum_{i = 1}^{m}t_{g(i)}\varphi(h_g(i))(v_i).
+	\end{equation}
+\end{defn}
+
+\begin{rem}
+	Note that we are yet to show that $\Ind^{G}_{H}\varphi(g)$ is actually linear and that $\Ind^{G}_{H}\varphi$ is a representation. We shall do both these things in a bit.
+
+	Also note that the definition of the induction above is dependent on the set of coset representatives fixed. However, \Cref{thm:inducedreps} shows that the character of $\Ind^{G}_{H}\varphi$ does not depend on the transversal picked and thus, the character is actually defined uniquely up to equivalence. (Due to \Cref{cor:characbyequiv}.)
+\end{rem}
+
+% We now show that the two definitions ``coincide'' in the following sense.
+
+We now construct a matrix representation for the above. Since constructing a matrix representation only depends on the basis, we may as well assume that $V = \mathbb{C}^d.$ We first set up some notation.
+
+\begin{defn}
+	Suppose
+	\begin{equation*} 
+		\varphi : H \to \GL_d(\mathbb{C})
+	\end{equation*}
+	is a representation of $H.$ We define $\widehat{\varphi} : G \to \GL_d(\mathbb{C})$ by
+	\begin{equation*} 
+		\widehat{\varphi}_x = \begin{cases}
+			\varphi_x & x \in H,\\
+			0 & x \notin H,
+		\end{cases}
+	\end{equation*}
+	where the $0$ is the $d \times d$ zero matrix. 
+\end{defn}
+
+\begin{rem}
+	The above definition also makes sense for a general representation $\varphi : G \to \GL(V)$ after we have fixed a basis $B$ for $V$ to represent the linear transformations. It is in this way that we interpret \Cref{thm:inducedmatrixandabs}.
+
+	To be more precise, by $\varphi_x,$ we shall mean the matrix $[\varphi_x].$
+\end{rem}
+
+\begin{defn}%[Induced representation matrix]
+	\label{defn:inducedrep1}
+	Let $\varphi : H \to \GL_d(\mathbb{C})$ be a representation.\\
+	The \deff{induced representation matrix} $\Ind^{G}_{H}\varphi : G \to \GL_{md}(\mathbb{C})$ is defined as following block matrix:
+	\begin{equation} \label{eq:inducedrepmatrix}
+		\Ind^{G}_{H}\varphi(g) = \begin{bmatrix}
+			\widehat{\varphi}_{t_1^{-1}gt_1} & \widehat{\varphi}_{t_1^{-1}gt_2} & \cdots & \widehat{\varphi}_{t_1^{-1}gt_m}\\
+			\widehat{\varphi}_{t_2^{-1}gt_1} & \widehat{\varphi}_{t_2^{-1}gt_2} & \cdots & \widehat{\varphi}_{t_2^{-1}gt_m}\\
+			\vdots & \vdots & \ddots & \vdots\\
+			\widehat{\varphi}_{t_m^{-1}gt_1} & \widehat{\varphi}_{t_m^{-1}gt_2} & \cdots & \widehat{\varphi}_{t_m^{-1}gt_m}\\
+		\end{bmatrix}.
+	\end{equation}
+	We denote $\Ind^{G}_{H}\varphi$ as $\varphi^G,$ for ease of notation. Thus, $\varphi^G_g$ is an $m \times m$ block matrix with $d \times d$ blocks defined as
+	\begin{equation*} 
+		[\varphi^G_g]_{ij} = \widehat{\varphi}_{t_i^{-1}gt_j}
+	\end{equation*}
+	for $1 \le i, j \le m.$
+\end{defn}
+
+% \begin{rem}
+%Note already that \Cref{defn:inducedrep2} is more general in that we don't assume the vector spaces to particularly be $\mathbb{C}^d.$
+% \end{rem}
+
+\begin{thm} \label{thm:inducedmatrixandabs}
+	Let $\varphi : H \to \GL(V)$ be a representation. 
+	Fix an ordered basis $B = (e_1, \ldots, e_d)$ of $V.$ Then,
+	\begin{equation*} 
+		B' = (t_1e_1, \ldots, t_1e_d, t_2e_1, \ldots, t_2e_d, \ldots, t_me_1, \ldots, t_me_d)
+	\end{equation*}
+	is an ordered basis of $\bigoplus_{i = 1}^m t_iV_i.$ \\
+	Moreover, $\Ind^{G}_{H}\varphi(g)$ as defined in \Cref{eq:inducedrepabs} is a linear transformation whose matrix representation with respect to $B'$ is given by \Cref{eq:inducedrepmatrix}.
+\end{thm}
+\begin{proof} 
+	That $B'$ is a basis is an easy check. The linearity of $\Ind^{G}_{H}\varphi(g)$ follows from the linearity of $\varphi(h_g(i))$ for all $i.$ Only the matrix representation is left to be shown.
+
+	For the sake of clarity, we show that the first $d$ columns of \Cref{eq:inducedrepmatrix} are indeed what we should get. The general argument is identical. (Note that the first $d$ columns would mean the first column of blocks that appears in the matrix written.)
+
+	For ease of notation, we denote $\Ind^{G}_{H}\varphi$ as defined in \Cref{defn:inducedrep1} by $\varphi^G.$
+
+	To determine the $i$-th column for $1 \le i \le d,$ we need to look at the image of $t_1e_i$ under $\varphi^G_g.$ We have
+	\begin{equation*} 
+		gt_1 = t_{g(1)}h_g(1) \quad\text{or}\quad t_{g(1)}^{-1}gt_1 = h_g(1).
+	\end{equation*}
+	Thus, we have
+	\begin{equation*} 
+		\varphi^G_g(t_1e_i) = t_{g(1)}\varphi_{h_g(1)}e_i \in t_{g(1)}V \le \bigoplus_{j = 1}^m t_jV_j.
+	\end{equation*}
+
+	Note that if $j \neq g(1),$ then $t_{g(1)}^{-1}gt_1 \notin H$ and hence, the $j$-th block in the first (block) column of \Cref{eq:inducedrepmatrix} will be $0.$ This is consistent with the equation above.
+
+	On the other hand, for $j = g(1),$ the above equation tells us that the $j$-th block should be the matrix representation of 
+	\begin{equation*} 
+		\varphi_{h(g_1)} = \varphi_{t_{g(1)}^{-1}gt_1}.
+	\end{equation*}
+	Again, this is consistent with \Cref{eq:inducedrepmatrix} (since $t_{g(1)}^{-1}gt_1 \in H$) and we are done.
+\end{proof}
+
+\begin{rem}
+	Thus, by this, we may use the two definitions interchangeably after fixing a basis. We will also use the notation $\varphi^G$ when there is no confusion of $H.$
+
+	Note that we are yet to show that $\Ind^{G}_{H}\varphi$ is actually a representation. Before that, we do some computations.
+\end{rem}
+
+\begin{lem} \label{lem:gttghg}
+	As in the notation of \Cref{defn:gttghg}, we have
+	\begin{equation*} 
+		g'(g(i)) = (g'g)(i) \andd h_{g'g}(i) = h_{g'}(g(i))h_g(i).
+	\end{equation*}
+\end{lem}
+\begin{proof} 
+	Note that
+	\begin{equation*} 
+		gt_i = t_{g(i)}h_g(i),
+	\end{equation*}
+	by definition and hence,
+	\begin{equation*} 
+		g'gt_i = g't_{g(i)}h_g(i).
+	\end{equation*}
+	On the other hand, applying \Cref{defn:gttghg} to the left hand side gives
+	\begin{equation*} 
+		t_{(g'g)(i)}h_{g'g}(i) = g't_{g(i)}h_g(i)
+	\end{equation*}
+	or
+	\begin{equation*} 
+		g't_{g(i)} = t_{(g'g)(i)}h_{g'g}(i)h_g(i)^{-1}.
+	\end{equation*}
+	Comparing with \Cref{defn:gttghg} gives
+	\begin{equation*} 
+		g'(g(i)) = (g'g(i)) \andd h_{g'}(g(i)) = h_{g'g}(i)h_g(i)^{-1}.
+	\end{equation*}
+	This yields the desired equalities.
+\end{proof}
+
+\begin{cor} \label{cor:gttghg}
+	For all $g, g' \in G,$ $i \in \{1, \ldots, m\}$ and $v \in V,$ the equality
+	\begin{equation*} 
+		\varphi^G_{g'}(\varphi^G_g(t_iv)) = \varphi^G_{g'g}(t_iv)
+	\end{equation*}
+	holds.
+\end{cor}
+\begin{proof} 
+	For ease of notation, we shall denote $\varphi_h(v)$ by $h \cdot v$ for $h \in H.$ Note that this actually is an action of $H$ on $V.$
+
+	Observe that
+	\[\begin{WithArrows}[displaystyle] 	
+		\varphi^G_{g'}(\varphi^G_g(t_iv)) &= \varphi^G_{g'}\left(t_{g(i)}h_g(i) \cdot v\right)\\
+		&= t_{g'(g(i))} h_{g'}(g(i))\cdot(h_g(i) \cdot v)\\
+		&= t_{g'(g(i))} (h_{g'}(g(i))h_g(i)) \cdot v \Arrow{\Cref{lem:gttghg}}\\
+		&= t_{(g'g)(i)} h_{g'g}(i) \cdot v\\
+		&= \varphi^G_{g'g}(t_iv).
+	\end{WithArrows}\] 
+	Thus, we are done.
+\end{proof}
+
+% \begin{rem}
+% 	Note that the above definition is in terms of the coset representatives that we have chosen. However, the next theorem will show that the representation obtained is determined up to equivalence, independent of the representatives.
+% \end{rem}
+
+\begin{thm}[Induced representations] \label{thm:inducedreps}
+	Let $H$ be a subgroup of $G$ of index $m$ and suppose that $\varphi : H \to \GL(V)$ is a representation of $H.$ Then, $\Ind^{G}_{H}\varphi : G \to \GL\left(\bigoplus_{1}^m t_iV_i\right)$ is a representation and $\chi_{\Ind^{G}_{H}\varphi} = \Ind^{G}_{H}\chi_\varphi.$ In particular, $\Ind^{G}_{H}$ maps characters to characters.
+\end{thm}
+\begin{proof} 
+	To show that it is a representation, we work with \Cref{defn:inducedrep2}. By \Cref{lem:determininggrouphomoring}, it suffices to show that $\varphi^G_1$ is identity and $\varphi^G_{g'g} = \varphi^G_{g'} \circ \varphi^G_{g}.$ Put $W \vcentcolon= \bigoplus_{1}^m t_iV_i$
+
+	For the first, we note that $1 t_i = t_i \cdot 1$ and hence, $1(i) = i$ and $h_1(i) = 1$ for all $i.$ From this, it follows that $\varphi^G_1(w) = w$ for all $w \in W.$
+
+	The fact that it is multiplicative follows from \Cref{cor:gttghg} since $\{t_i v \mid 1 \le i \le m,\; v \in V\}$ forms a spanning set for $W.$
+
+	We now show that $\chi_{\Ind^{G}_{H}\varphi} = \Ind^{G}_{H}\chi_\varphi.$ For this, we work with \Cref{defn:inducedrep1} (after fixing a basis for $V$ and getting the natural basis for $W$). We then have
+	\[\begin{WithArrows}[displaystyle]
+		\chi_{\varphi^G}(g) &= \sum_{i = 1}^{m} \trace(\widehat{\varphi}_{t_1^{-1}gt_i})\\
+		&= \sum_{i = 1}^{m}\widehat{\chi_\varphi}(t_i^{-1}gt_i) \Arrow{\Cref{prop:shortindformula}}\\
+		&= \Ind^{G}_{H}\chi_\varphi.
+	\end{WithArrows}\]
+	The equality from the first line to the second is verified by considering the cases $t_i^{-1}gt_i \notin H$ and $\in H.$
+\end{proof}
+
+Let us now look at some examples.
+\begin{ex}[Induction on dihedral groups] \label{ex:inductdihedral}
+	As usual, let $D_n$ denote the dihedral group with $r$ denoting rotation by $2\pi/n$ and $s$ denoting a reflection. Let $G = D_n$ and $H = \langle r\rangle.$ $H$ is a cyclic group of order $n$ and index $2.$ Recall that all the degree one representations of cyclic groups (\Cref{ex:ZnZCstardeg1}) are as follows.
+
+	For $0 \le k \le n - 1,$ define $\chi_k : H \to \mathbb{C}^*$ as $\chi_k(r^m) = \omega_n^{km}.$ We now compute the induced representations $\varphi^{(k)} = \Ind^{G}_{H}\chi_k.$ We choose the coset representatives $t_1 = 1$ and $t_2 = s.$
+
+	We now construct the matrix \Cref{eq:inducedrepmatrix}. For this, we need to compute $t_i^{-1}gt_j$ for all $g \in G$ and $i, j \in \{1, 2\}.$ Note that the elements of $G$ are either of the form $r^m$ or $sr^m$ for $m = 0, \ldots, n- 1.$ \\
+	Thus, we have the following:
+	\begin{align*} 
+		\begin{array}{lll}
+			t_1^{-1}r^mt_1 = r^m & \phantom{hi}\hspace{1.5cm}\phantom{hi} & t_1^{-1}sr^mt_1 = sr^m,\\
+			t_1^{-1}r^mt_2 = sr^{-m} & & t_1^{-1}sr^mt_2 = r^{-m},\\
+			t_2^{-1}r^mt_1 = sr^m & & t_2^{-1}sr^mt_1 = r^m,\\
+			t_2^{-1}r^mt_2 = r^{-m} & & t_2^{-1}sr^mt_2 = sr^{-m}.
+		\end{array}
+	\end{align*}
+	Note that $r^m, r^{-m} \in H$ and $sr^m, sr^{-m} \notin H.$ Thus, we have
+	\begin{align*} 
+		\varphi^{(k)}(r^m) &= \two{\widehat{\chi}_k(r^m)}{\widehat{\chi}_k(sr^{-m})}{\widehat{\chi}_k(sr^{m})}{\widehat{\chi}_k(r^{-m})} = \two{\omega_n^m}{}{}{\omega_n^{-m}},\\
+		\varphi^{(k)}(sr^m) &= \two{\widehat{\chi}_k(sr^m)}{\widehat{\chi}_k(r^{-m})}{\widehat{\chi}_k(r^{m})}{\widehat{\chi}_k(sr^{-m})} = \two{}{\omega_n^{-m}}{\omega_n^m}{}.
+	\end{align*}
+	From the above, we note that $\Ind^{G}_{H}\chi_k(r^m) = 2\cos(2\pi km/n)$ and $\Ind^{G}_{H}\chi_k(sr^m) = 0.$
+
+	The astute reader might have seen the resemblance with \Cref{ex:finishingDn}. Indeed, $\varphi^{(k)}$ in this example is precisely $\varphi_k$ from that example. This shows that all the degree two irreducible representations are actually obtained from degree one representations of $H.$ (Of course, not all give inequivalent ones. For that, we restrict $k$ to satisfy $1 \le k < \frac{n}{2},$ which is consistent with our earlier observation as well.)
+\end{ex}
+
+\begin{ex}[Induction on quaternions] \label{ex:inductquaternion}
+	Let $Q = \{\pm 1, \pm \I, \pm \J, \pm \K\}$ denote the group of quaternions. Note that the center is $Z(Q) = \{\pm 1\}$ and $Q/Z(Q) \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}$ is abelian. Since $Q$ was not abelian, we see that $Z(Q)$ is the commutator subgroup.\footnotemark
+
+	As noted earlier, this means that there are exactly four irreducible degree one representations of $Q.$ Now, we know that
+	\begin{equation*} 
+		d_1^2 + \cdots + d_s^2 = 8.
+	\end{equation*}
+	Thus, for the remaining, we have
+	\begin{equation*} 
+		d_5^2 + \cdots + d_s^2 = 4.
+	\end{equation*}
+	However, $d_5 \ge 2$ and thus, we see that $s = 5$ and $d_5 = 2.$
+
+	In other words, there is only one remaining irreducible representation, which is of degree two. Let us now obtain that.
+
+	Defining $H = \langle \I\rangle,$ we see that $\md{H} = 4$ and $[Q : H] = 2.$ Choose the coset representatives $t_1 = 1$ and $t_2 = \J.$ Consider the representation $\chi : H \to \mathbb{C}^*$ given by $\varphi(\I^k) = \iota^k.$ Then, we have
+	\begin{align*} 
+		\begin{array}{lll}
+		\varphi^Q_{\pm 1} = \pm \two{1}{}{}{1}, && \varphi^Q_{\pm \I} = \pm \two{\iota}{}{}{-\iota},\\ && \\
+		\varphi^Q_{\pm \J} = \pm \two{}{-1}{1}{}, && \varphi^Q_{\pm \K} = \pm \two{}{-\iota}{-\iota}{}.
+		\end{array}
+	\end{align*}
+	Note that $\varphi^Q_{\I}$ and $\varphi^Q_{\K}$ have no common eigenvector and hence, $\varphi^Q$ is irreducible.
+
+	The character table of $Q$ is given as follows.
+
+	\captionsetup{type=figure}
+	\[\begin{array}{rrrrrr}
+		 & [1] & [-1] & [\I] & [\J] & [\K]\\
+		\thiccline
+		\chi_{1} & 1 & 1 & 1 & 1 & 1\\
+		\chi_{2} & 1 & 1 & -1 & 1 & -1\\
+		\chi_{3} & 1 & 1 & 1 & -1 & -1 \\
+		\chi_{4} & 1 & 1 & -1 & -1 & 1\\
+		\chi_{5} & 2 & -2 & 0 & 0 & 0
+	\end{array}\]
+	\captionof{table}{Character table of $Q$} \label{tab:charquat}
+
+	The first four rows are obtained using the Character table of Klein group. (\Cref{tab:charklein})
+\end{ex}
+\footnotetext{Recall that the commutator subgroup is the smallest normal subgroup such that the quotient is abelian.}
+
+\subsection{Mackey's Irreducibility Criterion}
+We now wish to see if the induction of an irreducible representation is again irreducible. This was not the case in \Crefrange{ex:regrepinduct}{ex:permrepinduct} but was the case in \Crefrange{ex:inductdihedral}{ex:inductquaternion}. \\
+Note that by \Cref{cor:irrediffnormone}, this can be answered by computation of
+\begin{equation*} 
+	\langle \Ind^{G}_{H}\varphi, \Ind^{G}_{H}\varphi\rangle.
+\end{equation*}
+Now, by \nameref{thm:frobeniusreciprocity}, we have
+\begin{equation*} 
+	\langle \Ind^{G}_{H}\varphi, \Ind^{G}_{H}\varphi\rangle = \langle \varphi, \Res^{G}_{H}\Ind^{G}_{H}\varphi\rangle.
+\end{equation*}
+Thus, our problem reduces to studying $\Res^{G}_{H}\Ind^{G}_{H}\varphi.$
+
+\begin{defn}%[Disjoint representations]
+	Two representations $\varphi$ and $\rho$ of $G$ are said to be \deff{disjoint} if they have no common irreducible constituent. Equivalently, $\langle \chi_\varphi, \chi_\rho\rangle = 0.$
+\end{defn}
+
+\begin{rem}
+	To see the equivalence, note that if
+	\begin{align*} 
+		\rho &\sim n_1\varphi^{(1)} \oplus \cdots \oplus n_s\varphi^{(s)},\\
+		\varphi &\sim m_1\varphi^{(1)} \oplus \cdots \oplus m_s\varphi^{(s)},
+	\end{align*}
+	then they are disjoint iff $n_im_i = 0$ for all $1 \le i \le s.$
+
+	On the other hand, since $n_im_i \ge 0,$ we have that
+	\begin{equation*} 
+		\langle \chi_\varphi, \chi_r\rangle = 0 \iff \sum_{i = 1}^{s}m_in_i = 0 \iff m_in_i = 0 \; \forall i.
+	\end{equation*}
+\end{rem}
+
+We had noted that we wished to study $\Res^{G}_{H}\Ind^{G}_{H}\varphi.$ As it turns out, studying that it not more difficult than studying $\Res^{G}_{H}\Ind^{G}_{K}\varphi,$ where $H, K \le G.$ 
+
+\begin{defn}
+	Let $K \le G$ and $s \in G.$ Then, for $f \in Z(L(K)),$ $f^s \in Z(L(sKs^{-1}))$ is defined by
+	\begin{equation*} 
+		f^s(x) = f(s^{-1}xs)
+	\end{equation*}
+	for all $x \in K.$
+\end{defn}
+
+Note that $Z(L(sKs^{-1}))$ makes sense since $sKs^{-1}$ is again a subgroup of $G.$ Moreover, $f^s(x)$ makes sense for $x \in sKs^{-1}$ since $s^{-1}xs \in K$ then. We must check that $f^s$ is indeed a class function.
+
+\begin{proof} 
+	Let $x, y \in sKs^{-1}.$ Then, there exist $k, k' \in K$ such that $x = sks^{-1}$ and $y = sk's^{-1}.$ We then have
+	\begin{align*} 
+		f^s(yxy^{-1}) &= f(s^{-1}yxy^{-1}s)\\
+		&= f(s^{-1}sk's^{-1}sks^{-1}sk'^{-1}s^{-1}s)\\
+		&= f(k'kk'^{-1})\\
+		&= f(k),
+	\end{align*}
+	where the last equality follows since $f$ is a class function on $K.$
+
+	The proof is complete upon noting that
+	\begin{equation*} 
+		f(k) = f(s^{-1}xs) = f^s(x). \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{defn}
+	Let $H$ be a subgroup of $G$ and let $\varphi : H \to \GL_d(\mathbb{C})$ be a representation. For $s \in G,$ we define the representation $\varphi^s : sHs^{-1} \to \GL_d(\mathbb{C})$ by
+	\begin{equation*} 
+		\varphi^s(x) = \varphi(s^{-1}xs).
+	\end{equation*}
+\end{defn}
+
+As earlier, the above definition makes sense. We only need to check that $\varphi^s$ is indeed a representation.
+
+\begin{proof} 
+	Only that $\varphi^s$ is a homomorphism needs to be checked. Let $x, x' \in sHs^{-1}.$ Let $h, h' \in H$ be such that $x = shs^{-1}$ and $x' = sh's^{-1}.$ Then,
+	\begin{equation*} 
+		\varphi^s(xx') = \varphi(s^{-1}xx's) = \varphi(s^{-1}xss^{-1}x's) = \varphi(hh') = \varphi(h)\varphi(h') = \varphi^s(x)\varphi^s(x').
+	\end{equation*}
+	The second last equality follows since $\varphi$ was a homomorphism to begin with.
+\end{proof}
+
+Before the next theorem, one must recall the notion of \nameref{subsubsec:doublecosets}.
+
+\begin{thm}[Mackey] \label{thm:mackey}
+	Let $H, K \le G$ and let $S$ be a transversal of double coset representatives for $\dcos{H}{G}{K}.$ Then, for $f \in Z(L(K)),$ the equality
+	\begin{equation*} 
+		\Res^{G}_{H}\Ind^{G}_{K}f = \sum_{s \in S} \Ind^{H}_{H \cap sKs^{-1}}\Res^{sKs^{-1}}_{H \cap sKs^{-1}}f^s
+	\end{equation*}
+	holds.
+\end{thm}
+Before the proof, one can visualise the left and right terms as ``transferring'' a function from one domain to another in terms of the following triangles:
+\begin{center}
+	\begin{tikzcd}
+	  & G \arrow[ld, "\Res"'] &                                          \\
+	H &                       & K \arrow[lu, "\Ind"'] \arrow[ll, dashed]
+	\end{tikzcd}
+	\begin{tikzcd}
+	H &                                    & sKs^{-1} \arrow[ll, dashed] \arrow[ld, "\Res"] \\
+	  & H \cap sKs^{-1} \arrow[lu, "\Ind"] &                                               
+	\end{tikzcd}
+\end{center}
+\begin{proof} 
+	The main idea behind the proof is selecting a ``correct'' set of (left) coset representatives for $K$ in $G.$ 
+
+	\textbf{Step 1.} For each $s \in S,$ fix a complete set $V_s \subset H$ of coset representatives of $H \cap sKs^{-1}$ in $H.$ (Note that this makes sense because $H \cap sKs^{-1}$ is indeed a subgroup of $H.$)\\
+	Thus, we have
+	\begin{equation} \tag{$*$} \label{eq:007}
+		H = \bigsqcup_{v \in V_s}v(H \cap sKs^{-1}).
+	\end{equation}
+
+	\textbf{Step 2.} Now, fix $s \in S.$ We show that
+	\begin{equation} \tag{$**$} \label{eq:008}
+		HsK = \bigsqcup_{v \in V_s}vsK.
+	\end{equation}
+
+	$(\subset)$ Let $h \in H, k \in K$ be arbitrary. By \Cref{eq:007}, we can write $h = vh'$ for some $v \in V_s$ and $h' \in H \cap sKs^{-1}.$ Thus, we have
+	\begin{equation*} 
+		hsk = vh'sk = vs\underbrace{s^{-1}hs}_{\in K}k \in vsK.
+	\end{equation*}
+	Since a typical element of $HsK$ is of the form $hsk,$ we are done.
+
+	$(\supset)$ This is clear since $V_s \subset H$ by construction.
+
+	We now show that the union on the right is actually disjoint. Suppose that $vsK = v'sK$ for $v, v' \in V_s.$ Then, 
+	\begin{equation*} 
+		s^{-1}v'^{-1}vs \in K \quad\text{or}\quad v'^{-1}v \in sKs^{-1}.
+	\end{equation*}
+	Since $v$ and $v'$ are elements of $H$ to begin with, we see that
+	\begin{equation*} 
+		v'^{-1}v \in H \cap sKs^{-1}.
+	\end{equation*}
+	Since $v$ and $v'$ are from a transversal of cosets, we must have $v = v'.$
+
+	\textbf{Step 3.} For $s \in S,$ define $T_s = \{vs \mid v \in V_s\}.$ We show that $T_s$ and $T_{s'}$ are disjoint if $s \neq s'.$
+
+	Suppose there is an element in the intersection; then, there exist $v \in V_s$ and $v' \in V_{s'}$ such that $vs = v's'.$ By \Cref{eq:008}, we see that
+	\begin{equation*} 
+		HsK \supset vsK = v's'K \subset Hs'K
+	\end{equation*}
+	and hence, $HsK \cap Hs'K \neq \emptyset.$ Since $s, s'$ belong to a transversal of double cosets, it follows that $s = s'.$
+
+	\textbf{Step 4.} Let $T = \bigsqcup_{s \in S}T_s.$ Note that
+	\begin{equation*} 
+		G = \bigsqcup_{s \in S}HsK = \bigsqcup_{s \in S}\bigsqcup_{v \in V_s}vsK = \bigsqcup_{s \in S}\bigsqcup_{t \in T_s}tK = \bigsqcup_{t \in T}tK.
+	\end{equation*}
+	Thus, $T$ is a complete set of coset representatives of $K$ in $G.$
+
+	\textbf{Step 5.} For $h \in H,$ we use \Cref{prop:shortindformula} to note that
+	\begin{align*} 
+		\Ind^{G}_{K}f(h) &= \sum_{t \in T} \hat{f}(t^{-1}ht)\\
+		&= \sum_{s \in S}\sum_{t \in T_s} \hat{f}(t^{-1}ht)\\
+		&= \sum_{s \in S}\sum_{v \in V_s} \hat{f}(s^{-1}v^{-1}hvs)\\
+		&= \sum_{s \in S}\sum_{\substack{v \in V_s \\ v^{-1}hv \in sKs^{-1}}} f(s^{-1}v^{-1}hvs)\\	
+		&= \sum_{s \in S}\sum_{\substack{v \in V_s \\ v^{-1}hv \in sKs^{-1}}} f^s(v^{-1}hv)
+	\end{align*}
+	As noted earlier, $v \in H$ and thus, $v^{-1}hv \in H.$ Since the summation above is only over those $v$ such that $v^{-1}hv \in sKs^{-1},$ we see that $v^{-1}hv \in H \cap sKs^{-1}.$ Thus, we get
+	\begin{align*} 
+		\Ind^{G}_{K}f(h) &= \sum_{s \in S}\sum_{\substack{v \in V_s \\ v^{-1}hv \in H \cap sKs^{-1}}} \Res^{sKs^{-1}}_{H \cap sKs^{-1}}f^s(v^{-1}hv).
+	\end{align*}
+	Using the second form of equality given in \Cref{prop:shortindformula}, we see that 
+	\begin{align*} 
+		\Ind^{G}_{K}f(h) &= \sum_{s \in S}\Ind^{H}_{H \cap sKs^{-1}} \Res^{sKs^{-1}}_{H \cap sKs^{-1}}f^s(v^{-1}hv). \qedhere
+	\end{align*}
+\end{proof}
+
+We now deduce Mackey's irreducibility criterion for when the induction of an irreducible representation is again irreducible. Before that, we isolate a calculation.
+
+\begin{cor}
+	Let $H$ be a subgroup of $G$ and let $\varphi : H \to \GL_d(\mathbb{C})$ be a representation with character $\chi.$ Then,
+	\begin{equation*} 
+		\|\Ind^{G}_{H}\chi\| \ge \|\chi\|.
+	\end{equation*}
+	More precisely, if $S$ is any set of double coset representatives of $\dcos{H}{G}{H},$ then we have
+	\begin{equation*} 
+		\|\Ind^{G}_{H}\chi\|^2 = \|\chi\|^2 + \sum_{s \in S \setminus H} \langle \Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s, \Res^{H}_{H \cap sHs^{-1}}\chi\rangle.
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	We first replace the coset representative of $H$ by $1.$ Note that then $S \setminus \{1\} = S \setminus H.$
+
+	For $s = 1,$ note that $H \cap sHs^{-1} = H$ and $\chi^s = \chi.$ In particular, for $s = 1,$ we have
+	\begin{equation*} 
+		\Ind^{H}_{H \cap sHs^{-1}}\Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s = \Ind^{H}_{H}\Res^{H}_{H}\chi = \chi.
+	\end{equation*} 
+	Now, let $S^* = S \setminus \{1\}.$ By \Cref{thm:mackey}, we get
+	\begin{equation*} 
+		\Res^{G}_{H}\Ind^{G}_{H}\chi = \chi + \sum_{s \in S^*} \Ind^{H}_{H \cap sHs^{-1}}\Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s.
+	\end{equation*}
+	By Frobenius reciprocity, we have
+	\[\begin{WithArrows}[displaystyle]
+		\langle \Ind^{G}_{H}\chi, \Ind^{G}_{H}\chi\rangle &= \langle \chi, \Res^{G}_{H}\Ind^{G}_{H}\chi\rangle \Arrow[i]{\Cref{cor:innerprodproperties} shows this quantity is real}\\
+		&= \langle \Res^{G}_{H}\Ind^{G}_{H}\chi, \chi\rangle\\
+		&= \langle \chi, \chi\rangle + \sum_{s \in S^*} \langle \Ind^{H}_{H \cap sHs^{-1}}\Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s, \chi\rangle\\
+		&= \langle \chi, \chi\rangle + \sum_{s \in S^*} \langle \Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s, \Res^{H}_{H \cap sHs^{-1}}\chi\rangle
+	\end{WithArrows}\]
+	
+	and hence,
+	\begin{equation*} 
+		\|\Ind^{G}_{H}\chi\|^2 = \|\chi\|^2 + \sum_{s \in S \setminus \{1\}} \langle \Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s, \Res^{H}_{H \cap sHs^{-1}}\chi\rangle.
+	\end{equation*}
+	From the above, the first inequality follows since the inner product on the left is of characters (restriction of characters is again a character) and hence, is non-negative, by \Cref{cor:innerprodproperties}.
+\end{proof}
+
+\begin{thm}[Mackey's irreducibility criterion] \label{thm:mackeyirredcrit}
+	Let $H$ be a subgroup of $G$ and let $\varphi : H \to \GL_d(\mathbb{C})$ be a representation. Then, $\Ind^{G}_{H}\varphi$ is irreducible if and only if
+	\begin{enumerate}
+		\item $\varphi$ is irreducible;
+		\item the representations $\Res^{H}_{H \cap sHs^{-1}}\varphi$ and $\Res^{sHs^{-1}}_{H \cap sHs^{-1}}\varphi^s$ are disjoint for all $s \notin H;$ that is, 
+		\begin{equation*} 
+			\langle \Res^{H}_{H \cap sHs^{-1}}\chi, \Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s\rangle = 0,
+		\end{equation*}
+		for all $s \notin H.$
+	\end{enumerate}
+\end{thm}
+
+Note that it makes sense to talk about those representations being disjoint since both are representations of the same group $H \cap sHs^{-1}.$
+
+\begin{proof} 
+	Let $\chi = \chi_\varphi.$ Let $S$ be a set of double coset representatives of $\dcos{H}{G}{H}.$ Assume without loss of generality, $1 \in S.$ By the preceding theorem, we have
+	\begin{equation*} 
+		\|\Ind^{G}_{H}\chi\|^2 = \|\chi\|^2 + \sum_{s \in S \setminus \{1\}} \langle \Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s, \Res^{H}_{H \cap sHs^{-1}}\chi\rangle.
+	\end{equation*}
+
+	Thus, by \Cref{cor:irrediffnormone}, $\Ind^{G}_{H}\varphi$ is irreducible iff the above quantity is $1.$ Using \Cref{cor:innerprodproperties}, we see that $\Ind^{G}_{H}\varphi$ is irreducible iff 
+	\begin{equation*} 
+		\langle \chi, \chi\rangle = 1 \andd \langle \Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s, \Res^{H}_{H \cap sHs^{-1}}\chi\rangle = 0
+	\end{equation*}
+	for all $s \in S^* \setminus \{1\}.$ 
+
+	Thus, we get that $\chi$ is irreducible and the representations $\Res^{sHs^{-1}}_{H \cap sHs^{-1}}\varphi^s$ and $\Res^{H}_{H \cap sHs^{-1}}\varphi$ are disjoint. We are using the fact that $\Res^{sHs^{-1}}_{H \cap sHs^{-1}}\chi^s$ is indeed the character of $\Res^{G}_{H}\varphi^s.$
+
+	Now, note that given any $s \notin H,$ we can choose $S$ to include $s.$ The theorem follows.
+\end{proof}
+
+\begin{rem}
+	As the proof the theorem shows, instead of checking the disjointness for \emph{all} $s \notin H,$ we only need to check for a set of double coset representatives. 
+\end{rem}
+
+\begin{prop}
+	Let $N \unlhd G$ and $\varphi : N \to \GL_d(\mathbb{C})$ be a representation. Then, for every $s \in G,$ $\varphi^s$ is irreducible if and only if $\varphi$ is.
+\end{prop}
+\begin{proof} 
+	Fix $s \in G.$ Note that $sNs^{-1} = N.$ Let $W \le \mathbb{C}^n$ be an $N$-invariant subspace with respect to $\varphi^s.$ We now show that it $N$-invariant with respect to $\varphi.$
+
+	Indeed, for $w \in W$ and $n \in N,$ we note that
+	\begin{equation*} 
+		\varphi(n)(w) = \varphi^s(sns^{-1})(w) \in W.
+	\end{equation*}
+
+	A similar computation shows that the converse is also true. Thus, the $N$-invariant subspaces of $\mathbb{C}^n$ with respect to $\varphi$ and $\varphi^s$ coincide and the result follows.
+\end{proof}
+
+\begin{rem}
+	With the above proposition, we see that \nameref{thm:mackeyirredcrit} works very well if $H$ is a normal subgroup of $G$ and $\varphi$ an irreducible representation of $H.$ By \Cref{prop:dcosetsofnormal}, we know that $G/H = \dcos{H}{G}{H}.$ By the above proposition, $\varphi^s$ is irreducible for every $s \in G.$ So the criterion reduces to checking that $\varphi$ and $\varphi^s$ are inequivalent, as $s$ ranges over a set of coset representatives.
+\end{rem}
+
+\begin{ex}[Checking the dihedral induction]
+	As an example, let us apply the criterion on \Cref{ex:inductdihedral}. We already saw that the induction is indeed irreducible. We now verify using Mackey. Fix some $k$ such that $1 \le k < \frac{n}{2}$ and let $\varphi = \chi_k.$ (Where $\chi_k$ is as in \Cref{ex:inductdihedral}.)
+
+	As remarked, it suffices to only check $\varphi$ and $\varphi^s$ are inequivalent. (Here $s$ denotes the reflection element of $D_n.$) Now, since $H = \langle r\rangle$ is normal, we have $sHs^{-1} = H.$ Thus, the restrictions are again $\varphi$ and $\varphi^s.$ Since these are degree one representations, it suffices to show that they are distinct to conclude inequivalence.
+
+	Note that $\varphi(r) = \omega_n^k$ and
+	\begin{equation*} 
+		\varphi^s(r) = \varphi(s^{-1}rs) = \varphi(r^{-1}) = \omega_n^{-k}.
+	\end{equation*}
+	Now, since $1 \le k < \frac{n}{2},$ we have $\omega_n^k \neq \omega_n^{-k}$ and hence, the representations are inequivalent.
+\end{ex}
+
+\begin{ex}
+	Let $p$ be a prime and let
+	\begin{equation*} 
+		G = \left\{\two{a}{b}{}{[1]} \mid a \in (\mathbb{Z}/p\mathbb{Z})^*,\; b \in \mathbb{Z}/p\mathbb{Z}\right\} \le \GL_2(\mathbb{Z}/p\mathbb{Z}).
+	\end{equation*}
+	One can note that $\md{G} = p(p - 1).$
+
+	We observe the multiplication in $G$ to be
+	\begin{equation*} 
+		\two{a}{b}{}{[1]}\two{a'}{b'}{}{[1]} = \two{aa'}{ab' + b}{}{[1]}.
+	\end{equation*}
+	Thus, $\psi : G \to (\mathbb{Z}/p\mathbb{Z})^*$ defined by
+	\begin{equation*} 
+		\two{a}{b}{}{[1]} \mapsto a
+	\end{equation*}
+	is an onto group homomorphism with kernel
+	\begin{equation*} 
+		H = \left\{\two{[1]}{b}{}{[1]} \mid b \in \mathbb{Z}/p\mathbb{Z}\right\}.
+	\end{equation*}
+	In particular, we have $H \unlhd G$ and $G/H \cong (\mathbb{Z}/p\mathbb{Z})^*.$ It is easy to see that a complete set of coset representatives of $H$ in $G$ is 
+	\begin{equation*} 
+		S = \left\{\two{a}{}{}{[1]} \mid a \in (\mathbb{Z}/p\mathbb{Z})^*\right\}.
+	\end{equation*}
+
+	Now, consider the representation $\varphi : H \to \mathbb{C}^*$ defined as
+	\begin{equation*} 
+		\varphi\left(\two{[1]}{[b]}{}{[1]}\right) = \omega_p^b.
+	\end{equation*}
+	Now, if $s = \two{[a]}{}{}{[1]}$ with $[a] \neq [1],$ we have
+	\begin{equation*} 
+		\varphi^s\left(\two{[1]}{[b]}{}{[1]}\right) = \varphi\left(\two{[1]}{[ab]}{}{[1]}\right) = \omega_p^{ab}
+	\end{equation*}
+	and hence, $\varphi$ and $\varphi^s$ are inequivalent (since they are distinct degree one representations). By Mackey's criterion, we see that $\Ind^{G}_{H}\varphi$ is an irreducible representation. Note that this has degree $1\cdot[G : H] = p - 1.$
+
+	On the other hand, we can lift the $p - 1$ inequivalent irreducible degree one representations of $G/H$ to get $p - 1$ irreducible degree one representations of $G.$ Now, note that
+	\begin{equation*} 
+		(p - 1)\cdot1^2 + 1\cdot(p - 1)^2 = p(p - 1) = \md{G}.
+	\end{equation*}
+	Thus, we have found all the irreducible representations of $G.$
+\end{ex}

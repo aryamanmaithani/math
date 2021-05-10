@@ -1,0 +1,367 @@
+\section{Burnside's Theorems}
+
+\subsection{Burnside's \texorpdfstring{$pq$}{pq}-theorem}
+
+In this section, we prove Burnside $pq$-theorem. The theorem states that no non-abelian group of order $p^aq^b$ is simple. We have already seen some applications of representation theory to prove group theoretic results. However, as we had remarked, they all had elementary group theoretic proofs as well. In this section, we give the first major application of representation theory. 
+
+For this section, we assume familiarity with some Galois theory.
+
+We recall the following simple lemma.
+\begin{lem} \label{lem:modofsumofrootsofunity}
+	Let $\lambda_1, \ldots, \lambda_d$ be $n$-th roots of unity. Then,
+	\begin{equation*} 
+		\md{\lambda_1 + \cdots + \lambda_d} \le d
+	\end{equation*}
+	with equality if and only if $\lambda_1 = \cdots = \lambda_d.$
+\end{lem}
+
+We also recall the following definition and simple corollary.
+
+\begin{defn}%[]
+	$\mathbb{Q}[\omega_n]$ denotes the smallest subfield of $\mathbb{C}$ containing $\omega_n.$
+\end{defn}
+
+As it turns out, $\mathbb{Q}[\omega_n]$ is the smallest subfield $\mathbb{F}$ of $\mathbb{C}$ such that $z^n - 1 = (z - \alpha_1) \cdots (z - \alpha_n)$ for $\alpha_1, \ldots, \alpha_n \in \mathbb{F}.$ (Such an $\mathbb{F}$ would necessarily have to contain $\omega_n$ and thus, $\mathbb{Q}[\omega_n].$ On the other hand, since $n$ consecutive powers of $\omega_n$ give us $n$ distinct roots, we see that $\mathbb{F} = \mathbb{Q}[\omega_n].$) 
+
+Since $\omega_n$ is algebraic over $\mathbb{Q},$ we have the following.
+
+\begin{lem} 
+	The field $\mathbb{Q}[\omega_n]$ has finite dimension as a $\mathbb{Q}$-vector space.
+\end{lem}
+
+\begin{defn}%[]
+	Let $\Gamma_n = \Gal(\mathbb{Q}[\omega_n] : \mathbb{Q}),$ be the Galois group of $\mathbb{Q}[\omega_n]$ over $\mathbb{Q}.$ It is the group of all field automorphisms $\sigma : \mathbb{Q}[\omega_n] \to \mathbb{Q}[\omega_n]$ that act as identity on $\mathbb{Q}.$
+\end{defn}
+
+\begin{rem}
+	The reader familiar with field theory would know that we simply could have taken $\Gamma_n$ to be the group of all field automorphisms of $\mathbb{Q}[\omega_n]$ since the second part about acting as identity on $\mathbb{Q}$ is forced.
+\end{rem}
+
+\begin{lem} \label{lem:ratpolyrootpermut}
+	Let $p(z) \in \mathbb{Q}[z]$ and suppose that $\alpha \in \mathbb{Q}[\omega_n]$ is a root of $p.$ Then, $\sigma(\alpha)$ is also a root of $p$ for all $\sigma \in \Gamma_n.$
+\end{lem}
+\begin{proof} 
+	Write $p(z) = a_kz^k + \cdots + a_1z + a_0$ for $a_i \in \mathbb{Q}.$ Let $\sigma \in \Gamma_n$ be arbitrary. Then, $\sigma(a_i) = a_i$ for all $i.$ Thus,
+	\begin{align*} 
+		p(\sigma(\alpha)) &= a_k \sigma(\alpha)^k + \cdots a_1 \sigma(\alpha) + a_0\\
+		&= \sigma(a_k \alpha^k + \cdots a_1 \alpha + a_0)\\
+		&= \sigma(0) = 0. \qedhere
+	\end{align*}
+\end{proof}
+
+\begin{cor} \label{cor:ratpolyunityrootpermut}
+	Let $\alpha$ be an $n$-th root of unity. Then, so is $\sigma(\alpha),$ for all $\sigma \in \Gamma_n.$
+\end{cor}
+\begin{proof} 
+	Apply \Cref{lem:ratpolyrootpermut} to $p(z) = z^n - 1.$
+\end{proof}
+
+Since the extension $\mathbb{Q} \subset \mathbb{Q}[\omega_n]$ is Galois with $\Gamma_n$ as its Galois group, we have the following theorem.
+
+\begin{thm} \label{thm:fixedfieldisQ}
+	Let $\alpha \in \mathbb{Q}[\omega_n].$ Then, the following are equivalent:
+	\begin{enumerate}
+	 	\item $\sigma(\alpha) = \alpha$ for all $\sigma \in \Gamma_n.$
+	 	\item $\alpha \in \mathbb{Q}.$
+	 \end{enumerate} 
+\end{thm}
+
+In other words, if we take an element of $\mathbb{Q}[\omega_n]$ outside $\mathbb{Q},$ then we can find an automorphism that moves it.
+
+\begin{ex}
+	Consider the following ``non-example''. 
+
+	Let $\mathbb{F} = \mathbb{Q}[\sqrt[3]{2}],$ that is, the smallest subfield of $\mathbb{C}$ containing $\sqrt[3]{2}.$ Since $\sqrt[3]{2} \in \mathbb{R},$ we see that $\mathbb{F} \subset \mathbb{R}.$
+
+	Now, let $\sigma : \mathbb{F} \to \mathbb{F}$ be a field automorphism (that acts as identity on $\mathbb{Q}$). Then,
+	\begin{equation*} 
+		\left(\sigma(\sqrt[3]{2})\right)^3 = \sigma\left(\sqrt[3]{2}^3\right) = \sigma(2) = 2
+	\end{equation*}
+	and thus, $\sigma(\sqrt[3]{2})$ must be a cube root of $2$ in $\mathbb{F}.$ However, $\mathbb{R}$ only contains one cube root of $2.$ Thus, we see that $\sigma(\sqrt[3]{2})$ and in turn, $\sigma = \id_F.$
+
+	In other words, even if we take an element outside $\mathbb{Q},$ we cannot move it by any automorphism of $\mathbb{F}.$ The underlying problem here is that $\mathbb{F}$ is not a Galois extension.
+\end{ex}
+
+\begin{cor} \label{cor:averagingisrational}
+	Let $\alpha \in \mathbb{Q}[\omega_n].$ Then, $\beta \vcentcolon= \prod_{\sigma \in \Gamma_n} \sigma(\alpha) \in \mathbb{Q}.$
+\end{cor}
+\begin{proof} 
+	Let $\tau \in \Gamma_n$ be arbitrary. Then,
+	\begin{equation*} 
+		\tau(\beta) = \tau\left(\prod_{\sigma \in \Gamma_n} \sigma(\alpha)\right) = \prod_{\sigma \in \Gamma_n} (\tau\sigma)(\alpha) = \prod_{\sigma' \in \Gamma_n} \sigma'(\alpha) = \beta.
+	\end{equation*}
+	Thus, by \Cref{thm:fixedfieldisQ}, $\beta \in \mathbb{Q}.$
+\end{proof}
+
+\begin{thm} \label{thm:technicaltheoremgcd}
+	Let $G$ be a group of order $n$ and let $C$ be a conjugacy class of $G.$ Suppose $\varphi : G \to \GL_d(\mathbb{C})$ is an irreducible representation and assume that $h = \md{C}$ is relatively prime to $d.$ Then either
+	\begin{enumerate}
+		\item \label{item:012} there exists $\lambda \in \mathbb{C}^*$ such that $\varphi_g = \lambda I$ for all $g \in C,$ or
+		\item \label{item:013} $\chi_\varphi(g) = 0$ for all $g \in C.$
+	\end{enumerate}
+\end{thm}
+\begin{proof} 
+	Let $\chi = \chi_\varphi.$ Fix $g \in C.$
+
+	First note that if $\varphi_g = \lambda I$ for \emph{some} $\lambda \in \mathbb{C},$ then we get that $\varphi_x = \lambda I$ for all $x \in C$ since conjugating a scalar matrix does not change it. Moreover, it is forced that $\lambda \in \mathbb{C}^*$ since $\varphi_g \in \GL_d(\mathbb{C}).$ Thus, \ref{item:012} is true.
+
+	So we may assume that $\varphi_g$ is not a scalar matrix. If we show that $\chi(g) = 0,$ then again the theorem follows since $\chi$ is constant on conjugacy classes, showing that \ref{item:013} is true.
+
+	By \Cref{prop:charisalgint} and \Cref{thm:hchidisalgint}, we know that $\chi(g)$ and $h\chi(g)/d$ are both algebraic integers. Since $\gcd(h, d) = 1,$ there exist integers $k, j$ such that $kh + jd = 1.$ By \Cref{prop:algintsubring}, it follows that
+	\begin{equation*} 
+		\mathbb{A} \ni \alpha \vcentcolon= k\left(\frac{h}{d}\chi(g)\right) + j\chi(g) = \frac{kh + jd}{d}\chi(g) = \frac{\chi(g)}{d}.
+	\end{equation*}
+	
+	Recall that $\varphi_g$ is diagonalisable and its eigenvalues $\lambda_1, \ldots, \lambda_d$ are $n$-th roots of unity. (\Cref{cor:finorderdiagonalisable} and \Cref{cor:chargrouprootsunity}.) Now, since $\varphi_g$ is not a scalar matrix, the eigenvalues are not all equal. 
+	% Thus,
+	% \begin{equation*} 
+	% 	\md{\chi(g)} = \md{\lambda_1 + \cdots \lambda_d} < d,
+	% \end{equation*}
+	% by \Cref{lem:modofsumofrootsofunity}. Thus,
+	% \begin{equation*} 
+	% 	\md{\alpha} = \md{\frac{\chi(g)}{d}} < 1.
+	% \end{equation*}
+
+	Let $\sigma \in \Gamma_n.$ Then, \Cref{lem:ratpolyrootpermut} gives us that $\sigma(\alpha)$ is also an algebraic integer. But now, \Cref{cor:ratpolyunityrootpermut} tells us that
+	\begin{equation*} 
+		\sigma(\chi(g)) = \sigma(\lambda_1) + \cdots + \sigma(\lambda_d)
+	\end{equation*}
+	is again a sum of roots of unity, not all equal. Thus, we get that
+	\begin{equation*} 
+		\md{\sigma(\alpha)} = \md{\frac{\sigma(\chi(g))}{d}} < 1,
+	\end{equation*}
+	by \Cref{lem:modofsumofrootsofunity}. Now, define $q \vcentcolon= \prod_{\sigma \in \Gamma_n}\sigma(\alpha).$ By \Cref{cor:averagingisrational}, $q \in \mathbb{Q}$ and by \Cref{prop:algintsubring}, $q \in \mathbb{A}.$ Thus, $q \in \mathbb{Z}.$ On the other hand, $\md{q} < 1.$ Hence, $q = 0.$
+
+	In turn, this gives us that $\sigma(\alpha) = 0$ for some $\sigma \in \Gamma_n.$ Since $\sigma$ is an automorphism, $\alpha = 0.$ Since $\alpha = \chi(g)/d,$ we get $\chi(g) = 0,$ as desired.
+\end{proof}
+
+\begin{lem} 
+	Let $G$ be a finite non-abelian group. Suppose that there is a conjugacy class $C \neq \{1\}$ of $G$ such that $\md{C} = p^t$ for some prime $p$ and $t \ge 0.$ Then, $G$ is not simple.
+\end{lem}
+\begin{proof} 
+	Assume that $G$ is simple. Let $\varphi^{(1)}, \ldots, \varphi^{(s)}$ be the irreducible representations of $G,$ where $\varphi^{(1)}$ is the trivial representation. \\
+	Note that $\ker \varphi^{(k)} = G \iff \varphi$ is the trivial representation. Thus, for all $1 < i \le s,$ we have $\ker \varphi^{(i)} \neq G.$ Since $G$ is simple and kernels are normal, this forces that each $\varphi^{(i)}$ is injective for $1 < i \le s.$
+
+	Let $d_i$ denote the degree of $\varphi^{(i)}$ and $\chi_i$ its character. Note that if $d_i = 1,$ then the homomorphism $\varphi^{(i)} : G \to \mathbb{C}^*$ would necessarily be injective since $G$ is non-abelian and thus, has a non-trivial commutator subgroup. Thus, $d_i > 1$ for all $1 < i \le s.$
+
+	We now show that $t > 0.$ Since $G$ is simple, the center $Z(G)$ is either trivial or all of $G.$ However, since $G$ is non-abelian, the center is trivial. Note that the conjugacy class of $x \in G$ is trivial iff $x$ is in the center. Since $C \neq \{1\}$ by assumption, we get that $\md{C} > 1$ and thus, $t > 0.$
+
+	Let $g \in C$ and $i > 1.$ Let $Z_i = \{x \in G : \varphi^{(i)}_x \text{ is a scalar matrix}\}.$ Let $H_i = \{\lambda I_{d_i} : \lambda \in \mathbb{C}^*\}.$ (All the non-zero scalar matrices in $\GL_{d_i}(\mathbb{C}).$) Note that $H_i$ is normal, since it is (contained in) the center of $\GL_{d_i}(\mathbb{C}).$ In turn, $Z_i = \left[\varphi^{(i)}\right]^{-1}(H_i)$ is normal in $G.$ As before, if it were the case that $Z_i = G,$ then $\varphi^{(i)}$ would map into an abelian group and the commutator would be non-trivially contained in the kernel. Thus, $Z_i = \{1\}.$
+
+	Note that for those $i$ for which $p \nmid d_i,$ we have $\chi_i(g) = 0,$ by \Cref{thm:technicaltheoremgcd}. (Since \Cref{item:012} of \Cref{thm:technicaltheoremgcd} is ruled.)
+
+	Letting $L$ denote the regular representation of $G,$ we recall that
+	\begin{equation*} 
+		\chi_L(g) = d_1\chi_1(g) + \cdots d_s\chi_s(g)
+	\end{equation*}
+	for all $g \in G$ (\Cref{prop:descripofL}) and that $\chi_L(g) = 0$ for $g \neq 1.$ Thus, for $g \neq 1,$ we have
+	\begin{align*} 
+		0 &= \sum_{i = 1}^{s}d_i\chi_i(g)\\
+		&= 1 + \sum_{i = 2}^{s}d_i\chi_i(g)\\
+		&= 1 + \sum_{p \mid d_i}d_i\chi_g\\
+		&= 1 + pz,
+	\end{align*}
+	where $z$ is an algebraic integer. But this gives us that $1/p = -z$ is a rational algebraic integer and thus, an integer. This is clearly a contradiction since $p > 1.$ This contradiction proves the result.
+\end{proof}
+
+\begin{thm}[Burnside]
+	Let $G$ be a group of order $p^aq^b$ with $p, q$ primes and $a, b \ge 0.$ Then, $G$ is not simple unless it of prime order (and thus, cyclic).
+\end{thm}
+\begin{proof} 
+	If $G$ is abelian and simple, then $G$ must necessarily be of prime order. 
+
+	If $a = 0$ or $b = 0,$ then $G$ is a group of prime order and thus, has a non-trivial center. Simplicity again forces $G$ to be abelian. 
+
+	Thus, we assume that $a, b \ge 1$ and show that $G$ is not simple.
+
+	The Sylow theorems imply that $G$ has a subgroup $H$ of order $q^b.$ By our earlier remark, $H$ has a non-trivial center. Let $1 \neq g \in Z(H)$ and let $C_G(g) = \{x \in G : xgx^{-1} = g\}$ be the centraliser of $g$ in $G.$ Then, $g \in Z(H)$ implies that $H \le C_G(g).$ In turn, the ``tower law'' gives
+	\begin{equation*} 
+		p^a = [G:H] = [G:C_G(g)][C_G(g):H].
+	\end{equation*}
+	In particular, $[G:C_G(g)]$ is a power of $p,$ i.e., $[G:C_G(g)] = p^t$ for some $t \ge 0.$ But this is precisely the order of the conjugacy class of $g.$ The previous lemma implies that $G$ is not simple, as desired.
+\end{proof}
+
+\subsection{Another Theorem of Burnside}
+
+\begin{defn}%[]
+	Given a matrix $A = (a_{ij}) \in M_n(\mathbb{C}),$ we define its \deff{conjugate matrix} $\overline{A} = (\overline{a_{ij}}) \in M_n(\mathbb{C}).$
+\end{defn}
+
+\begin{rem}
+	It can be easily verified that one has the following properties:
+	\begin{enumerate}
+		\item $\overline{A \cdot B} = \overline{A} \cdot \overline{B}.$
+		\item If $A \in \GL_n(\mathbb{C}),$ then $\overline{A} \in \GL_n(\mathbb{C})$ and $\left(\overline{A}\right)^{-1} = \overline{\left(A^{-1}\right)}.$
+		\item $\trace(\overline{A}) = \overline{\trace(A)}.$
+	\end{enumerate}
+\end{rem}
+
+In view of the above, we can get the following natural definition.
+
+\begin{defn}%[]
+	If $\varphi : G \to \GL_d(\mathbb{C})$ is a representation, then the \deff{conjugate representation} of $\varphi$ is denoted by $\overline{\varphi}$ and defined as
+	\begin{equation*} 
+		\overline{\varphi}(x) = \overline{\varphi(x)}.
+	\end{equation*}
+\end{defn}
+That the above is indeed a representation follows from the first two points of the previous remark. The third point gives us the following proposition.
+
+\begin{prop}
+	Let $\varphi : G \to \GL_d(\mathbb{C})$ be a representation. Then, we have $\chi_{\overline{\varphi}} = \overline{\chi_\varphi}.$
+\end{prop}
+
+\begin{cor} \label{cor:conjofcharischar}
+	The conjugate of an irreducible representation is again irreducible. In particular, if $\chi$ is an irreducible character, so is $\overline{\chi}.$
+\end{cor}
+\begin{proof} 
+	By \Cref{cor:irrediffnormone}, we know that $\langle \chi_\varphi, \chi_\varphi\rangle = 1 \iff \varphi$ is irreducible. Recalling that
+	\begin{equation*} 
+		\langle \chi, \chi\rangle = \frac{1}{\md{G}}\sum_{g \in G}\chi(g)\overline{\chi}(g),
+	\end{equation*}
+	the result follows since the previous proposition gives $\langle \chi, \chi\rangle = \langle \overline{\chi}, \overline{\chi}\rangle.$
+\end{proof}
+
+\begin{rem}
+	Note that if $\chi$ takes a non-real value at some element, then $\overline{\chi}$ is distinct from $\chi$ and thus, the representations are \emph{inequivalent}.
+\end{rem}
+
+\begin{defn}%[Real character]
+	A character $\chi$ of $G$ is called \deff{real} if $\chi = \overline{\chi},$ that is, if $\chi(g) \in \mathbb{R}$ for all $g \in G.$
+\end{defn}
+
+\begin{prop}
+	Let $\chi$ be a character of a group. Then, $\chi(g^{-1}) = \overline{\chi(g)}.$
+\end{prop}
+\begin{proof} 
+	Since character does not change with equivalence, we may assume that $\chi$ is a character of a unitary representation $\varphi : G \to U_n(\mathbb{C}).$
+
+	Then, we have
+	\begin{align*} 
+		\chi(g^{-1}) = \trace(\varphi_{g^{-1}}) = \trace(\varphi_g^*) &= \trace(\overline{\varphi_g}^\mathsf{T}) \\
+		&= \trace(\overline{\varphi_g}) = \overline{\trace(\varphi_g)} = \overline{\chi(g)}. \qedhere
+	\end{align*}
+\end{proof}
+
+\begin{rem} \label{rem:conjofconjisconj}
+	Note that if $g$ and $h$ are conjugates, then so are $g^{-1}$ and $h^{-1}.$ Thus, given a conjugacy class $C,$ even $C^{-1} = \{g^{-1} : g \in C\}$ is a conjugacy class. The previous proposition gives us that
+	\begin{equation*} 
+		\chi(C^{-1}) = \overline{\chi(C)}.
+	\end{equation*}
+	(Recall that characters are constant on conjugacy classes.)
+
+	This motivates the following definition.
+\end{rem}
+
+\begin{defn}%[Real conjugacy class]
+	A conjugacy class $C$ of a group $G$ is said to be \deff{real} if $C^{-1} = C.$
+\end{defn}
+
+% In view of the earlier remark, we get the following proposition.
+
+\begin{prop}
+	Let $C$ be a real conjugacy class and $\chi$ a character of $G.$ Then, $\chi(C) \in \mathbb{R}$ or $\chi(C) = \overline{\chi(C)}.$ 
+\end{prop}
+In other words, a character takes real values on real conjugacy classes.
+\begin{proof} 
+	$\overline{\chi(C)} = \chi(C^{-1}) = \chi(C).$
+\end{proof}
+
+Note that we shown that the number of conjugacy classes of a group is exactly the number of irreducible representations of the group. The latter, in turn, is exactly the number of irreducible characters of the group. We would now like to show that the same is true for real conjugacy classes and real irreducible characters. In fact, that is precisely the theorem of Burnside.
+
+\begin{lem} \label{lem:rowcoloperations}
+	Let $\varphi : S_n \to \GL_n(\mathbb{C})$ be the standard representation of $S_n,$ let $A \in M_n(\mathbb{C})$ be a matrix and let $\sigma \in S_n$ be a permutation. Then,
+	\begin{enumerate}
+		\item  the $i$-th column of the matrix $A\varphi_\sigma$ is the $\sigma(i)$-th column of $A,$ and
+		\item the $i$-th row of the matrix $\varphi_\sigma^{-1}A$ is the $\sigma(i)$-th row of $A.$
+	\end{enumerate}
+\end{lem}
+Note that for the case that $\sigma$ is a transposition, we have $\sigma = \sigma^{-1}$ and the above is simply a result about elementary row operations.
+\begin{proof} 
+	Let $e_i$ denote the standard $i$-th column basis vector. By definition of $\varphi,$ we have $\varphi_\sigma(e_i) = e_{\sigma(i)}.$ \\
+	Now, we have
+	\begin{align*} 
+		i\text{-th column of }A\varphi_\sigma &= A\varphi_\sigma^{-1}e_i\\
+		&= Ae_{\sigma(i)} = \sigma(i)\text{-th column of }A.
+	\end{align*}
+	
+	We now wish to make a similar calculation for rows. Note that $\varphi_\sigma^{-1} = \varphi_\sigma^\mathsf{T}$ since the columns are orthonormal and real.
+
+	Applying the first part to the transpose yields the result.
+\end{proof}
+
+\begin{thm}[Burnside] \label{thm:burnsidereal}
+	Let $G$ be a finite group. The number of real irreducible characters of $G$ equals the number of real conjugacy classes of $G.$
+\end{thm}
+\begin{proof} 
+	Let $s$ be the number of conjugacy classes of $G.$ Let $\chi_1, \ldots, \chi_s$ denote the irreducible characters of $G$ and $C_1, \ldots, C_s$ the conjugacy classes. 
+
+	By \Cref{cor:conjofcharischar}, it follows that for each $i,$ $\overline{\chi_i}$ is again an irreducible character. Moreover, $\overline{\bar{\chi}} = \chi$ and thus, there exists a permutation $\alpha \in S_s$ such that $\overline{\chi_i} = \chi_{\alpha(i)}.$\\
+	Similarly, in view of \Cref{rem:conjofconjisconj} and the fact that $(C^{-1})^{-1} = C$, there exists $\beta \in S_s$ such that $C_i^{-1} = C_{\beta(i)}.$
+	
+	We note that $\chi_i$ is real iff $\alpha(i) = i$ and $C_i$ is real iff $\beta(i) = i.$ Thus, it suffices to show that $\md{\Fix(\alpha)} = \md{\Fix(\beta)}.$ Moreover, the involutions noted above also show that $\alpha = \alpha^{-1}$ and $\beta = \beta^{-1}.$
+
+	Let $\varphi : S_s \to \GL_s(\mathbb{C})$ denote the standard representation of $S_s.$ Then, we have $\chi_\varphi(\alpha) = \md{\Fix(\alpha)}$ and $\chi_\varphi(\beta) = \md{\Fix(\beta)},$ by \Cref{prop:charofpermrep}. Thus, it suffices to prove that $\trace(\varphi_\alpha) = \trace(\varphi_\beta).$
+
+	Let $\mathsf{X}$ denote the character table of $S_n,$ viewed as an $s \times s$ matrix with $\mathsf{X}_{ij} = \chi_i(C_j).$ We note that
+	\begin{equation*} 
+		\varphi_\alpha\mathsf{X} = \overline{\mathsf{X}} = \mathsf{X}\varphi_\beta.
+	\end{equation*}
+	Both equalities follow from \Cref{lem:rowcoloperations}. Indeed, the $i$-th row of $\varphi_\alpha\mathsf{X} = \varphi_\alpha^{-1}\mathsf{X}$ is the $\alpha(i)$-th row of $\mathsf{X}$ but that is exactly the row corresponding to $\chi_{\alpha(i)} = \overline{\chi_i}.$ Similarly, the $j$-th column of $\mathsf{X}\varphi_\beta$ is the $\beta(j)$-th column of $\mathsf{X}$ which is the column corresponding to $C_{\beta(j)} = C_j^{-1}.$ Since $\chi_i(C_j^{-1}) = \overline{\chi_i(C_j)},$ the equality follows.
+
+	Recall that the \nameref{thm:secondorthorel} implied that $\mathsf{X}$ is invertible. Thus, we have
+	\begin{equation*} 
+		\varphi_\beta = \mathsf{X}^{-1}\varphi_\alpha\mathsf{X}
+	\end{equation*}
+	which proves the desired equality of traces.
+\end{proof}
+
+\begin{prop} \label{prop:oddgroupconjclassesreal}
+	Let $G$ be a group. Then, the following are equivalent:
+	\begin{enumerate}
+	 	\item $\md{G}$ is odd.
+	 	\item $G$ does not have any non-trivial real irreducible characters.
+	 	\item $G$ does not have any non-trivial real conjugacy classes.
+	 \end{enumerate} 
+\end{prop}
+
+\begin{proof} 
+	Note that since the trivial representation and $\{1\}$ are always real, the equivalence of the last two follows from \Cref{thm:burnsidereal}.
+
+	We now show that the first two are equivalent. First, assume that $\md{G}$ is even. Then, there exists $1 \neq g \in G$ such that $g = g^{-1}.$\footnote{To see why, consider the bijection $f : G\setminus\{1\} \to G\setminus\{1\}$ given by $f(g) = g^{-1}.$ This is an involution on a set with odd cardinality and thus, has a fixed point since the sets $\{x, f(x)\}$ partition the set and cannot all have two elements. } Then, the conjugacy class $C$ of $g$ intersects $C^{-1} \ni g^{-1} = g.$ Thus, $C^{-1} = C \neq \{1\},$ as desired.
+
+	Conversely, suppose that $C = C^{-1}$ for some conjugacy class $C \neq \{1\}.$ Then, we pick $g \in C.$ Clearly, $g \neq 1.$ Let $C_G(g) = \{x \in G : xgx^{-1}= g\}$ be the centraliser of $g$ in $G.$ Since $C = C^{-1},$ there exists $h \in G$ such that $hgh^{-1} = g^{-1}.$ In turn,
+	\begin{equation*} 
+		h^2gh^{-2} = h(hgh^{-1})h^{-1} = hg^{-1}h^{-1} = (hgh^{-1})^{-1} = g.
+	\end{equation*}
+	Thus, $h^2 \in C_G(g).$
+
+	Now, if $h \in \langle h^2\rangle \subset C_G(g),$ then $g = hgh^{-1} = g^{-1}$ and thus, $g^2 = 1.$ Thus, $\md{G}$ is even. ($g \neq 1.$)\\
+	If $h \notin \langle h^2\rangle,$ then $h^2$ is not a generator of $\langle h\rangle$ and hence, $h$ has even order. Again, $\md{G}$ is even.
+\end{proof}
+
+\begin{cor}
+	A group with odd order has odd number of conjugacy classes.
+\end{cor}
+\begin{proof} 
+	The group has exactly one real conjugacy $\{1\}$ and the other conjugacy classes can be paired up as $C_1, C_1^{-1}, \ldots, C_k, C_k^{-1}.$ Thus, the group has $2k + 1$ conjugacy classes.
+\end{proof}
+
+\begin{cor}
+	Let $G$ be a group of odd order and let $s$ be the number of conjugacy classes of $G.$ Then, 
+	\begin{equation*} 
+		s \equiv \md{G} \mod{16}.
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	By \Cref{prop:oddgroupconjclassesreal}, $G$ has the trivial character $\chi_0$ and the remaining characters appear in conjugate pairs $\chi_1, \chi'_1, \ldots, \chi_k, \chi'_k$ with degrees $d_1, \ldots, d_k.$ We have $s = 1 + 2k$ and
+	\begin{equation*} 
+		\md{G} = 1 + \sum_{j = 1}^{k}2d_j^2.
+	\end{equation*}
+	By the \nameref{thm:dimthm}, it follows that $d_j \mid \md{G}$ and thus, each $d_j$ is odd. Writing $d_j = 2m_j + 1$ for $m_j \in \mathbb{N}_0,$ we get
+	\begin{align*} 
+		\md{G} &= 1 + \sum_{j = 1}^{k}2(2m_j + 1)^2\\
+		&= 1 + 8\sum_{j = 1}^{k}m_j(m_j + 1) + 2k\\
+		&= (2k + 1) + 8\sum_{j = 1}^{k}\underbrace{m_j(m_j + 1)}_{\text{even}}\\
+		&\equiv s \mod{16}. \qedhere
+	\end{align*}
+\end{proof}

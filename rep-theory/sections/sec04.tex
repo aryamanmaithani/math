@@ -1,0 +1,407 @@
+\section{Permutation Representations}
+
+The reader is advised to recall \nameref{subsubsec:groupactions}. We shall continue with the notation established in that section.
+
+\begin{defn}%[Permutation representation]
+	\label{defn:permrep}
+	Let $\sigma : G \to S_X$ be a group action. Define a representation $\sigma : G \to \GL(\mathbb{C}X)$ by setting
+	\begin{equation*} 
+		\widetilde{\sigma}_g\left(\sum_{x \in X} c_x x\right) = \sum_{x \in X} c_x \sigma_g(x).
+	\end{equation*}
+	$\widetilde{\sigma}$ is called the \deff{permutation representation} associated to $\sigma.$
+\end{defn}
+
+\begin{rem}
+	Note that $\widetilde{\sigma}$ is a representation by \Cref{prop:extendingactiontorep}. Note that $\widetilde{\sigma}_g$ is the linear map defined by extending the map $x \mapsto \sigma_g(x).$ This can be done since $X$ is a basis for $\mathbb{C}X.$
+
+	In more suggestive notation, the above representation can also be written as
+	\begin{align*} 
+		\widetilde{\sigma}_g\left(\sum_{x \in X} c_x x\right) &= \sum_{x \in X} c_x \sigma_g(x)\\
+		&= \sum_{x \in X} c_x(g \cdot x)\\
+		&= \sum_{y \in X} c_{g^{-1} \cdot y} y.
+	\end{align*}
+\end{rem}
+
+\begin{rem}
+	Recall \Cref{ex:regularaction} which was the action $\lambda$ of $G$ on $G$ by left multiplication. Then, we have $\widetilde{\lambda} = L,$ the \Cref{defn:regularrepresentation}.	Note that the degree of the action and of the representation coincide.
+\end{rem}
+
+\begin{rem} \label{rem:stdrepSnispermrepofstdact}
+	Recall the action $\sigma$ of $S_n$ on $\{1, \ldots, n\}$ as in \Cref{ex:actsymgroups}. The corresponding $\widetilde{\sigma}$ is precisely the standard representation of $S_n$ as in \Cref{ex:standardrepSn}.
+\end{rem}
+
+\begin{prop} \label{prop:permrepisunitary}
+	Let $\sigma : G \to S_X$ be a group action. Then, the representation $\widetilde{\sigma} : G \to \GL(\mathbb{C}X)$ is unitary.
+\end{prop}
+
+\begin{proof} 
+	Let $g \in G,$ $x, y \in X$ be arbitrary. Note that
+	\[\begin{WithArrows}[displaystyle]
+		\left\langle \widetilde{\sigma}_g\sum_{x \in X} c_xx, \widetilde{\sigma}_g\sum_{x \in X} k_xx\right\rangle &= \left\langle \sum_{x \in X} c_{g^{-1} \cdot x} x, \sum_{x \in X} k_{g^{-1} \cdot x} x\right\rangle\\
+		&= \sum_{x \in X} c_{g^{-1} \cdot x}\overline{k_{g^{-1} \cdot x}} \Arrow{$x \mapsto g \cdot y$}\\
+		&= \sum_{y \in X} c_y\overline{k_y}\\
+		&= \left\langle \sum_{x \in X} c_x, \sum_{x \in X} k_xx \right\rangle,
+	\end{WithArrows}\]
+	as desired.
+\end{proof}
+
+As before, we now wish to compute the character of such representations. As with the regular representation, we have a simple formula.
+
+\begin{prop} \label{prop:charofpermrep}
+	Let $\sigma : G \to S_X$ be a group action. Then,
+	\begin{equation*} 
+		\chi_{\widetilde{\sigma}}(g) = \md{\Fix(g)}.
+	\end{equation*}
+\end{prop}
+
+\begin{proof} 
+	The proof is again almost identical to that of \Cref{prop:charofregrep}. Note that $X$ acts as a basis for $\mathbb{C}X.$ Fix an ordering $X = \{x_1, \ldots, x_n\}.$ Let $g \in G$ be arbitrary. Note that the matrix $[\widetilde{\sigma}_g]$ with respect to this basis $X$ will consists of columns with exactly with $1$ and rest $0$s.
+
+	More precisely, the $i$-th column will consist of all $0$s and a $1$ at the $j$-th position with $j$ satisfies $x_j = g \cdot x_i.$ In particular, $[\widetilde{\sigma}_g]_{ii} = 1$ iff $g \cdot x_i = x_i$ and $0$ otherwise. The statement now follows at once.
+\end{proof}
+
+\begin{cor} \label{cor:normchisigmatilde}
+	Retaining the same notation, we have
+	\begin{equation*} 
+		\langle \chi_{\widetilde{\sigma}}, \chi_{\widetilde{\sigma}}\rangle = \frac{1}{\md{G}}\sum_{g \in G} \md{\Fix(g)}^2 = \frac{\md{X}^2}{\md{G}} + \frac{1}{\md{G}}\sum_{1 \neq g \in G} \md{\Fix(g)}^2.
+	\end{equation*}
+\end{cor}
+
+\begin{cor}
+	Let $\sigma : G \to S_X$ be an action. If $\md{G} \nmid \md{X}^2,$ then there exists $g \in G \setminus \{1\}$ and $x \in X$ such that $g \cdot x = x.$
+\end{cor}
+
+\begin{proof} 
+	Note that the statement is precisely saying that $\md{\Fix(g)} \neq 0$ for some $1 \neq g \in G.$ Suppose not, that is, suppose that $\md{\Fix(g)} = 0$ for all $g \in G \setminus \{1\}.$ Then, by the earlier corollary, we get that
+	\begin{equation*} 
+		\langle \chi_{\widetilde{\sigma}}, \chi_{\widetilde{\sigma}}\rangle = \frac{\md{X}^2}{\md{G}} \notin \mathbb{Z}.
+	\end{equation*}
+	However, this is a contradiction. (\Cref{rem:normcharacisnatural}.)
+\end{proof}
+
+% \begin{rem}
+% 	As with the case of regular representation, the permutation representation is not irreducible if $\md{X} > 1.$ Note that the above generalises our earlier result (\Cref{prop:charofregrep}). 
+% \end{rem}
+
+\begin{defn}%[Fixed subspace]
+	Let $\varphi : G \to \GL(V)$ be a representation. Then,
+	\begin{equation*} 
+		V^G \vcentcolon= \{v \in V \mid \varphi_g(v) = v \text{ for all } g \in G\}
+	\end{equation*}
+	is a subspace of $V,$ called the \deff{fixed subspace} of $G.$
+\end{defn}
+
+The check that $V^G$ is a subspace is simple. We now show that it has some better properties.
+
+\begin{prop}
+	$V^G$ is a $G$-invariant subspace.
+\end{prop}
+\begin{proof} 
+	Let $v \in V^G$ and $g \in G.$ Then, $\varphi_gv = v$ by definition of $V^G.$ Thus, $\varphi_gv \in V^G.$
+\end{proof}
+
+\begin{rem} \label{rem:identityactiononfixedspace}
+	The above proof also shows that the subrepresentation $\varphi|_{V^G}$ is the trivial one. By \Cref{ex:directsumoftrivialreps}, we know that this can be written as a direct sum of $\dim V^G$ many trivial representations.
+
+	The next proposition shows that there are no more trivial representations in $\varphi.$ To be more precise, given the decomposition
+	\begin{equation*} 
+		\varphi \sim m_1 \varphi^{(1)} \oplus \cdots \oplus m_s \varphi^{(s)},
+	\end{equation*}
+	the coefficient of the trivial representation is $\dim V^G.$
+\end{rem}
+
+\begin{prop} \label{prop:innerprodvarphichifixeddim}
+	Let $\varphi : G \to \GL(V)$ be a representation and let $\chi_1$ be the (character of the) trivial representation of $G.$ Then, $\langle \varphi, \chi_1\rangle = \dim V^G.$
+\end{prop}
+
+As remarked earlier, shall use $\chi_1$ for both the character as well as the representation.
+
+\begin{proof} 
+	Since $V^G$ is a $G$-invariant subspace, there exists a $G$-invariant subspace $W$ such that
+	\begin{equation*} 
+		V = V^G \oplus W,
+	\end{equation*}
+	by \Cref{cor:existenceofcomplimentaryGinvarsubs}. (The above is an \emph{internal} direct sum. In particular, $V^G \cap W = 0.$)
+
+	Let $\psi$ and $\rho$ denote the subrepresentations obtained by restricting $\varphi$ to $V^G$ and $W,$ respectively. Then $\varphi \sim \psi \oplus \rho,$ by \Cref{prop:Ginvariantdirectsum}. 
+
+	% Let $\varphi^{(1)}$ denote the trivial representation. 
+
+	\textbf{Claim.} The multiplicity of $\chi_1$ in $\rho$ is $0.$
+	\begin{proof} 
+		Assume not. Let $W' \le W$ be a subspace such that $\rho|_{W'} \sim \chi_1.$ \\
+		In particular, $W'$ has dimension $1.$ \\
+		Choose a nonzero $w \in W' \le W.$ Then, $\rho_g(w) = w$ for all $g \in G.$\footnote{We are using the fact that if a representation is equivalent to the trivial representation, then it acts as identity.} Thus, $w \in V^G,$ a contradiction since $W \cap V^G = 0.$
+	\end{proof}
+
+	Note that we know
+	\begin{equation*} 
+		\psi \sim m_1 \chi_1
+	\end{equation*}
+	where $m_1 = \dim V^G.$ (\Cref{rem:identityactiononfixedspace}.) The above claim shows that
+	\begin{equation*} 
+		\langle \rho, \chi_1\rangle = 0.
+	\end{equation*}
+	Thus, we get
+	\begin{equation*} 
+		\langle \varphi, \chi_1\rangle = \langle \psi, \chi_1\rangle + \langle \rho, \chi_1\rangle = m_1 + 0 = \dim V^G. \qedhere
+	\end{equation*}
+\end{proof}
+	% Let
+	% \begin{equation*} 
+	% 	\varphi \sim m_1 \varphi^{(1)} \oplus \cdots \oplus m_s \varphi^{(s)}
+	% \end{equation*}
+	% be the decomposition of $\varphi$ into irreducible representation. Since characters only depend on equivalence classes, we may assume the above to be equality. We may assume that $\varphi^{(1)}$ is the trivial representation. 
+
+	% Since $\langle \varphi, \chi_1\rangle = m_1,$ our job now is to show that $m_1 = \dim V^G.$
+
+	% Let $V_1, \ldots, V_s$ denote the vector spaces corresponding to the different representations, that is, $\varphi^{(i)} : G \to \GL(V_i)$ and $V = \bigoplus_{i = 1}^s m_iV_i.$
+
+	% Now, if $v \in V,$ then
+	% \begin{equation*} 
+	% 	v = (v_1, \ldots, v_s)
+	% \end{equation*}
+	% for $v_i \in m_iV_i.$ Applying $\varphi_g$ for an arbitrary $g \in G$ gives
+	% \begin{align*} 
+	% 	\varphi_g(v) &= \left(\left(m_1\varphi^{(1)}\right)_g(v_1), \ldots, \left(m_s\varphi^{(s)}\right)_g(v_s)\right)\\
+	% 	&= \left(v, \left(m_2\varphi^{(2)}\right)_g(v_2), \ldots, \left(m_s\varphi^{(s)}\right)_g(v_s)\right).
+	% \end{align*}
+	% Thus, $v \in V^G$ iff $\left(m_i\varphi^{(i)}\right)_g(v_i) = v_i$ for all $2 \le i \le s.$ In other words,
+	% \begin{equation*} 
+	% 	V^G = m_1V_1 \oplus m_2V_2^G \oplus \cdots \oplus m_sV_s^G.
+	% \end{equation*}
+	% For $i \ge 2,$ we make the following observation: we know that $V_i^G \le V_i$ is $G$-invariant. Irreducibility of $\varphi^{(i)}$ tells us that $V_i^G = 0$ or $V.$ However, we also know that $\varphi^{(i)}$ acts as identity on $V_i^G$ (\Cref{rem:identityactiononfixedspace}) and thus, $V_i^G = V_i$ would imply that $\varphi^{(i)}$ can be decomposed as a sum of $\varphi^{(1)}$s. Thus, we must have $V_i^G = 0$ for all $i \ge 2.$
+
+	% Thus, $V^G = m_1V_1.$ Since $V_1$ is one dimensional, we see that $\dim V^G = m_1,$ as desired.
+
+% The above is a proposition which could have been proven in the previous section as well. In particular, we did not use any theory of group actions in the above. However, we now connect the above in the next proposition, by computing $\mathbb{C}X^G$ for a permutation representation.
+
+\begin{prop} \label{prop:fixedspacetransaction}
+	Let $\sigma : G \to S_X$ be a transitive group action. Define
+	\begin{equation*} 
+		v_0 \vcentcolon= \sum_{x \in X} x \in \mathbb{C}X.
+	\end{equation*}
+	Then, $\mathbb{C}X^G = \mathbb{C}v_0.$ In, particular, $\mathbb{C}X^G$ is one-dimensional.
+\end{prop}
+
+Note that this is a special case of the immediate next proposition.
+
+\begin{proof} 
+	It is clear that $\mathbb{C}v_0 \le \mathbb{C}X^G$ since every $\sigma_g$ is simply a permutation of $X.$ Thus, it suffices to show that $v_0$ spans $\mathbb{C}X^G.$ The idea is simple. Consider $v \in \mathbb{C}X^G.$ Then, it can represented in the standard basis as
+	\begin{equation*} 
+		v = \sum_{x \in X} c_x x.
+	\end{equation*}
+	We assert that $c_x$ is independent of $x.$ In other words, we show that $c_y = c_z$ for all $y, z \in X.$
+
+	Indeed, given $y, z \in X,$ choose $g \in G$ such that $g \cdot y = z.$ (We can do so since the action is transitive.) \\
+	Now, note that
+	\begin{align*} 
+		v &= \widetilde{\sigma}_g(v)\\
+		\iff \sum_{x \in X} c_x x &= \sum_{x \in X} c_x g \cdot x.
+	\end{align*}
+	The coefficient of $z$ is $c_z$ on the left and $c_y$ on the right and thus, $c_y = c_z.$
+
+	Thus, each $c_x = c$ for some $c \in \mathbb{C}$ and we get
+	\begin{equation*} 
+		v = \sum_{x \in X} c_x x = \sum_{x \in X} c x = c\sum_{x \in X} x = cv_0,
+	\end{equation*}
+	as desired.
+\end{proof}
+
+\begin{prop} \label{prop:numberoforbitsisfixeddim}
+	Let $\sigma : G \to S_X$ be a group action. Let $\mathcal{O}_1, \ldots, \mathcal{O}_m$ be orbits of $G$ on $X.$ Define
+	\begin{equation*} 
+		v_i \vcentcolon= \sum_{x \in \mathcal{O}_i} x \in \mathbb{C}X
+	\end{equation*} 
+	for $i = 1, \ldots, m.$ Then, $B = \{v_1, \ldots, v_m\}$ is a basis for $\mathbb{C}X^G.$ In particular, $\dim \mathbb{C}X^G = m,$ the number of orbits.
+\end{prop}
+
+\begin{proof} 
+	First, we show that $B$ is indeed a subset of $\mathbb{C}X^G.$ This is simple for if $1 \le i \le m$ and $g \in G$ are arbitrary, then
+	\[\begin{WithArrows}[displaystyle]
+		\widetilde{\sigma}_gv_i &= \widetilde{\sigma}_g\left(\sum_{x \in \mathcal{O}_i} x\right)\\
+		& = \sum_{x \in \mathcal{O}_i} \sigma_g(x) \Arrow{$\sigma_g|_{\mathcal{O}_i}$ is a bijection}\\
+		& =  \sum_{x \in \mathcal{O}_i} x\\
+		&= v_i
+	\end{WithArrows}\]
+
+	Second, we show that $B$ is linearly independent. We do the usual by computing the inner product of elements of $B.$ However, recall that the inner product on $\mathbb{C}X$ is essentially the ``usual'' dot product, just indexed by $X.$ Since distinct orbits are disjoint, we get the following
+	\begin{equation*} 
+		\langle v_i, v_j\rangle = \begin{cases}
+			\md{\mathcal{O}_i} & i = j,\\
+			0 & i \neq j.
+		\end{cases}
+	\end{equation*}
+	That is, $B$ consists of non-zero orthogonal vectors and thus, is linearly independent.
+
+	Third, we show that $B$ is spanning. Let $v \in \mathbb{C}X^G$ be an arbitrary vector given by
+	\begin{equation*} 
+		v = \sum_{x \in X} c_x x
+	\end{equation*}
+	for some scalars $c_x \in \mathbb{C}.$ Note that $G$ acts transitively on each orbit. Thus, by a similar argument as in the previous proof, we get that $c_z = c_y$ for all $y, z \in X$ if $z \in G \cdot y.$ 
+
+	% We now wish to show that the coefficients of two elements of $X$ in the above is equal if the two are in the same orbit. More precisely, if $y, z \in X$ with $z \in G \cdot y,$ then $c_z = c_y.$ To see this, choose $g \in G$ such that $z = g \cdot y.$ Then, since $v \in \mathbb{C}X^G,$ we note that
+	% \begin{align*} 
+	% 	v &= \widetilde{\sigma}_g(v)\\
+	% 	\iff \sum_{x \in X} c_x x &= \sum_{x \in X} c_x g \cdot x.
+	% \end{align*}
+	% The coefficient of $z$ is $c_z$ on the left and $c_y$ on the right and thus, $c_y = c_z.$
+
+	Thus, for each $i = 1, \ldots, m,$ there exists $c_i \in \mathbb{C}$ such that $c_x = c_i$ for all $x \in \mathcal{O}_i.$ Hence, we may write $v$ as
+	\begin{align*} 
+		v &= \sum_{x \in X} c_x x\\
+		&= \sum_{i = 1}^{m} \sum_{x \in \mathcal{O}_i} c_i x\\
+		&= \sum_{i = 1}^{m} c_i \sum_{x \in \mathcal{O}_i} x\\
+		&= \sum_{i = 1}^{m} c_i v_i \in \spn B. \qedhere
+	\end{align*}
+\end{proof}
+
+\begin{cor} \label{cor:nontrivialpermred}
+	Suppose $\sigma : G \to S_X$ is a group action and $\md{X} > 1.$ Then, $\widetilde{\sigma}$ is reducible.
+\end{cor}
+
+\begin{proof} 
+	Note that the degree of $\widetilde{\sigma}$ is $\md{X} > 1.$ However, since $X$ has at least one orbit, the previous proposition shows that the fixed subspace of $G$ has dimension at least one. Thus, the trivial representation appears as a proper constituent in the decomposition of $\widetilde{\sigma}.$
+\end{proof}
+
+\begin{cor}[Burnside's lemma] \label{cor:burnsideslemma}
+	Let $\sigma : G \to S_X$ be a group action and let $m$ be the number of orbits of $G$ on $X.$ Then,
+	\begin{equation*} 
+		m = \frac{1}{\md{G}}\sum_{g \in G} \md{\Fix(g)}.
+	\end{equation*}
+\end{cor}
+
+That is, the number of orbits equals the average number of fixed points.
+
+\begin{proof} 
+	Let $\chi_1$ denote the trivial character of $G.$ Then, we note
+	\[\begin{WithArrows}[displaystyle]
+		& m \Arrow{\Cref{prop:numberoforbitsisfixeddim}} \\
+		&= \dim \mathbb{C}X^G \Arrow{\Cref{prop:innerprodvarphichifixeddim}} \\
+		&= \langle \chi_{\widetilde{\sigma}}, \chi_1\rangle \\
+		&= \frac{1}{\md{G}} \sum_{g \in G} \chi_{\widetilde{\sigma}}(g) \overline{\chi_1(g)} \Arrow{$\chi_1 \equiv 1$}\\
+		&= \frac{1}{\md{G}} \sum_{g \in G} \chi_{\widetilde{\sigma}}(g) \Arrow{\Cref{prop:charofpermrep}}\\
+		&= \frac{1}{\md{G}}\sum_{g \in G} \md{\Fix(g)},
+	\end{WithArrows}\]
+	finishing the proof.
+\end{proof}
+
+\begin{cor} \label{cor:transactionranknorm}
+	Let $\sigma : G \to S_X$ be a group action. Then, the equalities
+	\begin{equation*} 
+		\rank(\sigma) = \frac{1}{\md{G}}\sum_{g \in G} \md{\Fix(g)}^2 = \langle \chi_{\widetilde{\sigma}}, \chi_{\widetilde{\sigma}}\rangle
+	\end{equation*}
+	hold.
+\end{cor}
+
+\begin{proof} 
+	The left equality follows by recalling that the definition of $\rank$ is the number of orbits of $\sigma^2.$ Thus, applying \nameref{cor:burnsideslemma} to $\sigma^2$ yields the equality since $\md{\Fix^2(g)} = \md{\Fix(g)}^2,$ by \Cref{prop:fix2isfix2}.
+
+	The right equality is simply \Cref{cor:normchisigmatilde}.
+\end{proof}
+
+\begin{defn}
+	Let $\sigma : G \to S_X$ be a \underline{transitive} action. Let $v_0 \vcentcolon= \sum_{x \in X} x \in \mathbb{C}X.$
+
+	$\mathbb{C}v_0 = \mathbb{C}X^G$ is a $G$-invariant subspace. $V_0 \vcentcolon= \mathbb{C}v_0^\perp$ is $G$-invariant. Let $\widetilde{\sigma}'$ denote the restriction of $\widetilde{\sigma}$ to $V_0.$
+
+	$\mathbb{C}v_0$ is called the \deff{trace} of $\sigma,$ $V_0$ the \deff{augmentation} of $\sigma,$ and $\widetilde{\sigma}'$ the \deff{augmentation representation} associated to $\sigma.$
+\end{defn}
+
+\begin{rem}
+	Let us justify the various statements in the definition.
+	
+	$\mathbb{C}v_0 = \mathbb{C}X^G$ followed from \Cref{prop:numberoforbitsisfixeddim}.
+
+	Since $\widetilde{\sigma}$ is a unitary representation, $V_0 \vcentcolon= \mathbb{C}v_0^\perp$ is $G$-invariant, by the proof of \Cref{prop:unitirredordecom}.
+\end{rem}
+
+\begin{thm} \label{thm:augmenirrediff2trans}
+	Let $\sigma : G \to S_X$ be a transitive group action. Then, the augmentation representation $\widetilde{\sigma}'$ is irreducible if and only if $G$ is 2-transitive.
+\end{thm}
+
+\begin{proof} 
+	Given that $\sigma$ is transitive, we see that $\sigma$ is 2-transitive if and only if $\rank(\sigma) = 2,$ by \Cref{prop:2transiffrank2}. Also note that \Cref{lem:charactersadd} gives us
+	\begin{equation*} 
+		\chi_{\widetilde{\sigma}'} = \chi_{\widetilde{\sigma}} - \chi_1.
+	\end{equation*}
+	Thus, we get
+	\[\begin{WithArrows}[displaystyle]
+		\langle \chi_{\widetilde{\sigma}'}, \chi_{\widetilde{\sigma}'}\rangle &= \langle \chi_{\widetilde{\sigma}} - \chi_1, \chi_{\widetilde{\sigma}} - \chi_1\rangle\\
+		&= \langle \chi_{\widetilde{\sigma}}, \chi_{\widetilde{\sigma}}\rangle - \langle \chi_{\widetilde{\sigma}}, \chi_1\rangle - \langle \chi_1, \chi_{\widetilde{\sigma}}\rangle + \langle \chi_1, \chi_1\rangle\\
+		&= \langle \chi_{\widetilde{\sigma}}, \chi_{\widetilde{\sigma}}\rangle - \langle \chi_{\widetilde{\sigma}}, \chi_1\rangle - \langle \chi_1, \chi_{\widetilde{\sigma}}\rangle + 1 \Arrow{\Cref{prop:innerprodvarphichifixeddim}}\\
+		&= \langle \chi_{\widetilde{\sigma}}, \chi_{\widetilde{\sigma}}\rangle - \dim \mathbb{C}X^G - \overline{\dim \mathbb{C}X^G} + 1 \Arrow{$\dim \mathbb{C}X^G = 1,$ \Cref{prop:numberoforbitsisfixeddim}}\\
+		&= \langle \chi_{\widetilde{\sigma}}, \chi_{\widetilde{\sigma}}\rangle - 1 \Arrow{\Cref{cor:transactionranknorm}} \\
+		&= \rank(\sigma) - 1.
+	\end{WithArrows}\]
+	By \Cref{cor:irrediffnormone}, $\widetilde{\sigma}'$ is irreducible iff $\langle \chi_{\widetilde{\sigma}'}, \chi_{\widetilde{\sigma}'}\rangle = 1$ iff $\rank(\sigma) - 1 = 1$ iff $\rank(\sigma) = 2$ iff $\sigma$ is 2-transitive.
+\end{proof}
+
+\begin{ex}[Character table of $S_4$]
+	Note that we have five conjugacy classes in $S_4.$ (Recall \nameref{thm:descconjclassSn}.) One set of representatives is
+	\begin{equation*} 
+		1, (12), (12)(34), (123), (1234).
+	\end{equation*}
+
+	We already know it has exactly two degree one representations. (\Cref{ex:degonerepsSn}.) Let $\chi_1$ denote the character of the trivial representation and $\chi_2$ of the sign representation.
+
+	Let $\rho$ denote the standard representation of $S_4.$ (\Cref{ex:standardrepSn}.) Recall that this is the permutation permutation corresponding to the natural action of $S_4$ on $\{1, \ldots, 4\}.$ (\Cref{rem:stdrepSnispermrepofstdact}.) Also, recall that this action is 2-transitive. (\Cref{ex:actsymgroups}.) Thus, by \Cref{thm:augmenirrediff2trans}, the augmentation representation is a degree three irreducible representation of $S_4.$ Let us denote its character by $\chi_4.$ We know that $\chi_4 = \chi_\rho - \chi_1.$
+
+	Thus, there are two more left. By \Cref{prop:descripofL}, we see the sums of squares of their degrees is $13.$ Thus, the degrees are two and three. (This is the reason we used $\chi_4$ and not $\chi_3$ for the earlier representation.)
+
+	Let $\chi_3$ and $\chi_5$ denote the characters of the unknown degree two and three representations, respectively. Thus, so far, we have the following table.
+
+	\[\begin{array}{rrrrrr}
+		 & [1] & [(12)] & [(12)(34)] & [(123)] & [(1234)]\\
+		\thiccline
+		\chi_1 & 1 &  1 & 1  &  1 &  1 \\
+		\chi_2 & 1 & -1 & 1  &  1 & -1 \\
+		\chi_3 & 2 &    &    &    &    \\
+		\chi_4 & 3 &  1 & -1 &  0 & -1 \\
+		\chi_5 & 3 &    &    &    &    \\
+	\end{array}\]
+
+	(Note that $\chi_4 = \chi_\rho - \chi_1$ is easy to calculate because $\chi_\rho(\tau)$ is the number of elements fixed by $\tau.$ Thus, we just look at the number of elements fixed by $\tau$ and subtract $1$ to get $\chi_4.$)
+
+	From the above table, we note that
+	\begin{equation*} 
+		\chi_2\left((12)\right) \neq 1 \andd \chi_4\left((12)\right) \neq 0.
+	\end{equation*}
+	Thus, by \Cref{cor:multiplyingdegonerep}, we see that multiplying the representations corresponding to $\chi_2$ and $\chi_4$ gives us a new inequivalent irreducible degree three representation. Thus, the character $\chi_5$ is obtained by multiplying the corresponding characters to get the following.
+
+	\[\begin{array}{rrrrrr}
+		 & [1] & [(12)] & [(12)(34)] & [(123)] & [(1234)]\\
+		\thiccline
+		\chi_1 & 1 &  1 &  1 &  1 &  1 \\
+		\chi_2 & 1 & -1 &  1 &  1 & -1 \\
+		\chi_3 & 2 &    &    &    &    \\
+		\chi_4 & 3 &  1 & -1 &  0 & -1 \\
+		\chi_5 & 3 & -1 & -1 &  0 &  1 \\
+	\end{array}\]
+
+	The remaining entries of $\chi_2$ are now easy to fill since the columns are orthogonal, by \Cref{thm:secondorthorel}. Since we do know the first column completely, the other columns can be filled.
+
+	Computing the inner product for $g \neq 1$ with the first column, we get
+	\begin{equation*} 
+		1 \chi_1(g) + 1 \chi_2(g) + 2 \chi_3(g) + 3 \chi_4(g) + 3 \chi_5(g) = 0
+	\end{equation*}
+	or
+	\begin{equation*} 
+		\chi_3(g) = -\frac{1}{2}(\chi_1(g) + \chi_2(g) + 3\chi_4(g) + 3\chi_5(g)).
+	\end{equation*}
+	(We have dropped the conjugate since everything is real.)
+
+	Thus, we fill the last row to obtain the table as follows.
+
+	\captionsetup{type=figure}
+	\[\begin{array}{rrrrrr}
+		 & [1] & [(12)] & [(12)(34)] & [(123)] & [(1234)]\\
+		\thiccline
+		\chi_1 & 1 &  1 &  1 &  1 &  1 \\
+		\chi_2 & 1 & -1 &  1 &  1 & -1 \\
+		\chi_3 & 2 &  0 &  2 & -1 &  0 \\
+		\chi_4 & 3 &  1 & -1 &  0 & -1 \\
+		\chi_5 & 3 & -1 & -1 &  0 &  1 \\
+	\end{array}\]
+	\captionof{table}{Character table of $S_4$} \label{tab:charS4}
+\end{ex}
