@@ -1,0 +1,671 @@
+\section{Fourier Analysis on Finite Groups}
+\subsection{Periodic Functions on Cyclic Groups}
+
+\begin{defn}
+    Let $n \in \mathbb{Z} \setminus \{0\}.$ A function $f : \mathbb{Z} \to \mathbb{C}$ is said to be \deff{periodic} with \deff{period} $n$ if $f(x + n) = f(x)$ for all $x \in \mathbb{Z}.$
+\end{defn}
+
+Note that there is no unique period associated to a periodic function. Indeed, if $n$ is a period, then so is any multiple of $n.$
+
+\begin{rem}
+    Fix an integer $n > 0.$ The set of functions periodic with period $n$ is in bijection with the set of all complex valued functions on $\mathbb{Z}/n\mathbb{Z}.$
+    
+    Indeed, given a period function $f : \mathbb{Z} \to \mathbb{C}$ with period $n,$ we get a function $\tilde{f} : \mathbb{Z}/n\mathbb{Z} \to \mathbb{C}$ defined as $\tilde{f}([m]) = f(m).$ (This is well-defined by assumption of periodicity.)
+    
+    Conversely, given a function $g : \mathbb{Z}/n\mathbb{Z} \to \mathbb{C},$ we get a function $\dot{g} : \mathbb{Z} \to \mathbb{C}$ defined as $\dot{g}(m) = g([m]).$ Clearly, $g$ is periodic with period $n.$
+    
+    Moreover, the correspondences $f \mapsto \tilde{f}$ and $g \mapsto \dot{g}$ are inverses. Thus, the set of functions periodic with period $n$ is in bijection with $L(\mathbb{Z}/n\mathbb{Z}).$ (Recall that $L(G)$ was the \hyperref[defn:groupalg]{group algebra} of the group $G.$)
+\end{rem}
+
+\begin{rem}
+    Recall that \Cref{cor:orthnormalbasis} gave us an orthonormal basis of $L(G).$ Since the irreducible representations of $\mathbb{Z}/n\mathbb{Z}$ are all of degree one, we see that the set is simply $\{\chi_k : 0 \le k < n\},$ where $\chi_k([m]) = w_n^{mk}.$
+    
+    Thus, for $f \in L(\mathbb{Z}/n\mathbb{Z})$ we get 
+    \begin{equation*}
+        f = \langle f, \chi_0\rangle \chi_0 + \cdots + \langle f, \chi_{n - 1}\rangle \chi_{n - 1}.
+    \end{equation*}
+\end{rem}
+
+\begin{defn} \label{defn:fourierZnZ}
+    Let $f : \mathbb{Z}/n\mathbb{Z} \to \mathbb{C}.$ The \deff{Fourier transform} $\mathcal{F}(f) = \widehat{f} : \mathbb{Z}/n\mathbb{Z} \to \mathbb{C}$ of $f$ is defined as
+    \begin{equation*}
+        \widehat{f}([m]) = \sum_{k = 0}^{n - 1} f([k])e^{-2\pi\iota mk/n} = \sum_{k = 0}^{n - 1} f([k])\omega_n^{-mk} = n\langle f, \chi_m\rangle.
+    \end{equation*}
+\end{defn}
+
+The last equality follows by the definition of $\langle \cdot , \cdot\rangle$ and the fact that $n \md{\mathbb{Z}/n\mathbb{Z}}.$ Moreover, note that $\mathcal{F} : L(\mathbb{Z}/n\mathbb{Z}) \to L(\mathbb{Z}/n\mathbb{Z})$ is linear since
+$\langle \cdot , \cdot\rangle$ is linear in the first variable.
+
+\begin{prop}
+    The Fourier transform is invertible. More precisely, 
+    \begin{equation*}
+        f = \frac{1}{n}\sum_{k = 0}^{n - 1} \widehat{f}([k])\chi_k.
+    \end{equation*}
+\end{prop}
+\begin{proof}
+    We simply compute $\langle f, \chi_k\rangle$ and show that it equals $\widehat{f}([k])/n.$
+    
+    To this end, note that
+    \begin{align*}
+        \langle f, \chi_k\rangle &= \frac{1}{n} \sum_{j = 0}^{n - 1}f([j])\overline{\chi_k(j)} \\
+        &= \frac{1}{n} \sum_{j = 0}^{n - 1}f([j])e^{-2\pi\iota kj/n} \\
+        &= \frac{1}{n} \widehat{f}([k]). \qedhere
+    \end{align*}
+\end{proof}
+
+\subsection{The Convolution Product}
+
+\begin{defn}
+    Let $G$ be a group.
+    Given $g \in G,$ we define $\delta_g : G \to \mathbb{C}$ as
+    \begin{equation*}
+        \delta_g(x) \vcentcolon=
+        \begin{cases}
+            1 & x = g, \\
+            0 & x \neq g.
+        \end{cases}
+    \end{equation*}
+\end{defn}
+
+\begin{defn}
+    Let $G$ be a finite group and $a, b \in L(G).$ Then, $a * b \in L(G)$ is defined as
+    \begin{equation*}
+        (a * b)(x) = \sum_{y \in G} a(xy^{-1})b(y)
+    \end{equation*}
+    and is called the \deff{convolution} of $a$ with $b.$
+\end{defn}
+
+The above is well-defined since $G$ is finite and the sum is taken in $\mathbb{C},$ which is commutative. 
+
+\begin{rem} \label{rem:classfunctionincenter}
+    We have
+    \begin{equation*}
+        (a * b)(x) = \sum_{y \in G} a(xy^{-1})b(y).
+    \end{equation*}
+    The change of variable $y \mapsto xz^{-1}$ gives
+    \begin{equation*}
+        (a * b)(x) = \sum_{z \in G} a(xzx^{-1})b(xz^{-1}) = \sum_{z \in G} b(xz^{-1})a(xzx^{-1}).
+    \end{equation*}
+    Thus, if $a$ is a class function, then we get
+    \begin{equation*}
+        (a * b)(x) = \sum_{z \in G} b(xz^{-1})a(z) = (b * a)(x)
+    \end{equation*}
+    for all $x \in G$ and hence, $a * b = b * a.$
+    
+    In particular, if $G$ is abelian, then $a * b = b * a$ for all $a, b \in L(G).$
+    
+    However, for a general group, it is not necessary that $*$ is commutative. In fact, after the next proposition, it will be clear that $*$ is commutative iff $G$ is abelian.
+\end{rem}
+
+\begin{prop} \label{prop:convdeltaprod}
+    Let $G$ be a finite group and $g, h \in G.$ Then, $\delta_g * \delta_h = \delta_{gh}.$
+\end{prop}
+\begin{proof}
+    Let $x \in G.$ Then,
+    \begin{equation*}
+        (\delta_g * \delta_h)(x) = \sum_{y \in G} \delta_g(xy^{-1})\delta_h(y).
+    \end{equation*}
+    Thus, $(\delta_g * \delta_h)(x) = 1$ iff $h = y$ and $xy^{-1} = g$ iff $x = gh$ and $0$ otherwise.
+    
+    In other words, $(\delta_g * \delta_h) = \delta_{gh}.$
+\end{proof}
+
+Thus, if $G$ is a non-abelian group, then choose $g, h \in G$ such that $gh \neq hg.$ Then, we get $\delta_g * \delta_h \neq \delta_h * \delta_g.$ 
+
+\begin{prop} \label{prop:convole}
+    Let $a \in L(G)$ and $h, g \in G.$ Then, $(a * \delta_h)(g) = a(gh^{-1}).$
+\end{prop}
+
+There are many properties that one can verify about the convolution product. We list them below and leave the proof as a computational exercise.
+
+\begin{prop}
+    Let $G$ be a finite group. Then,
+    \begin{enumerate}
+        \item $a * \delta_1 = a = \delta_1 * a$ for all $a \in L(G),$
+        \item $a * (b * c) = (a * b) * c$ for all $a, b, c \in L(G),$
+        \item $a * (b + c) = (a * b) + (a * c)$ for all $a, b, c \in L(G).$
+    \end{enumerate}
+    In other words, $(L(G), +, *)$ is a ring with $\delta_1$ as (multiplicative) identity.
+\end{prop}
+
+As noted earlier, $L(G)$ is a commutative ring iff $G$ is commutative. The above also justifies why we used the term ``group algebra''. Soon, the usage of $Z(L(G))$ for the set of class functions will become apparent too.
+
+\begin{rem}
+    Note that since $\delta_1$ is the identity, \Cref{prop:convdeltaprod} tells us the map $i : G \to L(G)$ defined as $g \mapsto \delta_g$ is a group homomorphism into the group of units $(L(G))^\times.$ (Recall \Cref{lem:determininggrouphomoring}.)
+\end{rem}
+
+\begin{defn}
+    Let $R$ be a ring. The \deff{center} of $R$ is denoted $Z(R)$ and defined as
+    \begin{equation*}
+        Z(R) \vcentcolon= \{r \in R : rs = sr \text{ for all } s \in R\}.
+    \end{equation*}
+    That is, it is the set of all those elements which commute with every element of $R.$
+\end{defn}
+
+\begin{rem}
+    One can show that the above is actually a \emph{subring} of $R.$ Moreover, it is a commutative ring. However, we do not use this fact.
+\end{rem}
+
+Recall that we had already used the notation $Z(L(G))$ to denote the set of class functions of $G.$ We now show that it is indeed the center and thus, the notation is unambiguous.
+
+\begin{prop}
+    Let $G$ be a finite group. Then, $a : G \to \mathbb{C}$ is a class function if and only if $a$ is in the center of $L(G).$
+\end{prop}
+\begin{proof}
+    $(\implies)$ Suppose $a : G \to \mathbb{C}$ is a class function. We had observed in \Cref{rem:classfunctionincenter} that $a * b = b * a$ for all $b \in L(G)$ and hence, $a$ is in the center.
+    
+    $(\impliedby)$ Let $a$ be in the center of $L(G)$ and let $g, h \in G$ be arbitrary. Then,
+    \begin{align*}
+        a(gh) = \sum_{y \in G} a(gy^{-1})\delta_{h^{-1}}(y) &= (a * \delta_{h^{-1}})(g) \\
+        &= (\delta_{h^{-1}} * a)(g) = \sum_{y \in G}\delta_{h^{-1}}(gy^{-1})a(y) = a(hg).
+    \end{align*}
+    Thus, given any $x, y \in G,$ setting $g = xy$ and $h = x^{-1}$ gives $a(xyx^{-1}) = a(x),$ showing that $a$ is a class function.
+\end{proof}
+
+\subsection{Fourier Analysis on Finite Abelian Groups}
+
+Recall that we had defined the \hyperref[defn:dualgroup]{dual of a group}, the group of all homomorphisms $G \to \mathbb{C}^\times$ with point-wise multiplication as operation. In the case that $G$ is finite and abelian, we see that the elements of $\widehat{G}$ are precisely the irreducible characters of $G$ and that $G \cong \widehat{G}.$ (The last was \Cref{cor:GconghatG}.) \\
+Moreover, note that $L(G)$ is abelian. 
+
+Recall that we had defined the Fourier transform $\mathcal{F} : L(G) \to L(G)$ earlier for the case that $G = \mathbb{Z}/n\mathbb{Z}.$ Now, we do it in a more general setting, taking inspiration from the earlier. Instead of a map $L(G) \to L(G),$ we define $\mathcal{F} : L(G) \to L(\widehat{G}).$ 
+
+\begin{defn}
+    Let $G$ be a finite abelian group and let $f : G \to \mathbb{C}$ be a function. We define the \deff{Fourier transform} $\mathcal{F}(f) = \widehat{f} \in L(\widehat{G})$ by 
+    \begin{equation*}
+        \widehat{f}(\chi) = \md{G}\langle f, \chi\rangle = \sum_{g \in G}f(g) \overline{\chi(g)}.
+    \end{equation*}
+    The complex numbers $\md{G}\langle f, \chi\rangle$ are called the \deff{Fourier coefficients} of $f.$
+\end{defn}
+
+Note that $\widehat{f}$ is a function $\widehat{f} : \widehat{G} \to \mathbb{C}.$ That is, $\widehat{f}$ takes irreducible characters of $G$ as input.
+
+\begin{rem}
+    Recall we had constructed an isomorphism $\mathbb{Z}/n\mathbb{Z} \cong \widehat{\mathbb{Z}/n\mathbb{Z}}$ in \Cref{prop:ZnZconghatZnZ}. The isomorphism was given as $[k] \leftrightarrow \chi_k,$ where $\chi_k \in \widehat{\mathbb{Z}/n\mathbb{Z}},$ as before is
+    \begin{equation*} 
+        \chi_k([m]) = w_n^{mk}.
+    \end{equation*}
+
+    Under this identification, we see that the Fourier transform defined above agrees with the one in \Cref{defn:fourierZnZ}.
+\end{rem}
+
+\begin{ex}[Fourier transform of a character] \label{ex:fourtranschar}
+    Let $\chi, \theta \in \widehat{G}$ be (irreducible) characters of the abelian group $G.$ Then, $\chi \in L(G)$ and thus, the Fourier transform of $\chi$ makes sense and we have
+    \begin{equation*}
+        \widehat{\chi}(\theta) = \md{G} \langle \chi, \theta\rangle = 
+        \begin{cases}
+            \md{G} & \theta = \chi, \\
+            0 & \theta \neq \chi.
+        \end{cases}
+    \end{equation*}
+    The last equality follows from \nameref{thm:firstorthorel}.
+    
+    Thus, $\widehat{\chi} = \md{G} \delta_\chi.$
+\end{ex}
+
+As before, we have the Fourier inversion. 
+
+\begin{thm}[Fourier inversion] \label{thm:fourierinv}
+    Let $G$ be an abelian group. If $f \in L(G),$ then
+    \begin{equation*}
+        f = \frac{1}{\md{G}}\sum_{\chi \in \widehat{G}} \widehat{f}(\chi)\chi.
+    \end{equation*}
+    That is, if $\mathcal{F}(f) = \mathcal{F}(g),$ then $f = g.$ In other words, $\mathcal{F}$ is injective.
+\end{thm}
+\begin{proof}
+    As earlier, we use the fact that the characters form an orthonormal basis along with the computation that
+    \begin{equation*}
+        f = \sum_{x \in \widehat{G}}\langle f, \chi\rangle\chi = \frac{1}{\md{G}}\sum_{x \in \widehat{G}}\md{G}\langle f, \chi\rangle\chi = \frac{1}{\md{G}}\sum_{x \in \widehat{G}} \widehat{f}(\chi)\chi. \qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{prop} \label{prop:fourierisovspace}
+    The map $\mathcal{F} : L(G) \to L(\widehat{G})$ is an isomorphism of vector spaces.
+\end{prop}
+\begin{proof}
+    Let $\md{G} = n.$ Let $f_1, f_2 \in L(G)$ and $\alpha \in \mathbb{C}$ be arbitrary. For $\chi \in \widehat{G},$ we note that
+    \begin{align*}
+        \mathcal{F}(\alpha f_1 + f_2)(\chi) &= n\langle \alpha f_1 + f_2, \chi\rangle \\
+        &= n\alpha\langle f_1, \chi\rangle + n\langle f_2, \chi\rangle = \alpha\mathcal{F}(f_1)(\chi) + \mathcal{F}(f_2)(\chi).
+    \end{align*}
+    Thus, $\mathcal{F}$ is linear.
+    
+    By \nameref{thm:fourierinv}, $\mathcal{F}$ is injective. Now, since $\dim(L(G)) = n = \dim(L(\widehat{G})),$ we see that $\mathcal{F}$ is an isomorphism.
+\end{proof}
+
+We now also wish $\mathcal{F}$ to be an isomorphism of rings. However, for this purpose, the convolution product on $L(\widehat{G})$ does not do the trick. Instead, we need the point-wise product on $L(\widehat{G}).$ Clearly, this does make $L(\widehat{G})$ a commutative ring with the constant map $g \mapsto 1$ as identity. As noted earlier, $L(G)$ is also commutative in this case. However, its identity is not the constant function but the function $\delta_1.$
+
+\begin{thm} \label{thm:fourierisorings}
+    Let $G$ be an abelian group and let $a, b \in L(G).$
+
+    The Fourier transform satisfies
+    \begin{equation*}
+        \widehat{a * b} = \widehat{a} \cdot \widehat{b}.
+    \end{equation*}
+    
+    Consequently, the linear map $\mathcal{F} : L(G) \to L(\widehat{G})$ is an isomorphism between the rings $(L(G), +, *)$ and $(L(\widehat{G}), +, \cdot).$
+\end{thm}
+\begin{proof}
+    The only thing that is required to be proven is that $\widehat{a * b} = \widehat{a} \cdot \widehat{b}.$ (Note that both sides are functions $\widehat{G} \to \mathbb{C}.$) Set $n = \md{G}$ and let $\chi \in \widehat{G}$ be arbitrary.
+    
+    We see that
+    \begin{align*}
+        \widehat{a * b}(\chi) &= n \langle a * b, \chi\rangle \\
+        &= n \cdot \frac{1}{n} \sum_{x \in G} (a * b)(x) \overline{\chi(x)} \\
+        &= \sum_{x \in G}\overline{\chi(x)} \sum_{y \in G} a(xy^{-1})b(y) \\
+        &= \sum_{y \in G}b(y) \sum_{x \in G}a(xy^{-1})\overline{\chi(x)} \\
+        &= \sum_{y \in G}b(y) \sum_{z \in G}a(z)\overline{\chi(zy)} \\
+        &= \sum_{y \in G}b(y)\overline{\chi(y)} \sum_{z \in G}a(z)\overline{\chi(z)} \\
+        &= n\langle a, \chi\rangle \cdot n\langle b, \chi\rangle \\
+        &= \widehat{a}(\chi) \cdot \widehat{b}(\chi). \qedhere
+    \end{align*}
+\end{proof}
+
+\subsection{An application to Graph Theory}
+
+\begin{defn}%[Graph]
+    A \deff{graph} $\Gamma$ is an ordered pair $(V, E)$ where $V$ is a finite \underline{ordered} set and $E$ is a set consisting of unordered \emph{pairs} of elements of $V.$ $V$ is called the \deff{vertex set} of $\Gamma$ and each element of $V$ is called a \deff{vertex}. $E$ is called the \deff{edge set} of $\Gamma$ and each element of $E$ is called an \deff{edge}.
+
+    Given $v, w \in V,$ we say that $v$ and $w$ are \deff{connected by an edge} if $\{v, w\} \in E.$
+\end{defn}
+
+\begin{ex}
+    $\Gamma = ((1, 2, 3, 4), \{\{1, 3\}, \{2, 3\}, \{2, 4\}, \{3, 4\}\})$ is a graph. This can be depicted as the following diagram.
+    
+
+    \begin{center}
+        \captionsetup{type=figure}
+        \begin{tikzpicture}
+            \GraphInit[vstyle=Normal]
+            \SetGraphUnit{2}
+            \begin{scope}[rotate = 90]
+                \Vertices{circle}{2, 3, 4}
+            \end{scope}
+
+            \NOWE(3){1}
+            \Edges(1, 3, 2, 4, 3)
+        \end{tikzpicture}
+        \captionof{graph}{A graph} \label{fig:graph1}
+    \end{center}
+\end{ex}
+
+\begin{rem}
+    As in the previous example, we often depict graphs using a diagram as shown above. We draw circles to represent the vertices and draw a line between two vertices $v_i$ and $v_j$ iff $\{v_i, v_j\} \in E.$
+
+    Note that our definition only talks about unordered pairs. Moreover, note that we do not talk about an edge from a vertex to itself.
+\end{rem}
+
+\begin{defn}%[Adjacency matrix]
+    Let $\Gamma$ be a graph with vertex set $V = (v_1, \ldots, v_n)$ and edge set $E.$ Then, we define the \deff{adjacency matrix} $A = (a_{ij}) \in M_n(\mathbb{Z})$ as
+    \begin{equation*} 
+        a_{ij} = \begin{cases}
+            1 & \{v_i, v_j\} \in E,\\
+            0 & \{v_i, v_j\} \notin E. 
+        \end{cases}
+    \end{equation*}
+\end{defn}
+
+\begin{rem}
+    By definition, we see that $A$ is symmetric and thus, real diagonalisable, by the spectral theorem. Note that the diagonal entries of $A$ will always be $0.$
+\end{rem}
+
+\begin{ex}
+    For \Cref{fig:graph1}, the adjacency matrix is given as
+    \begin{equation*} 
+        A = \begin{bmatrix}
+             &   & 1 &   \\
+             &   & 1 & 1 \\
+           1 & 1 &   & 1 \\
+             & 1 & 1 &   \\
+        \end{bmatrix}.
+    \end{equation*}
+\end{ex}
+
+\begin{defn}%[]
+    Let $G$ be a finite group written in some fixed order. A subset $S \subset G$ is said to be a \deff{symmetric subset} of $G$ if
+    \begin{enumerate}
+        \item $1 \notin S,$
+        \item $s \in S \implies s^{-1} \in S.$
+    \end{enumerate}
+    If $S$ is a symmetric subset of $G,$ then the \deff{Cayley graph} of $G$ with respect to $S$ is the graph with vertex set $G$ and with an edge $\{g, h\}$ iff $gh^{-1} \in S.$
+\end{defn}
+
+\begin{aside}
+    \textbf{Convention}
+
+    Whenever we consider $G = \mathbb{Z}/n\mathbb{Z},$ we shall consider the order to be fixed as $G = ([0], \ldots, [n - 1]).$
+\end{aside}
+
+\begin{rem}
+    Since $S$ is symmetric, $gh^{-1} \in S$ is equivalent to $hg^{-1} \in S.$ This shows that the above is indeed well-defined. (Since $\{g, h\} = \{h, g\}.$) Note that since $1 \notin S,$ we do not have any singletons in the edge set, which is compatible with our definition.
+\end{rem}
+
+\begin{ex}
+    Consider the group $G = \mathbb{Z}/4\mathbb{Z}$ (with the decided order). Then, $S = \{\pm [1]\}$ is a symmetric subset of $G.$ (Note that the $1$ of $G$ is $[0].$)
+
+    The Cayley graph is given as
+
+    \begin{center}
+        \captionsetup{type=figure}
+        \begin{tikzpicture}
+            \GraphInit[vstyle=Normal]
+            \SetGraphUnit{2}
+            \begin{scope}[rotate = 45]
+                \Vertices{circle}{[0], [1], [2], [3]}
+            \end{scope}
+            \Edges([0], [1], [2], [3], [0])
+        \end{tikzpicture}
+        \captionof{graph}{Cayley graph of $\mathbb{Z}/4\mathbb{Z}$ with respect to $\{\pm [1]\}$} \label{fig:cayleyz4z}
+    \end{center}
+    and the adjacency matrix as
+    \begin{equation*} 
+        A = \begin{bmatrix}
+            & 1 & & 1\\
+             1 &&  1&\\
+            & 1 & & 1\\
+             1 &&  1&\\
+        \end{bmatrix}.
+    \end{equation*}
+\end{ex}  
+
+\begin{ex}
+    If we take $G = \mathbb{Z}/6\mathbb{Z}$ and $S = \{\pm [1], \pm [2]\},$ we get the graph as
+    \begin{center}
+        \captionsetup{type=figure}
+        \begin{tikzpicture}
+            \GraphInit[vstyle=Normal]
+            \SetGraphUnit{3}
+            \begin{scope}%[rotate = 45]
+                \Vertices{circle}{[0], [1], [2], [3], [4], [5]}
+            \end{scope}
+            \Edges([0], [1], [2], [3], [4], [5], [0])
+            \Edges([0], [2], [4], [0])
+            \Edges([1], [3], [5], [1])
+        \end{tikzpicture}
+        \captionof{graph}{Cayley graph of $\mathbb{Z}/6\mathbb{Z}$ with respect to $\{\pm [1], \pm [2]\}$} \label{fig:cayleyz6z}
+    \end{center}
+
+    and the adjacency matrix as
+
+    \begin{equation*} 
+        A = \begin{bmatrix}
+              & 1 & 1 &   & 1 & 1 \\
+            1 &   & 1 & 1 &   & 1 \\
+            1 & 1 &   & 1 & 1 &   \\
+              & 1 & 1 &   & 1 & 1 \\
+            1 &   & 1 & 1 &   & 1 \\
+            1 & 1 &   & 1 & 1 &   \\
+        \end{bmatrix}
+    \end{equation*}
+\end{ex}
+
+\begin{defn}%[Circulant graph]
+    A Cayley graph of $\mathbb{Z}/n\mathbb{Z}$ is called a \deff{circulant graph} (on $n$ vertices).
+\end{defn}
+
+\begin{defn}%[Circulant matrix]
+    An $n \times n$ \deff{circulant matrix} is a matrix of the form
+    \begin{equation*} 
+        A = \begin{bmatrix}
+            a_0 & a_1 & \cdots & a_{n - 2} & a_{n - 1} \\
+            a_{n - 1} & a_0 & \cdots & a_{n - 3} & a_{n - 2}\\
+            \vdots & \vdots & \ddots & \vdots & \vdots \\
+            a_2 & a_3 & \cdots & a_{0} & a_1\\
+            a_1 & a_2 & \cdots & a_{n - 1} & a_0
+        \end{bmatrix}.
+    \end{equation*}
+    Equivalently, a matrix $A = (a_{ij})$ is circulant if there exists a function $f : \mathbb{Z}/n\mathbb{Z} \to \mathbb{C}$ such that $a_{ij} = f([j] - [i]).$
+\end{defn} 
+
+\begin{ex}
+    If $S$ is a symmetric subset of $G \vcentcolon= \mathbb{Z}/n\mathbb{Z},$ then the indicator function $\delta_S : G \to \mathbb{C}$ is defined as
+    \begin{equation*} 
+        \delta_S(x) = \begin{cases}
+            1 & x \in S,\\
+            0 & x \notin S. 
+        \end{cases}
+    \end{equation*} 
+    Consider the matrix $A = (a_{ij})$ given by $a_{ij} = f([j] - [i]).$ Then, note that 
+    \begin{equation*} 
+        a_{ij} = 1 \iff [j] - [i] \in S \iff \{[i], [j]\} \in E,
+    \end{equation*}
+    where $E$ denotes the edge set of the Cayley graph of $G$ with respect to $S.$
+
+    Thus, we see that the circulant matrix corresponding to $\delta_S$ is the adjacency matrix of the Cayley graph of $G$ with respect to $S.$
+\end{ex}
+
+\begin{lem} \label{lem:convolvediagonal}
+    Let $G$ be an abelian group and $a \in L(G).$ Define $A : L(G) \to L(G)$ by $A(b) = a * b.$ Then, $A$ is linear and $\chi$ is an eigenvector of $A$ with eigenvalue $\widehat{a}(\chi)$ for all $\chi \in \widehat{G}.$ Consequently, $A$ is diagonalisable.
+\end{lem}
+\begin{proof} 
+    That $A$ is additive follows from the fact that $*$ distributes over $+.$ That $A(\alpha b) = \alpha A(b)$ for $\alpha \in \mathbb{C}$ and $b \in L(G)$ follows easily from the definition of $*.$ Thus, $A$ is linear.
+
+    Put $n \vcentcolon= \md{G}.$ Now, let $\chi \in \widehat{G}$ be arbitrary. Then,
+    \begin{equation*} 
+        \widehat{a * \chi} = \widehat{a} \cdot \widehat{\chi} = \widehat{a} \cdot n \delta_\chi,
+    \end{equation*}
+    where the last equality follows from \Cref{ex:fourtranschar}. Now, for $\theta \in \widehat{G},$ we note that
+    \begin{equation*} 
+        (\widehat{a} \cdot n \delta_\chi)(\theta) = \begin{cases}
+            n\widehat{a}(\chi) & \theta = \chi,\\
+            0 & \theta \neq \chi.   
+        \end{cases}
+    \end{equation*}
+    Thus, we have $\widehat{a * \chi} = \widehat{a} \cdot n \delta_\chi = n \widehat{a}(\chi) \delta_\chi.$ By \Cref{ex:fourtranschar} again, we get
+    \begin{equation*} 
+        \widehat{a * \chi} = n \widehat{a}(\chi) \widehat{\chi}.
+    \end{equation*}
+    Applying the inverse Fourier transform (and using its linearity), we get
+    \begin{equation*} 
+        a * \chi = \widehat{a}(\chi) \chi.
+    \end{equation*}
+    (Note that $\widehat{a}(\chi) \in \mathbb{C}$ is a constant.) The above equation is simply
+    \begin{equation*} 
+        A(\chi) = \widehat{a}(\chi)\chi
+    \end{equation*}
+    and hence, $\chi$ is an eigenvector with eigenvalue $\widehat{a}(\chi).$
+
+    Note that the irreducible characters of $G$ form a basis of $Z(L(G)),$ by \Cref{thm:onbforzlg}. Since $G$ is abelian, the irreducible characters are precisely the elements of $\widehat{G}$ and $Z(L(G)) = L(G).$ Thus, we see that $\widehat{G}$ forms a basis of $L(G)$ and have just shown that all these elements are eigenvectors of $A.$ Thus, $\widehat{G}$ is an eigenbasis of $L(G)$ corresponding and $A$ is diagonalisable.
+\end{proof}
+
+\begin{thm} \label{thm:adjcayleyeigen}
+    Let $G = (g_1, \ldots, g_n)$ be an ordered abelian group and let $S \subset G$ be a symmetric subset. Let $\chi_1, \ldots, \chi_n$ be irreducible characters of $G$ and let $A$ be the adjacency matrix of the Cayley graph of $G$ with respect to $S.$ Then,
+    \begin{enumerate}
+        \item The eigenvalues of $A$ are the real numbers
+        \begin{equation*} 
+            \lambda_i \vcentcolon= \sum_{s \in S} \chi_i(s)
+        \end{equation*}
+        for $1 \le i \le n;$
+        \item A corresponding orthonormal basis of eigenvectors is given by the vectors $(v_1, \ldots, v_n)$ where
+        \begin{equation*} 
+            v_i \vcentcolon= \frac{1}{\sqrt{\md{G}}} \begin{bmatrix}
+                \chi_i(g_1) & \cdots & \chi_i(g_n)
+            \end{bmatrix}^\mathsf{T}.
+        \end{equation*}
+    \end{enumerate}
+\end{thm}
+
+\begin{proof} 
+    The indicator function $\delta_S$ of $S$ is given by $\delta_S = \sum_{s \in S} \delta_s.$ Note that $\delta_S \in L(G).$ Define $F : L(G) \to L(G)$ by
+    \begin{equation*} 
+        F(b) = \delta_S * b.
+    \end{equation*}
+    Then, by \Cref{lem:convolvediagonal}, $F$ has eigenvectors $\chi_i$ with corresponding eigenvalue
+    \[\begin{WithArrows}[displaystyle]
+        \widehat{\delta_S}(\chi_i) = n\langle \delta_S, \chi_i\rangle &= \sum_{x \in G} \delta_S(x)\overline{\chi_i(x)}\\
+        &= \sum_{x \in S} \overline{\chi_i(x)} \Arrow{\Cref{rem:findegoneunitary}}\\
+        &= \sum_{x \in S} \chi_i(x^{-1}) \Arrow{$S$ is symmetric}\\
+        &= \sum_{y \in S} \chi_i(y)\\
+        &= \lambda_i.
+    \end{WithArrows}\]
+    This proves that $\lambda_i$ is an eigenvalue for each $1 \le i \le n.$ (Note that $\lambda_i \in \mathbb{R}$ follows since $A$ is symmetric.\footnote{Alternately, one can note that that sum in the definition of $\lambda_i$ is real. Indeed, if $s = s^{-1}$, then $\chi(s) = \chi(s^{-1}) = \overline{\chi(s)} \in \mathbb{R}.$ On the other hand, if $s \neq s^{-1},$ then pairing up $\chi(s)$ and $\chi(s^{-1})$ in the sum gives $\chi(s) + \chi(s^{-1}) = \chi(s) + \overline{\chi(s)} \in \mathbb{R}.$})
+
+    Consider the ordered basis $B = (\delta_{g_1}, \ldots, \delta_{g_n})$ for $L(G).$ Let $[F]_B$ denote the matrix of $F$ with respect to this ordered basis. Note that the coordinate vector of $\chi_i$ with respect to $B$ is precisely $\sqrt{\md{G}}v_i.$ The above shows that it is an eigenvector with eigenvalue $\lambda_i.$ The orthogonality of $v_i$ follows from \Cref{thm:secondorthorel}. (Note that the conjugacy classes are singletons since $G$ is abelian.) \\
+    Lastly, the orthonormality follows from noting that
+    \begin{equation*} 
+        \|v_i\|^2 = \frac{1}{G}\left(\md{\chi_i(g_1)}^2 + \cdots + \md{\chi_i(g_n)}^2\right) = \|\chi_i\|^2 = 1.
+    \end{equation*}
+    Thus, to complete the proof, it suffices to show that $A = [F]_B.$
+
+    Let $1 \le i, j \le n$ be arbitrary. We show that $A_{ij} = ([F]_B)_{ij}.$ Note that $([F]_B)_{ij}$ is the coefficient of $\delta_{g_i}$ in $F(\delta_{g_j}).$ We note that
+    \begin{equation*} 
+        F(\delta_{g_j}) = \delta_S * \delta_{g_j} = \sum_{s \in S}\delta_s * \delta_{g_j} = \sum_{s \in S} \delta_{sg_j} = \sum_{g \in Sg_j} \delta_g.
+    \end{equation*}
+    (We have used $\delta_{gh} = \delta_g * \delta_h,$ by \Cref{prop:convdeltaprod}.)
+
+    Thus, 
+    \begin{align*} 
+        ([F]_B)_{ij} &= \begin{cases}
+            1 & g_i \in Sg_j,\\
+            0 & g_i \notin Sg_j,
+        \end{cases}\\
+        &= \begin{cases}
+            1 & g_ig_j^{-1} \in S,\\
+            0 & g_ig_j^{-1} \notin S,
+        \end{cases}\\
+        &= A_{ij}. \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{cor}
+    Let $A$ be a circulant matrix of degree $n,$ which is the adjacency matrix of the Cayley graph of $\mathbb{Z}/n\mathbb{Z}$ with respect to some symmetric subset $S \subset \mathbb{Z}/n\mathbb{Z}.$ Then, the eigenvalues of $A$ are
+    \begin{equation*} 
+        \lambda_k \vcentcolon= \sum_{[m] \in S} \omega_n^{km},
+    \end{equation*}
+    for $k = 0, \ldots, n - 1$ with corresponding basis of orthonormal eigenvectors given by
+    \begin{equation*} 
+        v_k \vcentcolon= \frac{1}{\sqrt{n}}\begin{bmatrix}
+            1 & \omega_n^{k} & \omega_n^{2k} & \cdots & \omega_n^{(n - 1)k}
+        \end{bmatrix}^\mathsf{T}.
+    \end{equation*}
+\end{cor}
+\begin{proof} 
+    The result follows from \Cref{thm:adjcayleyeigen} since we have
+    \begin{equation*} 
+        \chi_k([m]) = \omega_n^{km}
+    \end{equation*}
+    for $k = 0, \ldots, n - 1.$ 
+\end{proof}
+
+\begin{ex}
+    Recall \Cref{fig:cayleyz6z}. We had $n = 6$ and $S = \{\pm [1], \pm [2]\}.$ Thus, the eigenvalues of $A$ are given by
+    \begin{equation*} 
+        \lambda_k = \omega_6^k + \omega_6^{-k} + \omega_6^{2k} + \omega_6^{-2k} = 2\left(\cos\left(\frac{\pi k}{3}\right) + \cos\left(\frac{2\pi k}{3}\right)\right)
+    \end{equation*}
+    for $k = 0, \ldots, 5.$
+\end{ex}
+
+\subsection{Fourier Analysis on Non-abelian Groups}
+
+If $G$ is a non-abelian group, then $L(G) \neq Z(L(G)).$ Note however that that pointwise product of functions into $\mathbb{C}$ is commutative. Thus, we cannot have a Fourier transform converting convolution into pointwise product while being an isomorphism. To remedy this, we look at matrix multiplication instead of pointwise.
+
+Before that, we look at the case of abelian groups in a different light. First, recall that $\mathbb{C}^n$ is a ring with product given as
+\begin{equation*} 
+    (w_1, \ldots, w_n) \cdot (z_1, \ldots, z_n) \vcentcolon= (w_1z_1, \ldots, w_nz_n).
+\end{equation*}
+
+\begin{prop}
+    Let $G$ be a finite abelian group with irreducible characters $\chi_1, \ldots, \chi_n.$ Define $T : L(G) \to \mathbb{C}^n$ by
+    \begin{equation*} 
+        Tf = (\widehat{f}(\chi_1), \ldots, \widehat{f}(\chi_n)).
+    \end{equation*}
+    Then, $T$ is an isomorphism of rings.
+\end{prop}
+\begin{proof} 
+    Note that if $f, g \in L(G)$ are such that $Tf = Tg,$ then $\widehat{f} = \widehat{g}.$ Fourier inversion gives $f = g.$ Thus, $T$ is injective. Since $T$ is $\mathbb{C}$-linear (same proof as \Cref{prop:fourierisovspace}) and $\dim_{\mathbb{C}}(L(G)) = n = \dim_{\mathbb{C}}(\mathbb{C}^n),$ it follows that $T$ is a bijection and hence, an isomorphism of $\mathbb{C}$-vector spaces.
+
+    To show that is an isomorphism of rings, all that remains is to show that $T(f * g) = Tf \cdot Tg.$ This follows directly from the fact that $\widehat{f * g}(\chi_i) = \widehat{f}(\chi_i)\widehat{g}(\chi_i)$ for all $i = 1, \ldots, n.$
+\end{proof}
+
+Thus, \Cref{thm:fourierisorings} can be stated as follows.
+\begin{thm}
+    Let $G$ be a finite abelian group of order $n.$ Then, $L(G) \cong \mathbb{C}^n$ as rings.
+\end{thm}
+
+Note that all the irreducible representations of $G$ have degree one. The above product can be seen as $\mathbb{C}^n \cong M_1(\mathbb{C}) \times \cdots \times M_1(\mathbb{C}).$ In general, we replace the $1$s with the degrees of the irreducible representations.
+
+\begin{aside}
+    \textbf{Setup.}
+
+    $G$ is a finite group of order $n$ and $\varphi^{(1)}, \ldots, \varphi^{(s)}$ is a transversal of irreducible unitary representations of $G.$ Put $d_k = \deg \varphi^{(k)}.$ 
+
+    For $1 \le k \le s$ and $1 \le i, j \le d_k,$ we have the functions $\varphi^{(k)}_{ij} : G \to \mathbb{C}$ such that the matrix $\varphi^{(k)}(g)$ is given as $(\varphi^{(k)}_{ij}(g))$ for all $g \in G.$
+
+    Let $D = \{(i, j, k) : 1 \le k \le s,\; 1 \le i, j \le d_k\}.$
+
+    We recall \Cref{cor:orthnormalbasis} which told us that $B = \left\{\sqrt{d_k}\varphi_{ij}^{(k)} \mid (i, j, k) \in D\right\}$ is an orthonormal basis for $L(G).$
+\end{aside}
+
+\begin{defn}%[]
+    Define
+    \begin{equation*} 
+        \mathcal{F} : L(G) \to M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})
+    \end{equation*}
+    by $\mathcal{F}(f) \vcentcolon= (\widehat{f}(\varphi^{(1)}), \ldots, \widehat{f}(\varphi^{(s)}))$ where
+    \begin{equation*}
+        \widehat{f}(\varphi^{(k)}) \vcentcolon= \sum_{g \in G} f(g)\overline{\varphi^{(k)}_g}.
+    \end{equation*}
+    We call $\mathcal{F}(f)$ the \deff{Fourier transform} of $f.$
+\end{defn}
+\begin{rem}
+    In terms of the matrix entries, the above can be rewritten as
+    \begin{equation} \label{eq:012}
+        \widehat{f}(\varphi^{(k)})_{ij} \vcentcolon= \sum_{g \in G} f(g)\overline{\varphi^{(k)}_{ij}(g)} = n\langle f, \varphi^{(k)}_{ij}\rangle.
+    \end{equation}
+\end{rem}
+
+\begin{rem} \label{rem:dimLGdimmatrix}
+    Note that $L(G)$ is a $\mathbb{C}$-vector space of dimension $\md{G}.$ On the other hand, $M_{d_i}(\mathbb{C})$ is a $\mathbb{C}$-vector space with dimension $d_i^2.$ Thus, the product $M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})$ is a vector space of dimension $d_1^2 + \cdots + d_s^2 = \md{G}.$
+
+    Thus, we see that $L(G)$ and $M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})$ have the same dimension. We shall show that $\mathcal{F}$ is an isomorphism.
+\end{rem}
+
+\begin{thm}[Fourier inversion] \label{thm:fourierinvgen}
+    Let $f \in L(G).$ Then,
+    \begin{equation*} 
+        f = \frac{1}{n}\sum_{(i, j, k) \in D}d_k \widehat{f}(\varphi^{(k)})_{ij} \varphi^{(k)}_{ij}.    
+    \end{equation*}
+    In particular, $\mathcal{F}$ is injective.
+\end{thm}
+\begin{proof} 
+    The proof is as before. We know that $B$ is an orthonormal basis. Thus, it suffices to prove that
+    \begin{equation*} 
+        \langle f, \sqrt{d_k}\varphi^{(k)}_{ij}\rangle = \frac{1}{n}\sqrt{d_k} \widehat{f}(\varphi^{(k)})_{ij}
+    \end{equation*}
+    for all $(i, j, k) \in D.$ However, the above is precisely \Cref{eq:012}.
+\end{proof}
+
+\begin{thm}
+    The Fourier transform $\mathcal{F} : L(G) \to M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})$ is an isomorphism of vector spaces.
+\end{thm}
+\begin{proof} 
+    As usual, the check that it is linear is simple and essentially follows from the fact that $\langle \cdot , \cdot \rangle$ is linear in the first variable. \\
+    By \Cref{thm:fourierinvgen}, we know that $\mathcal{F}$ is injective. \\
+    By \Cref{rem:dimLGdimmatrix}, we know that $\dim_{\mathbb{C}}(L(G)) = \dim_{\mathbb{C}}(M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C}))$ and thus, $\mathcal{F}$ is an isomorphism.
+\end{proof}
+
+Note that $M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})$ is a ring as well, with coordinate-wise product.
+
+\begin{thm}[Wedderburn]
+    The Fourier transform $\mathcal{F} : L(G) \to M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})$ is an isomorphism of rings.
+\end{thm}
+\begin{proof} 
+    All that is required to be proven is that $T(f * g) = Tf \cdot Tg,$ where the latter product is in the ring $M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C}).$ Let $a, b \in L(G).$
+
+    Since the latter product is coordinate-wise, it suffices to show that
+    \begin{equation*} 
+        \widehat{(a * b)}(\varphi^{(k)}) = \widehat{a}(\varphi^{(k)})\widehat{b}(\varphi^{(k)})
+    \end{equation*}
+    for all $1 \le k \le s.$ (The product on the right is matrix multiplication.)
+
+    The computation is the same as before.
+    \begin{align*} 
+        \widehat{(a * b)}(\varphi^{(k)}) &= \sum_{g \in G} (a * b)(g)\overline{\varphi^{(k)}(g)}\\
+        &= \sum_{g \in G}\left(\sum_{h \in G}a(gh^{-1})b(h)\right)\overline{\varphi^{(k)}(g)}\\
+        &= \sum_{h \in G}b(h)\sum_{g \in G}a(gh^{-1})\overline{\varphi^{(k)}(g)}\\
+        &= \sum_{h \in G}b(h)\sum_{g' \in G}a(g')\overline{\varphi^{(k)}(g'h)}\\
+        &= \sum_{h \in G}b(h)\sum_{g' \in G}a(g')\overline{\varphi^{(k)}(g')}\cdot\overline{\varphi^{(k)}(h)}\\
+        &= \sum_{g' \in G}a(g')\overline{\varphi^{(k)}(g')}\sum_{h \in G}b(h)\overline{\varphi^{(k)}(h)}\\
+        &= \widehat{a}(\varphi^{(k)})\widehat{b}(\varphi^{(k)}). \qedhere
+    \end{align*}
+\end{proof}
+In the above computation, note that $a$ and $b$ took values in $\mathbb{C}$ and so, commuted with the other terms.
