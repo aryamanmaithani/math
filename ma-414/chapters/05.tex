@@ -1,0 +1,98 @@
+\chapter{Finite fields}
+
+\section{Existence and Uniqueness}
+
+In this section, $p$ will denote an arbitrary prime number.
+
+\begin{restatable}[Uniqueness of finite fields]{thm}{uniquefinfields}
+\label{thm:uniquefinfields}
+    Let $\mathbb{K}$ and $\mathbb{L}$ be finite fields with same cardinality. Then, $\mathbb{K}$ and $\mathbb{L}$ are isomorphic. \hfill\hyperref[thm:uniquefinfields2]{\downsym}
+\end{restatable}
+
+\begin{defn}%[]
+    We shall denote the finite with $p^n$ elements by $\mathbb{F}_{p^n}.$
+\end{defn}
+
+\begin{rem}
+    We have not yet shown that $\mathbb{F}_{p^n}$ for every prime $p$ and $n \in \mathbb{N}.$ Have only shown uniqueness up to isomorphism.
+\end{rem}
+
+\begin{restatable}[Existence of finite fields]{thm}{existencefinfields}
+\label{thm:existencefinfields}
+    Fix a prime $p$ and an algebraic closure $\overline{\mathbb{F}}_p.$ For every $n \in \mathbb{N},$ there exists a unique subfield of $\overline{\mathbb{F}}_p$ of size $p^n,$ denoted $\mathbb{F}_{p^n}.$ Moreover
+    \begin{equation*} 
+        \overline{\mathbb{F}}_p = \bigcup_{n \in \mathbb{N}} \mathbb{F}_{p^n}.
+    \end{equation*}
+    \hfill\hyperref[thm:existencefinfields2]{\downsym}
+\end{restatable}
+
+Here's an interesting application to finite fields.
+
+\begin{restatable}[]{prop}{xfourplusone}
+\label{prop:xfourplusone}
+    The polynomial $f(x) \vcentcolon= x^4 + 1$ is irreducible in $\mathbb{Z}[x]$ be it is reducible in $\mathbb{F}_p$ for every prime $p.$ \hfill\hyperref[prop:xfourplusone2]{\downsym}
+\end{restatable}
+
+\section{Gauss' Necklace Formula}
+
+Recall the M\"obius inversion formula.
+
+\begin{defn}%[]
+    The \deff{M\"obius function} $\mu : \mathbb{N} \to \mathbb{N}$ is defined as
+    \begin{equation*} 
+        \mu(n) \vcentcolon= \begin{cases}
+            1 & n = 1,\\
+            (-1)^r & n \text{ is a product of }r \text{ distinct primes},\\
+            0 & p^2 \mid n \text{ for some prime }p.
+        \end{cases}
+    \end{equation*}
+\end{defn}
+
+\begin{thm}[M\"obius inversion formula] \label{thm:mobiusinv}
+    Let $f, g : \mathbb{N} \to \mathbb{N}$ be functions satisfying
+    \begin{equation*} 
+        f(n) = \sum_{d \mid n} g(d).
+    \end{equation*}
+    Then, they also satisfy
+    \begin{equation*} 
+        g(n) = \sum_{d \mid n} f\left(\frac{n}{d}\right)\mu(d).
+    \end{equation*}
+\end{thm}
+
+\textbf{Notation:} For the remaining of this section, $p$ is an odd prime and $q$ is a positive integral power of $p.$
+
+\begin{restatable}[]{lem}{xdxxnxdiv}
+\label{lem:xdxxnxdiv}
+    If $m \mid n,$ then $x^{q^m} - x \mid x^{q^n} - x$ in $\mathbb{F}_q[x].$ \hfill\hyperref[lem:xdxxnxdiv2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{lem}{irreddivsplitpoly}
+\label{lem:irreddivsplitpoly}
+    Let $f(x) \in \mathbb{F}_q[x]$ be a monic irreducible polynomial. \\
+    Then, $f(x) \mid x^{q^n} - x$ iff $\deg(f(x)) \mid n.$ \hfill\hyperref[lem:irreddivsplitpoly2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[Gauss]{thm}{gaussnecklace}
+\label{thm:gaussnecklace}
+    The number of irreducible polynomials of degree $n$ over $\mathbb{F}_{q}$ is given by
+    \begin{equation*} 
+        N_q(n) = \frac{1}{n}\sum_{d \mid n} \mu(d)q^{n/d}.
+    \end{equation*} \hfill\hyperref[thm:gaussnecklace2]{\downsym}
+\end{restatable}
+
+\section{Primitive Element Theorem}
+
+\begin{defn}%[]
+    Let $\mathbb{E}/\mathbb{F}$ be a field extension. An element $\alpha \in \mathbb{E}$ is called a \deff{primitive element for $\mathbb{E}$ over $\mathbb{F}$} if $\mathbb{E} = \mathbb{F}(\alpha).$
+
+    We say that \deff{$\mathbb{E}$ is primitive over $\mathbb{F}$} if there exists a primitive element for $\mathbb{E}$ over $\mathbb{F}.$
+\end{defn}
+
+\begin{restatable}[Primitive Element Theorem]{thm}{pet}
+\label{thm:pet}
+    Let $\mathbb{K}/\mathbb{F}$ be a finite extension. 
+    \begin{enumerate}
+        \item There is a primitive element for $\mathbb{K}/\mathbb{F}$ iff the number of intermediate subfields $\mathbb{E}$ such that $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}$ is finite.
+        \item If $\mathbb{K}/\mathbb{F}$ is a separable extension, then it has a primitive element. \hfill\hyperref[thm:pet2]{\downsym}
+    \end{enumerate}
+\end{restatable}

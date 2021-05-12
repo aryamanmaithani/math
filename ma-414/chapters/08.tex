@@ -1,0 +1,163 @@
+\chapter{Cyclotomic Extensions}
+
+\section{Roots of unity}
+
+\begin{defn}%[]
+    Let $\mathbb{F}$ be a field. A root $\zeta \in \mathbb{F}$ of $x^n - 1 \in \mathbb{F}[x]$ is called an \deff{$n$-th root of unity in $\mathbb{F}$}.
+\end{defn}
+
+\begin{rem}
+    Suppose that $\chr(\mathbb{F}) = p > 0$ and $n = p^em$ with $p \nmid m.$ Then, $x^n = (x^m - 1)^{p^e}.$ By the derivative criterion, $x^m - 1$ is separable. Thus, the splitting field of $x^n - 1$ is the same as that of $x^m - 1$ and the roots are the same too (ignoring multiplicity). Thus, we either consider fields of characteristic $0$ or assume that $(\chr(\mathbb{F}), n) = 1.$
+\end{rem}
+
+\begin{defn}%[]
+    Let $\mathbb{F}$ be a field and $n \in \mathbb{K}.$ \\
+    Suppose that $\chr(\mathbb{F}) = 0$ or $\gcd(\chr(\mathbb{F}), n) = 1.$ Let $Z = \{z_1, \ldots, z_n\} \subset \overline{\mathbb{F}}^\times$ is a cyclic subgroup (\Cref{thm:finsubgroupcyclic}). Any of the $\varphi(n)$ generators of $Z$ is called a \deff{primitive $n$-th root of unity}.
+
+    A primitive root of unity over $\mathbb{Q}$ is denoted by $\zeta_n$ and we define $\Phi_n(x) \vcentcolon= \irr(\zeta_n, \mathbb{Q}).$ 
+\end{defn}
+
+\begin{rem}
+    We shall soon show that $\irr(\zeta_n, \mathbb{Q})$ is independent of the primitive root chosen. This is \textbf{not} the case in general (see \Cref{ex:irrunityFtwo}).
+\end{rem}
+
+\begin{defn}%[]
+    A splitting field of $x^n - 1$ over $\mathbb{F}$ is called a \deff{cyclotomic extension of order $n$ over $\mathbb{F}$}.
+\end{defn}
+
+\begin{restatable}[]{prop}{Gfabeliansubgroup}
+\label{prop:Gfabeliansubgroup}
+    Let $\chr(\mathbb{F}) = 0$ or $\gcd(\chr(\mathbb{F}), n) = 1$ and $f(x) = x^n - 1 \in \mathbb{F}[x].$ Then, $\G_f$ is isomorphic to a subgroup of $(\mathbb{Z}/n\mathbb{Z})^\times.$ In particular, $\G_f$ is an abelian group and $\md{\G_f} \mid \varphi(n).$ \hfill\hyperref[prop:Gfabeliansubgroup2]{\downsym}
+\end{restatable}
+
+\begin{ex} \label{ex:irrunityFtwo}
+    Let us consider$\mathbb{F} = \mathbb{F}_2.$ We shall consider the $n$-th roots of unity for $n$ odd so that $\gcd(n, 2) = 1.$ In this example, we will consider $n = 3$ and $7.$ Since these are prime, we know that there are $2$ and $6$ primitive roots in each case.
+
+    First, consider $x^3 - 1 = (x - 1)(x^2 + x + 1).$ The quadratic factor is irreducible since it has no root. Any root $z$ of the quadratic is a primitive cube root of unity.
+
+    Now, consider $n = 7.$ Then, we have
+    \begin{equation*} 
+        x^7 - 1 = (x - 1)(x^3 + x^2 + 1)(x^3 + x + 1).
+    \end{equation*}
+    Note that both the cubics are irreducible since they have no roots in $\mathbb{F}.$ Since any root apart from $1$ is a primitive root, we see that any of the roots of the two cubics is a primitive root. 
+
+    In particular, note that are $6$ primitive $7$-th roots of unity over $\mathbb{F}$ with two minimal polynomials. However, we will see that this does not happen over $\mathbb{Q}.$
+\end{ex}
+
+\begin{restatable}[]{prop}{nthrootsnonunity}
+\label{prop:nthrootsnonunity}
+    Let $x^n - a = f(x) \in \mathbb{F}[x]$ and suppose $\mathbb{F}$ has $n$ distinct roots of $x^n - 1.$ Then, $\G_f$ is a cyclic group and $\md{\G_f}$ divides $n.$ \hfill\hyperref[prop:nthrootsnonunity2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{thm}{cyclotomicQ}
+\label{thm:cyclotomicQ}
+    Let $n \in \mathbb{N}$ fix a primitive root $n$-th root of unity $\zeta_n \in \overline{\mathbb{Q}}$ and let $\Phi_n(x) \vcentcolon= \irr(\zeta_n, \mathbb{Q}).$ Then,
+    \begin{enumerate}
+         \item $\Phi_n(x) \in \mathbb{Z}[x],$
+         \item every primitive $n$-th root of unity is a root of $\Phi_n(x),$
+         \item $[\mathbb{Q}(\zeta_n) : \mathbb{Q}] = \varphi(n),$ and
+         \item $\Gal(\mathbb{Q}(\zeta_n)/\mathbb{Q}) \cong (\mathbb{Z}/n\mathbb{Z})^\times.$ \hfill\hyperref[thm:cyclotomicQ2]{\downsym}
+     \end{enumerate} 
+\end{restatable}
+
+\section{Computation of Cyclotomic Polynomials}
+As earlier, $\Phi_n(x)$ defines the irreducible polynomial of any primitive $n$-th root of unity.
+
+\begin{restatable}[]{thm}{cycloreccurence}
+\label{thm:cycloreccurence}
+    We have $\Phi_1(x) = x - 1$ and
+    \begin{equation*} 
+        \Phi_n(x) = \frac{x^n - 1}{\displaystyle\prod_{\substack{d \mid n\\ d < n}} \Phi_d(x)}
+    \end{equation*}
+    for $n > 1.$ \hfill\hyperref[thm:cycloreccurence2]{\downsym}
+\end{restatable}
+
+\begin{ex}[First few cyclotomic polynomials]
+    \begin{align*} 
+        \Phi_1(x) &= x - 1, \\
+        \Phi_2(x) &= \frac{x^2 - 1}{x - 1} = x + 1, \\
+        \Phi_3(x) &= \frac{x^3 - 1}{x - 1} = x^2 + x + 1, \\
+        \Phi_4(x) &= \frac{x^4 - 1}{(x - 1)(x + 1)} = x^2 + 1, \\
+        \Phi_5(x) &= \frac{x^5 - 1}{x - 1} = x^4 + x^3 + x^2 + x + 1, \\
+        \Phi_6(x) &= \frac{x^6 - 1}{(x - 1)(x^2 - 1)(x^3 - 1)} = x^2 - x + 1, \\
+        \Phi_7(x) &= \frac{x^7 - 1}{x - 1} = x^6 + x^5 + \cdots + x + 1.
+    \end{align*}
+    Note that the above may indicate that the coefficients are always $0, \pm 1.$ However, that is \textbf{not} the case.
+
+    However, the first example of that is $\Phi_{105}(x).$ The coefficient of $x^{41}$ is $-2.$ (Every other coefficient is $0, \pm 1.$)
+\end{ex}
+
+\section{Subfields of \texorpdfstring{$\mathbb{Q}(\zeta_n)$}{Q(zn)}}
+
+\begin{restatable}[]{prop}{cyclocyclic}
+\label{prop:cyclocyclic}
+    Let $p$ be a prime. Then, $\Gal(\mathbb{Q}(\zeta_p)/\mathbb{Q})$ is cyclic of order $p - 1.$ Consequently, given any divisor $d \mid p - 1,$ there is a unique intermediate subfield $\mathbb{E}$ of $\mathbb{Q}(\zeta_p)/\mathbb{Q}$ such that $[\mathbb{E} : \mathbb{Q}] = d.$ Equivalently, there is a unique intermediate $\mathbb{E}$ such that $[\mathbb{Q}(\zeta_p) : \mathbb{E}] = \frac{p - 1}{d}.$ \hfill\hyperref[prop:cyclocyclic2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{lem}{cyclodisc}
+\label{lem:cyclodisc}
+    Let $p$ be an odd prime. Then $\disc(\Phi_p(x)) = (-1)^{\binom{p}{2}}p^{p - 2}.$ \hfill\hyperref[lem:cyclodisc2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{uniquequadraticcyclosubfield}
+\label{prop:uniquequadraticcyclosubfield}
+    Let $p$ be an odd prime. The field $\mathbb{Q}(\zeta_p)$ contains a unique quadratic extension of $\mathbb{Q},$ namely
+    \begin{equation*} 
+        \mathbb{Q}\left(\sqrt{\disc(\Phi_p(x))}\right) = \mathbb{Q}\left(\sqrt{(-1)^{\binom{p}{2}}}p\right),
+    \end{equation*}
+    which is real if $p \equiv 1 \pmod{4}$ and (non-real) complex if $p \equiv 3 \pmod{4}.$ \hfill\hyperref[prop:uniquequadraticcyclosubfield2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{cor}{quadincyclo}
+\label{cor:quadincyclo}
+    Every quadratic extension of $\mathbb{Q}$ is contained in a cyclotomic extension. \hfill\hyperref[cor:quadincyclo2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{quadgeneratorcyclo}
+\label{prop:quadgeneratorcyclo}
+    Let $p$ be an odd prime and $\mathbb{F} \subset \mathbb{Q}(\zeta_p)$ be a subfield such that $[\mathbb{Q}(\zeta_p) : \mathbb{F}] = 2.$ Then,
+    \begin{equation*} 
+        \mathbb{F} = \mathbb{Q}(\zeta_p + \zeta_p^{-1}).
+    \end{equation*} \hfill\hyperref[prop:quadgeneratorcyclo2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{fixedfieldcyclosubgroup}
+\label{prop:fixedfieldcyclosubgroup}
+    Let $p > 2$ be a prime number. Let $H$ be a subgroup of $G \vcentcolon= \Gal(\mathbb{Q}(\zeta_p)/\mathbb{Q}).$ Define
+    \begin{equation*} 
+        \beta \vcentcolon= \sum_{\sigma \in H} \sigma(\zeta_p).
+    \end{equation*}
+    Then,
+    \begin{equation*} 
+        \mathbb{Q}(\zeta_p)^H = \mathbb{Q}(\beta_H).
+    \end{equation*} 
+    \hfill\hyperref[prop:fixedfieldcyclosubgroup2]{\downsym}
+\end{restatable}
+
+\begin{ex}
+    Let $p = 7$ and $\omega = \zeta_7.$ Then, $[\mathbb{Q}(\omega + \omega^{-1}) : \mathbb{Q}] = 3.$ Let us find the irreducible polynomial of $\omega + \omega^{-1}.$
+
+    Note that the degree of this is $3.$ Since this is also the separable degree, we see that $\omega + \omega^{-1}$ has an orbit of size $3$ under $G \vcentcolon= \Gal(\mathbb{Q}(\omega)/\mathbb{Q}).$
+
+    If $\{\beta_1, \beta_2, \beta_3\}$ is the orbit of $\omega$ under $G,$ then note that the polynomial
+    \begin{equation*} 
+        f(x) = (x - \beta_1) (x - \beta_2) (x - \beta_3)
+    \end{equation*}
+    is fixed by $G$ and hence, must be in $\mathbb{Q}[x].$ Since it is of the correct degree, it is the irreducible polynomial of $\omega + \omega^{-1}.$
+
+    Thus, we now find the orbit. Note that $G \cong (\mathbb{Z}/7\mathbb{Z})^\times.$ The latter is generated by $\bar{3}.$ Thus, consider the automorphism $\sigma \in G$ determined by $\sigma(\omega) = \omega^3.$ Then, $G = \langle \sigma\rangle.$
+
+    Now, we have
+    \begin{align*} 
+        \sigma(\omega + \omega^{-1}) &= \omega^3 + \omega^{-3} = \omega^3 + \omega^4 =\vcentcolon \beta_2\\
+        \sigma^2(\omega + \omega^{-1}) &= \omega^9 + \omega^{-9} = \omega^2 + \omega^5 =\vcentcolon \beta_3.
+    \end{align*}
+    Since the above elements are distinct from $\omega + \omega^{-1} =\vcentcolon \beta_1,$ we have the orbit as
+    \begin{equation*} 
+        \{\beta_1, \beta_2, \beta_3\}.
+    \end{equation*}
+    Thus, we have
+    \begin{equation*} 
+        \irr(\alpha, \mathbb{Q}) = \prod_{i = 1}^{3}(x - \beta_i) = x^3 + x^2 - 2x - 1.
+    \end{equation*}
+\end{ex}

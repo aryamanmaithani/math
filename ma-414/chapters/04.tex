@@ -207,7 +207,7 @@ Note that by \Cref{prop:multindepsplitting}, the $n$ also does not depend on cho
     Let $\mathbb{E}/\mathbb{F}$ be a finite extension. Then, $\mathbb{E}/\mathbb{F}$ is separable iff $[\mathbb{E} : \mathbb{F}]_s = [\mathbb{E} : \mathbb{F}].$ \hfill\hyperref[thm:sepiffdegequal2]{\downsym}
 \end{restatable}
 
-\begin{cor}
+\begin{cor} \label{cor:adjoiningsepissep}
     Let $\alpha \in \mathbb{E} \supset \mathbb{F}$ be separable over $\mathbb{F}.$ Then, $\mathbb{F}(\alpha)/\mathbb{F}$ is a separable extension.
 \end{cor}
 \begin{proof}
@@ -219,6 +219,13 @@ Note that by \Cref{prop:multindepsplitting}, the $n$ also does not depend on cho
     Let $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}$ be a tower of fields. Then,\\
     $\mathbb{K}/\mathbb{F}$ is separable iff $\mathbb{K}/\mathbb{E}$ and $\mathbb{E}/\mathbb{F}$ are separable. \hfill\hyperref[prop:compdecompsep2]{\downsym}
 \end{restatable}
+
+\begin{cor}
+    Let $f(x) \in \mathbb{F}[x]$ be a separable polynomial and $\mathbb{E} \supset \mathbb{F}$ be a splitting field of $f(x)$ over $\mathbb{F}.$ Then, $\mathbb{E}/\mathbb{F}$ is separable.
+\end{cor}
+\begin{proof}
+    Write $\mathbb{E} = \mathbb{F}(r_1, \ldots, r_n)$ where $f(x) = a(x - r_1) \cdots (x - r_n)$ and use the previous corollary and proposition repeatedly.
+\end{proof}
 
 \begin{restatable}[]{prop}{sepdegdividesdeg}
 \label{prop:sepdegdividesdeg}

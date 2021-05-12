@@ -1,4 +1,3 @@
-
 \chapter{Symmetric Polynomials}
 
 \begin{defn}%[]
@@ -110,6 +109,11 @@ Note that the last term is $(-1)^{k + 1} \sigma_k {\color{red}k}.$ One might hav
 
 \begin{rem} \label{rem:discrepeatedroots}
     Note that $\disc_{\mathbb{K}}(f(x)) = 0 \iff f(x)$ has repeated roots in $\mathbb{K}.$
+
+    Moreover, by construction, $\disc_{\mathbb{K}}(f(x))$ has a square root in $\mathbb{K},$ namely
+    \begin{equation*} 
+        \prod_{1 \le i < j \le n} (r_i - r_j) \in \mathbb{K}.
+    \end{equation*}
 \end{rem}
 
 \begin{restatable}[]{prop}{independencediscriminant}
@@ -158,7 +162,7 @@ In view of the (proof of the) above proposition, we have the following alternate
     This is the usual discriminant of a quadratic.
 \end{ex}
 
-\begin{ex}[Discriminant of a special cubic]
+\begin{ex}[Discriminant of a special cubic] \label{ex:disccubic}
     Let $x^3 + px + q \in \mathbb{F}[x]$ be a cubic. Here, $\sigma_1 = 0,$ $\sigma_2 = p,$ and $\sigma_3 = -q.$ Then, Newton's identities become
     \begin{align*} 
         w_1 &= 0,\\

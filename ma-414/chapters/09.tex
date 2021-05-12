@@ -1,0 +1,66 @@
+\chapter{Abelian and Cyclic extensions}
+
+\section{Inverse Galois Problem}
+The inverse Galois problem asks whether every finite group appears as the Galois group of some Galois extension of $\mathbb{Q}.$ This is currently unsolved. We prove this for finite abelian groups.
+
+\begin{defn}%[]
+	A Galois extension $\mathbb{E}/\mathbb{F}$ is called \deff{abelian} (resp., \deff{cyclic}) if $\Gal(\mathbb{E}/\mathbb{F})$ is abelian (resp., cyclic).
+\end{defn}
+
+\begin{restatable}[]{lem}{pequivonemodn}
+\label{lem:pequivonemodn}
+	Let $p$ be a prime number and $n$ be relatively prime to $n.$ Suppose $\bar{\Phi}_n(x)$ has a root in $\mathbb{F}_p.$ Then, $p \equiv 1 \pmod{n}.$ \hfill\hyperref[lem:pequivonemodn2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{thm}{infprimesmodone}
+\label{thm:infprimesmodone}
+	Let $n \in \mathbb{N}.$ Then, there are infinitely many primes $p$ such that $p \equiv 1 \pmod{n}.$ \hfill\hyperref[thm:infprimesmodone2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{thm}{fingroupQextension}
+\label{thm:fingroupQextension}
+	Let $G$ be a finite abelian group. Then, there exists an extension $\mathbb{K}/\mathbb{Q}$ such that $G \cong \Gal(\mathbb{K}/\mathbb{Q}).$ \hfill\hyperref[thm:fingroupQextension2]{\downsym}
+\end{restatable}
+
+In fact, there is a stronger version of the above theorem, which we do not prove.
+
+\begin{thm}[Kronecker–Weber]
+	Let $G$ be a finite abelian group. Then, there exists $n \in \mathbb{N}$ and a tower of fields
+	\begin{equation*} 
+		\mathbb{Q} \subset \mathbb{K} \subset \mathbb{Q}(\zeta_n)
+	\end{equation*}
+	such that $\Gal(\mathbb{K}/\mathbb{Q}) = n.$
+
+	In other words, every finite abelian Galois extension of $\mathbb{Q}$ is contained in a cyclotomic extension.
+\end{thm}
+
+\section{Cyclic Galois Extensions}
+\begin{defn}%[]
+	Let $G$ be a group and $\mathbb{K}$ a field. A \deff{character of $G$ in $\mathbb{K}$} is a homomorphism $\chi : G \to \mathbb{K}^\times.$
+\end{defn}
+
+\begin{rem}
+	Note that the set of all functions from $G$ to $\mathbb{K}$ is a vector space over $\mathbb{K}$ with point-wise operations. Thus, we can talk about linear independence of characters.
+\end{rem}
+
+\begin{restatable}[Dedekind]{thm}{dedekindcharacters}
+\label{thm:dedekindcharacters}
+	Let $\chi_1, \ldots, \chi_n : G \to \mathbb{K}^\times$ be distinct characters. Then, $\chi_1, \ldots, \chi_n$ are linearly independent. \hfill\hyperref[thm:dedekindcharacters2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{lem}{primeigenvalue}
+\label{lem:primeigenvalue}
+	Let $n \in \mathbb{N}$ and $\mathbb{F}$ be a field containing a primitive $n$-th root of unity $\zeta.$ Suppose that $\mathbb{E}/\mathbb{F}$ is a cyclic Galois extension of degree $n$ with $G \vcentcolon= \Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle.$ Then, $\zeta$ is an eigenvalue of the $\mathbb{F}$-linear map $\sigma.$ \hfill\hyperref[lem:primeigenvalue2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{thm}{cyclicextprimroot}
+\label{thm:cyclicextprimroot}
+	Let $\mathbb{E}/\mathbb{F}$ be a cyclic Galois extension of degree $n.$ Let $G \vcentcolon= \Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle$ and $\zeta \in \mathbb{F}$ be a primitive $n$-th root of unity. Then, there exists $a \in \mathbb{E}$ such that $\mathbb{E} = \mathbb{F}(a)$ and $a^n \in \mathbb{F}.$ \hfill\hyperref[thm:cyclicextprimroot2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{subfieldsofprimcyclic}
+\label{prop:subfieldsofprimcyclic}
+	Let $\mathbb{E}/\mathbb{F}$ be a cyclic Galois extension of degree $n$ where $\mathbb{F}$ has a primitive $n$-th root of unity. Let $\mathbb{E} = \mathbb{F}(a),$ where $a \in \mathbb{E}$ is such that $a^n \in \mathbb{F},$ in view of \Cref{thm:cyclicextprimroot}.
+
+	Then, the intermediate subfields of $\mathbb{E}/\mathbb{F}$ are $\mathbb{F}(a^d)$ where $d$ is a divisor of $n.$ \hfill\hyperref[prop:subfieldsofprimcyclic2]{\downsym}
+\end{restatable}
