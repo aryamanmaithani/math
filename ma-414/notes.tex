@@ -11,16 +11,63 @@
 \usetikzlibrary{decorations.markings}
 \usetikzlibrary{arrows.meta}
 
+\numberwithin{equation}{chapter}
 \theoremstyle{definition}
-\newtheorem{thm}{Theorem}
-\numberwithin{thm}{chapter}
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{defn}[thm]{Definition}
-\newtheorem{prop}[thm]{Proposition}
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{ex}[thm]{Example}
-\newtheorem{rem}[thm]{Remark}
 
+\newtheorem{fakethm}{Theorem}[chapter]
+\newtheorem{fakeprop}[fakethm]{Proposition}
+\newtheorem{fakelem}[fakethm]{Lemma}
+\newtheorem{fakecor}[fakethm]{Corollary}
+\newtheorem{fakerem}[fakethm]{Remark}
+
+\newtheorem{fakedefn}[fakethm]{Definition}
+\newtheorem{fakeex}[fakethm]{Example}
+\newtheorem{fakeexe}[fakethm]{Exercise}
+% \newtheorem*{conject}{Conjecture}
+
+% -------------------
+% Coloured theorem and other environments
+% -------------------
+\usepackage{framed}
+\newenvironment{thm}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakethm}}
+{\end{fakethm}\end{shaded}}
+
+\newenvironment{prop}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakeprop}}
+{\end{fakeprop}\end{shaded}}
+
+\newenvironment{lem}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakelem}}
+{\end{fakelem}\end{shaded}}
+
+\newenvironment{cor}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakecor}}
+{\end{fakecor}\end{shaded}}
+
+\newenvironment{rem}
+{\colorlet{shadecolor}{red!25}\begin{shaded}\begin{fakerem}}
+{\end{fakerem}\end{shaded}}
+
+\newenvironment{defn}
+{\colorlet{shadecolor}{green!15}\begin{shaded}\begin{fakedefn}}
+{\end{fakedefn}\end{shaded}}
+
+\newenvironment{exe}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeexe}}
+{\end{fakeexe}\end{shaded}}
+
+\newenvironment{ex}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeex}}
+{\end{fakeex}\end{shaded}}
+
+\newenvironment{disclaimer}
+{\begin{tcolorbox}[parbox=false, colback = red!30]\bfseries}
+{\end{tcolorbox}}
+
+\newenvironment{aside}
+{\begin{tcolorbox}[parbox=false]}
+{\end{tcolorbox}}
 
 \setlength\parindent{0pt}
 
@@ -36,13 +83,14 @@
 \usepackage{lipsum}
 
 \usepackage{cleveref}
-\crefname{thm}{theorem}{theorems}
-\crefname{lem}{lemma}{lemmas}
-\crefname{defn}{definition}{definitions}
-\crefname{prop}{proposition}{propositions}
-\crefname{cor}{corollary}{corollaries}
-\crefname{ex}{example}{examples}
-\crefname{rem}{remark}{remarks}
+\crefname{fakethm}{theorem}{theorems}
+\crefname{fakelem}{lemma}{lemmas}
+\crefname{fakedefn}{definition}{definitions}
+\crefname{fakeprop}{proposition}{propositions}
+\crefname{fakecor}{corollary}{corollaries}
+\crefname{fakeexe}{exercise}{exercises}
+\crefname{fakeex}{example}{examples}
+\crefname{fakerem}{remark}{remarks}
 \crefname{equation}{}{}
 
 \newcommand{\downsym}{[$\downarrow$]}
@@ -74,6 +122,10 @@
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\disc}{disc}
 \DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\G}{G}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\im}{im}
 
 \title{MA-414\\Galois Theory}
 \author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
@@ -88,96 +140,10 @@
 \input{chapters/02}
 \input{chapters/03}
 \input{chapters/04}
-
-\section{Finite fields}
-
-\section{Existence and Uniqueness}
-
-In this section, $p$ will denote an arbitrary prime number.
-
-\begin{restatable}[Uniqueness of finite fields]{thm}{uniquefinfields}
-\label{thm:uniquefinfields}
-    Let $\mathbb{K}$ and $\mathbb{L}$ be finite fields with same cardinality. Then, $\mathbb{K}$ and $\mathbb{L}$ are isomorphic. \hfill\hyperref[thm:uniquefinfields2]{\downsym}
-\end{restatable}
-
-\begin{defn}%[]
-    We shall denote the finite with $p^n$ elements by $\mathbb{F}_{p^n}.$
-\end{defn}
-
-\begin{rem}
-    We have not yet shown that $\mathbb{F}_{p^n}$ for every prime $p$ and $n \in \mathbb{N}.$ Have only shown uniqueness up to isomorphism.
-\end{rem}
-
-\begin{restatable}[Existence of finite fields]{thm}{existencefinfields}
-\label{thm:existencefinfields}
-    Fix a prime $p$ and an algebraic closure $\overline{\mathbb{F}}_p.$ For every $n \in \mathbb{N},$ there exists a unique subfield of $\overline{\mathbb{F}}_p$ of size $p^n,$ denoted $\mathbb{F}_{p^n}.$ Moreover
-    \begin{equation*} 
-        \overline{\mathbb{F}}_p = \bigcup_{n \in \mathbb{N}} \mathbb{F}_{p^n}.
-    \end{equation*}
-    \hfill\hyperref[thm:existencefinfields2]{\downsym}
-\end{restatable}
-
-\section{Gauss' Necklace Formula}
-
-Recall the M\"obius inversion formula.
-
-\begin{defn}%[]
-    The \deff{M\"obius function} $\mu : \mathbb{N} \to \mathbb{N}$ is defined as
-    \begin{equation*} 
-        \mu(n) \vcentcolon= \begin{cases}
-            1 & n = 1,\\
-            (-1)^r & n \text{ is a product of }r \text{ distinct primes},\\
-            0 & p^2 \mid n \text{ for some prime }p.
-        \end{cases}
-    \end{equation*}
-\end{defn}
-
-\begin{thm}[M\"obius inversion formula]
-    Let $f, g : \mathbb{N} \to \mathbb{N}$ be functions satisfying
-    \begin{equation*} 
-        f(n) = \sum_{d \mid n} g(d).
-    \end{equation*}
-    Then, they also satisfy
-    \begin{equation*} 
-        g(n) = \sum_{d \mid n} f\left(\frac{n}{d}\right)\mu(d).
-    \end{equation*}
-\end{thm}
-
-\begin{restatable}[Gauss]{thm}{gaussnecklace}
-\label{thm:gaussnecklace}
-    The number of irreducible polynomials of degree $n$ over $\mathbb{F}_{q}$ is given by
-    \begin{equation*} 
-        N_q(n) = \frac{1}{n}\sum_{d \mid n} \mu(d)q^{n/d}.
-    \end{equation*} \hfill\hyperref[thm:gaussnecklace2]{\downsym}
-\end{restatable}
-
-\gaussnecklace*\label{thm:gaussnecklace2}
-\begin{flushright}\hyperref[thm:gaussnecklace]{\upsym}\end{flushright}
-\begin{proof}
-    
-\end{proof}
-
+\input{chapters/05}
+\input{chapters/06}
+\input{chapters/07}
+\input{chapters/08}
+\input{chapters/09}
 \input{proofs}
-
-\uniquefinfields*\label{thm:uniquefinfields2}
-\begin{flushright}\hyperref[thm:uniquefinfields]{\upsym}\end{flushright}
-\begin{proof}
-    Let $q \vcentcolon= \md{\mathbb{K}}$ and $p \vcentcolon= \chr(\mathbb{K}).$ Then, $q = p^n$ for some $n \in \mathbb{N}.$ Note that $\mathbb{K}^\times$ is a group of order $q - 1.$ By Lagrange's theorem, we have $a^{q - 1} = 1$ for all $a \in \mathbb{K}^\times.$ In turn, we get $a^q - a = 0$ for \emph{all} $a \in \mathbb{K}.$
-
-    Hence, $\mathbb{K}$ is a splitting field of $x^q - x$ over $\mathbb{F}_p$ and so is $\mathbb{L}.$ By \Cref{thm:isosplitting}, $\mathbb{K}$ and $\mathbb{L}$ are isomorphic.
-\end{proof}
-
-\existencefinfields*\label{thm:existencefinfields2}
-\begin{flushright}\hyperref[thm:existencefinfields]{\upsym}\end{flushright}
-\begin{proof}
-    Fix $n \in \mathbb{N}$ and let $q = p^n.$ $\overline{\mathbb{F}}_p$ contains a unique splitting field of $x^q - x =\vcentcolon f(x)$ over $\mathbb{F}_p.$ We show that this splitting field has $q$ elements. Consider
-    \begin{equation*} 
-        \mathbb{K} = \{\alpha \in \overline{\mathbb{F}}_p \mid f(\alpha) = 0\}.
-    \end{equation*}
-    Then, $\md{\mathbb{K}} = q$ since $f(x)$ is separable, by \Cref{thm:derivcritsep}. 
-
-    Thus, $\mathbb{K}$ is the desired splitting field. Conversely any other field with $q$ elements would be the set of roots of $x^q - x$ and hence, we have uniqueness.
-
-    We now show that $\overline{\mathbb{F}}_p = \bigcup_{k \ge 1}\mathbb{F}_{p^k}.$ Let $\alpha \in \overline{\mathbb{F}}_p$ and let $d \vcentcolon= \deg_{\mathbb{F}}(\alpha).$ Then, $[\mathbb{F}(\alpha) : \mathbb{F}] = d$ and hence, $\alpha \in \mathbb{F}(\alpha) = \mathbb{F}_{p^d}.$
-\end{proof}
 \end{document}
