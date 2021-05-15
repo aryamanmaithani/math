@@ -1,0 +1,18 @@
+\chapter{Normal Closure of an Algebraic Extension}
+
+\begin{defn}%[]
+	\label{defn:normalclosure}
+	Let $\mathbb{E}/\mathbb{F}$ be an algebraic extension and $\mathbb{E} \subset \overline{\mathbb{F}}.$ The \deff{normal closure of $\mathbb{E}/\mathbb{F}$ in $\overline{\mathbb{F}}$} is the splitting field $\mathbb{K}$ over $\mathbb{F}$ of the polynomials $\{\irr(\alpha, \mathbb{F}) \mid \alpha \in \mathbb{E}\}.$
+\end{defn}
+
+\begin{restatable}[]{prop}{normalclosureproperties}
+\label{prop:normalclosureproperties}
+	Let the notations be as in \Cref{defn:normalclosure}. The following are true.
+	\begin{enumerate}
+	 	\item $\mathbb{K}$ is a normal extension of $\mathbb{F}$ containing $\mathbb{E}.$
+	 	\item Any such normal extension $\mathbb{K}' \subset \overline{\mathbb{F}}$ as above contains $\mathbb{K}.$
+	 	\item If $\mathbb{E}/\mathbb{F}$ is a finite extension, then so is $\mathbb{K}/\mathbb{F}.$
+	 	\item If $\mathbb{E}/\mathbb{F}$ is separable, then $\mathbb{K}/\mathbb{F}$ is Galois.
+	 	\item Suppose $\mathbb{E}/\mathbb{F}$ is separable and not normal. Suppose $H \le \Gal(\mathbb{K}/\mathbb{E}) \le \Gal(\mathbb{K}/\mathbb{F}) =\vcentcolon G$ is normal in $G.$ Then, $H = 1.$ \hfill\hyperref[prop:normalclosureproperties2]{\downsym}
+	 \end{enumerate} 
+\end{restatable}

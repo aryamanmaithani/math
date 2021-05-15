@@ -1,4 +1,5 @@
 \chapter{Proofs}
+\section{Algebraic extensions}
 
 \finextisalg*\label{prop:finextisalg2}
 \begin{flushright}\hyperref[prop:finextisalg]{\upsym}\end{flushright}
@@ -180,6 +181,7 @@
     Then, $\mathbb{K} = \mathbb{F}(a_1, \ldots, a_n) \subset \mathbb{F}_n$ is a splitting field.
 \end{proof}
 
+\section{Symmetric Polynomials}
 \FTSP*\label{thm:FTSP2}
 \begin{flushright}\hyperref[thm:FTSP]{\upsym}\end{flushright}
 \begin{proof}
@@ -371,7 +373,7 @@
     Thus, $\alpha_a \in \mathbb{C}.$ But $\alpha_a$ was a root of $f(x),$ as desired.
 \end{proof}
 
-
+\section{Algebraic Closure of a Field}
 \alglcosureinalgclosedisclosed*\label{prop:alglcosureinalgclosedisclosed2}
 \begin{flushright}\hyperref[prop:alglcosureinalgclosedisclosed]{\upsym}\end{flushright}
 \begin{proof}
@@ -476,7 +478,7 @@
     Note that we have $\mathbb{E}' = \mathbb{F}(\alpha_1, \ldots, \alpha_n)$ and so, $\tau(\mathbb{E}') = \mathbb{F}(\tau(\alpha_1), \ldots, \tau(\alpha_n)).$ Thus, $\tau(\mathbb{E}')$ is a splitting field of $f^{\tau}.$ But $f^{\tau} = f$ since $f(x) \in \mathbb{F}[x]$ and $\tau$ extends the inclusion map. Thus, $\tau(\mathbb{E}') = \mathbb{E},$ since any algebraic closure contains a unique splitting field.
 \end{proof}
 
-
+\section{Separable extensions}
 \multindepsplitting*\label{prop:multindepsplitting2}
 \begin{flushright}\hyperref[prop:multindepsplitting]{\upsym}\end{flushright}
 \begin{proof}
@@ -706,4 +708,1206 @@
     where $\alpha_2, \ldots, \alpha_g \in \overline{\mathbb{F}}\setminus\{\alpha\}$ are distinct. Note that we have $gp^n = d.$ By \Cref{prop:rootsandextensions}, we know that $[\mathbb{F}(\alpha) : \mathbb{F}]_s = g.$ Thus, the statement is true.
 
     For a general finite extension $\mathbb{E}/\mathbb{F},$ write $\mathbb{E} = \mathbb{F}(\beta_1, \ldots, \beta_k)$ and use the fact that degrees are multiplicative.
+\end{proof}
+
+\section{Finite fields}
+\uniquefinfields*\label{thm:uniquefinfields2}
+\begin{flushright}\hyperref[thm:uniquefinfields]{\upsym}\end{flushright}
+\begin{proof}
+    Let $q \vcentcolon= \md{\mathbb{K}}$ and $p \vcentcolon= \chr(\mathbb{K}).$ Then, $q = p^n$ for some $n \in \mathbb{N}.$ Note that $\mathbb{K}^\times$ is a group of order $q - 1.$ By Lagrange's theorem, we have $a^{q - 1} = 1$ for all $a \in \mathbb{K}^\times.$ In turn, we get $a^q - a = 0$ for \emph{all} $a \in \mathbb{K}.$
+
+    Hence, $\mathbb{K}$ is a splitting field of $x^q - x$ over $\mathbb{F}_p$ and so is $\mathbb{L}.$ By \Cref{thm:isosplitting}, $\mathbb{K}$ and $\mathbb{L}$ are isomorphic.
+\end{proof}
+
+\existencefinfields*\label{thm:existencefinfields2}
+\begin{flushright}\hyperref[thm:existencefinfields]{\upsym}\end{flushright}
+\begin{proof}
+    Fix $n \in \mathbb{N}$ and let $q = p^n.$ $\overline{\mathbb{F}}_p$ contains a unique splitting field of $x^q - x =\vcentcolon f(x)$ over $\mathbb{F}_p.$ We show that this splitting field has $q$ elements. Consider
+    \begin{equation*} 
+        \mathbb{K} = \{\alpha \in \overline{\mathbb{F}}_p \mid f(\alpha) = 0\}.
+    \end{equation*}
+    Then, $\md{\mathbb{K}} = q$ since $f(x)$ is separable, by \Cref{thm:derivcritsep}. 
+
+    Thus, $\mathbb{K}$ is the desired splitting field. Conversely any other field with $q$ elements would be the set of roots of $x^q - x$ and hence, we have uniqueness.
+
+    We now show that $\overline{\mathbb{F}}_p = \bigcup_{k \ge 1}\mathbb{F}_{p^k}.$ Let $\alpha \in \overline{\mathbb{F}}_p$ and let $d \vcentcolon= \deg_{\mathbb{F}}(\alpha).$ Then, $[\mathbb{F}(\alpha) : \mathbb{F}] = d$ and hence, $\alpha \in \mathbb{F}(\alpha) = \mathbb{F}_{p^d}.$
+\end{proof}
+
+
+\xfourplusone*\label{prop:xfourplusone2}
+\begin{flushright}\hyperref[prop:xfourplusone]{\upsym}\end{flushright}
+\begin{proof}
+    For irreducibility over $\mathbb{Z}[x],$ note that
+    \begin{equation*} 
+        f(x + 1) = x^4 + 4x^3 + 6x^2 + 4x + 2
+    \end{equation*}
+    is Eisenstein at the prime $2.$
+
+    Now, let $p$ be a prime. If $p = 2,$ the we have $x^4 + 1 = (x + 1)^4.$ Let $p > 2$ be an odd prime. Then, $p^2 \equiv 1 \pmod{8}.$ Hence, we have
+    \begin{equation*} 
+        x^4 + 1 \mid x^8 - 1 \mid x^{p^2 - 1} \mid x^{p^2} - x.
+    \end{equation*}
+    For the sake of contradiction, assume that $x^4 + 1$ is irreducible and let $\alpha \in \overline{\mathbb{F}}_p$ be a root. Then, $[\mathbb{F}_p(\alpha) : \mathbb{F}] = \deg(x^4 + 1) = 4.$
+
+    But $\alpha$ is clearly contained the splitting of $x^{p^2} - x$ over $\mathbb{F}_p,$ which is $\mathbb{F}_{p^2} \subset \overline{\mathbb{F}}_p$ and so, is contained in a degree $2$ extension. This is a contradiction.
+\end{proof}
+
+\xdxxnxdiv*\label{lem:xdxxnxdiv2}
+\begin{flushright}\hyperref[lem:xdxxnxdiv]{\upsym}\end{flushright}
+\begin{proof}
+    Fix an algebraic closure $\overline{\mathbb{F}}_q.$ Since $f(x) \vcentcolon= x^{q^m} - x$ is separable, it suffices to show that every root of $f(x)$ is also a root of $x^{q^n} - x =\vcentcolon g(x).$ (Recall \Cref{prop:divisibilityofpoly}.)
+
+    To this end, let $\alpha$ be a root of $f(x).$ We have 
+    \begin{equation*} 
+        \alpha^{q^m} = \alpha.
+    \end{equation*}
+    Now raise both sides to the power $q^m$ to obtain 
+    \begin{equation*} 
+        \alpha^{q^{2m}} = \alpha^{q^m} = \alpha.
+    \end{equation*}
+    Continue repeatedly to get 
+    \begin{equation*} 
+        \alpha^{q^{km}} = \alpha
+    \end{equation*}
+    for all $k \in \mathbb{N}.$ In particular, for $k = a = n/m,$ the above is true. This gives us that $g(\alpha) = 0,$ as desired.
+\end{proof}
+
+\irreddivsplitpoly*\label{lem:irreddivsplitpoly2}
+\begin{flushright}\hyperref[lem:irreddivsplitpoly]{\upsym}\end{flushright}
+\begin{proof}
+    \forward Suppose $f(x) \mid x^{q^n} - x.$ Then, $\mathbb{F}_{q^n}$ contains all the roots of $f(x).$ Let $\alpha \in \mathbb{F}_{q^n}$ be a root of $f(x).$ Thus, $\alpha \in \mathbb{F}_{q^n}.$ Considering the tower $\mathbb{F}_q \subset \mathbb{F}_q(\alpha) \subset \mathbb{F}_{q^n}$ shows that $\deg(f(x)) = [\mathbb{F}_q(\alpha) : \mathbb{F}_q]$ divides $[\mathbb{F}_{q^n} : \mathbb{F}_q] = n.$
+
+    \backward Let $d \vcentcolon= \deg(f(x)) \mid n.$ Fix an algebraic closure $\overline{\mathbb{F}}_q$ of $\mathbb{F}_q.$ We show that every root of $f(x)$ in $\overline{\mathbb{F}}_q$ satisfies $x^{q^d} - x.$ Since this divides $x^{q^n} - x,$ we would be done.
+
+    Let $\alpha \in \overline{\mathbb{F}}_q$ be a root of $f(x).$ Then, $[\mathbb{F}(\alpha) : \mathbb{F}] = d$ and thus, by \Cref{thm:existencefinfields}, we have that
+    \begin{equation*} 
+        \mathbb{F}(\alpha) = \mathbb{F}_{q^d} = \{\beta^{q^d} - \beta = 0 \mid \beta \in \overline{\mathbb{F}}_q\}.
+    \end{equation*}
+    (Note that any algebraic closure $\overline{\mathbb{F}}_q$ is also an algebraic closure of $\mathbb{F}_p \subset \mathbb{F}_q.$)
+
+    Thus, $\alpha$ satisfies $x^{q^d} - x,$ as desired.
+\end{proof}
+
+\gaussnecklace*\label{thm:gaussnecklace2}
+\begin{flushright}\hyperref[thm:gaussnecklace]{\upsym}\end{flushright}
+\begin{proof}
+    Note that $x^{q^n} - x$ is a separable polynomial. By \Cref{lem:irreddivsplitpoly}, we see that
+    \begin{equation*} 
+        x^{q^n} - x = \prod_{d \mid n} f_1^{(d)}(x) \cdots f_{N_q(d)}^{(d)}(x),
+    \end{equation*}
+    where $f_1^{(d)}(x), \ldots, f_{N_q(d)}^{(d)}(x)$ are all the irreducible monic polynomials of degree $d.$ 
+
+    Equating the degrees of both sides gives
+    \begin{equation*} 
+        q^n = \sum_{d \mid n} d{N_q(d)}.
+    \end{equation*}
+    Thus, defining $f(n) \vcentcolon= q^n$ and $g(n) \vcentcolon= nN_q(n),$ we use \nameref{thm:mobiusinv} to conclude that
+    \begin{equation*} 
+        nN_q(n) = \sum_{d \mid n} \mu(d)q^{n/d}. \qedhere
+    \end{equation*}
+\end{proof}
+
+\pet*\label{thm:pet2}
+\begin{flushright}\hyperref[thm:pet]{\upsym}\end{flushright}
+\begin{proof}
+    If $\mathbb{F}$ is a finite, then $\mathbb{K}$ is also finite and hence, $\mathbb{K}^\times$ is cyclic by \Cref{thm:finsubgroupcyclic}. A generator of $\mathbb{K}^\times$ is clearly a primitive element of $\mathbb{K}$ over $\mathbb{F}.$ Clearly, there are only finitely many intermediate subfields as well. 
+
+    Thus, we may assume that $\mathbb{F}$ is infinite.
+    \begin{enumerate}
+        \item \forward Let $\mathbb{K} = \mathbb{F}(\alpha)$ for some $\alpha \in \mathbb{K}$ and let $f(x) \vcentcolon= \irr(\alpha, \mathbb{F}).$ Let $\mathbb{E}$ be an intermediate subfield. 
+
+        Let $h_{\mathbb{E}}(x) \vcentcolon= \irr(\alpha, \mathbb{E}).$ Then, $h_{\mathbb{E}}(x) \mid f(x)$ for all intermediate subfields $\mathbb{E}.$
+
+        Now, let $\mathbb{E}_0 \subset \mathbb{E}$ be the field obtained by adjoining the coefficients of $h(x)$ to $\mathbb{F}.$ Then, $\irr(\alpha, \mathbb{E}) = \irr(\alpha, \mathbb{E}_{0}).$ Note that we also have $\mathbb{K} = \mathbb{E}(\alpha) = \mathbb{E}_0(\alpha).$ Thus, we get that
+        \begin{equation*} 
+            [\mathbb{K} : \mathbb{E}] = \deg(\irr(\alpha, \mathbb{E})) = \deg(\irr(\alpha, \mathbb{E}_0)) = [\mathbb{K} : \mathbb{E}_0]
+        \end{equation*}
+        and hence, $\mathbb{E} = \mathbb{E}_0.$
+
+        This shows that if $\mathbb{E}$ and $\mathbb{E}'$ are intermediate fields with $h_{\mathbb{E}} = h_{\mathbb{E}'},$ then $\mathbb{E} = \mathbb{E}'.$ Since $f(x)$ only has finitely many monic divisors, there are only finitely many intermediate subfields.
+
+        \backward Suppose $\mathbb{K}/\mathbb{F}$ has finitely many intermediate subfields. Write $\mathbb{K} = \mathbb{F}(\alpha_1, \ldots, \alpha_n).$
+
+        Assume that $n = 2.$ We show that $\mathbb{K}/\mathbb{F}$ has a primitive element. The general case then follows inductively. \\
+        Thus, we have $\mathbb{K} = \mathbb{F}(\alpha_1, \alpha_2).$ 
+
+        For each $c \in \mathbb{F},$ we have the subfield $\mathbb{F}(\alpha_1 + c\alpha_2).$ Since $\mathbb{F}$ is finite and there are only finitely many intermediate subfields, there exist $c \neq d \in \mathbb{F}$ such that 
+        \begin{equation*} 
+            \mathbb{F}(\alpha_1 + c\alpha_2) = \mathbb{F}(\alpha_1 + d\alpha_2) =\vcentcolon \mathbb{L}.
+        \end{equation*} 
+        We show that $\mathbb{L} = \mathbb{K}.$ (Note that $\mathbb{L}$ is primitive over $\mathbb{F}.$)
+
+        By the above, we see that $(c - d)\alpha_2 \in \mathbb{L}$ and hence, $\alpha_2 \in \mathbb{L}.$ In turn, $\alpha_1 \in \mathbb{L}.$ Thus,
+        \begin{equation*} 
+            \mathbb{L} \subset \mathbb{K} = \mathbb{F}(\alpha_1, \alpha_2) \subset \mathbb{L}
+        \end{equation*}
+        and hence, we have equality.
+        %
+        %
+        %
+        \item Now, assume that $\mathbb{K}/\mathbb{F}$ is a finite separable extension. By the same inductive argument as earlier, it is sufficient to prove the existence of a primitive element when $\mathbb{K} = \mathbb{F}(\alpha, \beta)$ for some $\alpha, \beta \in \mathbb{K}.$ Fix an algebraic closure $\overline{\mathbb{F}}$ of $\mathbb{F}.$
+
+        As earlier, we show that there exists $c \in \mathbb{F}$ such that
+        \begin{equation} \label{eq:003} \tag{$*$}
+            \mathbb{K} = \mathbb{F}(\alpha + c\beta).
+        \end{equation}
+
+        We now seek a condition on $c$ that implies \Cref{eq:003}. Let $n \vcentcolon= [\mathbb{K} : \mathbb{F}] = [\mathbb{K} : \mathbb{F}]_s.$ (Equality by \Cref{thm:sepiffdegequal}.) \\
+        Then, by definition of separable degree, there exist $n$ embeddings $\sigma_1, \ldots, \sigma_n : \mathbb{K} \to \overline{\mathbb{F}}$ extending the natural inclusion. 
+
+        Now, if $c \in \mathbb{F}$ is such that the \deff{conjugates} $\sigma_i(\alpha + c\beta)$ are distinct for $i = 1, \ldots, n,$ then this means that 
+        \begin{equation*} 
+            n = [\mathbb{K} : \mathbb{F}]_s \ge [\mathbb{F}(\alpha + c\beta) : \mathbb{F}]_s \ge n = [\mathbb{K} : \mathbb{F}]
+        \end{equation*}
+        and thus, \Cref{eq:003} holds.
+
+        Note that $\sigma_i(\alpha + c\beta) = \sigma_i(\alpha) + c\sigma_i(\beta)$ since $c \in \mathbb{F}.$ Consider the polynomial
+        \begin{equation*} 
+            f(x) \vcentcolon= \prod_{1 \le i < j \le n}\left[(\sigma_i(\alpha) - \sigma_j(\alpha)) + x(\sigma_i(\beta) - \sigma_j(\beta))\right] \in \mathbb{K}[x].
+        \end{equation*}
+
+        Thus, the conjugates of $c$ are distinct iff $f(c) \neq 0.$ Since $f(x)$ is not the zero polynomial and $\mathbb{F}$ is infinite, there exists $c \in \mathbb{F}$ such that $f(c) \neq 0$ and thus, we are done.
+    \end{enumerate}
+\end{proof}
+
+\section{Normal extensions}
+
+\seppolysplittingfields*\label{prop:seppolysplittingfields2}
+\begin{flushright}\hyperref[prop:seppolysplittingfields]{\upsym}\end{flushright}
+\begin{proof}
+    Let $a \in \mathbb{E} = \mathbb{F}(A)$ where $A$ is as in \Cref{rem:splitfamilyexists}. By \Cref{cor:FAdescfinite}, there is a finite set $\{a_1, \ldots, a_n\} \subset A$ such that $a \in \mathbb{F}(a_1, \ldots, a_n).$ Since each $a_i$ is a root of a separable, it is separable. By applying \Cref{cor:adjoiningsepissep} (repeatedly), we see that $\mathbb{F}(a_1, \ldots, a_n)/\mathbb{F}$ is a separable extension and thus, $a$ is separable over $\mathbb{F}.$
+\end{proof}
+
+\algebraicautomorphism*\label{lem:algebraicautomorphism2}
+\begin{flushright}\hyperref[lem:algebraicautomorphism]{\upsym}\end{flushright}
+\begin{proof}
+    We only need to prove that $\sigma$ is onto. Let $\alpha \in \mathbb{E}$ be arbitrary. Put $p(x) \vcentcolon= \irr(\alpha, \mathbb{F}).$ Let $\mathbb{K} \subset \mathbb{E}$ be the subfield generated by the roots of $p(x)$ in $\mathbb{E}.$ Then, $\mathbb{K}$ is a finite dimensional vector space over $\mathbb{F}$ and $\alpha \in \mathbb{K}.$ Since $\sigma$ is an $\mathbb{F}$-embedding, it maps roots of $p(x)$ to roots of $p(x).$ Thus, $\sigma(\mathbb{K}) \subset \mathbb{K}.$
+
+    But $\sigma$ is an $\mathbb{F}$-linear map and $\mathbb{K}$ is a finite dimensional $\mathbb{F}$-vector space. Thus, $\sigma|_{\mathbb{K}}$ is onto and contains $\alpha$ in its image.
+\end{proof}
+
+\normalequivalent*\label{thm:normalequivalent2}
+\begin{flushright}\hyperref[thm:normalequivalent]{\upsym}\end{flushright}
+\begin{proof}
+    \ref{item:001} $\Rightarrow$ \ref{item:002}: Let $a \in E$ and $p_a(x) = \irr(a, \mathbb{F}).$ If $b \in \overline{\mathbb{F}}$ is a root of $p_a(x),$ then there exists an $\mathbb{F}$-isomorphism $\mathbb{F}(a) \to \overline{\mathbb{F}}$ with $a \mapsto b.$ Extend this to a map $\sigma : \mathbb{E} \to \overline{\mathbb{F}}.$ By hypothesis, we have $\mathbb{E} = \sigma(\mathbb{E}) \ni b.$ Thus, $\mathbb{E}$ is a splitting field of the family $\{p_a(x)\}_{a \in E}.$
+
+    \ref{item:002} $\Rightarrow$ \ref{item:003}: Let $\mathbb{E}$ be a spitting field of $\{p_i(x)\}_{i \in I} \subset \mathbb{F}[x]$ over $\mathbb{F}.$ Let $f(x) \in \mathbb{F}[x]$ be an irreducible polynomial having a root $a \in \mathbb{E}.$ Let $b \in \overline{\mathbb{F}}$ be any root of $f(x).$ There exists an $\mathbb{F}$-embedding $\mathbb{F}(a) \to \overline{\mathbb{F}}$ with $a \mapsto b.$ Extend this to an $\mathbb{F}$-embedding $\sigma : \mathbb{E} \to \overline{\mathbb{F}}.$ Since $\sigma$ fixes $\mathbb{F},$ it maps roots of $p_i(x)$ to its roots for all $i \in I.$ Since $\mathbb{E}$ is generated by these roots, we see that $\sigma(\mathbb{E}) \subset \mathbb{E}$ and hence, $b \in \mathbb{E}.$
+
+    \ref{item:003} $\Rightarrow$ \ref{item:001}: Let $\sigma : \mathbb{E} \to \overline{\mathbb{F}}$ be an $\mathbb{F}$-embedding. Let $a \in \mathbb{E}.$ Then, $p(x) \vcentcolon= \irr(\alpha, \mathbb{F})$ splits into linear factors in $\mathbb{E}.$ Since $\sigma(a)$ is a root of $p(x),$ we have $\sigma(a) \in \mathbb{E}.$ Thus, $\sigma(E) \subset E.$ By \Cref{lem:algebraicautomorphism}, we have that $\sigma$ is an automorphism. (Note that $\mathbb{E}/\mathbb{F}$ is indeed algebraic since $\mathbb{E} \subset \overline{\mathbb{F}}.$)
+\end{proof}
+
+\operationsonnormalexts*\label{prop:operationsonnormalexts2}
+\begin{flushright}\hyperref[prop:operationsonnormalexts]{\upsym}\end{flushright}
+\begin{proof}
+    Fix an algebraic closure $\overline{\mathbb{F}} \supset \mathbb{K}.$
+
+    Let $\sigma : \mathbb{E}_1\mathbb{E}_2 \to \overline{\mathbb{F}}$ be an $\mathbb{F}$-embedding. Then, $\sigma(\mathbb{E}_1\mathbb{E}_2) = \sigma(\mathbb{E}_1)\sigma(\mathbb{E}_2) = \mathbb{E}_1\mathbb{E}_2.$ Since this is true for all $\mathbb{F}$-embeddings, $\mathbb{E}_1\mathbb{E}_2/\mathbb{F}$ is normal, by \Cref{thm:normalequivalent}.
+
+    Similar calculation shows the same for intersection as well.
+\end{proof}
+
+\section{Galois Extensions}
+\orderofgalgroup*\label{prop:orderofgalgroup2}
+\begin{flushright}\hyperref[prop:orderofgalgroup]{\upsym}\end{flushright}
+\begin{proof}
+    Fix an algebraic closure $\overline{\mathbb{F}} \supset \mathbb{E}.$ 
+
+    Let $n \vcentcolon= [\mathbb{E} : \mathbb{F}]_s.$ Let $\sigma_1, \ldots, \sigma_n : \mathbb{E} \to \overline{\mathbb{F}}$ be $\mathbb{F}$-embeddings. Then, normality of $\mathbb{E}/\mathbb{F}$ implies that $\sigma_i \in \Gal(\mathbb{E}/\mathbb{F}).$ Thus, $\md{\Gal(\mathbb{E}/\mathbb{F})} \ge n.$
+
+    On the other hand, if $\sigma \in \Gal(\mathbb{E}/\mathbb{F}),$ then $\sigma$ is an $\mathbb{F}$-embedding of $\mathbb{E}$ into $\overline{\mathbb{F}}$ upon composition by the inclusion. Thus, $\Gal(\mathbb{E}/\mathbb{F}) = \{\sigma_1, \ldots, \sigma_n\}.$
+\end{proof}
+
+\frobgenerates*\label{prop:frobgenerates2}
+\begin{flushright}\hyperref[prop:frobgenerates]{\upsym}\end{flushright}
+\begin{proof}
+    Note that $\varphi$ does indeed fix $\mathbb{F}_q$ since any $a \in \mathbb{F}_q$ satisfies $x^q - x$ and thus, $\varphi \in \Gal(\mathbb{F}_{q^n}/\mathbb{F}_q).$
+
+    By \Cref{prop:orderofgalgroup}, we know that $\md{\Gal(\mathbb{F}_{q^n}/\mathbb{F}_q)} = n.$ Thus, it suffices to show that $\varphi$ has order no less than $n.$ Let order of $\varphi$ be $d \le n.$ Note that
+    \begin{equation*} 
+        \varphi^d(a) = a^{q^d}.
+    \end{equation*}
+    Thus, if $\varphi^d = \id_{\mathbb{F}_{q^n}},$ then every element of $\mathbb{F}_{q^n}$ satisfies $x^{q^d} - x.$ Thus, the degree is at least $q^n.$ Thus, $q^d \ge q^n$ or $d \ge n.$
+\end{proof}
+
+\fixfieldinjectiveIG*\label{thm:fixfieldinjectiveIG2}
+\begin{flushright}\hyperref[thm:fixfieldinjectiveIG]{\upsym}\end{flushright}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Clearly, $\mathbb{F} \subset \mathbb{K}^G,$ by definition of the Galois group. Only the reverse inclusion needs to be shown.
+
+        Let $a \in \mathbb{K}^G.$ Then, $a$ is separable over $\mathbb{F}$ and hence, $[\mathbb{F}(a) : \mathbb{F}]_s = [\mathbb{F}(a) : \mathbb{F}],$ by \Cref{cor:adjoiningsepissep} and \Cref{thm:sepiffdegequal}.
+
+        Thus, if $a \notin \mathbb{F},$ then $[\mathbb{F}(a) : \mathbb{F}] > 1$ and so, there is one non-identity embedding $\mathbb{F}(a) \to \mathbb{K},$ which would necessarily move $a.$ Thus, we must have $a \in \mathbb{F}.$
+        %
+        \item The fact that $\mathbb{K}/\mathbb{E}$ is separable follows from \Cref{prop:compdecompsep} and that it is normal follows from \Cref{prop:decompnormal}. Thus, $\mathbb{K}/\mathbb{E}$ is Galois.
+
+        Now, if $\mathbb{E}, \mathbb{E}' \in \mathcal{I}$ are such that 
+        \begin{equation*} 
+            H \vcentcolon= \Gal(\mathbb{K}/\mathbb{E}) = \Gal(\mathbb{K}/\mathbb{E}') =\vcentcolon H',
+        \end{equation*}
+        then the first part gives
+        \begin{equation*} 
+            \mathbb{E} = \mathbb{K}^H = \mathbb{K}^{H'} = \mathbb{E}'
+        \end{equation*}
+        and thus, the map is an injection.
+    \end{enumerate}
+\end{proof}
+
+\degboundedbyn*\label{lem:degboundedbyn2}
+\begin{flushright}\hyperref[lem:degboundedbyn]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\beta \in \mathbb{E}$ be such that $[\mathbb{F}(\beta) : \mathbb{F}]$ is maximal. Note that $[\mathbb{F}(\beta) : \mathbb{F}] \le n,$ by hypothesis. It suffices to show that $\mathbb{E} = \mathbb{F}(\beta).$
+
+    Suppose that $\mathbb{E} \neq \mathbb{F}(\beta).$ Then, pick $\alpha \in \mathbb{E} \setminus \mathbb{F}(\beta).$ Then, $\mathbb{F}(\alpha, \beta)$ is a separable extension and thus, there exists $\eta \in \mathbb{F}(\alpha, \beta) \subset \mathbb{E}$ such that $\mathbb{F}(\alpha, \beta) = \mathbb{F}(\eta),$ by the \nameref{thm:pet}.
+
+    But this is a contradiction since $\mathbb{F}(\beta) \subsetneq \mathbb{F}(\alpha, \beta) = \mathbb{F}(\eta)$ implies that $[\mathbb{F}(\eta) : \mathbb{F}] > [\mathbb{F}(\beta) : \mathbb{F}],$ contradicting the maximality of $\beta.$
+\end{proof}
+
+\artin*\label{thm:artin2}
+\begin{flushright}\hyperref[thm:artin]{\upsym}\end{flushright}
+\begin{proof}
+    Let $G = \{\sigma_1, \ldots, \sigma_n\}$ and $\md{G} = n.$
+    \begin{enumerate}
+        \item Let $\alpha \in \mathbb{E}.$ Consider $S = \{\sigma_1(\alpha), \ldots, \sigma_n(\alpha)\}.$ Note that the elements written need not all be distinct. Let $r \vcentcolon= \md{S}.$ Without loss of generality, assume that $S = \{\sigma_1(\alpha), \ldots, \sigma_r(\alpha)\}.$
+
+        Let $\tau \in G.$ Then, $\tau(S) = S.$\footnote{Each $\tau\sigma_i$ is an element of $G$ and $\tau\sigma_i(\alpha)$ are distinct for $i = 1, \ldots, r.$} Thus, $\tau|_{S}$ is a permutation of $S.$ Consider the polynomial
+        \begin{equation*} 
+            f(x) \vcentcolon= (x - \sigma_1(\alpha)) \cdots (x - \sigma_r(\alpha)).
+        \end{equation*}
+        The coefficients of $f(x)$ are symmetric functions of $\sigma_1(\alpha), \ldots, \sigma_r(\alpha)$ and thus, are fixed by every $\tau \in G,$ by the previous observation. Thus, $f(x) \in \mathbb{E}^G[x].$
+
+        Note that $f(\alpha) = 0$ since one of the $\sigma_i$ is the identity map. Thus, $\irr(\alpha, \mathbb{E}^G) \mid f(x).$ Note that $f(x)$ has distinct roots, by construction. In particular, $\alpha$ is separable over $\mathbb{E}^G.$ Since $\alpha \in \mathbb{E}$ was arbitrary, this tells us that $\mathbb{E}/\mathbb{E}^G$ is separable.
+
+        Moreover, $f(x)$ splits completely in $\mathbb{E}[x]$ and thus, so does $\irr(\alpha, \mathbb{E}^G).$ Thus, $\mathbb{E}/\mathbb{E}^G$ is normal as well and hence, Galois.
+
+        To see that it is finite, note that $[\mathbb{E}^G(\alpha) : \mathbb{E}^G] = r \le n$ and thus, $[\mathbb{E} : \mathbb{E}^G],$ by \Cref{thm:artin}.
+        %
+        \item Note that $G \subset \Gal(\mathbb{E}/\mathbb{E}^G).$ As we noted earlier, $[\mathbb{E} : \mathbb{E}^G] \le n = \md{G}.$ 
+
+        By \Cref{prop:orderofgalgroup}, we have $\Gal(\mathbb{E}/\mathbb{E}^G) = [\mathbb{E} : \mathbb{E}^G].$ Thus, comparing cardinalities gives $G = \Gal(\mathbb{E}/\mathbb{E}^G).$
+        %
+        \item Follows from the second part. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\galoissubgroupscompositum*\label{thm:galoissubgroupscompositum2}
+\begin{flushright}\hyperref[thm:galoissubgroupscompositum]{\upsym}\end{flushright}
+\begin{proof}
+    The third assertion about the inclusion is obvious since $H_1 \supset H_2$ implies that every element fixed by $H_2$ is also fixed by $H_1.$ Since the extensions are Galois, the fields fields are precisely the $\mathbb{E}_i,$ by \Cref{thm:fixfieldinjectiveIG}.
+
+    Note that $\mathbb{K}/\mathbb{E}_i$ is Galois and thus, $\mathbb{E}_i = \mathbb{K}^{H_i} \subset \mathbb{K}^{H_1 \cap H_2}$ for $i = 1, 2.$ Thus, $\mathbb{E}_1\mathbb{E}_2 \subset \mathbb{K}^{H_1 \cap H_2}.$
+
+    On the other hand, if $\sigma \in G$ fixes $\mathbb{E}_1\mathbb{E}_2,$ then it fixes both $\mathbb{E}_1$ and $\mathbb{E}_2.$ Thus, $\Gal(\mathbb{K}/\mathbb{E}_1\mathbb{E}_2) \subset H_1 \cap H_2$ and so, $\mathbb{E}_1\mathbb{E}_2 \supset \mathbb{K}^{H_1 \cap H_2}.$
+
+    Let $H \vcentcolon= \Gal(\mathbb{K}/(\mathbb{E}_1 \cap \mathbb{E}_2)).$ Note that $H_1, H_2 \subset H$ since every $\sigma \in H_i$ fixes $\mathbb{E}_i$ and thus, fixes the intersection. Thus, $\langle H_1, H_2\rangle \subset H$ or $\mathbb{E}_1 \cap \mathbb{E}_2 \subset \mathbb{K}^{\langle H_1, H_2\rangle}.$
+
+    On the other hand, 
+    \begin{equation*} 
+        \mathbb{K}^{\langle H_1, H_2\rangle} \subset \mathbb{K}^{H_i} = \mathbb{E}_i
+    \end{equation*}
+    and thus,
+    \begin{equation*} 
+        \mathbb{K}^{\langle H_1, H_2\rangle} \subset \mathbb{E}_1 \cap \mathbb{E}_2.
+    \end{equation*}
+\end{proof}
+
+\isomorphismgalois*\label{prop:isomorphismgalois2}
+\begin{flushright}\hyperref[prop:isomorphismgalois]{\upsym}\end{flushright}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item We use \Cref{thm:normalequivalent}. Since $\mathbb{K}/\mathbb{F}$ is Galois, $\mathbb{K}$ is the splitting field of a family of separable polynomials $\{f_i(x) : i \in I\}$ over $\mathbb{F}.$ Then, $\lambda(\mathbb{K})$ is the splitting field of the separable polynomials $\{f^{\lambda}_i(x) : i \in I\}$ over $\lambda(\mathbb{F}).$
+        %
+        \item Define $\psi : \Gal(\mathbb{K}/\mathbb{F}) \to \Gal(\lambda(\mathbb{K})/\lambda(\mathbb{F}))$ be $\sigma \mapsto \lambda\sigma\lambda^{-1}.$ Clearly, $\psi$ is a well-defined homomorphism. It is easy to see that $\tau \mapsto \lambda^{-1}\tau\lambda$ acts as an inverse. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\galoisiffnormal*\label{thm:galoisiffnormal2}
+\begin{flushright}\hyperref[thm:galoisiffnormal]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{E}/\mathbb{F}$ be Galois. Define 
+    \begin{align*} 
+        \psi : \Gal(\mathbb{K}/\mathbb{F}) &\to \Gal(\mathbb{E}/\mathbb{F})\\
+        \psi(\sigma) &= \sigma|_{\mathbb{E}}.
+    \end{align*}
+    Note that the above is well-defined since $\mathbb{E}$ is normal and so, $\sigma|_{\mathbb{E}}$ is indeed an automorphism of $\mathbb{F}.$ (That it fixes $\mathbb{F}$ is obvious since $\sigma$ did so.) Clearly, $\psi$ is a homomorphism. However, now note that
+    \begin{equation*} 
+        \ker(\psi) = \{\sigma \in \Gal(\mathbb{K}/\mathbb{F}) \mid \sigma|_{\mathbb{E}} = \id_{\mathbb{E}}\} = \Gal(\mathbb{K}/\mathbb{E}).
+    \end{equation*}
+    Thus, $\Gal(\mathbb{K}/\mathbb{E})$ is a normal subgroup of $\Gal(\mathbb{K}/\mathbb{F}).$
+
+    Moreover, since $\mathbb{K}/\mathbb{E}$ is an algebraic and normal extension, every automorphism of $\mathbb{E}$ can indeed be extended to an automorphism of $\mathbb{K}.$\footnote{First extend it to a map $\mathbb{K} \to \overline{\mathbb{E}} \supset \mathbb{K}.$ Normality then forces the map to be an automorphism of $\mathbb{K}.$} Thus, $\psi$ is a surjective map and thus,
+    \begin{equation*} 
+        \Gal(\mathbb{E}/\mathbb{F}) \cong \frac{\Gal(\mathbb{K}/\mathbb{F})}{\Gal(\mathbb{K}/\mathbb{E})}.
+    \end{equation*}
+    This proves one direction of the first part as well as the second part.
+
+    Conversely, suppose that $\Gal(\mathbb{K}/\mathbb{E}) \unlhd \Gal(\mathbb{K}/\mathbb{F}).$ Let $\lambda : \mathbb{K} \to \mathbb{K}$ be any $\mathbb{F}$-isomorphism. We first show that $\lambda(\mathbb{E}) = \mathbb{E}.$ By \Cref{prop:isomorphismgalois}, we have
+    \begin{equation*} 
+        \Gal(\mathbb{K}/\mathbb{E}) = \lambda\Gal(\mathbb{K}/\mathbb{E})\lambda^{-1} = \Gal(\lambda(\mathbb{K})/\lambda(\mathbb{E})) = \Gal(\mathbb{K}/\lambda(\mathbb{E})).
+    \end{equation*}
+    Thus, $\Gal(\mathbb{K}/\mathbb{E}) = \Gal(\mathbb{K}/\lambda(\mathbb{E})).$ By \Cref{thm:fixfieldinjectiveIG}, we get $\mathbb{E} = \lambda(\mathbb{E}).$
+
+    Now, to show that $\mathbb{E}/\mathbb{F}$ is normal, let $\sigma : \mathbb{E} \to \overline{\mathbb{F}} \supset \mathbb{E}$ be an $\mathbb{F}$-embedding. Then, $\sigma$ can be extended to an $\mathbb{F}$-embedding $\lambda : \mathbb{K} \to \overline{\mathbb{F}}.$ Since $\mathbb{K}/\mathbb{F}$ is normal, we have $\lambda(\mathbb{K}) = \mathbb{K}.$ By the above, we have $\sigma(\mathbb{E}) = \lambda(\mathbb{E}) = \mathbb{E}.$
+\end{proof}
+
+\FTGT*\label{thm:FTGT2}
+\begin{flushright}\hyperref[thm:FTGT]{\upsym}\end{flushright}
+\begin{proof}
+    Note that only the first part needs to be proven. We have proven the others (\Cref{thm:galoisiffnormal}, \Cref{prop:orderofgalgroup}, \Cref{thm:galoissubgroupscompositum}).
+
+    Let $\Psi : \mathcal{I} \to \mathcal{G}$ be the map $\mathbb{E} \mapsto \Gal(\mathbb{K}/\mathbb{E}).$ Let $\Phi : \mathcal{G} \to \mathcal{I}$ denote the map $H \mapsto \mathbb{K}^H.$ The fact that these maps reverse inclusion is obvious.
+
+    By \Cref{thm:fixfieldinjectiveIG}, we know that $\Psi$ is an injection.
+
+    Let $H \in \mathcal{G}.$ Then, $H$ is finite and is the Galois group of $\mathbb{K}/\mathbb{K}^H,$ by \Cref{thm:artin}. Thus, $\Psi$ is onto.
+
+    Hence, $\Psi$ is bijective. Therefore, to show that $\Phi = \Psi^{-1},$ it suffices to show only that $\Phi \circ \Psi = \id_{\mathcal{I}}.$
+
+    To this end, let $\mathbb{E} \in \mathcal{I}$ be arbitrary. Then, $H \vcentcolon= \Psi(\mathbb{K}/\mathbb{E})$ is the Galois group of $\mathbb{K}/\mathbb{E}.$ Thus, $\mathbb{E} = \mathbb{K}^H,$ by \Cref{thm:fixfieldinjectiveIG}. In other words
+    \begin{equation*} 
+        \mathbb{E} = \Phi(\Psi(\mathbb{E})). \qedhere
+    \end{equation*}
+\end{proof}
+
+\ftagalois*\label{thm:ftagalois2}
+\begin{flushright}\hyperref[thm:ftagalois]{\upsym}\end{flushright}
+\begin{proof}
+    Let $g(x) \in \mathbb{C}[x]$ be a non-constant polynomial. Then, $f(x) = g(x)\bar{g}(x)$ is a non-constant polynomial with real coefficients. Here, $\bar{g}(x)$ denotes the polynomial whose coefficients are complex conjugates of those of $g(x).$ Note that if $f(z) = 0$ for some $z \in \mathbb{C},$ then $g(z) = 0$ or $\bar{g}(z) = 0.$ If $\bar{g}(z) = 0,$ then $g(\bar{z}) = 0.$ In either case, $g$ has a complex root. Thus, it suffices to show that $f(x)$ has a root in $\mathbb{C}.$
+
+    Let $\mathbb{E}$ denote a splitting field of $f(x)$ over $\mathbb{C}.$ Then, it is a splitting of $(x^2 + 1)f(x)$ over $\mathbb{R}.$ It suffices to show that $\mathbb{E} = \mathbb{C}.$ 
+
+    Since $\mathbb{R}$ has no proper odd degree extensions,\footnote{Every odd degree real polynomial has a root in $\mathbb{R}.$} we see that $2 \mid [\mathbb{E} : \mathbb{R}].$ Thus, $G = \Gal(\mathbb{E}/\mathbb{R})$ has a Sylow-$2$ subgroup, say $S.$
+
+    Now, if $S \neq G,$ then $\mathbb{E} \supset \mathbb{E}^S \supsetneq \mathbb{R}.$ However, note that 
+    \begin{equation*} 
+        [\mathbb{E}^S : \mathbb{R}] = \frac{[\mathbb{E} : \mathbb{R}]}{[\mathbb{E} : \mathbb{E}^S]} = \frac{\md{G}}{\md{S}}
+    \end{equation*} 
+    is odd. But $\mathbb{R}$ has no proper odd degree extension and thus, $S = G.$
+
+    Thus, $G$ is a $2$-group. (That is, $\md{G} = 2^n$ for some $n \in \mathbb{N}.$) If $\md{G} = 2,$ then $\mathbb{C} = \mathbb{E}$ are we are done.
+
+    Thus, $\md{G} \ge 4.$ Then, $\md{\Gal(\mathbb{E}/\mathbb{C})} \ge 2.$ Let $H \le \Gal(\mathbb{E}/\mathbb{C})$ be a subgroup of index $2.$ Then, $[\mathbb{E}^H : \mathbb{C}] = 2,$ which is a contradiction, since $\mathbb{C}$ has no quadratic extensions. Thus, $\mathbb{C} = \mathbb{E}.$ 
+\end{proof}
+
+\section{Cyclotomic Extensions}
+\Gfabeliansubgroup*\label{prop:Gfabeliansubgroup2}
+\begin{flushright}\hyperref[prop:Gfabeliansubgroup]{\upsym}\end{flushright}
+\begin{proof}
+    As $f(x)$ is separable, it has $n$ distinct roots in $\overline{\mathbb{F}}.$ Let $Z = \{z_1, \ldots, z_n\}$ be the set of roots and $\mathbb{E} = \mathbb{F}(z_1, \ldots, z_n).$ By \Cref{thm:finsubgroupcyclic}, we know that $Z$ is cyclic. The map $\psi : \Gal(\mathbb{E}/\mathbb{F}) \to \Aut(Z)$ given as $\sigma \mapsto \sigma|_Z$ is an injective group homomorphism. Note that $\Aut(Z) \cong (\mathbb{Z}/n\mathbb{Z})^\times,$ which proves the result.
+\end{proof}
+
+\nthrootsnonunity*\label{prop:nthrootsnonunity2}
+\begin{flushright}\hyperref[prop:nthrootsnonunity]{\upsym}\end{flushright}
+\begin{proof}
+    Let $Z = \{z_1, \ldots, z_n\} \subset \mathbb{F}^\times$ be the set of roots of $x^n - 1.$ Let $r$ be a root of $f(x)$ in a splitting field $\mathbb{E}$ of $f(x).$ Then, $rz_1, \ldots, rz_n$ are $n$ distinct roots of $f(x)$ and hence, all the roots. Thus, $\mathbb{E} = \mathbb{F}(r).$
+
+    Let $\sigma, \tau \in \Gal(\mathbb{E}/\mathbb{F}).$ Then, $\sigma(r) = z_{\sigma}r$ and $\tau(r) = z_{\tau}r$ for some $z_\sigma, z_\tau \in Z.$ In turn, we see $\sigma\tau(r) = z_{\sigma}z_{\tau}r.$ Thus, the map
+    \begin{equation*} 
+        \psi : \Gal(\mathbb{E}/\mathbb{F}) \to Z
+    \end{equation*}
+    defined by $\psi(\sigma) = z_{\sigma}$ is a group homomorphism. Moreover it is injective since every $\mathbb{F}$-automorphism of $\mathbb{E} = \mathbb{F}(r)$ is uniquely determined by its action on $r.$ Thus, $\G_f$ is isomorphic to a subgroup of $Z$ and we are done.
+\end{proof}
+
+\cyclotomicQ*\label{thm:cyclotomicQ2}
+\begin{flushright}\hyperref[thm:cyclotomicQ]{\upsym}\end{flushright}
+\begin{proof}
+    We have $x^n - 1 = \Phi_n(x) h(x),$ where $h(x) \in \mathbb{Q}[x]$ is monic. Thus, by Gauss' Lemma, we have $\Phi_n(x) \in \mathbb{Z}[x].$
+
+    Now, suppose that $p$ is prime not dividing $n.$ We contend that $\Phi(\zeta_n^p) = 0.$ Indeed, suppose not. Then, $h(\zeta_n^p) = 0.$ Alternately, $\zeta_n$ is a root of $h(x^p) \in \mathbb{Q}[x].$ But note that $\Phi_n(x)$ is the minimal polynomial of $\zeta_n$ over $\mathbb{Q}.$ Thus, we can write
+    \begin{equation*} 
+        h(x^p) = \Phi_n(x) g(x)
+    \end{equation*}
+    for monic $g(x) \in \mathbb{Z}[x].$ (Again, by Gauss' Lemma.) Reduce the above equation $\mod p$ to get
+    \begin{equation*} 
+        (\bar{h}(x))^p = \bar{\Phi}_n(x) \bar{g}(x).
+    \end{equation*}
+    (Note that every element $a \in \mathbb{Z}/p\mathbb{Z}$ satisfies $a^p = a$ and so, $\bar{h}(x^p) = \bar{h}(x))^p.$)
+
+    From the above, we see that $\bar{\Phi}_n(x)$ and $\bar{h}(x)$ have a common factor of $\mathbb{F}_p[x].$ ($\mathbb{F}_p[x]$ is a UFD. Factorise both sides of the above equation into primes.)
+
+    But this, in turn, implies that
+    \begin{equation*} 
+        x^n - 1 = \bar{\Phi}_n(x) \bar{h}(x)
+    \end{equation*}
+    in $\mathbb{F}_p[x].$ In particular, $x^n - 1 \in \mathbb{F}_p[x]$ has repeated roots in $\overline{\mathbb{F}}_p.$ This is a contradiction since $x^n - 1$ is separable because $\gcd(n, p) = 1.$
+
+    Thus, $\Phi_n(\zeta_n^p) = 0.$ Now, if $a \in \mathbb{N}$ is any integer such that $\gcd(a, n) = 1,$ we factorise $a = p_1 \cdots p_r$ where $p_1, \ldots, p_r$ are (not necessarily distinct) primes not dividing $n.$ Now, note that $\zeta_n^{p_1}$ is again a primitive root of unity satisfying $\Phi_n(x).$ Thus, the above argument applies and we get $\Phi_n\left((\zeta_n^{p_1})^{p_2}\right) = 0.$ Again, since $\gcd(n, p_1p_2) = 1,$ we see that $\zeta_n^{p_1p_2}$ is a primitive root and so on. Thus, 
+    \begin{equation*} 
+        \Phi_n(\zeta_n^a) = 0
+    \end{equation*}
+    for every $a \in \mathbb{N}$ with $\gcd(a, n) = 1.$ As $a$ varies over all such integers, we see that every primitive root of unity is a root of $\Phi_n(x).$
+
+    In particular, $\Phi_n(x)$ has $\varphi(n)$ many distinct roots, each with multiplicity $1.$ Thus, $[\mathbb{Q}(\zeta_n) : \mathbb{Q}] = \varphi(n).$
+
+    By \Cref{prop:Gfabeliansubgroup}, we already know that $\Gal(\mathbb{Q}(\zeta_n)/\mathbb{Q})$ is isomorphic to a subgroup of $(\mathbb{Z}/n\mathbb{Z})^\times.$ By comparing cardinalities, we see that the groups are isomorphic.
+\end{proof}
+
+\cycloreccurence*\label{thm:cycloreccurence2}
+\begin{flushright}\hyperref[thm:cycloreccurence]{\upsym}\end{flushright}
+\begin{proof}
+    Clearly, $\Phi_1(x) = x - 1.$ Let $\zeta_n$ be a primitive $n$-th root of unity. By \Cref{thm:cyclotomicQ}, we know that the other roots of $\Phi_n(x)$ are $\zeta_n^i$ for $i \in \{1, \ldots, n\}$ with $\gcd(i, n) = 1.$ Thus,
+    \begin{equation*} 
+        \Phi_n(x) = \prod_{\substack{1 \le i \le n \\ \gcd(n, i) = 1}}(x - \zeta_n^i).
+    \end{equation*}
+    In turn, we have
+    \begin{equation*} 
+        x^n - 1 = \prod_{d \mid n} \Phi_d(x).
+    \end{equation*}
+    (Factor the above in $\overline{\mathbb{Q}}$ and note that every root of the left side is a primitive $d$-th root of unity for some unique $d.$ Since the $n$-th roots form a group of order $n,$ we must have $d \mid n.$ Conversely, every such $d$-th root is indeed a root of $x^n - 1$ and no two different cyclotomic polynomials have a common root.)
+
+    Thus,
+    \begin{equation*} 
+        \Phi_n(x) = \frac{x^n - 1}{\displaystyle\prod_{\substack{d \mid n\\ d < n}} \Phi_d(x)}. \qedhere
+    \end{equation*}
+\end{proof}
+
+\cyclocyclic*\label{prop:cyclocyclic2}
+\begin{flushright}\hyperref[prop:cyclocyclic]{\upsym}\end{flushright}
+\begin{proof}
+    Note that $\Gal(\mathbb{Q}(\zeta_p)/\mathbb{Q}) \cong (\mathbb{Z}/p\mathbb{Z})^\times,$  by \Cref{thm:cyclotomicQ}. Since $\mathbb{Z}/p\mathbb{Z} = \mathbb{F}_p$ is a finite field, \Cref{thm:finsubgroupcyclic} tells us that $\mathbb{F}_p^\times$ is cyclic.
+
+    Recall the general fact about finite cyclic groups: given a cyclic group $G$ of order $n,$ there is a unique subgroup of \emph{index} $d$ for every $d \mid n.$ 
+
+    Using this with the Galois correspondence gives the last statement.
+\end{proof}
+
+\cyclodisc*\label{lem:cyclodisc2}
+\begin{flushright}\hyperref[lem:cyclodisc]{\upsym}\end{flushright}
+\begin{proof}
+    We shall use \nameref{prop:discderivative}. First, we note that we have
+    \begin{equation*} 
+        x^p - 1 = \Phi_p(x)(x - 1)
+    \end{equation*}
+    and thus,
+    \begin{equation*} 
+        px^{p - 1} = \Phi_p'(x)(x - 1) + \Phi_p(x).
+    \end{equation*}
+    Substituting $\zeta_n^i$ above for $i = 1, \ldots, p - 1$ gives
+    \begin{equation*} 
+        \frac{p}{\zeta_p^i} = \Phi_p'(\zeta_p^i)(\zeta_p^i - 1).
+    \end{equation*}
+    (We have used $\zeta_p^{p - 1} = \zeta_p^{-1}$ to simplify the left hand side.)
+
+    Thus, we have
+    \begin{equation} \label{eq:004} \tag{$\prod$}
+        \prod_{i = 1}^{p - 1} \Phi_p'(\zeta_p^i) = \prod_{i = 1}^{p - 1} \frac{p}{\zeta_p^i(\zeta_p^i - 1)}.
+    \end{equation}
+    Note that we have the following expressions for $\Phi_p(x).$
+    \begin{align*} 
+        \Phi_p(x) &= (x - \zeta_p)(x - \zeta_p^2) \cdots (x - \zeta_p^{p - 1})\\
+        &= x^{p - 1} + \cdots + x + 1.
+    \end{align*}
+    Thus,
+    \begin{equation*} 
+        \prod_{i = 1}^{p - 1} \zeta_p^i = (-1)^{p - 1}\andd \prod_{i = 1}^{p - 1}(\zeta_p^i - 1) = (-1)^{p - 1}\Phi_p(1).
+    \end{equation*}
+    Since $p$ is odd, we have $(-1)^{p - 1} = 1$ and putting it back in \Cref{eq:004} gives
+    \begin{equation*} 
+        \prod_{i = 1}^{p - 1} \Phi_p'(\zeta_p^i) = \frac{p^{p - 1}}{1 \cdot \Phi_p(1)} = p^{p - 2}.
+    \end{equation*}
+
+    Now using the formula of discriminant in terms of derivatives, we get
+    \begin{equation*} 
+        \disc(\Phi_p(x)) = (-1)^{\binom{p - 1}{2}}p^{p - 2} = (-1)^{\binom{p}{2}}p^{p - 2}. \qedhere
+    \end{equation*}
+\end{proof}
+
+\uniquequadraticcyclosubfield*\label{prop:uniquequadraticcyclosubfield2}
+\begin{flushright}\hyperref[prop:uniquequadraticcyclosubfield]{\upsym}\end{flushright}
+\begin{proof}
+    The existence and uniqueness of quadratic subfield is given by \Cref{prop:cyclocyclic}, since $2 \mid p - 1.$ 
+
+    Note that $\disc(\Phi_p(x))$ is not a perfect square in $\mathbb{Q}.$ On the other hand, by definition of $\disc(\Phi_p(x)),$ it is clear that $\disc(\Phi_p(x))$ has a square root in any splitting field of $\Phi_p(x).$ (Recall \Cref{rem:discrepeatedroots}.) Thus, $\sqrt{\disc(\Phi_p(x))} \in \mathbb{Q}(\zeta_p) \setminus \mathbb{Q}.$
+
+    Hence, this generates the unique quadratic extension. Moreover note that
+    \begin{equation*} 
+        (-1)^{\binom{p}{2}} = (-1)^{\frac{p - 1}{2}}.
+    \end{equation*}
+    Thus, the square root is real iff $p \equiv 1 \pmod{4}.$
+\end{proof}
+
+\quadincyclo*\label{cor:quadincyclo2}
+\begin{flushright}\hyperref[cor:quadincyclo]{\upsym}\end{flushright}
+\begin{proof}
+    Any quadratic extension of $\mathbb{Q}$ is of the form $\mathbb{Q}(\sqrt{d})$ for some square free integer $d.$ (Negative or positive.)
+
+    Let $\zeta_n \vcentcolon= \exp\left(\dfrac{2 \pi \iota}{n}\right).$ Note that $\zeta_n$ is indeed a primitive $n$-th root of unity.
+
+    Let $p$ be an odd prime and note that $\mathbb{Q}(\sqrt{-p}) \subset \mathbb{Q}(\zeta_p)$ if $p \equiv 3 \pmod{4}$ and $\mathbb{Q}(\sqrt{p}) \subset \mathbb{Q}(\zeta_p)$ if $p \equiv 1 \pmod{4}.$ Also, $\sqrt{2} \in \mathbb{Q}(\zeta_8)$.\footnote{Note that $(\zeta_8 + \zeta_8^{-1})^2 = 2.$} Lastly, $\iota \in \mathbb{Q}(\zeta_4)$ and $\mathbb{Q}(\zeta_4) \subset \mathbb{Q}(\zeta_8).$
+
+    Armed with these facts, we note that if $d = \pm p_1 \cdots p_r$ where $p_i$ are distinct odd primes, then,
+    \begin{equation*} 
+        \mathbb{Q}(\sqrt{d}) \subset \mathbb{Q}(\zeta_{p_1}, \ldots, \zeta_{p_r}, \zeta_4) = \mathbb{Q}(\zeta_{4p_1 \cdots p_r}).
+    \end{equation*}
+    On the other hand, if $d = \pm 2 p_1 \cdots p_r$ where $p_i$ are distinct odd primes, then,
+    \begin{equation*} 
+        \mathbb{Q}(\sqrt{d}) \subset \mathbb{Q}(\zeta_{p_1}, \ldots, \zeta_{p_r}, \zeta_8) = \mathbb{Q}(\zeta_{8p_1 \cdots p_r}).
+    \end{equation*}
+    In both the above equations, the last equality follows from \Cref{ex:compositecyclo}.
+\end{proof}
+
+\quadgeneratorcyclo*\label{prop:quadgeneratorcyclo2}
+\begin{flushright}\hyperref[prop:quadgeneratorcyclo]{\upsym}\end{flushright}
+\begin{proof}
+    Note that $\zeta_p$ is a root of the quadratic 
+    \begin{equation*} 
+        x^2 - (\zeta_p + \zeta_p^{-1})x + 1 \in \mathbb{Q}(\zeta_p + \zeta_p^{-1}).
+    \end{equation*}
+    Thus, $[\mathbb{Q}(\zeta_p) : \mathbb{Q}(\zeta_p + \zeta_p^{-1})] \le 2.$ The degree will be $1$ iff $\mathbb{Q}(\zeta_p) = \mathbb{Q}(\zeta_p + \zeta_p^{-1}).$ However, note that the latter is contained in $\mathbb{R}$ whereas the former is not. Thus, $[\mathbb{Q}(\zeta_p) : \mathbb{Q}(\zeta_p + \zeta_p^{-1})] = 2.$
+
+    Now, by \Cref{prop:cyclocyclic}, there is a unique intermediate subfield $\mathbb{E}$ of $\mathbb{Q}(\zeta_p)/\mathbb{Q}$ satisfying $[\mathbb{Q}(\zeta_p) : \mathbb{E}] = 2.$ Thus, $\mathbb{E} = \mathbb{Q}(\zeta_p + \zeta_p^{-1}).$
+\end{proof}
+
+\fixedfieldcyclosubgroup*\label{prop:fixedfieldcyclosubgroup2}
+\begin{flushright}\hyperref[prop:fixedfieldcyclosubgroup]{\upsym}\end{flushright}
+\begin{proof}
+    Fix $p$ and let $\zeta \vcentcolon= \zeta_p.$
+
+    Clearly, $\beta_H \in \mathbb{Q}(\zeta)^H$ since given any $\tau \in H,$ we have
+    \begin{equation*} 
+        \tau(\beta_H) = \tau\left(\sum_{\sigma \in H} \sigma(\zeta)\right) = \sum_{\sigma \in H} \tau\sigma(\zeta) = \beta_H,
+    \end{equation*}
+    since the map $\sigma \mapsto \tau\sigma$ is a bijection from $H$ to itself.
+
+    Thus, $\mathbb{Q}(\beta_H) \subset \mathbb{Q}(\zeta)^H.$ By the Galois correspondence, we know that there exists a subgroup $K$ with $H \le K \le G$ such that
+    \begin{equation*} 
+        \mathbb{Q}(\beta_H) = \mathbb{Q}(\zeta)^K.
+    \end{equation*}
+    (In fact, we know exactly what this subgroup is, $\Gal(\mathbb{Q}(\zeta)/\mathbb{Q}(\beta_h)).$)
+
+    It suffices to prove that $H = K.$ Suppose not. Then, $H \subsetneq K$ and $\beta$ is fixed by every element of $K.$ Pick $\tau \in K \setminus H.$ We show that $\tau(\beta_H) \neq \beta_H$ and reach a contradiction. 
+
+    Note that the set
+    \begin{equation*} 
+        B = \{\zeta, \zeta^2, \ldots, \zeta^{p - 1}\}
+    \end{equation*}
+    is a $\mathbb{Q}$-basis for $\mathbb{Q}(\zeta).$ Moreover, the above is the set of all roots of $\irr(\zeta, \mathbb{Q}).$ Thus, any $\sigma \in G$ permutes $B.$ Since any $\sigma \in G$ is determined by its action on $\zeta,$ we see that the elements $\sigma(\zeta)$ are distinct for distinct $\sigma \in G$ and hence, linearly independent.
+
+    Thus, if $\tau(\beta_H) = \beta_H,$ then there is some $\sigma \in H$ such that $\tau\sigma = \id_{\mathbb{Q}(\zeta)}$ but then $\tau = \sigma^{-1} \in H,$ a contradiction. Thus, $\tau(\beta_H) \neq \beta_H$ but that contradicts the fact that $K$ fixes $\mathbb{Q}(\beta_H).$ Thus, $\mathbb{Q}(\beta_H) = \mathbb{Q}(\zeta)^H.$
+\end{proof}
+
+\section{Abelian and Cyclic extensions}
+
+\pequivonemodn*\label{lem:pequivonemodn2}
+\begin{flushright}\hyperref[lem:pequivonemodn]{\upsym}\end{flushright}
+\begin{proof}
+    Let $k \in \mathbb{Z}$ be such that $\bar{k} \in \mathbb{F}_p$ is a root of $\bar{\Phi}_n(x).$ Then, $p \mid \Phi_n(k)$ in $\mathbb{Z}.$ In turn, $p \mid k^n - 1$ or $k^n \equiv 1 \pmod{p}.$
+
+    We contend that $o(\bar{k}) = n$ in $(\mathbb{F}_p)^\times.$ Suppose not. Then, $m \vcentcolon= o(\bar{k}) < n.$ Then, $m \mid n$ and so, we have
+    \begin{align*} 
+        x^n - 1 &= \prod_{d \mid n} \Phi_d(x)\\
+        &= \Phi_n(x) \prod_{\substack{d \mid n \\ d \neq n}} \Phi_d(x) \\
+        &= \Phi_n(x) \cdot \prod_{d \mid m} \Phi_d(x) \cdot \prod_{\substack{d \nmid m \\ d \neq n}} \Phi_d(x)\\
+        &= \Phi_n(x) (x^m - 1) h(x)
+    \end{align*}
+    for some $h(x) \in \mathbb{Z}[x].$ We have used \Cref{thm:cycloreccurence} in the above.
+
+    Going $\mod p$ gives
+    \begin{equation*} 
+        x^n - 1 = \bar{\Phi}_n(x) (x^m - 1) \bar{h}(x).
+    \end{equation*}
+    However, note that $\bar{k}$ is a root of both $\bar{\Phi}_n(x)$ and $x^m - 1$ and so, $x^n - 1$ has repeated roots in $\mathbb{F}_p.$ This is a contradiction since $p \nmid n.$
+
+    Thus, $o(\bar{k}) = n$ and in particular, $n \mid (p - 1),$ as desired.
+\end{proof}
+
+\infprimesmodone*\label{thm:infprimesmodone2}
+\begin{flushright}\hyperref[thm:infprimesmodone]{\upsym}\end{flushright}
+\begin{proof}
+    Suppose to the contrary that $p_1, \ldots, p_r$ are all such primes. Let $m = np_1 \cdots p_r.$ Consider the cyclotomic polynomial $\Phi_m(x).$ Since it is monic (and non-constant), we have
+    \begin{equation*} 
+        \lim_{x\to \infty} \Phi_m(mx) = \infty.
+    \end{equation*}
+    In particular, there exists $k \in \mathbb{N}$ such that $\Phi_m(mk) \ge 2.$ Thus, it has a prime factor $p.$ Then,
+    \begin{equation*} 
+        p \mid (mk)^m - 1
+    \end{equation*}
+    and thus, $p \nmid (mk).$ Hence, $\gcd(p, n) = 1.$ Consequently, $p \neq p_1, \ldots, p_r.$ But $\bar{\Phi}_m(\overline{mk}) = 0$ and so, $p \equiv 1 \pmod{mk}.$ In turn, we have
+    \begin{equation*} 
+        p \equiv 1 \pmod{n},
+    \end{equation*}
+    a contradiction.
+\end{proof}
+
+\fingroupQextension*\label{thm:fingroupQextension2}
+\begin{flushright}\hyperref[thm:fingroupQextension]{\upsym}\end{flushright}
+\begin{proof}
+    We may assume that $\md{G} =\vcentcolon n \ge 2.$ For $m \in \mathbb{N},$ define $C_m \vcentcolon= \mathbb{Z}/m\mathbb{Z}$ and $U(m) \vcentcolon= (\mathbb{Z}/m\mathbb{Z})^\times.$ We have
+    \begin{equation*} 
+        G \cong C_{n_1} \times \cdots \times C_{n_k}
+    \end{equation*}
+    for some integers $n_1, \ldots, n_k \ge 2$ with
+    \begin{equation*} 
+        n = n_1 \cdots n_k.
+    \end{equation*}
+    Let $p_1, \ldots, p_k$ be distinct primes such that $p_i \equiv 1 \pmod{n_i}$ for all $i = 1, \ldots, k.$ (Existence is given by \Cref{thm:infprimesmodone}.)
+
+    Note that each $U(p_i)$ is cyclic with order $p_i - 1,$ a multiple of $n_i.$ Thus, there exists a subgroup $H_i \le U(p_i)$ with
+    \begin{equation*} 
+        \frac{U(p_i)}{H_i} \cong C_{n_i},
+    \end{equation*}
+    for each $i = 1, \ldots, k.$
+
+    Thus, we have 
+    \begin{equation*} 
+        \frac{U(p_1) \times \cdots \times U(p_k)}{H_1 \times \cdots \times H_k} \cong C_{n_1} \times \cdots \times C_{n_k} \cong G.
+    \end{equation*}
+
+    By the Chinese Remainder Theorem, we have 
+    \begin{equation*} 
+        U(p_1) \times \cdots \times U(p_k) \cong U(m) \cong \Gal(\mathbb{Q}(\zeta_m)/\mathbb{Q}),
+    \end{equation*} 
+    where $m = p_1 \cdots p_k.$ Let $H$ be the subgroup of $\Gal(\mathbb{Q}(\zeta_m)/\mathbb{Q})$ corresponding to $H_1 \times \cdots \times H_k,$ under this isomorphism.
+
+    Thus, we have
+    \begin{equation*} 
+        \frac{\Gal(\mathbb{Q}(\zeta_m)/\mathbb{Q})}{H} \cong G.
+    \end{equation*}
+    By the Galois correspondence, we see that $G \cong \Gal(\mathbb{Q}(\zeta_m)^H/\mathbb{Q}).$
+\end{proof}
+
+\dedekindcharacters*\label{thm:dedekindcharacters2}
+\begin{flushright}\hyperref[thm:dedekindcharacters]{\upsym}\end{flushright}
+\begin{proof}
+    If $n = 1,$ then the statement is clearly true since $\chi_1$ does not take the value $0.$
+
+    Suppose that $n \ge 2.$ Suppose that $\chi_1, \ldots, \chi_n$ are linearly dependent. Among all relations of linear dependence, choose $m \ge 2$ to be the one with the least number of non-zero coefficients. (We have $m \ge 2$ by the first line.) By renumbering, we may assume that we have
+    \begin{equation*} 
+        a_1 \chi_1 + \cdots + a_m \chi_m = 0
+    \end{equation*}
+    with $a_1, \ldots, a_m \in \mathbb{K} \setminus \{0\}.$ Thus, for any $g \in G,$ we have
+    \begin{equation} \label{eq:005}
+        a_1 \chi_1(g) + \cdots + a_m \chi_m(g) = 0.
+    \end{equation} 
+    Now, fix $g_0 \in G$ such that $\chi_1(g_0) \neq \chi_m(g_0).$ (Exists since $m \ge 1$ and $\chi_1 \neq \chi_m.$) Then, \Cref{eq:005} gives
+    \begin{equation*} 
+        a_1 \chi_1(g_0g) + \cdots + a_m \chi_m(g_0g) = 0
+    \end{equation*}
+    for all $g \in G.$ Since each $\chi_i$ is a homomorphism, we have
+    \begin{equation} \label{eq:006}
+        a_1 \chi_1(g_0)\chi_1(g) + \cdots + a_m \chi_m(g_0)\chi_m(g) = 0.
+    \end{equation}
+    Multiplying \Cref{eq:005} with $\chi_m(g_0)$ and subtracting from \Cref{eq:006} gives
+    \begin{equation*} 
+        a_1(\chi_1(g_0) - \chi_m(g_0))\chi_1(g) + \cdots + a_{m - 1}(\chi_{m - 1}(g_0) - \chi_{m}(g_0))\chi_{m - 1}(g) = 0.
+    \end{equation*}
+    The above holds for all $g \in G.$ But the first coefficient is non-zero. This is an equation of linear dependence with $\le m - 1$ non-zero coefficients. This is a contradiction.
+\end{proof}
+
+\primeigenvalue*\label{lem:primeigenvalue2}
+\begin{flushright}\hyperref[lem:primeigenvalue]{\upsym}\end{flushright}
+\begin{proof}
+    The order of $\sigma$ is $n$ and hence, it satisfies $T^n - 1 = 0.$ (As an operator.)
+
+    We contend that $T^n - 1 \in \mathbb{F}[T]$ is the minimal polynomial of $\sigma.$ Indeed, if $\sigma$ satisfies a polynomial of degree $m < n,$ then the distinct characters $\sigma, \ldots, \sigma^m$ are linearly dependent. This contradicts \Cref{thm:dedekindcharacters}, since we can view $\sigma, \ldots, \sigma^m$ as distinct characters of $\mathbb{E}^\times$ in $\mathbb{E}.$
+
+    Hence, $T^n - 1$ is the minimal polynomial of $\sigma.$ Since $\zeta \in \mathbb{F}$ is a root of $T^n - 1,$ it is an eigenvalue of $\sigma.$
+\end{proof}
+
+\cyclicextprimroot*\label{thm:cyclicextprimroot2}
+\begin{flushright}\hyperref[thm:cyclicextprimroot]{\upsym}\end{flushright}
+\begin{proof}
+    By \Cref{lem:primeigenvalue}, we see that $\zeta$ is an eigenvalue of $\sigma.$ Thus, there exists an eigenvector $a \in \mathbb{E}^\times$ such that $\sigma(a) = \zeta a$ and hence, $\sigma^i(a) = \zeta^i a.$
+
+    Since $\zeta$ is a primitive $n$-th root, we see that $a, \zeta a, \ldots, \zeta^{n - 1}a$ are all distinct and hence, $a$ has at least $n$ Galois conjugates and so, 
+    \begin{equation*} 
+        [\mathbb{F}(a) : \mathbb{F}] \ge [\mathbb{F}(a) : \mathbb{F}]_s \ge n.
+    \end{equation*}
+    Since $[\mathbb{E} : \mathbb{F}] = n,$ we see that $\mathbb{F}(a) = \mathbb{E}.$ 
+
+    Now, note that $\sigma(a^n) = (\sigma(a))^n = \zeta^na^n = a^n$ and thus, $a^n \in \mathbb{E}^G = \mathbb{F}.$
+\end{proof}
+
+\subfieldsofprimcyclic*\label{prop:subfieldsofprimcyclic2}
+\begin{flushright}\hyperref[prop:subfieldsofprimcyclic]{\upsym}\end{flushright}
+\begin{proof}
+    Clearly, each $\mathbb{F}(a^d)$ is indeed an intermediate subfield of $\mathbb{E}/\mathbb{F}.$ We show that these are the only ones.
+
+    Note that since $G$ is cyclic of order $n,$ it has exactly one subgroup of order $d,$ for every divisor $d$ of $n.$ In turn, $\mathbb{E}/\mathbb{F}$ has exactly one intermediate subfield of degree $n/d$ over $\mathbb{F}.$ We show that $\mathbb{F}(a^d)$ has this property and thus, we have covered all intermediate subfields.
+
+    To this end, first note that $(a^d)^{n/d} \in \mathbb{F}$ and thus,
+    \begin{equation*} 
+        [\mathbb{F}(a^d) : \mathbb{F}] \le n/d.
+    \end{equation*}
+    On the other hand, $a$ satisfies $x^d - a^d \in \mathbb{F}(a^d)[x]$ and so,
+    \begin{equation*} 
+        [\mathbb{E} : \mathbb{F}(a^d)] \le d.
+    \end{equation*}
+
+    Since $[\mathbb{E} : \mathbb{F}] = n,$ the \nameref{thm:towerlaw} forces both of the above inequalities to be equalities.
+\end{proof}
+
+\begin{restatable}[Artin-Schreier]{thm}{artinschreier}
+\label{thm:artinschreier}
+    Let $\mathbb{F}$ be a field of prime characteristic $p.$
+    \begin{enumerate}
+        \item Let $\mathbb{E}/\mathbb{F}$ be a finite Galois extension of degree $p.$ Then, $\mathbb{E} = \mathbb{F}(a)$ for some $a \in \mathbb{E}$ such that $a^p - a \in \mathbb{F}.$
+        \item Let $b \in \mathbb{F}$ be such that $f(x) \vcentcolon= x^p - x - b \in \mathbb{F}[x]$ has no root in $\mathbb{F}.$ Then, $f(x)$ is irreducible over $\mathbb{F}$ and a splitting field of $f(x)$ over $\mathbb{F}$ is cyclic of degree $p.$ \hfill\hyperref[thm:artinschreier2]{\downsym}
+    \end{enumerate} 
+\end{restatable}
+
+\artinschreier*\label{thm:artinschreier2}
+\begin{flushright}\hyperref[thm:artinschreier]{\upsym}\end{flushright}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Let $G \vcentcolon= \Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle.$ Define the $\mathbb{F}$-linear map $T : \mathbb{E} \to \mathbb{E}$ as 
+        \begin{equation*} 
+            T \vcentcolon= \sigma - \id_{\mathbb{E}}.
+        \end{equation*}
+        Note that
+        \begin{equation*} 
+            \ker(T) = \{a \in \mathbb{E} : \sigma(a) = a\} = \mathbb{E}^G = \mathbb{F}.
+        \end{equation*}
+        Also, we have
+        \begin{equation*} 
+            T^p = (\sigma - \id_{\mathbb{E}})^p = \sigma^p - \id_{\mathbb{E}} = 0
+        \end{equation*}
+        and so, $\im(T^{p - 1}) \subset \ker(T) = \mathbb{F}.$ However, note that $T^{p - 1} \neq 0$ since that would give a non-trivial relation between the distinct $\mathbb{E}^\times$ characters $1, \sigma, \ldots, \sigma^{p - 1},$ contradicting \nameref{thm:dedekindcharacters}.
+
+        Thus, $\im(T^{p - 1})$ is at least one dimensional over $\mathbb{F}.$ Since it is contained in $\mathbb{F},$ we have $\im(T^{p - 1}) = \mathbb{F}.$
+
+        Let $b \in \mathbb{E}$ be such that $T^{p - 1}(b) = 1$ and put $a = T^{p - 2}(b) \in \mathbb{E}.$ Note that
+        \begin{equation*} 
+            \sigma(a) = T(a) + a = 1 + a.
+        \end{equation*}
+        Thus, $\sigma^i(a) = i + a$ for $i = 0, \ldots, p - 1.$ All of these are distinct. Thus, $\mathbb{E} = \mathbb{F}(a).$ (Compare the separability degree.)
+
+        Now, note that
+        \begin{equation*} 
+            \sigma(a^p - a) = (1 + a)^p - (1 + a) = a^p - a
+        \end{equation*}
+        and thus, $a^p - a \in \mathbb{E}^G = \mathbb{F}.$
+        %
+        \item Suppose $b \in \mathbb{F}$ is such that $f(x) \vcentcolon= x^p - x - b$ has no root in $\mathbb{F}.$ Let $\mathbb{E}$ be a splitting field of $f(x)$ over $\mathbb{F}$ and let $\alpha \in \mathbb{E}$ be a root. Then, $\alpha + 1, \ldots, \alpha + (p - 1)$ are also roots. Thus,
+        \begin{equation*} 
+            \mathbb{E} = \mathbb{F}(\alpha, \ldots, \alpha + p - 1) = \mathbb{F}(\alpha).
+        \end{equation*}
+
+        Now, write $f(x) = g_1(x) \cdots g_r(x)$ for irreducible $g_i(x) \in \mathbb{F}[x].$ Now, if $\beta \in \mathbb{E}$ is a root of some $g_i(x),$ then $\mathbb{E} = \mathbb{F}(\beta),$ by the same argument as above and hence, each $g_i$ has degree $d \vcentcolon= [\mathbb{F}(\beta) : \mathbb{F}] > 1.$\footnote{Strictly greater since $\beta \notin \mathbb{F}.$} Thus, we have
+        \begin{equation*} 
+            p = \deg(f(x)) = rd.
+        \end{equation*}
+        Since $p$ is prime and $d > 1,$ we have $d = p$ and $r = 1.$
+
+        Thus, $[\mathbb{E} : \mathbb{F}] = d = p$ and $G$ is generated by the automorphism $\sigma$ determined by $\sigma(\alpha) = \alpha + 1.$ \qedhere
+    \end{enumerate}
+\end{proof}
+
+\section{Some Group Theory}
+
+\pgroupssolvable*\label{prop:pgroupssolvable2}
+\begin{flushright}\hyperref[prop:pgroupssolvable]{\upsym}\end{flushright}
+\begin{proof}
+    We prove this by induction on $n.$ If $n = 0, 1,$ then $G$ is abelian and hence, solvable. Suppose $n > 1$ and groups of order $p^{k}$ for $0 \le k < n$ are solvable.
+
+    Let $Z(G) \unlhd G$ denote the center of $G.$ We have $\md{Z(G)} > 1$ and thus, $\overline{G} = G/Z(G)$ is a group of order $p^k$ for some $k < n.$ By induction hypothesis, $\overline{G}$ has a series
+    \begin{equation*} 
+        \overline{G} = \overline{G_0} \supset \overline{G_1} \supset \cdots \supset \overline{G_{s}} = 1.
+    \end{equation*}
+    By the correspondence theorem, the above lifts to a series
+    \begin{equation*} 
+        G = G_0 \supset G_1 \supset \cdots \supset G_{s} = Z(G) \supset G_{s + 1} \vcentcolon= 1.
+    \end{equation*}
+    Since the quotients $G_i/G_{i - 1}$ are isomorphic to $\overline{G_i}/\overline{G_{i - 1}}$ for $i = 1, \ldots, s,$ we see that the above is an abelian series except possibly at the right-most stage. However, $Z(G)$ is abelian and so, the right-most stage is verified as well.
+\end{proof}
+
+\commutatorresults*\label{prop:commutatorresults2}
+\begin{flushright}\hyperref[prop:commutatorresults]{\upsym}\end{flushright}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Let $g, h \in G.$ Then, 
+        \begin{equation*} 
+            f([g, h]) = f(g^{-1}h^{-1}gh) = f(g)^{-1}f(h)^{-1}f(g)f(h) = [f(g), f(h)].
+        \end{equation*}
+        Thus, $f(G') \subset H'$ and we may consider the homomorphism $f'|_{G'} : G' \to H'.$ Applying the result again gives
+        \begin{equation*} 
+            f(G^{(2)}) = f((G')') \subset (H')' = H^{(2)}.
+        \end{equation*}  
+        Inductively, we get the result for all $s \ge 1.$
+
+        If $f$ is onto, then every commutator is in the image $f(G')$ and thus, $H' = f(G').$
+
+        Thus, we may consider $f$ as an onto homomorphism $f : G' \to H'.$ As before, induction gives the result for all $s \ge 1.$
+        %
+        \item Let $a \in G.$ The inner automorphism $i_a : G \to G$ restricts to one of $K$ since $K \unlhd G.$ By the previous part, $i_a(K') = K'$ and thus, $K$ is normal. $G' \unlhd G$ follows since $G \unlhd G.$
+        %
+        \item $G/K$ is abelian $\iff$ $ghK = hgK$ for all $h, g \in G$ $\iff$ $g^{-1}h^{-1}gh \in K$ for all $g, h \in K$ $\iff$ $G' \le K.$ \qedhere
+    \end{enumerate}
+\end{proof}
+
+\solvableifftrivialderiv*\label{prop:solvableifftrivialderiv2}
+\begin{flushright}\hyperref[prop:solvableifftrivialderiv]{\upsym}\end{flushright}
+\begin{proof}
+    \forward Suppose $G$ is solvable. Then, there is an abelian series
+    \begin{equation} \label{eq:007}
+        1 = G_0 \unlhd G_1 \unlhd \cdots \unlhd G_s = G
+    \end{equation}
+    for $G.$ We show by induction on $s$ that $G^{(s)} = 1.$ 
+
+    If $s = 1,$ then $G$ is abelian and $G^{(1)} = 1.$ Now, let $s > 1$ and assume that $G^{(s - 1)} = 1$ whenever $G$ has an abelian series of length $s - 1.$ Let $G$ be a group with an abelian series of length $s$ as in \Cref{eq:007}. Then,
+    \begin{equation*} 
+        1 = G_0 \unlhd G_1 \unlhd \cdots \unlhd G_{s - 1}
+    \end{equation*}
+    is an abelian series for $G_{s - 1}.$ By induction hypothesis, we have $G_{s - 1}^{(s - 1)} = 1.$ Since $G/G_{s - 1}$ is abelian, we have $G' \subset G_{s - 1},$ by \Cref{prop:commutatorresults}. Thus,
+    \begin{equation*} 
+        G^{(s)} = (G')^{(s - 1)} \subset (G_{s - 1})^{(s - 1)} = 1.
+    \end{equation*}
+
+    \backward Suppose that $G^{(s)} = 1$ for some $s.$ Then,
+    \begin{equation*} 
+        1 = G^{(s)} \unlhd G^{(s - 1)} \unlhd \cdots \unlhd G^{(1)} \unlhd G
+    \end{equation*}
+    is an abelian series.
+\end{proof}
+
+\deriveofquotient*\label{prop:deriveofquotient2}
+\begin{flushright}\hyperref[prop:deriveofquotient]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\pi : G \to G/K$ be the natural onto map. Then, $\pi(G^{(s)}) = (G/K)^{(s)},$ by \Cref{prop:commutatorresults}. By the correspondence theorem, we see that $\langle G^{(s)}, K\rangle/K = (G/K)^{s}.$ 
+\end{proof}
+
+\twoofthreesolvable*\label{prop:twoofthreesolvable2}
+\begin{flushright}\hyperref[prop:twoofthreesolvable]{\upsym}\end{flushright}
+\begin{proof}
+    For the first two parts, let $s$ be such that $G^{(s)} = 1.$ (Exists by \Cref{prop:solvableifftrivialderiv}.) Using the same result, it suffices to show that $H^{(s)} = 1$ for the first two parts.
+    \begin{enumerate}
+        \item $H^{(s)} \cong i(H^{(s)}) \subset G^{(s)} = 1.$
+        \item Since $f$ is onto, we have $H^{(s)} = f(G^{(s)}) = 1.$
+        \item There exist $s$ and $t$ such that $K^{(s)} = 1$ and $(G/K)^{(t)} = 1.$\\
+        By \Cref{prop:deriveofquotient}, we have $(G/K)^{(t)} = \langle G^{(t)}, K\rangle/K.$ Since this is trivial, we have $G^{(t)} \subset K$ and so, $G^{(s + t)} \subset K^{(s)} = 1.$ \qedhere
+    \end{enumerate}
+\end{proof}
+
+\refiningabelianseries*\label{prop:refiningabelianseries2}
+\begin{flushright}\hyperref[prop:refiningabelianseries]{\upsym}\end{flushright}
+\begin{proof}
+    Since $G$ is solvable, there exists an abelian series
+    \begin{equation*} 
+        1 = G_0 \unlhd G_1 \unlhd \cdots \unlhd G_s = G.
+    \end{equation*}
+    We show that between $G_i$ and $G_{i + 1},$ we can insert groups $H_1^{(i)}, \ldots, H_{r_i}^{(i)}$ such that 
+    \begin{equation*} 
+        G_i \unlhd H_1^{(i)} \unlhd \cdots \unlhd H_{r_i}^{(i)} \unlhd G_{i + 1}
+    \end{equation*}
+    and each quotient above is cyclic of prime order.
+
+    Note that by the correspondence theorem of subgroups of the original group and a quotient group, it suffices to prove that for $s = 1.$
+
+    That is, assume that $G$ is an abelian group. We show that there exists a chain
+    \begin{equation*} 
+        1 = G_0 \unlhd \cdots \unlhd G_s = G
+    \end{equation*}
+    such that the quotients are cyclic of prime order.
+
+    Let $\md{G} = p_1 \cdots p_n,$ where $p_i$ are (not necessarily distinct) primes. We prove the statement by induction on $n.$ If $n = 0$ or $1,$ the result is obvious. Assume $n \ge 2$ and that the result is true for $n - 1.$ Then, since $p_n \mid G,$ there exists an element $g \in G$ order $p_n.$ Let $G_1 \vcentcolon= \langle g\rangle.$ Then, $G_1 \unlhd G$ since $G$ is abelian. By induction, $G/G_1$ has a normal series where the quotients are cyclic of prime order. Lift that chain to complete the proof.
+\end{proof}
+
+\Angenerator*\label{lem:Angenerator2}
+\begin{flushright}\hyperref[lem:Angenerator]{\upsym}\end{flushright}
+\begin{proof}
+    Clearly, every three cycle $(a b c) = (a c)(a b)$ is indeed in $A_n.$ Let $H \le A_4$ be the subgroup generated by the $3$-cycles.
+
+    Let $\tau_1 = (i j)$ and $\tau_2 = (r s)$ be distinct transpositions. Then, we have
+    \begin{equation*} 
+        \tau_1\tau_2 = \begin{cases}
+            (i j r)(r s j) & \tau_1 \text{ and } \tau_2 \text{ are disjoint},\\
+            (irs) & \text{otherwise}.
+        \end{cases}
+    \end{equation*}
+    Thus, $H$ contains all products of distinct pairs of transpositions. Since these generate $A_n$ (by definition), we have $H = A_n.$
+
+    Now, assume that $n \ge 3.$ Recall that if $\sigma \in S_n$ is any permutation and $(j_1, \ldots, j_k)$ is a $k$-cycle, then
+    \begin{equation*} 
+        \sigma(j_1, \ldots, j_k)\sigma^{-1} = (\sigma(j_1), \ldots, \sigma(j_k)).
+    \end{equation*}
+
+    Now, let $(i j k)$ and $(r s t)$ be any two $3$-cycles. Define $\gamma \in S_n$ by
+    \begin{equation*} 
+        \gamma(u) \vcentcolon= \begin{cases}
+            r & u = i, \\
+            s & u = j, \\
+            t & u = k, \\
+            u & \text{otherwise}.
+        \end{cases}
+    \end{equation*}
+    Clearly, the above is indeed a bijection from $[n]$ to itself. Then, we have
+    \begin{equation*} 
+        \gamma\cdot(i j k)\cdot\gamma^{-1} = (r s t).
+    \end{equation*}
+    Thus, if $\gamma$ is even, then the above shows that the $3$-cycles are conjugate in $A_n.$ Otherwise, pick distinct $u, v \in [n] \setminus \{r, s, t\}$ (exist since $n \ge 5$) and define $\sigma \vcentcolon= (i j) \cdot \gamma.$ Then,
+    \begin{equation*} 
+        \sigma\cdot(i j k)\cdot\sigma^{-1} = (u v)(r s t)(u v)^{-1} = (r s t)
+    \end{equation*}
+    and $\sigma \in A_n.$
+\end{proof}
+
+\SnAnnotsolvable*\label{thm:SnAnnotsolvable2}
+\begin{flushright}\hyperref[thm:SnAnnotsolvable]{\upsym}\end{flushright}
+\begin{proof}
+    In view of \Cref{prop:twoofthreesolvable}, it suffices to show that $A_n$ is not solvable. We now show that $A_n' = A_n$ and hence, $A_n^{(s)} = A_n \neq 1$ for all $s \ge 1.$
+
+    We actually show that every $3$-cycle $(i j k) \in A_n$ is a commutator. Then, by \Cref{lem:Angenerator}, it follows that $A_n' = A_n.$ Since $n \ge 5,$ we can distinct $r, v \in [n] \setminus \{i, j, k\}.$ Then, we have
+    \begin{equation*} 
+        [(jkv), (ikr)] = (vkj)(rki)(jkv)(ikr) = (vkj)(ivj) = (ikj). \qedhere
+    \end{equation*}
+\end{proof}
+
+\Ansimple*\label{thm:Ansimple2}
+\begin{flushright}\hyperref[thm:Ansimple]{\upsym}\end{flushright}
+\begin{proof}
+    Suppose $1 \neq N \unlhd A_n.$ We show that $N = A_n.$ If $N$ contains a $3$-cycle, then $N$ contains all $3$-cycles since $N$ is normal in $A_4$ and all $3$-cycles in $A_n$ are conjugates, by \Cref{lem:Angenerator}. But that lemma also tells us that $A_n$ is generated by $3$-cycles. Thus, we get $N = A_4.$ So, it suffices to show that $N$ contains a $3$-cycle.
+
+    For $\sigma \in S_n$ and $j \in [n],$ we say that $j$ is a fixed point of $\sigma$ if $\sigma(j) = j.$ Pick $\sigma \in N \setminus \{1\}$ with maximum number of fixed points in $N \setminus \{1\}.$ We will show that $\sigma$ is a $3$-cycle.
+
+    Write $\sigma = \tau_1 \cdots \tau_g$ where $\tau_1, \ldots, \tau_g$ are disjoint cycles of length at least $2$ and $g \ge 1.$ This is possible since $\sigma \neq 1.$
+
+    \textbf{Case 1.} Each $\tau_i$ has length exactly $2.$ Then, since $\sigma$ is even, we have $g \ge 2.$\\
+    Let $\tau_1 = (i j)$ and $\tau_2 = (r s).$ Since $n \ge 5,$ we can fix $k \in [n] \setminus \{i, j, r, s\}$ and set $\tau = (r s k) \in A_n.$ Consider the commutator
+    \begin{equation*} 
+        \sigma' = [\sigma, \tau] = \sigma^{-1}\underbrace{(\tau^{-1}\sigma\tau)}_{\in N} \in N
+    \end{equation*}
+    Let $\gamma = \tau_3 \cdots \tau_g$ so that
+    \begin{equation*} 
+        \sigma = (i j)(r s)\gamma
+    \end{equation*}
+    with $\gamma$ fixing $i, j, r, s.$ (Since the $\tau$s were disjoint.)
+
+    Note that $\tau\sigma(k) = \tau\gamma(k) = \gamma(k),$ since $\gamma$ restricts to a permutation on $[n] \setminus \{i, j, r, s\}.$ On the other hand, we have $\sigma\tau(k) = \sigma(r) = s \neq k.$ Thus, $\tau\sigma \neq \sigma\tau$ and hence, $\sigma' \neq 1.$
+
+    But note that $\sigma'$ fixes all fixed points of $\sigma,$ with possible exception of $k.$\footnote{By this, we mean that it was possible that $\sigma$ fixed $k.$} However, $\sigma'$ also fixes $i$ and $j.$ Thus, $\sigma' \in N \setminus \{1\}$ has more fixed points than $\sigma.$ A contradiction.
+
+    \textbf{Case 2.} There is some $\tau_i$ with length at least $3.$ Since all the $\tau$s commute, we may assume $\tau_1 = (i j k \ldots)$ has length at least $3.$ If $\sigma = (i j k),$ then we are done.
+
+    Otherwise, there are at least two other elements $r , s$ apart from $i, j, k$ that $\sigma$ does not fix.\footnote{If $g = 1,$ then $\tau_1$ is a cycle with odd number of elements since $\sigma \in A_n.$ If $g \ge 2,$ then $\tau_2$ has at least two elements which it moves.} Let $\tau = (r s k) \in A_n$ and consider $\sigma' = [\sigma, \tau].$ Note that $\sigma'(j) \neq j$ and thus, $\sigma' \neq 1.$ Thus, $\sigma' \in N \setminus \{1\}.$
+
+    However, note that $\sigma'(i) = i$ and $\sigma'$ fixes every fixed element of $\sigma.$ (Since $\tau$ only moves those elements already moved by $\sigma.$) Thus, $\sigma'$ fixes more elements than $\sigma,$ a contradiction.
+
+    Thus, $\sigma$ is a $3$-cycle and we are done.
+\end{proof}
+
+\genconsectranpose*\label{thm:genconsectranpose2}
+\begin{flushright}\hyperref[thm:genconsectranpose]{\upsym}\end{flushright}
+\begin{proof}
+    For $n = 2,$ the theorem is clear. Assume $n \ge 3.$ Then, by \Cref{thm:gentranspose}, it suffices to show that every transposition is generated by the above list. Let $(ij) \in S_n$ be a transposition. If $i = 1$ or $j = 1,$ then it is in the above list. Assume $i \neq 1 \neq j.$ Then, we have
+    \begin{equation*} 
+        (ij) = (1i)(1j)(1i). \qedhere
+    \end{equation*}
+\end{proof}
+
+\genconsectranposespecial*\label{thm:genconsectranposespecial2}
+\begin{flushright}\hyperref[thm:genconsectranposespecial]{\upsym}\end{flushright}
+\begin{proof}
+    Again, by \Cref{thm:gentranspose}, it suffices to show that every transposition is generated by the above list.
+
+    Let $(a \ b) \in S_n$ be a transposition. Without loss of generality, we assume that $a < b.$\footnote{Note that $(a \ b) = (b \ a).$} We show that $(a \ b)$ is a product of elements of the given list by induction on $b - a.$
+
+    If $b - a = 1,$ then $(a \ b)$ is in the list itself. Assume $b - a = k > 1$ and the theorem is true for $k - 1.$ Note that we have
+    \begin{equation*} 
+        (a \ b) = (a \ a + 1)(a + 1 \ b)(a \ a + 1).
+    \end{equation*}
+    Since $(a + 1) - a = 1$ and $b - (a + 1) = k - 1,$ we are done.
+\end{proof}
+
+\gentransposecycle*\label{thm:gentransposecycle2}
+\begin{flushright}\hyperref[thm:gentransposecycle]{\upsym}\end{flushright}
+\begin{proof}
+    The theorem is clearly true for $n = 2.$ Assume $n \ge 3.$
+
+    By \Cref{thm:genconsectranposespecial}, it suffices to show the two elements above generate all transpositions of the form $(i \ i + 1)$ for $1 \le i < n.$ 
+
+    Let $\sigma \vcentcolon= (12 \ldots n).$ Then, for $k = 1, \ldots, n - 2,$ we have
+    \begin{equation*} 
+        \sigma^k(1 \ 2)\sigma^{-k} = (\sigma^k(1) \ \sigma^k(2)) = (k + 1 \ k + 2). \qedhere
+    \end{equation*}
+\end{proof}
+
+\genprimetranscycle*\label{cor:genprimetranscycle2}
+\begin{flushright}\hyperref[cor:genprimetranscycle]{\upsym}\end{flushright}
+\begin{proof}
+    Let renumbering, we may assume that the transposition is $(12).$ The $p$-cycle is of the form $(1 a_1 \ldots a_{p - 2}) =\vcentcolon \sigma.$ Since $p$ is a prime, there exists $k$ such that $\sigma^k$ is of the form $(1 2 b_3 \ldots b_{p - 3}).$ By renumbering again, we may assume that $b_i = i$ for $i = 3, \ldots, n.$ By \Cref{thm:gentransposecycle}, we are done.
+\end{proof}
+
+\section{Galois Groups of Composite Extensions}
+
+\galoisEFK*\label{prop:galoisEFK2}
+\begin{flushright}\hyperref[prop:galoisEFK]{\upsym}\end{flushright}
+\begin{proof}
+    As $\mathbb{E}/\mathbb{F}$ is Galois, $\mathbb{E}$ is a splitting field of a family of separable polynomials $\{f_i(x)\}_{i \in I} \subset \mathbb{F}[x]$ over $\mathbb{F}.$ Then, $\mathbb{E}\mathbb{K}$ is splitting of the same family over $\mathbb{K}$ and thus, is Galois over $\mathbb{K}.$
+
+    Now, assume that $\mathbb{K}/\mathbb{E}$ is also Galois. Then, $\mathbb{K}$ is a splitting field of a family of separable polynomials $\{g_j(x)\}_{j \in J} \subset \mathbb{F}[x]$ over $\mathbb{F}.$ Then, $\mathbb{E}\mathbb{F}$ is a splitting field the the family $\{f_i(x)\}_{i \in I} \cup \{g_j(x)\}_{j \in J} \subset \mathbb{F}[x]$ over $\mathbb{F}$ and thus, Galois.
+
+    Now we show the same for the intersection. Let $\sigma : (\mathbb{E} \cap \mathbb{K}) \to \overline{F}$ be an $\mathbb{F}$-embedding. Extend it to an $\mathbb{F}$-embedding $\tau : \mathbb{E}\mathbb{K} \to \overline{F}.$\\
+    Since $\mathbb{E}/\mathbb{F}$ and $\mathbb{K}/\mathbb{F}$ are normal, we get $\tau(\mathbb{E}) = \mathbb{E}$ and $\tau(\mathbb{K}) = \mathbb{K}.$ Therefore, $\tau(\mathbb{E} \cap \mathbb{K}) \subset \mathbb{E} \cap \mathbb{K}.$ But since $(\mathbb{E} \cap \mathbb{K})/\mathbb{F}$ is algebraic, we have $\tau(\mathbb{E} \cap \mathbb{K}) = \mathbb{E} \cap \mathbb{K},$ by \Cref{lem:algebraicautomorphism}. Thus, $\sigma(\mathbb{E} \cap \mathbb{K}) = \mathbb{E} \cap \mathbb{K},$ as desired and so, $\mathbb{E} \cap \mathbb{K}$ is Galois over $\mathbb{F}.$ (We have used \Cref{thm:normalequivalent}.)
+\end{proof}
+
+\secondiso*\label{prop:secondiso2}
+\begin{flushright}\hyperref[prop:secondiso]{\upsym}\end{flushright}
+\begin{proof}
+    First note that $\sigma$ is actually well-defined. Indeed, if $\sigma \in \Gal(\mathbb{E}\mathbb{K}/\mathbb{K}),$ then $\sigma$ fixes $\mathbb{K}$ and in particular, $\mathbb{F}.$ Thus, so does $\sigma|_{\mathbb{E}}.$ That is is a homomorphism is clear.
+
+    Now, suppose that $\sigma \in \Gal(\mathbb{E}\mathbb{K}/\mathbb{K})$ is such that $\sigma|_{\mathbb{E}} = \id_{\mathbb{E}}.$ By definition of the Galois group, we have $\sigma|_{\mathbb{K}} = \id_{\mathbb{K}}.$ Thus, $\sigma$ fixes both $\mathbb{E}$ and $\mathbb{K}$ and in turn, $\mathbb{E}\mathbb{K}.$ Hence, $\psi$ is injective.
+
+    Let $H \vcentcolon= \im(\psi) \le G \vcentcolon= \Gal(\mathbb{E}/\mathbb{F}).$ Note that $\mathbb{E} \cap \mathbb{K} \subset \mathbb{E}^H.$ Indeed, if $a \in \mathbb{E} \cap \mathbb{K}$ and $\tau = \psi(\sigma) \in H$ for some $\sigma \in \Gal(\mathbb{E}\mathbb{K}/\mathbb{K}),$ then $\tau(a) = \sigma(a) = a,$ since $\sigma$ fixes $\mathbb{K}.$
+
+    On the other hand, if $a \in \mathbb{E} \setminus (\mathbb{E} \cap \mathbb{K}),$ then $a \in \mathbb{E}\mathbb{K} \setminus \mathbb{K}$ and hence, there exists $\sigma \in \Gal(\mathbb{E}\mathbb{K}/\mathbb{K})$ such that $\sigma(a) \neq a.$ (See \Cref{thm:fixfieldinjectiveIG} and \Cref{rem:nonbasemoved}.) Thus, $a \notin \mathbb{E}^H.$ Hence, $\mathbb{E}^H = \mathbb{E} \cap \mathbb{K}.$ 
+
+    Now, note $H$ is finite since $G$ is so. By \nameref{thm:artin}, we have 
+    \begin{equation*} 
+        \Gal(\mathbb{E}\mathbb{K}/\mathbb{K}) \cong H = \Gal(\mathbb{E}/\mathbb{E}^H) = \Gal(\mathbb{E}/(\mathbb{E} \cap \mathbb{K})). \qedhere
+    \end{equation*}
+\end{proof}
+
+\secondisoindex*\label{cor:secondisoindex2}
+\begin{flushright}\hyperref[cor:secondisoindex]{\upsym}\end{flushright}
+\begin{proof}
+    The equation about the degrees follows from \Cref{prop:orderofgalgroup}.
+
+    Thus,
+    \begin{equation*} 
+        [\mathbb{E}\mathbb{K} : \mathbb{F}] = [\mathbb{E}\mathbb{K} : \mathbb{K}][\mathbb{K} : \mathbb{F}] = [\mathbb{E} : \mathbb{E} \cap \mathbb{K}][\mathbb{K} : \mathbb{F}] = \frac{[\mathbb{E} : \mathbb{F}]}{[\mathbb{E} \cap \mathbb{K} : \mathbb{F}]}[\mathbb{K} : \mathbb{F}].
+    \end{equation*}
+    The last statement now follows.
+\end{proof}
+
+\galoiscompositeproduct*\label{thm:galoiscompositeproduct2}
+\begin{flushright}\hyperref[thm:galoiscompositeproduct]{\upsym}\end{flushright}
+\begin{proof}
+    That $\psi$ is a well-defined homomorphism is clear. (Same proof as \Cref{prop:secondiso}.) Suppose $\sigma \in \ker(\psi).$ Then, $\sigma(a) = a$ for all $a \in \mathbb{E}$ and for all $a \in \mathbb{K}.$ Thus, $\sigma = \id_{\mathbb{E}\mathbb{K}}$ and hence, $\psi$ is injective.
+
+    Suppose that $\mathbb{E} \cap \mathbb{K} = \mathbb{F},$ then by \Cref{cor:secondisoindex}, we have
+    \begin{equation*} 
+        \md{\Gal(\mathbb{E}\mathbb{K}/\mathbb{F})} = [\mathbb{E}\mathbb{K} : \mathbb{F}] = [\mathbb{E} : \mathbb{F}][\mathbb{K} : \mathbb{F}] = \md{\Gal(\mathbb{E}/\mathbb{F}) \times \Gal(\mathbb{K}/\mathbb{F})}
+    \end{equation*}
+    and thus, comparing cardinalities gives that $\psi$ is onto as well.
+\end{proof}
+
+\section{Normal Closure of an Algebraic Extension}
+\normalclosureproperties*\label{prop:normalclosureproperties2}
+\begin{flushright}\hyperref[prop:normalclosureproperties]{\upsym}\end{flushright}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item $\mathbb{K}$ is normal by \Cref{thm:normalequivalent}. That it contains $\mathbb{E}$ is trivial.
+        \item Since $\mathbb{K}' \supset \mathbb{E},$ given any $a \in \mathbb{E},$ the polynomial $\irr(a, \mathbb{F})$ must factor completely in $\mathbb{K}',$ by definition of normality. Thus, it contains the splitting field of $\irr(a, \mathbb{F})$ over $\mathbb{F}.$ Since this is true for all $a \in \mathbb{E},$ $\mathbb{K}' \supset \mathbb{K}.$
+        \item Write $\mathbb{E} = \mathbb{F}(a_1, \ldots, a_n).$ Then, consider the splitting field $\mathbb{K}$ of $\{\irr(a_i, \mathbb{F}) \mid 1 \le i \le n\}$ over $\mathbb{F}.$ Then, $\mathbb{K}$ is normal over $\mathbb{F}$ and any normal extension of $\mathbb{F}$ must contain $\mathbb{K}.$ Thus, $\mathbb{K}$ is the normal closure. $\mathbb{K}/\mathbb{F}$ is clearly a finite extension.
+        \item Since $\irr(a, \mathbb{F})$ is separable over $\mathbb{F}$ for each $a \in \mathbb{E},$ we see that $\mathbb{K}/\mathbb{F}$ is normal, in view of \Cref{prop:seppolysplittingfields}.
+        \item Let $K \vcentcolon= \Gal(\mathbb{K}/\mathbb{E}).$ Note that $K$ is not normal in $G$ since $\mathbb{E}/\mathbb{F}$ is not normal. (Recall \Cref{thm:galoisiffnormal}, which was for infinite extensions as well.)
+
+        Thus, we see that $\mathbb{K}^H \supsetneq \mathbb{K}^K = \mathbb{E}.$ By \Cref{thm:galoisiffnormal} again, we see that $\mathbb{K}^H/\mathbb{F}$ is normal. Thus, $\mathbb{K}^H$ is a normal extension of $\mathbb{F}$ containing $\mathbb{E}$ which is contained in $\mathbb{K}.$ By minimality of $\mathbb{K},$ we have $\mathbb{K}^H = \mathbb{K}$ and thus, $H = 1.$
+    \end{enumerate}
+\end{proof}
+
+\section{Solvability by Radicals}
+
+\radextproperties*\label{prop:radextproperties2}
+\begin{flushright}\hyperref[prop:radextproperties]{\upsym}\end{flushright}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Let
+        \begin{equation*} 
+            \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n \subset \mathbb{E}
+        \end{equation*}
+        and
+        \begin{equation*} 
+            \mathbb{E} = \mathbb{E}_0 \subset \mathbb{E}_1 \subset \cdots \subset \mathbb{E}_m \subset \mathbb{K}
+        \end{equation*}
+        be towers of simple radical extensions. Append the two together to see that $\mathbb{K}/\mathbb{F}$ is a radical extension.
+        %
+        \item Let
+        \begin{equation*} 
+            \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n \subset \mathbb{E}
+        \end{equation*}
+        be a tower of simple radical extensions. Then, there exist $a_i \in \mathbb{F}_i$ such that
+        \begin{equation*} 
+            \mathbb{F}_i = \mathbb{F}_{i - 1}(a_i)
+        \end{equation*}
+        for $i = 1, \ldots, n,$ such that a power of $a_i$ is in $\mathbb{F}_{i - 1}.$
+
+        Consider the tower
+        \begin{equation*} 
+            \mathbb{K} \subset \mathbb{K}(a_1) \subset \cdots \subset \mathbb{K}(a_1, \ldots, a_m) = \mathbb{E}\mathbb{K}.
+        \end{equation*}
+
+        Clearly, each extension above is a simple radical extension. Thus, $\mathbb{E}\mathbb{K}/\mathbb{K}$ is a radical extension. If $\mathbb{K}/\mathbb{F}$ is also radical, then the previous part gives us that $\mathbb{E}\mathbb{K}/\mathbb{F}$ is also radical.
+    \end{enumerate}
+\end{proof}
+
+\sepgaloisradical*\label{prop:sepgaloisradical2}
+\begin{flushright}\hyperref[prop:sepgaloisradical]{\upsym}\end{flushright}
+\begin{proof}
+    Let $n \vcentcolon= [\mathbb{E} : \mathbb{F}].$ (Note that $n < \infty$ since $\mathbb{E}/\mathbb{F}$ is a radical extension.) Since $\mathbb{E}/\mathbb{F}$ is separable, there are $n$ distinct $\mathbb{F}$-embeddings
+    \begin{equation*} 
+        \sigma_1, \ldots, \sigma_n : \mathbb{E} \to \overline{\mathbb{F}}.
+    \end{equation*}
+    We show that $\mathbb{K} = \sigma_1(\mathbb{E}) \cdots \sigma_n(\mathbb{E})$ is the smallest Galois extension of $\mathbb{F}$ containing $\mathbb{E}.$
+
+    By the \nameref{thm:pet}, we know that $\mathbb{E} = \mathbb{F}(a)$ for some $a \in \mathbb{E}.$ Then, the roots of $p(x) \vcentcolon= \irr(a, \mathbb{F})$ in $\overline{\mathbb{F}}$ are precisely $\sigma_1(a), \ldots, \sigma_n(a).$ Let $\mathbb{K} \vcentcolon= \mathbb{F}(\sigma_1(a), \ldots, \sigma_n(a)).$ Then, $\mathbb{K}$ is a splitting field of a separable polynomial and hence, Galois over $\mathbb{K}.$ Moreover, it contains $\mathbb{E}.$ It is clear any such another field must contain $\mathbb{K}.$ Thus, $\mathbb{K}$ satisfies the hypothesis of the theorem.
+
+    Note that we have $\mathbb{K} = \sigma_1(\mathbb{E}) \cdots \sigma_n(\mathbb{E}).$ Since $\sigma(\mathbb{E}_i) \cong \mathbb{E}_i,$ we see that each $\sigma(\mathbb{E}_i)/\mathbb{F}$ is a radical extension and thus, so is $\mathbb{K}/\mathbb{F},$ by \Cref{prop:radextproperties}.
+\end{proof}
+
+\solvradicalimpliesgroup*\label{thm:solvradicalimpliesgroup2}
+\begin{flushright}\hyperref[thm:solvradicalimpliesgroup]{\upsym}\end{flushright}
+\begin{proof}
+    Let
+    \begin{equation*} 
+        \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_r = \mathbb{K}
+    \end{equation*}
+    be a sequence of simple radical extensions with $\mathbb{F}_i = \mathbb{F}_{i - 1}(a_i)$ such that $a_i^{n_i} \in \mathbb{F}_{i - 1}$ for $i = 1, \ldots, r$ and $\mathbb{K}$ contains a splitting field $\mathbb{E}$ of $f(x)$ over $\mathbb{F}.$ 
+
+    Since $\chr(\mathbb{F}) = 0,$ we know that $\mathbb{K}/\mathbb{F}$ is separable. Thus, by \Cref{prop:sepgaloisradical}, we may assume that $\mathbb{K}/\mathbb{F}$ is Galois. Let $n \vcentcolon= n_1 \cdots n_r$ and $\mathbb{L}$ be the splitting field of $x^n - 1$ over $\mathbb{K}.$
+
+    Then, $\mathbb{L} = \mathbb{K}(\omega)$ where $\omega$ is any primitive $n$-th root of unity. Consider the fields $\mathbb{L}_0, \ldots, \mathbb{L}_r = \mathbb{L}$ defined as $\mathbb{L}_i \vcentcolon= \mathbb{F}_i(\omega).$ 
+
+    Since $\mathbb{K}/\mathbb{F}$ is Galois, $\mathbb{K}$ is the splitting of some $g(x) \in \mathbb{F}[x]$ over $\mathbb{F}.$ Then, $\mathbb{L}$ is a splitting field of $(x^n - 1)g(x) \in \mathbb{F}[x]$ over $\mathbb{F}.$ Thus, $\mathbb{L}$ is Galois over $\mathbb{F}$ and in turn, over all $\mathbb{L}_i.$
+
+    Let $H_i \vcentcolon= \Gal(\mathbb{L}/\mathbb{L}_i)$ for $i = 0, \ldots, r.$ See the diagram (at the end of this proof) for a picture. By \hyperref[thm:FTGT]{FTGT}, we have 
+    \begin{equation*} 
+        \G_f \cong \Gal(\mathbb{E}/\mathbb{F}) \cong \frac{\Gal(\mathbb{L}/\mathbb{F})}{\Gal(\mathbb{L}/\mathbb{E})}.
+    \end{equation*}
+    (Note that $\mathbb{L}/\mathbb{E}$ is normal since $\mathbb{L}$ is a splitting field over $\mathbb{E}.$)
+
+    Thus, to prove that $\G_f$ is solvable, it is enough to prove that $\Gal(\mathbb{L}/\mathbb{F})$ is solvable, by \Cref{prop:twoofthreesolvable}. 
+
+    Note that $\mathbb{L}_i = \mathbb{L}_{i - 1}(a_i)$ and that $\mathbb{L}_{i - 1} \ni \omega$ and so, $\mathbb{L}_{i - 1}$ contains a primitive $n_i$-th root of unity. Thus, $\mathbb{L}_i$ is a splitting field of $x^{n_i} - a_i^{n_i} \in \mathbb{L}_{i - 1}$ over $\mathbb{L}_{i - 1}.$ Hence, $\mathbb{L}_i/\mathbb{L}_{i - 1}$ is Galois. Thus, $H_{i - 1} \unlhd H_i$ for all $i = 1, \ldots, r.$
+
+    Moreover, by \Cref{prop:nthrootsnonunity}, we see that $\Gal(\mathbb{L}_i/\mathbb{L}_{i - 1})$ is cyclic. Since $H_{i}/H_{i - 1} \cong \Gal(\mathbb{L}_i/\mathbb{L}_{i - 1}),$ we see that
+    \begin{equation*} 
+        1 = H_r \unlhd H_{r - 1} \unlhd \cdots \unlhd H_0 = \Gal(\mathbb{L}/\mathbb{L}_0)
+    \end{equation*}
+    is an abelian series for $\Gal(\mathbb{L}/\mathbb{L}_0)$ and hence, it is solvable.
+
+    On the other hand, we know that $\Gal(\mathbb{L}_0/\mathbb{F})$ is abelian, by \Cref{prop:Gfabeliansubgroup}. Again, by \Cref{prop:twoofthreesolvable}, we see that $\Gal(\mathbb{L}/\mathbb{F})$ is solvable, as desired.
+
+    \begin{center}
+        \begin{tikzcd}
+                         &  &                                                                         &  & \mathbb{K}(\omega) = \mathbb{L}_r = \mathbb{L} \arrow[rr, no head]         &  & \Gal(\mathbb{L}/\mathbb{L}) = 1                            \\
+                         &  & \mathbb{K} = \mathbb{F}_r \arrow[rru, no head]                                   &  &                                                                   &  &                                                            \\
+                         &  &                                                                         &  & \mathbb{F}_{r-1}(\omega) = \mathbb{L}_{r-1} \arrow[rr, no head] \arrow[uu, no head] &  & \Gal(\mathbb{L}/\mathbb{L}_{r - 1}) = H_{r - 1} \arrow[uu, no head] \\
+                         &  & \mathbb{F}_{r-1} \arrow[uu, no head] \arrow[rru, no head]                                 &  &                                                                   &  &                                                            \\
+        \mathbb{E} \arrow[rruuu, no head] &  &                                                                         &  & \mathbb{F}_1(\omega) = \mathbb{L}_1 \arrow[rr, no head] \arrow[uu, dashed, no head] &  & \Gal(\mathbb{L}/\mathbb{L}_1) = H_1 \arrow[uu, dashed, no head]     \\
+                                 &  & \mathbb{F}_1 \arrow[rru, no head] \arrow[uu, dashed, no head]                             &  &                                                                   &  &                                                            \\
+                                 &  &                                                                         &  & \mathbb{F}_0(\omega) = \mathbb{L}_0 \arrow[rr, no head] \arrow[uu, no head]         &  & \Gal(\mathbb{L}/\mathbb{L}_0) = H_0 \arrow[uu, no head]             \\
+                                 &  & \mathbb{F} = \mathbb{F}_0 \arrow[rru, no head] \arrow[uu, no head] \arrow[lluuu, no head] &  &                                                                   &  &                                                           
+        \end{tikzcd}
+    \end{center}    
+\end{proof}
+
+\solvgroupimpliesradical*\label{thm:solvgroupimpliesradical2}
+\begin{flushright}\hyperref[thm:solvgroupimpliesradical]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\mathbb{K}$ be a splitting field of $f(x)$ over $\mathbb{F}$ and $[\mathbb{K} : \mathbb{F}] = n.$ Let $\mathbb{L}$ be a splitting field of $x^n - 1$ over $\mathbb{K}$ and $\omega \in \mathbb{L}$ be a primitive $n$-th root of unity. We have $\mathbb{L} = \mathbb{K}(\omega).$ Put $\mathbb{E} = \mathbb{F}(\omega).$ Then, $\mathbb{L}$ is a splitting of $f(x)$ over $\mathbb{E}.$\footnote{The embedding is given as $\sigma \mapsto \sigma_{\mathbb{K}}.$ It is injective because $\sigma$ fixes $\omega$ to begin with.} Since $H = \Gal(\mathbb{L}/\mathbb{E})$ embeds into $\Gal(\mathbb{K}/\mathbb{F}) \cong \G_f,$ $H$ is also a solvable group, by \Cref{prop:twoofthreesolvable2}. Note that $\mathbb{E}/\mathbb{F}$ is a simple radical extension. Thus, if we show that $\mathbb{L}/\mathbb{E}$ is a radical extension, then we are done. (\Cref{prop:radextproperties}.)
+
+    Since $H$ is finite, by \Cref{prop:refiningabelianseries}, we have an abelian series
+    \begin{equation*} 
+        1 = H_k \unlhd H_{k - 1} \unlhd \cdots \unlhd H_0 = H
+    \end{equation*}
+    such that $H_i/H_{i + 1}$ is cyclic of prime order $p_{i + 1}$ for $i = 0, \ldots, k - 1.$ Note that $n = p_1 \cdots p_k.$
+
+    Let $\mathbb{E}_i \vcentcolon= \mathbb{L}^{H_i}$ for $i = 1, \ldots, k.$ Then, $[\mathbb{E}_i : \mathbb{E}_{i - 1}] = \md{H_{i - 1}/H_i} = p_i.$ Since $\mathbb{E}_{i - 1}$ contains $\omega,$ it has a primitive $p_i$-th root of unity. Thus, $\mathbb{E}_i/\mathbb{E}_{i - 1}$ is a simple radical extension, by \Cref{thm:cyclicextprimroot}. Thus, $\mathbb{L}/\mathbb{E}$ is a radical extension.
 \end{proof}

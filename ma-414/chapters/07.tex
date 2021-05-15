@@ -1,4 +1,5 @@
 \chapter{Galois Extensions}
+\section{Definitions}
 
 \begin{defn}%[]
     A field extension $\mathbb{E}/\mathbb{F}$ is called a \deff{Galois extension} if it is normal and separable. The \deff{Galois group of a Galois extension} $\mathbb{E}/\mathbb{F}$ is the group of all $\mathbb{F}$-automorphisms of $\mathbb{E}$ under the operation of composition of maps. It is denoted $\Gal(\mathbb{E}/\mathbb{F}).$
@@ -58,7 +59,7 @@ Note that the last equality is simply by definition of a Galois extension (and \
     Then, $\tau^2 = \sigma^2 = \id_{\mathbb{K}}.$ Thus, $\Gal(\mathbb{K}/\mathbb{F}) \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z},$ the Klein-$4$ group.
 \end{ex}
 
-\begin{ex}[Galois group of a separable cubic]
+\begin{ex}[Galois group of a separable cubic] \label{ex:galsepcubic}
     We show the role of the discriminant in determining the Galois group of a cubic.
 
     Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) \neq 2, 3.$ Let $f(x) = x^3 + px + q \in \mathbb{F}[x]$ be an irreducible cubic. In particular, $f(x)$ has no roots in $\mathbb{F}.$ We wish to show that $f(x)$ is separable. Note that
@@ -83,7 +84,7 @@ Note that the last equality is simply by definition of a Galois extension (and \
 
     Note that $\delta \in \mathbb{F} \iff \disc(f(x))$ is a perfect square in $\mathbb{F}.$ Thus, the above is characterised entirely by $\disc(f(x))$ being a perfect square.
 
-    For example, if $f(x) = x^3 + x + 1 \in \mathbb{Q}[x],$ then $\disc(f(x)) = -31$ and so, $\Gal(\mathbb{E}/\mathbb{F}) \cong S_3.$ On the other hand, if $f(x) = x^3 - 3x + 1,$ then $\disc(f(x)) = 81 = 9^2$ and thus, $\Gal(\mathbb{E}/\mathbb{F}) \cong A_3.$
+    For example, if $f(x) = x^3 + x + 1 \in \mathbb{Q}[x],$ then $\disc(f(x)) = -31$ and so, $\Gal(\mathbb{E}/\mathbb{Q}) \cong S_3.$ On the other hand, if $f(x) = x^3 - 3x + 1,$ then $\disc(f(x)) = 81 = 9^2$ and thus, $\Gal(\mathbb{E}/\mathbb{Q}) \cong A_3.$
 \end{ex}
 
 \section{The Fundamental Theorem of Galois Theory}
@@ -136,7 +137,7 @@ For the rest of the section, $\mathbb{K}/\mathbb{F}$ will denote a {\color{purpl
      \end{enumerate} 
 \end{restatable}
 
-\begin{rem}
+\begin{rem} \label{rem:nonbasemoved}
     The above again shows the need for Galois extension. For example, consider the non-Galois extension $\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q}.$ If we consider $G$ to be the ``Galois group,'' that is, $G$ to be the group of automorphisms of $\mathbb{Q}(\sqrt[3]{2})$ which fix $\mathbb{Q},$ we see that $G$ is trivial. Thus, $\mathbb{Q}(\sqrt[3]{2})^G = \mathbb{Q}(\sqrt[3]{2}).$
 
     However, for Galois extensions, the above says that the only field which is fixed by all the Galois automorphisms is precisely the base field.
@@ -155,7 +156,7 @@ For the rest of the section, $\mathbb{K}/\mathbb{F}$ will denote a {\color{purpl
     Then, $\alpha^p \in \mathbb{F}$ for all $\alpha \in \mathbb{E}$ (exercise) and thus, $[\mathbb{E}(\alpha) : \mathbb{F}] \le p$ for all $\alpha \in \mathbb{E}.$ However, $[\mathbb{E} : \mathbb{F}] = p^2 > p.$
 \end{rem}
 
-\begin{restatable}[Emil Artin]{thm}{artin}
+\begin{restatable}[Artin's Theorem]{thm}{artin}
 \label{thm:artin}
     Let $\mathbb{E}$ be a field and $G$ a \underline{finite} group of automorphisms of $\mathbb{E}.$ Then,
     \begin{enumerate}
@@ -167,7 +168,7 @@ For the rest of the section, $\mathbb{K}/\mathbb{F}$ will denote a {\color{purpl
 
 \begin{restatable}[]{thm}{galoissubgroupscompositum}
 \label{thm:galoissubgroupscompositum}
-    Let $\mathbb{K}/\mathbb{F}$ be a {\color{purple}(possibly infinite)} Galois extension with Galois group $G.$ Let $\mathbb{E}_1$ and $\mathbb{E}_2$ be intermediate subfields of $\mathbb{K}/\mathbb{F}.$ Let $H_i \vcentcolon= \Gal(\mathbb{K}/\mathbb{E}_i)$ for $i = 1, 2.$ Let $\langle H_1, H_2\rangle$ be the smallest subgroup of $G$ containing $H_1$ and $H_2.$ Then
+    Let $\mathbb{K}/\mathbb{F}$ be a {\color{purple}(possibly infinite)} Galois extension with Galois group $G.$ Let $\mathbb{E}_1$ and $\mathbb{E}_2$ be intermediate subfields of $\mathbb{K}/\mathbb{F}.$ Let $H_i \vcentcolon= \Gal(\mathbb{K}/\mathbb{E}_i)$ for $i = 1, 2.$Then
     \begin{equation*} 
         \mathbb{E}_1\mathbb{E}_2 = \mathbb{K}^{H_1 \cap H_2},\; \mathbb{E}_1 \cap \mathbb{E}_2 = \mathbb{K}^{\langle H_1, H_2\rangle}, \text{ and } \mathbb{E}_1 \subset \mathbb{E}_2 \iff H_1 \supset H_2.
     \end{equation*} \hfill\hyperref[thm:galoissubgroupscompositum2]{\downsym}

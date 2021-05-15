@@ -157,17 +157,17 @@ Note that by \Cref{prop:multindepsplitting}, the $n$ also does not depend on cho
     Let $S_\sigma$ (resp. $S_\tau$) denote the set of extensions of $\sigma$ (resp. $\tau$) to embeddings of $\mathbb{E}$ into $\mathbb{L}$ (resp. $\mathbb{L}'$). Let $\lambda : \mathbb{L} \to \mathbb{L}'$ be an isomorphism extending $\tau \circ \sigma^{-1} : \sigma(\mathbb{F}) \to \tau(\mathbb{F}).$  
 
     The map $\psi : S_\sigma \to S_\tau$ given by $\psi(\widetilde{\sigma}) = \lambda \circ \widetilde{\sigma}$ is a bijection. \hfill\hyperref[thm:separabledegreedef2]{\downsym}
-\end{restatable}
 
-\begin{center}
-        \begin{tikzcd}
-        \mathbb{L}' \arrow[dd, no head]                  &  &                                                                                                     &  & \mathbb{L} \arrow[llll, "\lambda"'] \arrow[dd, no head] \\
-                                                         &  &                                                                                                     &  &                                                         \\
-        \widetilde{\tau}(\mathbb{E}) \arrow[dd, no head] &  & \mathbb{E} \arrow[ll, "\widetilde{\tau} \in S_\tau"'] \arrow[rr, "\widetilde{\sigma} \in S_\sigma"] &  & \widetilde{\sigma}(\mathbb{E}) \arrow[dd, no head]      \\
-                                                         &  &                                                                                                     &  &                                                         \\
-        \tau(\mathbb{F})                                 &  & \mathbb{F} \arrow[rr, "\sigma"] \arrow[ll, "\tau"']                                                 &  & \sigma(\mathbb{F})                                     
+    \begin{center}
+        \begin{tikzcd}[ampersand replacement=\&]
+        \mathbb{L}' \arrow[dd, no head]                  \&  \&                                                                                                     \&  \& \mathbb{L} \arrow[llll, "\lambda"'] \arrow[dd, no head] \\
+                                                         \&  \&                                                                                                     \&  \&                                                         \\
+        \widetilde{\tau}(\mathbb{E}) \arrow[dd, no head] \&  \& \mathbb{E} \arrow[ll, "\widetilde{\tau} \in S_\tau"'] \arrow[rr, "\widetilde{\sigma} \in S_\sigma"] \&  \& \widetilde{\sigma}(\mathbb{E}) \arrow[dd, no head]      \\
+                                                         \&  \&                                                                                                     \&  \&                                                         \\
+        \tau(\mathbb{F})                                 \&  \& \mathbb{F} \arrow[rr, "\sigma"] \arrow[ll, "\tau"']                                                 \&  \& \sigma(\mathbb{F})                                     
         \end{tikzcd}
-\end{center}  
+    \end{center}  
+\end{restatable}
 
 \begin{rem}
     What the above proposition is really saying is that the ``number'' (cardinality) of extensions does not depend on $\mathbb{L}$ \textbf{\emph{or}} on the embedding $\sigma.$ Note that since $\mathbb{E}$ is an arbitrary algebraic extension, the set $S_\sigma$ need not be finite. 

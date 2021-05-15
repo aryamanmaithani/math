@@ -1,0 +1,58 @@
+\chapter{Galois Groups of Composite Extensions}
+
+In this section, $\mathbb{F}$ be a field and $\overline{\mathbb{F}}$ some fixed algebraic closure of $\mathbb{F}.$ Whenever we talk about extensions $\mathbb{E}/\mathbb{F}$ and $\mathbb{K}/\mathbb{F},$ it will be understood that $\mathbb{E}, \mathbb{K} \subset \overline{\mathbb{F}}.$ In particular, it makes sense to talk about $\mathbb{E}\mathbb{K}$ and $\mathbb{E} \cap \mathbb{K}.$
+
+\begin{restatable}[]{prop}{galoisEFK}
+\label{prop:galoisEFK}
+	If $\mathbb{E}/\mathbb{F}$ is a Galois extension and $\mathbb{K}/\mathbb{F}$ is a field extension, then $\mathbb{E}\mathbb{K}/\mathbb{K}$ is Galois. Moreover, if $\mathbb{F}/\mathbb{K}$ is also Galois, then $\mathbb{E}\mathbb{K}/\mathbb{F}$ and $(\mathbb{E} \cap \mathbb{K})/\mathbb{F}$ are Galois. \hfill\hyperref[prop:galoisEFK2]{\downsym}
+
+	\begin{center}
+		\begin{tikzcd}[ampersand replacement=\&]
+		\& \overline{\mathbb{F}} \arrow[dd, no head] \& \\
+		\& \& \\
+                                                                       \& \mathbb{E}\mathbb{K} \arrow[rd, no head] \arrow[ld, no head]                          \&            \\
+\mathbb{E} \arrow[rddd, "\text{Galois}"', no head, dashed, bend right] \&                                                                                        \& \mathbb{K} \\
+                                                                       \& \mathbb{E} \cap \mathbb{K} \arrow[dd, no head] \arrow[ru, no head] \arrow[lu, no head] \&            \\
+                                                                       \&                                                                                        \&            \\
+                                                                       \& \mathbb{F}                                                                             \&           
+	\end{tikzcd}
+	\end{center}
+\end{restatable}
+
+\begin{restatable}[]{prop}{secondiso}
+\label{prop:secondiso}
+	Let $\mathbb{E}/\mathbb{F}$ be a finite Galois extension and $\mathbb{K}/\mathbb{F}$ be a field extension (with $\mathbb{E}, \mathbb{K} \subset \overline{\mathbb{F}}$). Then, the map
+	\begin{equation*} 
+		\psi : \Gal(\mathbb{E}\mathbb{K}/\mathbb{K}) \to \Gal(\mathbb{E}/\mathbb{F})
+	\end{equation*}
+	defined by $\psi(\sigma) = \sigma|_{\mathbb{E}}$ is injective and induces an isomorphism
+	\begin{equation*} 
+		\Gal(\mathbb{E}\mathbb{K}/\mathbb{K}) \cong \Gal(\mathbb{E}/\mathbb{E} \cap \mathbb{K}).
+	\end{equation*} \hfill\hyperref[prop:secondiso2]{\downsym}
+
+	\begin{center}
+		\begin{tikzcd}[ampersand replacement=\&]
+		                               \& \mathbb{E}\mathbb{K} \arrow[rd, red, no head]       \&                                \\
+		\mathbb{E} \arrow[ru, no head] \&                                                \& \mathbb{K} \arrow[ld, no head] \\
+		                               \& \mathbb{E} \cap \mathbb{K} \arrow[lu, red, no head] \&                               
+		\end{tikzcd}
+	\end{center}
+\end{restatable}
+
+\begin{restatable}[]{cor}{secondisoindex}
+\label{cor:secondisoindex}
+	Let $\mathbb{E}/\mathbb{F}$ be a finite Galois extension and $\mathbb{K}/\mathbb{F}$ any field extension. Then,
+	\begin{equation*} 
+		[\mathbb{E}\mathbb{K} : \mathbb{K}] = [\mathbb{E} : \mathbb{E} \cap \mathbb{K}].
+	\end{equation*}
+	In particular, $[\mathbb{E}\mathbb{K} : \mathbb{F}] = [\mathbb{E} : \mathbb{F}][\mathbb{K} : \mathbb{F}]$ iff $\mathbb{E} \cap \mathbb{K} = \mathbb{F}.$ \hfill\hyperref[cor:secondisoindex2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{thm}{galoiscompositeproduct}
+\label{thm:galoiscompositeproduct}
+	Let $\mathbb{E}/\mathbb{F}$ and $\mathbb{K}/\mathbb{F}$ be finite Galois extensions with $\mathbb{E}, \mathbb{K} \subset \overline{\mathbb{F}}.$ Then, the homomorphism
+	\begin{equation*} 
+		\psi : \Gal(\mathbb{E}\mathbb{K}/\mathbb{F}) \to \Gal(\mathbb{E}/\mathbb{F}) \times \Gal(\mathbb{K}/\mathbb{F}), \quad \psi(\sigma) = (\sigma|_{\mathbb{E}}, \sigma|_{\mathbb{K}})
+	\end{equation*}
+	is injective. If $\mathbb{E} \cap \mathbb{K} = \mathbb{F},$ then $\psi$ is an isomorphism. \hfill\hyperref[thm:galoiscompositeproduct2]{\downsym}
+\end{restatable}

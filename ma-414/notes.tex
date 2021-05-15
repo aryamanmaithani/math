@@ -108,7 +108,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\sffamily{\S\textbf{\nouppercase{\rightmark}}}}
-\fancyhead[R]{\sffamily{\thepage}}
+\fancyhead[r]{\sffamily{\thepage}}
 
 \newcommand{\deff}[1]{{\color{blue}#1}}
 \newcommand{\md}[1]{{\left\lvert #1 \right\lvert}}
@@ -126,6 +126,8 @@
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\im}{im}
+\let\subset\subseteq
+\let\supset\supseteq
 
 \title{MA-414\\Galois Theory}
 \author{Aryaman Maithani\\\url{https://aryamanmaithani.github.io/}}
@@ -145,5 +147,9 @@
 \input{chapters/07}
 \input{chapters/08}
 \input{chapters/09}
+\input{chapters/10}
+\input{chapters/11}
+\input{chapters/12}
+\input{chapters/13}
 \input{proofs}
 \end{document}

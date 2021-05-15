@@ -1,0 +1,82 @@
+\chapter{Solvability by Radicals}
+
+\section{Radical extensions}
+
+\begin{defn}%[]
+	A field extension $\mathbb{K}/\mathbb{F}$ is called a \deff{simple radical extension} if $\mathbb{K} = \mathbb{F}(a)$ and $a^n \in \mathbb{F}$ for some $a \in \mathbb{K}$ and some $n \in \mathbb{N}.$
+
+	We say that $\mathbb{K}/\mathbb{F}$ is a \deff{radical extension} if there is a sequence of field extensions
+	\begin{equation*} 
+		\mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n = \mathbb{K}
+	\end{equation*}
+	such that $\mathbb{F}_i/\mathbb{F}_{i - 1}$ is a simple radical extension for $i = 1, \ldots, n.$
+
+	A polynomial $f(x) \in \mathbb{F}[x]$ is called \deff{solvable by radicals over $\mathbb{F}$} if a splitting field of $f(x)$ over $\mathbb{F}$ is contained in a radical extension of $\mathbb{F}.$
+\end{defn}
+
+\begin{rem}
+	Note that radical extensions are finite extensions.
+\end{rem}
+
+\begin{restatable}[]{prop}{radextproperties}
+\label{prop:radextproperties}
+	Let $\mathbb{F}, \mathbb{E}, \mathbb{K} \subset \overline{\mathbb{F}}$ be fields. 
+	\begin{enumerate}
+		\item Suppose $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}.$ If $\mathbb{E}/\mathbb{F}$ and $\mathbb{K}/\mathbb{E}$ are radical extensions, then so is $\mathbb{K}/\mathbb{F}.$ 
+		\item Suppose $\mathbb{F} \subset \mathbb{E}, \mathbb{K}$ are such that $\mathbb{E}/\mathbb{F}$ is a radical extension. Then, $\mathbb{E}\mathbb{K}/\mathbb{K}$ is a radical extension. If $\mathbb{K}/\mathbb{F}$ is also a radical extension, then so is $\mathbb{E}\mathbb{K}/\mathbb{F}.$ \hfill\hyperref[prop:radextproperties2]{\downsym}
+	\end{enumerate}
+\end{restatable}
+
+\begin{restatable}[]{prop}{sepgaloisradical}
+\label{prop:sepgaloisradical}
+	Let $\mathbb{E}/\mathbb{F}$ be a separable radical extension. Let $\mathbb{K} \subset \overline{\mathbb{F}}$ be the smallest Galois extension of $\mathbb{E}$ containing $\mathbb{E}.$ Then, $\mathbb{K}$ is a radical extension of $\mathbb{F}.$ \hfill\hyperref[prop:sepgaloisradical2]{\downsym}
+\end{restatable}
+
+Note that the $\mathbb{K}$ above is simply the normal closure.
+
+\section{Solvability Criterion}
+
+\begin{restatable}[]{thm}{solvradicalimpliesgroup}
+\label{thm:solvradicalimpliesgroup}
+	Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) = 0.$ If $f(x) \in \mathbb{F}[x]$ is solvable by radicals, then $\G_f$ is a solvable group.  \hfill\hyperref[thm:solvradicalimpliesgroup2]{\downsym}
+\end{restatable}
+
+\begin{ex}[Quintic not solvable by radicals]
+	Suppose $f(x) \in \mathbb{Q}[x]$ is an irreducible quintic (degree five) polynomial which has exactly $3$ roots. Let $\mathbb{E} = \mathbb{Q}(a) \subset \mathbb{C}$ be a splitting field of $f(x)$ over $\mathbb{Q}.$ Any $\sigma \in \G_f$ will permute the roots of $f(x)$ and thus, we can identify $\G_f$ with a subgroup of $S_5.$
+
+	Then, $\G_f \cong \Gal(\mathbb{E}/\mathbb{Q})$ has order divisible by $5.$ Thus, $\G_f$ contains an element of order $5$ and thus, a $5$-cycle.
+
+	On the other hand, the automorphism is a non-trivial automorphism of order $2.$ Thus, $\G_f$ contains a $5$-cycle and a transposition. By \Cref{cor:genprimetranscycle}, we have $\G_f = S_5.$
+
+	By \Cref{thm:SnAnnotsolvable}, we see that $\G_f$ is not solvable and thus, $f(x)$ is not solvable by radicals over $\mathbb{Q}.$
+
+	Such an $f(x)$ does indeed exist. For example, consider
+	\begin{equation*} 
+		f(x) \vcentcolon= x^5 - 16x + 2.
+	\end{equation*}
+	$f(x)$ is irreducible by Eisenstein at $2.$ Elementary calculus techniques show that $f(x)$ has exactly $3$ real roots.
+\end{ex}
+
+\begin{restatable}[]{thm}{solvgroupimpliesradical}
+\label{thm:solvgroupimpliesradical}
+	Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) = 0$ and $f(x) \in \mathbb{F}[x].$ If $\G_f$ is a solvable group, then $f(x)$ is solvable by radicals. \hfill\hyperref[thm:solvgroupimpliesradical2]{\downsym}
+\end{restatable}
+
+Putting \Cref{thm:solvradicalimpliesgroup} and \Cref{thm:solvgroupimpliesradical} together, we get the following.
+
+\begin{thm}[Solvability via radicals]
+	Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) = 0$ and $f(x) \in \mathbb{F}[x].$ $f(x)$ is solvable by radicals if and only if $\G_f$ is a solvable group. 
+\end{thm}
+
+\begin{ex}
+	Note that ``solvable by radicals'' does not necessarily mean that the splitting field is a radical extension.
+
+	Consider the polynomial $f(x) = x^3 - 3x + 1 \in \mathbb{Z}[x].$ Reducing modulo $2,$ we see that polynomial is irreducible since it has no root in $\mathbb{F}_2.$ Thus, $f(x)$ is irreducible in $\mathbb{Z}[x]$ and in turn, over $\mathbb{Q}[x].$
+
+	Let $\mathbb{E}$ be a splitting field of $f(x)$ over $\mathbb{Q}.$ We show that $\mathbb{E}$ is not a radical extension of $\mathbb{Q}.$
+	Note that $\disc(f(x)) = 81$ and thus, $\G_f \cong A_3,$ by \Cref{ex:galsepcubic}. Thus, $[\mathbb{E} : \mathbb{Q}] = 3.$ Let $r$ be a real root of $f(x).$ Then, we may assume that $\mathbb{E} = \mathbb{Q}(r),$ by consideration of degree. In particular, $\mathbb{E} \subset \mathbb{R}.$ 
+
+	Now, for the sake of contradiction, suppose that $\mathbb{E}/\mathbb{Q}$ is a radical extension. Since $3$ is prime, there is no proper intermediate subfield of $\mathbb{E}/\mathbb{Q}.$ This means that $\mathbb{E}$ itself is a simple radical extension over $\mathbb{Q}.$
+
+	Let $\mathbb{E} = \mathbb{Q}(a)$ where $a^n \in \mathbb{Q}$ for some $n \in \mathbb{N}.$ Let $g(x) \vcentcolon= \irr(a, \mathbb{Q}).$ Then, $\mathbb{E}$ is a splitting field of $g(x)$ over $\mathbb{Q}.$ Moreover, $g(x) \mid (x^n - a^n) \in \mathbb{Q}[x].$ Thus, every root $b \in \mathbb{E}$ of $g(x)$ satisfies $b^n = a^n$ or $(b/a)^n = 1.$ Note that $b, a \in \mathbb{E} \subset \mathbb{R}.$ But there are at most $2$ roots of unity in $\mathbb{R}$ and hence, $g(x)$ has at most $2$ roots in $\mathbb{E}.$ This is a contradiction since $g(x)$ is a separable cubic and $\mathbb{E}$ is its splitting field.
+\end{ex}
