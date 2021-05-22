@@ -164,7 +164,7 @@ In other words, if we take an element of $\mathbb{Q}[\omega_n]$ outside $\mathbb
 	where $z$ is an algebraic integer. But this gives us that $1/p = -z$ is a rational algebraic integer and thus, an integer. This is clearly a contradiction since $p > 1.$ This contradiction proves the result.
 \end{proof}
 
-\begin{thm}[Burnside]
+\begin{thm}[Burnside] \label{thm:burnsidepq}
 	Let $G$ be a group of order $p^aq^b$ with $p, q$ primes and $a, b \ge 0.$ Then, $G$ is not simple unless it of prime order (and thus, cyclic).
 \end{thm}
 \begin{proof} 
@@ -179,6 +179,21 @@ In other words, if we take an element of $\mathbb{Q}[\omega_n]$ outside $\mathbb
 		p^a = [G:H] = [G:C_G(g)][C_G(g):H].
 	\end{equation*}
 	In particular, $[G:C_G(g)]$ is a power of $p,$ i.e., $[G:C_G(g)] = p^t$ for some $t \ge 0.$ But this is precisely the order of the conjugacy class of $g.$ The previous lemma implies that $G$ is not simple, as desired.
+\end{proof}
+
+As corollary, we give the version of Burnside's theorem more popularly stated. This requires knowing what a ``solvable group'' is.
+
+(All we really use is the following fact: If $G$ is group with a normal subgroup $H \unlhd G$ such that $H$ and $G/H$ are both solvable, then so is $G.$)
+
+\begin{cor}[Burnside]
+	Let $G$ be a finite group of order $p^aq^b,$ where $p$ and $q$ are primes and $a, b \in \mathbb{N}_0.$ Then, $G$ is solvable.
+\end{cor}
+\begin{proof} 
+	Suppose not. Then, there exist primes $p, q$ and integers $a, b \in \mathbb{N}_0$ such that $G$ is not simple. Among all such $p, q, a, b,$ choose them so that $p^aq^b$ is the smallest.
+
+	Note that if $a = 0$ or $b = 0,$ then $G$ is abelian and hence, solvable. Thus, $a \ge 1$ and $b \ge 1.$ Thus, $G$ does not have prime order and by \Cref{thm:burnsidepq}, it is not simple. Let $H$ be a proper, non-trivial normal subgroup of $G.$
+
+	Then, $\md{H}$ is of the form $p^{a'}q^{b'}.$ Since $\md{H} < \md{G},$ we see that $H$ is solvable. Moreover, $\md{G/H}$ is also of the same form. Since $\md{G/H} < \md{G}$ as well, we see that $G/H$ is also solvable. In turn, $G$ is solvable. A contradiction.  
 \end{proof}
 
 \subsection{Another Theorem of Burnside}
