@@ -83,7 +83,7 @@ Of course, ``irreducible'' above means ``irreducible in $\mathbb{F}[x].$''
 \begin{defn}%[]
     Given a field extension $\mathbb{K}/\mathbb{F}$ and $\alpha \in \mathbb{K}$ with is algebraic over $\mathbb{F},$ the irreducible monic polynomial $f(x) \in \mathbb{F}[x]$ having $\alpha$ as a root is called the \deff{irreducible monic polynomial of $\alpha$ over $\mathbb{F}.$} It is denoted by $\irr(\alpha, \mathbb{F}).$
 
-    The degree of $\irr(\alpha, \mathbb{F})$ is called the \deff{degree of $\alpha$} and is denoted by $\deg_{\mathbb{F}}\alpha.$
+    The degree of $\irr(\alpha, \mathbb{F})$ is called the \deff{degree of $\alpha$ over $\mathbb{F}$} and is denoted by $\deg_{\mathbb{F}}\alpha.$
 \end{defn}
 
 \begin{ex}
@@ -91,7 +91,7 @@ Of course, ``irreducible'' above means ``irreducible in $\mathbb{F}[x].$''
     \begin{enumerate}
         \item Let $\alpha \in \mathbb{C}$ be a square root of $\iota.$ Then, $\alpha$ satisfies $f(x) \vcentcolon= x^4 + 1.$ Show that $f(x) = \irr(\alpha, \mathbb{Q}).$
 
-        However, $\irr(\alpha, \mathbb{Q}(i)) = x^2 - \iota.$ Thus, degree also depends on the base field.
+        However, $\irr(\alpha, \mathbb{Q}(\iota)) = x^2 - \iota.$ Thus, degree also depends on the base field.
         \item Let $p$ be a prime and $\zeta_p \vcentcolon= \exp\left(\dfrac{2\pi\iota}{p}\right) \in \mathbb{C}.$ Then, $\zeta_p^p = 1.$ Note that $x^p - 1 = (x - 1)\Phi_p(x)$ where
         \begin{equation*} 
             \Phi_p(x) \vcentcolon= x^{p - 1} + \cdots + 1.
@@ -115,7 +115,7 @@ Of course, ``irreducible'' above means ``irreducible in $\mathbb{F}[x].$''
 
 \begin{restatable}[]{prop}{isocarryingalphtobet}
 \label{prop:isocarryingalphtobet}
-    Let $\alpha, \beta \in \mathbb{K} \supset \mathbb{F}$ be algebraic over $\mathbb{F}.$ Then, there exists and $\mathbb{F}$-isomorphism $\psi : \mathbb{F}(\alpha) \to \mathbb{F}(\beta)$ such that $\psi(\alpha) = \beta$ iff $\irr(\alpha, \mathbb{F}) = \irr(\beta, \mathbb{F}).$ \hfill\hyperref[prop:isocarryingalphtobet2]{\downsym}
+    Let $\alpha, \beta \in \mathbb{K} \supset \mathbb{F}$ be algebraic over $\mathbb{F}.$ Then, there exists an $\mathbb{F}$-isomorphism $\psi : \mathbb{F}(\alpha) \to \mathbb{F}(\beta)$ such that $\psi(\alpha) = \beta$ iff $\irr(\alpha, \mathbb{F}) = \irr(\beta, \mathbb{F}).$ \hfill\hyperref[prop:isocarryingalphtobet2]{\downsym}
 \end{restatable}
 
 \begin{defn}%[]
