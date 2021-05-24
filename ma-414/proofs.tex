@@ -75,7 +75,7 @@
     \begin{equation*} 
         a_i = \sum_{j = 1}^{m} b_{ij} \beta_j
     \end{equation*}
-    for $j \in \mathbb{F}.$ Then,
+    for $b_{ij} \in \mathbb{F}.$ Then,
     \begin{equation*} 
         a = \sum_{i = 1}^{n}\sum_{j = 1}^{m}b_{ij} (\alpha_i\beta_j)
     \end{equation*}
@@ -115,7 +115,7 @@
 
     Let $\mathbb{L} \vcentcolon= \mathbb{F}(a_0, \ldots, a_{n - 1}).$
 
-    Then, $\mathbb{L}$ is finite over $\mathbb{F}$ since each $a_i \in \mathbb{R}$ is algebraic over $\mathbb{F}.$ Moreover, $0 \neq f(x) \in \mathbb{L}[x].$ Thus, $\alpha$ is algebraic over $\mathbb{L}$ and hence, $\mathbb{L}(\alpha)$ is finite over $\mathbb{L}.$
+    Then, $\mathbb{L}$ is finite over $\mathbb{F}$ since each $a_i \in \mathbb{E}$ is algebraic over $\mathbb{F}.$ Moreover, $0 \neq f(x) \in \mathbb{L}[x].$ Thus, $\alpha$ is algebraic over $\mathbb{L}$ and hence, $\mathbb{L}(\alpha)$ is finite over $\mathbb{L}.$
 
     By the \nameref{thm:towerlaw}, $\mathbb{L}/\mathbb{F}$ is finite and thus, $\alpha$ is algebraic over $\mathbb{F}.$ (\Cref{prop:finextisalg}.)
 \end{proof}
@@ -130,7 +130,7 @@
 \intdomfinextfield*\label{prop:intdomfinextfield2}
 \begin{flushright}\hyperref[prop:intdomfinextfield]{\upsym}\end{flushright}
 \begin{proof}
-    We only need to show that every non-zero element of $R$ has a multiplicative inverse (in $R$). Let $0 \neq a \in R$ be arbitrary. Since $\dim_{\mathbb{F}}(R) < \infty,$ there is a smallest $n \ge 1$ such that the set $\{1, a, \ldots, a^n\}$ is linearly dependent. Then, let $b_0, \ldots, b_{n} \in \mathbb{F}$ be not all zero such that
+    We only need to show that every non-zero element of $R$ has a multiplicative inverse (in $R$). Let $0 \neq a \in R$ be arbitrary. Since $\dim_{\mathbb{F}}(R) < \infty,$ there is a smallest $n \ge 1$ such that the set $\{1, a, \ldots, a^n\}$ is linearly dependent over $\mathbb{F}.$ Then, let $b_0, \ldots, b_{n} \in \mathbb{F}$ be not all zero such that
     \begin{equation*} 
         b_0 + b_1a + \cdots b_na^n = 0.
     \end{equation*} 
@@ -138,7 +138,7 @@
     \begin{equation*} 
         a(b_1 + \cdots + b_na^{n - 1}) = -b_0.
     \end{equation*}
-    This shows that
+    This shows that the element
     \begin{equation*} 
         -\frac{1}{b_0}(b_1 + \cdots + b_na^{n - 1}) \in R
     \end{equation*}
@@ -149,8 +149,8 @@
 \begin{flushright}\hyperref[prop:descofcompositum]{\upsym}\end{flushright}
 \begin{proof}
     Simple computations show that $\mathbb{L}$ is indeed a subring of $\mathbb{K}.$ If $\{\alpha_1, \ldots, \alpha_n\}$ and $\{\beta_1, \ldots, \beta_m\}$ are $\mathbb{F}$-bases for $\mathbb{E}_1$ and $\mathbb{E}_2,$ then clearly $\{\alpha_i\beta_j : 1 \le i \le n,\; 1 \le j \le m\}$ spans $\mathbb{L}$ over $\mathbb{F}.$ Thus, $\dim_{\mathbb{F}}(\mathbb{L}) \le mn = d.$ 
-    
-    Since $\mathbb{L}$ is a subring of $\mathbb{K},$ it is an integral domain and hence, $\mathbb{L}$ is a field, by \Cref{prop:intdomfinextfield}.
+
+    Note that $\mathbb{L}$ is clearly the smallest subring of $\mathbb{K}$ containing $\mathbb{E}_1$ and $E_2.$ Since $\mathbb{L}$ is a subring of $\mathbb{K},$ it is an integral domain and hence, $\mathbb{L}$ is a field, by \Cref{prop:intdomfinextfield}. Thus, $\mathbb{L} = \mathbb{E}_1\mathbb{E}_2.$
 
     Lastly, note that $[\mathbb{E}_i : \mathbb{F}]$ divides $[\mathbb{L} : \mathbb{F}],$ in view of the \nameref{thm:towerlaw}. In particular, if $\gcd(m, n) = 1,$ then $mn \mid [\mathbb{L} : \mathbb{F}].$ Since $[\mathbb{L} : \mathbb{F}] \le mn,$ we are done.
 \end{proof}
