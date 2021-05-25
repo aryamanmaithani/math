@@ -17,7 +17,7 @@
     \begin{equation*} 
         f(u_1, \ldots, u_n) = f(u_{\tau(1)}, \ldots, u_{\tau(n)})
     \end{equation*} 
-    for all $\tau \in S_n.$
+    for all $\tau \in S_n.$ In other words, $g_{\tau}(f) = f$ for all $\tau \in S_n.$
 \end{defn}
 
 \begin{defn}%[]
@@ -37,8 +37,8 @@
 \begin{rem}
     Note that one can explicitly write down the elementary symmetric polynomials. We have
     \begin{align*} 
-        \sigma_1 &= \sum_{i = 1}^{n} u_i,\\
-        \sigma_2 &= \sum_{1 \le i_1 < i_1 \le n} u_{i_1}u_{i_2},\\
+        \sigma_1 &= \sum_{i_1 = 1}^{n} u_{i_1},\\
+        \sigma_2 &= \sum_{1 \le i_1 < i_2 \le n} u_{i_1}u_{i_2},\\
         & \vdots \\
         \sigma_n &= u_1 \cdots u_n.
     \end{align*}
@@ -48,7 +48,7 @@
 \section{Fundamental theorem of Symmetric Polynomials}
 
 \begin{defn}%[]
-    Given an elementary symmetric polynomial $\sigma_i \in R[u_1, \ldots, u_n]$ in $n$ variables (for $n \ge 1$), we define the elementary symmetric polynomial $\sigma_i^0$ in $(n - 1)$ variables as
+    Given an elementary symmetric polynomial $\sigma_i \in R[u_1, \ldots, u_n]$ in $n$ variables (for $n \ge 2$), we define the elementary symmetric polynomial $\sigma_i^0$ in $(n - 1)$ variables as
     \begin{equation*} 
         \sigma_i^0 \vcentcolon= \sigma_1(u_1, \ldots, u_{n - 1}, 0).
     \end{equation*}
