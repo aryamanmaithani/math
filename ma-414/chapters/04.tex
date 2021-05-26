@@ -12,7 +12,7 @@
 \end{defn}
 
 \begin{rem}
-    Note that the above definition requires no notion of limits. For the case of $\mathbb{F} = \mathbb{R}$ or $\mathbb{C},$ then it coincides with the usual definition if we identify a polynomial with the function it represents. We shall not require this, however.
+    Note that the above definition requires no notion of limits. For the case of $\mathbb{F} = \mathbb{R}$ or $\mathbb{C},$ it coincides with the usual definition if we identify a polynomial with the function it represents. We shall not require this, however.
 \end{rem}
 
 We have the follow easy-to-check proposition.
@@ -100,13 +100,15 @@ The first point is just verifying that $\D_{\mathbb{F}}$ is indeed $\mathbb{F}$-
     $\mathbb{F}^p$ is a subfield of $\mathbb{F}.$
 \end{prop}
 \begin{proof} 
-    Only closure under addition is not so obvious. Note that $(x + y)^p = x^p + y^p$ for all $x, y \in \mathbb{F}.$
+    Only closure under addition is not so obvious. For this, note that $(x + y)^p = x^p + y^p$ for all $x, y \in \mathbb{F}.$
 \end{proof}
 
 \begin{restatable}[]{prop}{xppolyirredorroot}
 \label{prop:xppolyirredorroot}
     Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) = p > 0.$ Then, $x^p - a \in \mathbb{F}[x]$ is either irreducible in $\mathbb{F}[x]$ or $a \in \mathbb{F}^p.$ \hfill\hyperref[prop:xppolyirredorroot2]{\downsym}
 \end{restatable}
+
+In other words, either the above polynomial has a root or is irreducible.
 
 \begin{restatable}[]{prop}{nonseppowerp}
 \label{prop:nonseppowerp}
@@ -173,7 +175,7 @@ Note that by \Cref{prop:multindepsplitting}, the $n$ also does not depend on cho
 \begin{rem}
     What the above proposition is really saying is that the ``number'' (cardinality) of extensions does not depend on $\mathbb{L}$ \textbf{\emph{or}} on the embedding $\sigma.$ Note that since $\mathbb{E}$ is an arbitrary algebraic extension, the set $S_\sigma$ need not be finite. 
 
-    Thus, we may assume $\mathbb{L} \supset \mathbb{F}$ to be an algebraic closure and $\sigma$ to be the natural inclusion.
+    Thus, we may assume $\mathbb{L} \supset \mathbb{F}$ to be an algebraic closure of $\mathbb{F}$ and $\sigma$ to be the natural inclusion.
 \end{rem}
 
 \begin{defn}%[]

@@ -10,7 +10,7 @@ In this section, $p$ will denote an arbitrary prime number.
 \end{restatable}
 
 \begin{defn}%[]
-    We shall denote the finite with $p^n$ elements by $\mathbb{F}_{p^n}.$
+    We shall denote \emph{the} finite field with $p^n$ elements by $\mathbb{F}_{p^n}.$
 \end{defn}
 
 \begin{rem}
@@ -71,6 +71,10 @@ Recall the M\"obius inversion formula.
     Let $f(x) \in \mathbb{F}_q[x]$ be a monic irreducible polynomial. \\
     Then, $f(x) \mid x^{q^n} - x$ iff $\deg(f(x)) \mid n.$ \hfill\hyperref[lem:irreddivsplitpoly2]{\downsym}
 \end{restatable}
+
+\begin{rem}
+    This shows that the monic factorisation of $x^{q^n} - x$ in $\mathbb{F}_q[x]$ consists of every (monic) irreducible polynomial of degree $d$ as a factor, where $d$ runs over all divisors of $n.$ (No factor can be repeated twice since the polynomial is separable.)
+\end{rem}
 
 \begin{restatable}[Gauss]{thm}{gaussnecklace}
 \label{thm:gaussnecklace}
