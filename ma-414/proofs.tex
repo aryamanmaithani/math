@@ -266,7 +266,7 @@
 \independencediscriminant*\label{prop:independencediscriminant2}
 \begin{flushright}\hyperref[prop:independencediscriminant]{\upsym}\end{flushright}
 \begin{proof}
-    Let $r_1, \ldots, r_n \in \mathbb{K}$ be such that $f(x) = (x - r_1) \cdot (x - r_n).$
+    Let $r_1, \ldots, r_n \in \mathbb{K}$ be such that $f(x) = (x - r_1) \cdots (x - r_n).$
 
     Consider the Vandermonde matrix
     \begin{equation*} 
@@ -278,7 +278,7 @@
             r_1^{n - 1} & r_2^{n - 1} & \cdots & r_n^{n - 1}\\
         \end{bmatrix}.
     \end{equation*}
-    Then, $\disc_{\mathbb{K}}(f(x)) = (\det(M))^2 = \det(MM^{\mathsf{T}}).$ As before, let $\sigma_1, \ldots, \sigma_n \in R[u_1, \ldots, u_n]$ be the elementary symmetric polynomials. Put
+    Then, $\disc_{\mathbb{K}}(f(x)) = (\det(M))^2 = \det(MM^{\mathsf{T}}).$ As before, let $\sigma_1, \ldots, \sigma_n \in \mathbb{F}[u_1, \ldots, u_n]$ be the elementary symmetric polynomials. Put
     \begin{equation*} 
         s_i \vcentcolon= \sigma_i(r_1, \ldots, r_n).
     \end{equation*}
@@ -302,7 +302,7 @@
     \end{equation*} 
     Thus, $\disc_{\mathbb{K}}(f(x)) = \det(MM^{\mathsf{T}}) \in \mathbb{F}.$
 
-    Note that since $v_k$ can be calculated directly in terms of $s_i,$ which are coefficients of $\mathbb{F}.$ Thus, the discriminant does not depend on the choice of the splitting field.
+    Note that $v_k$ can be calculated directly in terms of $s_i,$ the coefficients of $f(x).$ Thus, the discriminant does not depend on the choice of the splitting field.
 \end{proof}
 
 \discderivative*\label{prop:discderivative2}
