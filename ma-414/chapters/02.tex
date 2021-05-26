@@ -127,7 +127,7 @@ Note that the last term is $(-1)^{k + 1} \sigma_k {\color{red}k}.$ One might hav
     In other words, the discriminant takes values in $\mathbb{F}$ and is independent of the splitting field chosen. \hfill\hyperref[prop:independencediscriminant2]{\downsym}
 \end{restatable}
 
-In view of the (proof of the) above proposition, we have the following alternate definition of discriminant.
+In view of the (proof of the) above proposition, we have the following alternate definition of discriminant. (See the remark right after the definition, if you are confused.)
 
 \begin{defn}%[]
     Let $f(x) = x^n - \sigma_1x^{n - 1} + \cdots + (-1)^n\sigma_n \in \mathbb{F}[x]$ be a monic polynomial. Define $w_k$ for $k = 1, \ldots, 2n - 2$ as in \Cref{eq:newident}. Then, 
@@ -141,6 +141,19 @@ In view of the (proof of the) above proposition, we have the following alternate
         \end{bmatrix}.
     \end{equation*}
 \end{defn}
+
+\begin{rem}
+    In the above, $\sigma_i$ are not the elementary symmetric polynomials, they are simply elements of $\mathbb{F}.$ We are \emph{defining} $w_k$ recursively in terms of $\sigma_i$ using the relations given in \Cref{eq:newident}.
+
+    An alternate (but longer) definition could have been to start with $f(x)  = x^n - a_1x^{n - 1} + \cdots a_n \in \mathbb{F}[x]$ and define 
+    \begin{equation*} 
+        w_k \vcentcolon= \begin{cases}
+            a_1 w_{k - 1} - a_2w_{k - 2} + \cdots + (-1)^k a_{k - 1}w_1 + (-1)^{k + 1}a_k k & k \le n,\\
+            a_1 w_{k - 1} - a_2w_{k - 2} + \cdots + (-1)^{n + 1} a_{n}w_{k - n} & k > n                
+        \end{cases}
+    \end{equation*}
+    and then write the determinant.
+\end{rem}
 
 \begin{restatable}[Discriminant in terms of derivative]{prop}{discderivative}
 \label{prop:discderivative}
