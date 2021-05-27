@@ -3,11 +3,11 @@
 \section{Existence}
 
 \begin{defn}%[]
-    A field $\mathbb{K}$ is called a \deff{algebraically closed field} if every non-constant polynomial $f(x) \in \mathbb{K}[x]$ has a root in $\mathbb{K}.$
+    A field $\mathbb{K}$ is called an \deff{algebraically closed field} if every non-constant polynomial $f(x) \in \mathbb{K}[x]$ has a root in $\mathbb{K}.$
 \end{defn}
 
 \begin{defn}%[]
-    Let $\mathbb{K}/\mathbb{F}$ be a field extension. We say that $\mathbb{K}$ is an \deff{algebraic closure} if $\mathbb{K}$ is algebraically closed and $\mathbb{K}/\mathbb{F}$ is an algebraic extension.
+    Let $\mathbb{K}/\mathbb{F}$ be a field extension. We say that $\mathbb{K}$ is an \deff{algebraic closure of $\mathbb{F}$} if $\mathbb{K}$ is algebraically closed and $\mathbb{K}/\mathbb{F}$ is an algebraic extension.
 \end{defn}
 
 We have the following simple proposition.
@@ -61,7 +61,7 @@ The proof we have given is due to Artin.
     Let $\sigma : \mathbb{F} \to \mathbb{L}$ be an embedding of fields where $\mathbb{L}$ is \underline{algebraically closed}. Let $\alpha \in \mathbb{K} \supset \mathbb{F}$ be algebraic over $\mathbb{F}$ and $p(x) = \irr(\alpha, \mathbb{F}).$ \\
     Write $p(x) = \sum a_i x^i$ and define $p^{\sigma}(x) \vcentcolon= \sum \sigma(a_i) x^i.$ Then, $\tau \mapsto \tau(\alpha)$ is a bijection between the sets
     \begin{equation*} 
-        \{\tau : \mathbb{F}(\alpha) \to \mathbb{L} \mid \tau \text{ is an embedding and }\tau|_{\mathbb{F}} = \sigma\} \leftrightarrow \{\beta \in L \mid p^{\sigma}(\beta) = 0\}.
+        \{\tau : \mathbb{F}(\alpha) \to \mathbb{L} \mid \tau \text{ is an embedding and }\tau|_{\mathbb{F}} = \sigma\} \leftrightarrow \{\beta \in \mathbb{L} \mid p^{\sigma}(\beta) = 0\}.
     \end{equation*} \hfill\hyperref[prop:rootsandextensions2]{\downsym}
 \end{restatable}
 

@@ -326,7 +326,7 @@
     \begin{equation*} 
         c \vcentcolon= \sqrt{\frac{1}{2}[a + \sqrt{a^2 + b^2}]} \andd d \vcentcolon= \sqrt{\frac{1}{2}[-a + \sqrt{a^2 + b^2}]}.
     \end{equation*}
-    Then, $(c + d \iota)^2 = z.$
+    Then, $(c + d \iota)^2 = a + b\iota.$
 \end{proof}
 \FTA*\label{thm:FTA2}
 \begin{flushright}\hyperref[thm:FTA]{\upsym}\end{flushright}
@@ -346,7 +346,7 @@
     \end{equation*}
     has degree
     \begin{equation*} 
-        \deg(h(x)) = \binom{d + 1}{2} = \frac{d}{2}(d + 1) = 2^{n - 1}\underbrace{q(d + 1)}_{\text{odd}}.
+        \deg(h_r(x)) = \binom{d + 1}{2} = \frac{d}{2}(d + 1) = 2^{n - 1}\underbrace{q(d + 1)}_{\text{odd}}.
     \end{equation*}
     Note that the coefficients of $h_r(x)$ are elementary symmetric polynomials in $y_{ij}$s. Thus, they are symmetric polynomials in $\alpha_i, \ldots, \alpha_d.$ Hence, they are polynomials in the coefficients of $f(x).$ Thus, $h(x) \in \mathbb{R}[x].$ By inductive hypothesis (on $n$), we see that $h_r(x)$ has a root $z_r \in \mathbb{C} \subset \mathbb{K}.$ Thus, $z_r = y_{i(r)j(r)}(r)$ for some pair $(i(r), j(r))$ with $1 \le i(r) \le j(r) \le d.$
 
@@ -356,7 +356,7 @@
     \end{equation*}
     Thus,
     \begin{equation*} 
-        z_c = \alpha_a + \alpha_b + c\alpha_a\alpha_b = z_d = \alpha_a + \alpha_b + d\alpha_a\alpha_b.
+        z_c = \alpha_a + \alpha_b + c\alpha_a\alpha_b \andd z_d = \alpha_a + \alpha_b + d\alpha_a\alpha_b.
     \end{equation*}
     Note that a priori, we only know that $\alpha_a, \alpha_b \in \mathbb{K}.$ But note that
     \begin{equation*} 
@@ -423,7 +423,7 @@
 \begin{proof}
     Let $\mathbb{L} \supset \mathbb{F}$ be algebraically closed. (Existence given by \Cref{thm:algclosedext}.) Define
     \begin{equation*} 
-        \mathbb{K} \vcentcolon= \{\alpha \in \mathbb{L} : \alpha \text{ is algebraic over }\mathbb{K}\}.
+        \mathbb{K} \vcentcolon= \{\alpha \in \mathbb{L} : \alpha \text{ is algebraic over } \mathbb{F}\}.
     \end{equation*}
     By \Cref{prop:alglcosureinalgclosedisclosed}, $\mathbb{K}$ is an algebraic closure of $\mathbb{F}.$
 \end{proof}
