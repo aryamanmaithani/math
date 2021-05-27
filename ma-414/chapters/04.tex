@@ -81,11 +81,13 @@ The first point is just verifying that $\D_{\mathbb{F}}$ is indeed $\mathbb{F}$-
      In other words, irreducible polynomials over fields of characteristic $0$ are separable. \hfill\hyperref[prop:irredsepderiv2]{\downsym}
 \end{restatable}
 
-\begin{ex}
+\begin{ex} \label{ex:FXnotperfect}
     Let $p \in \mathbb{N}$ be a prime. Consider the field $\mathbb{F}_p(X)$ and the polynomial $f(T) = T^p - X \in \mathbb{F}_p(X)[T].$ \\
     Then, $f(T)$ is irreducible, by applying Eisenstein at the prime $X.$ However, $f'(T) = 0$ and hence, not separable.
 
-    In fact, as we shall see, the existence of $p$-th roots will play an important role.
+    The above can essentially be attributed to the fact that $X$ has no $p$-th root in $\mathbb{F}_p(X).$ In fact, as we shall see, the existence of $p$-th roots will play an important role.
+
+    It should also be clear that we can replace $\mathbb{F}_p$ with any field of characteristic $p$ in the above.
 \end{ex}
 
 \begin{defn}%[]
@@ -108,7 +110,7 @@ The first point is just verifying that $\D_{\mathbb{F}}$ is indeed $\mathbb{F}$-
     Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) = p > 0.$ Then, $x^p - a \in \mathbb{F}[x]$ is either irreducible in $\mathbb{F}[x]$ or $a \in \mathbb{F}^p.$ \hfill\hyperref[prop:xppolyirredorroot2]{\downsym}
 \end{restatable}
 
-In other words, either the above polynomial has a root or is irreducible.
+In other words, either the above polynomial either has a root or is irreducible.
 
 \begin{restatable}[]{prop}{nonseppowerp}
 \label{prop:nonseppowerp}
@@ -129,7 +131,7 @@ In other words, either the above polynomial has a root or is irreducible.
 \begin{ex}
     \phantom{hi}
     \begin{enumerate}
-        \item We had seen that $\mathbb{F}_p(X)$ is not perfect for any prime $p.$
+        \item We had seen (in \Cref{ex:FXnotperfect}) that $\mathbb{F}_p(X)$ is not perfect for any prime $p.$ (Or more generally, $\mathbb{F}(X)$ is not perfect if $\chr(\mathbb{F}) \neq 0.$) 
         \item By \Cref{prop:irredsepderiv}, we have that every field of characteristic $0$ is perfect.
     \end{enumerate}
 \end{ex}
@@ -190,7 +192,7 @@ Note that by \Cref{prop:multindepsplitting}, the $n$ also does not depend on cho
     Let $\alpha \in \mathbb{E} \supset \mathbb{F}$ be algebraic over $\mathbb{F}$ and $n \vcentcolon= \deg(\irr(\alpha, \mathbb{F})).$ Then, $[\mathbb{F}(\alpha) : \mathbb{F}]_s \le n = [\mathbb{F}(a) : \mathbb{F}]$ with equality iff $\alpha$ is separable over $\mathbb{F}.$
 \end{prop}
 \begin{proof} 
-    By \Cref{prop:rootsandextensions}, we know that $[\mathbb{F}(\alpha) : \mathbb{F}]_s$ is exactly the number of roots of $p(x) = \irr(\alpha, \mathbb{F})$ in $\overline{\mathbb{F}}.$ This is at most $n = \deg(p(x)).$ Moreover, equality implies that all roots are distinct and hence, $\alpha$ is separable.
+    By \Cref{prop:rootsandextensions}, we know that $[\mathbb{F}(\alpha) : \mathbb{F}]_s$ is exactly the number of roots of $p(x) \vcentcolon= \irr(\alpha, \mathbb{F})$ in $\overline{\mathbb{F}}.$ This is at most $n = \deg(p(x)).$ Moreover, equality implies that all roots are distinct and hence, $\alpha$ is separable.
 \end{proof}
 
 \begin{restatable}[Tower Law for separable degree]{thm}{towerlawsep}
