@@ -455,7 +455,7 @@
     \begin{equation*} 
         (\mathbb{E}, \tau) \le (\mathbb{E}', \tau') \iff \mathbb{E} \subset \mathbb{E}' \text{ and } \tau'|_{\mathbb{E}} = \tau.
     \end{equation*}
-    Then, $(\Sigma, \le)$ is a partially ordered set. Moreover, if $\Lambda = \{(\mathbb{E}_\alpha, \tau_\alpha)\}_{\alpha \in I}$ is a chain in $\Sigma,$ then $\mathbb{E} \vcentcolon= \bigcup_{\alpha \in I}\mathbb{F}_\alpha$ is a subfield of $\mathbb{E}$ and $\tau : \mathbb{E} \to \mathbb{L}$ defined as $\tau(x) \vcentcolon= \tau_\alpha(x)$ for $x \in \mathbb{F}_\alpha$ is well-defined. (The proof is similar to that of \Cref{lem:unionoffields}.) Moreover, $(\mathbb{E}, \tau)$ is an upper bound of $\Lambda.$   
+    Then, $(\Sigma, \le)$ is a partially ordered set. Moreover, if $\Lambda = \{(\mathbb{E}_\alpha, \tau_\alpha)\}_{\alpha \in I}$ is a chain in $\Sigma,$ then $\mathbb{E} \vcentcolon= \bigcup_{\alpha \in I}\mathbb{E}_\alpha$ is a subfield of $\mathbb{K}$ and $\tau : \mathbb{E} \to \mathbb{L}$ defined as $\tau(x) \vcentcolon= \tau_\alpha(x)$ for $x \in \mathbb{F}_\alpha$ is well-defined. (The proof is similar to that of \Cref{lem:unionoffields}.) Moreover, $(\mathbb{E}, \tau)$ is an upper bound of $\Lambda.$   
 
     Thus, by Zorn's lemma, there exists a maximal element $(\mathbb{E}, \tau) \in \Sigma.$ We contend that $\mathbb{E} = \mathbb{K}.$ If not, then pick $\alpha \in \mathbb{K} \setminus \mathbb{E}.$ By \Cref{prop:rootsandextensions}, we can extend $\tau$ to an embedding $\tau' : \mathbb{E}(\alpha) \to \mathbb{L}.$ But this contradicts maximality of $(\mathbb{E}, \tau).$
 
@@ -473,8 +473,9 @@
 
     Let $f(x) = a(x - \alpha_1) \cdots (x - \alpha_n)$ be a factorisation of $f(x)$ in $\mathbb{E}'[x].$ Then,
     \begin{equation*} 
-        f^{\tau}(x) = (x - \tau(\alpha_1)) \cdots (x - \tau(\alpha_n)) \in \overline{\mathbb{E}}[x].
+        f^{\tau}(x) = a(x - \tau(\alpha_1)) \cdots (x - \tau(\alpha_n)) \in \overline{\mathbb{E}}[x].
     \end{equation*}
+    (Note that $a \in \mathbb{F}^\times.$)
     Note that we have $\mathbb{E}' = \mathbb{F}(\alpha_1, \ldots, \alpha_n)$ and so, $\tau(\mathbb{E}') = \mathbb{F}(\tau(\alpha_1), \ldots, \tau(\alpha_n)).$ Thus, $\tau(\mathbb{E}')$ is a splitting field of $f^{\tau}.$ But $f^{\tau} = f$ since $f(x) \in \mathbb{F}[x]$ and $\tau$ extends the inclusion map. Thus, $\tau(\mathbb{E}') = \mathbb{E},$ since any algebraic closure contains a unique splitting field.
 \end{proof}
 

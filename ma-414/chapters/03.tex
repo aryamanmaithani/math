@@ -66,21 +66,21 @@ The proof we have given is due to Artin.
 \end{restatable}
 
 \begin{rem}
-    The above proposition says that the number of ways to extend from $\mathbb{F}$ to $\mathbb{F}(\alpha)$ is precisely the number of roots of that $p(x)$ has in $\mathbb{L}.$ (Not exactly, we need to apply $\sigma$ to the coefficients. This is essentially saying that we consider $\mathbb{F}$ as a subfield under $\mathbb{L}.$) In particular, this set is non-empty since $\mathbb{L}$ is algebraically closed. \\
-    Note that this number need not be $\deg(f(x)).$ We shall see in the next chapter that a polynomial may be irreducible but still have repeated roots in its splitting field.
+    The above proposition says that the number of ways to extend from $\mathbb{F}$ to $\mathbb{F}(\alpha)$ is precisely the number of roots that $p(x)$ has in $\mathbb{L}.$ (Not exactly, we need to apply $\sigma$ to the coefficients. This is essentially saying that we consider $\mathbb{F}$ as a subfield under $\mathbb{L}.$) In particular, this set is non-empty since $\mathbb{L}$ is algebraically closed. \\
+    Note that this number need not be $\deg(p(x)).$ We shall see in the next chapter that a polynomial may be irreducible but still have repeated roots in its splitting field.
 \end{rem}
 
 \begin{restatable}[]{thm}{extendtoalgextension}
 \label{thm:extendtoalgextension}
     Let $\sigma : \mathbb{F} \to \mathbb{L}$ be an embedding where $\mathbb{L}$ is algebraically closed. Let $\mathbb{K}/\mathbb{F}$ be an algebraic extension. Then, there exists an embedding $\tau : \mathbb{K} \to \mathbb{L}$ extending $\sigma.$ \\
-    Moreover, if $\mathbb{K}$ is an algebraic closure of $\mathbb{F}$ and $\mathbb{L}$ of $\sigma(\mathbb{K}),$ then $\tau$ is an isomorphism extending $\sigma.$ \hfill\hyperref[thm:extendtoalgextension2]{\downsym}
+    Moreover, if $\mathbb{K}$ is an algebraic closure of $\mathbb{F}$ and $\mathbb{L}$ of $\sigma(\mathbb{F}),$ then $\tau$ is an isomorphism extending $\sigma.$ \hfill\hyperref[thm:extendtoalgextension2]{\downsym}
 \end{restatable}
 
 \begin{cor}[Isomorphism of algebraic closures]
     If $\mathbb{K}_1$ and $\mathbb{K}_2$ are two algebraic closures of $\mathbb{F},$ then they are $\mathbb{F}$-isomorphic.
 \end{cor}
 \begin{proof} 
-    Apply previous proposition to the inclusion $i : \mathbb{F} \hookrightarrow \mathbb{E}_2$ to extend it to an $\mathbb{F}$-isomorphism $\tau : \mathbb{E}_1 \to \mathbb{E}_2.$
+    Apply previous theorem to the inclusion $i : \mathbb{F} \hookrightarrow \mathbb{E}_2$ to extend it to an $\mathbb{F}$-isomorphism $\tau : \mathbb{K}_1 \to \mathbb{K}_2.$
 \end{proof}
 
 \begin{defn}%[]
