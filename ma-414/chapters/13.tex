@@ -23,8 +23,16 @@
 	Let $\mathbb{F}, \mathbb{E}, \mathbb{K} \subset \overline{\mathbb{F}}$ be fields. 
 	\begin{enumerate}
 		\item Suppose $\mathbb{F} \subset \mathbb{E} \subset \mathbb{K}.$ If $\mathbb{E}/\mathbb{F}$ and $\mathbb{K}/\mathbb{E}$ are radical extensions, then so is $\mathbb{K}/\mathbb{F}.$ 
-		\item Suppose $\mathbb{F} \subset \mathbb{E}, \mathbb{K}$ are such that $\mathbb{E}/\mathbb{F}$ is a radical extension. Then, $\mathbb{E}\mathbb{K}/\mathbb{K}$ is a radical extension. If $\mathbb{K}/\mathbb{F}$ is also a radical extension, then so is $\mathbb{E}\mathbb{K}/\mathbb{F}.$ \hfill\hyperref[prop:radextproperties2]{\downsym}
+		\item Suppose $\mathbb{F} \subset \mathbb{E}, \mathbb{K}$ are such that $\mathbb{E}/\mathbb{F}$ is a radical extension. Then, $\mathbb{E}\mathbb{K}/\mathbb{K}$ is a radical extension. If $\mathbb{K}/\mathbb{F}$ is also a radical extension, then so is $\mathbb{E}\mathbb{K}/\mathbb{F}.$ 
 	\end{enumerate}
+	\begin{equation*} 
+		\begin{tikzcd}[ampersand replacement=\&]
+			\& \mathbb{E}\mathbb{K}                               \&                                \\
+			\mathbb{E} \arrow[ru, no head] \&                                                    \& \mathbb{K} \arrow[lu, no head] \\
+			\& \mathbb{F} \arrow[ru, no head] \arrow[lu, no head] \& 
+		\end{tikzcd}
+	\end{equation*}
+	\hfill\hyperref[prop:radextproperties2]{\downsym}
 \end{restatable}
 
 \begin{restatable}[]{prop}{sepgaloisradical}
