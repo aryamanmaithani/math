@@ -530,11 +530,11 @@
 \begin{proof}
     Let $\mathbb{E}$ be a splitting field of $f(x)$ over $\mathbb{F}.$
     \begin{enumerate}
-        \item \forward $f(x)$ has no repeated roots and thus, $f'(x) \neq 0,$ by \Cref{prop:irredsepderiv}.
+        \item \forward $f(x)$ has no repeated roots and thus, $f'(x) \neq 0,$ by \Cref{thm:derivcritsep}.
 
-        \backward Suppose $f'(x) \neq 0$ and $f(x)$ has a repeated root $r \in \mathbb{E}.$ Then, by \Cref{prop:derivcritreproot}, $f'(r) = 0.$ Thus, $g(x) \vcentcolon= \gcd(f(x), f'(x)) \neq 1.$ Irreducibility of $g(x)$ forces $f(x) = g(x).$ But then, $f(x) \mid f'(x),$ which is a contradiction since $\deg(f'(x)) < \deg(f(x)).$
+        \backward Suppose $f'(x) \neq 0$ and $f(x)$ has a repeated root $r \in \mathbb{E}.$ Then, by \Cref{prop:derivcritreproot}, $f'(r) = 0.$ Thus, $g(x) \vcentcolon= \gcd(f(x), f'(x)) \neq 1.$ Irreducibility of $f(x)$ forces $f(x) = g(x).$ But then, $f(x) \mid f'(x),$ which is a contradiction since $\deg(f'(x)) < \deg(f(x)).$
         %
-        \item If $f(x)$ is non-constant, then $f'(x) \neq 0.$ The previous part applies.
+        \item If $f(x)$ is non-constant, then $f'(x) \neq 0.$ The previous part applies. \qedhere
     \end{enumerate} 
 \end{proof}
 
@@ -1406,6 +1406,8 @@
 
     Hence, $T^n - 1$ is the minimal polynomial of $\sigma.$ Since $\zeta \in \mathbb{F}$ is a root of $T^n - 1,$ it is an eigenvalue of $\sigma.$
 \end{proof}
+
+(In case you're not aware of minimal polynomials: We have shown that $T^n - 1$ is the least degree polynomial that is satisfied by $\sigma.$ Use this to conclude that $T^n - 1$ divides every polynomial $p(T) \in \mathbb{F}[T]$ such that $p(\sigma) = 0.$ In particular, it must divide the characteristic polynomial (here we use Cayley Hamilton) and thus, $\zeta$ is an eigenvalue.)
 
 \cyclicextprimroot*\label{thm:cyclicextprimroot2}
 \begin{flushright}\hyperref[thm:cyclicextprimroot]{\upsym}\end{flushright}
