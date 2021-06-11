@@ -603,11 +603,11 @@
     \end{equation*}
     Thus, the multiplicity of $\beta$ is at least $m.$ By symmetry, we have equality.
 
-    If $\chr(\mathbb{F}) = 0,$ then $f(x)$ is separable (\Cref{thm:derivcritsep}) and thus, all roots are simple.
+    If $\chr(\mathbb{F}) = 0,$ then $f(x)$ is separable (\Cref{prop:irredsepderiv}) and thus, all roots are simple.
 
     Now, assume that $\chr(\mathbb{F}) =\vcentcolon p > 0.$ Let $n \in \mathbb{N}_0$ be the largest such that there exists a polynomial $g(x) \in \mathbb{F}[x]$ with $f(x) = g(x^{p^n}).$ (Note that we can take $g = f$ and $n = 0$ if no positive $n$ exists.)
 
-    Then, $g$ is irreducible since $f$ is so. Moreover, $g$ must be separable. Indeed, if not, then we can write $g(x) = h(x^p)$ for some $h(x) \in \mathbb{F}[x],$ by \Cref{prop:irredsepderiv}. Then, $f(x) = g(x^{p^{n + 1}})$ contradicting maximality of $n.$
+    Then, $g$ is irreducible since $f$ is so. Moreover, $g$ must be separable. Indeed, if not, then we can write $g(x) = h(x^p)$ for some $h(x) \in \mathbb{F}[x],$ by \Cref{prop:nonseppowerp}. Then, $f(x) = h(x^{p^{n + 1}})$ contradicting maximality of $n.$
 
     Thus, $g(x)$ factors in $\overline{\mathbb{F}}$ as $g(x) = (x - r_1) \cdots (x - r_g)$ for distinct $r_g.$ Since $\overline{\mathbb{F}}$ is algebraically closed, we can find $s_1, \ldots, s_g$ necessarily distinct such that $s_i^{p^n} = r_i.$ Then, we have
     \begin{equation*} 
