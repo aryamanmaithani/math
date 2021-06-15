@@ -631,21 +631,21 @@
 \begin{proof}
     First, we show that the separable degree is multiplicative. Let $n \vcentcolon= [\mathbb{K} : \mathbb{E}]_s$ and $m \vcentcolon= [\mathbb{E} : \mathbb{F}]_s$ and $\sigma : \mathbb{F} \to \mathbb{L}$ be an embedding into an algebraically closed field $\mathbb{L}.$ 
 
-    Let $\sigma_1, \ldots, \sigma_m : \mathbb{E} \to \mathbb{L}$ be extensions of $\mathbb{F}.$ Then, each $\sigma_i$ has extensions $\sigma_i^{(1)}, \ldots, \sigma_i^{(n)} : \mathbb{K} \to \mathbb{L}.$ Note that $\{\sigma_i^{(j)} : 1 \le i \le m,\; 1 \le j \le n\}$ has cardinality $mn.$ (All the extensions obtained are distinct.)
+    Let $\sigma_1, \ldots, \sigma_m : \mathbb{E} \to \mathbb{L}$ be extensions of $\sigma.$ Then, each $\sigma_i$ has extensions $\sigma_i^{(1)}, \ldots, \sigma_i^{(n)} : \mathbb{K} \to \mathbb{L}.$ Note that $\{\sigma_i^{(j)} : 1 \le i \le m,\; 1 \le j \le n\}$ has cardinality $mn.$ (All the extensions obtained are distinct.)
 
-    Clearly, any embedding $\tau : \mathbb{K} \to \mathbb{L}$ extending $\tau$ is obtained this way. ($\tau|_{\mathbb{E}}$ is $\sigma_i$ for some $i$ and thus, $\tau = \sigma_i^{(j)}$ for some $j.$) 
+    Clearly, any embedding $\tau : \mathbb{K} \to \mathbb{L}$ extending $\sigma$ is obtained this way. ($\tau|_{\mathbb{E}}$ is $\sigma_i$ for some $i$ and thus, $\tau = \sigma_i^{(j)}$ for some $j.$) 
 
     Thus, $[\mathbb{K} : \mathbb{F}]_s = mn,$ as desired. 
 
     Now, since $\mathbb{E}/\mathbb{F}$ is finite, we can construct $\alpha_1, \ldots, \alpha_g$ such that $\mathbb{E} = \mathbb{F}(\alpha_1, \ldots, \alpha_g).$ We have the chain
     \begin{equation*} 
-        \mathbb{F} \subset \mathbb{F}(\alpha_1) \subset \mathbb{F}(\alpha_1, \alpha_2) \subset \cdots \subset \mathbb{F}(\alpha_1, \ldots, \alpha_n).
+        \mathbb{F} \subset \mathbb{F}(\alpha_1) \subset \mathbb{F}(\alpha_1, \alpha_2) \subset \cdots \subset \mathbb{F}(\alpha_1, \ldots, \alpha_g).
     \end{equation*}
     Note that by \Cref{prop:sepdeglessthannordeg}, we know that 
     \begin{equation*} 
         [\mathbb{F}(\alpha_1, \ldots, \alpha_{i + 1}) : \mathbb{F}(\alpha_1, \ldots, \alpha_i)]_s \le [\mathbb{F}(\alpha_1, \ldots, \alpha_{i + 1}) : \mathbb{F}(\alpha_1, \ldots, \alpha_i)]
     \end{equation*}
-    for all $i = 0, \ldots, n - 1.$ Since both degrees are multiplicative, we are done.
+    for all $i = 0, \ldots, g - 1.$ Since both degrees are multiplicative, we are done.
 \end{proof}
 
 \sepiffdegequal*\label{thm:sepiffdegequal2}
@@ -659,7 +659,7 @@
     \end{equation*} 
     for $i = 1, \ldots, n.$
 
-    \forward Assume $\mathbb{E}/\mathbb{F}$ is separable. Then, since each $\alpha_i$ is separable over $\mathbb{F},$ it follows that $\alpha_i$ is separable over $\mathbb{F}$ for $i = 1, \ldots, n.$ (Note that $\irr(\alpha, \mathbb{F}_i) \mid \irr(\alpha, \mathbb{F}).$) Thus, we see that 
+    \forward Assume $\mathbb{E}/\mathbb{F}$ is separable. Then, since each $\alpha_i$ is separable over $\mathbb{F},$ it follows that $\alpha_i$ is separable over $\mathbb{F}_i$ for $i = 1, \ldots, n.$ (Note that $\irr(\alpha_i, \mathbb{F}_i) \mid \irr(\alpha_i, \mathbb{F}).$) Thus, we see that 
     \begin{equation*} 
         [\mathbb{F}_{i} : \mathbb{F}_{i - 1}]_s = [\mathbb{F}_{i} : \mathbb{F}_{i - 1}]
     \end{equation*}
