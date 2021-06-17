@@ -515,7 +515,7 @@
 \begin{flushright}\hyperref[thm:derivcritsep]{\upsym}\end{flushright}
 \begin{proof}
     Let $\mathbb{E}$ be a splitting field of $f(x).$
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item Let $r \in \mathbb{E}$ be a root of $f(x).$ Then, $f'(r) = 0,$ by hypothesis and thus, $r$ is a repeated root, by \Cref{prop:derivcritreproot}.
         %
         \item Suppose $f'(x) \neq 0.$\\
@@ -529,7 +529,7 @@
 \begin{flushright}\hyperref[prop:irredsepderiv]{\upsym}\end{flushright}
 \begin{proof}
     Let $\mathbb{E}$ be a splitting field of $f(x)$ over $\mathbb{F}.$
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item \forward $f(x)$ has no repeated roots and thus, $f'(x) \neq 0,$ by \Cref{thm:derivcritsep}.
 
         \backward Suppose $f'(x) \neq 0$ and $f(x)$ has a repeated root $r \in \mathbb{E}.$ Then, by \Cref{prop:derivcritreproot}, $f'(r) = 0.$ Thus, $g(x) \vcentcolon= \gcd(f(x), f'(x)) \neq 1.$ Irreducibility of $f(x)$ forces $f(x) = g(x).$ But then, $f(x) \mid f'(x),$ which is a contradiction since $\deg(f'(x)) < \deg(f(x)).$
@@ -770,13 +770,13 @@
     \begin{equation*} 
         \alpha^{q^{km}} = \alpha
     \end{equation*}
-    for all $k \in \mathbb{N}.$ In particular, for $k = a = n/m,$ the above is true. This gives us that $g(\alpha) = 0,$ as desired.
+    for all $k \in \mathbb{N}.$ In particular, for $k = n/m,$ the above is true. This gives us that $g(\alpha) = 0,$ as desired.
 \end{proof}
 
 \irreddivsplitpoly*\label{lem:irreddivsplitpoly2}
 \begin{flushright}\hyperref[lem:irreddivsplitpoly]{\upsym}\end{flushright}
 \begin{proof}
-    \forward Suppose $f(x) \mid x^{q^n} - x.$ Then, $\mathbb{F}_{q^n}$ contains all the roots of $f(x).$ Let $\alpha \in \mathbb{F}_{q^n}$ be a root of $f(x).$ Thus, $\alpha \in \mathbb{F}_{q^n}.$ Considering the tower $\mathbb{F}_q \subset \mathbb{F}_q(\alpha) \subset \mathbb{F}_{q^n}$ shows that $\deg(f(x)) = [\mathbb{F}_q(\alpha) : \mathbb{F}_q]$ divides $[\mathbb{F}_{q^n} : \mathbb{F}_q] = n.$
+    \forward Suppose $f(x) \mid x^{q^n} - x.$ Then, $\mathbb{F}_{q^n}$ contains all the roots of $f(x).$ Let $\alpha \in \overline{\mathbb{F}}_{q}$ be a root of $f(x).$ Thus, $\alpha \in \mathbb{F}_{q^n}.$ Considering the tower $\mathbb{F}_q \subset \mathbb{F}_q(\alpha) \subset \mathbb{F}_{q^n}$ shows that $\deg(f(x)) = [\mathbb{F}_q(\alpha) : \mathbb{F}_q]$ divides $[\mathbb{F}_{q^n} : \mathbb{F}_q] = n.$
 
     \backward Let $d \vcentcolon= \deg(f(x)) \mid n.$ Fix an algebraic closure $\overline{\mathbb{F}}_q$ of $\mathbb{F}_q.$ We show that every root of $f(x)$ in $\overline{\mathbb{F}}_q$ satisfies $x^{q^d} - x.$ Since this divides $x^{q^n} - x,$ we would be done.
 
@@ -814,7 +814,7 @@
     If $\mathbb{F}$ is a finite, then $\mathbb{K}$ is also finite and hence, $\mathbb{K}^\times$ is cyclic by \Cref{thm:finsubgroupcyclic}. A generator of $\mathbb{K}^\times$ is clearly a primitive element of $\mathbb{K}$ over $\mathbb{F}.$ Clearly, there are only finitely many intermediate subfields as well. 
 
     Thus, we may assume that $\mathbb{F}$ is infinite.
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item \forward Let $\mathbb{K} = \mathbb{F}(\alpha)$ for some $\alpha \in \mathbb{K}$ and let $f(x) \vcentcolon= \irr(\alpha, \mathbb{F}).$ Let $\mathbb{E}$ be an intermediate subfield. 
 
         Let $h_{\mathbb{E}}(x) \vcentcolon= \irr(\alpha, \mathbb{E}).$ Then, $h_{\mathbb{E}}(x) \mid f(x)$ for all intermediate subfields $\mathbb{E}.$
@@ -860,14 +860,14 @@
         \begin{equation*} 
             n = [\mathbb{K} : \mathbb{F}]_s \ge [\mathbb{F}(\alpha + c\beta) : \mathbb{F}]_s \ge n = [\mathbb{K} : \mathbb{F}]
         \end{equation*}
-        and thus, \Cref{eq:003} holds.
+        and thus, \Cref{eq:003} holds. Our job now is to find such a $c \in \mathbb{F}$ for which the conjugates are distinct. 
 
-        Note that $\sigma_i(\alpha + c\beta) = \sigma_i(\alpha) + c\sigma_i(\beta)$ since $c \in \mathbb{F}.$ Consider the polynomial
+        Let $c \in \mathbb{F}$ be arbitrary. Then, $\sigma_i(\alpha + c\beta) = \sigma_i(\alpha) + c\sigma_i(\beta).$ Consider the polynomial
         \begin{equation*} 
             f(x) \vcentcolon= \prod_{1 \le i < j \le n}\left[(\sigma_i(\alpha) - \sigma_j(\alpha)) + x(\sigma_i(\beta) - \sigma_j(\beta))\right] \in \mathbb{K}[x].
         \end{equation*}
 
-        Thus, the conjugates of $c$ are distinct iff $f(c) \neq 0.$ Since $f(x)$ is not the zero polynomial and $\mathbb{F}$ is infinite, there exists $c \in \mathbb{F}$ such that $f(c) \neq 0$ and thus, we are done.
+        Thus, the conjugates of $c$ are distinct iff $f(c) \neq 0.$ Note that if $\sigma_i$ and $\sigma_j$ agree on $\alpha$ and $\beta,$ then $\sigma_i = \sigma_j$ since $\mathbb{K} = \mathbb{F}(\alpha, \beta).$ Thus, $f(x)$ above is not the zero polynomial. But since $\mathbb{F}$ is infinite, there exists $c \in \mathbb{F}$ such that $f(c) \neq 0$ and thus, we are done. \qedhere
     \end{enumerate}
 \end{proof}
 
@@ -934,7 +934,7 @@
 \begin{flushright}\hyperref[thm:fixfieldinjectiveIG]{\upsym}\end{flushright}
 \begin{proof}
     \phantom{hi}
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item Clearly, $\mathbb{F} \subset \mathbb{K}^G,$ by definition of the Galois group. Only the reverse inclusion needs to be shown.
 
         Let $a \in \mathbb{K}^G.$ Then, $a$ is separable over $\mathbb{F}$ and hence, $[\mathbb{F}(a) : \mathbb{F}]_s = [\mathbb{F}(a) : \mathbb{F}],$ by \Cref{cor:adjoiningsepissep} and \Cref{thm:sepiffdegequal}.
@@ -951,7 +951,7 @@
         \begin{equation*} 
             \mathbb{E} = \mathbb{K}^H = \mathbb{K}^{H'} = \mathbb{E}'
         \end{equation*}
-        and thus, the map is an injection.
+        and thus, the map is an injection. \qedhere
     \end{enumerate}
 \end{proof}
 
@@ -969,7 +969,7 @@
 \begin{flushright}\hyperref[thm:artin]{\upsym}\end{flushright}
 \begin{proof}
     Let $G = \{\sigma_1, \ldots, \sigma_n\}$ and $\md{G} = n.$
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item Let $\alpha \in \mathbb{E}.$ Consider $S = \{\sigma_1(\alpha), \ldots, \sigma_n(\alpha)\}.$ Note that the elements written need not all be distinct. Let $r \vcentcolon= \md{S}.$ Without loss of generality, assume that $S = \{\sigma_1(\alpha), \ldots, \sigma_r(\alpha)\}.$
 
         Let $\tau \in G.$ Then, $\tau(S) = S.$\footnote{Each $\tau\sigma_i$ is an element of $G$ and $\tau\sigma_i(\alpha)$ are distinct for $i = 1, \ldots, r.$} Thus, $\tau|_{S}$ is a permutation of $S.$ Consider the polynomial
@@ -1017,7 +1017,7 @@
 \begin{flushright}\hyperref[prop:isomorphismgalois]{\upsym}\end{flushright}
 \begin{proof}
     \phantom{hi}
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item We use \Cref{thm:normalequivalent}. Since $\mathbb{K}/\mathbb{F}$ is Galois, $\mathbb{K}$ is the splitting field of a family of separable polynomials $\{f_i(x) : i \in I\}$ over $\mathbb{F}.$ Then, $\lambda(\mathbb{K})$ is the splitting field of the separable polynomials $\{f^{\lambda}_i(x) : i \in I\}$ over $\lambda(\mathbb{F}).$
         %
         \item Define $\psi : \Gal(\mathbb{K}/\mathbb{F}) \to \Gal(\lambda(\mathbb{K})/\lambda(\mathbb{F}))$ be $\sigma \mapsto \lambda\sigma\lambda^{-1}.$ Clearly, $\psi$ is a well-defined homomorphism. It is easy to see that $\tau \mapsto \lambda^{-1}\tau\lambda$ acts as an inverse. \qedhere
@@ -1442,20 +1442,11 @@
     Since $[\mathbb{E} : \mathbb{F}] = n,$ the \nameref{thm:towerlaw} forces both of the above inequalities to be equalities.
 \end{proof}
 
-\begin{restatable}[Artin-Schreier]{thm}{artinschreier}
-\label{thm:artinschreier}
-    Let $\mathbb{F}$ be a field of prime characteristic $p.$
-    \begin{enumerate}
-        \item Let $\mathbb{E}/\mathbb{F}$ be a finite Galois extension of degree $p.$ Then, $\mathbb{E} = \mathbb{F}(a)$ for some $a \in \mathbb{E}$ such that $a^p - a \in \mathbb{F}.$
-        \item Let $b \in \mathbb{F}$ be such that $f(x) \vcentcolon= x^p - x - b \in \mathbb{F}[x]$ has no root in $\mathbb{F}.$ Then, $f(x)$ is irreducible over $\mathbb{F}$ and a splitting field of $f(x)$ over $\mathbb{F}$ is cyclic of degree $p.$ \hfill\hyperref[thm:artinschreier2]{\downsym}
-    \end{enumerate} 
-\end{restatable}
-
 \artinschreier*\label{thm:artinschreier2}
 \begin{flushright}\hyperref[thm:artinschreier]{\upsym}\end{flushright}
 \begin{proof}
     \phantom{hi}
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item Let $G \vcentcolon= \Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle.$ Define the $\mathbb{F}$-linear map $T : \mathbb{E} \to \mathbb{E}$ as 
         \begin{equation*} 
             T \vcentcolon= \sigma - \id_{\mathbb{E}}.
@@ -1521,7 +1512,7 @@
 \begin{flushright}\hyperref[prop:commutatorresults]{\upsym}\end{flushright}
 \begin{proof}
     \phantom{hi}
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item Let $g, h \in G.$ Then, 
         \begin{equation*} 
             f([g, h]) = f(g^{-1}h^{-1}gh) = f(g)^{-1}f(h)^{-1}f(g)f(h) = [f(g), f(h)].
@@ -1577,7 +1568,7 @@
 \begin{flushright}\hyperref[prop:twoofthreesolvable]{\upsym}\end{flushright}
 \begin{proof}
     For the first two parts, let $s$ be such that $G^{(s)} = 1.$ (Exists by \Cref{prop:solvableifftrivialderiv}.) Using the same result, it suffices to show that $H^{(s)} = 1$ for the first two parts.
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item $H^{(s)} \cong i(H^{(s)}) \subset G^{(s)} = 1.$
         \item Since $f$ is onto, we have $H^{(s)} = f(G^{(s)}) = 1.$
         \item There exist $s$ and $t$ such that $K^{(s)} = 1$ and $(G/K)^{(t)} = 1.$\\
@@ -1793,14 +1784,14 @@
 \begin{flushright}\hyperref[prop:normalclosureproperties]{\upsym}\end{flushright}
 \begin{proof}
     \phantom{hi}
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item $\mathbb{K}$ is normal by \Cref{thm:normalequivalent}. That it contains $\mathbb{E}$ is trivial.
         \item Since $\mathbb{K}' \supset \mathbb{E},$ given any $a \in \mathbb{E},$ the polynomial $\irr(a, \mathbb{F})$ must factor completely in $\mathbb{K}',$ by definition of normality. Thus, it contains the splitting field of $\irr(a, \mathbb{F})$ over $\mathbb{F}.$ Since this is true for all $a \in \mathbb{E},$ $\mathbb{K}' \supset \mathbb{K}.$
         \item Write $\mathbb{E} = \mathbb{F}(a_1, \ldots, a_n).$ Then, consider the splitting field $\mathbb{K}$ of $\{\irr(a_i, \mathbb{F}) \mid 1 \le i \le n\}$ over $\mathbb{F}.$ Then, $\mathbb{K}$ is normal over $\mathbb{F}$ and any normal extension of $\mathbb{F}$ must contain $\mathbb{K}.$ Thus, $\mathbb{K}$ is the normal closure. $\mathbb{K}/\mathbb{F}$ is clearly a finite extension.
         \item Since $\irr(a, \mathbb{F})$ is separable over $\mathbb{F}$ for each $a \in \mathbb{E},$ we see that $\mathbb{K}/\mathbb{F}$ is normal, in view of \Cref{prop:seppolysplittingfields}.
         \item Let $K \vcentcolon= \Gal(\mathbb{K}/\mathbb{E}).$ Note that $K$ is not normal in $G$ since $\mathbb{E}/\mathbb{F}$ is not normal. (Recall \Cref{thm:galoisiffnormal}, which was for infinite extensions as well.)
 
-        Thus, we see that $\mathbb{K}^H \supsetneq \mathbb{K}^K = \mathbb{E}.$ By \Cref{thm:galoisiffnormal} again, we see that $\mathbb{K}^H/\mathbb{F}$ is normal. Thus, $\mathbb{K}^H$ is a normal extension of $\mathbb{F}$ containing $\mathbb{E}$ which is contained in $\mathbb{K}.$ By minimality of $\mathbb{K},$ we have $\mathbb{K}^H = \mathbb{K}$ and thus, $H = 1.$
+        Thus, we see that $\mathbb{K}^H \supsetneq \mathbb{K}^K = \mathbb{E}.$ By \Cref{thm:galoisiffnormal} again, we see that $\mathbb{K}^H/\mathbb{F}$ is normal. Thus, $\mathbb{K}^H$ is a normal extension of $\mathbb{F}$ containing $\mathbb{E}$ which is contained in $\mathbb{K}.$ By minimality of $\mathbb{K},$ we have $\mathbb{K}^H = \mathbb{K}$ and thus, $H = 1.$ \qedhere
     \end{enumerate}
 \end{proof}
 
@@ -1810,7 +1801,7 @@
 \begin{flushright}\hyperref[prop:radextproperties]{\upsym}\end{flushright}
 \begin{proof}
     \phantom{hi}
-    \begin{enumerate}
+    \begin{enumerate}[leftmargin=*]
         \item Let
         \begin{equation*} 
             \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n \subset \mathbb{E}
@@ -1836,7 +1827,7 @@
             \mathbb{K} \subset \mathbb{K}(a_1) \subset \cdots \subset \mathbb{K}(a_1, \ldots, a_m) = \mathbb{E}\mathbb{K}.
         \end{equation*}
 
-        Clearly, each extension above is a simple radical extension. Thus, $\mathbb{E}\mathbb{K}/\mathbb{K}$ is a radical extension. If $\mathbb{K}/\mathbb{F}$ is also radical, then the previous part gives us that $\mathbb{E}\mathbb{K}/\mathbb{F}$ is also radical.
+        Clearly, each extension above is a simple radical extension. Thus, $\mathbb{E}\mathbb{K}/\mathbb{K}$ is a radical extension. If $\mathbb{K}/\mathbb{F}$ is also radical, then the previous part gives us that $\mathbb{E}\mathbb{K}/\mathbb{F}$ is also radical. \qedhere
     \end{enumerate}
 \end{proof}
 
