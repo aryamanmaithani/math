@@ -1276,7 +1276,7 @@
     \begin{equation*} 
         \mathbb{Q}(\beta_H) = \mathbb{Q}(\zeta)^K.
     \end{equation*}
-    (In fact, we know exactly what this subgroup is, $\Gal(\mathbb{Q}(\zeta)/\mathbb{Q}(\beta_h)).$)
+    (In fact, we know exactly what this subgroup is, namely $\Gal(\mathbb{Q}(\zeta)/\mathbb{Q}(\beta_h)).$)
 
     It suffices to prove that $H = K.$ Suppose not. Then, $H \subsetneq K$ and $\beta$ is fixed by every element of $K.$ Pick $\tau \in K \setminus H.$ We show that $\tau(\beta_H) \neq \beta_H$ and reach a contradiction. 
 
@@ -1402,7 +1402,7 @@
 \begin{proof}
     The order of $\sigma$ is $n$ and hence, it satisfies $T^n - 1 = 0.$ (As an operator.)
 
-    We contend that $T^n - 1 \in \mathbb{F}[T]$ is the minimal polynomial of $\sigma.$ Indeed, if $\sigma$ satisfies a polynomial of degree $m < n,$ then the distinct characters $\sigma, \ldots, \sigma^m$ are linearly dependent. This contradicts \Cref{thm:dedekindcharacters}, since we can view $\sigma, \ldots, \sigma^m$ as distinct characters of $\mathbb{E}^\times$ in $\mathbb{E}.$
+    We contend that $T^n - 1 \in \mathbb{F}[T]$ is the minimal polynomial of $\sigma.$ Indeed, if $\sigma$ satisfies a polynomial of degree $m < n,$ then the distinct operators $\sigma, \ldots, \sigma^m$ are linearly dependent. This contradicts \Cref{thm:dedekindcharacters}, since we can view $\sigma, \ldots, \sigma^m$ as distinct characters of $\mathbb{E}^\times$ in $\mathbb{E}.$
 
     Hence, $T^n - 1$ is the minimal polynomial of $\sigma.$ Since $\zeta \in \mathbb{F}$ is a root of $T^n - 1,$ it is an eigenvalue of $\sigma.$
 \end{proof}
@@ -1412,7 +1412,7 @@
 \cyclicextprimroot*\label{thm:cyclicextprimroot2}
 \begin{flushright}\hyperref[thm:cyclicextprimroot]{\upsym}\end{flushright}
 \begin{proof}
-    By \Cref{lem:primeigenvalue}, we see that $\zeta$ is an eigenvalue of $\sigma.$ Thus, there exists an eigenvector $a \in \mathbb{E}^\times$ such that $\sigma(a) = \zeta a$ and hence, $\sigma^i(a) = \zeta^i a.$
+    Let $G \vcentcolon= \Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle$ and $\zeta \in \mathbb{F}$ be a primitive $n$-th root of unity. By \Cref{lem:primeigenvalue}, we see that $\zeta$ is an eigenvalue of $\sigma.$ Thus, there exists an eigenvector $a \in \mathbb{E}^\times$ such that $\sigma(a) = \zeta a$ and hence, $\sigma^i(a) = \zeta^i a.$
 
     Since $\zeta$ is a primitive $n$-th root, we see that $a, \zeta a, \ldots, \zeta^{n - 1}a$ are all distinct and hence, $a$ has at least $n$ Galois conjugates and so, 
     \begin{equation*} 
@@ -1732,7 +1732,7 @@
 \begin{proof}
     As $\mathbb{E}/\mathbb{F}$ is Galois, $\mathbb{E}$ is a splitting field of a family of separable polynomials $\{f_i(x)\}_{i \in I} \subset \mathbb{F}[x]$ over $\mathbb{F}.$ Then, $\mathbb{E}\mathbb{K}$ is splitting of the same family over $\mathbb{K}$ and thus, is Galois over $\mathbb{K}.$
 
-    Now, assume that $\mathbb{K}/\mathbb{E}$ is also Galois. Then, $\mathbb{K}$ is a splitting field of a family of separable polynomials $\{g_j(x)\}_{j \in J} \subset \mathbb{F}[x]$ over $\mathbb{F}.$ Then, $\mathbb{E}\mathbb{F}$ is a splitting field the the family $\{f_i(x)\}_{i \in I} \cup \{g_j(x)\}_{j \in J} \subset \mathbb{F}[x]$ over $\mathbb{F}$ and thus, Galois.
+    Now, assume that $\mathbb{K}/\mathbb{F}$ is also Galois. Then, $\mathbb{K}$ is a splitting field of a family of separable polynomials $\{g_j(x)\}_{j \in J} \subset \mathbb{F}[x]$ over $\mathbb{F}.$ Then, $\mathbb{E}\mathbb{F}$ is a splitting field the the family $\{f_i(x)\}_{i \in I} \cup \{g_j(x)\}_{j \in J} \subset \mathbb{F}[x]$ over $\mathbb{F}$ and thus, Galois.
 
     Now we show the same for the intersection. Let $\sigma : (\mathbb{E} \cap \mathbb{K}) \to \overline{F}$ be an $\mathbb{F}$-embedding. Extend it to an $\mathbb{F}$-embedding $\tau : \mathbb{E}\mathbb{K} \to \overline{F}.$\\
     Since $\mathbb{E}/\mathbb{F}$ and $\mathbb{K}/\mathbb{F}$ are normal, we get $\tau(\mathbb{E}) = \mathbb{E}$ and $\tau(\mathbb{K}) = \mathbb{K}.$ Therefore, $\tau(\mathbb{E} \cap \mathbb{K}) \subset \mathbb{E} \cap \mathbb{K}.$ But since $(\mathbb{E} \cap \mathbb{K})/\mathbb{F}$ is algebraic, we have $\tau(\mathbb{E} \cap \mathbb{K}) = \mathbb{E} \cap \mathbb{K},$ by \Cref{lem:algebraicautomorphism}. Thus, $\sigma(\mathbb{E} \cap \mathbb{K}) = \mathbb{E} \cap \mathbb{K},$ as desired and so, $\mathbb{E} \cap \mathbb{K}$ is Galois over $\mathbb{F}.$ (We have used \Cref{thm:normalequivalent}.)
@@ -1741,7 +1741,7 @@
 \secondiso*\label{prop:secondiso2}
 \begin{flushright}\hyperref[prop:secondiso]{\upsym}\end{flushright}
 \begin{proof}
-    First note that $\sigma$ is actually well-defined. Indeed, if $\sigma \in \Gal(\mathbb{E}\mathbb{K}/\mathbb{K}),$ then $\sigma$ fixes $\mathbb{K}$ and in particular, $\mathbb{F}.$ Thus, so does $\sigma|_{\mathbb{E}}.$ That is is a homomorphism is clear.
+    First note that $\sigma$ is actually well-defined. Indeed, if $\sigma \in \Gal(\mathbb{E}\mathbb{K}/\mathbb{K}),$ then $\sigma$ fixes $\mathbb{K}$ and in particular, $\mathbb{F}.$ Thus, so does $\sigma|_{\mathbb{E}}.$ That it is a homomorphism is clear.
 
     Now, suppose that $\sigma \in \Gal(\mathbb{E}\mathbb{K}/\mathbb{K})$ is such that $\sigma|_{\mathbb{E}} = \id_{\mathbb{E}}.$ By definition of the Galois group, we have $\sigma|_{\mathbb{K}} = \id_{\mathbb{K}}.$ Thus, $\sigma$ fixes both $\mathbb{E}$ and $\mathbb{K}$ and in turn, $\mathbb{E}\mathbb{K}.$ Hence, $\psi$ is injective.
 
@@ -1758,7 +1758,7 @@
 \secondisoindex*\label{cor:secondisoindex2}
 \begin{flushright}\hyperref[cor:secondisoindex]{\upsym}\end{flushright}
 \begin{proof}
-    The equation about the degrees follows from \Cref{prop:orderofgalgroup}.
+    The first equation about the degrees follows from \Cref{prop:orderofgalgroup}.
 
     Thus,
     \begin{equation*} 
@@ -1804,17 +1804,17 @@
     \begin{enumerate}[leftmargin=*]
         \item Let
         \begin{equation*} 
-            \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n \subset \mathbb{E}
+            \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n = \mathbb{E}
         \end{equation*}
         and
         \begin{equation*} 
-            \mathbb{E} = \mathbb{E}_0 \subset \mathbb{E}_1 \subset \cdots \subset \mathbb{E}_m \subset \mathbb{K}
+            \mathbb{E} = \mathbb{E}_0 \subset \mathbb{E}_1 \subset \cdots \subset \mathbb{E}_m = \mathbb{K}
         \end{equation*}
         be towers of simple radical extensions. Append the two together to see that $\mathbb{K}/\mathbb{F}$ is a radical extension.
         %
         \item Let
         \begin{equation*} 
-            \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n \subset \mathbb{E}
+            \mathbb{F} = \mathbb{F}_0 \subset \mathbb{F}_1 \subset \cdots \subset \mathbb{F}_n = \mathbb{E}
         \end{equation*}
         be a tower of simple radical extensions. Then, there exist $a_i \in \mathbb{F}_i$ such that
         \begin{equation*} 
@@ -1838,7 +1838,7 @@
     \begin{equation*} 
         \sigma_1, \ldots, \sigma_n : \mathbb{E} \to \overline{\mathbb{F}}.
     \end{equation*}
-    We show that $\mathbb{K} = \sigma_1(\mathbb{E}) \cdots \sigma_n(\mathbb{E})$ is the smallest Galois extension of $\mathbb{F}$ containing $\mathbb{E}.$
+    We show that compositum $\mathbb{K} = \sigma_1(\mathbb{E}) \cdots \sigma_n(\mathbb{E})$ is the smallest Galois extension of $\mathbb{F}$ containing $\mathbb{E}.$
 
     By the \nameref{thm:pet}, we know that $\mathbb{E} = \mathbb{F}(a)$ for some $a \in \mathbb{E}.$ Then, the roots of $p(x) \vcentcolon= \irr(a, \mathbb{F})$ in $\overline{\mathbb{F}}$ are precisely $\sigma_1(a), \ldots, \sigma_n(a).$ Let $\mathbb{K} \vcentcolon= \mathbb{F}(\sigma_1(a), \ldots, \sigma_n(a)).$ Then, $\mathbb{K}$ is a splitting field of a separable polynomial and hence, Galois over $\mathbb{K}.$ Moreover, it contains $\mathbb{E}.$ It is clear any such another field must contain $\mathbb{K}.$ Thus, $\mathbb{K}$ satisfies the hypothesis of the theorem.
 
