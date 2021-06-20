@@ -1,0 +1,126 @@
+\chapter{Solutions of Cubic and Quartic equations}
+
+In this chapter, we assume that $\mathbb{F}$ is a field of characteristic different from $2$ or $3.$ We shall describe algorithms for solving an arbitrary cubic and quartic polynomials over $\mathbb{F}$ in terms of radicals.
+
+\section{Cubics}
+
+Consider a cubic of the form $f(x) \vcentcolon= x^3 + px + q \in \mathbb{F}[x].$ (Note that we can assume any cubic to be of this form since we can always kill the square term by ``completing the cube'' and then scale to make the leading coefficient unity.)
+
+Now, we introduce two new variables $u$ and $v.$ We will get our roots to be of the form $u + v.$ \\
+We expand the equation $f(u + v) = 0$ to get
+\begin{equation*} 
+	u^3 + v^3 + q + (3uv + p)(u + v) = 0.
+\end{equation*}
+
+We now set
+\begin{equation} \label{eq:008}
+	u^3 + v^3 + q = 0
+\end{equation}
+and
+\begin{equation} \label{eq:009}
+	3uv + p = 0.
+\end{equation}
+
+From \Cref{eq:009}, we have $uv = -p/3.$ Multiplying \Cref{eq:008} with $u^3$ and using $uv = -p/3$ gives
+\begin{equation*} 
+	u^6 + qu^3 - p^3/27 = 0.
+\end{equation*}
+
+The above is a quadratic in $u^3.$ Put $D = -(4p^3 + 27q^2).$ (Recall that this is the discriminant! \Cref{ex:disccubic}.) Bu the quadratic formula, we get
+\begin{equation*} 
+	u^3 = \frac{-q \pm \sqrt{q^2 + (4p^3/27)}}{2} = -\frac{q}{2} \pm \sqrt{-\frac{D}{108}}.
+\end{equation*}
+
+By symmetry, in $u$ and $v,$ we set
+\begin{equation*} 
+	A \vcentcolon= -\frac{q}{2} + \sqrt{-\frac{D}{108}} = u^3 \andd B \vcentcolon= -\frac{q}{2} - \sqrt{-\frac{D}{108}} = v^3.
+\end{equation*}
+
+Let $\omega$ be a primitive cube root of unity. Thus, we see that the possible values of $u$ and $v$ are given as
+\begin{equation*} 
+	u = \sqrt[3]{A},\, \omega\sqrt[3]{A},\, \omega^2\sqrt[3]{A}, \andd v = \sqrt[3]{B},\, \omega\sqrt[3]{B},\, \omega^2\sqrt[3]{B}.
+\end{equation*}
+
+However, we cannot choose $u$ and $v$ independently. We need to ensure that $uv = -p/3.$ 
+
+First, choose cube roots $\sqrt[3]{A}$ and $\sqrt[3]{B}$ such that $\sqrt[3]{A}\sqrt[3]{B} = -p/3.$ (The reason we can do this is because $AB = -p^3/27.$)
+
+Then, the three roots of $f(x)$ are seen to be 
+\begin{equation*} 
+	\sqrt[3]{A} + \sqrt[3]{B},\,\omega\sqrt[3]{A} + \omega^2\sqrt[3]{B},\,\omega^2\sqrt[3]{A} + \omega\sqrt[3]{B}.
+\end{equation*}
+
+\begin{ex}[Negative discriminant]
+	Suppose $f(x) = x^3 + px + q \in \mathbb{R}[x]$ with $\disc(f(x)) < 0.$ In this case, $A$ and $B$ are real. Moreover, we can choose the cube roots of $A$ and $B$ to be real. We get the roots as
+	\begin{align*} 
+		r_1 &= \sqrt[3]{A} + \sqrt[3]{B} \in \mathbb{R}, \\
+		r_2 &= -\frac{\sqrt[3]{A} + \sqrt[3]{B}}{2} + \iota\sqrt{3}\left(\frac{\sqrt[3]{A} - \sqrt[3]{B}}{2}\right), \\
+		r_3 &= \overline{r_2}.
+	\end{align*}
+	Note that the roots are distinct. This can be seen by either observing that $A \neq B$ or that $\disc(f(x)) \neq 0.$ 
+\end{ex}
+
+\begin{ex}[Positive discriminant]
+	Suppose $f(x) = x^3 + px + q \in \mathbb{R}[x]$ with $\disc(f(x)) > 0.$ Then, we have
+	\begin{equation*} 
+		A = -\frac{q}{2} + \iota\sqrt{\frac{D}{108}} \andd B = \overline{A}.
+	\end{equation*}
+	Let $a + \iota b$ be a cube root of $\sqrt[3]{A}.$ Then, since $B = \overline{A},$ we know the cube roots of $B.$ Since we wish the product to be $-p/3 \in \mathbb{R},$ we pick $\sqrt[3]{B} = a - \iota b.$ Thus, the roots are
+	\begin{align*} 
+		r_1 &= 2a, \\
+		r_2 &= -a - b\sqrt{3}, \\
+		r_3 &= -a + b\sqrt{3}.
+	\end{align*}
+	In particular, all the roots are real and distinct.
+\end{ex}
+
+\section{Quartics}
+
+As before, it suffices to consider a polynomial of the form
+\begin{equation*} 
+	g(y) = y^4 + py^2 + qy + r \in \mathbb{F}[y].
+\end{equation*}
+Let $r_1, \ldots, r_4$ be the roots of $g(y).$ Consider the following quantities
+\begin{equation*} 
+	\theta_1 \vcentcolon= (r_1 + r_2)(r_3 + r_4),\, \theta_2 \vcentcolon= (r_1 + r_3)(r_2 + r_4),\, \theta_3 \vcentcolon= (r_1 + r_4)(r_2 + r_3).
+\end{equation*}
+
+Now, note that we compute the elementary symmetric polynomials in $\theta_i$ since these will be elementary symmetric polynomials in $r_j$ and we already know those in terms of $p, q, r.$ In particular, we may compute the monic cubic polynomial having $\theta_1, \theta_2, \theta_3$ as roots. This is called the \deff{resolvent cubic} of $g(y).$ This turns out to be
+\begin{equation*} 
+	h(x) \vcentcolon= x^3 - 2px^2 + (p^2 - 4r)x + q^2.
+\end{equation*}
+
+Using the relation $r_1 + r_2 + r_3 + r_4 = 0,$ we get 
+\begin{equation*} 
+	(r_1 + r_2)^2 = (r_3 + r_4)^2 = -\theta_1
+\end{equation*} 
+and so on. Fixing a square root for each $-\theta_i,$ we get.
+\begin{align*} 
+	r_1 + r_2 &= \sqrt{-\theta_1}, \quad r_3 + r_4 = -\sqrt{-\theta_1}, \\
+	r_1 + r_3 &= \sqrt{-\theta_2}, \quad r_2 + r_4 = -\sqrt{-\theta_2}, \\
+	r_1 + r_4 &= \sqrt{-\theta_3}, \quad r_2 + r_3 = -\sqrt{-\theta_3}.
+\end{align*}
+One can show that the product of the elements on the left is $-q,$ i.e., the choice of square roots must satisfy
+\begin{equation*} 
+	\sqrt{-\theta_1}\sqrt{-\theta_2}\sqrt{-\theta_3} = -q.
+\end{equation*}
+Thus, two of the square roots determine the third. Now, using the relation $r_2 + r_3 + r_4 = -r_1,$ adding the four equations on the left lead to the following solutions.
+\begin{align*} 
+	2r_1 =  \sqrt{-\theta_1} + \sqrt{-\theta_2} + \sqrt{-\theta_3}, \\
+	2r_2 =  \sqrt{-\theta_1} - \sqrt{-\theta_2} - \sqrt{-\theta_3}, \\
+	2r_3 = -\sqrt{-\theta_1} + \sqrt{-\theta_2} - \sqrt{-\theta_3}, \\
+	2r_4 = -\sqrt{-\theta_1} - \sqrt{-\theta_2} + \sqrt{-\theta_3}.
+\end{align*}
+
+Thus, the roots of the resolvent cubic determine the roots of the quartic. 
+
+\begin{prop}
+	The discriminants of the quartic $g(y)$ and its resolvent $h(x)$ are equal.
+\end{prop}
+\begin{proof} 
+	The differences of roots are 
+	\begin{equation*} 
+		\theta_1 - \theta_2 = (r_2 - r_3)(r_4 - r_1),\, \theta_1 - \theta_3 = (r_2 - r_4)(r_3 - r_1),\, \theta_2 - \theta_3 = (r_3 - r_4)(r_2 - r_1).
+	\end{equation*}	
+	It is now clear that the discriminants are equal.
+\end{proof}
