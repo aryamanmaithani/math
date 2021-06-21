@@ -1905,3 +1905,278 @@
 
     Let $\mathbb{E}_i \vcentcolon= \mathbb{L}^{H_i}$ for $i = 1, \ldots, k.$ Then, $[\mathbb{E}_i : \mathbb{E}_{i - 1}] = \md{H_{i - 1}/H_i} = p_i.$ Since $\mathbb{E}_{i - 1}$ contains $\omega,$ it has a primitive $p_i$-th root of unity. Thus, $\mathbb{E}_i/\mathbb{E}_{i - 1}$ is a simple radical extension, by \Cref{thm:cyclicextprimroot}. Thus, $\mathbb{L}/\mathbb{E}$ is a radical extension.
 \end{proof}
+
+\section{Solutions of Cubic and Quartic equations}
+
+\section{Galois Groups of Quartic Polynomials}
+
+\alternatingsubgroupdiscriminantroot*\label{thm:alternatingsubgroupdiscriminantroot2}
+\begin{flushright}\hyperref[thm:alternatingsubgroupdiscriminantroot]{\upsym}\end{flushright}
+\begin{proof}
+    Note that any transposition maps $\delta$ to $-\delta.$ Thus, all permutations in $\G_f \cap A_n$ fix $\delta$ and in turn, $\mathbb{F}(\delta) \subset \mathbb{E}^{\G_f \cap A_n}.$
+
+    Let $d = [\G_f : \G_f \cap A_n].$ Then, $d \le 2.$ If $d = 1,$ then $\G_f = \G_f \cap A_n$ which means that
+    \begin{equation*} 
+        \mathbb{F}(\delta) \subset \mathbb{E}^{\G_f \cap A_n} = \mathbb{E}^{\G_f} = \mathbb{F} \subset \mathbb{F}(\delta),
+    \end{equation*}
+    and we are done.
+
+    Now, assume $d = 2.$ Then, $\G_f \cap A_n \neq A_n$ and hence, $\G_f$ has an odd permutation $\sigma.$ Since $\delta \neq 0,$ and $\chr(\mathbb{F}) \neq 2,$ we see that $\delta \neq -\delta$ and thus, $\delta$ is not fixed by $\sigma.$ Thus, $\delta \notin \mathbb{F}$ and $\mathbb{F}(\delta)$ is a degree $2$ extension of $\mathbb{F}.$\footnote{Recall that $\delta^2$ is the discriminant of $f(x)$ and thus, is an element of $\mathbb{F}.$ } But $\mathbb{E}^{\G_f \cap A_n}$ is also a degree $2$ extension of $\mathbb{E}^{\G_f} = \mathbb{F},$ since $d = 2.$ Since we already have the inclusion $\mathbb{F}(\delta) \subset \mathbb{E}^{\G_f \cap A_n},$ we are done.
+\end{proof}
+
+\transitivegaloisgroupiffirreducible*\label{thm:transitivegaloisgroupiffirreducible2}
+\begin{flushright}\hyperref[thm:transitivegaloisgroupiffirreducible]{\upsym}\end{flushright}
+\begin{proof}
+    Let $r_1, \ldots, r_n \in \overline{\mathbb{F}}$ be the roots of $f(x),$ and let $\mathbb{E} = \mathbb{F}(r_1, \ldots, r_n)$ be the splitting field. 
+
+    \forward Suppose $f(x)$ is irreducible. Let $i, j \in \{1, \ldots, n\}$ be distinct. Since $f(x)$ is irreducible, we see that 
+    \begin{equation*} 
+        \irr(r_i, \mathbb{F}) = f(x) = \irr(r_j, \mathbb{F}).
+    \end{equation*}
+    By \Cref{prop:isocarryingalphtobet}, there exists an $\mathbb{F}$-isomorphism $\tau : \mathbb{F}(r_i) \to \mathbb{F}(r_j).$ Extending this to an isomorphism $\sigma : \mathbb{E} \to \mathbb{E}$ gives $\sigma \in \G_f$ with $\sigma(r_i) = r_j.$
+
+    \backward Suppose $\G_f$ is a transitive subgroup of $S_n.$ For the sake of contradiction, assume that
+    \begin{equation*} 
+        f(x) = g(x)h(x)
+    \end{equation*}
+    for polynomials $g(x), h(x) \in \mathbb{F}[x]$ of positive degree. Let $r$ be a root of $g(x)$ and $s$ of $h(x).$ By transitivity, there exists an $\mathbb{F}$-automorphism $\sigma : \mathbb{E} \to \mathbb{E}$ such that $\sigma(r) = s.$ But $g(x)$ and $h(x)$ are fixed by $\sigma$ and so, we see that $s$ is a root of $g(x)$ and $h(x)$ both. But this is a contradiction since $f(x)$ has distinct roots.
+\end{proof}
+
+\stabiliserofti*\label{prop:stabiliserofti2}
+\begin{flushright}\hyperref[prop:stabiliserofti]{\upsym}\end{flushright}
+\begin{proof}
+    We prove this for $i = 1,$ for ease of notation. Clearly, $H_1$ fixes $t_i$ and thus, $H_1 \subset \Stab t_1.$ Moreover, note that
+    \begin{equation*} 
+        S_4 = H_1 \sqcup (13)H_1 \sqcup (14)H_1
+    \end{equation*}
+    and $(13),$ $(14)$ do not fix $t_1.$ Thus, $H_1 = \Stab t_1.$ 
+\end{proof}
+
+\galoisintersectklein*\label{prop:galoisintersectklein2}
+\begin{flushright}\hyperref[prop:galoisintersectklein]{\upsym}\end{flushright}
+\begin{proof}
+    Since $V$ fixes each $t_i,$ we have $\mathbb{F}(\underline{t}) \subset \mathbb{E}^{\G_f \cap V}.$ Note that 
+    \begin{equation*} 
+        V = H_1 \cap H_2 \cap H_3.
+    \end{equation*}
+    Thus, if $\sigma \in \G_f$ fixes $t_1, t_2, t_3,$ then $\sigma \in V,$ by \Cref{prop:stabiliserofti}. Thus, $\Gal(\mathbb{E}/\mathbb{F}(\underline{t})) \subset \G_f \cap V$ and thus, we get the reverse inclusion $\mathbb{E}^{\G_f \cap V} = \mathbb{F}(\underline{t})$ as well.
+
+    The second equality now follows since $V$ is normal in $S_4$ and thus, $\G_f \cap V$ is normal in $\G_f.$
+\end{proof}
+
+\resolventquarticrootinF*\label{prop:resolventquarticrootinF2}
+\begin{flushright}\hyperref[prop:resolventquarticrootinF]{\upsym}\end{flushright}
+\begin{proof}
+    Recall that the roots of the resolvent are precisely the $t_i.$ 
+
+    \forward Suppose $t_i \in \mathbb{F}$ for some $i.$ Thus, $\G_f$ fixes $t_i$ and hence, $\G_f \subset H_i.$
+
+    \backward If $\G_f \subset H_i$ for some $i,$ then every $\sigma \in \G_f$ fixes $t_i$ and thus, $t_i \in \mathbb{F}.$
+\end{proof}
+
+\classifyingirreduciblequarticgalois*\label{thm:classifyingirreduciblequarticgalois2}
+\begin{flushright}\hyperref[thm:classifyingirreduciblequarticgalois]{\upsym}\end{flushright}
+\begin{proof}
+    Let $r_1, \ldots, r_4 \in \overline{\mathbb{F}}$ be the roots of $f(x)$ and $\mathbb{E} = \mathbb{F}(r_1, \ldots, r_4)$ be the splitting field. 
+
+    Since $f(x)$ is irreducible in $\mathbb{F}[x],$ we see that $\G_f$ is a transitive subgroup. Thus, $\md{\G_f} \in \{4, 8, 12, 24\}.$ Also, $\md{\G_f \cap V} \in \{1, 2, 4\}.$ Note that $\mathbb{F}(\underline{t})$ is the splitting field of $r(x).$ Thus, $\md{\G_f/\G_f \cap V} = \md{\G_r} \in \{1, 2, 3, 6\},$ where the first equality follows from \Cref{prop:galoisintersectklein}. \\
+    Since the first and third sets have no element in common, it follows that $\md{\G_f \cap V} > 1.$ Moreover, since we must have
+    \begin{equation*} 
+        \md{V \cap \G_f} \cdot \md{\frac{\G_f}{V \cap \G_f}} = \md{\G_f},
+    \end{equation*}
+    the possibilities are reduced to the following sets
+    \begin{equation*} 
+        \{2, 4\} \cdot \{1, 2, 3, 6\} = \{4, 8, 12, 24\}.
+    \end{equation*}
+
+    \begin{enumerate}[leftmargin=*]
+        \item Assume that $r(x)$ is irreducible in $\mathbb{F}[x]$ and $\disc(r(x)) \in \mathbb{F}^2.$ By \Cref{ex:galsepcubic}, it follows that $\G_r \cong A_3$ and hence, $\md{\G_f/\G_f \cap V} = 3.$ The only way this is possible is if $\md{\G_f} = 12$ or $\G_f \cong A_4.$
+        %
+        \item Assume that $r(x)$ is irreducible in $\mathbb{F}[x]$ and $\disc(r(x)) \notin \mathbb{F}^2.$ By \Cref{ex:galsepcubic}, it follows that $\G_r \cong S_3$ and hence, $\md{\G_f/\G_f \cap V} = 6.$ Thus, $\md{\G_f}$ is either $12$ or $24.$ If it is the latter, then $\G_f \cong S_4,$ as desired. We show that the former is not possible. \\
+        Indeed, if $\md{\G_f} = 12,$ then $\G_f = A_4$ and thus, $\md{\G_f \cap V} = 4,$ which gives $\md{\G_f/\G_f \cap V} = 3,$ a contradiction.\footnote{The point to note here is that we explicitly know how $A_4$ and $V$ intersect, within $S_4.$}
+        %
+        \item Assume that $r(x)$ has all its roots in $\mathbb{F}.$ Then, 
+        \begin{equation*} 
+            \mathbb{E}^{\G_f \cap V} = \mathbb{F}(\underline{t}) = \mathbb{F} = \mathbb{E}^{\G_f}.
+        \end{equation*}
+        (The first equality follows from \Cref{prop:galoisintersectklein}.) 
+
+        Thus, $\G_f \cap V = \G_f$ or $\G_f \subset V.$ Since $\md{V} = 4 \le \md{\G_f},$ it follows that $\G_f = V,$ as desired.
+        %
+        \item Assume that $r(x)$ has exactly one root in $\mathbb{F}.$ Then, $[\mathbb{F}(\underline{t}) : \mathbb{F}] = 2 = \md{\G_f/\G_f \cap V}.$ Thus, $\md{\G_f}$ is either $4$ or $8.$
+        \begin{enumerate}
+            \item Assume that $f(x)$ is irreducible over $\mathbb{F}(\underline{t}).$ Then,
+            \begin{equation*} 
+                \md{\G_f \cap V} = [\mathbb{E} : \mathbb{F}(\underline{t})] \ge 4.
+            \end{equation*}
+            Thus, $\md{\G_f \cap V} = 4$ and hence $\md{\G_f} = 4 \cdot 2 = 8$ which implies $G \cong D_8.$
+            %
+            \item Assume that $f(x)$ is reducible over $\mathbb{F}(\underline{t}).$ We already know that $\md{\G_f} = 4$ or $8.$ Thus, it is (isomorphic to) one of $C_4,$ $V,$ or $D_8.$ We show that the last two are not possible.
+
+            Suppose $\G_f \cong D_8.$ Then,
+            \begin{equation*} 
+                [\mathbb{E} : \mathbb{F}(\underline{t})] = \frac{[\mathbb{E} : \mathbb{F}]}{[\mathbb{F}(\underline{t}) : \mathbb{F}]} = \frac{8}{2} = 4.
+            \end{equation*}
+            Thus, $\Gal(\mathbb{E}/\mathbb{F}(\underline{t})) \cong V$ (by \Cref{prop:galoisintersectklein}). But this is transitive, which contradicts the reduciblity of $f(x)$ over $\mathbb{F}(\underline{t}).$
+
+            Now, suppose $\G_f = V.$ Then, $\G_r = \G_f/(\G_f \cap V) = \{1\}.$ But $\md{\G_r} = 2,$ a contradiction. \qedhere
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
+
+\section{Norm, Trace, and Hilbert's Theorem 90}
+
+\propertiesnormtrace*\label{prop:propertiesnormtrace2}
+\begin{flushright}\hyperref[prop:propertiesnormtrace]{\upsym}\end{flushright}
+\begin{proof}
+    \begin{enumerate}[leftmargin=*]
+        \item It is clear that $\N_{\mathbb{E}/\mathbb{F}}(ab) = \N_{\mathbb{E}/\mathbb{F}}(a)\N_{\mathbb{E}/\mathbb{F}}(b)$ for all $a, b \in \mathbb{E}.$ Moreover, if $a \neq 0,$ then $\N_{\mathbb{E}/\mathbb{F}}(a) \neq 0.$
+
+        Now, suppose $a \in \mathbb{E}^\times$ and let $\mathbb{L}$ be the normal closure of $\mathbb{E}/\mathbb{F}.$ Then, $\mathbb{L}/\mathbb{F}$ is a Galois extension and $\sigma_1(a), \ldots, \sigma_n(a) \in \mathbb{L}.$ Then, $ \N_{\mathbb{E}/\mathbb{F}}(a)$ is fixed by every $\sigma \in \Gal(\mathbb{L}/\mathbb{F})$ and hence, $a \in \mathbb{F}^\times.$
+        %
+        \item Suppose $\mathbb{E} = \mathbb{F}(a).$ Then, it is clear that the irreducible polynomial $f(x) = \irr(a, \mathbb{F})$ is simply
+        \begin{equation*} 
+            f(x) = (x - \sigma_1(a)) \cdots (x - \sigma_n(a))
+        \end{equation*}
+        and thus, $\N_{\mathbb{E}/\mathbb{F}}(a) = (-1)^n$ and $\Tr_{\mathbb{E}/\mathbb{F}}(a) = -a_{n - 1}.$
+        %
+        \item Let $a \in \mathbb{E}.$ Consider the extensions $\mathbb{F} \subset \mathbb{F}(a) \subset \mathbb{E}.$ Let $d \vcentcolon= [\mathbb{E} : \mathbb{F}(a)].$ \\
+        Then, we see that
+        \begin{equation*} 
+            \Tr_{\mathbb{E}/\mathbb{F}}(a) = d \cdot \Tr_{\mathbb{F}(a)/\mathbb{F}}(a).
+        \end{equation*}
+        By the previous part, we see that $\Tr_{\mathbb{F}(a)/\mathbb{F}}(a) \in \mathbb{F}$ and thus, $\Tr_{\mathbb{E}/\mathbb{F}}(a) \in \mathbb{F}.$
+
+        Now, let $\sigma_1, \ldots, \sigma_n$ be the $\mathbb{F}$-embeddings of $\mathbb{E}$ into $\overline{\mathbb{F}}.$ We have shown that
+        \begin{equation*} 
+            \Tr_{\mathbb{E}/\mathbb{F}} = \sigma_1 + \cdots + \sigma_n
+        \end{equation*}
+        is a $\mathbb{F}$-linear map from $\mathbb{E}$ to $\mathbb{F}.$ By \nameref{thm:dedekindcharacters}, it follows that $\sigma_1 + \cdots + \sigma_n$ is not the zero map and thus, $\Tr_{\mathbb{E}/\mathbb{F}}$ is surjective.
+        %
+        \item Let $\{\tau_j\}$ be the $\mathbb{F}$-embeddings $\mathbb{K} \to \overline{\mathbb{F}}$ and let $\{\sigma_i\}$ be the family of $\mathbb{K}$-embeddings $\mathbb{E} \to \overline{\mathbb{F}}.$ Each $\tau_j$ can be extended to an automorphism $\widetilde{\tau_j}$ of $\overline{\mathbb{F}}.$ Then, $\{\widetilde{\tau_j}\sigma_i\}$ is the set of all $\mathbb{F}$-embeddings $\mathbb{E} \to \overline{\mathbb{F}}.$ For an arbitrary $x \in \mathbb{E},$ we have
+        \begin{equation*} 
+            (\N_{\mathbb{K}/\mathbb{F}} \circ \N_{\mathbb{E}/\mathbb{K}})(x) = \N_{\mathbb{K}/\mathbb{F}}\left(\prod_{i = 1}^{n} \sigma_i(x)\right) = \prod_{j = 1}^{m}\prod_{i = 1}^{n} \tau_j\sigma_i(x) = \N_{\mathbb{E}/\mathbb{F}}(x). \qedhere
+        \end{equation*}
+    \end{enumerate} 
+\end{proof}
+
+\normtracelinearmap*\label{prop:normtracelinearmap2}
+\begin{flushright}\hyperref[prop:normtracelinearmap]{\upsym}\end{flushright}
+\begin{proof}
+    Fix $a \in \mathbb{E}$ and let $\mathbb{K} = \mathbb{F}(a).$ Set
+    \begin{equation*} 
+        f(x) \vcentcolon= \irr(a, \mathbb{F}) = x^d + a_{d - 1}x^d + \cdots + a_1x + a_0.
+    \end{equation*}
+    Let $\{v_1, \ldots, v_e\}$ be a $\mathbb{K}$-basis for $\mathbb{E}.$ Then,
+    \begin{equation*} 
+        \{v_ia^j : i = 1, \ldots, e,\, j = 0, \ldots, d - 1\}
+    \end{equation*}
+    is an $\mathbb{F}$-basis of $\mathbb{E}.$ Order this basis as
+    \begin{equation*} 
+        B = (v_1, a_1v_1, \ldots, a_1^{d - 1}v_1, \ldots, v_e, av_e, \ldots, a^{d - 1}v_e).
+    \end{equation*}
+    Consider the matrix
+    \begin{equation*} 
+        A = \begin{bmatrix}
+            0 & 0 & 0 & \cdots & 0 & -a_0 \\
+            1 & 0 & 0 & \cdots & 0 & -a_1 \\
+            0 & 1 & 0 & \cdots & 0 & -a_2 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+            0 & 0 & 0 & \cdots & 1 & -a_{d - 1}
+        \end{bmatrix}.
+    \end{equation*}
+    Then, note that the matrix of $m_a$ with respect to $B$ is the $n \times n$ block matrix given as
+    \begin{equation*} 
+        \begin{bmatrix}
+            A & O & O & \cdots & O \\
+            O & A & O & \cdots & O \\
+            O & O & A & \cdots & O \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            O & O & O & \cdots & A \\
+        \end{bmatrix}.
+    \end{equation*}
+    Moreover, the characteristic polynomial of $A$ is $f(x).$ In particular,
+    \begin{equation*} 
+        \det(A) = \det(A - 0I) = (-1)^df(0) = (-1)^d a_0 = \N_{\mathbb{K}/\mathbb{F}}(a).
+    \end{equation*}
+    The last equality above uses \Cref{prop:propertiesnormtrace}. Similarly, we also get
+    \begin{equation*} 
+        \Tr(A) = -a_{d - 1} = \Tr_{\mathbb{K}/\mathbb{F}}(a).
+    \end{equation*}
+    Therefore, using \Cref{prop:propertiesnormtrace} again, we get
+    \begin{align*} 
+        \N_{\mathbb{E}/\mathbb{F}}(a) &= (\N_{\mathbb{K}/\mathbb{F}} \circ \N_{\mathbb{E}/\mathbb{F}})(a) = \N_{\mathbb{K}/\mathbb{F}}(a^e) = (\det A)^e = \det m_a, \\
+        \Tr_{\mathbb{E}/\mathbb{F}}(a) &= (\Tr_{\mathbb{K}/\mathbb{F}} \circ \Tr_{\mathbb{E}/\mathbb{F}})(a) = \Tr_{\mathbb{K}/\mathbb{F}}(ea) = e \Tr A = \Tr m_a. \qedhere
+    \end{align*}
+\end{proof}
+
+\tracebilinearmaps*\label{prop:tracebilinearmaps2}
+\begin{flushright}\hyperref[prop:tracebilinearmaps]{\upsym}\end{flushright}
+\begin{proof}
+    The first statement is easy to see and it clearly implies the next. In turn, this shows that $\psi$ is a map from $\mathbb{E}$ to $\Hom(\mathbb{E}, \mathbb{F}).$ It is again easy to see that $\psi$ is $\mathbb{F}$-linear. Since $\mathbb{E}$ and $\Hom_{\mathbb{F}}(\mathbb{E}, \mathbb{F})$ have the same dimension as $\mathbb{F}$-vector spaces, it suffices to show that $\psi$ is injective.
+
+    Suppose that $x \in \mathbb{E}^\times$ is such that $\psi(x) = 0.$ Let $y \in \mathbb{E}$ be arbitrary. Then, we have
+    \begin{equation*} 
+        \Tr(y) = \Tr(xx^{-1}y) = \Tr_x(x^{-1}y) = \psi(x)(x^{-1}y) = 0.
+    \end{equation*}
+    But the above is a contradiction since $\Tr$ is not the zero map (\Cref{prop:propertiesnormtrace}).
+\end{proof}
+
+\hilbertmultiplicative*\label{thm:hilbertmultiplicative2}
+\begin{flushright}\hyperref[thm:hilbertmultiplicative]{\upsym}\end{flushright}
+\begin{proof}
+    Let $[\mathbb{E} : \mathbb{F}] = n.$
+
+    \backward If $\beta = \alpha/\sigma(\alpha),$ then
+    \begin{equation*} 
+        \N_{\mathbb{E}/\mathbb{F}}(\beta) = \beta \sigma(\beta) \cdots \sigma^{n - 1}(\beta) = \frac{\alpha}{\sigma(\alpha)} \frac{\sigma(\alpha)}{\sigma^2(\alpha)} \cdots \frac{\sigma^{n - 1}(\alpha)}{\sigma^n(\alpha)} = 1,
+    \end{equation*}
+    since $\sigma^n(\alpha) = \alpha.$
+
+    \forward Suppose $\N_{\mathbb{E}/\mathbb{F}}(\beta) = 1.$ Then, the map
+    \begin{equation*} 
+        \id_{\mathbb{E}} + \beta \sigma + \beta \sigma(\beta) \sigma^2 + \beta \sigma(\beta) \sigma^2(\beta) \sigma^3 + \cdots + \beta \sigma(\beta) \cdots \sigma^{n - 2}(\beta) \sigma^{n - 1}
+    \end{equation*}
+    is a nonzero map $\mathbb{E} \to \mathbb{E},$ due to \nameref{thm:dedekindcharacters}. Let $\alpha \in \mathbb{E}^\times$ be in its image and $\theta$ be any preimage of $\alpha.$ That is,
+    \begin{equation*} 
+        \alpha = \theta + \beta \sigma(\theta) + \beta \sigma(\beta) \sigma^2(\theta) + \cdots + \beta \sigma(\beta) \cdots \sigma^{n - 2}(\beta) \sigma^{n - 1}(\theta)
+    \end{equation*}
+    and thus,
+    \begin{equation*} 
+        \beta\sigma(\alpha) = \beta \sigma(\theta) + \beta \sigma(\beta) \sigma^2(\theta) + \cdots + \underbrace{\beta \sigma(\beta) \sigma^2(\beta) \cdots \sigma^{n - 1}(\beta)}_{= \N_{\mathbb{E}/\mathbb{F}}(\beta) = 1} \underbrace{\sigma^{n}(\theta)}_{= \theta} = \alpha.
+    \end{equation*}
+    Therefore, $\beta = \frac{\sigma(\alpha)}{\alpha}.$
+\end{proof}
+
+\splittingfieldnthroots*\label{cor:splittingfieldnthroots2}
+\begin{flushright}\hyperref[cor:splittingfieldnthroots]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle,$ and $\zeta \in \mathbb{F}$ be a primitive $n$-th root of $1.$ Then, $\N_{\mathbb{E}/\mathbb{F}}(\zeta^{-1}) = \zeta^{-n} = 1.$ By \nameref{thm:hilbertmultiplicative}, there exists $\alpha \in \mathbb{E}^\times$ such that $\sigma(\alpha) = \zeta \alpha.$ In turn, $\sigma^i(\alpha) = \zeta^i\alpha$ for $i = 1, \ldots, n$ and thus, $\alpha$ has $n$ distinct conjugates in $\mathbb{E}.$ Since $[\mathbb{E} : \mathbb{F}] = n,$ it follows that $\mathbb{E} = \mathbb{F}(\alpha).$ \\
+    Moreover, $\irr(\alpha, \mathbb{F}) = x^n - \alpha^n.$ Thus, it suffices to show that $\alpha^n \in \mathbb{F}.$ To this end, note that 
+    \begin{equation*} 
+        \sigma(\alpha^n) = (\sigma(\alpha))^n = \zeta^n\alpha^n = \alpha^n
+    \end{equation*}
+    and thus, $\alpha^n \in \mathbb{E}^{\langle \sigma\rangle} = \mathbb{F}.$
+\end{proof}
+
+\hilbertadditive*\label{thm:hilbertadditive2}
+\begin{flushright}\hyperref[thm:hilbertadditive]{\upsym}\end{flushright}
+\begin{proof}
+    The proof is essentially the same as that of the \hyperref[thm:hilbertmultiplicative]{multiplicative form}. The direction \backward is simple and for \forward, let $\theta \in \mathbb{E}$ be such that $\Tr(\theta) \neq 0$ and consider the element
+    \begin{equation*} 
+        \alpha \vcentcolon= \frac{1}{\Tr(\theta)}[\beta\theta + (\beta + \sigma(\beta))\sigma(\theta) + \cdots + (\beta + \sigma(\beta) + \cdots + \sigma^{n - 2}(\beta))\sigma^{n - 2}(\theta)].
+    \end{equation*}
+    Use $\Tr(\beta) = 0$ to deduce $\alpha - \sigma(\alpha) = \beta.$
+\end{proof}
+
+\artinschreier*\label{cor:artinschreier2}
+\begin{flushright}\hyperref[cor:artinschreier]{\upsym}\end{flushright}
+\begin{proof}
+    Let $\Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle.$ Note that $\Tr(-1) = p \cdot (-1) = 0$ and thus, there exists $\alpha \in \mathbb{E}$ such that $-1 = \alpha - \sigma(\alpha)$ or $\sigma(\alpha) = \alpha + 1.$ Thus, $\sigma^i(\alpha) = \alpha + i$ for $i = 0, \ldots, p - 1.$ Since $\chr(\mathbb{F}) = p,$ all these elements are distinct and thus, $\alpha$ has $p$ distinct conjugates in $\mathbb{E}.$ Since $[\mathbb{E} : \mathbb{F}] = p,$ it follows that $\mathbb{E} = \mathbb{F}(\alpha).$ 
+
+    Lastly, note that
+    \begin{equation*} 
+        \sigma(\alpha^p - \alpha) = (\alpha + 1)^p - (\alpha + 1) = \alpha^p - \alpha
+    \end{equation*}
+    and thus, $\alpha^p - \alpha =\vcentcolon a \in \mathbb{F}.$ It can be checked that all the conjugates of $\alpha$ are roots of $x^p - x - \alpha$ and we are done.
+\end{proof} 

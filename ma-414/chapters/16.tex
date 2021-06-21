@@ -1,0 +1,106 @@
+\chapter{Norm, Trace, and Hilbert's Theorem 90}
+
+\section{Norm and Trace}
+\begin{defn} \label{defn:normtrace}
+	Let $\mathbb{E}/\mathbb{F}$ be a finite separable extension of degree $n.$ Let $\sigma_1, \ldots, \sigma_n : \mathbb{E} \to \overline{\mathbb{F}}$ be the distinct $\mathbb{F}$-embeddings. For $a \in \mathbb{E},$ define the \deff{norm} and \deff{trace} of $a$ by
+	\begin{align*} 
+		\N_{\mathbb{E}/\mathbb{F}}(a) &\vcentcolon= \sigma_1(a) \cdots \sigma_n(a), \\
+		\Tr_{\mathbb{E}/\mathbb{K}}(a) &\vcentcolon= \sigma_1(a) + \cdots + \sigma_n(a)
+	\end{align*}
+\end{defn}
+
+We shall omit the subscript when the extension is clear.
+
+\begin{ex}
+	Let $m \in \mathbb{Z}$ be square free. Consider the quadratic extension $\mathbb{Q}(\sqrt{m})/\mathbb{Q}.$ Its Galois group consists of the identity and the ``conjugation'' map determined by $\sigma(\sqrt{m}) = -\sqrt{m}.$ 
+
+	Thus, given $a + b\sqrt{m} \in \mathbb{Q}(\sqrt{m})$ with $a, b \in \mathbb{Q},$ we have
+	\begin{equation*} 
+		\Tr(a + b\sqrt{m}) = 2a \andd \N(a + b\sqrt{m}) = a^2 - mb^2.
+	\end{equation*}
+	For $m = -1,$ we recover the familiar norm $\N(a + \iota b) = a^2 + b^2.$
+\end{ex}
+
+\begin{restatable}[]{prop}{propertiesnormtrace}
+\label{prop:propertiesnormtrace}
+	Let $\mathbb{E}/\mathbb{F}$ be a finite separable extension.
+	\begin{enumerate}
+		\item $\N_{\mathbb{E}/\mathbb{F}} : \mathbb{E}^\times \to \mathbb{F}^\times$ is a group homomorphism. \\
+		(In particular, $N_{\mathbb{E}/\mathbb{F}}$ takes values in $\mathbb{F}.$)
+		%
+		\item If $\mathbb{E} = \mathbb{F}(a)$ and $\irr(a, \mathbb{F}) = x^n + a_{n - 1}x^{n - 1} + \cdots + a_0,$ then
+		\begin{equation*} 
+			\N_{\mathbb{E}/\mathbb{F}}(a) = (-1)^na_0, \andd \Tr_{\mathbb{E}/\mathbb{F}}(a) = -a_{n - 1}.
+		\end{equation*}
+		%
+		\item $\Tr_{\mathbb{E}/\mathbb{F}} : \mathbb{E} \to \mathbb{F}$ is a surjective $\mathbb{F}$-linear map. \\
+		(In particular, $\Tr_{\mathbb{E}/\mathbb{F}}$ takes values in $\mathbb{F}.$) 
+		\item Let $\mathbb{K}$ be an intermediate subfield of $\mathbb{E}/\mathbb{F}.$ Then,
+		\begin{equation*} 
+			\N_{\mathbb{E}/\mathbb{F}} = \N_{\mathbb{K}/\mathbb{F}} \circ \N_{\mathbb{E}/\mathbb{K}}, \andd \Tr_{\mathbb{E}/\mathbb{F}} = \Tr_{\mathbb{K}/\mathbb{F}} \circ \Tr_{\mathbb{E}/\mathbb{K}}.
+		\end{equation*}
+		(The above compositions make sense, by the earlier parts.) \hfill\hyperref[prop:propertiesnormtrace2]{\downsym}
+		%
+	\end{enumerate} 
+\end{restatable}
+
+\begin{restatable}[]{prop}{normtracelinearmap}
+\label{prop:normtracelinearmap}
+	Let $\mathbb{E}/\mathbb{F}$ be a finite separable extension of degree $n,$ and let $a \in \mathbb{E}.$ Let $m_a : \mathbb{E} \to \mathbb{E}$ be the $\mathbb{F}$-linear map defined as $x \mapsto ax.$ Then,
+	\begin{equation*} 
+		\N_{\mathbb{E}/\mathbb{F}}(a) = \det(m_a) \andd \Tr_{\mathbb{E}/\mathbb{F}}(a) = \Tr(m_a).
+	\end{equation*} \hfill\hyperref[prop:normtracelinearmap2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{prop}{tracebilinearmaps}
+\label{prop:tracebilinearmaps}
+	Let $\mathbb{E}/\mathbb{F}$ be a finite separable extension. 
+	\begin{enumerate}
+		\item The map $\varphi : \mathbb{E} \times \mathbb{E} \to \mathbb{F}$ given by $(x, y) \mapsto \Tr(xy)$ is $\mathbb{F}$-bilinear.
+		\item The map $\Tr_x : \mathbb{E} \to \mathbb{F}$ given by $y \mapsto \Tr(xy)$ is $\mathbb{F}$-linear for all $x \in \mathbb{E}.$
+		\item The map $\psi : \mathbb{E} \to \Hom_{\mathbb{F}}(\mathbb{E}, \mathbb{F})$ given by $x \mapsto \Tr_x$ is an isomorphism of $\mathbb{F}$-vector spaces.
+	\end{enumerate}\hfill\hyperref[prop:tracebilinearmaps2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[Hilbert's Theorem 90 (multiplicative form)]{thm}{hilbertmultiplicative}
+\label{thm:hilbertmultiplicative}
+	Let $\mathbb{E}/\mathbb{F}$ be a cyclic Galois extension with $\Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle,$ and $\beta \in \mathbb{E}.$ Then,
+	\begin{equation*} 
+		\N_{\mathbb{E}/\mathbb{F}}(\beta) = 1 \iff \beta = \frac{\alpha}{\sigma(\alpha)} \text{ for some } \alpha \in \mathbb{E}^\times.
+	\end{equation*} 
+	\hfill\hyperref[thm:hilbertmultiplicative2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[]{cor}{splittingfieldnthroots}
+\label{cor:splittingfieldnthroots}
+	Let $\mathbb{F}$ be a field, and $n \in \mathbb{N}$ be such that $\gcd(n, \chr(\mathbb{F})) = 1.$ Assume that $\mathbb{F}$ has a primitive $n$-th root of $1.$ Let $\mathbb{E}/\mathbb{F}$ be a cyclic Galois extension. Then, $\mathbb{E}$ is the splitting field of $x^n - a \in \mathbb{F}[x]$ for some $a \in \mathbb{F}.$ \hfill\hyperref[cor:splittingfieldnthroots2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[Hilbert's Theorem 90 (additive form)]{thm}{hilbertadditive}
+\label{thm:hilbertadditive}
+	Let $\mathbb{E}/\mathbb{F}$ be a cyclic Galois extension with $\Gal(\mathbb{E}/\mathbb{F}) = \langle \sigma\rangle,$ and $\beta \in \mathbb{E}.$ Then,
+	\begin{equation*} 
+		\Tr_{\mathbb{E}/\mathbb{F}}(\beta) = 0 \iff \beta = \alpha - \sigma(\alpha) \text{ for some } \alpha \in \mathbb{E}.
+	\end{equation*}  \hfill\hyperref[thm:hilbertadditive2]{\downsym}
+\end{restatable}
+
+\begin{restatable}[Artin-Schreier]{cor}{artinschreier}
+\label{cor:artinschreier}
+	Let $\mathbb{F}$ be a field with $\chr(\mathbb{F}) =\vcentcolon p > 0.$ Let $\mathbb{E}/\mathbb{F}$ be a cyclic degree extension of degree $p.$ Then, $\mathbb{E}$ is a splitting field of $f(x) \vcentcolon= x^p - x - a \in \mathbb{F}[x]$ for some $a \in \mathbb{F}$ and $\mathbb{E} = \mathbb{F}(\alpha),$ where $\alpha \in \mathbb{E}$ is a root of $f(x).$ \hfill\hyperref[cor:artinschreier2]{\downsym}
+\end{restatable}
+
+\begin{ex}[Rational points on the unit circle]
+	We wish to find all rational points $(a, b) \in \mathbb{Q}^2$ satisfying $a^2 + b^2 = 1.$ 
+
+	We claim that these are precisely the points of the form
+	\begin{equation*} 
+		(a, b) = \left(\frac{c^2 - d^2}{c^2 + d^2}, \frac{2cd}{c^2 + d^2}\right)
+	\end{equation*}
+	for $c, d \in \mathbb{Z}$ not both zero. (It is clear that every point of the above form is indeed a rational point on the unit circle.)
+
+	The above is an immediate consequence of \nameref{thm:hilbertmultiplicative}. Indeed, considering the degree $2$ extension $\mathbb{Q}(\iota)/\mathbb{Q}$ shows that $\N(a + \iota b) = 1$ and thus, there exists $c + \iota d \in \mathbb{Q}(i)^\times$ such that
+	\begin{equation*} 
+		a + \iota b = \frac{c + \iota d}{c - \iota d} = \frac{c^2 - d^2}{c^2 + d^2} + \iota \frac{2cd}{c^2 + d^2}.
+	\end{equation*}
+	Comparing the real and imaginary parts gives the result, after clearing the denominators.
+\end{ex}
