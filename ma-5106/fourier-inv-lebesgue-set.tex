@@ -1,0 +1,274 @@
+\documentclass[dvipsnames]{beamer}
+\mode<presentation>{}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools, mathrsfs}
+% \setbeamertemplate{theorems}[numbered]
+\title{Fourier Inversion for \texorpdfstring{$L^1$}{L1} Functions}
+\author[Aryaman Maithani]{Aryaman Maithani}
+\date[17-03-2020]{March 17, 2021}
+\institute[IITB]{\texorpdfstring{Department of Mathematics\\IIT Bombay}{IIT Bombay}}
+\usetheme{Warsaw}
+\setbeamertemplate{headline}{}
+\newcommand{\myvphan}{\vphantom{\md{\int_{\|u\| < \delta}^{} [f(x - u) - f(x)]\varphi_t(u) \,{\mathrm{d}}u}}}
+\hypersetup{colorlinks=true}
+\usepackage{parskip}
+
+\AtBeginSection[] 
+{%
+    \begin{frame}{\secname} %% ToC
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+% \newcommand{\biggesteq}{%
+%   \hphantom{\epsilon A - \int_{0}^{\delta/t} \epsilon s^n \,{\mathrm{d}}(\psi_0(s)) \le \epsilon\left(A - \int_{0}^{\infty} s^n \,{\mathrm{d}}(\psi_0(s))\right)}
+%  }
+\setbeamercolor{footline}{fg=blue}
+\setbeamerfont{footline}{series=\bfseries}
+\addtobeamertemplate{navigation symbols}{}{%
+    \usebeamerfont{footline}%
+    \usebeamercolor[fg]{footline}%
+    \hspace{1em}%
+    \insertframenumber/\inserttotalframenumber
+}
+% \usepackage{tikz}
+% \usecolortheme{beetle}
+% \usepackage{graphicx}
+\let\emptyset\varnothing
+
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\md}[1]{{\left\lvert #1 \right\lvert}}
+\DeclareMathOperator{\Leb}{Leb}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+% \renewcommand{\exp}{\operatorname{exp}}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+\begin{frame}{Overview}
+\tableofcontents
+\end{frame}
+\section{Recap}
+\begin{frame}{Heat kernel}
+
+    \uncover<1->{Recall how we had proven Fourier inversion for $L^1$ functions in class. }\uncover<2->{Fix $n \in \mathbb{N}$ for the entirety of this discussion. }
+    \uncover<2->{\begin{defn}[Heat Kernel]
+        \uncover<3->{For $t > 0,$ define $h_t : \mathbb{R}^n \to \mathbb{R}$ by }\uncover<4->{
+        \begin{equation*} 
+            h_t(x) = \frac{1}{t^{n/2}}\exp\left(-\frac{\pi}{t}\|x\|^2\right).
+        \end{equation*} }
+    \end{defn} }
+\end{frame}
+\begin{frame}{The proof from class}
+    \uncover<1->{We had seen that $\{h_t\}_{t > 0}$ constitutes a (continuous) approximate identity. } \uncover<2->{We thus concluded that $f * h_t \xrightarrow{t \to 0} f$ in $L^1$ for any $f \in L^1.$ }\uncover<3->{In turn, that gave us that there is a subsequence $\{t_n\}$ such that 
+    \begin{equation} \tag{$\star$} \label{eq:01}
+        \lim_{t_n\to 0}(f * h_{t_n})(x) = f(x)
+    \end{equation} for almost all $x.$ } 
+
+    \uncover<4->{We then showed the following assuming $\hat{f} \in L^1.$ }
+    \begin{enumerate}
+        \uncover<5->{\item $(f * h_t)(x) = \displaystyle\int_{\mathbb{R}^n} \hat{f}(\xi)e^{-\pi t\|\xi\|^2}e^{2\pi\iota x \cdot \xi} \,{\mathrm{d}}\xi$ for \underline{all} $x \in \mathbb{R}^n.$ }
+        \uncover<6->{\item Using DCT, we let $t \to 0$ in the above via $\{t_n\}$ to conclude that
+        \begin{equation*} 
+            f(x) = \int_{\mathbb{R}^n} \hat{f}(\xi)e^{2\pi\iota x \cdot \xi} \,{\mathrm{d}}\xi
+        \end{equation*} 
+        \uncover<7->{for those $x \in \mathbb{R}^n$ for which (\ref{eq:01}) holds. } }
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Conclusion}
+    \uncover<2->{Thus, we have actually proven that the Fourier inversion holds for those points $x$ }\uncover<3->{for which the equality
+    \begin{equation} \tag{$\star$}
+        \lim_{t\to 0}(f * h_t)(x) = f(x)
+    \end{equation} holds. }\uncover<4->{(In fact, we have something stronger since we allow $t \to 0$ via a subsequence.) }
+
+    \uncover<5->{Our aim now is to show that (\ref{eq:01}) holds for all $x$ in the \emph{Lebesgue set} of $f.$ }\uncover<6->{(Even without passing to a subsequence.) }
+
+    \uncover<7->{We will actually prove the result for a broader class of approximate identities. }
+\end{frame}
+\section{Notations and Setup}
+\begin{frame}{Lebesgue set}
+    \uncover<1->{Note that if $f \in L^1,$ then $f$ is finite a.e. Thus, we may assume that $f$ is finite everywhere by changing it on a null set. }
+    \begin{defn}[Lebesgue set]
+        \uncover<2->{Suppose $f \in L^1(\mathbb{R}^n).$ }\uncover<3->{The Lebesgue set of $f,$ denoted $\Leb(f)$ }\uncover<4->{is defined to be the set of all $x \in \mathbb{R}^n$ for which }\uncover<5->{
+        \begin{equation*} 
+            \lim_{r\to 0}\frac{1}{r^n}\int_{\|u\| < r}^{} \md{f(x - u) - f(x)} \,{\mathrm{d}}u = 0
+        \end{equation*} }\uncover<4->{holds. }
+    \end{defn}
+    \uncover<6->{Note that the above $\Leb(f)$ is actually a superset of the $\Leb(f)$ we defined it in class. }\uncover<7->{So, we shall prove a stronger result. }
+\end{frame}
+\begin{frame}{The identity}
+    \uncover<1->{Let $\varphi \in L^1(\mathbb{R}^n)$ be a \underline{radial} function with $\|\varphi\|_1 = 1.$ }\uncover<2->{Let $\psi_0 : [0, \infty) \to \mathbb{R}$ be defined as }\uncover<3->{
+    \begin{equation*} 
+        \psi_0(\|x\|) = \varphi(x)
+    \end{equation*} for $x \in \mathbb{R}^n.$ }\uncover<4->{(Well-defined by radial assumption.) }
+
+    \uncover<5->{For $t > 0,$ define $\varphi_t \in L^1(\mathbb{R}^n)$ by }\uncover<6->{
+    \begin{equation*} 
+        \varphi_t(x) = t^{-n}\varphi(x/t).
+    \end{equation*} }\uncover<7->{($\varphi_t$ is in $L^1$ since $\varphi$ is, as can be seen by a change of variables.) }
+
+    \uncover<8->{Recall that we had seen that $\{\varphi_t\}_{t > 0}$ constitutes an approximate identity. }
+\end{frame}
+\begin{frame}{The Main Theorem}
+    \begin{thm}[Main theorem]
+        \uncover<2->{Suppose that $\varphi$ is non-negative. }\uncover<3->{Further assume that $\psi_0$ is in $L^1(\mathbb{R}^n)$ and is decreasing. }\uncover<4->{Let $f \in L^1(\mathbb{R}^n).$ }\uncover<5->{Then,
+        \begin{equation*} 
+            \lim_{t\to 0}(f * \varphi_t)(x) = f(x)
+        \end{equation*} }\uncover<6->{for all $x \in \Leb(f).$ }
+    \end{thm}
+\end{frame}
+\begin{frame}{Less abstract, more concrete}
+    \uncover<2->{For the remainder of the discussion, one may forget the general setup and consider the following example for concreteness' sake. }\uncover<3->{Let $\varphi$ be defined as }\uncover<4->{
+    \begin{equation*} 
+        \varphi(x) = e^{-\pi\|x\|^2}.
+    \end{equation*} }\uncover<5->{This is radial, non-negative, radially decreasing and we have $\|\varphi\|_1 = 1.$ }\uncover<6->{The above is just the kernel $h_1.$ }
+
+    \uncover<7->{For $t > 0,$ we have
+    \begin{equation*} 
+        \varphi_t(x) = t^{-n}\exp\left(-\frac{\pi}{t^2}\|x\|^2\right).
+    \end{equation*} }\uncover<8->{The above isn't exactly the heat kernel $h_t.$ }\uncover<9->{Rather, it is $h_{t^2}.$ }
+
+    \uncover<10->{It is now clear that proving the Main Theorem will show that (\ref{eq:01}) holds for $x \in \Leb(f).$ }
+\end{frame}
+\begin{frame}{Some final notation}
+    \uncover<2->{$S^{n - 1}$ will denote the $n - 1$ sphere in $\mathbb{R}^n.$ }\uncover<3->{More explicitly,
+    \begin{equation*} 
+        S^{n - 1} = \{x \in \mathbb{R}^n : \|x\| = 1\}.
+    \end{equation*} }
+    \uncover<4->{For $x \in \mathbb{R}^n$ and $r > 0,$ $B(x, r) = \{y \in \mathbb{R}^n : \|y - x\| < r\}.$ }
+
+    \uncover<5->{$V_n$ is the volume of the unit ball $B(0, 1).$ }\uncover<6->{Thus, we have
+    \begin{equation*} 
+        \int_{B(x, r)}1 = V_nr^n
+    \end{equation*} for $x \in \mathbb{R}^n$ and $r > 0.$ }
+\end{frame}
+\begin{frame}{Recap on Polar Coordinates}
+    \uncover<2->{Recall that given $f \in L^1(\mathbb{R}^n),$ we may compute its integral as }\uncover<3->{
+    \begin{equation*} 
+        \int_{\mathbb{R}^n}^{} f(x) \,{\mathrm{d}}x = \int_{0}^{\infty} \int_{S^{n - 1}}^{} r^{n - 1}f(r\omega) \,{\mathrm{d}}\omega \,{\mathrm{d}}r.
+    \end{equation*} }
+
+    \uncover<4->{In particular, if $f$ is a radial function }\uncover<5->{and $g$ is such that $f(x) = g(\|x\|),$ then }\uncover<6->{
+    \begin{equation*} 
+        \int_{\mathbb{R}^n}^{} f(x) \,{\mathrm{d}}x = \omega\left(S^{n - 1}\right)\int_{0}^{\infty} r^{n - 1}g(r) \,{\mathrm{d}}r.
+    \end{equation*} }
+\end{frame}
+\section{Proof of the Main Theorem}
+\begin{frame}{Proof of the Main Theorem}
+    Fix a point $x \in \Leb(f)$ and let $\epsilon > 0$ be arbitrary.\\
+    \uncover<2->{By definition of Lebesgue set, there exists $\delta > 0$ such that }\uncover<3->{
+    \begin{equation} \tag{$L$} \label{eq:02}
+        \only<5->{\phantom{\frac{1}{r^n}}}\only<3-4>{\frac{1}{r^n}}\int_{\|u\| < r}^{} \md{f(x - u) - f(x)} \,{\mathrm{d}}u < \epsilon \only<5->{r^n}\only<3-4>{\phantom{r^n}}
+    \end{equation} }\uncover<4->{for all $0 < r \le \delta.$ }
+    
+    \uncover<6->{Note that for all $t > 0,$ we have $\displaystyle\int_{\mathbb{R}^n} \varphi_t = \int_{\mathbb{R}^n} \varphi = \int_{\mathbb{R}^n} \md{\varphi} = 1.$ }
+\end{frame}
+\begin{frame}{Still proving the Main Theorem}
+    \uncover<2->{Thus, for all $t > 0,$ we have }
+    \uncover<3->{\begin{align*} 
+        \md{(f * \varphi_t)(x) - f(x)} &= \md{\int_{\mathbb{R}^n}^{} f(x - u)\varphi_t(u) \,{\mathrm{d}}u - f(x)}\\
+        \uncover<4->{&= \md{\int_{\mathbb{R}^n}^{} f(x - u)\varphi_t(u) \,{\mathrm{d}}u - f(x)\only<4>{\cdot1 }\only<5->{\int_{\mathbb{R}^n}^{} \varphi_t(u) \,{\mathrm{d}}u }} }\\
+        \uncover<6->{&= \md{\int_{\mathbb{R}^n}^{} [f(x - u) - f(x)]\varphi_t(u) \,{\mathrm{d}}u} }\\
+        \uncover<7->{&\le \md{\int_{\|u\| < \delta}^{} [f(x - u) - f(x)]\varphi_t(u) \,{\mathrm{d}}u} \uncover<8->{{\color{blue}\leadsto I_1\uncover<9->{(t)}} } \\
+        &\qquad + \md{\int_{\|u\| \ge \delta}^{} [f(x - u) - f(x)]\varphi_t(u) \,{\mathrm{d}}u} \uncover<8->{{\color{blue}\leadsto I_2\uncover<9->{(t)}} } }
+    \end{align*} }
+\end{frame}
+\begin{frame}{The $A$ Game}
+    First, we note that
+    \begin{flalign*} 
+         && \vphantom{\left(\int_{r/2 \le \|u\| \le r}^{} 1\right)} \only<3>{\int_{r/2 \le \|u\| \le r}^{} \psi_0(r) \,{\mathrm{d}}u}\only<4>{\left(\int_{r/2 \le \|u\| \le r}^{} 1\right)}\only<5->{V_n\left(1 - \frac{1}{2^n}\right)r^n}\only<4->{\psi_0(r)}\uncover<3->{\le}\uncover<2->{\int_{r/2 \le \|u\| \le r}^{} \varphi(u) \,{\mathrm{d}}u}\uncover<6->{\to 0, } \qquad \hphantom{hi}
+    \end{flalign*}
+    \uncover<7->{as $r \to 0$ }\uncover<8->{or as $r \to \infty.$ }
+
+    \uncover<9->{Thus, $r^n\psi_0(r) \to 0$ }\uncover<10->{as $r$ tends to $0$ or $\infty.$ }
+
+    \uncover<11->{Hence, there exists $A > 0$ such that }\uncover<12->{$r^n\psi_0(r) \le A$ }\uncover<13->{for $r \in (0, \infty).$ }
+
+    \vspace{2mm}
+
+    \uncover<14->{Using this, we first show that $I_2(t) \xrightarrow{t \to 0} 0.$ }
+\end{frame}
+\begin{frame}{Taking $I_2$ down}
+    \begin{flalign*} 
+        I_2(t) \only<2>{= \md{\int_{\|u\| \ge \delta}^{} [f(x - u) - f(x)]\varphi_t(u) \,{\mathrm{d}}u}} %
+        \only<3->{\le \int_{\|u\| \ge \delta}\md{f(x - u)}\varphi_t(u)\,{\mathrm{d}}u + \md{f(x)}\int_{\|u\| \ge \delta}\varphi_t(u)\,{\mathrm{d}}u.} \vphantom{\md{\int_{\md{u \ge \delta}}^{\infty}  \,{\mathrm{d}}x}} &&
+    \end{flalign*}
+    \uncover<4->{The second term goes to $0$ as $t \to 0$ }\uncover<5->{since $\{\varphi_t\}_{t > 0}$ is an approximate identity. }
+
+    \uncover<6->{Now, let $\chi_\delta$ denote the characteristic function of $\{u \in \mathbb{R}^n : \|u\| \ge \delta\}.$ }
+
+    \uncover<7->{We see that the first term is at most $\|f\|_1\|\chi_\delta \varphi_t\|_{\infty}.$ }\uncover<8->{Since $\varphi$ is radially decreasing, we see that }\uncover<9->{
+    \begin{flalign*} 
+        \hphantom{hi}\qquad \|\chi_\delta \varphi_t\|_{\infty} = \sup_{\|u\| \ge \delta}\only<9>{\varphi_t(u)\hphantom{t^{-n}}}\only<10->{t^{-n}\varphi(u/t)} \only<11>{= t^{-n}\psi_0(\delta/t)\qquad}\only<12->{=\delta^{-n}(\delta/t)^n\psi_0(\delta/t)}\uncover<13->{\to 0,} &&
+    \end{flalign*} }
+    \uncover<14->{as $t \to 0.$ }\uncover<15->{Thus, $I_2(t) \xrightarrow{t \to 0} 0.$ }
+\end{frame}
+\begin{frame}{$I_2$ down, $I_1$ to go}
+    \uncover<2->{Let us now define
+    \begin{equation*} 
+        g(r) = \int_{S^{n - 1}}^{} \md{f(x - r\omega) - f(x)} \,{\mathrm{d}}\omega
+    \end{equation*} }
+    \uncover<3->{and
+    \begin{equation*} 
+        G(r) = \int_{0}^{r} s^{n - 1}g(s) \,{\mathrm{d}}s.
+    \end{equation*} }\uncover<4->{Thus, the Lebesgue set condition (\ref{eq:02}) from earlier translates to }\uncover<5->{
+    \begin{equation*} 
+        G(r) \le \epsilon r^n \uncover<6->{\quad\text{for}\quad r \le \delta. }
+    \end{equation*} }
+    \uncover<6->{Note that $G(0) = 0.$ }
+
+    \uncover<7->{With these notations, we do some more calculations. }
+\end{frame}
+\begin{frame}{Some more calculations}
+    We have
+    \begin{flalign*} 
+        \uncover<2->{I_1(t)&}\only<2>{=}\only<2>{\md{\int_{\|u\| < \delta}^{} [f(x - u) - f(x)]\varphi_t(u) \,{\mathrm{d}}u} } %
+        \only<3->{\le}\only<3>{\int_{\|u\| < \delta}^{} \md{f(x - u) - f(x)}\varphi_t(u) \,{\mathrm{d}}u \myvphan}%
+        \only<4->{\int_{\|u\| < \delta}^{} \md{f(x - u) - f(x)}t^{-n}\varphi(u/t) \,{\mathrm{d}}u \myvphan} && \\
+        \uncover<5->{&= \int_{0}^{\delta} {\color<6->{blue}{r^{n - 1}g(r)}}t^{-n}\psi_0(r/t) \,{\mathrm{d}}r } && \\
+        &\only<6>{\text{Integrate by parts}}\vphantom{\int_{0}^{\delta}} %
+        \only<7>{={\color{blue}G(r)}t^{-n}\psi_0(r/t)\big|^{\delta}_0 - \int_{0}^{\delta} {\color<7->{blue}{G(r)}} \,{\mathrm{d}}(t^{-n}\psi_0(r/t)) }%
+        \only<8->{={\color{blue}G(\delta)}t^{-n}\psi_0(\delta/t)\,\,\, - \int_{0}^{\delta} {\color<7->{blue}{G(r)}} \,{\mathrm{d}}(t^{-n}\psi_0(r/t)) } && \\
+        &\uncover<9->{\le \epsilon\only<9-10>{\only<9>{\delta^nt^{-n}}\only<10->{(\delta/t)^n}\psi_0(\delta/t)}\only<11->{A} - \int_{0}^{\delta/t} G(ts)t^{-n} \,{\mathrm{d}}(\psi_0(s)) } && \\
+        &\uncover<12->{\le \epsilon A - \int_{0}^{\delta/t} \epsilon\only<12>{(ts)^nt^{-n}}\only<13->{s^n} \,{\mathrm{d}}(\psi_0(s)) }\only<14->{\le \epsilon\left(A {\color<15->{ForestGreen}{\; - \int_{0}^{\infty} s^n \,{\mathrm{d}}(\psi_0(s))}}\right) } &&
+    \end{flalign*}
+    \uncover<12->{Note that ${\mathrm{d}}\psi_0 \le 0.$ }
+\end{frame}
+\begin{frame}{The Green Integral}
+    The green integral can be calculated exactly quite simply.
+    \begin{align*} 
+        \uncover<2->{- \int_{0}^{\infty} s^n \,{\mathrm{d}}(\psi_0(s))&}\uncover<3->{= -s^n\psi_0(s)\big|^\infty_0 + n\int_{0}^{\infty} s^{n - 1}\psi_0(s) \,{\mathrm{d}}s}\\
+        &\only<4>{=0 + \frac{n}{\omega\left(S^{n - 1}\right)}\int_{\mathbb{R}^n}^{} \varphi }\only<5->{=\frac{n}{\omega\left(S^{n - 1}\right)}.} \vphantom{\int_{-\infty}^{\infty}}
+    \end{align*}
+
+    \uncover<6->{Putting this back, we get }\uncover<7->{
+    \begin{equation*} 
+        I_1(t) \le \epsilon\left(A + \frac{n}{\omega\left(S^{n - 1}\right)}\right) \uncover<8->{= \epsilon B.}
+    \end{equation*} }
+    \uncover<9->{Thus, we have bounded $I_1$ }\uncover<10->{\emph{independent of $t$} }\uncover<11->{\emph{and of} $f.$ }
+\end{frame}
+\begin{frame}{Putting it back}
+    We had\uncover<2->{
+    \begin{flalign*} 
+        \md{(f * \varphi_t)(x) - f(x)} \le I_1(t) + I_2(t)\only<4->{\le \epsilon B + I_2(t)}.  & &
+    \end{flalign*} }\uncover<3->{We showed that $I_1$ is bounded independent of $t.$ } \uncover<5->{We also showed that $I_2(t) \xrightarrow{t\to0} 0.$ }\uncover<6->{Thus, for $t$ sufficiently small, we have }\uncover<7->{
+    \begin{equation*} 
+        \md{(f * \varphi_t)(x) - f(x)} < \epsilon(B + 1).
+    \end{equation*} }\uncover<8->{This completes the proof. }
+\end{frame}
+\section{The Stronger Theorem}
+\begin{frame}{Concluding Remark}
+    The theorem which I have proven is actually a weaker version of something more general. \uncover<2->{Forget all the notation and hypothesis that we had so far. }
+    \uncover<3->{\begin{thm}[General Theorem]
+        Suppose $\varphi \in L^1(\mathbb{R}^n).$ \uncover<4->{Let $\psi(y) = \displaystyle\esssup_{\|z\| \ge \|y\|}\md{\varphi(z)}$ }\uncover<5->{and for $t > 0,$ let $\varphi_t(y) = t^{-n}\varphi(y/t).$ }\uncover<6->{If $\psi \in L^1(\mathbb{R}^n)$ and $f \in L^p(\mathbb{R}^n),$ $1 \le p \le \infty,$ }\uncover<7->{then $\displaystyle\lim_{t\to 0}(f * \varphi_t)(x) = f(x)\int_{\mathbb{R}^n}^{} \varphi(t) \,{\mathrm{d}}t$ }\uncover<8->{whenever $x \in \Leb(f).$ }
+    \end{thm} }
+    % \uncover<9->{Note that $\varphi$ is not assumed to be radial (or radially decreasing) or non-negative. }\uncover<10->{However, $\psi$ has all these properties. }\uncover<11->{Thus, the proof goes on similar lines with $\varphi$ being replaced by $\psi$ at appropriate places. }\uncover<12->{Moreover, the above theorem is for a general $p.$ }
+    \uncover<9->{Reference: \emph{Introduction to Fourier Analysis on Euclidean Spaces} by \emph{Stein and Weiss} }
+\end{frame}
+\end{document}
