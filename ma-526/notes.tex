@@ -21,6 +21,7 @@
 \DeclareMathOperator{\ann}{ann}
 \DeclareMathOperator{\nil}{nil}
 \DeclareMathOperator{\htt}{height}
+\DeclareMathOperator{\gr}{gr}
 
 % -------------------
 % Content
@@ -59,6 +60,8 @@
 	\item $I \unlhd R$ is read as ``$I$ is an ideal of $R$.''
 	\item For an integral domain $R,$ $Q(R)$ denotes its field of fractions.
 	\item $\mathsf{k}$ denotes a field. If $\mathsf{k}$ is algebraically closed, we write this as $\mathsf{k} = \overline{\mathsf{k}}.$ 
+	\item When we say that ``$M$ is a finite $R$-module,'' we mean that ``$M$ is a finitely generated $R$-module.''
+	\item When we write ``$P(n)$ is true for $n \gg 0$,'' we mean that ``there exists $N \in \mathbb{N}$ such that $P(n)$ is true for all $n \ge N.$'' A similar definition holds for $n \ll 0.$
 \end{enumerate}
 
 \section{Associated primes of ideals and modules} % Lecture 1
@@ -120,7 +123,7 @@ Note that $a$ is a zero divisor iff $\mu_a$ is not injective.
 	$\Supp(M) \vcentcolon= \{\mathfrak{p} \in \Spec(R) \mid M_{\mathfrak{p}} \neq 0\}.$
 \end{defn}
 \begin{prop}
-	If $M$ is finitely generated, then $\Supp(M) = V(\ann M).$
+	If $M$ is finitely generated, then $\Supp(M) = V(\ann(M)).$
 \end{prop}
 \begin{prop}
 	If $0 \to N \to M \to L \to 0$ is exact, then $\Supp M = \Supp N \cup \Supp L.$
@@ -196,20 +199,20 @@ Note that if $R$ is Noetherian and $I \unlhd R$ is an ideal, then $\Ass(R/I) \su
 	\begin{align*} 
 		\nil(M) \vcentcolon=&\; \{a \in R \mid \mu_a \text{ is nilpotent}\}\\
 		=&\; \{a \in R \mid a^nM = 0 \text{ for some } n\}\\
-		=&\; \sqrt{\ann M}
+		=&\; \sqrt{\ann(M)}
 	\end{align*}
 \end{defn}
 
 \begin{prop}
-	If $\Ass(M) = \{\mathfrak{p}\},$ then $\mathcal{Z}(M) = \nil M = \sqrt{\ann M}.$
+	If $\Ass(M) = \{\mathfrak{p}\},$ then $\mathcal{Z}(M) = \nil(M) = \sqrt{\ann(M)}.$
 \end{prop}
 \begin{thm}
-	$\md{\Ass M} = 1 \iff \mathcal{Z}(M) = \nil M.$\\
-	If either condition holds, we have $\Ass M = \{\sqrt{\ann M}\}.$
+	$\md{\Ass M} = 1 \iff \mathcal{Z}(M) = \nil(M).$\\
+	If either condition holds, we have $\Ass M = \{\sqrt{\ann(M)}\}.$
 \end{thm}
 
 \begin{cor}
-	If $N \le M$ is $\mathfrak{p}$-primary, then $\Ass(M/N) = \{\sqrt{\ann M/N}\}.$
+	If $N \le M$ is $\mathfrak{p}$-primary, then $\Ass(M/N) = \{\sqrt{\ann(M/N)}\}.$
 \end{cor}
 \begin{cor}
 	$I$ is $\mathfrak{p}$-primary implies $\mathfrak{p} = \sqrt{I}.$
@@ -292,7 +295,7 @@ We now drop the assumption from the previous chapter of rings and modules being 
 		\item If $N = \mathcal{N}(R),$ then there exists $k$ such that $N^k = 0.$
 		\item Let $0 \to N \to M \to L \to 0$ be an exact sequence. Then $M$ is Artinian iff $N$ and $L$ are Artinian.\\
 		In particular, $\bigoplus_{i = 1}^n M_i$ is Artinian iff each $M_i$ is.
-		\item If $M$ is a finitely generated $R$-module, then $M$ is an Artinian $R$-module and $R/\ann M$ is an Artinian ring.
+		\item If $M$ is a finitely generated $R$-module, then $M$ is an Artinian $R$-module and $R/\ann(M)$ is an Artinian ring.
 	\end{enumerate}
 \end{prop}
 
@@ -690,7 +693,7 @@ R                                   &  & \mathfrak{p}_1 \arrow[r,symbol=\supset]
 			\mathsf{k}[z_1, \ldots, z_d] = S.
 		\end{tikzcd}
 	\end{center}
-	In particular, $R$ is a finite $S$ module.
+	In particular, $R$ is a finite $S$-module.
 \end{thm}
 
 \begin{cor}
@@ -702,13 +705,14 @@ R                                   &  & \mathfrak{p}_1 \arrow[r,symbol=\supset]
 \end{cor}
 
 \begin{defn}%[]
+	\label{defn:krulldimring}
 	A \deff{saturated chain of prime ideals} is a chain
 	\begin{equation*} 
 		\mathfrak{p}_0 \subsetneq \mathfrak{p}_1 \subsetneq \cdots \subsetneq \mathfrak{p}_n
 	\end{equation*}
 	of prime ideals such that no prime ideal can be inserted strictly in between anywhere above. (In other words, there exists no $i \in \{0, \ldots, n - 1\}$ and no $\mathfrak{q} \in \Spec(R)$ such that $\mathfrak{p}_i \subsetneq \mathfrak{q} \subsetneq \mathfrak{p}_{i + 1}.$)
 
-	The \deff{length} of the above chain is $n.$ The \deff{dimension} of $R$ is defined as
+	The \deff{length} of the above chain is $n.$ The \deff{Krull dimension} of $R$ is defined as
 	\begin{equation*} 
 		\dim(R) = \sup\{n : \exists \text{ a saturated chain of length }n\}.
 	\end{equation*}
@@ -751,4 +755,345 @@ $\dim(R)$ may be $\infty$ even if $R$ is Noetherian.
 \begin{rem}
 	The above shows that the $d$ in \nameref{thm:NNL} is determined uniquely. Moreover, it shows that the dimension of polynomial ring in $d$ variables over a field is $d.$
 \end{rem}
+
+\section{Graded Rings and Graded Modules}
+
+\begin{defn}%[]
+	Let $R$ be any commutative ring. {\color{ForestGreen}(In particular, it is an additive subgroup.)}\\
+	Let $\{R_n : n = 0, 1, \ldots\}$ be a sequence of additive sub\underline{groups} with the properties that
+	\begin{equation*} 
+		R = \bigoplus_{n \ge 0} R_n \andd R_nR_m \subset R_{n + m} \text{ for all } n, m \ge 0.
+	\end{equation*}
+	Then, $R$ is called a \deff{graded ring} with \deff{grading} $(R_n)_n.$ Any $x \in R_n$ is called \deff{homogeneous} of \deff{degree} n.
+\end{defn}
+
+\begin{rem}
+	Note that for $n = m = 0,$ we have $R_0R_0 \subset R_0.$ Thus, $R_0$ is closed under multiplication as well. Moreover, writing $1 = r_0 + \cdots + r_n$ for $r_i \in R_i$ and noting that $1^2 = 1$ gives that $n = 0$ and $1 \in R_0.$
+
+	Thus, $R_0$ is actually a subring of $R.$ In particular, $R$ is an $R_0$-module. Moreover, $R_0R_n \subset R_n$ gives us that each $R_n$ is an $R_0$-module.
+\end{rem}
+
+\begin{ex}
+	Consider $R = \mathsf{k}[X_1, \ldots, X_r]$ and let $R_n$ be the $\mathsf{k}$ vector space generated by monomials of degree $n.$ Then, $R$ is a graded ring with grading $(R_n)_n.$ 
+\end{ex}
+
+\begin{defn}%[]
+	Let $R$ be a graded ring with grading $(R_n)_{n \ge 0}.$ An $R$-module $M$ is called \deff{graded} if there exists a sequence of additive sub\underline{groups} $(M_n)_{n \ge 0}$ such that
+	\begin{equation*} 
+		M = \bigoplus_{n \in \mathbb{Z}}M_n \andd R_mN_n \subset M_{n + m} \text{ for all }m, n \ge 0.
+	\end{equation*}
+\end{defn}
+\begin{rem}
+	Note that $M_n$ are not necessarily $R$-submodules of $M.$ As an example, if $r \in R_1$ and $x \in M_n,$ then $rx \in M_{n + 1}.$ If $rx \neq 0,$ then $rx \notin M_n$ and so, $M_n$ is not closed under scalar multiplication.
+
+	However, one notes that each $M_n$ \emph{is} an $R_0$-submodule of $M.$ (Note that since $R_0$ is a subring of $R,$ we may regard $M$ as an $R_0$-module as well.)
+\end{rem}
+
+Note that in the above we have used $\mathbb{N}_0$ for grading. However, we may use $\mathbb{N}$ or $\mathbb{Z}$ as well. In fact, one may use any monoid or even semigroup. 
+
+\begin{defn}%[]
+	Let $R$ be a graded ring and $M$ a graded $R$-module. A submodule $N \le M$ is called a \deff{graded submodule} if $N$ is generated by \underline{homogeneous} elements of $M.$
+\end{defn}
+
+\begin{thm}[Characterisation of graded submodules] \label{thm:chargradedsubmodules}
+	Let $R = \bigoplus_{n \ge 0} R_n$ be a graded ring and $M = \bigoplus_{n \ge 0}M_n$ a graded $R$-module and $N \le M$ a submodule. TFAE:
+	\begin{enumerate}
+		\item $N$ is a graded $R$-submodule of $M,$ that is, $N$ is generated by homogeneous elements.
+		\item $N = \bigoplus_{n \ge 0}(N \cap M_n).$
+		\item If $y \in N$ and $y = y_0 + \cdots + y_n,$ where $y_i \in M_i,$ then $y_i \in N.$
+	\end{enumerate}
+\end{thm}
+
+The second point says that $N$ can be considered a graded $R$-submodule by itself. The third says that if we write an element of $N$ as a sum of homogeneous elements of different degrees, then each such element must be in $N$ itself.
+
+\begin{ex}
+	Consider $R = M = \mathsf{k}[x],$ with the usual grading as in the previous example. Then, the submodule $I = \langle x\rangle$ is a graded $R$-submodule of $M$ since it is generated by a homogeneous element.
+
+	On the other hand, the submodule $J = \langle x - 1\rangle$ is \emph{not} graded because we have $x - 1 \in J$ and $x, 1$ are homogeneous of different degrees but $1 \notin J.$
+\end{ex}
+
+\begin{thm}[Characterisation of Noetherian graded rings]
+	Let $R = \bigoplus_{n \ge 0} R_n$ be a graded ring. TFAE:
+	\begin{enumerate}
+		\item $R$ is Noetherian.
+		\item $R_0$ is Noetherian and $R$ is a finitely generated $R_0$-algebra, i.e., $R = R_0[r_1, \ldots, r_n].$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}%[]
+	The sum $R_+ = \bigoplus_{i \ge 1} R_i$ is an ideal of $R,$ called the irrelevant ideal.
+\end{defn}
+
+\begin{defn}%[]
+	Let $R$ be a commutative ring and $F = \{I_n\}_{n \ge 0}$ a filtration of ideals as
+	\begin{equation*} 
+		R = I_0 \supset I_1 \supset I_2 \supset \cdots
+	\end{equation*}
+	satisfying $I_n I_m \subset I_{n + m}.$
+
+	Let $t$ be an indeterminate. We define the \deff{Rees ring of F} as
+	\begin{equation*} 
+		\mathcal{R}(F) = \bigoplus_{n \ge 0} I_nt^n \subset R[t].
+	\end{equation*}
+
+	$\mathcal{R}(F)$ is a graded ring with grading $(I_nt^n)_{n \ge 0}.$
+\end{defn}
+The fact that it is graded follows from the condition that $I_nI_m \subset I_{n + m}.$\\
+A special case of the above is when we take $I_n = I^n$ for some fixed ideal $I \unlhd R.$ 
+
+\begin{defn}%[]
+	The \deff{Rees ring of an ideal} $I$ is defined as
+	\begin{equation*} 
+		\mathcal{R}(I) = \bigoplus_{n \ge 0}I^nt^n = \left\{\sum a_it^i : a_i \in I^i\right\}.
+	\end{equation*}
+	(Convention: $I^0 = R.$)
+\end{defn}
+
+In the following, we have the following notation: Let $R$ be a ring, $I \unlhd R$ and ideal and $M$ and $R$-module.
+
+\begin{defn}%[]
+	Let $M = M_0 \supset M_1 \supset M_2 \supset \cdots$ be a filtration of submodules. Then this filtration is called an \deff{$I$-filtration} if 
+	\begin{equation*} 
+		IM_n \subset M_{n + 1} \text{ for all }n \in \mathbb{N}.
+	\end{equation*}
+
+	$\bigoplus_{n \ge 0}M_nt^n \subset M[t]$ is a graded $\mathcal{R}(I)$-module since $I^nM_m \subset M_{n + m}$ for all $n, m \ge 0.$
+
+	The filtration is called \deff{$I$-stable} if 
+	\begin{equation*} 
+		IM_n = M_{n + 1} \text{ for }n \gg 0.
+	\end{equation*}
+	That is, there exists $N \in \mathbb{N}$ such that $IM_n = M_{n + 1}$ for all $n > N.$
+\end{defn}
+\begin{ex}
+	$\{I^nM\}_{n \ge 0}$ is an $I$-stable filtration.
+\end{ex}
+
+\begin{defn}%[]
+	Given filtrations $F = \{I_n\}_{n \ge 0}$ of ideals of $R$ and $G = \{M_n\}_{n \ge 0}$ of $R$-submodules of $M,$ we say that $G$ is \deff{$F$-compatible} if $I_nM_m \subset M_{n + m}$ for all $n, m \ge 0.$
+\end{defn}
+\begin{ex}
+	$\{I^nM\}_{n \ge 0}$ is $\{I^n\}_{n \ge 0}$-compatible.
+\end{ex}
+
+\begin{thm}
+	Suppose $R$ is Noetherian, $I \unlhd R$ an ideal, $M$ a finitely generated $R$-module and $G$ a filtration of $R$-submodules of $M$ which is $\{I^n\}_{n \ge 0}$-compatible. Then,
+	\begin{equation*} 
+		\mathcal{R}(G) \text{ is a finitely generated }\mathcal{R}(I)\text{-module} \iff G \text{ is } I \text{-stable}.
+	\end{equation*}
+\end{thm}
+
+The next two theorems (ARL and KIT) were obtained as corollaries.
+
+\begin{thm}[Generalised Artin-Rees Lemma]
+	Suppose $R$ is Noetherian, $I \unlhd R$ an ideal, $M$ a finitely generated $R$-module, $N \le M$ an $R$-submodule, and $\{M_n\}_{n \ge 0}$ is an $I$-stable filtration. Then, $\{N \cap M_n\}_{n \ge 0}$ is $I$-stable.
+\end{thm}
+
+In other words, if $IM_n = M_{n + 1}$ for $n \gg 0,$ then $I(M_n \cap N) = M_{n + 1} \cap N$ for $n \gg 0.$
+
+\begin{cor}[Artin-Rees Lemma]
+	Suppose $R$ is Noetherian, $I \unlhd R$ an ideal, $M$ a finitely generated $R$-module, $N \le M$ an $R$-submodule. Then, 
+	\begin{equation*} 
+		N \cap I^nM = I^{n - k}(N \cap I^kM) \text{ for } n \gg 0.
+	\end{equation*}
+\end{cor}
+
+\begin{thm}[Krull Intersection Theorem]
+	Let $R$ be a Noetherian ring, $I \unlhd R$ an ideal, and $M$ a finitely generated $R$-module. Define the submodule $N \le M$ as
+	\begin{equation*} 
+		N \vcentcolon= \bigcap_{n \ge 1} I^nM.
+	\end{equation*}
+	Then,
+	\begin{enumerate}
+		\item There exists $a \in I$ such that $(1 + a)N = 0.$
+		\item If $I \subset \mathcal{J}(R),$ then $N = \bigcap_{n \ge 1}I^nM = 0.$
+		\item If $R$ is a Noetherian domain and $I \neq R,$ then $\bigcap_{n \ge 1}I^n = 0.$
+		\item If $R$ is local and $I \neq R,$ then $N = \bigcap_{n \ge 1}I^nM = 0.$
+	\end{enumerate}
+\end{thm}
+
+\begin{ex}
+	KIT need not be true if $R$ is not Noetherian. Consider the ring $R = \mathcal{C}^\infty(\mathbb{R}),$ the ring of smooth real valued functions defined on $\mathbb{R}$ with pointwise operations. This ring is not Noetherian. We construct a maximal ideal such that the intersection of its powers is not zero.
+
+	Consider the map $\varphi : R \to \mathbb{R}$ given by $f \mapsto f(0).$ This is a surjective ring homomorphism. Since $\mathbb{R}$ is a field, we see that $m \vcentcolon= \ker \varphi$ is maximal.
+
+	Let $x \in R$ denote the identity function. 
+
+	\textbf{Claim 1.} $\mathfrak{m} = (x).$
+	\begin{proof} 
+		$\supset$ is clear since $x(0) = 0.$
+
+		$(\subset)$ Let $f \in \mathfrak{m}.$ Consider the function $g : \mathbb{R} \to \mathbb{R}$ defined by
+		\begin{equation*} 
+			g(t) \vcentcolon= \begin{cases}
+				f(t)/t & t \neq 0,\\
+				f'(0) & t = 0.
+			\end{cases}
+		\end{equation*}
+		Then, one sees that $g$ is smooth. Clearly, $g$ is infinitely differentiable on $\mathbb{R} \setminus \{0\}.$ For $0,$ one may use L'H\^{o}pital's rule to successively compute the derivatives (and show their existence).
+
+		Clearly, $xg = f$ and hence, $f \in (x),$ as desired.
+	\end{proof}
+
+	In particular, we have $\mathfrak{m}^n = (x^n).$ Note that $x^n$ is the function $t \mapsto t^n.$ We now identify this ideal.
+
+	\textbf{Claim 2.} $(x^n) = \{f \in R : f(0) = f'(0) = \cdots = f^{(n - 1)}(0) = 0\}.$
+	\begin{proof} 
+		As before $\subset$ is clear since $(x^n)' = nx^{n - 1}.$
+
+		$(\supset)$ The idea is as before. Let $g \in R$ be such that $f(0) = \cdots = f^{(n - 1)}(0) = 0.$ Define $g : \mathbb{R} \to \mathbb{R}$ by
+		\begin{equation*} 
+			g(t) \vcentcolon= \begin{cases}
+				f(t)/t^n & t \neq 0,\\
+				f^{(n)}(0)/n! & t = 0.
+			\end{cases}
+		\end{equation*}
+		As earlier, we get $g \in R$ and $f = x^ng \in (x^n).$
+	\end{proof}
+
+	\textbf{Claim 3.} $\bigcap_{n \ge 1}\mathfrak{m}^n \neq 0.$
+	\begin{proof} 
+		Consider the function $f : \mathbb{R} \to \mathbb{R}$ defined by
+		\begin{equation*} 
+			f(x) \vcentcolon= \begin{cases}
+				e^{-1/x^2} & x \neq 0,\\
+				0 & x = 0.
+			\end{cases}
+		\end{equation*}
+		Then, $f \in R$ and $f^{(n)}(0) = 0$ for all $n.$ However, $f$ is not the zero function. Thus, $0 \neq f \in \bigcap_{n \ge 1}\mathfrak{m}^n,$ as desired.
+	\end{proof}
+\end{ex}
+
+\begin{defn}%[]
+	Given an ideal $I \unlhd R,$ we define the ideal $I^*$ as
+	\begin{equation*} 
+		I^* = \bigoplus_{n \ge 0} (I \cap R_n).
+	\end{equation*}
+	Note that $I^* \subset I.$
+\end{defn}
+
+Recall that $I = I^* \iff I$ is generated by homogeneous elements. (\nameref{thm:chargradedsubmodules}.)
+
+\begin{prop}
+	Let $R = \bigoplus_{n \ge 0}R_n$ be a graded ring.
+	\begin{enumerate}
+		\item If $\mathfrak{p} \in \Spec(R),$ then $\mathfrak{p}^* \in \Spec(R).$
+		\item Any minimal prime of $R$ is a graded ideal.
+		\item Maximal graded ideals of $R$ are precisely of the of the form $\mathfrak{m} \oplus R_1 \oplus R_2 \oplus \cdots$ for $\mathfrak{m} \in \mSpec(R).$
+		\item If $R$ is Noetherian and $M = \bigoplus_{n \ge 0}M_n$ graded, then $\mathfrak{p} \in \Ass_R(M)$ is graded and $\mathfrak{p} = \ann_R(x)$ for some \emph{homogeneous} element $x \in M.$
+		\item If the non-zero \emph{homogeneous} elements of $R$ are non-zero-divisors, then $R$ is an integral domain.
+		\item Let $\mathfrak{p} \neq R$ be a graded ideal. If for all \emph{homogeneous} elements $a, b \in R$ the following holds:
+		\begin{equation*} 
+			ab \in \mathfrak{p} \implies a \in \mathfrak{p} \text{ or } b \in \mathfrak{p},
+		\end{equation*}
+		then $\mathfrak{p}$ is a prime ideal.
+	\end{enumerate}
+\end{prop}
+
+\section{Dimension Theory of Finite Modules over Noetherian Local Rings}
+Recall that by ``finite module,'' we mean ``finitely generated modules.''
+
+In the following, $R$ will denote a Noetherian ring and $M$ a finitely generated $R$-module.
+
+\begin{defn}%[]
+	The \deff{Krull dimension} of $M \neq 0$ is defined as $\dim(M) \vcentcolon= \dim(R/\ann(M)).$ If $M = 0,$ we define $\dim(M) = -1.$
+\end{defn}
+(Recall that we had already defined the Krull dimension of a ring in \Cref{defn:krulldimring}.)
+
+\begin{disc}
+	{\color{red}\textbf{Caution:}} Note that if $R$ is a field and $V$ a finite dimensional vector space over $R,$ then $\dim(V)$ will {\color{red}not} be the usual vector space dimension. If $V \neq 0,$ then (Krull) $\dim(V) = 0$ since $R/\ann(M) = R$ and $\dim(\text{field}) = 0.$ On the other hand, if $V = 0,$ then (Krull) $\dim(V) = -1,$ by the above convention.
+\end{disc}
+
+\begin{defn}%[]
+	The \deff{Chevalley dimension} of $M \neq 0$ is defined as
+	\begin{equation*} 
+		c(M) \vcentcolon= \inf \{n : \exists x_1, \ldots, x_n \text{ s.t. } l_R(M/(x_1, \ldots, x_n)M) < \infty\}.
+	\end{equation*}	
+	For $M = 0,$ we define $c(M) \vcentcolon= -1.$
+\end{defn}
+
+Note that if $M \neq 0$ and $M$ has finite length, then $c(M) = 0.	$
+
+\begin{prop}
+	Let $R = \bigoplus_{n \ge 0}R_n$ be a graded ring Noetherian and $M = \bigoplus_{n \in \mathbb{Z}}M_n$ a finitely generated graded $R$-module. Then,
+	\begin{enumerate}
+		\item $M_n = 0$ for $n \ll 0,$
+		\item each $M_n$ is a finitely generated $R_0$-submodule.
+	\end{enumerate}
+	In particular, if $R_0$ is Artinian as well, then $l_{R_0}(M_n) < \infty$ for all $n \in \mathbb{Z}.$
+\end{prop}
+
+\begin{defn}
+	Given any ring $R,$ we define the \deff{Laurent series ring over $R$ in the variable $x$} as the localisation of $R[\![x]\!]$ at the set $\{1, x, x^2, \ldots\}.$
+
+	In other words, it is the set of (formal) series of the form
+	\begin{equation*} 
+		\sum_{n = N}^{\infty}a_nx^n
+	\end{equation*}
+	for some $N \in \mathbb{Z}$ and some $a_n \in R.$
+
+	We denote this ring by $R[\![x, x^{-1}]\!].$
+
+	$R[x, x^{-1}]$ is the subring of $R[\![x, x^{-1}]\!]$ which has only finitely many $a_n \neq 0.$
+\end{defn}
+
+\begin{defn}%[]
+	A function $f : \mathbb{Z} \to \mathbb{Q}$ is called \deff{polynomial-like} if there exists $g(x) \in \mathbb{Q}[x]$ such that $f(n) = g(n)$ for $n \gg 0.$ In this case, we define $\deg(f) = \deg(g(x))$ and call $g$ the \deff{corresponding polynomial} of $f.$
+\end{defn}
+\begin{rem}
+	Note that if $f$ is polynomial-like, then the polynomial $g$ in the definition above is uniquely determined. Indeed, if $h$ is another such polynomial, then we have $(g - h)(n) = 0$ for $n$ sufficiently large. Thus, $g = h.$ 
+
+	This justifies the degree and corresponding polynomial being well-defined.
+\end{rem}
+
+\begin{defn}%[]
+	Let $R$ be a Noetherian graded ring such that $R_0$ is Artinian. Let $M$ be a finite graded $R$-module. We define the \deff{Hilbert series} of $M$ as
+	\begin{equation*} 
+		H(M, \lambda) = \sum_{n \in \mathbb{Z}} l_{R_0}(M_n)\lambda^n \in \mathbb{Z}[\![\lambda, \lambda^{-1}]\!].
+	\end{equation*}
+\end{defn}
+
+\begin{thm}[Hilbert-Serre]
+	Let $R$ be a Noetherian graded ring such that $R_0$ is Artinian. Let $M$ be a finite graded $R$-module. \\
+	Suppose $x_1, \ldots, x_r \in R$ are such that $R = R_0[x_1, \ldots, x_r]$ with $d_i \vcentcolon= \deg(x_i) \ge 1.$ Then,
+	\begin{equation*} 
+		H(M, \lambda) = \frac{f(\lambda, \lambda^{-1})}{\prod_{i = 1}^{r}(1 - \lambda^{d_i})}
+	\end{equation*}
+	for some $f(\lambda, \lambda^{-1}) \in \mathbb{Z}[\lambda, \lambda^{-1}].$
+\end{thm}
+\begin{cor}
+	In the same setup as earlier, $n \mapsto l_{R_0}(M_n)$ is a polynomial like function. 
+\end{cor}
+
+\begin{defn}%[]
+	Let $R$ be a Noetherian graded ring such that $R_0$ is Artinian. Let $M$ be a finite graded $R$-module.
+
+	The $n \mapsto l_{R_0}(M_n)$ is (loosely) called the \deff{Hilbert polynomial} of $M.$
+\end{defn}
+Note that the above is a polynomial-\emph{like} function and not necessarily given by a polynomial itself.
+
+
+% \begin{defn}%[]
+% 	Let $(R, \mathfrak{m})$ be a Noetherian local ring and $M$ a finite $R$-module. The \deff{$\mathfrak{m}$-adic} filtration of $R$ is
+% 	\begin{equation*} 
+% 		\mathcal{F} : \quad R \supset \mathfrak{m} \supset \mathfrak{m}^2 \supset \cdots.
+% 	\end{equation*}
+% 	$\mathcal{R}(\mathfrak{m}) \vcentcolon= \mathcal{R}(\mathcal{F}) = \bigoplus_{n = 0}^\infty \mathfrak{m}^nt^n.$
+
+% 	Define $\mathcal{G}$ as the following filtration of $M:$
+% 	\begin{equation*} 
+% 		\mathcal{G} : \quad M \supset \mathfrak{m}M \supset \mathfrak{m}^2M \supset \cdots.
+% 	\end{equation*}
+% 	$\mathcal{R}(\mathcal{G}) = \bigoplus_{n = 0}^\infty \mathfrak{m}^nMt^n.$ 
+
+% 	Since $\mathcal{G}$ is $\mathfrak{m}$-stable, we see that $\mathcal{R}(\mathcal{G})$ is a finitely generated module over the Noetherian ring $\mathcal{R}(\mathfrak{m}).$
+
+% 	We define the graded ring $\gr_{\mathfrak{m}}(R)$ and the $\gr_{\mathfrak{m}}(R)$-graded module $\gr_{\mathfrak{m}}(M)$ as
+% 	\begin{align*} 
+% 		\gr_{\mathfrak{m}}(R) \vcentcolon= \bigoplus_{n = 0}^\infty \mathfrak{m}^n/\mathfrak{m}^{n + 1} = \mathcal{R}(\mathfrak{m})/\mathfrak{m}\mathcal{R}(\mathfrak{m}),\\
+% 		\gr_{\mathfrak{m}}(M) \vcentcolon= \bigoplus_{n = 0}^\infty \mathfrak{m}^nM/\mathfrak{m}^{n + 1}M = \mathcal{R}(\mathcal{G})/\mathfrak{m}\mathcal{R}(\mathcal{G}).
+% 	\end{align*}
+
+% 	Then, $\gr_\mathfrak{m}(M)$ is a finite $\gr_\mathfrak{m}(R)$-module.
+% \end{defn}
 \end{document}
