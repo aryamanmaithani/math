@@ -172,7 +172,7 @@ From now on, we shall omit the subscript $\mathbb{F}$ when it is clear what the 
     It is clear now that $\md{\mathbb{F}} = \md{\mathbb{F}_p}^n = p^n.$
 \end{proof}
 
-\begin{thm}
+\begin{thm} \label{thm:numberofrootsinfield}
     Let $f(x) \in \mathbb{F}[x]$ have a degree $n \ge 1.$ Then, $f(x)$ has at most $n$ roots in $\mathbb{F}.$
 \end{thm}
 \begin{proof} 
@@ -182,7 +182,7 @@ From now on, we shall omit the subscript $\mathbb{F}$ when it is clear what the 
 \begin{thm} \label{thm:finsubgroupcyclic}
     Let $\mathbb{F}$ be a field. Let $U$ be a finite subgroup of $\mathbb{F}^\times.$ Then, $U$ is cyclic. 
 \end{thm}
-We give two proofs.
+We give three proofs. The third is the slickest one, which I got from \href{https://mathoverflow.net/questions/54735}{this Mathoverflow post}.
 \begin{proof} 
     This proof uses the following fact: Let $G$ be an abelian group and $a, b \in G$ have orders $m$ and $n.$ Then, there exist $c \in G$ with order $\operatorname{lcm}(m, n).$ (This needs a little argument. $c = ab$ works if $\gcd(m, n) = 1.$ The general case has to be reduced to that.)
 
@@ -197,6 +197,18 @@ We give two proofs.
     This prove uses the structure theorem of abelian groups. Let $n \vcentcolon= \md{U}.$
 
     Write $U \cong \mathbb{Z}/d_1\mathbb{Z} \times \cdots \times \mathbb{Z}/d_r\mathbb{Z}$ where $1 < d_1 \mid d_2 \mid \cdots \mid d_r$ and $n = d_1 \cdots d_r.$ Now, every element of $U$ satisfies $x^{d_r} - 1.$ Thus, as earlier, we have $d_r = n$ and hence, $n = 1.$ This means $U \cong \mathbb{Z}/n\mathbb{Z}$ is cyclic. 
+\end{proof}
+\begin{proof} 
+    This proof uses just the following simple fact: If $x, y$ are elements of (finite) coprime order in an abelian group, then the order of $xy$ is the product of the orders.
+
+    We now prove the result by induction on $\md{U}$. Clearly, it is true for $\md{U} = 1$. Assume $\md{U} \ge 2$.
+
+    \textbf{Case 1.} $\md{U} = p^{k}$ with $p$ prime and $k \ge 1$. \\
+    In this case, if $U$ is not cyclic, then all $p^{k}$ elements of $U$ satisfy $x^{p^{k - 1}} - 1 = 0$, a contradiction to \Cref{thm:numberofrootsinfield}.
+
+    \textbf{Case 2.} $\md{U} = ab$ for some coprime integers $a, b > 1$. \\
+    Consider the homomorphism $U \to U$ given by $u \mapsto u^{a}$. Let $A$ be the kernel and $B$ be its image. Note that every $u \in A$ satisfies $u^{a} = 1$ and every $u \in B$ satisfies $u^{b} = 1$. Thus, by \Cref{thm:numberofrootsinfield}, we have $\md{A} \le a < \md{U}$ and $\md{B} \le b < \md{U}$. \\
+    Since $A$ and $B$ are subgroups of $U$, the induction hypothesis applies. Let $x$ and $y$ be cyclic generators for $A$ and $B$. Then, the order of $xy$ is $\md{U}$ and we are done.
 \end{proof}
 
 \begin{prop} \label{prop:divisibilityofpoly}
