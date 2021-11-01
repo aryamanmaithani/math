@@ -172,7 +172,7 @@ For the remainder, $T$ will denote an element of $\End(V)$ and $m(X)$ its minima
 	\begin{equation*} 
 		V = E_{\lambda_1} \oplus \cdots \oplus E_{\lambda_r}.
 	\end{equation*}
-	Note that since we know that eigenspaces intersect trivially, it suffices to show that
+	Note that since eigenvectors corresponding to distinct eigenvalues are linearly independent, it suffices to show that
 	\begin{equation*} 
 		V = E_{\lambda_1} + \cdots + E_{\lambda_r}.
 	\end{equation*}
@@ -536,7 +536,7 @@ The above two corollaries put together gives us:
 \end{defn}
 
 \begin{rem}
-	We shall implicitly assume that $\md{X} \neq 2$ from hereon, even though the definition doesn't explicitly demand that. Note that $S_X$ would be the trivial group if $\md{X} = 0, 1$ and there isn't much to discuss about that.
+	We shall implicitly assume that $\md{X} \ge 2$ from hereon, even though the definition doesn't explicitly demand that. Note that $S_X$ would be the trivial group if $\md{X} = 0, 1$ and there isn't much to discuss about that.
 \end{rem}
 
 \begin{rem}
@@ -586,7 +586,7 @@ The above two corollaries put together gives us:
 \end{proof}
 
 \begin{defn}%[Transitive]
-	A group action $\sigma : G \to S_X$ is said to be \deff{transitive} if there is a unique orbit.
+	A group action $\sigma : G \to S_X$ is said to be \deff{transitive} if there is exactly one orbit.
 \end{defn}
 
 \begin{rem}
