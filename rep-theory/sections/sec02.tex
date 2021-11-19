@@ -201,7 +201,7 @@ We now generalise the result of \Cref{thm:irredcyclicgroup} (in fact, this also 
 \end{rem}
 
 \begin{cor} \label{cor:finabelrepdiagonal}
-	Let $G$ be a finite abelian group and $\varphi : G \to \GL_n(\mathbb{C})$ a representation. Then, there exists an invertible matrix $T$ such that $T^{-1}\varphi_gT$ is invertible all $g \in G.$
+	Let $G$ be a finite abelian group and $\varphi : G \to \GL_n(\mathbb{C})$ a representation. Then, there exists an invertible matrix $T$ such that $T^{-1}\varphi_gT$ is diagonal for all $g \in G.$
 \end{cor}
 Note that the matrix $T$ is independent of $g.$ 
 \begin{proof} 
@@ -526,16 +526,10 @@ If $\varphi : G \to \GL_n(\mathbb{C})$ is a representation given by $\varphi_g =
 	\begin{equation*} 
 		\varphi_g = T\rho_gT^{-1}
 	\end{equation*}
-	for all $g \in G.$ Now fix $g \in G$ and using $\trace(ABC) = \trace(CAB),$ we see that
-	\begin{align*} 
-		\chi_\varphi(g) &= \trace \varphi_g\\
-		&= \trace (T\rho_gT^{-1})\\
-		&= \trace (T^{-1}T\rho_g)\\
-		&= \trace \rho_g\\
-		&= \chi_\rho (g),
-	\end{align*}
-	as desired.
+	for all $g \in G.$ Since the traces of similar matrices are the same, we are done.
 \end{proof}
+
+To recall why the last statement is true, note that $\trace(ABC) = \trace(CAB)$ and thus, if $C = A^{-1}$, we are done.
 
 \begin{cor} \label{cor:chargrouprootsunity}
 	Let $G$ be a group of order $n$ and $\chi$ a character of degree $m$ of $G.$ Then, $\chi(g)$ is a sum of $m$ $n$-th roots of unity, for each $g \in G.$
