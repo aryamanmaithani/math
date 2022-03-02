@@ -1011,16 +1011,16 @@ We shall now fix the following notation: $G$ is a finite group and $\left\{\varp
 	In particular, the equality $\md{G} = d_1^2 + \cdots + d_s^2$ holds.
 \end{prop}
 \begin{proof} 
-	By \Cref{thm:calcequivfromchar}, it suffices to show that $\langle \chi_L, \chi_i\rangle = d_i$ holds. To that end, note that
+	We first note that
 	\begin{align*} 
 		\langle \chi_L, \chi_i\rangle &= \dfrac{1}{\md{G}}\sum_{g \in G} \chi_L(g)\overline{\chi_i(g)}\\
 		&= \dfrac{1}{\md{G}}\chi_L(1)\overline{\chi_i(1)}\\
 		&= \dfrac{1}{\md{G}}\md{G}\deg \varphi^{(i)}\\
 		&= \deg \varphi^{(i)} = d_i,
 	\end{align*}
-	as desired.
+	as desired. By \Cref{thm:calcequivfromchar}, $L \sim d_1 \varphi^{(1)} \oplus \cdots \oplus d_s \varphi^{(s)}$ follows.
 
-	Now, note that by the \Cref{prop:descripofL} and \Cref{lem:charactersadd}, we see that
+	In turn, \Cref{lem:charactersadd} gives us
 	\begin{equation*} 
 		\chi_L = d_1\chi_1 + \cdots + d_s\chi_s.
 	\end{equation*}
