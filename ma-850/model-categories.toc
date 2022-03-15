@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Model Categories}{3}{0}{1}
+\beamer@sectionintoc {2}{Homotopy Relations on Maps}{22}{0}{2}

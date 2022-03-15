@@ -1,0 +1,254 @@
+\documentclass[dvipsnames]{beamer}
+% \mode<presentation>{}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools, mathrsfs}
+% \usepackage{enumitem}
+\setbeamertemplate{theorems}[numbered]
+\title{Model Categories}
+\author{Aryaman Maithani}
+\date[04-2022]{April 2022}
+\institute{IIT Bombay}
+\usetheme{Madrid}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{tikz-cd}
+\usepackage{commands}
+\usepackage{graphicx}
+% \usepackage{soul}
+
+% \usepackage{tikz}
+% \usetikzlibrary{topaths,calc}
+% \usepackage{caption}
+% \usepackage{subcaption}
+% \usepackage{pgfplots}  
+% \pgfplotsset{compat=1.17}
+% \usepackage{cancel}
+% \usepgfplotslibrary{polar}   
+% \usepgflibrary{shapes.geometric}  
+% \usetikzlibrary{calc}  
+% \pgfplotsset{posQuad/.append style={grid=both, xlabel={$x$}, ylabel={$y$}, line width=2pt, mark size=3pt,draw=NordWhite}}
+
+\tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}%
+  }
+}
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+    \par
+    \def\insertproofname{#1\@addpunct{.}}%
+    \usebeamertemplate{proof begin}#2}
+  {\usebeamertemplate{proof end}}
+\makeatother
+
+% \setbeamercolor{footline}{fg=brown}
+% \setbeamerfont{footline}{series=\bfseries}
+% \addtobeamertemplate{navigation symbols}{}{%
+%     \usebeamerfont{footline}%
+%     \usebeamercolor[fg]{footline}%
+%     \hspace{1em}%
+%     [\insertframenumber/\inserttotalframenumber]
+% }
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{caution}[thm]{Caution}
+\newtheorem{ques}{Question}
+\newtheorem*{alg}{Algorithm}
+\newtheorem*{fac}{Fact}
+\newtheorem*{ex}{Example}
+
+\let\subset\subseteq
+\let\supset\supseteq
+\let\ge\geqslant
+\let\le\leqslant
+
+\newcommand{\wequ}{\xrightarrow{\sim}}
+\DeclareMathOperator{\Ho}{Ho}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+\section{Model Categories}
+\begin{frame}{Notations}
+    \begin{enumerate}
+        \item $\C{C}$ will denote a category.
+        \item $f$, $g$ will denote morphisms in a category.
+        \item Given a ring $R$, $\Ch{R}$ will denote the category of nonnegatively graded chain complexes over $R$, i.e., objects are of the form
+        \begin{equation*} 
+            \cdots \to M_{2} \to M_{1} \to M_{0},
+        \end{equation*}
+        where the $M_{i}$ are $R$-modules and the morphisms are the obvious ones.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{}
+    \begin{defn}[Lift]
+        \pause Given a commutative diagram of the form 
+        \begin{equation*} 
+            \begin{tikzcd}[ampersand replacement=\&]
+                A \arrow[r] \arrow[d, "i"'] \& X \arrow[d, "p"] \\
+                B \arrow[r] \arrow[visible on=<4->, ru, dashed] \& Y
+            \end{tikzcd},
+        \end{equation*}
+        \pause a \deff{lifting} \pause is a map $B \to X$ \pause such that the resulting diagram commutes.
+    \end{defn}
+\pause
+\begin{defn}[Retract]
+    $f$ is said to be a \deff{retract} of $g$ if there is a commutative diagram \pause
+    \begin{equation*} 
+        \begin{tikzcd}[ampersand replacement=\&]
+            X \arrow[r, "i"] \arrow[d, "f"] \& Y \arrow[r, "r"] \arrow[d, "g"] \& X \arrow[d, "f"] \\
+            X' \arrow[r, "i'"'] \& Y' \arrow[r, "r'"'] \& X'
+        \end{tikzcd}
+    \end{equation*}
+    \pause such that $ri$ and $r'i'$ are the appropriate identity maps.
+\end{defn}
+\end{frame}
+
+\begin{frame}{}
+    \begin{defn}
+        A \deff{model category} is a category $\C{C}$ with three distinguished classes of maps:
+        \begin{enumerate}
+            \item \deff{weak equivalences} ($\wequ$),
+            \item \deff{fibrations} ($\onto$), and
+            \item \deff{cofibrations} ($\into$),
+        \end{enumerate}
+        each of which is closed under composition and contains all identity maps. A map which is both a fibration (resp. cofibration) and a weak equivalence is called an \deff{acyclic fibration} (resp. \deff{acyclic cofibration}).
+    \end{defn}
+    Additionally, we require the \deff{model category axioms} \textbf{MC1} - \textbf{MC5} to be satisfied, which are stated on the next slide.
+\end{frame}
+
+\begin{frame}{Model Category Axioms}    
+    \textbf{MC1} Finite limits and colimits exist in $\C{C}$.
+
+    \textbf{MC2} Let $f$ and $g$ be maps such that $gf$ is defined. If two of of the three maps $f$, $g$, $gf$ are weak equivalences, then so is the third.
+
+    \textbf{MC3} If $f$ is a retract of $g$ and $g$ is a fibration, cofibration, or a weak equivalence, then so if $f$.
+
+    \textbf{MC4} Given a commutative diagram of the form $\begin{tikzcd}[ampersand replacement=\&]
+                A \arrow[r] \arrow[d, "i"'] \& X \arrow[d, "p"] \\
+                B \arrow[r] \& Y
+            \end{tikzcd}$, a lift exists in either of the following two situations: (i) $i$ is a cofibration and $p$ is an acyclic fibration, or (ii) $i$ is an acyclic cofibration and $p$ is a fibration.
+
+    \textbf{MC5} Any map $f$ can be factored in two ways $f = pi = qj$, where $i$ is a cofibration, $p$ is an acyclic fibration, $j$ is an acyclic fibration, and $q$ is a fibration.
+\end{frame}
+
+\begin{frame}{Fibrant and Cofibrant objects}
+    By \textbf{MC1}, a model category $\C{C}$ has both an initial object $\emptyset$ and a final object $\ast$.
+
+    \begin{defn}
+        An object $A \in \C{C}$ is said to be \deff{cofibrant} if $\emptyset \to A$ is a cofibration and \deff{fibrant} if $A \to \ast$ is a fibration.
+    \end{defn}
+\end{frame}
+
+\begin{frame}{An example}
+    The category $\Ch{R}$ can be given the structure of a model category by defining a map $f : M \to N$ to be
+    \begin{enumerate}
+        \item a \deff{weak equivalence} if $f$ induces an isomorphism on homology groups,
+        \item a \deff{cofibration} if for each $k \ge 0$, the map $f_{k} : M_{k} \to N_{k}$ is a monomorphism with a \emph{projective} $R$-module as its cokernel,
+        \item a \deff{fibration} if for each $k \ge 1$, the map $f_{k} : M_{k} \to N_{k}$ is an epimorphism.
+    \end{enumerate}
+
+    Note that $\emptyset$ and $\ast$ are both the zero chain complex. The cofibrant objects in $\Ch{R}$ are the chain complexes $M$ such that each $M_{k}$ is projective. On the other hand, object is fibrant.
+
+    The homotopy category $\Ho(\Ch{R})$ is equivalent to the category whose objects are these cofibrant chain complexes and whose morphisms are ordinary chain homotopy classes of maps. 
+\end{frame}
+
+\begin{frame}{Another example}
+    The category $\C{Top}$ of topological spaces can be given the structure of a model category by defining a map $f : M \to N$ to be
+    \begin{enumerate}
+        \item a \deff{weak equivalence} if $f$ is a homotopy equivalence,
+        \item a \deff{cofibration} if $f$ is a closed Hurewicz cofibration,
+        \item a \deff{fibration} if $f$ is a Hurewicz fibration.
+    \end{enumerate}
+
+    In this case, the homotopy category $\Ho(\C{Top})$ is the usual homotopy category of topological spaces.
+\end{frame}
+
+\begin{frame}{Some constructions}
+    Given a model category $\C{C}$, we may construct some new model categories.
+
+    \begin{ex}
+        The opposite category $\C{C}^{\op}$ is quite naturally a model category by keeping the weak equivalences the same and switching fibrations with cofibrations.
+    \end{ex}
+
+    \begin{ex}
+        If $A$ is an object of $\C{C}$, $A \downarrow \C{C}$ is the category in which an object is a map $f : A \to X$ in $\C{C}$. A morphism in this category from $f : A \to X$ to $g : A \to Y$ is a map $h : X \to Y$ such that $hf = g$. (For example, $\ast \downarrow \C{Top}$ is the category of pointed spaces.)
+
+        This has the structure of a model category by defining $h$ to be a weak equivalence, fibration, or cofibration according to whether it was so in $\C{C}$.
+
+        An object $X$ of $\ast \downarrow \C{Top}$ is cofibrant iff the basepoint of $X$ is closed and nondegenerate.
+    \end{ex}
+\end{frame}
+
+\begin{frame}{}
+    \begin{defn}
+        Let $i : A \to B$ and $p : X \to Y$ be maps such that
+        \begin{equation*} 
+            \begin{tikzcd}[ampersand replacement=\&]
+                A \arrow[r] \arrow[d, "i"'] \& X \arrow[d, "p"] \\
+                B \arrow[r] \& Y
+            \end{tikzcd}
+        \end{equation*}
+        has a lift for any choice of horizontal arrows (that make the diagram commute). Then, $i$ is said to have the \deff{left lifting property (LLP)} with respect to $p$, and $p$ is said to have the \deff{right lifting property (RLP)} with respect to $i$.
+    \end{defn}
+\end{frame}
+
+\begin{frame}{}
+    \begin{prop}
+        Let $\C{C}$ be a model category.
+        \begin{enumerate}
+            \item The cofibrations in $\C{C}$ are precisely the maps which have the LLP with respect to acyclic fibrations.
+            \item The acyclic cofibrations in $\C{C}$ are precisely the maps which have the LLP with respect to fibrations.
+            \item The fibrations in $\C{C}$ are precisely the maps which have the RLP with respect to acyclic cofibrations.
+            \item The acyclic fibrations in $\C{C}$ are precisely the maps which have the RLP with respect to cofibrations.
+        \end{enumerate}
+    \end{prop}
+    This shows that the axioms for model category are overdetermined in some sense: more precisely, if $\C{C}$ is a model category, then given just the classes of weak equivalences and fibrations is enough to determine the class of cofibrations.
+\end{frame}
+
+\begin{frame}{}
+    Given a pushout diagram
+    \begin{equation*} 
+        \begin{tikzcd}[ampersand replacement=\&]
+            B \arrow[r, "i"] \arrow[d, "j"'] \& C \arrow[d, "j'"] \\
+            A \arrow[r, "i'"'] \& P \arrow[ul, phantom, "\lrcorner", very near start]
+        \end{tikzcd},
+    \end{equation*}
+    the map $i'$ is the \deff{cobase change of $i$ (along $j$)}. Similarly, one may define base change.
+
+    \begin{prop}
+        Let $\C{C}$ be a model category.
+        \begin{enumerate}
+            \item The classes of fibrations and acyclic fibrations are closed under cobase change.
+            \item The classes of cofibrations and acyclic cofibrations are closed under base change.
+        \end{enumerate}
+    \end{prop}
+\end{frame}
+
+\section{Homotopy Relations on Maps}
+
+
+\end{document}
