@@ -1,3 +1,13 @@
+rep-theory:
+  tit: Representation Theory of Finite Groups
+
+alg-top:
+  tit: Algebraic Topology
+
+alg-geo:
+  tit: Algebraic Geometry
+  desc: Presentation on Algebraic Geometry as part of VSRP  
+
 group-theory-gd:
   tit: Group theory GD
   desc: Presentation on an introduction to Group Theory
