@@ -2,11 +2,19 @@
 % \mode<presentation>{}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools, mathrsfs}
+
+\usepackage{cmbright}
+\fontencoding{OT1}\fontfamily{cmbr}\selectfont %to load ot1cmbr.fd
+\DeclareFontShape{OT1}{cmbr}{bx}{n}{% change bx definition
+<->cmbrbx10%
+}{}
+\normalfont % back to normalfont
+
 % \usepackage{enumitem}
 \setbeamertemplate{theorems}[numbered]
 \title{Model Categories}
 \author{Aryaman Maithani}
-\date[04-2022]{April 2022}
+\date[07-04-2022]{7th April 2022}
 \institute{IIT Bombay}
 \usetheme{Madrid}
 \usepackage{parskip}
@@ -57,6 +65,7 @@
 \newtheorem{thm}{Theorem}
 \newtheorem{defn}[thm]{Definition}
 \newtheorem{prop}[thm]{Proposition}
+\newtheorem{rem}[thm]{Remark}
 \newtheorem{cor}[thm]{Corollary}
 \newtheorem{caution}[thm]{Caution}
 \newtheorem{ques}{Question}
@@ -70,7 +79,14 @@
 \let\le\leqslant
 
 \newcommand{\wequ}{\xrightarrow{\sim}}
+\newcommand{\lhom}{\overset{\ell}{\sim}}
+\newcommand{\rhom}{\overset{r}{\sim}}
+\newcommand{\acfib}{\overset{\sim}{\onto}}
+\newcommand{\accofib}{\overset{\sim}{\into}}
+\newcommand{\cpA}{A \coprod A}
 \DeclareMathOperator{\Ho}{Ho}
+\DeclareMathOperator{\inc}{in}
+\DeclareMathOperator{\pr}{pr}
 
 \AtBeginSection[]
 {
@@ -95,11 +111,11 @@
     \begin{enumerate}
         \item $\C{C}$ will denote a category.
         \item $f$, $g$ will denote morphisms in a category.
-        \item Given a ring $R$, $\Ch{R}$ will denote the category of nonnegatively graded chain complexes over $R$, i.e., objects are of the form
+        \item Given a ring $R$, $\Ch{R}$ will denote the category of nonnegatively graded chain complexes over $R$, i.e., objects are chain complexes of the form
         \begin{equation*} 
             \cdots \to M_{2} \to M_{1} \to M_{0},
         \end{equation*}
-        where the $M_{i}$ are $R$-modules and the morphisms are the obvious ones.
+        and the morphisms are the obvious ones.
     \end{enumerate}
 \end{frame}
 
@@ -112,7 +128,7 @@
                 B \arrow[r] \arrow[visible on=<4->, ru, dashed] \& Y
             \end{tikzcd},
         \end{equation*}
-        \pause a \deff{lifting} \pause is a map $B \to X$ \pause such that the resulting diagram commutes.
+        \pause a \deff{lift} \pause is a map $B \to X$ \pause such that the resulting diagram commutes.
     \end{defn}
 \pause
 \begin{defn}[Retract]
@@ -129,55 +145,55 @@
 
 \begin{frame}{}
     \begin{defn}
-        A \deff{model category} is a category $\C{C}$ with three distinguished classes of maps:
-        \begin{enumerate}
+        A \deff{model category} is a category $\C{C}$ with three distinguished classes of maps: \pause
+        \begin{enumerate}[<+->]
             \item \deff{weak equivalences} ($\wequ$),
             \item \deff{fibrations} ($\onto$), and
             \item \deff{cofibrations} ($\into$),
-        \end{enumerate}
-        each of which is closed under composition and contains all identity maps. A map which is both a fibration (resp. cofibration) and a weak equivalence is called an \deff{acyclic fibration} (resp. \deff{acyclic cofibration}).
+        \end{enumerate} \pause
+        each of which is closed under composition and contains all identity maps. \pause A map which is both a fibration (resp. cofibration) and a weak equivalence is called an \deff{acyclic fibration} (resp. \deff{acyclic cofibration}). \pause
     \end{defn}
     Additionally, we require the \deff{model category axioms} \textbf{MC1} - \textbf{MC5} to be satisfied, which are stated on the next slide.
 \end{frame}
 
 \begin{frame}{Model Category Axioms}    
-    \textbf{MC1} Finite limits and colimits exist in $\C{C}$.
+    \textbf{MC1} Finite limits and colimits exist in $\C{C}$. \pause
 
-    \textbf{MC2} Let $f$ and $g$ be maps such that $gf$ is defined. If two of of the three maps $f$, $g$, $gf$ are weak equivalences, then so is the third.
+    \textbf{MC2} Let $f$ and $g$ be maps such that $gf$ is defined. \pause If two of of the three maps $f$, $g$, $gf$ are weak equivalences, then so is the third. \pause
 
-    \textbf{MC3} If $f$ is a retract of $g$ and $g$ is a fibration, cofibration, or a weak equivalence, then so if $f$.
+    \textbf{MC3} If $f$ is a retract of $g$ and $g$ is a fibration, cofibration, or a weak equivalence, then so is $f$. \pause
 
     \textbf{MC4} Given a commutative diagram of the form $\begin{tikzcd}[ampersand replacement=\&]
                 A \arrow[r] \arrow[d, "i"'] \& X \arrow[d, "p"] \\
                 B \arrow[r] \& Y
-            \end{tikzcd}$, a lift exists in either of the following two situations: (i) $i$ is a cofibration and $p$ is an acyclic fibration, or (ii) $i$ is an acyclic cofibration and $p$ is a fibration.
+            \end{tikzcd}$, \pause a lift exists in either of the following two situations: \pause (i) $i$ is a cofibration and $p$ is an acyclic fibration, or \pause (ii) $i$ is an acyclic cofibration and $p$ is a fibration. \pause 
 
-    \textbf{MC5} Any map $f$ can be factored in two ways $f = pi = qj$, where $i$ is a cofibration, $p$ is an acyclic fibration, $j$ is an acyclic fibration, and $q$ is a fibration.
+    \textbf{MC5} Any map $f$ can be factored in two ways $f = pi = qj$, \pause where $i$ is a cofibration, $p$ is an acyclic fibration, \pause $j$ is an acyclic fibration, and $q$ is a fibration.
 \end{frame}
 
 \begin{frame}{Fibrant and Cofibrant objects}
-    By \textbf{MC1}, a model category $\C{C}$ has both an initial object $\emptyset$ and a final object $\ast$.
+    By \textbf{MC1}, a model category $\C{C}$ has both an initial object $\emptyset$ and a final object $\ast$. \pause More generally, all finite products and coproducts exist. \pause Similarly, pushouts and pullbacks exist as well. \pause
 
     \begin{defn}
-        An object $A \in \C{C}$ is said to be \deff{cofibrant} if $\emptyset \to A$ is a cofibration and \deff{fibrant} if $A \to \ast$ is a fibration.
+        An object $A \in \C{C}$ is said to be \deff{cofibrant} if $\emptyset \to A$ is a cofibration, \pause and \deff{fibrant} if $A \to \ast$ is a fibration.
     \end{defn}
 \end{frame}
 
 \begin{frame}{An example}
-    The category $\Ch{R}$ can be given the structure of a model category by defining a map $f : M \to N$ to be
-    \begin{enumerate}
+    The category $\Ch{R}$ can be given the structure of a model category \pause by defining a map $f : M \to N$ to be \pause
+    \begin{enumerate}[<+->]
         \item a \deff{weak equivalence} if $f$ induces an isomorphism on homology groups,
         \item a \deff{cofibration} if for each $k \ge 0$, the map $f_{k} : M_{k} \to N_{k}$ is a monomorphism with a \emph{projective} $R$-module as its cokernel,
-        \item a \deff{fibration} if for each $k \ge 1$, the map $f_{k} : M_{k} \to N_{k}$ is an epimorphism.
+        \item a \deff{fibration} if for each $k \ge 1$, the map $f_{k} : M_{k} \to N_{k}$ is an epimorphism. \pause
     \end{enumerate}
 
-    Note that $\emptyset$ and $\ast$ are both the zero chain complex. The cofibrant objects in $\Ch{R}$ are the chain complexes $M$ such that each $M_{k}$ is projective. On the other hand, object is fibrant.
+    Note that $\emptyset$ and $\ast$ are both the zero chain complex. \pause The cofibrant objects in $\Ch{R}$ are the chain complexes $M$ such that each $M_{k}$ is projective. \pause On the other hand, every object is fibrant. \pause
 
-    The homotopy category $\Ho(\Ch{R})$ is equivalent to the category whose objects are these cofibrant chain complexes and whose morphisms are ordinary chain homotopy classes of maps. 
+    The homotopy category $\Ho(\Ch{R})$ is equivalent to the category whose objects are these cofibrant chain complexes \pause and whose morphisms are ordinary chain homotopy classes of maps. 
 \end{frame}
 
 \begin{frame}{Another example}
-    The category $\C{Top}$ of topological spaces can be given the structure of a model category by defining a map $f : M \to N$ to be
+    The category $\C{Top}$ of topological spaces can be given the structure of a model category by defining a map $f : X \to Y$ to be
     \begin{enumerate}
         \item a \deff{weak equivalence} if $f$ is a homotopy equivalence,
         \item a \deff{cofibration} if $f$ is a closed Hurewicz cofibration,
@@ -187,22 +203,33 @@
     In this case, the homotopy category $\Ho(\C{Top})$ is the usual homotopy category of topological spaces.
 \end{frame}
 
+\begin{frame}{Yet another example}
+    The category $\C{Top'}$  of topological spaces can be given yet another structure of a model category by defining a map $f : X \to Y$ to be
+    \begin{enumerate}
+        \item a \deff{weak equivalence} if $f$ is a \underline{weak} homotopy equivalence,
+        \item a \deff{cofibration} if $f$ is a retract of a map $X \to Y'$ in which $Y'$ is obtained from $X$ by attaching cells,
+        \item a \deff{fibration} if $f$ is a \underline{Serre} fibration.
+    \end{enumerate}
+
+    In this case, the homotopy category $\Ho(\C{Top}')$ is the usual homotopy category of \underline{CW-complexes}.
+\end{frame}
+
 \begin{frame}{Some constructions}
-    Given a model category $\C{C}$, we may construct some new model categories.
+    Given a model category $\C{C}$, we may construct some new model categories. \pause
 
     \begin{ex}
-        The opposite category $\C{C}^{\op}$ is quite naturally a model category by keeping the weak equivalences the same and switching fibrations with cofibrations.
+        The opposite category $\C{C}^{\op}$ is quite naturally a model category by \pause keeping the weak equivalences the same and switching fibrations with cofibrations. \pause
     \end{ex}
 
     \begin{ex}
-        If $A$ is an object of $\C{C}$, $A \downarrow \C{C}$ is the category in which an object is a map $f : A \to X$ in $\C{C}$. A morphism in this category from $f : A \to X$ to $g : A \to Y$ is a map $h : X \to Y$ such that $hf = g$. (For example, $\ast \downarrow \C{Top}$ is the category of pointed spaces.)
+        If $A$ is an object of $\C{C}$, $A \downarrow \C{C}$ is the category in which an object is a map $f : A \to X$ in $\C{C}$. \pause A morphism in this category from $f : A \to X$ to $g : A \to Y$ is a map $h : X \to Y$ such that $hf = g$. \pause (For example, $\ast \downarrow \C{Top}$ is the category of pointed spaces.) \pause
 
-        This has the structure of a model category by defining $h$ to be a weak equivalence, fibration, or cofibration according to whether it was so in $\C{C}$.
+        This has the structure of a model category by defining $h$ to be a weak equivalence, fibration, or cofibration according to \pause whether it was so in $\C{C}$. \pause
 
         An object $X$ of $\ast \downarrow \C{Top}$ is cofibrant iff the basepoint of $X$ is closed and nondegenerate.
     \end{ex}
 \end{frame}
-
+% \begin{comment}
 \begin{frame}{}
     \begin{defn}
         Let $i : A \to B$ and $p : X \to Y$ be maps such that
@@ -212,43 +239,364 @@
                 B \arrow[r] \& Y
             \end{tikzcd}
         \end{equation*}
-        has a lift for any choice of horizontal arrows (that make the diagram commute). Then, $i$ is said to have the \deff{left lifting property (LLP)} with respect to $p$, and $p$ is said to have the \deff{right lifting property (RLP)} with respect to $i$.
+        has a lift for any choice of horizontal arrows (that make the diagram commute). \pause Then, $i$ is said to have the \deff{left lifting property (LLP)} with respect to $p$, and $p$ is said to have the \deff{right lifting property (RLP)} with respect to $i$.
     \end{defn}
 \end{frame}
 
 \begin{frame}{}
     \begin{prop}
         Let $\C{C}$ be a model category.
-        \begin{enumerate}
+        \begin{enumerate}[<+->]
             \item The cofibrations in $\C{C}$ are precisely the maps which have the LLP with respect to acyclic fibrations.
             \item The acyclic cofibrations in $\C{C}$ are precisely the maps which have the LLP with respect to fibrations.
             \item The fibrations in $\C{C}$ are precisely the maps which have the RLP with respect to acyclic cofibrations.
             \item The acyclic fibrations in $\C{C}$ are precisely the maps which have the RLP with respect to cofibrations.
         \end{enumerate}
-    \end{prop}
-    This shows that the axioms for model category are overdetermined in some sense: more precisely, if $\C{C}$ is a model category, then given just the classes of weak equivalences and fibrations is enough to determine the class of cofibrations.
+    \end{prop} \pause
+    This shows that the axioms for model category are overdetermined in some sense: \pause more precisely, if $\C{C}$ is a model category, then given just the classes of weak equivalences and fibrations is enough to determine the class of cofibrations.
 \end{frame}
+% \end{comment}
 
-\begin{frame}{}
+\begin{frame}{Cobase change}
     Given a pushout diagram
     \begin{equation*} 
         \begin{tikzcd}[ampersand replacement=\&]
             B \arrow[r, "i"] \arrow[d, "j"'] \& C \arrow[d, "j'"] \\
             A \arrow[r, "i'"'] \& P \arrow[ul, phantom, "\lrcorner", very near start]
         \end{tikzcd},
-    \end{equation*}
-    the map $i'$ is the \deff{cobase change of $i$ (along $j$)}. Similarly, one may define base change.
+    \end{equation*} \pause
+    the map $i'$ is the \deff{cobase change of $i$ (along $j$)}. \pause Similarly, one may define base change (using pullback diagrams). \pause
 
     \begin{prop}
-        Let $\C{C}$ be a model category.
-        \begin{enumerate}
-            \item The classes of fibrations and acyclic fibrations are closed under cobase change.
-            \item The classes of cofibrations and acyclic cofibrations are closed under base change.
+        Let $\C{C}$ be a model category. \pause
+        \begin{enumerate}[<+->]
+            \item The classes of cofibrations and acyclic cofibrations are closed under cobase change.
+            \item The classes of fibrations and acyclic fibrations are closed under base change.
         \end{enumerate}
     \end{prop}
 \end{frame}
 
 \section{Homotopy Relations on Maps}
 
+\begin{frame}{Overview}
+    In this section, $\C{C}$ is some fixed model category, and $A$ and $X$ are some objects of $\C{C}$. \pause We wish to exploit the model category axioms to construct a notion of homotopy relations on the set $\Hom_{\C{C}}(A, X)$. \pause We define \emph{left homotopy} and \emph{right homotopy} and see that these two coincide in the most important case -- \pause namely if $A$ is cofibrant and $X$ is fibrant.
+\end{frame}
+
+\begin{frame}{Notations for the coproduct}
+    \begin{equation*} 
+        \begin{tikzcd}[ampersand replacement=\&]
+            \& X \& \\ 
+            \& \& \\
+            A \arrow[visible on=<2->, ruu, "f"] \arrow[r, "\inc_{0}"'] \& A \coprod A \arrow[visible on=<3->, uu, dashed, "f + g"] \& A \arrow[l, "\inc_{1}"] \arrow[visible on=<2->, luu, "g"']
+        \end{tikzcd}
+        % \begin{tikzcd}[ampersand replacement=\&, scale=0.5]
+        %     \& X \& \\ 
+        %     \& \& \\
+        %     A \arrow[ruu, "f_{0}"] \arrow[r, "\inc_{0}"'] \& A \coprod A \arrow[uu, dashed, "f"] \& A \arrow[l, "\inc_{1}"] \arrow[luu, "f_{1}"']
+        % \end{tikzcd}
+    \end{equation*}
+    \pause \pause \pause In particular, taking $X = A$ and $f = g = \id_{A}$ gives us the \deff{folding map} 
+        \begin{equation*} 
+            A \coprod A \xrightarrow{\id_{A} + \id_{A}} A.
+        \end{equation*}
+    
+    \pause Conversely, given a map $f : A \coprod A \to X$, \pause we get two structure maps $f_{0} = f \circ \inc_{0}$ and $f_{1} = f \circ \inc_{1}$. \pause Note that $f_{0} + f_{1} = f$.
+\end{frame}
+
+\begin{frame}{Cylinder objects}
+    \begin{defn}
+        A \deff{cylinder object for $A$} is an object $A \wedge I$ of $\C{C}$ \pause together with a diagram
+        \begin{equation*} 
+            A \coprod A \xrightarrow{i} A \wedge I \wequ A
+        \end{equation*}
+        which factors the folding map $\id_{A} + \id_{A} : A \coprod A \to A$. \pause A cylinder object $A \wedge I$ is called \pause
+        \begin{enumerate}
+            \item a \deff{good cylinder object}, if $A \coprod A \to A \wedge I$ is a cofibration, and \pause
+            \item a \deff{very good cylinder object}, if in addition the map $A \wedge I \to A$ is a (necessarily acyclic) fibration. \pause
+        \end{enumerate}
+    \end{defn}
+    If $A \wedge I$ is a cylinder object for $A$, \pause we will denote the two structure maps $A \to A \coprod A \to A \wedge I$ by $i_{0}$ and $i_{1}$. \pause Note that the composition $A \xrightarrow{i_{0}} A \wedge I \wequ A$ is $\id_{A}$. \pause Thus, $i_{0}$ and $i_{1}$ are weak equivalences, by \textbf{MC2}. \pause
+
+    By \textbf{MC5}, at least one very good cylinder object exists for every $A$.
+\end{frame}
+
+\begin{frame}{}
+    \begin{prop} 
+        If $A$ is cofibrant and $A \wedge I$ is a good cylinder object for $A$, then the maps $i_{0}, i_{1} : A \to A \wedge I$ are acyclic cofibrations.
+    \end{prop} 
+    \pause
+    \begin{proof} 
+        Suffices to prove that $i_{0}$ is a cofibration. \pause
+
+        $A \coprod A$ is defined by the pushout diagram 
+        \begin{equation*} 
+                \begin{tikzcd}[ampersand replacement=\&]
+                    \emptyset \arrow[r] \arrow[visible on=<4->, d, "{\text{cofibration}}"'] \arrow[d] \& A \arrow[d, "\inc_{0}"] \\
+                    A \arrow[r, "\inc_{1}"'] \& A \coprod A \arrow[ul, phantom, "\lrcorner", very near start]
+                \end{tikzcd}.
+        \end{equation*} 
+        \pause \pause Thus, $\inc_{0}$ is a cofibration, being a cobase change of one. 
+
+        \pause As $i_{0}$ is the composition, $A \xrightarrow{\inc_{0}} A \coprod A \into A \wedge I$, we are done.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Left homotopy}
+    \begin{defn}
+        Two maps $f, g : A \to X$ in $\C{C}$ are said to be \deff{left homotopic} (written $f \lhom g$) \pause if there exists a cylinder object $A \wedge I$ for $A$ \pause such that the sum map $f + g : A \coprod A \to X$ \pause extends to a map $H : A \wedge I \to X$. \pause Such a map $H$ is said to be a \deff{left homotopy} from $f$ to $g$ (via the cylinder object $A \wedge I$). \pause The left homotopy is said to be \deff{good} or \deff{very good} if $A \wedge I$ is so.
+    \end{defn}
+
+    \pause Note that in the above case, we have $f = H i_{0}$ and $g = H i_{1}$. \pause
+
+    \begin{rem}
+        Suppose $f \lhom g$. \pause If $f$ is a weak equivalence, then $f = H i_{0}$ shows that $H$ is weak equivalence. \pause In turn, $g = H i_{1}$ is a weak equivalence. \pause 
+
+        Thus, $f$ is a weak equivalence iff $g$ is so.
+    \end{rem}
+\end{frame}
+\begin{frame}{Left homotopy}
+    \begin{prop}
+        If $f \lhom g : A \to X$, \pause then there exists a good left homotopy from $f$ to $g$. \pause \newline
+        If $X$ is fibrant, \pause then there exists a very good left homotopy from $f$ to $g$. \pause
+    \end{prop}
+    The first statement follows simply by factoring $A \coprod A \to A \wedge I$ as a product of a cofibration and an acyclic fibration. \pause
+
+    \begin{prop}
+        If $A$ is cofibrant, then $\lhom$ is an equivalence relation on $\Hom_{\C{C}}(A, X)$. \pause
+    \end{prop}
+    The proof of this is not tough and just works out by considering pushouts cleverly. \pause Reflexivity and symmetry follow even if $A$ is not cofibrant. \pause $A$ being cofibrant ensures that the maps $A \to A \wedge I$ are acyclic cofibrations, which lets one prove transitivity by consider pushouts of two mapping cylinders. 
+\end{frame}
+\begin{frame}{Left homotopy}
+    \begin{defn}
+        $\pi^{\ell}(A, X)$ denotes the set of equivalence classes of $\Hom_{\C{C}}(A, X)$ under the equivalence relation \underline{generated} by left homotopy.
+    \end{defn} \pause
+    Note that we define the above even if $A$ is not cofibrant. \pause
+
+    \begin{prop}
+        If $A$ is cofibrant and $p : Y \acfib X$ is an acyclic fibration, \pause then 
+        \begin{equation*} 
+            p_{\ast} : \pi^{\ell}(A, Y) \to \pi^{\ell}(A, X), \quad [f] \mapsto [pf] \pause
+        \end{equation*}
+        is a (well-defined) bijection.
+    \end{prop}
+\end{frame}
+\begin{frame}{Left homotopy}
+    \begin{prop}
+        Suppose $h : A' \to A$ is map, \pause and $f \lhom g : A \to X$ with $X$ fibrant. \pause Then, $fh \lhom gh : A' \to X$. \pause
+    \end{prop}
+
+    \begin{prop}
+        If $X$ is fibrant, then the composition in $\C{C}$ induces a map: \pause
+        \begin{align*} 
+            \pi^{\ell}(A', A) \times \pi^{\ell}(A, X) &\to \pi^{\ell}(A', X) \\
+            ([h], [f]) &\mapsto [fh].
+        \end{align*}
+    \end{prop}
+\end{frame}
+
+\begin{frame}{Path objects}
+    We may now consider the dual notions. Since $\C{C}^{\op}$ is a model category as described earlier, all the propositions go through by duality. \pause
+
+    We have the notation for a product as: 
+    $\begin{tikzcd}[ampersand replacement=\&]
+      \& X \arrow[ldd, "f"'] \arrow[dd, "{(f,g)}"', dashed] \arrow[rdd, "g"] \&                        \\
+      \&                                                                     \&                        \\
+    A \& A \times A \arrow[l, "\pr_{0}"] \arrow[r, "\pr_{1}"']               \& A
+    \end{tikzcd}$ \pause
+
+    A \deff{path object for $X$} is an object $X^{I}$ \pause together with a diagram 
+    \begin{equation*} 
+        X \wequ X^{I} \xrightarrow{p} X \times X
+    \end{equation*} 
+    that factors $(\id_{X}, \id_{X}) : X \to X \times X$. \pause The path object is said to be \deff{good} if $p$ is a fibration \pause and \deff{very good} if $X \to X^{I}$ is additionally a (necessarily acyclic) cofibration.
+\end{frame}
+\begin{frame}{Right homotopy}
+    \begin{defn}
+        Two maps $f, g : A \to X$ in $\C{C}$ are said to be \deff{right homotopic} (written $f \rhom g$) if there exists a path object $X^{I}$ for $X$ such that the product map $(f, g) : A \to X \times X$ lifts to a map $H : A \to X^{I}$. \pause Such a map $H$ is said to be a \deff{right homotopy} from $f$ to $g$ (via the path object $X^{I}$). The right homotopy is said to be \deff{good} or \deff{very good} if $X^{I}$ is so. \pause
+    \end{defn}
+
+    \begin{defn}
+        $\pi^{r}(A, X)$ denotes the set of equivalence classes of $\Hom_{\C{C}}(A, X)$ under the equivalence relation \underline{generated} by right homotopy.
+    \end{defn}
+\end{frame}
+\begin{frame}{Right homotopy}
+    \begin{prop}
+        If $X$ is fibrant, then $\rhom$ is an equivalence relation on $\Hom_{\C{C}}(A, X)$. \pause If $i : A \accofib B$ is an acyclic cofibration, then composition with $i$ induces a bijection $i^{\ast} : \pi^{r}(B, X) \to \pi^{r}(A, X)$. \pause
+    \end{prop}
+
+    \begin{prop}
+        If $A$ is cofibrant, then composition in $\C{C}$ induces a map $\pi^{r}(A, X) \times \pi^{r}(X, Y) \to \pi^{r}(A, Y)$.
+    \end{prop}
+\end{frame}
+
+\begin{frame}{Relation between left and right homotopy}
+    \begin{prop}
+        Let $f, g : A \to X$ be maps. \pause
+        \begin{enumerate}
+            \item If $A$ is cofibrant and $f \lhom g$, then $f \rhom g$. \pause
+            \item If $X$ is fibrant and $f \rhom g$, then $f \lhom g$. \pause
+        \end{enumerate}
+    \end{prop}
+    \begin{proof} 
+        %There exists a good cylinder object $A \coprod A \xrightarrow{i_{0} + i_{1}} A \wedge I \xrightarrow{j} A$ and a homotopy $H : A \wedge I \to X$ from $f$ to $g$. The map $i_{0}$ is an acyclic cofibration. 
+        Fix a good left homotopy $H : A \wedge I \to X$. \pause Let $j$ be the map $A \wedge I \to A$. \pause Choose a good path object $X \xrightarrow{q} X^{I} \overset{p}{\onto} X \times X$. \pause By \textbf{MC4}, we may find a lift $K : A \wedge I \to X^{I}$ in
+        \begin{equation*} 
+            \begin{tikzcd}[ampersand replacement=\&]
+                A \arrow[r, "qf"] \arrow[d, "i_{0}"'] \& X^{I} \arrow[d, "p"] \\
+                A \wedge I \arrow[visible on=<8->, ru, dashed, "K"'] \arrow[r, "{(fj, H)}"'] \& X \times X
+            \end{tikzcd}.
+        \end{equation*}
+        \pause \pause The composite $Ki_{1} : A \to X^{I}$ is the desired right homotopy.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Homotopic maps}
+    \begin{defn}
+        If $A$ is cofibrant and $X$ is fibrant, we will denote the identical right homotopy and left homotopy equivalence relations on $\Hom_{\C{C}}(A, X)$ by $\sim$, \pause and say that two maps related by this relation are \deff{homotopic}. \pause The set of equivalence classes is denoted $\pi(A, X)$. \pause
+    \end{defn}
+
+    \begin{thm}
+        Suppose that $f : A \to X$ is a map in $\C{C}$ between objects $A$ and $X$ which are both fibrant and cofibrant. \pause Then, $f$ is a weak equivalence if and only if $f$ has a homotopy inverse, \pause i.e., if and only if there exists a map $g : X \to A$ such that $gf$ and $fg$ are homotopic to the respective identity maps.
+    \end{thm}
+\end{frame}
+\begin{frame}{Weak equivalence $\Rightarrow$ homotopy inverse}
+    \begin{proofs}
+        Suppose $f$ is a weak equivalence and factor $f$ as $A \overset{q}{\underset{\sim}{\into}} C \overset{p}{\onto} X$. \pause Thus, $p$ is also a weak equivalence. \pause Using \textbf{MC4} on the diagram $
+        \begin{tikzcd}[ampersand replacement=\&]
+            A \arrow[r, "\id_{A}"] \arrow[d, "q"', "\sim", hook] \& A \arrow[d, two heads] \\
+            C \arrow[r] \arrow[visible on=<4->, ru, dashed, "r"'] \& \ast
+        \end{tikzcd}$ \pause
+        gives us a left inverse $r : C \to A$ of $q$. \pause \newline
+        Recall the bijection $q^{\ast} : \pi^{r}(C, C) \to \pi^{r}(A, C)$. \pause We have
+        \begin{equation*} 
+            q^{\ast}([qr]) = [qrq] = [q].
+        \end{equation*} \pause
+        Thus, $[qr] = [\id_{C}]$. \pause Thus, $r$ is a homotopy inverse for $q$. \pause Dually, there is a homotopy inverse $s$ for $p$. \pause Then, $rs$ is a homotopy inverse for $f = pq$.
+    \end{proofs}
+\end{frame}
+\begin{frame}{Homotopy inverse $\Rightarrow$ weak equivalence}
+    \begin{proofs} 
+        Suppose $f$ has a homotopy inverse and factor $f$ as $A \overset{q}{\underset{\sim}{\into}} C \overset{p}{\onto} X$. \pause By \textbf{MC2}, it suffices to prove that $p$ is a weak equivalence. \pause Note that $C$ is fibrant and cofibrant (since $A$ and $X$ are so). \pause Fix $g : X \to A$ \pause and a homotopy $H : X \wedge I \to X$ between $fg$ and $\id_{X}$. \pause Use \textbf{MC4} to get a lift $H' : X \wedge I \to C$ in the diagram \pause
+        $
+            \begin{tikzcd}[ampersand replacement=\&]
+                X \arrow[r, "qg"] \arrow[d, "i_{0}"'] \& C \arrow[d, "p"] \\
+                X \wedge I \arrow[r, "H"'] \arrow[ru, "H'"', dashed] \& X
+            \end{tikzcd}.
+        $
+
+        Let $s \vcentcolon= H' i_{1}$, \pause so that $ps = pH'i_{1} = Hi_{1} = \id_{X}$. \pause By the previous part, $q$ has a homotopy inverse, say $r$. \pause We have $fr = pqr \sim p$. \pause By the homotopy $H'$ we also have $s \sim qg$ and thus, \pause
+        \begin{equation*} 
+            sp \sim qgp \sim qgfr \sim qr \sim \id_{C}.
+        \end{equation*} \pause
+        Thus, $sp$ is a weak equivalence.
+    \end{proofs}
+\end{frame}
+\begin{frame}{Homotopy inverse $\Rightarrow$ weak equivalence}
+    \begin{proof} 
+        We have shown that $sp$ is a weak equivalence. \pause Now, looking at the diagram
+        \begin{equation*} 
+            \begin{tikzcd}[ampersand replacement=\&]
+                C \arrow[r, "\id_{C}"] \arrow[d, "p"] \& C \arrow[r, "\id_{C}"] \arrow[d, "sp"] \& C \arrow[d, "p"] \\
+                X \arrow[r, "s"'] \& C \arrow[r, "p"'] \& X
+            \end{tikzcd}
+        \end{equation*}
+        shows that $p$ is a retract of $sp$, \pause and hence by \textbf{MC3} that the map $p$ is a weak equivalence.
+    \end{proof}
+\end{frame}
+
+\section{Homotopy category of a model category}
+
+\begin{frame}{Overview and Definitions}
+    We use the machinery from the previous section to construct the \emph{homotopy category} $\Ho(\C{C})$. \pause We define the following six categories associated to $\C{C}$: \pause
+    \begin{enumerate}[<+->]
+        \item $\C{C}_{c}$ - full subcategory of $\C{C}$ whose objects are cofibrant objects,
+        \item $\pi \C{C}_{c}$ - subcategory of $\C{C}_{c}$ whose morphisms are right homotopy classes,
+        \item $\C{C}_{f}$ - full subcategory of $\C{C}$ whose objects are fibrant objects,
+        \item $\pi \C{C}_{f}$ - subcategory of $\C{C}_{f}$ whose morphisms are left homotopy classes,
+        \item $\C{C}_{cf}$ - full subcategory of $\C{C}$ whose objects are fibrant and cofibrant,
+        \item $\pi \C{C}_{cf}$ - subcategory of $\C{C}_{cf}$ whose morphisms are homotopy classes.
+    \end{enumerate}
+\end{frame}
+\begin{frame}{Q, R}
+    For each object $X$ in $\C{C}$, \pause we can apply \textbf{MC5} to $\emptyset \to X$ and $X \to \ast$ to obtain \pause
+    \begin{equation*} 
+        p_{X} : QX \acfib X \andd i_{X} : X \accofib RX
+    \end{equation*} \pause
+    with $QX$ cofibrant and $RX$ fibrant. \pause If $X$ it itself cofibrant (resp. fibrant), \pause then we let $QX = X$ (resp. $RX = X$).
+\end{frame}
+\begin{frame}{Q, R}
+    \begin{prop}
+        Given a map $X \xrightarrow{f} Y$ in $\C{C}$, \pause there exists a map $QX \xrightarrow{\widetilde{f}} QY$ \pause such that \vspace{-4mm}
+        \begin{equation*} \vspace{-4mm}
+            \begin{tikzcd}[ampersand replacement=\&]
+                QX \arrow[r, "\widetilde{f}"] \arrow[d, "p_{X}"', "\sim"] \& QY \arrow[d, "p_{Y}", "\sim"'] \\
+                X \arrow[r, "f"'] \& Y 
+            \end{tikzcd}
+        \end{equation*} 
+        commutes. \pause $\widetilde{f}$ is unique up to left (and right) homotopy, \pause and is a weak equivalence if and only if $f$ is. \pause If $Y$ is fibrant, then $\widetilde{f}$ depends up to left (and right) homotopy \pause only on the left homotopy class of $f$. \pause
+    \end{prop}
+    Thus, if $f = \id_{X}$, then $\widetilde{f} \rhom \id_{QX}$. \pause Similarly, if $f : X \to Y$ and $g : Y \to Z$ and $h = gf$, \pause then $\widetilde{h} \rhom \widetilde{g} \widetilde{f}$. \pause Thus, we can define a functor $Q : \C{C} \to \pi \C{C}_{c}$ \pause sending $X \mapsto QX$ \pause and $X \xrightarrow{f} Y$ to $[\widetilde{f}] \in \pi^{r}(QX, QY)$.
+\end{frame}
+\begin{frame}{Q, R}
+    Dually, we have the existence of a map $\overline{f}$ such that
+    \begin{equation*} 
+        \begin{tikzcd}[ampersand replacement=\&]
+                X \arrow[r, "f"] \arrow[d, "p_{X}"', "\sim"] \& Y \arrow[d, "p_{Y}", "\sim"'] \\
+                RX \arrow[r, "\overline{f}"'] \& RY 
+            \end{tikzcd}
+    \end{equation*}
+    commutes and we have the desired uniqueness properties. \pause
+
+    As before, this gives us a functor $R : \C{C} \to \pi \C{C}_{f}$ sending $X \mapsto RX$ and $f \mapsto [\overline{f}] \in \pi^{\ell}(RX, RY)$. \pause 
+
+    \begin{prop}
+        Restriction of $Q$ to $\pi \C{C}_{f}$ induces a functor $Q' : \pi \C{C}_{f} \to \pi \C{C}_{cf}$. \pause \newline
+        Restriction of $R$ to $\pi \C{C}_{c}$ induces a functor $R' : \pi \C{C}_{c} \to \pi \C{C}_{cf}$. 
+    \end{prop}
+\end{frame}
+\begin{frame}{Homotopy category}
+    \begin{defn}
+        The \deff{homotopy category} $\Ho(\C{C})$ of a model category $\C{C}$ is the category with \pause the same objects as $\C{C}$, and with \pause
+        \begin{equation*} 
+            \Hom_{\Ho(\C{C})}(X, Y) \vcentcolon= \Hom_{\pi \C{C}_{cf}}(R'QX, R'QY) = \pi(RQX, RQY).
+        \end{equation*} \pause
+    \end{defn}
+
+    There is a functor $\gamma : \C{C} \to \Ho(\C{C})$ \pause which is the identity on objects \pause and sends a map $X \xrightarrow{f} Y$ to the map $R'Q(X) \xrightarrow{R'Q(f)} R'Q(Y)$. \pause
+
+    If each of $X$ and $Y$ is both fibrant and cofibrant, \pause then by construction, \pause the map $\gamma : \Hom_{\C{C}}(X, Y) \to \Hom_{\Ho(\C{C})}(X, Y)$ is surjective \pause and induces a bijection $\pi(X, Y) \cong \Hom_{\Ho(\C{C})}(X, Y)$.
+\end{frame}
+\begin{frame}{Homotopy category}
+    \begin{prop}
+        Given a morphism $f$ in $\C{C}$, $\gamma(f)$ is an isomorphism iff $f$ is a weak equivalence. \pause Any morphism in $\Ho(\C{C})$ can be written as a composition of maps of the form $\gamma(f)$ and $\gamma(g)^{-1}$. \pause
+    \end{prop}
+
+    \begin{defn}
+        Let $\C{C}$ be a category, \pause and $W \subset \C{C}$ a class of morphisms. \pause A functor $F : \C{C} \to \C{D}$ is said to be \only<5-8|handout:0>{\deff{\underline{??}}}\only<9->{a \deff{localisation of $\C{C}$ with respect to $W$}} if \pause
+        \begin{enumerate}
+            \item $F(f)$ is an isomorphism for each $f \in W$, \pause
+            \item whenever $G : \C{C} \to \C{D}'$ is a functor carrying elements of $W$ into isomorphisms, \pause there exists a unique functor $G' : \C{D} \to \C{D}'$ such that $G'F = G$. \pause
+        \end{enumerate}
+    \end{defn}
+\end{frame}
+\begin{frame}{Homotopy category}
+    \begin{prop}
+        Let $\C{C}$ be a model category and $W \subset \C{C}$ the class of weak equivalences. Then, $\gamma : \C{C} \to \Ho(\C{C})$ is a localisation of $\C{C}$ with respect to $W$.
+    \end{prop}
+\end{frame}
+
+\begin{frame}{Chain complexes}
+    As stated earlier, $\Ch{R}$ can be given the structure of a model category. \pause 
+
+    If $A$ is an $R$-module and $n \ge 0$, we let $K(A, n)$ denote the chain complex which is $A$ in degree $n$ and $0$ elsewhere. \pause \newline
+    These are the chain complex analogues of \pause Eilenberg-Mac Lane spaces. \pause
+
+    \begin{prop}
+        For any two $R$-modules $A$ and $B$ and nonnegative integers $n$ and $m$, \pause there is a natural isomorphism
+        \begin{equation*} 
+            \Hom_{\Ho(\Ch{R})}(K(A, m), K(B, n)) \cong \Ext_{R}^{n - m}(A, B).
+        \end{equation*}
+    \end{prop}
+\end{frame}
 
 \end{document}
