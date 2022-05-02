@@ -308,7 +308,7 @@ In other words, what we have above is actually a \emph{representation}, the cent
 	\begin{equation*} 
 		\varphi_1(g_1) \vcentcolon= \varphi(g_1, 1)
 	\end{equation*}
-	and similarly, $\varphi_2 : \widehat{G_1} \to \mathbb{C}^*$ by
+	and similarly, $\varphi_2 : \widehat{G_2} \to \mathbb{C}^*$ by
 	\begin{equation*} 
 		\varphi_2(g_2) \vcentcolon= \varphi(1, g_2).
 	\end{equation*}
@@ -325,7 +325,11 @@ In other words, what we have above is actually a \emph{representation}, the cent
 	\end{equation*}
 	for every $\varphi, \varphi' \in \widehat{G}$ and $i = 1, 2.$
 
-	Moreover, if $\Phi(\varphi) = (1, 1),$ then $\varphi_1(g_1) = 1 = \varphi_2(g_2)$ for all $(g_1, g_2) \in G.$ Thus, $\varphi \equiv 1,$ showing that $\Phi$ is injective.
+	Moreover, if $\Phi(\varphi) = (1, 1),$ then $\varphi_1(g_1) = 1 = \varphi_2(g_2)$ for all $(g_1, g_2) \in G.$ Thus,
+	\begin{equation*} 
+		\varphi(g_{1}, g_{2}) = \varphi\left((g_{1}, 1) (1, g_{2})\right) = \varphi_1(g_1) \varphi_2(g_2) = 1.
+	\end{equation*}
+	This shows that $\varphi \equiv 1,$ proving that $\Phi$ is injective.
 
 	To show surjectivity, let $(\rho, \rho') \in \widehat{G_1} \times \widehat{G_2}$ be arbitrary. Then, define $\varphi:G \to \mathbb{C}^*$ by
 	\begin{equation*} 
@@ -392,7 +396,7 @@ We immediately note that $M$ actually maps into $M_n(\mathbb{Z})$ since the $i$-
 	\end{equation*}
 \end{prop}
 \begin{proof} 
-	It suffices to those that the matrices on either side of the equation act the same way on each $e_i.$ To this end, note that
+	It suffices to show that the matrices on either side of the equation act the same way on each $e_i.$ To this end, note that
 	\begin{align*} 
 		M(\sigma\tau)e_i &= e_{(\sigma\tau)(i)}\\
 		&= e_{\sigma(\tau(i))}\\
@@ -466,6 +470,8 @@ By the above corollary, the above composition is well-defined.
 \end{rem}
 
 \subsubsection{Conjugacy classes of \texorpdfstring{$S_n$}{Sn}} \label{subsubsec:conjclassofSn}
+
+Recall that given a group $G$ and elements $a, b \in G$, we say that $a$ and $b$ are \deff{conjugates} if there exists $g \in G$ such that $a = gbg^{-1}$.
 
 \begin{prop}
 	Let $\sigma, \tau \in S_n.$ Suppose that a disjoint cycle decomposition of $\sigma$ is given as

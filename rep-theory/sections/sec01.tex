@@ -102,7 +102,7 @@ Now, suppose that we have two bases $B, B'$ of $V.$ Corresponding to these, we g
 \end{equation*}
 mapping the basis elements to the standard basis vectors of $\mathbb{C}^n.$ Now, we have two representations
 \begin{equation*} 
-	\psi : \GL (V) \to \GL (\mathbb{C}^n) \andd \psi' : \GL (V) \to \GL (\mathbb{C}^n)
+	\psi : G \to \GL (\mathbb{C}^n) \andd \psi' : G \to \GL (\mathbb{C}^n)
 \end{equation*}
 obtained by setting
 \begin{equation*} 
@@ -261,7 +261,13 @@ Thus, the subspace $\mathbb{C}(e_1 + \cdots + e_n)$ is $\varphi_\sigma$-invarian
 	Let $\varphi:G\to \GL(V)$ be a representation. If $W \le V$ is a $G$-invariant subspace, then $\varphi|_W : G \to \GL(W)$ is again a representation and we call $\varphi|_W$ is a \deff{subrepresentation} of $\varphi.$
 \end{defn}
 
-Going back to \Cref{ex:ZnZGL2Cequiv}, it is easy to note that $\mathbb{C}e_1$ and $\mathbb{C}e_2$ are $\mathbb{Z}/n\mathbb{Z}$-invariant subspaces with respect to $\psi$ (and not $\varphi$!). Moreover, we have that $\mathbb{C}^2 = \mathbb{C}e_1 \oplus \mathbb{C}e_2.$ This motivates the following.
+At his point, we quickly recall direct sums: If $V$ is a vector space, and $U, W \le V$ are subspaces, then $U + W$ is defined to be the set of all elements of the form $u + w$, where $u \in U$ and $w \in V$. If it is the case that $U \cap W$, then $U + W$ is denoted as $U \oplus W$. This is the \emph{internal} direct sum of $U$ and $W$. The subspace $U \oplus W$ has the property that every element can be written as $u + w$ for a \emph{unique} choice of $u \in U$ and $w \in W$. \newline
+On the other hand, if $V_{1}$ and $V_{2}$ are arbitrary vector spaces, then the Cartesian product $V_{1} \times V_{2}$ is a vector space with pointwise operations. This is referred to as the \emph{external} direct sum of $V_{1}$ and $V_{2}$, and again denoted by $V_{1} \oplus V_{2}$. 
+
+The relation between the two is straightforward: If $U$ and $W$ are as in the earlier paragraph, then there is an isomorphism from the internal direct sum to the external direct sum given by $u + w \mapsto (u, w)$. \newline
+Conversely, $V_{1}$ and $V_{2}$ can be considered as subspaces of the (external) direct sum via the inclusions $v_{1} \mapsto (v_{1}, 0)$ and $v_{2} \mapsto (0, v_{2})$. Then, under this identification, the external and internal sums coincide.
+
+Going back to \Cref{ex:ZnZGL2Cequiv}, it is easy to note that $\mathbb{C}e_1$ and $\mathbb{C}e_2$ are $\mathbb{Z}/n\mathbb{Z}$-invariant subspaces with respect to $\psi$ (and not $\varphi$!). Moreover, we have that $\mathbb{C}^2 = \mathbb{C}e_1 \oplus \mathbb{C}e_2.$ This motivates the next definition.
 
 \begin{defn}%[Direct sum of representations]
 	Let $\varphi^{(1)}:G \to \GL(V_1)$ and $\varphi^{(2)}:G \to \GL(V_2)$ be representations. Then, their (external) \deff{direct sum} is the representation
@@ -302,7 +308,7 @@ If $\varphi^{(1)}:G\to \GL_n(\mathbb{C})$ and $\varphi^{(2)}:G \to \GL_m(\mathbb
 	\begin{equation*} 
 		\rho_{(12)} = \two{-1}{-1}{0}{1}, \quad \rho_{(123)} = \two{-1}{-1}{1}{0}.
 	\end{equation*}
-	(It must be checked that this defined a representation. We do this at the end.) 
+	(It must be checked that this defines a representation. We do this at the end.) 
 
 	Let $\psi:S_3 \to \mathbb{C}^* \cong \GL_1(\mathbb{C})$ be the trivial representation, i.e., $\psi_g = 1.$ Then, we have the representation $\rho \oplus \psi$ which is specified on the generators by
 	\begin{equation*} 
@@ -385,7 +391,7 @@ In the above, $0$ refers to the $0$ \emph{subspace}, i.e., $\{0\}.$
 
 	By the parenthetical remark, we can assume without loss of generality that $\md{a} \le \md{b}.$ ($\md{g}$ denotes the order of $g \in G.$)
 
-	Let $n \vcentcolon= \md{a}.$ We show that any irreducible representation of $G$ has order at most $n.$ 
+	Let $n \vcentcolon= \md{a}.$ We show that any irreducible representation of $G$ has degree at most $n.$ 
 
 	To this end, let $\varphi : G \to \GL(V)$ be an irreducible representation and let $v$ be an eigenvector of $\varphi_b.$ Consider the following subspace $W$ of $V$ given by
 	\begin{equation*} 
@@ -772,7 +778,7 @@ One can observe that the above proof is similar to how shows that if a three deg
 	\end{equation*}
 	Then, $\varphi$ is reducible since $\mathbb{C}e_1$ is a $\mathbb{Z}$-invariant subspace. However, one sees that there is no other common eigenvector to all $\varphi(n)$ and hence, there is no other $\mathbb{Z}$-invariant subspace. Thus, $\varphi$ is not decomposable.
 
-	That is, $\varphi$ is neither neither irreducible nor decomposable, showing that \Cref{cor:fingroupirrordec} is false for infinite groups. In turn, \Cref{prop:repoffingroupisunitary} is also false for infinite groups. (Note that \Cref{prop:unitirredordecom} had no  assumption of finiteness of group.)
+	That is, $\varphi$ is neither irreducible nor decomposable, showing that \Cref{cor:fingroupirrordec} is false for infinite groups. In turn, \Cref{prop:repoffingroupisunitary} is also false for infinite groups. (Note that \Cref{prop:unitirredordecom} had no  assumption of finiteness of group.)
 \end{ex}
 
 Moreover, the previous cannot be strengthened to degree four representations (even for finite groups) as the next example shows us.
