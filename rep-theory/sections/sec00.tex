@@ -67,11 +67,13 @@ $\mathbb{C}$ will denote the field of complex numbers and $V, W$ vector spaces o
 \end{proof}
 
 \begin{defn}%[Adjoint of an operator]
-	Let $(V, \langle \cdot, \cdot\rangle)$ be a finite dimensional inner product space and $T \in \End(V).$ The \deff{adjoint of $T$} is the unique linear operator $T^*$ such that the following equality holds for all $v, w \in V:$
+	Let $(V, \langle \cdot, \cdot\rangle)$ be an inner product space and $T \in \End(V).$ The \deff{adjoint of $T$} is the unique linear operator $T^*$ such that the following equality holds for all $v, w \in V:$
 	\begin{equation*} 
 		\langle Tv, w\rangle = \langle v, T^*w\rangle.
 	\end{equation*}
 \end{defn}
+
+Note that as usual, we are assuming that $V$ is finite dimensional (which is why such a $T^*$ exists).
 
 \begin{prop} \label{prop:Tadjointinvariance}
 	Let $(V, \langle \cdot, \cdot\rangle)$ be an inner product space and $T \in \End(V).$ Suppose that $W \le V$ is $T$-invariant. Then, $W^\perp$ is $T^*$-invariant.
@@ -100,7 +102,7 @@ for all $v, w \in V.$ In other words, $U^*U$ is the adjoint of the identity map.
 
 \begin{defn}%[Unitary matrix] 
 	\label{defn:unitarymatrix}
-	A matrix $U \in \GL_n(\mathbb{C})$ is said to be \deff{unitary} if $UU^* = I.$ A set of all such matrices is denoted by $U_n(\mathbb{C})$ and forms a subgroup of $\GL_n(\mathbb{C}).$
+	A matrix $U \in \GL_n(\mathbb{C})$ is said to be \deff{unitary} if $UU^* = I.$ The set of all such matrices is denoted by $U_n(\mathbb{C})$ and forms a subgroup of $\GL_n(\mathbb{C}).$
 \end{defn}
 As usual, $U^*$ denotes the conjugate transpose of $U.$ One can show that the matrix $U$ is unitary (\Cref{defn:unitarymatrix}) iff the corresponding linear operator is unitary (\Cref{defn:unitaryoperator}), with respect to the standard inner product on $\mathbb{C}^n.$
 
