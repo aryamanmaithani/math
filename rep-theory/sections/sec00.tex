@@ -170,8 +170,10 @@ For the remainder, $T$ will denote an element of $\End(V)$ and $m(X)$ its minima
 	By hypothesis, $m(X) = (X - \lambda_1)\cdots(X - \lambda_r)$ for some distinct $\lambda_1, \ldots, \lambda_r \in \mathbb{C}.$\\
 	Since $m(X)$ divides the characteristic polynomial, it follows that each $\lambda_i$ is an eigenvalue. We wish to show that
 	\begin{equation*} 
-		V = E_{\lambda_1} \oplus \cdots \oplus E_{\lambda_r}.
+		V = E_{\lambda_1} \oplus \cdots \oplus E_{\lambda_r},
 	\end{equation*}
+	where $E_{\lambda_i}$ denotes the eigenspace corresponding to $\lambda_i$, i.e., $E_{\lambda_i} \vcentcolon= \{v \in V : Tv = \lambda_{i} v\}$.
+
 	Note that since eigenvectors corresponding to distinct eigenvalues are linearly independent, it suffices to show that
 	\begin{equation*} 
 		V = E_{\lambda_1} + \cdots + E_{\lambda_r}.
@@ -192,7 +194,7 @@ For the remainder, $T$ will denote an element of $\End(V)$ and $m(X)$ its minima
 		1 = \sum_{i = 1}^{r} g_i(X).
 	\end{equation*}
 	(Both sides are polynomials of degree at most $r - 1$ which agree on the $r$ points $\lambda_1, \ldots, \lambda_r.$)\\
-	Thus, $g_i(T)$ is the identity operator.
+	Thus, $\sum_{i = 1}^{r} g_i(T)$ is the identity operator.
 
 	Thus, given any $v \in V,$ we have
 	\begin{equation} \tag{$\sum$} \label{eq:sumeigenvectors}
@@ -201,7 +203,7 @@ For the remainder, $T$ will denote an element of $\End(V)$ and $m(X)$ its minima
 	However, note now that
 	\begin{align*} 
 		(T - \lambda_i)g_i(T)v &= (T - \lambda_i)\dfrac{f_i(T)}{f_i(\lambda_i)}v\\
-		&= \dfrac{p(T)}{f_i(\lambda_i)}v\\
+		&= \dfrac{m(T)}{f_i(\lambda_i)}v\\
 		&= 0.
 	\end{align*}
 	Thus, $g_i(T)v \in E_{\lambda_i}$ for each $i$ and \Cref{eq:sumeigenvectors} shows that $V = \bigoplus E_{\lambda_i}.$ 
