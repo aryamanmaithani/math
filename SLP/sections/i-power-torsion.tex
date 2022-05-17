@@ -1,0 +1,534 @@
+\section{\texorpdfstring{$I$}{I}-power torsion}
+
+\subsection{Definition}
+
+In what follows, $R$ will be a commutative ring with $1$, $M$ an $R$-module, and $I \subset R$ an ideal of $R$.
+
+\begin{defn}
+	Given a $R$-module $M$, and an ideal $I \subset R$, we define
+	\begin{equation*} 
+		\Gamma_{I}(M) \vcentcolon= \{x \in M : I^{k} x = 0 \text{ for some } k \ge 1\}.
+	\end{equation*}
+	If $I = (a)$, we denote $\Gamma_{I}$ by $\Gamma_{a}$.
+\end{defn}
+
+\begin{rem}
+	Note that
+	\begin{equation*} 
+		\Gamma_{I}(M) = \bigcup_{k \ge 1} \left(0 :_{M} I^{k}\right) = \bigcup_{k \ge 1} \ann_{M}(I^{k}).
+	\end{equation*}
+	is a submodule of $M$. 
+\end{rem}
+
+\begin{prop}
+	Let $a \in R$, and $M$ be an $R$-module. $a$ is a nonzerodivisor on $M$ iff $\Gamma_{a}(M) = 0$.
+\end{prop}
+\begin{proof} 
+	\forward Suppose $a$ is a nonzerodivisor on $M$. If $x \neq 0$, then $ax \neq 0$ since $a$ is a nonzerodivisor. Inductively, this gives us that $a^{n} x \neq 0$ for all $n \ge 1$. Thus, $\Gamma_{a}(M) = 0$.
+
+	\backward Suppose $x \in M \setminus \{0\}$. Then, $x \notin \Gamma_{a}(M)$. In particular, $ax \neq 0$, as desired.
+\end{proof}
+
+\begin{prop} \label{prop:cech-zeroth-cohomology}
+	Let $a \in R$, and $M$ be an $R$-module. Then, the kernel of the natural map $M \xrightarrow{\varphi} M_{a}$ is equal to $\Gamma_{a}(M)$.
+\end{prop}
+\begin{proof} 
+	For $x \in M$, note that
+	\begin{equation*} 
+		x \in \ker(\varphi) \Leftrightarrow a^{n} x = 0 \text{ for some } n  \Leftrightarrow x \in \Gamma_{a}(M). \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{ex} \label{ex:polynomial-infinite-counterexample}
+	It is not necessary that $\Gamma_{I}(M/\Gamma_{I}(M)) = 0$. 
+
+	Consider $R = M = \mathsf{k}[X_{1}, X_{2}, X_{3}, \ldots]/(X_{1}, X_{2}^{2}, X_{3}^{3}, \ldots, X_{i} X_{j} \text{ for } i \neq j)$. \newline
+	Let $x_{i}$ denote the image of $X_{i}$ in the ring $R$. Let $\mathfrak{m} = (x_{1}, x_{2}, \ldots)$. 
+
+	\textbf{Claim.} $\mathfrak{m} = \Gamma_{\mathfrak{m}}(R)$. 
+
+	This is easy to see since $\mathfrak{m}^{n} x_{n} = 0$. Thus, $x_{n} \in \Gamma_{\mathfrak{m}}(R)$ for all $n$. In turn, $\mathfrak{m} \subset \Gamma_{\mathfrak{m}}(R)$. The latter is a proper ideal since $\mathfrak{m}$ is not nilpotent. Thus, maximality of $\mathfrak{m}$ forces equality.
+
+	Thus, $\mathsf{k} = R/\Gamma_{\mathfrak{m}}(R)$. However, note that $\mathfrak{m} \mathsf{k} = 0$, i.e., every element of $\mathfrak{m}$ annihilates every element of $\mathsf{k}$. Thus, $\Gamma_{\mathfrak{m}}(\mathsf{k}) = \mathsf{k} \neq 0$. Thus,
+	\begin{equation*} 
+		\Gamma_{\mathfrak{m}}(R/\Gamma_{\mathfrak{m}}(R)) \neq 0.
+	\end{equation*}
+\end{ex}
+
+The above does not happen if one of $R$ or $M$ is Noetherian.
+
+\begin{prop}
+	Let $M$ be an $R$-module. Let $I \subset R$ be an ideal. If either $R$ is a Noetherian ring, or $M$ is a Noetherian $R$-module, then $\Gamma_{I}(M/\Gamma_{I}(M)) = 0$.
+\end{prop}
+\begin{proof} 
+	Note that given any $x \in M$, the hypothesis of one of $R$ or $M$ being Noetherian implies that $I^{k} x$ is a finitely generated submodule of $M$. 
+
+	Let $N \vcentcolon= \Gamma_{I}(M)$. Let $x \in M$ be such that $\overline{x} \in \Gamma_{I}(M/N)$. Thus, there is some $k \ge 1$ such that $I^{k} \overline{x} = 0$ or $I^{k} x \subset N$. Thus, every element of $I^{k} x$ is annihilated by some power of $I$. Since $I^{k} x$ is finitely generated, one can find $n \gg 0$ such that $I^{n}$ that kills $I^{k} x$. Thus, $I^{n + k} x = 0$ and $x \in \Gamma_{I}(M)$, as desired.
+\end{proof}
+
+\begin{defn}
+	$M$ is said to be \deff{$I$-torsion} if $\Gamma_{I}(M) = M$. \newline
+	$M$ is said to be \deff{$I$-torsionfree} if $\Gamma_{I}(M) = 0$.
+\end{defn}
+
+\begin{obs} \label{obs:Gamma-submodule-intersection}
+	If $N$ is a submodule of $M$, then $\Gamma_{I}(N)$ is a submodule of $\Gamma_{I}(M)$. More precisely, $N \cap \Gamma_{I}(M) = \Gamma_{I}(N)$.
+\end{obs}
+
+\begin{obs} \label{obs:gamma-inclusion-reversing-on-ideals}
+	If $J \subset I$ and $x \in M$, then $J^{k} x \subset I^{k} x$ for all $x$. Thus, $\Gamma_{I}(M) \subset \Gamma_{J}(M)$. In particular,
+	\begin{align*} 
+		\text{$M$ is $J$-torsionfree} &\Rightarrow \text{$M$ is $I$-torsionfree}, \\
+		\text{$M$ is $I$-torsion} &\Rightarrow \text{$M$ is $J$-torsion.}
+	\end{align*}
+	Moreover, $\Gamma_{0}(M) = M$ and $\Gamma_{R}(M) = 0$ for all $M$.
+\end{obs}
+
+\begin{prop} \label{prop:product-sum-local-cohomology}
+	Let $I$, $J \subset R$ be ideals of $R$. Let $M$ be an $R$-module. Then,
+	\begin{enumerate}[label=(\roman*)]
+		\item $\Gamma_{I + J}(M) = \Gamma_{I}(M) \cap \Gamma_{J}(M)$,
+		\item $\Gamma_{I}(M) + \Gamma_{J}(M) \subset \Gamma_{IJ}(M)$,
+		\item $\Gamma_{I}(\Gamma_{J}(M)) = \Gamma_{I}(M) \cap \Gamma_{J}(M) = \Gamma_{I + J}(M)$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	Using \Cref{obs:Gamma-submodule-intersection}, we see that (iii) follows from (i). By \Cref{obs:gamma-inclusion-reversing-on-ideals}, it follows that $\Gamma_{I + J}(M) \subset \Gamma_{I}(M) \cap \Gamma_{J}(M)$ and $\Gamma_{I}(M) + \Gamma_{J}(M) \subset \Gamma_{IJ}(M)$. We only need to prove $\Gamma_{I}(M) \cap \Gamma_{J}(M) \subset \Gamma_{I + J}(M)$. 
+
+	Let $x \in \Gamma_{I}(M) \cap \Gamma_{J}(M)$. Pick $k \gg 0$ such that $I^{k}x = J^{k}x = 0$. Then, $(I + J)^{2k} x = 0$.
+\end{proof}
+
+\begin{ex}
+	We give an example to show that the inclusion $\Gamma_{I}(M) + \Gamma_{J}(M) \subset \Gamma_{IJ}(M)$ can be strict. 
+
+	Let $R = \kk[x, y]$, $I = (x)$, $J = (y)$, and $M = R/IJ$. Then, $\Gamma_{IJ}(M) = M$, $\Gamma_{I}(M) = (y)$, and $\Gamma_{J}(M) = (x)$.
+\end{ex}
+
+\begin{prop}
+	Suppose $J \subset I$ are ideals such that $I^{n} \subset J$ for some $n \ge 1$. Then, $\Gamma_{I}(M) = \Gamma_{J}(M)$.
+\end{prop}
+\begin{proof} 
+	By \Cref{obs:gamma-inclusion-reversing-on-ideals}, we have
+	\begin{equation*} 
+		\Gamma_{I}(M) \subset \Gamma_{J}(M) \subset \Gamma_{I^{n}}(M).
+	\end{equation*}
+	Since a power of $I^{n}$ is also a power of $I$, it follows that $\Gamma_{I^{n}}(M) \subset \Gamma_{I}(M)$ and we are done.
+\end{proof}
+
+\begin{cor}
+	If $R$ is Noetherian, then $\Gamma_{I} = \Gamma_{\sqrt{I}}$.
+\end{cor}
+\begin{proof} 
+	$I \subset \sqrt{I}$ is true for any ideal in any ring. Since $R$ is Noetherian, there exists $n$ such that $(\sqrt{I})^{n} \subset I$ and the result follows.
+\end{proof}
+
+\begin{cor}
+	Let $R$ be Noetherian, and $I, J \unlhd R$. $\Gamma_{I} = \Gamma_{J}$ iff $\sqrt{I} = \sqrt{J}$.
+\end{cor}
+By $\Gamma_{I} = \Gamma_{J}$, we mean that $\Gamma_{I}(M) = \Gamma_{J}(M)$ for all modules $M$.
+\begin{proof} 
+	\backward If $\sqrt{I} = \sqrt{J}$, then $\Gamma_{I} = \Gamma_{\sqrt{I}} = \Gamma_{\sqrt{J}} = \Gamma_{J}$.
+
+	\forward Suppose $\sqrt{I} \neq \sqrt{J}$. We wish to show that $\Gamma_{I} \neq \Gamma_{J}$. Without loss of generality, there exists $a \in \sqrt{I} \setminus \sqrt{J}$. \newline
+	Consider the module $M = R/J$. Evidently, $M$ is $J$-torsion as $\Gamma_{J}(M) = M$. However, $M$ is not $I$-torsion. Indeed, for every $k \ge 1$, we have $a^{k} \in I^{k}$. Since $a \notin \sqrt{J}$, we have that $a^{k} \notin J$ for all $k$. Thus, $I^{k} \cdot \overline{1} \neq 0$ for all $k \ge 1$.
+\end{proof}
+
+\begin{ex}
+	The above is not true without the Noetherian hypothesis. We may consider the setup of \Cref{ex:polynomial-infinite-counterexample} again. Note that $\mathfrak{m} = \sqrt{0}$ but $\Gamma_{0}(R) = R \neq \mathfrak{m} = \Gamma_{\mathfrak{m}}(R)$.
+\end{ex}
+
+\subsection{Functorial properties}
+
+Let $\lmod{R}$ denote the category of $R$-modules, and $\G{I}{R}$ the full subcategory of $\lmod{R}$ whose objects are $I$-torsion modules. 
+
+\begin{obs} \label{obs:GIR-closed-subquotients}
+	Note that $\G{I}{R}$ is closed under submodules and quotients, i.e., is closed under kernels and cokernels. The direct sum of $I$-torsion modules is again $I$-torsion. Thus, $\G{I}{R}$ is an abelian category.
+\end{obs}
+
+\begin{obs} \label{obs:Gamma-I-restricts}
+	Let $f : M \to N$ be an $R$-linear map. Suppose $x \in M$ is annihilated by $I^{k}$ for some $k$. Then,
+	\begin{equation*} 
+		I^{k} f(x) = f(I^{k} x) = 0.
+	\end{equation*}
+	Thus, $f(x) \in \Gamma_{I}(N)$. In other words, $f(\Gamma_{I}(M)) \subset \Gamma_{I}(N)$.
+\end{obs}
+
+\begin{defn}
+	In view of the above observation, we let $\Gamma_{I}$ denote the obvious functor from $\lmod{R}$ to $\G{I}{R}$.
+
+	Let $\iota : \G{I}{R} \to \lmod{R}$ denote the inclusion functor.
+\end{defn}
+
+\begin{obs}
+	Note that $\Gamma_{I}$ is an additive functor (as addition of maps commutes with restriction). \newline
+	Also, $\Gamma_{I}(\Gamma_{I}(M)) = M$ for all $M \in \lmod{R}$.  
+\end{obs}
+
+\begin{prop} \label{prop:Gamma-preserves-injective-maps}
+	$\Gamma_{I}$ preserves injective maps.
+\end{prop}
+\begin{proof} 
+	By \Cref{obs:Gamma-I-restricts}, we see that $\Gamma_{I}(f)$ is simply a restriction of $f$. Thus, if $f$ were injective, so is $\Gamma_{I}(f)$.
+\end{proof}
+
+\begin{rem}
+	Note that preserving injective maps is weaker than being left exact. The next proposition will tell us that $\Gamma_{I}$ is indeed left exact.
+\end{rem}
+
+\begin{prop}
+	$\Gamma_{I}$ is right adjoint to $\iota$ and hence, is left exact.
+\end{prop}
+\begin{proof} 
+	This again follows from \Cref{obs:Gamma-I-restricts}: If $M$ were $I$-torsion to begin with, then we see that any map from $M$ lands within $\Gamma_{I}(N)$. Thus, there is a natural isomorphism
+	\begin{equation*} 
+		\Hom_{\lmod{R}}(\iota(M), N) \cong \Hom_{\G{I}{R}}(M, \Gamma_{I}(N)). \qedhere
+	\end{equation*}
+\end{proof}
+We give an alternate proof below that $\Gamma \vcentcolon= \Gamma_{I}$ is a left exact functor. 
+\begin{proof} 
+	Let 
+	\begin{equation} \label{eq:02}
+		0 \to L \xrightarrow{f} M \xrightarrow{g} N
+	\end{equation}
+	be an exact sequence. 
+
+	$\Gamma(f)$ is injective by \Cref{prop:Gamma-preserves-injective-maps}. We need to show that $\im(\Gamma(f)) = \ker(\Gamma(g))$. To this end, let $m \in \ker(\Gamma(g))$. Then
+	\begin{equation*} 
+		g(m) = \Gamma(g)(m) = 0.
+	\end{equation*}
+	By exactness of \Cref{eq:02}, it follows that there exists $l \in L$ such that $f(l) = m$. We wish to show that $l \in \Gamma(L)$. 
+
+	Since $m \in \Gamma(M)$, there exists $k \ge 1$ such that $I^{k} m = 0$. For $i \in I^{k}$, we have
+	\begin{equation*} 
+		f(il) = if(l) = im = 0.
+	\end{equation*}
+	Since $f$ is an injection, it follows that $il = 0$ and thus $I^{k}l = 0$, as desired.
+\end{proof}
+
+\begin{cor} \label{cor:Gamma-preserves-injectives}
+	$\Gamma_{I}$ preserves injectives.
+\end{cor}
+\begin{proof} 
+	$\iota$ is exact and $\Gamma_{I}$ is a right adjoint to $\iota$.
+\end{proof}
+
+\begin{rem}
+	Note that the above is saying that if $E$ is an injective $R$-module, then $\Gamma_{I}(E)$ is an injective object in the category $\G{I}{R}$. This is not saying that $\Gamma_{I}(E)$ is an injective $R$-module.
+\end{rem}
+
+We will now like to show that $\Gamma_{I}(E)$ is actually an injective $R$-module when $R$ is Noetherian (and we will do so without using \Cref{cor:Gamma-preserves-injectives}). $\Gamma_{I}$ being additive tells us that $\Gamma_{I}$ preserves finite direct sums. It is not difficult to see $\Gamma_{I}(-)$ actually preserves arbitrary direct sums. Thus, in view of \Cref{thm:matlis-injectives-over-noetherian}, it suffices to study $\Gamma_{I}(E_{R}(R/\mathfrak{p}))$ for $\mathfrak{p} \in \Spec(R)$.
+
+% \begin{defn}
+% 	For $a \in R$, $a_{M} \in \End_{R}(M)$ denotes the map $x \mapsto a x$.
+% \end{defn}
+
+\begin{prop} \label{prop:multiplication-on-injective-hull}
+	Let $R$ be Noetherian. Fix $\mathfrak{p} \in \Spec(R)$ and set $E \vcentcolon= E_{R}(R/\mathfrak{p})$. For $a \in R$, let $\mu_{a} \in \End_{R}(E)$ be the map $x \mapsto a x$. 
+	\begin{enumerate}
+		\item If $a \notin \mathfrak{p}$, then $\mu_{a}$ is an isomorphism.
+		\item If $a \in \mathfrak{p}$, then for every $y \in E$, there exists $n \ge 1$ such that $a^{n} y = 0$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	Note that $\Ass(E) = \{\mathfrak{p}\}$. 
+	\begin{enumerate}
+		\item If $a \notin \mathfrak{p}$, then $a$ is not a zerodivisor on $E$, i.e., $\mu_{a}$ is injective. Thus, $\mu_{a}(E) \cong E$ is injective. Since $\mu_{a}(E)$ is an injective submodule of $E$, it splits off $E$. But $E$ is indecomposable. This forces $\mu_{a}(E) = E$ , as desired.
+		\item Let $y \in E$. There is nothing to prove if $y = 0$. Assume $y \neq 0$. Then, $\emptyset \neq \Ass(Ry) \subset \{\mathfrak{p}\}$. Thus, $\sqrt{\ann_{R}(y)} = \mathfrak{p}$. Thus, $y$ is killed by some power of $\mathfrak{p}$ and hence, of $a$. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{por} \label{por:injective-hull-p-torsion}
+	$E_{R}(R/\mathfrak{p})$ is $\mathfrak{p}$-torsion.
+\end{por}
+
+\begin{cor}
+	Let $I \subset R$ be an ideal, and $\mathfrak{p} \in \Spec(R)$. 
+
+	\begin{equation*} 
+		\Gamma_{I}(E_{R}(R/\mathfrak{p})) = 
+		\begin{cases}
+			E_{R}(R/\mathfrak{p}) & I \subset \mathfrak{p}, \\
+			0 & I \not\subset \mathfrak{p}.
+		\end{cases}
+	\end{equation*}
+
+	In words: $E_{R}(R/\mathfrak{p})$ is $I$-torsion if $I \subset \mathfrak{p}$ and $I$-torsionfree otherwise.
+\end{cor}
+\begin{proof} 
+	By \Cref{por:injective-hull-p-torsion}, the result is clear if $I \subset \mathfrak{p}$. Conversely, if there exists $a \in I \setminus \mathfrak{p}$, then $\mu_{a}$ is injective, by \Cref{prop:multiplication-on-injective-hull}. Thus, so is each $\mu_{a}^{n}$. Hence, if $0 \neq y \in E_{R}(R/\mathfrak{p})$. Then, $0 \neq a^{n} y \in I^{n} y$.
+\end{proof}
+
+\begin{cor}
+	Let $R$ be a Noetherian ring, and $E$ an injective $R$-module. Then, $\Gamma_{I}(E)$ is an injective $R$-module.
+\end{cor}
+\begin{proof} 
+	
+	\begin{equation*} 
+		\Gamma_{I}\left(\bigoplus_{\mathfrak{p}} E_{R}(R/\mathfrak{p})^{a(\mathfrak{p})}\right) = \bigoplus_{\mathfrak{p} \supset I} E_{R}(R/\mathfrak{p})^{a(\mathfrak{p})}. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{ex}
+	Let us see $\Gamma_{I}$ is not right exact. Suffices to show that $\Gamma_{I}$ does not preserve surjections. Consider $R = \mathbb{Z}$ and $I = p\mathbb{Z}$ for any integer $p \ge 2$. We have the surjective quotient map
+	\begin{equation*} 
+		\mathbb{Z} \to \mathbb{Z}/p.
+	\end{equation*}
+	Applying $\Gamma_{I}$ gives us
+	\begin{equation*} 
+		0 \to \mathbb{Z}/p,
+	\end{equation*}
+	which is clearly not surjective.
+
+	More generally, we may choose $R$ to be any domain which is not a field, and $I$ to be any nonzero proper ideal and consider the map $R \to R/I$.
+\end{ex}
+
+\subsection{Localisation}
+
+In what follows, $S$ will be a multiplicative subset of $R$.
+
+If $N \le M$ are $R$-modules, note that $S^{-1}N$ is an $S^{-1}R$-submodule of $S^{-1}M$ given as
+\begin{equation*} 
+	S^{-1}N = \left\{\frac{x}{s} : x \in N, s \in S\right\}.
+\end{equation*}
+
+We record a simple property below.
+
+\begin{prop} \label{prop:localisation-product-ideals}
+	$S^{-1}(IJ) = (S^{-1} I) (S^{-1}J)$ for ideals $I, J \subset R$.
+\end{prop}
+
+Recall that if $J$ is an ideal of $R$, and $M$ an $R$-module, then we define the $R$-submodule $\ann_{M}(J)$ of $M$ by
+\begin{equation*} 
+	\ann_{M}(J) \vcentcolon= \{x \in M : jx = 0 \text{ for all } j \in J\}.
+\end{equation*}
+
+\begin{prop} \label{prop:localising-annihilators}
+	Let $J$ be a finitely generated ideal of $R$. Then,
+	\begin{equation*} 
+		S^{-1}(\ann_{M}(J)) = \ann_{S^{-1}M}(S^{-1}J).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	($\subset$) Let $\frac{x}{s} \in S^{-1}(\ann_{M}(J))$, where $x \in \ann_{M}(J)$ and $s \in S$. (This is how an arbitrary element of $S^{-1}(\ann_{M}(J))$ looks.) 
+
+	Then, given an arbitrary $\frac{j}{t} \in S^{-1}J$ (where $j \in J$ and $t \in S$), we have
+	\begin{equation*} 
+		\frac{j}{t}\frac{x}{s} = \frac{jx}{ts} = \frac{0}{ts} = 0.
+	\end{equation*}
+	Thus, $\frac{x}{s} \in \ann_{S^{-1}M}(S^{-1}J)$.
+
+	($\supset$) Let $\frac{x}{s} \in \ann_{S^{-1}M}(S^{-1}J)$, where $x \in M$ and $s \in S$. \newline
+	Fix $j \in J$. By assumption, we have
+	\begin{equation*} 
+		\frac{j}{1} \frac{x}{s} = 0.
+	\end{equation*}
+	Thus, there exists $s_{j} \in S$ such that
+	\begin{equation*} 
+		s_{j}jx = 0 \quad\text{or}\quad j(s_{j} x) = 0.
+	\end{equation*}
+	Now, let $j_{1}, \ldots, j_{n}$ generate $J$ and set $s_{0} \vcentcolon= s_{j_{1}} \cdots s_{j_{n}} \in S$. Then we have
+	\begin{equation*} 
+		j (s_{0} x) = 0
+	\end{equation*}
+	for all $j \in J$, i.e., $s_{0} x \in \ann_{M}(J)$. In turn, we have
+	\begin{equation*} 
+		\frac{x}{s} = \frac{s_{0} x}{s_{0} s} \in S^{-1}(\ann_{M}(J)),
+	\end{equation*}
+	as desired.
+\end{proof}
+
+\begin{prop} \label{prop:localising-increasing-chain-submodules}
+	Let 
+	\begin{equation*} 
+		M_{0} \subset M_{1} \subset M_{2} \subset \cdots 
+	\end{equation*}
+	be an increasing chain of $R$-submodules of $M$. Then,
+	\begin{equation*} 
+		S^{-1}\left(\bigcup_{n \ge 0} M_{n}\right) = \bigcup_{n \ge 0} S^{-1}M_{n}.
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Easy check.
+\end{proof}
+
+\begin{cor}
+	Let $R$ be a Noetherian ring, $I \subset R$ an ideal, $S \subset R$ a multiplicative subset, and $M$ an $R$-module. Then,
+	\begin{equation*} 
+		S^{-1}\Gamma_{I}(M) = \Gamma_{S^{-1}I}(S^{-1}M).
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	Note that we have
+	\[\begin{WithArrows}[displaystyle]
+		S^{-1}\Gamma_{I}(M) &= S^{-1}\left(\bigcup_{k \ge 1} \ann_{M}(I^{k})\right) \Arrow{\Cref{prop:localising-increasing-chain-submodules}}\\
+		&= \bigcup_{k \ge 1} \left(S^{-1}\ann_{M}(I^{k})\right) \Arrow{\Cref{prop:localising-annihilators}} \\
+		&= \bigcup_{k \ge 1} \ann_{S^{-1}M}(S^{-1}(I^{k})) \Arrow{\Cref{prop:localisation-product-ideals}} \\
+		&= \bigcup_{k \ge 1} \ann_{S^{-1}M}((S^{-1}I)^{k}) \\
+		&= \Gamma_{S^{-1}I}(S^{-1}M),
+	\end{WithArrows}\]
+	as desired. \qedhere
+\end{proof}
+
+\begin{ex}
+	Let $R$ be Noetherian. Specialising to the case where $S = \{1, a, a^{2}, \ldots\}$ for some $a \in R$, we have
+	\begin{equation*} 
+		(\Gamma_{I}(M))_{a} = \Gamma_{I_{a}}(M_{a}).
+	\end{equation*}
+
+	Now, we have the localisation map
+	\begin{equation*} 
+		\Gamma_{I}(M) \to \Gamma_{I_{a}}(M_{a}).
+	\end{equation*}
+
+	By \Cref{prop:cech-zeroth-cohomology}, we see that the kernel of the above map is $\Gamma_{a}(\Gamma_{I}(M))$. By \Cref{prop:product-sum-local-cohomology}, we see that this kernel is $\Gamma_{(I, a)}(M)$. Thus, we have an exact sequence as
+	\begin{equation*} 
+		0 \to \Gamma_{(I, a)}(M) \to \Gamma_{I}(M) \to \Gamma_{I_{a}}(M_{a}).
+	\end{equation*}
+\end{ex}
+
+\subsection{Restriction of scalars}
+
+In this section, $R$ and $S$ are rings, and $f : R \to S$ is a ring homomorphism. $M$ will be an $S$-module, which we shall consider as an $R$-module via the rule
+\begin{equation*} 
+	r \cdot m \vcentcolon= f(r) \cdot m
+\end{equation*}
+for $r \in R$ and $m \in M$. We may denote this module by $f^{\ast}M$ or $M_{R}$ to remind us that we are viewing $M$ as an $R$-module.
+
+Given an ideal $J \unlhd S$, we have an ideal $f^{-1}(J)$ of $R$. \newline
+Conversely, given an ideal $I \unlhd R$, we may extend to an ideal $f(I) S$ of $S$.
+
+\begin{prop}
+	Let $J \subset S$ be an ideal, and $M$ be an $S$-module. We have
+	\begin{equation*} 
+		\Gamma_{J}(M) \subset \Gamma_{f^{-1}(J)}(f^{\ast}M).
+	\end{equation*}
+	Furthermore, if $f$ is a surjection, then equality holds.
+\end{prop}
+Note that technically, the left object is an $S$-module and the right is an $R$-module. However, it makes sense to talk about the above inclusions both sets above are subsets of $M$. Alternately, the $S$-module may be treated as an $R$-module.
+\begin{proof} 
+	Put $I \vcentcolon= f^{-1}(J)$ and let $x \in \Gamma_{I}(M)$ $\Gamma_{f^{-1}(I)}(f^{\ast}M)$ be arbitrary. Let $k$ be such that $J^{k} x = 0$. Note that $f(I) \subset J$ and thus, $f(I^{k}) \subset J^{k}$. Thus, given $r \in I^{k}$, we have $r \cdot x \in J^{k} x = \{0\}$. 
+
+	Now, if $f$ is a surjection, then $f(I) = J$ and consequently $f(I^{k}) = J^{k}$ from the reverse inclusion follows.
+\end{proof}
+
+\begin{ex}
+	The above inclusion can be strict if $f$ is not onto. Consider $R = \mathbb{Z}$, $S = \mathbb{Z}[x]$, and $f$ to be the inclusion map. Consider $M = S$ as a module over itself. Let $J = (x)S$. Thus, $I = f^{-1}(J) = 0$. Thus, $\Gamma_{J}(M) = 0$ and $\Gamma_{f^{-1}(J)}(f^{\ast}M) = S$.
+\end{ex}
+
+\textbf{Question.} What if $f$ is an epimorphism (but not necessarily surjective, for example, a localisation map), i.e., if $g, h : S \to S'$ are ring maps with $gf = hf$, then $g = h$?
+
+\begin{prop}
+	Let $I \subset R$ be an ideal, and $M$ be an $S$-module. Then,
+	\begin{equation*} 
+		\Gamma_{I}(f^{\ast} M) = \Gamma_{f(I)S}(M).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Let $J \vcentcolon= f(I)S$. 
+
+	($\subset$) Let $x \in \Gamma_{I}(f^{\ast} M)$. Pick $k \ge 1$ such that $I^{k} x = 0$. Note that $J^{k}$ is additively generated by elements of the form $f(i) s$, where $i \in I^{k}$ and $s \in S$. For such an element, we have
+	\begin{equation*} 
+		f(i) s \cdot x = s \cdot (f(i) \cdot x) = 0.
+	\end{equation*}
+
+	($\supset$) Conversely, let $x \in \Gamma_{J}(M)$ and $k \ge 1$ be such that $J^{k} x = 0$. We have $f(I^{k}) \subset J^{k}$. Thus, given $i \in I^{k}$, we have
+	\begin{equation*} 
+		i \cdot x = f(i) \cdot x \in J^{k} x = 0. \qedhere
+	\end{equation*}
+\end{proof}
+
+\subsection{Extension of scalars}
+
+In this section, $R$ and $S$ are rings, and $f : R \to S$ is a ring homomorphism. $M$ will be an $R$-module. We define the $R$-module $M^{S} \vcentcolon= S \otimes_{R} M$ which we shall consider as an $S$-module via the rule
+\begin{equation*} 
+	s \cdot (s' \otimes m) \vcentcolon= (s s') \otimes m,
+\end{equation*}
+for $s, s' \in S$ and $m \in M$ (and extending it linearly). 
+
+As before, given ideals $I \unlhd R$ and $J \unlhd S$, we get ideals $f(I)S \unlhd S$ and $f^{-1}(J) \unlhd R$.
+
+% If $N \le M$ is an $R$-submodule, then $N^{S}$ is an $S$-submodule of $M^{S}$ generated by elements of the form $s \otimes n$ for $s \in S$ and $n \in N$.
+
+\begin{rem}
+	If $N \le M$ are $R$-module, then there are two ways one way wish to interpret $N^{S}$. The first is the honest tensor product $S \otimes_{R} N$. The other is the additive subgroup of $S \otimes_{R} M$ generated by elements of the form $s \otimes n$ for $s \in S$ and $n \in N$. \newline
+	The unfortunate issue is that they are \textbf{not} isomorphic in general. 
+
+	Consider the example of $R = \mathbb{Z}$, $S = \mathbb{Z}/2$, $f$ being the quotient, $M = \mathbb{Z}$, $N = 2\mathbb{Z}$. Note that $M \cong N$ as $\mathbb{Z}$-modules and thus, the tensor products $S \otimes_{\mathbb{Z}} M$ and $S \otimes_{\mathbb{Z}} N$ are both isomorphic to $\mathbb{Z}/2$. However, the submodule interpretation gives us the $0$-module since then we have
+	\begin{equation*} 
+		\overline{x} \otimes (2y) = (2 \overline{x}) \otimes y = 0
+	\end{equation*}
+	for all $\overline{x} \in \mathbb{Z}/2$ and $y \in \mathbb{Z}$.
+
+	In essence, this is just capturing the fact that tensoring is not left exact in general, i.e., if $0 \to N \xrightarrow{i} M$ is exact, it does not mean that $0 \to N^{S} \xrightarrow{i^{S}} M^{S}$ is so. In fact, the second interpretation of $N^{S}$ as a submodule of $M^{S}$ is precisely the submodule $i^{S}(N^{S})$. The failure of $i^{S}$ being injective shows that $N^{S}$ need not be isomorphic to $i^{S}(N^{S})$.
+
+	However, if $S$ is a flat $R$-algebra, then this does not happen.
+\end{rem}
+
+\begin{prop}
+	Let $M$ be an $R$-module, and $I \subset R$ an ideal. Let $N$ denote the submodule which is the image $S \otimes_{R} \Gamma_{I}(M)$ inside $M^{S}$. Then,
+	\begin{equation*} 
+		N \subset \Gamma_{f(I)S}(M^{S}).
+	\end{equation*}
+	Or, interpreting appropriately, we have
+	\begin{equation*} 
+		S \otimes_{R} \Gamma_{I}(M) \subset \Gamma_{f(I)S}(M^{S}).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Let $\sum s_{\alpha} \otimes m_{\alpha} \in N$, with $m_{\alpha} \in \Gamma_{I}(M)$. As the summation is finite, we may fix $k \ge 1$ such that $I^{k} m_{\alpha} = 0$ for all $\alpha$. Let $J \vcentcolon= f(I)S$. As before, $J^{k}$ is generated additively by elements of the form $f(i) s$ with $i \in I^{k}$ and $s \in S$. For such an element, we have
+	\begin{equation*} 
+		(f(i) s) \cdot \left(\sum s_{\alpha} \otimes m_{\alpha}\right) = \sum (f(i) s s_{\alpha}) \otimes m_{\alpha} = \sum (ss_{\alpha}) \otimes (i \cdot m_{\alpha}) = 0. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{ex}
+	The inclusion above can be strict even if $f$ is surjective. Consider $R = \mathbb{Z}$, $S = \mathbb{Z}/4$, $f$ to be the quotient map, $M = \mathbb{Z}$, and $I = 2\mathbb{Z}$. Then, $\Gamma_{I}(\mathbb{Z}) = 0$. On the other hand,
+	\begin{equation*} 
+		\Gamma_{f(I)S}(M^{S}) = \Gamma_{2\mathbb{Z}/4}(\mathbb{Z}/4) = \mathbb{Z}/4 \neq 0.
+	\end{equation*}
+\end{ex}
+
+\begin{ex}
+	In the other direction, one may consider an ideal $J \subset S$ and ask if there is any inclusion between
+	\begin{equation*} 
+		S \otimes_{R} \Gamma_{f^{-1}(J)}(M) \andd \Gamma_{J}(M^{S}),
+	\end{equation*}
+	where the left module is interpreted as the submodule of $M^{S}$.
+
+	We now give two examples to show that neither inclusion is true.
+
+	Firstly, we may consider the previous example with $J = 2\mathbb{Z}/4\mathbb{Z}$ to see that the right module is a strict superset.
+
+	Secondly, we may consider $R = \mathbb{Z}$, $S = \mathbb{Z}[x]$, $f$ the inclusion map, $M = \mathbb{Z}$, and $J = (x)$. Then, $f^{-1}(J) = (0)$. Thus, the left module is $\mathbb{Z}[x]$ whereas the right is $0$.
+\end{ex}
+
+
+\subsection{Derived functors}
+
+Since $\Gamma_{I}$ is a left exact functor, it makes sense to talk about its derived functor.
+
+\begin{defn}
+	For $n \ge 1$, let $\Gamma^{n}_{I}$ denote the $n$-th derived functor of $\Gamma_{I}$.
+
+	Define $\Gamma^{0}_{I} \vcentcolon= \Gamma_{I}$.
+\end{defn}
+
+\begin{rem}
+	Recall how a derived functor: Given an $R$-module $M$, fix an injective resolution
+	\begin{equation*} 
+		0 \to M \to I^{0} \to I^{1} \to I^{2} \to \cdots.
+	\end{equation*}
+	Applying $\Gamma_{I}$, we form the cochain
+	\begin{equation} \label{eq:01}
+		0 \to \Gamma_{I}(I^{0}) \to \Gamma_{I}(I^{1}) \to \cdots.
+	\end{equation}
+	The cohomology at the $n$-th stage is $\Gamma^{n}_{I}(M)$. As usual, this is functorial and independent of the resolution $I^{\bullet}$.
+\end{rem}
+
+\begin{prop}
+	Let $M$ be any $R$-module. Then, $\Gamma^{n}_{I}(M)$ is an $I$-torsion module for all $n \ge 0$.
+\end{prop}
+\begin{proof} 
+	The modules in \Cref{eq:01} are all $I$-torsion. Since $\G{I}{R}$ is closed under subquotients (\Cref{obs:GIR-closed-subquotients}), the result follows.
+\end{proof}
+

@@ -1,0 +1,426 @@
+\section{Injective hull over polynomial rings}
+
+\subsection{Definitions and Notations} 
+
+$\kk$ will denote an arbitrary field. $n$ will denote a positive integer. $R_{n}$ will denote the polynomial ring $\kk[X_{1}, \ldots, X_{n}]$ with the usual operations. 
+
+\begin{defn} \label{defn:En}
+	$E_{n}$ is the $R_{n}$-module defined as follows: As a set, $E_{n} = \kk[X_{1}^{-1}, \ldots, X_{n}^{-1}]$, i.e., polynomial in $X_{1}, \ldots, X_{n}^{-1}$ with $\kk$-coefficients. The scalar multiplication is defined on monomials by
+	\begin{equation*} 
+		X_{i} \cdot (X_{1}^{-b_{1}} \cdots X_{n}^{-b_{n}}) \vcentcolon= 
+		\begin{cases}
+			X^{-b_{1}} \cdots X^{-(b_{i} - 1)} \cdots X_{n}^{-b_{n}} & \text{if } b_{i} \ge 1, \\
+			0 & \text{else}.
+		\end{cases}
+	\end{equation*}
+\end{defn}
+
+\begin{rem}
+	Note that the above has the effect of the following multiplication on monomials:
+	\begin{equation*} 
+		(X_{1}^{a_{1}} \cdots X_{n}^{a_{n}}) \cdot (X_{1}^{-b_{1}} \cdots X_{n}^{-b_{n}}) \vcentcolon= 
+		\begin{cases}
+			X^{-(b_{1} - a_{1})} \cdots X_{n}^{-(b_{n} - a_{n})} & \text{if } b_{i} \ge a_{i} \text{ for all } i, \\
+			0 & \text{else}.
+		\end{cases}
+	\end{equation*}
+	In words: multiply the monomials in the expected manner, that is the actual product if the result is indeed in $E_{n}$, else it is $0$.
+\end{rem}
+
+\begin{defn}
+	Let $R$ be a ring, and $E$ an $R$-module. $E$ is said to be an \deff{injective} $R$-module if for every ideal $J \subset R$, every $R$-linear map $J \to E$ extends to an $R$-linear map $R \to E$.
+\end{defn}
+
+\begin{rem}
+	The usual definition for $E$ being injective is that for every inclusion $N \into M$ of $R$-modules, the restriction map $\Hom_{R}(M, E) \to \Hom_{R}(N, E)$ is surjective. The above definition says that it suffices to look at the inclusions $J \into R$. The equivalence is known as Baer's criterion.
+\end{rem}
+
+\begin{rem}
+	One can show that the injective hull is defined uniquely up to isomorphism. Thus, we shall use the article ``the'' instead of ``an'' henceforth.
+\end{rem}
+
+Note that $\kk$ is an $R_{n}$-module viewed as the quotient $R_{n}/(X_{1}, \ldots, X_{n})$. Thus, the action of $R_{n}$ on $\kk$ is given by each $X_{i}$ acting trivially on $\kk$. This lets one identify $\kk$ as an $R_{n}$-submodule of $E_{n}$.
+
+\begin{prop}
+	$\kk \subset E_{n}$ is an essential extension.
+\end{prop}
+\begin{proof} 
+	Let $n \ge 1$. Let $R_{0} \vcentcolon= \kk$ and $E_{0} \vcentcolon= R_{0}$. Note that $\kk \subset E_{0}$ is an essential extension. We now proceed by induction.
+
+	Let $p \in E_{n} \setminus \{0\}$ be arbitrary. We may write
+	\begin{equation*} 
+		p = p_{0} + p_{1} X_{n}^{-1} + \cdots p_{k} X_{n}^{-k}
+	\end{equation*}
+	for some $p_{0}, \ldots, p_{k} \in E_{n - 1}$ with $k \ge 0$ and $p_{k} \neq 0$. Then,
+	\begin{equation*} 
+		X_{n}^{k} \cdot p = p_{k} \in R_{n - 1} \setminus \{0\}.
+	\end{equation*}
+	By induction, we may multiply the above with an element of $R_{n - 1}$ and get a nonzero element of $\kk$.
+\end{proof}
+
+\subsection{One variable case}
+
+Note that $\kk[X]$ is a PID and thus, to show that $\kk[X^{-1}]$ is injective, it suffices to show that $\kk[X^{-1}]$ is divisible (\Cref{prop:PID-divisible-is-injective}). For ease of notation, we let $R = \kk[X]$ and $E = \kk[X^{-1}]$ with the $R$-module structure on $E$ being as earlier.
+
+\begin{prop} \label{prop:E1-divisible}
+	$E$ is a divisible $R$-module.
+\end{prop}
+
+\begin{cor}
+	$E$ is the injective hull of $\kk$.
+\end{cor}
+
+\begin{proof}[Proof of \Cref{prop:E1-divisible}]
+	For $f \in R$, let $\mu_{f} \in \End_{R}(E)$ denote the map $p \mapsto f \cdot p$. 
+	
+	First note that $\mu_{X^{k}}$ is surjective for all $k \ge 0$. Indeed,
+	\begin{equation*} 
+		X^{k} \cdot (b_{0} X^{-k} + b_{1} X^{-k - 1} + \cdots b_{m} X^{-k - m}) = b_{0} + b_{1} X^{-1} + \cdots + b_{m} X^{-m}.
+	\end{equation*}
+
+	Now, given $0 \neq f \in R$, we may write $f = X^{k} g$ for some $k \ge 0$ and $g \in R$ such that $g(0) \neq 0$, i.e., $g$ has nonzero constant term.\footnote{We have simply pulled out the largest power of $X$.} As $\mu_{X^{k}}$ is surjective by the above, it suffices to assume that $f(0) \neq 0$. In fact, we may assume $f(0) = 1$ and write
+	\begin{equation} \label{eq:03}
+		f = 1 + a_{1} X + \cdots + a_{k} X^{k}.
+	\end{equation}
+	Now, note that $f \cdot 1 = 1$. Thus, $1 \in \im(\mu_{f})$. Next,
+	\begin{equation*} 
+		f \cdot X^{-1} = (1 + a_{1}) + X^{-1}.
+	\end{equation*}
+	The first term in parenthesis is already in $\im(\mu_{f})$ as it is a $\kk$-multiple of $1$. Thus, $X^{-1} \in \im(\mu_{f})$. More generally, if $n \ge 1$, then 
+	\begin{equation*} 
+		f \cdot X^{-n} = b_{0} + b_{1} X^{-1} + \cdots + b_{n - 1} X^{-(n - 1)} + X^{-n}
+	\end{equation*}
+	for some $b_{i} \in \kk$. Thus, inductively, we see that $X^{-n} \in \im(\mu_{f})$ for all $n \ge 1$. As $\{X^{-n} : n \ge 0\}$ is a $\kk$-spanning set for $E$, we have shown that $\mu_{f}$ is surjective, as desired.
+\end{proof}
+
+\begin{rem}
+	My original proof of the last part was a bit different. I had shown the following: Let $f$ be as in \Cref{eq:03} and assume $n \ge k$. Let $E[n]$ denote the $\kk$-vector subspace of $E$ spanned by $\{1, \ldots, X^{-n}\}$. Then, one notes that $\mu_{f}$ restricts to a $\kk$-endomorphism $E[n]$. This is because any multiplication $X^{a} \cdot X^{-b}$, if nonzero, results in a monomial $X^{-c}$ with $c \le b$. In fact, if $a > 0$, then $c < b$.
+
+	Now, with respect to the basis $\{1, \ldots, X^{-n}\}$ of $E[n]$, the matrix of $\mu_{f}$ is upper triangular with $1$s along the diagonal. This is a consequence of the last line of the previous paragraph. \newline
+	Thus, the matrix obtained is invertible. As every $q \in E$ is contained in some $E[n]$ (with $n \ge k$), this finished the proof.
+\end{rem}
+
+The proof given above can actually be shortened to not involve taking the case $f = X^{k}$ separately. We do this in more generality for higher variables.
+
+\subsection{More variables}
+
+In this section, we show that $E_{n}$ is an $R_{n}$-divisible module for any $n \ge 1$. However, note that this does not let us conclude that $E_{n}$ is an injective $R_{n}$-module since $R_{n}$ is not a PID for $n \ge 2$.
+
+We introduce some notations.
+
+\begin{enumerate}
+	% \item $\mathbb{N}_{0}$ denotes the set of nonnegative integers.
+	\item $[n] \vcentcolon= \{1, \ldots, n\}$ for $n \in \mathbb{N}$.
+	\item An element $\alpha = (\alpha_{1}, \ldots, \alpha_{n}) \in \mathbb{N}_{0}^{n}$ is called a \deff{multi-index}. 
+	\item $\md{\alpha} \vcentcolon= \alpha_{1} + \cdots + \alpha_{n}$.
+	\item We define the total order $\lelex$ on $\mathbb{N}_{0}^{n}$ by
+	\begin{equation*} 
+		\alpha \lelex \beta \Leftrightarrow \text{there exists $i \in [n]$ such that $\alpha_{i} < \beta_{i}$ and $\alpha_{j} = \beta_{j}$ for all $j < i$}
+	\end{equation*}
+	\item We define the total order $<$ on $\mathbb{N}_{0}^{n}$ by
+	\begin{align*} 
+		\alpha < \beta \Leftrightarrow\ & \md{\alpha} < \md{\beta}, \text{ or } \\
+		& \md{\alpha} = \md{\beta} \text{ and } \alpha \lelex \beta.
+	\end{align*}
+	\item For $\alpha, \beta \in \mathbb{N}_{0}^{n}$, we define
+	\begin{equation*} 
+		X^{\alpha} = X_{1}^{\alpha_{1}} \cdots X_{n}^{\alpha_{n}} \in R_{n} \andd X^{-\beta} = X_{1}^{-\beta_{1}} \cdots X_{n}^{-\beta_{n}} \in E_{n}.
+	\end{equation*}
+	Note that there is a natural way to define $\beta - \alpha$ as an element of $\mathbb{Z}^{n}$. Under the above definition, the multiplication on $E_{n}$ can be written as:
+	\begin{equation*} 
+		X^{\alpha} \cdot X^{-\beta} = 
+		\begin{cases}
+			X^{-(\beta - \alpha)} & \text{if }\beta - \alpha \in \mathbb{N}_{0}^{n}, \\
+			0 & \text{else}.
+		\end{cases}
+	\end{equation*}
+	Due to this, we may sometimes write $X^{-\beta}$ even if $\beta \in \mathbb{Z}^{n}$, with the understanding that this element is $0$ if $\beta \notin \mathbb{N}_{0}^{n}$.
+\end{enumerate}
+
+\begin{rem}
+	Note that $\alpha < \beta \Rightarrow \alpha + \gamma < \beta + \gamma$ for all $\alpha, \beta, \gamma \in \mathbb{N}_{0}^{n}$. However, $\alpha < \beta$ does not imply that $\beta - \alpha \in \mathbb{N}_{0}^{n}$.
+\end{rem}
+
+\begin{rem}
+	Multi-indices and monomials in $R_{n}$ have a one-to-one correspondence via $\alpha \leftrightarrow X^{\alpha}$. Similarly, so do multi-indices and monomials in $E_{n}$. Using this, we may compare two monomials in $R_{n}$ (resp. $E_{n}$) as well. 
+
+	Note that this means that $X^{-\beta_{1}}$ will be called smaller than $X^{-\beta_{2}}$ if $\beta_{1} < \beta_{2}$. Explicitly, $X_{1}^{-1}$ is smaller than $X_{1}^{-2}$.
+\end{rem}
+
+\begin{rem}
+	$<$ is a well-order on $\mathbb{N}_{0}^{n}$. Thus, we may give inductive proofs.
+\end{rem}
+
+\begin{prop}
+	$E_{n}$ is a divisible $R_{n}$-module.
+\end{prop}
+\begin{proof} 
+	Suppose not. Then there is some $0 \neq f \in R_{n}$ such that $\mu_{f}$ is not surjective. Pick $\beta$ smallest such that $X^{-\beta}$ is not in $\im(\mu_{f})$. Let $X^{\alpha}$ be the smallest monomial appearing in $f$. Without loss of generality, the coefficient of $X^{\alpha}$ is $1$. Thus, we may write
+	\begin{equation*} 
+		f = X^{\alpha} + \sum_{\alpha' > \alpha} c_{\alpha'} X^{\alpha'}
+	\end{equation*}
+	for $c_{\alpha'} \in \kk$.
+
+	Then,
+	\begin{equation*} 
+		f \cdot X^{-(\alpha + \beta)} = X^{-\beta} + \sum_{\alpha' > \alpha} c_{\alpha'} X^{-(\beta + \alpha - \alpha')}.
+	\end{equation*}
+
+	Note that the monomials on the summation on the right are smaller than $X^{-\beta}$ since $\alpha < \alpha'$. Thus those monomials are in $\im(\mu_{f})$. But then,
+	\begin{equation*} 
+		X^{-\beta} =  f \cdot X^{-(\alpha + \beta)} - \sum_{\alpha' > \alpha} c_{\alpha'} X^{-(\beta + \alpha - \alpha')} \in \im(\mu_{f}). \qedhere
+	\end{equation*}
+\end{proof}
+
+\subsection{Divisibility and Injectivity} \label{subsec:divisibility-injectivity}
+
+We now look at some proofs of how injectivity and divisibility are related.
+
+\begin{prop}
+	Let $E$ an injective $R$-module. Then, $E$ is divisible.
+\end{prop}
+\begin{proof} 
+	Let $r \neq R \setminus \mathcal{Z}(R)$ and $x \in E$ be arbitrary. As $r \notin \mathcal{Z}(R)$, the ideal $rR$ has basis $\{r\}$. Thus, we get an $R$-linear map $f : rR \to E$ defined by $r \mapsto x$. As $E$ is injective, $f$ extends to an $R$-linear map $F : R \to E$. Thus,
+	\begin{equation*} 
+		x = f(r) = F(r) = r F(1) = \mu_{r}(F(1)),
+	\end{equation*}
+	showing that $\mu_{r}$ is surjective.
+\end{proof}
+
+\begin{prop} \label{prop:PID-divisible-is-injective}
+	Let $R$ be a PID, and $E$ a divisible $R$-module. Then, $E$ is injective.
+\end{prop}
+\begin{proof} 
+	Let $J \subset R$ be an ideal, and $f : J \to R$ be $R$-linear. If $J = 0$, then zero map $0 : R \to E$ works as an extension. Thus, assume that $J = rR$ for some $r \neq 0$. ($J$ is singly generated as $R$ is a PID.)
+
+	Let $y \vcentcolon= f(r) \in E$. As $E$ is divisible and $r \neq 0$, there exists $x \in E$ such that $rx = y$. Define $F : R \to E$ by $1 \mapsto x$. Then, for $rs \in rR$, we see that
+	\begin{equation*} 
+		F(rs) = rs F(1) = srx = sy = sf(r) = f(rs).
+	\end{equation*}
+	That is, $F|_{J} = f$, as desired.
+\end{proof}
+
+Note that there are possibly multiple $x \in E$ that solve $rx = y$. Choosing any $x$ gives a valid choice of $F$. The reason is that $J$ was singly generated and thus, we only need to check compatibility with $r$. If $R$ is not a PID, then it is not so simple.
+
+\begin{prop} \label{prop:division-and-torsionfree-is-injective}
+	Let $R$ be any domain, and $E$ be a divisible and torsionfree $R$-module. Then, $E$ is injective.
+\end{prop}
+\begin{proof} 
+	As before, we assume that $J \neq 0$ is an ideal of $R$ and $f : J \to E$ is $R$-linear. Let $j \in J \setminus \{0\}$. By hypothesis, $\mu_{j} : E \to E$ is an isomorphism. We claim that the element
+	\begin{equation*} 
+		x_{j} \vcentcolon= \mu_{j}^{-1}(f(j)) \in E
+	\end{equation*}
+	is independent of $j \in J \setminus \{0\}$. 
+
+	Note that $x_{j}$ is defined to be the unique solution to
+	\begin{equation*} 
+		j x_{j} = f(j).
+	\end{equation*}
+	(To emphasise: existence is guaranteed by divisibility and uniqueness by torsionfree-ness.)
+
+	Let $i \in J \setminus \{0\}$ be arbitrary. Note that
+	\begin{equation*} 
+		ij x_{j} = i f(j) = f(ij) = j f(i) = ji x_{i}.
+	\end{equation*}
+	Thus,
+	\begin{equation*} 
+		ij (x_{i} - x_{j}) = 0.
+	\end{equation*}
+	As $R$ is a domain and $E$ is torsionfree, the above forces $x_{i} = x_{j}$, as desired.
+
+	Now, denoting this element by $x$, we simply define $F : R \to E$ by $1 \mapsto x$. Note that if $j \in J \setminus \{0\}$, then
+	\begin{equation*} 
+		F(j) = j F(1) = jx = f(j),
+	\end{equation*}
+	as desired. (Clearly, $F(0) = 0 = f(0)$ as well.)
+\end{proof}
+
+\begin{rem}
+	To summarise, we have shown that for an arbitrary domain, we have
+	\begin{align*} 
+		\text{injective} &\Rightarrow \text{divisible}, \\
+		\text{divisible and torsionfree} &\Rightarrow \text{injective}.
+	\end{align*}
+
+	Whereas for a PID, we have
+	\begin{equation*} 
+		\text{injective} \Leftrightarrow \text{divisible}.
+	\end{equation*}
+\end{rem}
+
+\begin{ex}
+	Let $R = \mathbb{Z}$, and $E = \mathbb{Q}/\mathbb{Z}$. $\mathbb{Q}$ is a divisible $R$-module and thus, so is $E$. Thus, $E$ is injective (since $\mathbb{Z}$ is a PID) but $E$ is not torsionfree.
+\end{ex}
+
+\begin{ex} \label{ex:divisible-not-injective}
+	We now show that ``divisible $\Rightarrow$ injective'' is indeed not true. 
+
+	Let $R = \mathbb{Z}[x]$ and $E = \mathbb{Q}(x)/\mathbb{Z}[x]$. Note that $E$ is divisible since $\mathbb{Q}(x)$ is so. Let $J = (2, x)R \subset R$. Define the map $f : J \to E$ by
+	\begin{align*} 
+		2 &\mapsto 0, \\
+		x &\mapsto [1/2],
+	\end{align*}
+	where $[\cdot]$ denotes the class modulo $\mathbb{Z}[x]$. Note that $\{2, x\}$ is not an $R$-basis of $J$ and thus, we must check that $f$ above is well-defined. We must check that whenever $f, g \in R$ are such that $2f + xg = 0$, then $f \cdot 0 + g \cdot [1/2] = 0$. This is easy to see. Indeed, if
+	\begin{equation*} 
+		2f = -xg,
+	\end{equation*}
+	then $2 \mid g$. (Note that $2$ is a prime in $R$ and does not divide $-x$.) \newline
+	Thus, we may write $g = 2h$ for some $h \in R$ but then
+	\begin{equation*} 
+		f \cdot 0 + g \cdot [1/2] = 2h \cdot [1/2] = h \cdot [1] = 0.
+	\end{equation*}
+
+	We contend that there is no extension $F : R \to E$ of $f$. We look at the equations that $F(1)$ would have to satisfy. We have
+	\begin{align*} 
+		2 F(1) &= F(2) = 0, \\
+		x F(1) &= F(x) = [1/2].
+	\end{align*}
+	The first equation tells us that $F(1) = [\frac{1}{2} h(x)]$ for some $h(x) \in \mathbb{Z}[x]$. By the second, we have that
+	\begin{equation*} 
+		x \left[\frac{1}{2}h(x)\right] = \left[\frac{1}{2}\right] \quad\text{or}\quad \frac{1}{2}(xh(x) - 1) \in \mathbb{Z}[x].
+	\end{equation*}
+	Evaluating the above at $x = 0$ gives us that $1/2 \in \mathbb{Z}$, a contradiction.
+\end{ex}
+
+The calculation in the proof of \Cref{prop:division-and-torsionfree-is-injective} tells us the following.
+
+\begin{prop} \label{prop:simultaneous-solution-extend-to-R}
+	Let $R$ be a ring, $J \subset R$ an ideal, $E$ an $R$-module, and $f \in \Hom_{R}(J, E)$. \newline
+	There exists an extension $F : R \to E$ iff there exists $x \in E$ such that $j \cdot x = f(j)$ for all $j \in J$. 
+\end{prop}
+Note that there is no domain assumption.
+\begin{proof} 
+	\forward Take $x = F(1)$. 
+
+	\backward Defining $F$ by $1 \mapsto x$ does the job.
+\end{proof}
+
+In fact, the proof given in \Cref{ex:divisible-not-injective} was essentially to show that there is no $y \in E$ that solves both $2 \cdot y = f(2)$ and $x \cdot y = f(x)$. Note that divisibility told us one may \emph{individually} solve $2 \cdot y_{1} = f(2)$ and $x \cdot y_{2} = f(x)$ for $y_{1}, y_{2} \in E$. However, there is no \emph{common} solution.
+
+Note that if $j_{1} \cdot x = f(j_{1})$ and $j_{2} \cdot x = f(j_{2})$, then for $r_{1}, r_{2} \in R$, we have
+\begin{equation*} 
+	f(r_{1} j_{1} + r_{2} j_{2}) = r_{1} f(j_{1}) + r_{2} f(j_{2}) = r_{1} j_{1} \cdot x + r_{2} j_{2} \cdot x = (r_{1} j_{1} + r_{2} j_{2}) \cdot x.
+\end{equation*}
+
+Thus, we get the following corollary.
+
+\begin{cor} \label{cor:simultaneous-solution-extend-to-R}
+	Let $R$ be a ring, $J \subset R$ an ideal, $E$ an $R$-module, and $f \in \Hom_{R}(J, E)$. Suppose $J$ is generated by $S$. \newline
+	There exists an extension $F : R \to E$ iff there exists $x \in E$ such that $s \cdot x = f(s)$ for all $s \in S$. 
+\end{cor}
+
+Thus, we have reduced our system of simultaneous equations to a generating set. In particular, if $R$ is Noetherian, then $S$ can be chosen to be finite. 
+
+\begin{prop}
+	Let $R$ be a domain. Suppose $E$ is a divisible $R$-module, and $J \subset R$ is an ideal. Assume $J$ contains a nonzerodivisor $j_{0} \in J$ on $E$. Then, any $R$-linear map $f : J \to E$ can be extended to a map $R \to E$.
+\end{prop}
+\begin{proof}
+	In view of \Cref{prop:simultaneous-solution-extend-to-R}, we wish to solve for simultaneously solve for an $x \in E$ such that $j \cdot x = f(j)$ for all $j \in J$. By hypothesis, there exists a unique $x \in E$ such that $j_{0} \cdot x = f(j_{0})$. We now show that this $x$ works for every $j \in J$. Indeed, as before we have
+	\begin{equation*} 
+		j_{0} \cdot f(j) = j \cdot f(j_{0}) = j_{0} \cdot (j \cdot x).
+	\end{equation*}
+	Now, we may cancel $j_{0}$ to get $f(j) = j \cdot x$ for every $j \in J$.
+\end{proof}
+
+\begin{rem} \label{rem:nonzerodivisor-constant-term}
+	Note that in our earlier case of $R_{n} = \kk[X_{1}, \ldots, X_{n}]$ and $E_{n} = \kk[X_{1}^{-1}, \ldots, X_{n}^{-1}]$, we see that any $f \in R_{n}$ with a nonzero constant term is a nonzerodivisor on $E_{n}$. Conversely, if $f(\mathbf{0}) = 0$, then $f$ annihilates $\kk$. 
+
+	Thus, to use prove injectivity of $E_{n}$, we only need to show that we can extend maps from ideals $J$ contained in the maximal ideal $(X_{1}, \ldots, X_{n})$.
+\end{rem}
+
+Here's a modified version of Baer's criterion. 
+
+\begin{prop}
+	Let $R$ be a Noetherian ring, and $E$ be a module such that the following holds: For every proper ideal $I \subsetneq R$ and every $R$-linear map $f : I \to E$, there exists an ideal $J \supsetneq I$ such that $f$ can be extended to an $R$-linear map $J \to E$.
+
+	Then, $E$ is injective.
+\end{prop}
+\begin{proof} 
+	Suppose $E$ is not injective. Then, by Baer's criterion, there exists an ideal $I$ and a $R$-linear map $f : I \to E$ which cannot be extended to a map $R \to E$. Since $R$ is Noetherian, we may choose $I$ to be maximal with respect to this property. Note that $I \neq R$ since otherwise $f$ itself is the desired extension. Then, by hypothesis, $f$ can be extended to map $F : J \to R$ for some strictly larger ideal $J \supsetneq I$. By the maximality of $I$, $F$ can extended to a map $\widetilde{F} : R \to E$. But then $\widetilde{F}$ extends $f$, contrary to our assumption.
+\end{proof}
+
+We record the usual trick of expanding $f(j_{1} j_{2})$ in two ways below.
+
+\begin{prop}[Compatibility condition] \label{prop:compatibility}
+	Let $f : J \to M$ be an $R$-linear map, where $J$ is an ideal of $R$. Then, for $r, s \in J$, we have
+	\begin{equation} \tag{CC} \label{eq:compatibility}
+		r \cdot f(s) = s \cdot f(r).
+	\end{equation}
+\end{prop}
+
+\begin{obs}
+	Let us consider the case of two variables: $R = \kk[X, Y]$ and $E = \kk[X^{-1}, Y^{-1}]$. Suppose $\varphi : (X, Y) \to E$ is an $R$-linear map. We wish to show that $\varphi$ can be extended to $R$. 
+
+	Write
+	\begin{align*} 
+		\varphi(X) &= \sum_{\beta \in \mathbb{N}_{0}^{2}} b_{\beta} X^{-\beta}, \\
+		\varphi(Y) &= \sum_{\beta \in \mathbb{N}_{0}^{2}} c_{\beta} X^{-\beta}.
+	\end{align*}
+	Note that
+	\begin{align*} 
+		X \cdot \varphi(Y) &= \sum_{\substack{\beta_{1} \ge 1 \\ \beta_{2} \ge 0}} c_{\beta_{1}, \beta_{2}} X^{1 - \beta_{1}} Y^{-\beta_{2}} \\
+		&= \sum_{\beta \in \mathbb{N}_{0}^{2}} c_{1 + \beta_{1}, \beta_{2}} X^{-\beta_{1}} Y^{-\beta_{2}}.
+	\end{align*}
+	Similarly,
+	\begin{equation*} 
+		Y \cdot \varphi(X) = \sum_{\beta \in \mathbb{N}_{0}^{2}} b_{\beta_{1}, 1 + \beta_{2}} X^{-\beta_{1}} Y^{-\beta_{2}}.
+	\end{equation*}
+	Now, by \Cref{eq:compatibility}, we get
+	\begin{equation*} 
+		c_{1 + \beta_{1}, \beta_{2}} = b_{\beta_{1}, 1 + \beta_{2}}
+	\end{equation*}
+	for all $(\beta_{1}, \beta_{2}) \in \mathbb{N}_{0}^{2}$.
+
+	This lets us get a simultaneous solution as desired by \Cref{cor:simultaneous-solution-extend-to-R}. More precisely, we first define
+	\begin{equation*} 
+		p \vcentcolon= \sum_{\beta \in \mathbb{N}_{0}^{2}} b_{\beta} X^{-(\beta_{1} + 1)} Y^{-\beta_{2}}.
+	\end{equation*}
+	Evidently, we have $X \cdot p = \varphi(X)$. Moreover, we have
+	\begin{align*} 
+		Y \cdot p &= \sum_{\substack{\beta_{1} \ge 0 \\ \beta_{2} \ge 1}} b_{\beta_{1}, \beta_{2}} X^{-(\beta_{1} + 1)} Y^{-(\beta_{2} - 1)} \\
+		&= \sum_{\beta \in \mathbb{N}_{0}^{2}} b_{\beta_{1}, \beta_{2} + 1} X^{-(\beta_{1} + 1)} Y^{-\beta_{2}} \\
+		&= \sum_{\beta \in \mathbb{N}_{0}^{2}} c_{1 + \beta_{1}, \beta_{2}} X^{-(\beta_{1} + 1)} Y^{-\beta_{2}} \\
+		&= \sum_{\substack{\beta_{1} \ge 1 \\ \beta_{2} \ge 0}} c_{\beta} X^{-\beta}.
+	\end{align*}
+	Note that the above is \emph{almost} $\varphi(Y)$. More precisely, $\varepsilon \vcentcolon= \varphi(Y) - Y \cdot p$ is given by
+	\begin{equation*} 
+		\varepsilon = \sum_{\beta_{2} \ge 0} c_{0, \beta_{2}} Y^{-\beta_{2}}.
+	\end{equation*}
+	Now, if we define $\delta \vcentcolon= \sum_{\beta_{2} \ge 0} c_{0, \beta_{2}} Y^{-(\beta_{2} + 1)}$, then $Y \cdot \delta = \varepsilon$ and $X \cdot \delta = 0$. This means that the corrected term $q \vcentcolon= p + \delta$ satisfies
+	\begin{equation*} 
+		X \cdot q = \varphi(X) \andd Y \cdot q = \varphi(Y).
+	\end{equation*}
+	Thus, by \Cref{cor:simultaneous-solution-extend-to-R}, the result follows.
+\end{obs}
+
+\begin{obs}
+	The above can be extended to $R_{3} = \kk[X, Y, Z]$ and $E_{3}$ as well. In this case, writing
+	\begin{align*} 
+		\varphi(X) &= \sum_{\beta \in \mathbb{N}_{0}^{3}} b_{\beta} X^{-\beta} \\
+		\varphi(Y) &= \sum_{\beta \in \mathbb{N}_{0}^{3}} c_{\beta} X^{-\beta},\\
+		\varphi(Z) &= \sum_{\beta \in \mathbb{N}_{0}^{3}} d_{\beta} X^{-\beta},
+	\end{align*}
+	we will get compatibility conditions as
+	\begin{align*} 
+		b_{\beta_{1}, \beta_{2} + 1, \beta_{3}} &= c_{\beta_{1} + 1, \beta_{2}, \beta_{3}}, \\
+		c_{\beta_{1}, \beta_{2}, \beta_{3} + 1} &= d_{\beta_{1}, \beta_{2} + 1, \beta_{3}}, \\
+		d_{\beta_{1} + 1, \beta_{2}, \beta_{3}} &= b_{\beta_{1}, \beta_{2}, \beta_{3} + 1},
+	\end{align*}
+	for all $(\beta_{1}, \beta_{2}, \beta_{3}) \in \mathbb{N}_{0}^{3}$. For convenience, let $e_{1} \vcentcolon= (1, 0, 0)$, and similarly define $e_{2}$ and $e_{3}$. 
+
+	As before, our first candidate for a common solution will be
+	\begin{equation*} 
+		p \vcentcolon= \sum_{\beta \in \mathbb{N}_{0}^{3}} b_{\beta} X^{-(\beta + e_{1})}.
+	\end{equation*}
+	Then, $X \cdot p = \varphi(X)$ but $Y \cdot p$ differs from $\varphi(Y)$. The terms corresponding to $\beta_{1} = 0$ will not appear in $Y \cdot p$. Thus, we modify our solution to
+	\begin{equation*} 
+		p' \vcentcolon= p + \sum_{\substack{\beta \in \mathbb{N}_{0}^{3} \\ \beta_{1} = 0}} c_{\beta} X^{-(\beta + e_{2})}.
+	\end{equation*}
+	As before, $X$ annihilates the additional term added and $Y \cdot p' = \varphi(Y)$. Lastly, we add $\sum_{\beta_{3} \ge 0} d_{\beta} X^{-(0, 0, \beta_{3})}$ to correct the term for $Z$.
+\end{obs}
+
+It is now clear how one may proceed in higher variables to obtain similar results. The only trouble is notational. We state the result without proving it.
+
+\begin{prop}
+	Let $R_{n}$ and $E_{n}$ be as in \Cref{defn:En}, and define $\mathfrak{m} \vcentcolon= (X_{1}, \ldots, X_{n})$. Suppose $f : \mathfrak{m} \to E_{n}$ is $R_{n}$-linear. Then, $f$ extends to an $R_{n}$-linear map $F : R_{n} \to E_{n}$.
+\end{prop}

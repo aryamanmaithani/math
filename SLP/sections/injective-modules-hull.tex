@@ -1,0 +1,604 @@
+\section{Injective modules and Injective hull}
+
+\subsection{Essential extensions}
+
+\begin{defn}
+	Let $R$ be a ring, and $M \le E$ be $R$-modules. $E$ is said to be an \deff{essential extension} of $M$ if for every $x \in E \setminus \{0\}$, there exists $r \in R$ such that $r \cdot x \in M \setminus \{0\}$.
+\end{defn}
+
+\begin{rem} \label{rem:equivalent-injective}
+	The above definition is equivalent to demanding that every nonzero submodule of $E$ intersects $M$ nontrivially.
+\end{rem}
+
+\begin{ex}
+	Every module is an essential extension of itself.
+\end{ex}
+
+\begin{ex}
+	Let $R$ be an integral domain, and $K = \Frac(R)$ its field of fractions. Then, $R \le K$ is an essential extension of $R$-modules.
+\end{ex}
+
+\begin{prop}[Transitivity of essentialness] \label{prop:transitivity-of-essentialness}
+	Let $L \le M \le N$ be $R$-modules. The following are equivalent.
+	\begin{enumerate}[label=(\roman*)]
+		\item $L \le M$ and $M \le N$ are essential extensions.
+		\item $L \le N$ is an essential extension.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(i) $\Rightarrow$ (ii): Let $n \in N \setminus \{0\}$. Then, there exists $r_{1} \in R$ such that $r_{1} \cdot n \in M \setminus \{0\}$. In turn, there exists $r_{2} \in R$ such that $r_{2} \cdot (r_{1} \cdot n) \in L \setminus \{0\}$. Thus, $(r_{1} r_{2}) \cdot n \in L \setminus \{0\}$, as desired.
+
+	(ii) $\Rightarrow$ (i): Let $n \in N \setminus \{0\}$. Then, there exists $r \in R$ such that $r \cdot n \in L \setminus \{0\}$. Since $L \setminus \{0\} \subset M \setminus \{0\}$, this proves that $M \le N$ is essential. \newline
+	Similarly, if $m \in M \setminus \{0\}$, then $m \in N \setminus \{0\}$ and essentialness of $L \le N$ finishes the proof.
+\end{proof}
+
+\begin{prop} \label{prop:maximal-essential-extension}
+	Let $M \le E$ be $R$-modules. Consider the set
+	\begin{equation*} 
+		\mathcal{E} \vcentcolon= \{N \le E : N \text{ is an essential extension of } M\}
+	\end{equation*}
+	and order it by inclusion. Then, $\mathcal{E}$ has a maximal element.
+\end{prop}
+\begin{proof} 
+	Note that $\mathcal{E} \neq \emptyset$ since $M \in \mathcal{E}$. We use Zorn's lemma to prove that $\mathcal{E}$ has a maximal element. As usual, it suffices to show that whenever $\{N_{\alpha}\}_{\alpha \in \Lambda}$ is a chain in $\mathcal{E}$, then
+	\begin{equation*} 
+		N \vcentcolon= \bigcup_{\alpha \in \Lambda} N_{\alpha}
+	\end{equation*}
+	is an element of $M$. 
+
+	But this follows easily because if $x \in N \setminus \{0\}$, then $x \in N_{\alpha} \setminus \{0\}$ for some $\alpha$. Using the essentialness of $M \le N_{\alpha}$ finishes the proof.
+\end{proof}
+
+\begin{prop}
+	If $N_{1} \le M_{1}$ and $N_{2} \le M_{2}$ are essential, then so is $N_{1} \oplus N_{2} \le M_{1} \oplus M_{2}$.
+\end{prop}
+\begin{proof} 
+	Let $(x, y) \in M_{1} \oplus M_{2}$ be nonzero. Without loss of generality, $x \neq 0$. Then, there exists $r \in R$ such that $r \cdot x \in N_{1} \setminus \{0\}$. Thus, $r \cdot (x, y) \in N_{1} \oplus N_{2}$ is nonzero.
+\end{proof}
+
+\subsection{Injective modules}
+
+\begin{defn}
+	And $R$-module $E$ is said to be \deff{injective} if it satisfies the following lifting property: Given any injection $f : N \to M$ and a map $\alpha : N \to E$, there exists a map $\beta : M \to E$ such that $\alpha = \beta \circ f$.
+
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & M \arrow[d] \arrow[r] & N \arrow[ld, dashed, "\exists"] \\
+			  & E & \\
+		\end{tikzcd}.
+	\end{equation*}
+\end{defn}
+
+In terms of $\Hom$, the above is precisely saying that the ``restriction'' map $\Hom_{R}(M, E) \xrightarrow{f^{\ast}} \Hom_{R}(N, E)$ is surjective. Indeed, this is what one means by a lift. Note that the contravariant $\Hom_{R}(-, E)$ functor is always left exact. Thus, we have shown the following.
+
+\begin{prop}
+	$E$ is an injective $R$-module iff $\Hom_{R}(-, E)$ is exact.
+\end{prop}
+
+\begin{prop} \label{prop:injective-over-localisation}
+	Let $S \subset R$ be a multiplicative set, and let $E$ be an $S^{-1}R$-module. $E$ is injective as an $R$-module iff $E$ is injective as an $S^{-1}R$-module.
+	% \emph{Hint: Use \Cref{obs:R-linear-map-between-localised-modules}.}
+\end{prop}
+\begin{proof} 
+	\forward Assume $E$ is an injective $R$-module. Suppose we have a diagram of $S^{-1}R$-modules and maps as
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & N \arrow[d, "\alpha"'] \arrow[r, hook] & M \\
+			  & E & \\
+		\end{tikzcd}.
+	\end{equation*}
+	By injectivity of $E$ as an $R$-module, there exists a desired lift $M \to E$. By \Cref{obs:R-linear-map-between-localised-modules}, it follows that this map is $S^{-1}R$-linear.
+
+	\backward Assume $E$ is an injective $S^{-1}R$-module. Suppose we have a diagram of $S^{-1}R$-modules and maps as
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & N \arrow[d, "\alpha"'] \arrow[r, hook] & M \\
+			  & E & \\
+		\end{tikzcd}.
+	\end{equation*}
+	Then, we get a diagram as
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & N \arrow[d] \arrow[r, hook] & M \arrow[d] \\
+			0 \arrow[r] & S^{-1} N \arrow[d, "S^{-1}\alpha"'] \arrow[r, hook] & S^{-1} M \\
+			  & E & \\
+		\end{tikzcd},
+	\end{equation*}
+	where the vertical maps are the localisation maps. Note that $S^{-1}E = E$ and that the composite $N \to S^{-1}N \xrightarrow{S^{-1}\alpha} E$ is equal to $\alpha$. The lower part of the diagram consists of $S^{-1}R$-modules and maps and hence, there exists a lift $S^{-1}M \to E$ of $S^{-1}\alpha$. Composing this with $M \to S^{-1}M$ gives the desired map.
+\end{proof}
+
+\begin{thm}[Baer's Criterion] \label{thm:baers-criterion}
+	A right $R$-module $E$ is injective iff for every right ideal $J$ of $R$, every map $J \to E$ can be extended to a map $R \to E$.
+\end{thm}
+\begin{proof} 
+	\forward This follows simply from the definition of injective.
+
+	\backward Suppose we are given a diagram as
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & N \arrow[d, "\alpha"'] \arrow[r, hook] & M \\
+			  & E & \\
+		\end{tikzcd}.
+	\end{equation*}
+	We shall assume that $N$ is simply an $R$-submodule of $M$. Define the poset $\mathcal{E}$ to consist of all pairs $(N', \alpha')$ where $N'$ is an $R$-submodule and $\alpha' : N' \to E$ is a map such that
+	\begin{equation*} 
+		N \le N' \le M \andd \alpha'|_{N} = \alpha.
+	\end{equation*}
+	This has the obvious partial order defined by $(N', \alpha') \le (N'', \alpha'')$ if
+	\begin{equation*} 
+		N' \subset N'' \andd \alpha''|_{N''} = \alpha'.
+	\end{equation*}
+	Note that $\mathcal{E}$ is nonempty since $(N, \alpha) \in \mathcal{E}$. It is also clear that every chain has an upper bound, by the usual trick of unions. Thus, by Zorn's lemma, there is a maximal extension
+	\begin{equation*} 
+		\alpha' : N' \to E.
+	\end{equation*}
+	We now show that $N' = M$. To the contrary, suppose that $N' \neq M$ and pick $x \in M \setminus N'$. Let $J \vcentcolon= (x :_{R} N') \unlhd R$. 
+
+	By assumption, the composite $J \xrightarrow{x} N' \xrightarrow{\alpha'} E$ extends to a map $R \to E$. Consider the submodule
+	\begin{equation*} 
+		N'' \vcentcolon= N' + Rx \subset M
+	\end{equation*}
+	and define $\alpha'' : N'' \to E$ by
+	\begin{equation*} 
+		\alpha''(a + rx) = \alpha'(a') + f(r), \quad a' \in N' \text{ and } r \in R.
+	\end{equation*}
+	This is well-defined because we have $\alpha'(r)x = f(r)$ for $xr \in N' \cap Rx$. But now, we have $(N'', \alpha'') > (N', \alpha')$ contradicting the maximality. Thus, we must have $N' = M$.
+\end{proof}
+
+\begin{prop} \label{prop:direct-product-injectives}
+	If $(E_{i})_{i \in I}$ is a family of injective modules, then $\prod_{i \in I} E_{i}$ is injective. In particular, a finite direct sum of injective modules is injective.
+\end{prop}
+\begin{proof} 
+	The last statement follows from the first since finite products and direct sums coincide.
+
+	Let $N \le M$ be $R$-modules, and $f : N \to \prod_{i \in I} E_{i}$ be an $R$-linear map. Composing with the canonical projections $\prod E_{i} \to E_{j}$, we get $R$-linear maps $f_{i} : N \to E_{i}$ for all $i$. By injectivity, these lift to maps $\widetilde{f}_{i} : M \to E_{i}$ for all $i$. By the universal property of products, we get a map $\widetilde{f} : M \to \prod_{i \in I} E_{i}$. It is simple to check that $\widetilde{f}|_{N} = f$.
+\end{proof}
+
+\begin{prop} \label{prop:direct-sum-injectives-noetherian}
+	Suppose $R$ is Noetherian and $(E_{i})_{i \in I}$ is a family of injective modules. Then $\bigoplus_{i \in I} E_{i}$ is injective.
+\end{prop}
+\begin{proof} 
+	We use \mynameref{thm:baers-criterion}. Let $J \unlhd R$ be an ideal and $f : J \to \bigoplus_{i} E_{i}$ be $R$-linear. As $R$ is Noetherian, $J$ is finitely generated by say $r_{1}, \ldots, r_{n} \in J$. Each $f(r_{i})$ is contained in a submodule of $\bigoplus_{i} E_{i}$ which is a direct sum of finitely many $E_{i}$. In turn, $f(J)$ is contained in a finite such direct sum. Now, by the previous corollary, this sum is injective and we may get the desired lift $R \to \bigoplus_{i} E_{i}$.
+\end{proof}
+
+\begin{rem}
+	We shall see later (\Cref{ex:not-noetherian-direct-sum-injectives}) that the Noetherian hypothesis above cannot be dropped. In fact, we shall show that given \emph{any} non-Noetherian ring, there exists a (countable!) family of injective modules whose direct sum is not injective.
+\end{rem}
+
+\begin{prop} \label{prop:direct-summand-injective}
+	Any direct summand of an injective module is injective.
+\end{prop}
+\begin{proof}[Sketch.]
+	Let $E$ be injective and write $E = I \oplus I'$. We wish to show that $I$ is injective. As usual, assume $N \le M$ and $f : N \to I$ is $R$-linear. Then, we have a map $N \to E$ given by the composition $N \to I \to E$. By injectivity of $E$, this lifts to a map $M \to E$. Compose this with $E \to I$ to get a map $M \to I$. Verify that this extends $f$.
+\end{proof}
+
+We recall the following adjointness between tensor and $\Hom$. We shall briefly consider modules on the right to give a precise formulation of the general adjointness. Recall that $M$ is an \deff{$S$-$R$ bimodule} if $M$ is a left $S$-module and a right $R$-module such that $s \cdot (m \cdot r) = (s \cdot m) \cdot r$ for all $s \in S$, $m \in M$, $r \in R$. Note that every (left) $R$-module is also an $R$-$R$ bimodule with the right action being given by $m \cdot r \vcentcolon= r \cdot m$.
+
+\begin{thm}[Tensor-Hom Adjointness] \label{thm:tensor-hom-adjointness}
+	Let $R$ and $S$ be rings. If $B$ is an $S$-$R$ bimodule and $C$ a right $R$-module, then $\Hom_{R}(B, C)$ is a naturally a right $S$-module by the rule $(f \cdot s)(b) \vcentcolon= f(sb)$ for $f \in \Hom_{R}(B, C)$, $s \in S$, and $b \in B$. \newline
+	The functor $\Hom_{R}(B, -) : \rmod{R} \to \rmod{S}$ is right adjoint to $\otimes_{S} B$. \newline
+	That is, for every $S$-module $A$ and $R$-module $C$, there is a natural isomorphism
+	\begin{equation*} 
+		\tau : \Hom_{R}(A \otimes_{S} B, C) \xrightarrow{\cong} \Hom_{S}(A, \Hom_{R}(B, C))
+	\end{equation*}
+	of $S$-modules.
+\end{thm}
+\begin{rem}
+	Note that as a special case (since we are working with commutative rings), we may always take $S = R$. In this case, the theorem is saying that given any $R$-module $B$, the functor $- \otimes_{R} B : \rmod{R} \to \rmod{R}$ is left adjoint to $\Hom_{\rmod{R}}(B, -)$.
+\end{rem}
+\begin{proof}[Sketch.] 
+	The proof follows essentially from the definition of the tensor product. We define $\tau$ as follows: Given an $R$-linear map $f : A \otimes_{S} B \to C$, we define $(\tau f)(a)$ to be the map $b \mapsto f(a \otimes b)$. \\
+	Conversely, given an $R$-linear map $g : A \to \Hom_{R}(B, C)$, we define $\sigma(g)$ to be the map defined by the bilinear form $a \otimes b \mapsto g(a)(b)$. \newline
+	Then, one verifies that $\tau$ and $\sigma$ are inverses of each other and that $\tau$ is natural.
+\end{proof}
+
+\begin{cor} \label{cor:base-change-injective}
+	If $S$ is an $R$-algebra and $E$ is an injective $R$-module, then $\Hom_{R}(S, E)$ is an injective $S$-module.
+\end{cor}
+\begin{proof} 
+	We wish to show that $\Hom_{S}(-, \Hom_{R}(S, E))$ preserves short exact sequences of $S$-modules. By adjointness, this is true iff $\Hom_{R}(- \otimes_{S} S, E)$ preserves short exact sequences of $S$-modules. But this is true since $- \otimes_{S} S$ is the identity functor and $\Hom_{R}(-, E)$ is exact by virtue of $E$ being injective.
+\end{proof}
+
+\begin{defn}
+	Let $R$ be a ring, and $M$ an $R$-module. For $a \in R$, let $\mu_{a} \in \End_{R}(M)$ denote the map $x \mapsto a x$. \newline
+	$M$ is said to be \deff{divisible} if $\mu_{a}$ is surjective for each $a \notin \mathcal{Z}(R)$. \newline
+	$M$ is said to be \deff{torsionfree} if $\mu_{a}$ is injective for each $a \notin \mathcal{Z}(R)$.
+\end{defn}
+
+The reader may look at \Cref{subsec:divisibility-injectivity} to see how the above two definitions relate to injectivity. The first few results from there are stated below, and the reader may prove them as an exercise. The proofs are elementary and are given in that section.
+
+\begin{exe}
+	Let $R$ be a domain, and $E$ be an $R$-module.
+	\begin{enumerate}
+		\item If $E$ is injective, then $E$ is divisible.
+		\item If $E$ is divisible and torsionfree, then $E$ is injective.
+		\item If $R$ is a PID and $E$ is divisible, then $E$ is injective. In particular, for $R = \mathbb{Z}$, the notion for injective and divisible modules coincide.
+	\end{enumerate}
+\end{exe}
+\begin{exe}
+	Give examples to show that
+	\begin{enumerate}
+		\item a divisible module need not be injective,
+		\item an injective module need not be torsionfree.
+	\end{enumerate}
+\end{exe}
+
+\begin{ex}
+	Using the above exercises, we have some examples and nonexamples.
+	\begin{enumerate}
+		\item Let $R$ be a domain which is not a field. Then, $R$ is not an injective $R$-module.
+		\item Let $R$ be a domain and $K = \Frac(R)$. Then, $K$ is an injective $R$-module (since it is divisible and torsionfree).
+		\item The quotient of a divisible module is divisible.
+		\item Thus, if $R = \mathbb{Z}$ (or more generally a PID), the quotient of an injective module is injective. 
+		\item $\mathbb{Q}/\mathbb{Z}$ is an injective $\mathbb{Z}$-module. More generally, $K/R$ is an injective $R$-module whenever $R$ is a PID and $K = \Frac(R)$.
+	\end{enumerate}
+\end{ex}
+
+Let $M$ be an arbitrary $\mathbb{Z}$-module. Then, we may map a free module $\bigoplus_{i} \mathbb{Z}$ onto $M$, i.e., we can write $M \cong \left(\bigoplus_{i} \mathbb{Z}\right)/N$. In turn, we have
+\begin{equation*} 
+	M \cong \frac{\bigoplus_{i} \mathbb{Z}}{N} \into \frac{\bigoplus_{i} \mathbb{Q}}{N}.
+\end{equation*}
+As $\mathbb{Z}$ is Noetherian, the rightmost module is Noetherian (using \Cref{prop:direct-sum-injectives-noetherian} and the above examples). Thus, we have proven the following result.
+
+\begin{prop}
+	Every $\mathbb{Z}$-module can be embedded in an injective $\mathbb{Z}$-module, i.e., given any $\mathbb{Z}$-module $M$, there exists an inclusion $M \into E$ where $E$ is an injective $\mathbb{Z}$-module.
+\end{prop}
+
+Using the above, we may replace $\mathbb{Z}$ by $R$.
+
+\begin{thm} \label{thm:enough-injectives-R-mod}
+	Let $R$ be an arbitrary ring. 
+
+	The category of $R$-modules has enough injectives, i.e., given any $R$-module $M$, there exists an inclusion $M \into E$ where $E$ is an injective $R$-module.
+\end{thm}
+\begin{proof} 
+	Note that $R$ is a $\mathbb{Z}$-algebra in a canonical way. \newline
+	Considering $M$ as a $\mathbb{Z}$-module, we get an injection $\varphi : M \into E$, where $E$ is an injective $\mathbb{Z}$-module. \newline
+	This induces a map $\Phi : M \to \Hom_{\mathbb{Z}}(R, E)$ given by $x \mapsto (r \mapsto \varphi(rx))$. If $x \neq 0$, then $\varphi(x) \neq 0$ and thus, $\Phi(x)(1) \neq 0$. Thus, $\Phi$ is an injection. \newline
+	By \Cref{cor:base-change-injective}, $\Hom_{\mathbb{Z}}(R, E)$ is an injective module and we are done.
+\end{proof}
+
+\begin{ex} \label{ex:not-noetherian-direct-sum-injectives}
+	We now prove the converse to \Cref{prop:direct-sum-injectives-noetherian}: Suppose $R$ is not Noetherian. Then, there exists a family $(E_{n})_{n \ge 1}$ of injective $R$-modules such that $\bigoplus_{n \ge 1} E_{n}$ is not injective.
+
+	As $R$ is not Noetherian, we can find ideals
+	\begin{equation*} 
+		I_{1} \subsetneq I_{2} \subsetneq I_{3} \subsetneq \cdots.
+	\end{equation*}
+
+	For each $n$, fix an injective module $E_{n}$ and a map $R/I_{n} \into E_{n}$. (This can be done in view of \Cref{thm:enough-injectives-R-mod}.)
+
+	Define $I \vcentcolon= \bigcup_{n \ge 1} I$ and $E \vcentcolon= \bigoplus_{n \ge 1} E_{n}$. We wish to show that $E$ is not injective. We do so by constructing an $R$-linear map $I \to E$ that cannot be extended to $R \to E$. (Note that $I$ is indeed an ideal.)
+
+	For each $n \ge 1$, we have a map $f_{n} : I \to E_{n}$ given by the composition
+	\begin{equation*} 
+		I \into R \onto R/I_{n} \into E_{n}.
+	\end{equation*}
+
+	Thus, we get a map $f : I \to \prod_{n \ge 1} E_{n}$. We claim that the image actually lies in the direct sum $\bigoplus_{n \ge 1} E_{n}$. Indeed, let $x \in I$. Let there exists $N \ge 1$ such that $x \in I_{n}$ for all $n \ge N$. But this means that the image of $x$ in $R/I_{n}$ is nonzero only for finitely many $n$, as desired.
+
+	Thus, we have obtained a map $f : I \to E$. For the sake of contradiction, assume that this lifts to an $R$-linear map $F : I \to E$. Let $e \vcentcolon= F(1)$. Then, we have
+	\begin{equation*} 
+		F(r) = r e
+	\end{equation*}
+	for all $r \in R$. As noted, $e$ is an element of the direct sum $\bigoplus_{n \ge 1} E_{n}$. Thus, there exists $N \ge 2$ such that the $n$-th component of $e$ is $0$ for all $n \ge N$. In turn, the same is true for $F(r)$ for every $r \in R$. Now, choose $r \in I_{N + 1} \setminus I_{N}$. Since $r \notin I_{N}$, the image of $r$ under the composition $I \into R \onto R/I_{N}$ is nonzero. Thus, the $N$-th component of $F(r)$ must be nonzero, a contradiction.
+\end{ex}
+
+Recall that a short exact sequence
+\begin{equation*} 
+	0 \to M \xrightarrow{f} L \xrightarrow{g} N \to 0
+\end{equation*} 
+is said to \deff{split} if there exists a map $f' : L \to M$ such that $f'f = \id_{M}$. A consequence of this is that $f(M)$ becomes a direct summand of $L$.
+
+\begin{cor} \label{cor:injective-splits}
+	For an $R$-module $E$, the following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $E$ is injective.
+		\item Every short exact sequence $0 \to E \to M \to N \to 0$ splits.
+		\item Whenever $E \into M$, we have $E \mid M$.
+	\end{enumerate}
+\end{cor}
+\begin{proof}
+	(i) $\Rightarrow$ (ii): Use injectivity of $E$ to lift $\id_{E} : E \to E$ to a map $f' : M \to E$.
+
+	(ii) $\Rightarrow$ (i): By \Cref{thm:enough-injectives-R-mod}, there exists an injective module $I$ such that $0 \to E \into I \to N \to 0$ is exact. By hypothesis, $E$ is a direct summand of $I$. By \Cref{prop:direct-summand-injective}, $E$ is injective.
+
+	(ii) $\Leftrightarrow$ (iii) is left as an exercise. 
+\end{proof}
+
+\begin{cor}
+	Let $E$ be an injective $R$-module, and $0 \to E \to M \to N \to 0$ an exact sequence. $M$ is injective iff $N$ is so.
+\end{cor}
+\begin{proof} 
+	By the previous corollary, we may write $M \cong E \oplus N$. The result follows from \Cref{prop:direct-product-injectives} and \Cref{prop:direct-summand-injective}.
+\end{proof}
+
+\subsection{Injective hull}
+
+Suppose $M \le E$ is an essential extension, and $i : M \into I$ is an injection where $I$ is injective. Then, by injectivity, we see that $i$ extends to a map $i' : E \to I$. Note that $\ker(i') \cap E = \ker(i) = 0$. Since $E$ is an essential extension, this forces $\ker(i') = 0$ (see \Cref{rem:equivalent-injective}). Thus, $E$ embeds inside $I$ as well. 
+
+As an example, consider $R$ to be a domain, $M = R$, and $E = K = \Frac(R)$. In this case, note that not only is $K$ is an essential extension of $R$ but also that $K$ is injective. Thus, the preceding paragraph shows that $K$ is a minimal injective module containing $R$.
+
+\begin{defn}
+	Let $R$ be a ring, and $M \le E$ be $R$-modules. $E$ is said to be an \deff{injective hull} of $M$ if 
+	\begin{enumerate}
+		\item $E$ is an injective $R$-module,
+		\item $E$ is an essential extension of $M$.
+	\end{enumerate}
+\end{defn}
+
+\begin{rem}
+	As is usual, we will not differentiate between inclusions and injections. Thus, an injective hull should be thought of as a module $E$ along with an injection $f : M \into E$ such that $E$ is injective and $f(M) \le E$ is essential.
+\end{rem}
+
+In some sense, we are saying that $E$ is a minimal injective module containing $M$. In another sense, we would like to say that $E$ is a maximal essential extension of $M$. To this end, we first prove an intermediary result.
+
+\begin{prop} \label{prop:injective-iff-no-proper-essential-extension}
+	An $R$-module $E$ is injective if and only if there is no proper essential extension of $E$.
+\end{prop}
+\begin{proof} 
+	\forward Let $E$ be injective, and $E \le M$ be essential. By \Cref{cor:injective-splits}, we may write $M = E \oplus F$, where this sum is an internal direct sum. This forces $E \cap F = 0$. As $E \le M$ is essential, we must have $F = 0$ and thus, $M = E$.
+
+	\backward Suppose $E$ has no proper essential extensions. By \Cref{thm:enough-injectives-R-mod}, let $I$ be an injective module such that $E \le I$. If $E = I$, then we are done. Else, $I$ is a proper extension of $E$ and hence, is not essential. Thus, the poset
+	\begin{equation*} 
+		\mathcal{E} = \{N \le I : N \neq 0 \text{ and } N \cap E = 0\}
+	\end{equation*}
+	is nonempty (ordering is by inclusion). The usual application of Zorn's lemma gives us a maximal element $N \in \mathcal{E}$. Note that $E$ embeds within $I/N$ as
+	\begin{equation*} 
+		E \cong \frac{E}{E \cap N} \cong \frac{E + N}{N} \into \frac{I}{N}.
+	\end{equation*}
+	By maximality of $N$, the above extension is essential. Since $E$ has no proper extensions, we get $E \cong I/N$ via the above inclusion. This means $E + N = I$. We had $E \cap N = 0$ by construction and thus, $E$ is a direct summand of $I$ and hence, is injective by \Cref{prop:direct-summand-injective}.
+\end{proof}
+
+\begin{thm} \label{thm:injective-hull-equivalent}
+	Let $R$ be a ring, and $M \le E$ be $R$-modules. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $E$ is an injective hull of $M$.
+		\item $E$ is a minimal injective $R$-module containing $M$.
+		\item $E$ is a maximal essential extension of $M$.
+	\end{enumerate}
+\end{thm}
+\begin{proof} 
+	(i) $\Rightarrow$ (ii): Assume (i). By hypothesis, $E$ is injective. As seen before, given any injection $M \into I$ with $I$ injective, the injection extends to an injection $E \into I$. This proves the minimality.
+
+	(ii) $\Rightarrow$ (iii): Assume (ii). By \Cref{prop:maximal-essential-extension}, we can find a maximal $N \le E$ such that $M \le N$ is essential. 
+
+	\textbf{Claim.} $N$ has no proper extensions.
+
+	Assuming the claim, we see that $N$ is injective by \Cref{prop:injective-iff-no-proper-essential-extension}. By minimality of $E$, we get that $N = E$ and thus, $E$ is an essential extension. Being a maximal essential again follows from \Cref{prop:injective-iff-no-proper-essential-extension}.
+
+	The proof of the claim is not difficult: if $f : N \le L$ is essential, then so is $M \le L$. Since $E$ is injective, we saw earlier that this gives $L \into E$. But maximality of $N$ then forces $f(N) = L$.
+
+	(iii) $\Rightarrow$ (i): Assume (iii). We need to show that $E$ is injective. Suppose not. Then, there is a proper essential extension $E \into L$, by \Cref{prop:injective-iff-no-proper-essential-extension}. But then by transitivity, $M \into L$ is an essential extension which contradicts maximality of $E$.
+\end{proof}
+
+\begin{thm}
+	Let $R$ be a ring, and $M$ be an $R$-module. Then, there exists an injective hull $M \into E$, which is unique up to isomorphism.
+\end{thm}
+\begin{proof} 
+	Let $I$ be an injective module with $M \into I$ (cf. \Cref{thm:enough-injectives-R-mod}). The proof of (ii) $\Rightarrow$ (iii) in \Cref{thm:injective-hull-equivalent} shows that there is a maximal essential extension $E$ of $M$ contained in $I$. This is an injective hull.
+
+	Now, if $E'$ is also an injective hull of $M$, then using injectivity of $E'$ and essentialness of $E$ gives inclusions $M \into E \into E'$. But $E$ is a maximal essential extension of $M$ and thus, the last inclusion is an isomorphism.
+\end{proof}
+
+\begin{defn}
+	Let $R$ be a ring, and $M$ be an $R$-module. The injective hull of $M$ is denoted by $E_{R}(M)$.
+\end{defn}
+
+\begin{ex}
+	If $R$ is domain, then $E_{R}(R) = \Frac(R)$.
+\end{ex}
+
+\subsection{Injective Modules over Noetherian rings}
+
+In this subsection we see that injective modules over Noetherian rings satisfy a nice unique decomposition theorem as one would like. Every injective module can be written as a direct sum of indecomposable injectives modules in a unique way. Moreover, one knows exactly what the indecomposable injective modules are. Also note that we had already seen that an arbitrary direct sum of injective modules (over a Noetherian ring) is injective (\Cref{prop:direct-sum-injectives-noetherian}). We had also seen that the converse is true (\Cref{ex:not-noetherian-direct-sum-injectives}). \newline
+In this section, we employ the use of associated primes. The reader is encouraged to review \Cref{subsec:associated-primes}. 
+
+\begin{prop} \label{prop:ass-of-injective-hull}
+	Let $R$ be a Noetherian ring, and $M$ an $R$-module. Then, $\Ass_{R}(E_{R}(M)) = \Ass_{R}(M)$. In particular, $\Ass_{R}(E_{R}(R/\mathfrak{p})) = \{\mathfrak{p}\}$.
+\end{prop}
+\begin{proof} 
+	Since $M \le E_{R}(M)$, we have $\Ass(M) \subset \Ass(E_{R}(M))$, by \Cref{cor:ass-of-submodule}. 
+
+	Conversely, if $\mathfrak{p} \in \Ass(E_{R}(M))$, then $R/\mathfrak{p} \into E_{R}(M)$. Since $M \into E_{R}(M)$ is essential, we see that $N \vcentcolon= M \cap (R/\mathfrak{p}) \neq 0$. Thus,
+	\begin{equation*} 
+		\emptyset \neq \Ass(N) \subset \Ass(R/\mathfrak{p}) = \{\mathfrak{p}\}.
+	\end{equation*}
+	(Using \Cref{prop:Ass-is-nonempty}, \Cref{cor:ass-of-submodule}, \Cref{ex:associated-primes-primary-quotient}.) Thus, $\{\mathfrak{p}\} = \Ass(N) \subset \Ass(M)$.
+
+	The last statement follows from \Cref{ex:associated-primes-primary-quotient}.
+\end{proof}
+
+\begin{defn}
+	A \underline{nonzero} $R$-module $M$ is said to be \deff{decomposable} if $M$ can be written as an internal direct sum of nonzero submodules, and is said to be \deff{indecomposable} otherwise.
+\end{defn}
+
+Note that an indecomposable module is nonzero by assumption.
+
+\begin{thm}[Matlis] \label{thm:matlis-injectives-over-noetherian}
+	Let $R$ be a Noetherian ring, and $E$ an $R$-module. Then,
+	\begin{enumerate}
+		\item $E$ is an indecomposable injective $R$-module iff $E \cong E_{R}(R/\mathfrak{p})$ for some $\mathfrak{p} \in \Spec(R)$, 
+		\item $E_{R}(R/\mathfrak{p}) \not\cong E_{R}(R/\mathfrak{q})$ if $\mathfrak{p}$ and $\mathfrak{q}$ are distinct prime ideals of $R$, and
+		\item every injective $R$-module can be written as a (possibly infinite) direct sum of indecomposable $R$-modules.
+	\end{enumerate}
+\end{thm}
+\begin{proof} 
+	\phantom{hi}
+	\begin{enumerate}[leftmargin=*]
+		\item \forward Let $E$ be an indecomposable injective $R$-module. Then, $E \neq 0$ and thus, we may pick $\mathfrak{p} \in \Ass(M)$ (\Cref{prop:Ass-is-nonempty}). By \Cref{prop:associated-quotient-embeds}, there is an injection $R/\mathfrak{p} \into E$. As $E$ is injective, we get $E_{R}(R/\mathfrak{p}) \into E$. As $E_{R}(R/\mathfrak{p})$ is injective, \Cref{cor:injective-splits} tells us that $E_{R}(R/\mathfrak{p}) \mid E$ and hence, $E \cong E_{R}(R/\mathfrak{p})$ since $E$ is indecomposable. 
+
+		\backward Let $\mathfrak{p} \in \Spec(R)$. We need to prove that $E \vcentcolon= E_{R}(R/\mathfrak{p})$ is indecomposable. Suppose $E = E_{1} \oplus E_{2}$ is an internal direct sum. We have the map $i : R/\mathfrak{p} \into E = E_{1} \oplus E_{2}$. Let $i(\bar{1}) = (y_{1}, y_{2})$. Then, 
+		\begin{equation*} 
+			\mathfrak{p} = \ann_{R}((y_{1}, y_{2})) = \ann_{R}(y_{1}) \cap \ann_{R}(y_{2}).
+		\end{equation*}
+		As $\mathfrak{p}$ is prime, the above implies (without loss of generality) that $\ann_{R}(y_{1}) = \mathfrak{p} \subset \ann_{R}(y_{2})$. Thus, $R/\mathfrak{p}$ embeds into $E_{1}$ via the projection $E \to E_{1}$. But $E_{1}$ is injective (since $E_{1} \mid E$) and $E$ is essential over $R/\mathfrak{p}$. This forces $E \into E_{1}$, such that the embedding restricts to $R/\mathfrak{p} \into E_{1}$. Thus, the natural projection $E \to E_{1}$ is one-one and $E_{1} = E$.
+		%
+		\item Follows from \Cref{prop:ass-of-injective-hull} since $\{\mathfrak{p}\} = \Ass(R/\mathfrak{p}) = \Ass(E_{R}(R/\mathfrak{p}))$.
+		%
+		\item Define 
+		\begin{align*} 
+			\mathfrak{E} \vcentcolon= \{\{E_{i}\}_{i \in I} : \{E_{i}\}_{i \in I} \text{ is a collection of indecomposable injective submodules} \\
+			\text{of $E$ such that their sum is direct}\}.
+		\end{align*}
+		The proof of (i) shows us that $E_{R}(R/\mathfrak{p}) \into E$ for any $\mathfrak{p} \in \Ass(E)$. Since $E_{R}(R/\mathfrak{p})$ is indecomposable, we see that $\{E_{R}(R/\mathfrak{p})\} \in \mathfrak{E}$ and thus, $\mathfrak{E} \neq \emptyset$. Zorn's lemma now gives us a maximal collection $\{E_{i}\}_{i \in I} \in \mathfrak{E}$.
+
+		Let $I \vcentcolon= \bigoplus_{i \in I} E_{i}$. If $I = E$, we are done. Thus, assume $I \neq E$. By \Cref{prop:direct-sum-injectives-noetherian}, $I$ is injective and thus, $I \mid E$. Write $E = I \oplus N$ for $N \neq 0$ and note that $N$ is also injective. Picking $\mathfrak{p} \in N$, we see that there is a copy of $E_{R}(R/\mathfrak{p})$ sitting inside $N$. But then, $\{E_{i}\}_{i \in I} \cup \{E_{R}(R/\mathfrak{p})\}$ is a strictly larger element of $\mathfrak{E}$.
+	\end{enumerate}
+\end{proof}
+
+\begin{cor}
+	Let $E$ be an injective $R$-module with $R$ Noetherian. Then,
+	\begin{equation} \label{eq:injective-decompose}
+		E \cong \bigoplus_{\mathfrak{p} \in \Ass_{R}(E)} E_{R}(R/\mathfrak{p})^{a(\mathfrak{p})}
+	\end{equation}
+	for nonzero cardinals $a(\mathfrak{p})$.
+\end{cor}
+The fact that the cardinals are nonzero actually follows from the proof of the previous result. We shall see later that the cardinals $a(\mathfrak{p})$ are uniquely determined and do not depend on the choice of decomposition.
+
+Recall that given a prime ideal $\mathfrak{p} \in \Spec(R)$, there are two ways to get a corresponding field:
+\begin{enumerate}
+	\item Form the quotient ring $R/\mathfrak{p}$. This is a integral domain. Consider its field of fractions $\Frac(R/\mathfrak{p})$.
+	\item Form the localisation $R_{\mathfrak{p}}$. This is a local ring with maximal ideal $\mathfrak{p}R_{\mathfrak{p}}$. Consider its residue field $R_{\mathfrak{p}}/\mathfrak{p}R_{\mathfrak{p}}$.
+\end{enumerate}
+One can check that both these operations lead to the same field, which we shall denote by $\kappa(\mathfrak{p})$. Note that localisation and quotients commute and thus,
+\begin{equation*} 
+	(R/\mathfrak{p})_{\mathfrak{p}} \cong R_{\mathfrak{p}}/\mathfrak{p}R_{\mathfrak{p}} = \kappa(\mathfrak{p}).
+\end{equation*}
+
+\begin{thm} \label{thm:injective-hull-R-mod-p}
+	Let $R$ be a Noetherian ring, $\mathfrak{p} \in \Spec(R)$ a prime ideal. Then,
+	\begin{equation*} 
+		E_{R}(R/\mathfrak{p}) = E_{R_{p}}(\kappa(\mathfrak{p})).
+	\end{equation*}
+\end{thm}
+\begin{proof} 
+	We first show that $E \vcentcolon= E_{R}(R/\mathfrak{p})$ is indeed an $R$-module. Let $s \in R \setminus \mathfrak{p}$. We must show that the multiplication map by $s$ is an automorphism of $E$. Note that $\Ass(E) = \{\mathfrak{p}\}$ by \Cref{prop:ass-of-injective-hull}. By \Cref{prop:Ass-is-nonempty}, we see that $s$ is not a zero divisor on $E$ and hence, $sE \cong E$ is injective. But $sE \subset E$ and thus, $sE \mid E$. $E$ is indecomposable by \Cref{thm:matlis-injectives-over-noetherian} and hence, $sE = E$.
+
+	The map $R/\mathfrak{p} \into E$ factors as 
+	\begin{equation*} 
+		R/\mathfrak{p} \into \kappa(\mathfrak{p}) \into E,
+	\end{equation*} 
+	since $R/\mathfrak{p} \into \kappa(\mathfrak{p})$ is an essential extension as ($R/\mathfrak{p}$-modules and hence) $R$-modules. Since $R \into E$ is an essential extension of $R$-modules, so is $\kappa(\mathfrak{p}) \into E$. A fortiori, it is an essential extension of $R_{\mathfrak{p}}$-modules. To finish the proof, we need to show that $E$ is an injective $R_{\mathfrak{p}}$-module.
+
+	Note that we have the $R_{\mathfrak{p}}$-module isomorphisms
+	\begin{equation*} 
+		E \cong \Hom_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}, E) \cong \Hom_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}, \Hom_{R}(R_{\mathfrak{p}}, E)).
+	\end{equation*}
+	By \mynameref{thm:tensor-hom-adjointness}, we have $\Hom_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}, \Hom_{R}(R_{\mathfrak{p}}, E)) \cong \Hom_{R}(R_{\mathfrak{p}}, E)$ which is an injective $R_{\mathfrak{p}}$-module by \Cref{cor:base-change-injective}.
+\end{proof}
+
+\begin{rem} \label{rem:localising-primes-containment}
+	Recall that localisation at a prime is localisation with respect to its complement. Moreover, if $S \subset T$ are multiplicative subsets of $R$, and $M$ is a $T^{-1}R$ module, then localising with respect to $S$ does not change anything (since elements of $S$ already act as units). In other words, $M \cong S^{-1}(M)$ is also an $S^{-1}R$ module.
+
+	Applying to the case where $\mathfrak{q} \subset \mathfrak{p}$ are primes, we see that any $R_{\mathfrak{q}}$-module is also an $R_{\mathfrak{p}}$ module.
+\end{rem}
+
+\begin{cor} \label{cor:injective-hull-inclusion-primes}
+	Let $R$ be a Noetherian ring, $\mathfrak{q}$ and $\mathfrak{p}$ be primes in $R$ with $\mathfrak{q} \subset \mathfrak{p}$. Then,
+	\begin{equation*} 
+		E_{R}(R/\mathfrak{q}) \cong E_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}/\mathfrak{q} R_{\mathfrak{p}}).
+	\end{equation*}
+	In particular, $E_{R}(R/\mathfrak{q})$ is an indecomposable injective $R_{\mathfrak{p}}$-module.
+\end{cor}
+\begin{proof} 
+	If $a \in R \setminus \mathfrak{p}$, then $a$ is not in $\mathfrak{q}$ and thus, $a$ is not a zerodivisor on $R/\mathfrak{q}$. Thus, the localisation map $R/\mathfrak{q} \into (R/\mathfrak{q})_{\mathfrak{p}}$ is injective. Note that $(R/\mathfrak{q})_{\mathfrak{p}} \cong R_{\mathfrak{p}}/\mathfrak{q} R_{\mathfrak{p}}$. Thus, we have an injection
+	\begin{equation*} 
+		R/\mathfrak{q} \into E_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}/\mathfrak{q} R_{\mathfrak{p}})
+	\end{equation*}
+	of $R$-modules. In turn, we have an injection
+	\begin{equation*} 
+		E_{R}(R/\mathfrak{q}) \into E_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}/\mathfrak{q} R_{\mathfrak{p}})
+	\end{equation*}
+	of $R$-modules. (Note that the right module above is injective over $R$ by \Cref{prop:injective-over-localisation}.)
+
+	By injectivity, the above splits. In view of \Cref{thm:injective-hull-R-mod-p} and \Cref{rem:localising-primes-containment}, we see that the left module is also an $R_{\mathfrak{p}}$-module. Using \Cref{exe:direct-summand-localised-modules}, we see that the above splitting is also as $R_{\mathfrak{p}}$-modules. Since $E_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}/\mathfrak{q} R_{\mathfrak{p}})$ is an indecomposable module (by \mynameref{thm:matlis-injectives-over-noetherian}), we see that the above inclusion is actually an isomorphism.
+\end{proof}
+
+\begin{thm} \label{thm:injective-hull-mod-p-over-mod-I}
+	Let $R$ be a Noetherian ring, $I \subset \mathfrak{p} \subset R$ be ideals, $\mathfrak{p} \in \Spec(R)$. Let $E \vcentcolon= E_{R}(R/\mathfrak{p})$. Then,
+	\begin{equation*} 
+		E_{R/I}(R/\mathfrak{p}) \cong \Hom_{R}(R/I, E_{R}(R/\mathfrak{p})) \cong (0 :_{E} I).
+	\end{equation*}
+\end{thm}
+The last isomorphism is the natural one: Giving a map from $R/I$ is the same as giving a map from $R$ which vanishes on $I$. In turn, giving a map from $R$ is the same as giving an element in the codomain.
+\begin{proof} 
+	We know that $\Hom_{R}(R/I, E)$ is an injective $R/I$-module. We now show that it is (isomorphic to) an essential extension of $R/\mathfrak{p}$. \newline
+	As noted earlier, we have $\Hom_{R}(R/I, E) \cong (0 :_{E} I) \subset E$. Identify $R/\mathfrak{p}$ with a subset of $E$ under $R/\mathfrak{p} \into E$. As $I \subset \mathfrak{p}$, we see that $R/\mathfrak{p} \subset (0 :_{E} I)$. By \mynameref{prop:transitivity-of-essentialness}, $R/\mathfrak{p} \into (0 :_{E} I)$ is essential, as desired.
+\end{proof}
+
+\begin{cor}
+	Let $(R, \mathfrak{m}, \kk)$ be a Noetherian local ring, and $E \vcentcolon= E_{R}(\kk)$ be the injective hull of $\kk$ over $R$. Then for any proper ideal $I$ in $R$, $E_{R/I}(\kk) \cong (0 :_{E} I)$.
+\end{cor}
+
+\begin{rem}
+	The above corollary says the following: Suppose that we have computed the injective hull $E$ of $\kk$ over $R$. Then, for any ideal $I$, the injective hull over $R/I$ can be simply obtained the submodule of $E$ which is annihilated by $I$.
+\end{rem}
+
+Our goal now is to show that the exponents $a(\mathfrak{p})$ in \Cref{eq:injective-decompose} are uniquely determined. 
+
+\begin{prop}
+	Let $R$ be a Noetherian ring, $\mathfrak{p}$ and $\mathfrak{q}$ prime ideals in $R$. Then,
+	\begin{enumerate}
+		\item 
+		\begin{equation*} 
+			[E_{R}(R/\mathfrak{p})]_{\mathfrak{q}} = 
+			\begin{cases}
+				0 & \text{if } \mathfrak{q} \not\subset \mathfrak{p}, \\
+				E_{R}(R/\mathfrak{q}) & \text{if } \mathfrak{q} \subset \mathfrak{p}.
+			\end{cases}
+		\end{equation*}
+		\item 
+		\begin{equation*} 
+			\Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), E_{R}(R/\mathfrak{q})_{\mathfrak{q}}) = 
+			\begin{cases}
+				\kappa(\mathfrak{p}) & \text{if } \mathfrak{p} = \mathfrak{q}, \\
+				0 & \text{if } \mathfrak{p} \neq \mathfrak{q}.
+			\end{cases}
+		\end{equation*}
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	For brevity, define $E \vcentcolon= E_{R}(R/\mathfrak{q})$.
+	\begin{enumerate}
+		\item As noted in \Cref{thm:injective-hull-R-mod-p}, $E = E_{R}(R/\mathfrak{q})$ is an $R_{\mathfrak{q}}$ module. By \Cref{rem:localising-primes-containment}, it follows that $E_{\mathfrak{p}} = E$ if $\mathfrak{p} \supset \mathfrak{q}$. 
+
+		Now, suppose $\mathfrak{q}$ is not a subset of $\mathfrak{p}$. Pick $a \in \mathfrak{q} \setminus \mathfrak{p}$. Note that $\Ass_{R}(E_{R}(R/\mathfrak{q})) = \{\mathfrak{q}\}$ and thus, $a$ is pointwise nilpotent (\Cref{cor:noetherian-unique-associated-prime}) on $E$, i.e., given any $x \in E$, there exists $n = n(x) \ge 1$ such that $a^{n} x = 0$. Since $a \notin \mathfrak{p}$, it follows that $\frac{x}{1} = 0$ in $E_{\mathfrak{p}}$, as desired.
+		%
+		\item If $\mathfrak{q}$ is not contained in $\mathfrak{p}$, then the first part tells us directly that the $\Hom$ is $0$. Thus, assume $\mathfrak{q} \subset \mathfrak{p}$.
+
+		For $\mathfrak{q} = \mathfrak{p}$, we note
+		\[\begin{WithArrows}[displaystyle]
+			\Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), E_{\mathfrak{p}}) &\cong \Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), E_{R}(R/\mathfrak{p})) \Arrow{\Cref{thm:injective-hull-R-mod-p}} \\
+			&\cong \Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), E_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}))) \Arrow{\Cref{thm:injective-hull-mod-p-over-mod-I}} \\
+			&\cong E_{\kappa(\mathfrak{p})}(\kappa(\mathfrak{p})) \\
+			&= \kappa(\mathfrak{p}).
+		\end{WithArrows}\]
+
+		Now, assume $\mathfrak{q} \subsetneq \mathfrak{p}$. By \Cref{prop:finitely-presented-Hom-localise}, we see that
+		\begin{equation*} 
+			\Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), E_{R}(R/\mathfrak{q})_{\mathfrak{p}}) \cong \left[\Hom_{R}(R/\mathfrak{p}, E_{R}(R/\mathfrak{q}))\right]_{\mathfrak{p}}.
+		\end{equation*}
+		Thus, it is enough to prove that $\Hom_{R}(R/\mathfrak{p}, E_{R}(R/\mathfrak{q})) = 0$. \newline
+		Suppose $f \in \Hom_{R}(R/\mathfrak{p}, E)$. Then $\mathfrak{p} f(\overline{1}) = 0$, i.e., $\mathfrak{p} \subset \ann_{R}(f(\bar{1}))$. On the other hand, since $\Ass(E) = \{\mathfrak{q}\}$, \Cref{por:annihilator-contained-in-associated-prime} shows that $\ann_{R}(x) \subset \mathfrak{q}$ for all $x \in E \setminus \{0\}$. Since $\mathfrak{p} \not\subset \mathfrak{q}$, it follows that $f(\bar{1}) = 0$ and we are done. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{cor}
+	Let $I$ be an injective module over a Noetherian ring $R$. For every $\mathfrak{p} \in \Spec(R)$, $I_{\mathfrak{p}}$ is an injective $R_{\mathfrak{p}}$-module. Furthermore, the map $I \to I_{\mathfrak{p}}$ is surjective.
+\end{cor}
+\begin{proof} 
+	By \mynameref{thm:matlis-injectives-over-noetherian}, decompose $I$ as in \Cref{eq:injective-decompose}. Then,
+	\begin{equation*} 
+		I_{\mathfrak{p}} \cong \bigoplus_{\mathfrak{q} \in \Ass(I), \mathfrak{q} \subset \mathfrak{p}} E_{R}(R/\mathfrak{q})^{a(\mathfrak{q})}.
+	\end{equation*}
+	By \Cref{cor:injective-hull-inclusion-primes}, the result follows.
+\end{proof}
+
+\begin{cor}
+	Let $R$ be a Noetherian ring and $I$ be an injective $R$-module. Suppose $I \cong \bigoplus_{\mathfrak{p} \in \Spec(R)} E_{R}(R/\mathfrak{p})^{a(\mathfrak{p})}$. Then, $a(\mathfrak{p}) = \dim_{\kappa(\mathfrak{p})}(\Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), I_{\mathfrak{p}}))$. 
+\end{cor}
+
+\begin{rem}
+	The previous corollary is saying that given a decomposition of $I$ as a direct sum of $E_{R}(R/\mathfrak{p})$, the exponent is uniquely determined. Existence of a decomposition was given by \mynameref{thm:matlis-injectives-over-noetherian}. Combining the two statements gives us the existence and uniqueness of the decomposition.
+\end{rem}

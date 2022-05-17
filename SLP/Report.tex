@@ -1,0 +1,334 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\def\univname{}
+\def\coursenum{}
+\def\coursename{Supervised Learning Project}
+\def\professor{Ananthnarayan Hariharan}
+\def\student{Aryaman Maithani}
+\def\semesteryear{Spring 2022}
+\def\imagename{iitb.png}		  
+\def\scalesize{0.20}
+\usepackage{../aryaman}
+\setcounter{tocdepth}{2}
+
+\newcommand{\kk}{\mathsf{k}}
+\newcommand{\lelex}{<_{{\mathrm lex}}}
+\newcommand{\G}[2]{\Gamma_{#1}(\lmod{#2})}
+\newcommand{\Cech}{\v{C}ech\ }
+\newcommand{\CC}{\check{C}}
+
+\newcommand{\smatrix}[1]{\left[\begin{smallmatrix} #1 \end{smallmatrix}\right]}
+
+\begin{document}
+\coverpage
+\thispagestyle{empty}
+\updated{\today}
+\thispagestyle{empty}
+% \setcounter{tocdepth}{1}
+\tableofcontents
+\pagestyle{fancy}
+\setcounter{page}{1}
+\setcounter{section}{-1}
+
+\input{sections/prelims}
+\input{sections/injective-modules-hull}
+
+\section{Some Homological Algebra}
+
+\subsection{Injective Resolutions}
+
+\Cref{thm:enough-injectives-R-mod} told us that given any module $M$, we can find an injective module $I^{0}$ and an injection $M \xrightarrow{\varepsilon} I^{0}$. This gives us a short exact sequence
+\begin{equation*} 
+	0 \to M \xrightarrow{\varepsilon} I^{0} \to \coker(\varepsilon) \to 0.
+\end{equation*}
+Now, using \Cref{thm:enough-injectives-R-mod} again gives us an injection $\coker(\varepsilon) \into I^{1}$. Composing this with $I^{0} \onto \coker(\varepsilon)$ gives us a map $I^{0} \xrightarrow{\partial^{0}} I^{1}$. Thus, we now have an exact sequence
+\begin{equation*} 
+	0 \to M \xrightarrow{\varepsilon} I^{0} \xrightarrow{\partial^{0}} I^{1} \to \coker(\partial^{0}) \to 0.
+\end{equation*}
+Continuing in this way, we get a sequence of injective modules $(I^{n})_{n \ge 0}$ and module homomorphisms $\partial^{n} : I^{n} \to I^{n + 1}$ such that the augmented complex
+\begin{equation*} 
+	0 \to M \xrightarrow{\varepsilon} I^{0} \xrightarrow{\partial^{0}} I^{1} \xrightarrow{\partial^{1}} I^{2} \xrightarrow{\partial^{2}} \cdots	
+\end{equation*}
+is exact.
+
+\begin{defn}
+	Let $R$ be a ring, and $M$ be an $R$-module. An \deff{injective resolution} of $M$ is an exact sequence
+	\begin{equation*} 
+		0 \to M \xrightarrow{\varepsilon} I^{0} \xrightarrow{\partial^{0}} I^{1} \xrightarrow{\partial^{1}} I^{2} \xrightarrow{\partial^{2}} \cdots,
+	\end{equation*}
+	where each $I^{n}$ is an injective module.
+\end{defn}
+
+The content of the beginning discussion is the following.
+\begin{prop}
+	Every module has an injective resolution.
+\end{prop}
+
+\subsection{\texorpdfstring{$\delta$}{delta}-Functors}
+
+For this subsection, we work in slight generality. In what follows, $\C{A}$ and $\C{B}$ will be abelian categories. Standard examples of abelian categories are $\lmod{R}$ and $\Ch{R}$. If the reader is unfamiliar with abelian categories, they might as well assume that the categories are one of these two. \newline
+Recall that a functor $F : \C{A} \to \C{B}$ is said to be \deff{additive} if $F(f + g) = F(f) + F(g)$.
+
+\begin{defn}
+	A (covariant) \deff{cohomological $\delta$-functor} between $\C{A}$ and $\C{B}$ is a collection of additive functors $T^{n} : \C{A} \to \C{B}$ for $n \ge 0$, together with morphisms
+	\begin{align*} 
+		\delta^{n} &: T^{n}(C) \to T^{n + 1}(A)
+	\end{align*}
+	defined for each short exact sequence $0 \to A \to B \to C \to 0$ in $\C{A}$. We make the convention that $T^{n} = 0$ for $n < 0$. We impose the following two conditions:
+	\begin{enumerate}
+		\item For each short exact sequence as above, there is a long exact sequence
+		\begin{equation*} 
+			\cdots \to T^{n - 1}(C) \xrightarrow{\delta} T^{n}(A) \to T^{n}(B) \to T^{n}(C) \xrightarrow{\delta} T^{n + 1}(A) \to \cdots.
+		\end{equation*}
+		In particular, $T^{0}$ is left exact.
+		%
+		\item For each morphism of short exact sequences from $0 \to A' \to B' \to C' \to 0$ to $0 \to A \to B \to C \to 0$, the $\delta$s give a commutative diagram
+		\begin{equation*} 
+			\begin{tikzcd}
+				T^{n}(C') \arrow[r, "\delta"] \arrow[d] & T^{n + 1}(A') \arrow[d] \\
+				T^{n}(C) \arrow[r, "\delta"'] & T^{n + 1}(A)
+			\end{tikzcd}.
+		\end{equation*}
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}
+	A \deff{morphism} $S \to T$ between $\delta$-functors is a system of natural transformations $S^{n} \to T^{n}$ that commute with $\delta$.
+
+	A cohomological $\delta$-functor $S$ is \deff{universal} if, given any $\delta$-functor $T$ and a natural transformation $\varphi^{0} : S^{0} \to T^{0}$, there is a unique morphism $S \to T$ of $\delta$-functors that extends $\varphi^{0}$.
+\end{defn}
+
+\begin{rem}
+	The statement about ``commuting with $\delta$'' simply means that the squares in the corresponding ladder of long exact sequences commute. To elaborate more: Let 
+	\begin{equation*} 
+		0 \to A \to B \to C \to 0
+	\end{equation*}
+	be an exact sequence in $\C{A}$. Since $T$ and $S$ are $\delta$-functors, and $(\varphi^{n})_{n}$ natural transformations, we have the ladder as
+	\begin{equation*} 
+		\begin{tikzcd}
+			\cdots \arrow[r, "\delta"] & S^{n}(A) \arrow[r] \arrow[d, "\varphi^{n}(A)"] & S^{n}(B) \arrow[r] \arrow[d, "\varphi^{n}(B)"] & S^{n}(C) \arrow[r, "\delta"] \arrow[d, "\varphi^{n}(C)"] & S^{n + 1}(A) \arrow[r] \arrow[d, "\varphi^{n + 1}(A)"] & \cdots \\
+			\cdots \arrow[r, "\delta"'] & T^{n}(A) \arrow[r] & T^{n}(B) \arrow[r] & T^{n}(C) \arrow[r, "\delta"'] & T^{n + 1}(A) \arrow[r] & \cdots
+		\end{tikzcd}.
+	\end{equation*}
+	The two left squares commute simply by virtue of $\varphi^{n}$ being natural transformations. The rightmost square commutes by our requirement of $\varphi$ commuting with $\delta$.
+\end{rem}
+
+\begin{exe}
+	If $F : \C{A} \to \C{B}$ is an exact functor, show that $T^{0} = F$ and $T^{n} = 0$ for $n \neq 0$ defines a universal $\delta$-functor.
+\end{exe}
+\begin{soln} 
+	That it defines a $\delta$-functor is clear, with $\delta^{n} = 0$ for all $n$ (here is where we use exactness). Let us now show that it is is universal. To this end, let $S$ be a $\delta$-functor, and $f^{0} : S^{0} \to T^{0}$ be a natural transformation.
+
+	Note that an extension, if it exists, is necessarily unique since $T^{n}(A) = 0$ for all $n \ge 1$ and all objects $A \in \C{A}$. Thus, each $f^{n}$ is forced to be the zero transformation. Now, we must check that this does define a morphism of $\delta$-functors. This $f$ also commutes with $\delta$ since both are $0$.
+\end{soln}
+
+\begin{rem}
+	As expected, a consequence of the universal property of the universal $\delta$-functor is as follows: Suppose $T^{\ast}$ and $S^{\ast}$ are universal $\delta$-functors with $T^{0} \cong S^{0}$, i.e., there is a natural transformation $\varphi^{0} : T^{0} \to S^{0}$. Then, $T^{\ast} \cong S^{\ast}$, i.e., there is an isomorphism $T^{\ast} \to S^{\ast}$ of $\delta$-functors.
+\end{rem}
+
+\begin{defn}
+	A family $(F^{n})_{n \ge 0}$ of additive functors $F^{n} : \C{A} \to \C{B}$ is said to \deff{vanish on enough injectives} if for every object $A \in \C{A}$, there exists an injective object $I \in \C{A}$ and a monomorphism $A \into I$ such that $F^{n}(I) = 0$ for all $n \ge 1$.
+\end{defn}
+Note that $F^{0}(I) = 0$ is \emph{not} necessary.
+
+\begin{ex}
+	Let $F$ be a left exact functor, and $\mathcal{R}^{\ast}F$ denote its right derived functor. Then, it is a simple consequence of the definition that $\mathcal{R}^{n}F(I) = 0$ for all injectives $I$ and all $n \ge 1$. Thus, $\mathcal{R}^{\ast}F$ vanishes on enough injectives (in fact, on all injectives) in view of \Cref{thm:enough-injectives-R-mod}.
+\end{ex}
+
+\begin{prop}
+	Let $F^{\ast} : \C{A} \to \C{B}$ be a $\delta$-functor that vanishes on enough injectives. Then, $F^{\ast}$ is a universal $\delta$-functor.
+\end{prop}
+\begin{proof} 
+	Suppose $T^{\ast}$ is a $\delta$-functor and that a natural transformation $\varphi^{0} : F^{0} \to T^{0}$ is given. We need to show that $\varphi^{0}$ admits a unique extension to a morphism $\varphi^{\ast} : F^{\ast} \to T^{\ast}$ of $\delta$-functors. Fix $n \ge 0$ and suppose inductively that $\varphi^{i} : F^{i} \to T^{i}$ are defined for $0 \le i \le n$ such that they commute with the appropriate $\delta^{\ast}$. For each $A$ in $\C{A}$, fix an exact sequence $0 \to A \to I \to C \to 0$ with $I$ injective and $F^{n}(I) = 0$ for $n > 0$. This can be done by our assumption of $F^{\ast}$ vanishing on enough injectives. Now, we have a commutative diagram with exact rows given by
+	\begin{equation} \label{eq:08}
+		\begin{tikzcd}
+			F^{n}(I) \arrow[d, "\varphi^{n}(I)"] \arrow[r] & F^{n}(C) \arrow[d, "\varphi^{n}(C)"] \arrow[r, "\delta"] & F^{n + 1}(A) \arrow[r] & 0 \\
+			T^{n}(I) \arrow[r] & T^{n}(C) \arrow[r, "\delta"'] & T^{n + 1}(A) & 
+		\end{tikzcd}.
+	\end{equation}
+	The $0$ in the first row is because $F^{n + 1}(I) = 0$. (Note that $n = 0$ is allowed and so we are not commenting on $F^{n}(I)$.) A diagram chase now reveals that there is a \emph{unique} map $\varphi^{n + 1}(A) : F^{n + 1}(A) \to T^{n + 1}(A)$ making the above diagram commute. We will now show that $\varphi^{n + 1}$ defined as above is a natural transformation that commutes with $\delta^{\ast}$.
+
+	\textbf{Natural transformation.} Let $f : A' \to A$ be a morphism. As fixed earlier, we have an exact sequence $0 \to A' \to I' \to C' \to 0$. By injectivity, we get a map $g : I' \to I$ and then, this induces a map $h : C' \to C$ such that the following diagram is commutative with exact rows. 
+	\begin{equation} \label{eq:05}
+		\begin{tikzcd}
+			0 \arrow[r] & A' \arrow[r] \arrow[d, "f"] & I' \arrow[r] \arrow[d, "g"] & C' \arrow[r] \arrow[d, "h"] & 0 \\
+			0 \arrow[r] & A \arrow[r] & I \arrow[r] & C \arrow[r] & 0 
+		\end{tikzcd}
+	\end{equation}
+
+	To see that $\varphi^{n}$ commutes with $f$, we note that in the following diagram, each small quadrilateral commutes.
+	\begin{equation} \label{eq:06}
+		\begin{tikzcd}[row sep=3em]
+		F^{n + 1}(A') \arrow[color=red, ddd, "\varphi^{n + 1}(A')"'] \arrow[color=red, rrrr, "F^{n + 1}(f)"] &                                                                                      &  &                                                           & F^{n + 1}(A) \arrow[color=red, ddd, "\varphi^{n + 1}(A)"] \\
+		                                                                               & F^{n}(C') \arrow[color=red, lu, "\delta"'] \arrow[rr, "F^{n}(h)"] \arrow[d, "\varphi^{n}(C')"'] &  & F^{n}(C) \arrow[ru, "\delta"] \arrow[d, "\varphi^{n}(C)"] &                                                \\
+		                                                                               & T^{n}(C') \arrow[rr, "T^{n}(h)"'] \arrow[ld, "\delta"]                               &  & T^{n}(C) \arrow[rd, "\delta"']                            &                                                \\
+		T^{n + 1}(A') \arrow[color=red, rrrr, "T^{n + 1}(f)"']                                    &                                                                                      &  &                                                           & T^{n + 1}(A)                                  
+		\end{tikzcd}
+	\end{equation}
+	(The top and bottom trapezia commute since $F^{\ast}$ and $T^{\ast}$ are $\delta$-functors. The left and right ones commute by construction of $\varphi^{n + 1}$. The middle square commutes since $\varphi^{n}$ is a natural transformation, by inductive hypothesis.) \newline
+	A diagram chase reveals that
+	\begin{equation*} 
+		T^{n + 1}(f) \circ \varphi^{n + 1}(A') \circ \delta = \varphi^{n + 1}(A) \circ F^{n + 1}(f) \circ \delta
+	\end{equation*}
+	Since $\delta$ is epic, we can cancel it above to see that $\varphi$ ``commutes'' with $f$, i.e., $\varphi$ is a natural transformation. (In fact, taking $A = A'$ and $f = \id_{A}$ also shows that $\varphi_{n}(A')$ does not depend on choice of $I$ and $C$.)
+
+	\textbf{Commuting with $\delta$.} Suppose we are given a short exact sequence $0 \to A' \to A \to A'' \to 0$. As before, we have maps and an injective $I'$ such that the following diagram is commutative with exact rows.
+	\begin{equation} \label{eq:07}
+		\begin{tikzcd}
+			0 \arrow[r] & A' \arrow[r] \arrow[d, equals] & A' \arrow[r] \arrow[d, "f"] & A'' \arrow[r] \arrow[d, "g"] & 0 \\
+			0 \arrow[r] & A' \arrow[r] & I' \arrow[r] & C' \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation}
+	This yields a diagram
+	\begin{equation*} 
+		\begin{tikzcd}[row sep=3em]
+			F^{n}(A'') \arrow[d, "\varphi^{n}"] \arrow[r, "F^{n}(g)"] & F^{n}(C') \arrow[d, "\varphi^{n}"] \arrow[r, "\delta"] & F^{n + 1}(A') \arrow[d, "\varphi^{n + 1}"] \\
+			T^{n}(A'') \arrow[r, "T^{n}(g)"'] & T^{n}(C') \arrow[r, "\delta"'] & T^{n + 1}(A')
+		\end{tikzcd}.
+	\end{equation*}
+	The left square commutes since $\varphi^{n}$ is a natural transformation by inductive hypothesis. The right square commutes since that is how we defined $\varphi^{n + 1}$ (see \Cref{eq:08}). Thus, the outer rectangle commutes. On the other hand, the naturality of $\delta$ tells us that the horizontal composite $\delta \circ F^{n}(g)$ is simply the $\delta$ map $F^{n}(A'') \to F^{n + 1}(A')$ corresponding to the first row of \Cref{eq:07} and similarly for $T^{\ast}$. Thus, the outer rectangle commuting shows us that $\varphi^{n + 1}$ commutes with $\delta$, as desired.
+\end{proof}
+
+\subsection{Introduction to colimits} \label{subsec:introduction-colimits}
+
+Recall that a \deff{partially ordered set (poset)} $(\Lambda, \le)$ is a set $\Lambda$ with a binary relation $\le$ which is reflexive, antisymmetric, and transitive. We shall assume that all our posets are nonempty. \newline
+$\Lambda$ can be considered as a category in the following way:
+\begin{enumerate}
+	\item the objects are elements of $\Lambda$,
+	\item there is a unique arrow $a \to b$ whenever $a \le b$,
+	\item the composition is the forced one.
+\end{enumerate}
+
+$\Lambda$ is said to be \deff{(upwards) directed} if for all $a$, $b \in \Lambda$, there exists $c \in \Lambda$ such that $a \le c$ and $b \le c$.
+
+We now define what a colimit is, in the general setting, but we shall soon turn to the situation where the index category is a directed poset.
+
+\begin{defn}
+	Let $I$ and $\C{C}$ be categories, and $F : I \to \C{C}$ be a functor. 
+
+	A \deff{co-cone} $(N, \psi)$ of $F$ is an object $N$ of $C$ together with a family of morphisms $\psi_{i} : F(i) \to N$ for every object $i$ of $I$, such that for every morphism $f : i \to j$ in $I$, we have $\psi_{j} \circ F(f) = \psi_{i}$.
+
+	A \deff{colimit} of $F$ is a co-cone $(L, \varphi)$ of $F$ such that for any co-cone $(N, \psi)$ of $F$, there is a unique morphism $u : L \to N$ such that $u \circ \varphi_{i} = \psi_{i}$ for all $i \in I$.
+\end{defn}
+
+To ease our mind, let us immediately see an example when $I$ the simplest interesting example: the poset $(\mathbb{N}_{0}, \le)$. Giving a functor $F : I \to \C{C}$ is the same as giving a diagram (in $\C{C}$) of the form
+\begin{equation*} 
+	C(0) \xrightarrow{f(0)} C(1) \xrightarrow{f(1)} C(2) \xrightarrow{f(2)} \cdots.
+\end{equation*}
+A limit will be an object $L$ along with morphism $\varphi(i) : C(i) \to L$ such that each (of the infinitely many) triangle commutes:
+
+\begin{equation*} 
+	\begin{tikzcd}
+	C(0) \arrow[r] \arrow[rrrrd, bend right] & C(1) \arrow[r] \arrow[rrrd, bend right] & C(2) \arrow[r] \arrow[rrd, bend right] & C(3) \arrow[r] \arrow[rd, bend right] & \cdots \\
+	                                         &                                         &                                        &                                       & L     
+	\end{tikzcd}
+\end{equation*}
+The universal property states that given any commutative diagram of the above form after replacing $L$ with some $N$, there exists a unique morphism $L \to N$ making the diagram below commute for all $i \ge 0$.
+
+\begin{equation*} 
+	\begin{tikzcd}
+	C(i) \arrow[rd] \arrow[rr] \arrow[rdd, bend right] &                     & C(i + 1) \arrow[ld] \arrow[ldd, bend left] \\
+	                                                   & L \arrow[d, dashed] &                                            \\
+	                                                   & N                   &                                           
+	\end{tikzcd}
+\end{equation*}
+
+\begin{exe}
+	Show that if a colimit of $F$ exists, then it is unique up to unique isomorphism.
+\end{exe}
+
+In view of the above exercise, we can talk about \emph{the} colimit. This is denoted by $\colim_{i \in I} F(i)$. If $I$ is a directed poset considered as a category, then the colimit is called a \deff{direct limit} and denoted by $\colimit_{i \in I} F(i)$.
+
+\begin{ex}
+	We also have a familiar example of colimit: direct sums. Indeed, if $I$ is an arbitrary (nonempty) set, then $I$ can be made a poset by giving it the discrete order, i.e., $x \le y \Leftrightarrow x = y$. In this case, the colimit of $F : I \to \C{A}$ is simply the direct sum $\bigoplus_{i \in I} F(i)$. Note that if $I$ is not a singleton, then the poset is not directed.
+\end{ex}
+
+\begin{prop}
+	Let $I$ be a small category, i.e., the collection of objects forms a set. Let $\C{A}$ be either $\lmod{R}$ or $\C{R}$ for some ring $R$. Then, given any functor $F : I \to \C{A}$, the colimit $\colim_{i \in I} F(i)$ exists.
+\end{prop}
+\begin{proof} 
+	Construct the following two direct sums:
+	\begin{equation*} 
+		\bigoplus_{\varphi : i \to j} F(i) \andd \bigoplus_{i \in I} F(i),
+	\end{equation*}
+	where the first direct sum is taken over all morphisms in $I$. 
+
+	For each such morphism $\varphi : i \to j$ in $I$, we have the map $F(\varphi) : F(i) \to F(j)$. This gives us a map
+	\begin{equation*} 
+		\Phi : \bigoplus_{\varphi : i \to j} F(i) \to \bigoplus_{i \in I} F(i).
+	\end{equation*}
+	(Note that we may have multiple arrows between two objects of $I$. This leads to multiple copies of $F(i)$ on the left.)
+	Similarly, since we have the maps $\id_{F(i)} : F(i) \to F(i)$ for every $\varphi : i \to j$, we get a map
+	\begin{equation*} 
+		\Psi : \bigoplus_{\varphi : i \to j} F(i) \to \bigoplus_{i \in I} F(i).
+	\end{equation*}
+	$\coker(\Phi - \Psi)$ gives the desired colimit.
+\end{proof}
+
+\begin{rem}
+	The above construction works for any small category $I$. In the special case that $I$ is a directed poset, we have a better alternate description as follows: Let $F : I \to \C{A}$ be a functor. Construct the disjoint $\coprod_{i \in I} F(i)$ and go modulo the following equivalence relation $\sim$: if $x_{i} \in A_{i}$ and $x_{j} \in A_{j}$, then $x_{i} \sim x_{j}$ iff there exists $k \in I$ with $i \le k$ and $j \le k$ such that 
+	\begin{equation*} 
+		F(i \to k)(x_{i}) = F(j \to k)(x_{j}),
+	\end{equation*}
+	i.e., $x_{i}$ and $x_{j}$ ``become equal in some higher $F(k)$''. 
+
+	Thus, the (object of the) colimit is given by
+	\begin{equation*} 
+		L \vcentcolon= \coprod_{i \in I} F(i)/{\sim}.
+	\end{equation*}
+
+	The maps $\varphi_{i} : F(i) \to L$ are the the obvious inclusions $F(i) \into \coprod_{i \in I} F(i)$ followed by the projection $\coprod_{i \in I} F(i) \to L$.
+\end{rem}
+
+\begin{ex}
+	Consider the poset $I = \mathbb{N}$ with the order given by divisibility, i.e., $i \le j$ iff $i$ divides $j$. Consider the functor $F : I \to \lmod{\mathbb{Z}}$ given by
+	\begin{equation*} 
+		F(i) = \mathbb{Z}
+	\end{equation*}
+	for all $i \in I$. Moreover, if $i \to j$ is a map, then $F(i \to j)$ is multiplication by $\frac{j}{i}$.
+
+	It is easy to check that $F$ is indeed a functor since $\frac{i}{i} = 1$ and $\frac{j}{i} \cdot \frac{k}{j} = \frac{k}{i}$. 
+
+	We claim that the colimit of $F$ is $\mathbb{Q}$ with the map $\varphi_{i} : F(i) \to \mathbb{Q}$ is division by $i$. 
+
+	First, we check that $(\mathbb{Q}, \varphi)$ is actually a co-cone. To this end, if $i \to j$ is a morphism, then given $x \in \mathbb{Z}$, we have
+	\begin{equation*} 
+		(\varphi_{j} \circ F(i \to j))(x) = \varphi_{j}\left(\frac{j x}{i}\right) = \frac{x}{i} = \varphi_{i}(x).
+	\end{equation*}
+
+	The check of the universal property is left as an exercise. We are essentially using the fact that $\mathbb{Q}$ is a localisation of $\mathbb{Z}$ with respect to $\mathbb{N}$.
+\end{ex}
+
+\begin{rem}
+	More generally, any localisation can be viewed as a colimit. However, this will be as a colimit of a category which is more general than a directed poset. It will be the colimit of a \emph{filtered category}, which is not something we need to define and so we do not. We outline the construction below.
+
+	Let $S \subset R$ be a multiplicative subset and $M$ be an $R$-module. Consider $S$ as a category where the objects are elements of $S$ and
+	\begin{equation*} 
+		\Hom_{S}(s_{1}, s_{2}) = \{s \in S : ss_{1} = s_{2}\}.
+	\end{equation*}
+
+	Composition is given by multiplication. $1$ acts as identity. (Note that it is possible that $\Hom_{S}(s_{1}, s_{2}) = \emptyset$ for some $s_{1}$ and $s_{2}$. That is okay.)
+
+	For $s \in S$, let $\mu_{s} : M \to M$ denote multiplication by $s$. Then, we define the functor $F : S \to \lmod{R}$ by
+	\begin{equation*} 
+		F(s) = M \andd F(s_{1} \xrightarrow{s} s_{2}) = \mu_{s}.
+	\end{equation*}
+
+	As before, it is easy to see that $F$ is actually a functor. Lastly, the colimit is given by $S^{-1}M$ with the maps $\varphi_{s} : M \to S^{-1}M$ being $x \mapsto \frac{x}{s}$.
+\end{rem}
+
+% \subsection{Exactness of colimits}
+
+\input{sections/i-power-torsion}
+\input{sections/polynomial-injective-hull}
+\input{sections/cech}
+\input{sections/completions}
+
+% \listoftheorems[ignoreall,show={fakeex}]
+
+\end{document}
+
+% brodmann and sharp local cohomology, urlich notes
+% adjointness - local cohomology, completion (I-adic)
+% matsumura, brunz and herzog

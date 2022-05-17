@@ -1,0 +1,406 @@
+% -------------------
+% Tikz & PGF
+% -------------------
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{
+	% calc,
+	% decorations.pathmorphing,
+	% hobby,
+	% matrix,arrows,
+	% positioning,
+	% shapes.geometric,
+	decorations.markings,
+	arrows.meta,
+}
+% \usepackage{pgfplots}
+% \pgfplotsset{compat=newest}
+
+% -------------------
+% Packages
+% -------------------
+
+\usepackage{
+	amsmath,			% Math Environments
+	amssymb,			% Math Symbols
+	amsthm,			    % Theorem Environments
+	bookmark,        	% Replaces (and loads) hyperref
+	caption, 			% Caption tables in float
+	calligra,			% Calligraphic
+	% chngcntr,			% Use counterwithin
+	cleveref,			% Use clever references
+	comment,			% Multiline comments
+	ctable,				% for \specialrule command
+	% enumerate,		% Enumerate Environments
+	enumitem,			% Labeling of enum
+	extpfeil,			% Extensible arrows in mathematics
+	fancyhdr,			% Better Headers
+	float,				% Force Image Placement
+	framed,				% Pretty (shaded) theorems
+	% graphics,
+	% graphicx,
+	% mathrsfs,         % More Math Scripts
+	mathtools,       	% Allows Prescript
+	mdframed,			% Blockquote environment
+	% microtype,       	% Improved Appearance
+	% multicol,			% Use Multi-columns
+	% multirow,			% Use Multi-rows
+	% nicefrac,			% Alternative Fractions
+	parskip,			% Paragraph space
+	% pstricks,pst-node,pst-tree,
+	% relsize,			% Bigger Math Symbols
+	stmaryrd,			% Power Series Brackets
+  thmtools,     % Custom Theorem Environments
+  titlesec,			% Set (sub)section formatting
+  % tkz-graph,			% For graphs (vertices and edges)
+	thm-restate,		% For Re-stateable Theorems
+	% totcount,			% Define counters
+	tcolorbox,			% Use tcolorbox
+	witharrows,			% Arrow transitions
+	xcolor,			    % Define Colors
+	% ytableau,			% Young diagrams
+}
+
+% \renewcommand{\sfdefault}{cmr}
+\setlength\parindent{0pt}
+\newcommand{\thiccline}{\specialrule{.1em}{.05em}{.05em}}
+
+% -------------------
+% Section formatting
+% -------------------
+
+\newcommand{\sectionbreak}{\clearpage}
+\titleformat{\section}[block]{\Large\filcenter\bfseries\sffamily}{\S\thesection.}{0.25cm}{\Large}
+\titleformat{\subsection}[block]{\large\bfseries\sffamily}{\S\S\thesubsection.}{0.2cm}{\large}
+
+% -------------------
+% Hyperref
+% -------------------
+\usepackage[all]{xy}
+\hypersetup{
+	colorlinks = true,
+	% citecolor = blue,
+  	% linkcolor  = blue,
+  	% urlcolor   = blue
+  	filecolor = red,
+}
+\PassOptionsToPackage{hyphens}{url}
+
+
+% -------------------
+% BibTex
+% -------------------
+% \usepackage[
+% 	hyperref = true,      	% Link to online documents
+%   	backend  = bibtex,      % Use bibtex instead of biber
+%   	sorting  = nyt,       	% Sorts by (name, year, title)
+%   	style  = alphabetic 	% Citations look like [Har77]
+% ]{biblatex}
+% \addbibresource{mat999_bib.bib}	% Change to match bib file
+
+
+% -------------------
+% Font
+% -------------------
+% \usepackage[adobe-utopia, cal=cmcal]{mathdesign}
+% \let\mathcal\undefined
+% \DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}	
+% \usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{euler}
+% \usepackage[cal=boondox]{mathalfa}
+% \usepackage{mathrsfs}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{charter}
+
+
+% -------------------
+% Colors
+% -------------------
+\definecolor{UnivColor}{RGB}{212,69,0}
+
+
+% -------------------
+% Header & Footer
+% -------------------
+% \pagestyle{fancy}
+% \fancyhf{}
+
+% % \fancyhead[CE]{}
+% \fancyhead[CO]{}
+% % \fancyhead[RE]{\thepage}
+% \fancyhead[LO]{\thepage}
+
+% \headheight=14pt
+% \footskip=14pt
+\pagestyle{fancy}
+\setlength{\headheight}{16pt}
+\fancyhf{}
+\fancyhead[L]{\sffamily{\S\textbf{\nouppercase{\leftmark}}}}
+\fancyhead[R]{\sffamily{\thepage}}
+
+% -------------------
+% Commands
+% -------------------
+
+% Special Characters
+% \newcommand{\N}{\mathbb{N}}
+% \newcommand{\Z}{\mathbb{Z}}
+% \newcommand{\Q}{\mathbb{Q}}
+% \newcommand{\R}{\mathbb{R}}
+% \newcommand{\F}{\mathbb{F}}
+% \newcommand{\C}{\mathbb{C}}
+% \renewcommand{\O}{\mathcal{O}}
+% \newcommand{\fp}{\mathfrak{p}}
+
+% Math Operators
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\Max}{Max}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\type}{type}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\pre}{pre}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\germ}{germ}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\cyl}{cyl}
+\DeclareMathOperator{\Presheaves}{Presheaves}
+\DeclareMathOperator{\Sheaves}{Sheaves}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator{\exx}{ex}
+\DeclareMathOperator{\htt}{ht}
+\DeclareMathOperator{\chr}{char}
+\DeclareMathOperator{\Ass}{Ass}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\gr}{gr}
+% \newcommand*{\sHom}{\mathscr{H}\text{\kern -5pt {\calligra\large om}}\,}
+
+% Categories
+\newcommand{\C}[1]{\mathbf{#1}}
+\newcommand{\Ab}{\C{Ab}}
+\newcommand{\F}[1]{\mathcal{#1}}
+\newcommand{\rmod}[1]{\C{mod}\text{-}#1}
+\newcommand{\lmod}[1]{#1\text{-}\C{mod}}
+\newcommand{\Ch}[1]{\C{Ch}(#1)}
+% \newcommand{\Set}{\mathbf{Set}}
+% \newcommand{\Mod}{\mathbf{Mod}}
+% \newcommand{\Ring}{\mathbf{Ring}}
+% \newcommand{\Grp}{\mathbf{Grp}}
+% \newcommand{\Ab}{\mathbf{Ab}}
+% \renewcommand{\Vec}{\mathbf{Vec}}
+% \newcommand{\Top}{\mathbf{Top}}
+% \newcommand{\Op}{\mathbf{Op}}
+% \newcommand{\Sch}{\mathbf{Sch}}
+
+
+% Special Commands
+\newcommand{\xqed}{\hfill \lower-0.3ex\hbox{$\triangleleft$}}
+% \newcommand{\ov}[1]{\overline{#1}}
+% \newcommand*{\defeq}{\stackrel{\text{def}}{=}}
+% \newcommand{\pf}{\noindent\emph{Proof. }}
+% \newcommand{\pfsk}{\noindent\emph{Proof (Sketch). }}
+\newcommand{\col}[2]{\begin{bmatrix} #1 \\ #2 \end{bmatrix}}
+\newcommand{\two}[4]{\begin{bmatrix} #1 & #2 \\ #3 & #4 \end{bmatrix}}
+\newcommand{\andd}{\quad\text{and}\quad}
+\newcommand{\md}[1]{{\left\lvert #1 \right\lvert}}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\fl}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\inm}{\in_m}
+\newcommand{\deff}[1]{{\color{blue}#1}}
+\newcommand{\dcos}[3]{#1 \reflectbox{\ensuremath{/}} #2 / #3}
+\newcommand*{\I}{\hat{\imath}}
+\newcommand*{\J}{\hat{\jmath}}
+\newcommand*{\K}{\hat{k}}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\forward}{($\Rightarrow$)\ }
+\newcommand{\backward}{($\Leftarrow$)\ }
+\renewcommand{\pmod}[1]{\ (\operatorname{mod} #1)}
+\newextarrow{\xbigtoto}{{20}{20}{20}{20}}
+   {\bigRelbar\bigRelbar{\bigtwoarrowsleft\rightarrow\rightarrow}}
+\newcommand{\ls}[2]{{}_{#2}#1}
+\newcommand{\mynameref}[1]{\nameref{#1} \ref{#1}}
+\let\emptyset\varnothing
+\let\subset\subseteq
+\let\supset\supseteq
+\let\ge\geqslant
+\let\le\leqslant
+
+\newcommand{\colimit@}[2]{%
+  \vtop{\m@th\ialign{##\cr
+    \hfil$#1\operator@font colim$\hfil\cr
+    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
+}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+\newcommand{\limit}{\varprojlim}
+
+% Counter Commands
+% \newcounter{problem}
+% \newcommand{\prob}{
+% 	\stepcounter{problem}%
+% 	\noindent\textbf{Problem \theproblem: }
+% }
+
+
+% -------------------
+% Theorem Environments
+% -------------------
+\numberwithin{equation}{section}
+\theoremstyle{definition}
+
+\newtheorem{fakethm}{Theorem}[subsection]
+\newtheorem{fakeprop}[fakethm]{Proposition}
+\newtheorem{fakepor}[fakethm]{Porism}
+\newtheorem{fakelem}[fakethm]{Lemma}
+\newtheorem{fakecor}[fakethm]{Corollary}
+\newtheorem{fakerem}[fakethm]{Remark}
+
+\newtheorem{fakedefn}[fakethm]{Definition}
+\newtheorem{fakeex}[fakethm]{Example}
+\newtheorem{fakeexe}[fakethm]{Exercise}
+\newtheorem{fakeobs}[fakethm]{Observation}
+% \newtheorem*{conject}{Conjecture}
+
+% -------------------
+% Coloured theorem and other environments
+% -------------------
+
+\newenvironment{thm}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakethm}}
+{\end{fakethm}\end{shaded}}
+
+\newenvironment{prop}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakeprop}}
+{\end{fakeprop}\end{shaded}}
+
+\newenvironment{por}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakepor}}
+{\end{fakepor}\end{shaded}}
+
+\newenvironment{lem}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakelem}}
+{\end{fakelem}\end{shaded}}
+
+\newenvironment{cor}
+{\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakecor}}
+{\end{fakecor}\end{shaded}}
+
+\newenvironment{rem}
+{\colorlet{shadecolor}{red!25}\begin{shaded}\begin{fakerem}}
+{\end{fakerem}\end{shaded}}
+
+\newenvironment{defn}
+{\colorlet{shadecolor}{green!15}\begin{shaded}\begin{fakedefn}}
+{\end{fakedefn}\end{shaded}}
+
+\newenvironment{exe}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeexe}}
+{\end{fakeexe}\end{shaded}}
+
+\newenvironment{ex}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeex}}
+{\end{fakeex}\end{shaded}}
+
+\newenvironment{obs}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeobs}}
+{\end{fakeobs}\end{shaded}}
+
+\newenvironment{blockquote}
+{\begin{mdframed}[skipabove=0pt, skipbelow=0pt, innertopmargin=4pt, innerbottommargin=4pt, bottomline=false,topline=false,rightline=false, linewidth=2pt]}
+{\end{mdframed}}
+\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+
+\newenvironment{disc}
+{\begin{tcolorbox}[parbox=false, colback = red!30]\bfseries}
+{\end{tcolorbox}}
+
+\newenvironment{aside}
+{\begin{tcolorbox}[parbox=false]}
+{\end{tcolorbox}}
+
+% -------------------
+% Cleverref setup
+% -------------------
+
+\newfloat{graph}{thp}{lop}
+\floatname{graph}{Graph}
+
+\crefname{fakethm}{theorem}{theorems}
+\crefname{fakelem}{lemma}{lemmas}
+\crefname{fakedefn}{definition}{definitions}
+\crefname{fakeprop}{proposition}{propositions}
+\crefname{fakepor}{porism}{porisms}
+\crefname{fakecor}{corollary}{corollaries}
+\crefname{fakeexe}{exercise}{exercises}
+\crefname{fakeobs}{observation}{observations}
+\crefname{fakeex}{example}{examples}
+\crefname{fakerem}{remark}{remarks}
+\crefname{equation}{}{}
+\crefname{graph}{graph}{graphs}
+
+% -------------------
+% First Pages
+% -------------------
+
+% Title Page
+\newcommand{\coverpage}{%
+\pagestyle{empty}
+    \begin{center}
+	\begin{tabular}{c}
+	\raisebox{-.5\height}{\includegraphics[scale=\scalesize]{\imagename}} %& {\color{UnivColor} \Huge \univname} \\
+	\end{tabular}
+    \end{center}
+\vspace{3in}
+
+{\color{UnivColor} \Huge\noindent\coursenum \par\vspace{0.2cm}\noindent\coursename \par\vspace{0.1cm} \noindent\rule{0.65\textwidth}{0.05cm}\par\vspace{0.2cm}}
+
+{\color{UnivColor} \large \noindent Professor: \professor \par\noindent Notes By: \student}
+
+\vfill
+\begin{center} {\huge \color{UnivColor} \semesteryear} \end{center}
+}
+
+
+% Last Updated
+\newcommand{\updated}[1]{%
+\newpage
+\vspace*{\fill} 
+    \begin{quote} 
+    \centering 
+    Last Updated: #1 
+    \end{quote}
+\vspace*{\fill}
+\newpage
+}

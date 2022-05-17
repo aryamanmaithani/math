@@ -1,0 +1,1343 @@
+\section{Completions} \label{sec:completions}
+
+\subsection{Filtered rings and modules}
+
+\begin{defn}
+	A \deff{filtered ring} $R$ is a ring $R$ together with a family $(R_{n})_{n \ge 0}$ of subgroups of $R$ satisfying the conditions:
+	\begin{enumerate}
+		\item $R_{0} = R$,
+		\item $R_{n + 1} \subset R_{n}$ for all $n \ge 0$,
+		\item $R_{m} R_{n} \subset R_{m + n}$ for all $m, n \ge 0$.
+	\end{enumerate}
+\end{defn}
+
+Putting $m = 0$ in the last condition gives $R R_{n} \subset R_{n}$ for all $n \ge 0$. Thus, $(R_{n})_{n \ge 0}$ is a (decreasing) family of ideals.
+
+\begin{ex}
+	\begin{enumerate}
+		\item For any ring $R$, setting $R_{0} = R$ and $R_{n} = 0$ for $n > 0$ gives a filtration on $R$. This is called the \deff{trivial filtration}.
+		\item Let $R$ be an arbitrary ring and $I \unlhd R$ be an ideal. Then, $R_{n} \vcentcolon= I^{n}$ for $n \ge 0$ gives the \deff{$I$-adic filtration} on $R$.
+		\item If $(R_{n})_{n}$ is a filtration on $R$ and $S$ a subring of $R$, then $(S \cap R_{n})_{n}$ is a filtration on $S$, called the \deff{induced filtration} on $S$.
+	\end{enumerate}
+\end{ex}
+
+\begin{defn}
+	Let $R$ be a filtered ring. A \deff{filtered $R$-module} $M$ is an $R$-module $M$ together with a family $(M_{n})_{n \ge 0}$ of additive groups of $M$ satisfying
+	\begin{enumerate}
+		\item $M_{0} = M$,
+		\item $M_{n + 1} \subset M_{n}$ for all $n \ge 0$, 
+		\item $R_{m} M_{n} \subset M_{m + n}$ for all $n, m \ge 0$.
+	\end{enumerate}
+\end{defn}
+As before, putting $m = 0$ in the last point shows that each $M_{n}$ is an $R$-submodule. 
+
+\begin{enumerate}
+	\item A filtered ring is a filtered module over itself (with the filtration being the same).
+	\item Corresponding to the trivial filtration on $R$, we have the trivial filtration on any (usual) $R$-module $M$ given by $M_{0} = M$ and $M_{n} = 0$ for $n > 0$.
+	\item Similarly, defining $M_{n} \vcentcolon= I^{n} M$ gives the $I$-adic filtration on $M$ (corresponding to the $I$-adic filtration on $R$).
+	\item More generally, given a filtered ring $R$ and an ordinary $R$-module $M$, we can define a filtration on $M$ by $M_{n} \vcentcolon= R_{n} M$. This gives $M$ the structure of a filtered $R$-module.
+	\item Let $M$ be a filtered $R$-module and $N$ be an $R$-submodule of $M$. Then, we have an induced filtration on $N$ and $M/N$ given as
+	\begin{equation*} 
+		(N \cap M_{n})_{n \ge 0} \andd \left(\frac{N + M_{n}}{N}\right)_{n \ge 0},
+	\end{equation*}
+	respectively.
+\end{enumerate}
+
+\begin{defn}
+	Let $M$ and $N$ be filtered modules over a filtered ring $R$. A map $f : M \to N$ is called a \deff{homomorphism (map) of filtered modules} if $f$ is $R$-linear and $f(M_{n}) \subset N_{n}$ for all $n \ge 0$.
+\end{defn}
+
+\begin{ex} \label{ex:homomorphism-filtered-homomorphism}
+	\begin{enumerate}
+		\item Let $R$ be a filtered ring, and $f : M \to N$ be an (ordinary) $R$-module homomorphism. If $M$ and $N$ are given the filtrations $(R_{n} M)_{n \ge 0}$ and $(R_{n} N)_{n \ge 0}$ respectively, then $f$ is a homomorphism of filtered modules. \newline
+		In particular, this is true for $I$-filtrations.
+		\item Let $M$ be a filtered $R$-module and $N$ be an $R$-submodule. Then, the projection $p : M \to M/N$ is a homomorphism of filtered modules. Indeed, the filtration of $M/N$ is given precisely as $(p(M_{n}))_{n \ge 0}$.
+	\end{enumerate}
+\end{ex}
+
+\begin{defn}
+	A graded ring $R$ is a ring which can be written as a direct sum of subgroups $(R_{n})_{n \ge 0}$ such that $R_{m} R_{n} \subset R_{m + n}$ for all $n, m \ge 0$.
+
+	A nonzero element of $R_{n}$ is said to be a \deff{homogeneous element} of \deff{degree} $n$.
+\end{defn}
+
+\begin{rem}
+	Note that we are not demanding $R_{0} = R$ above. In fact, if $R_{0} = 0$, then we would have $R_{n} = 0$ for all $n > 0$. This is called the \deff{trivial gradation} on $R$.
+\end{rem}
+
+\begin{obs}
+	$R_{0}$ is a subring of $R$. Indeed, it is clear that $R_{0}$ is closed under sums and products (put $m = n = 0$ in the definition). \newline
+	We must show that $1 \in R_{0}$.
+
+	By assumption, we may write
+	\begin{equation*} 
+		1 = r_{0} + r_{1} + \cdots + r_{m}
+	\end{equation*}
+	for some $m \ge 0$ with $r_{i} \in R_{i}$.
+
+	Multiplying both sides with $r_{i}$ above gives
+	\begin{equation*} 
+		r_{i} = r_{i} r_{0} + r_{i} r_{1} + \cdots r_{i} r_{m}.
+	\end{equation*}
+	Comparing degrees of homogeneous elements on both sides shows that $r_{0} r_{i} = r_{i}$ for all $0 \le i \le m$. Finally, we get
+	\begin{equation*} 
+		r_{0} = r_{0} \cdot \sum r_{i} = \sum r_{0} r_{i} = \sum r_{i} = 1.
+	\end{equation*}
+\end{obs}
+
+\begin{cor}
+	If $R$ is a graded ring with grading $(R_{n})_{n \ge 0}$, then
+	\begin{enumerate}
+		\item $R_{0}$ is a subring,
+		\item $R$ is an $R_{0}$-module,
+		\item $R_{n}$ is an $R_{0}$-submodule for all $n \ge 0$.
+	\end{enumerate}
+\end{cor}
+\begin{proof} 
+	Only the last assertion needs to be proven. This follows by putting $m = 0$ in the definition of a graded ring.
+\end{proof}
+
+\begin{ex}
+	The motivating example is that of a polynomial ring. Consider $R = \kk[X_{1}, \ldots, X_{n}]$, where $\kk$ is a field. Define $R_{n}$ to be the $\kk$-vector space generated by monomials of the form $X^{\alpha}$ with $\md{\alpha} = n$. Then, $(R_{n})_{n \ge 0}$ defines a gradation on $R$.
+\end{ex}
+
+\begin{ex}
+	Given a ring $R$, and an $R$-module $M$, one forms the \deff{tensor algebra of $M$ over $R$} to be the $R$-algebra
+	\begin{equation*} 
+		T^{\ast}(M) = \bigoplus_{p \ge 0} T^{p}(M),
+	\end{equation*}
+	with $T^{0}(M) \vcentcolon= R$ and $T^{p}(M) = M^{\otimes p}$ for $p \ge 1$. Multiplication is defined on pure tensors by
+	\begin{equation*} 
+		(x_{1} \otimes \cdots \otimes x_{p}) \cdot (y_{1} \otimes \cdots \otimes y_{q}) \vcentcolon= x_{1} \otimes \cdots \otimes x_{p} \otimes y_{1} \otimes \cdots \otimes y_{q}.
+	\end{equation*}
+	This gives $T^{\ast}(M)$ the structure of a graded ring (which is also an $R$-algebra). However, this is \textbf{not} a commutative ring in general. Going modulo the ideal generated by elements of the form $x \otimes y - y \otimes x$ for $x, y \in M$ gives a graded commutative ring.
+
+	Note that $R$ and $M$ were not assumed to be graded here.
+\end{ex}
+
+\begin{defn}
+	Let $R$ be a graded ring. An $R$-module $M$ is called a \deff{graded $R$-module} if $M$ can be expressed as a direct sum of subgroups $(M_{n})_{n \ge 0}$ such that $R_{m} M_{n} \subset M_{m + n}$ for all $m, n \ge 0$.
+
+	An $R$-submodule $N$ of $M$ is said to be a \deff{graded submodule} if $N$ is the (internal) direct sum of $(N \cap M_{n})_{n \ge 0}$.
+\end{defn}
+
+\begin{rem}
+	Note that in the above $M_{n}$ need \textbf{not} be an $R$-submodule of $M$. However, putting $m = 0$ shows that each $M_{n}$ will be an $R_{0}$-submodule of $M$.
+\end{rem}
+
+\begin{ex}
+	Every graded ring is a graded module over itself (with the same gradation).
+\end{ex}
+
+To check that the reader is following what is happening so far, they may verify the following proposition as an exercise.
+
+\begin{exe} \label{exe:graded-submodule-equivalent}
+	Let $R$ be a graded and $M$ a graded $R$-module. Let $N \le M$ be an $R$-submodule. Show that the following are equivalent:
+	\begin{enumerate}
+		\item $N$ is a graded submodule.
+		\item $N$ is generated (as an $R$-module) by homogeneous elements.
+		\item If $x \in N$ and $x = x_{0} + x_{1} + \cdots x_{n}$, where $x_{i} \in M_{i}$, then $x_{i} \in N_{i}$ for all $i$.
+	\end{enumerate}
+\end{exe}
+
+The last point is saying that if some element belongs to $N$, then each of its homogeneous components also belongs to $N$.
+
+\begin{exe}
+	Let $R$ be a graded ring and $N$ be a graded submodule of $M$. Show that $M/N$ has a graded $R$-module structure with gradation given by
+	\begin{equation*} 
+		\left(\frac{N + M_{n}}{N}\right)_{n \ge 0}.
+	\end{equation*}
+	Moreover, $(N + M_{n})/N \cong M_{n}/N_{n}$ for all $n \ge 0$.
+\end{exe}
+
+\begin{defn}
+	Let $M$ and $N$ be graded modules over a graded ring $R$. Let $f : M \to N$ be a map of $R$-modules. $f$ is called a \deff{homomorphism (map) of graded modules} if $f(M_{n}) \subset N_{n}$ for all $n \ge 0$.
+\end{defn}
+
+\begin{defn} \label{defn:associated-graded-ring}
+	Let $R$ be a filtered ring with filtration $(R_{n})_{n \ge 0}$. Let 
+	\begin{equation*} 
+		\gr_{n}(R) \vcentcolon= R_{n}/R_{n + 1} \andd \gr(R) \vcentcolon= \bigoplus_{n \ge 0} \gr_{n}(R).
+	\end{equation*} 
+	Then, $\gr(R)$ has a natural multiplication structure given by
+	\begin{equation*} 
+		(a + R_{m + 1})(b + R_{n + 1}) = ab + R_{m + n + 1}
+	\end{equation*}
+	for $a \in R_{m}$ and $b \in R_{n}$. This makes $R$ into a graded ring. This ring is called the \deff{associated graded ring} of $R$.
+\end{defn}
+
+\begin{rem}
+	Note that if $a \in R_{m}$ and $b \in R_{n}$, then
+	\begin{equation*} 
+		a R_{n + 1} \subset R_{m + n + 1},\, b R_{m + 1} \subset R_{m + n + 1},\, R_{m + 1} R_{n + 1} \subset R_{m + n + 2} \subset R_{m + n + 1}.
+	\end{equation*}
+	This is why the product defined above is well-defined. The ring axioms then are easily verified.
+
+	$\gr_{n}(R) \gr_{m}(R) \subset \gr_{m + n}(R)$ is also clear from construction.
+\end{rem}
+
+\begin{ex}
+	Let $R$ be any ring, and $t \in R$ be a nonzerodivisor. Consider the $(t)$-adic filtration on $R$. In this case,
+	\begin{align*} 
+		\gr_{n}(R) &= (t^{n})/(t^{n + 1}), \\
+		\gr(R) &= R/(t) \oplus (t)/(t^{2}) \oplus (t^{2})/(t^{3}) \oplus \cdots.
+	\end{align*} 
+	We observe that $\gr(R)$ is naturally isomorphic to the polynomial ring $\frac{R}{(t)}[X]$.
+
+	To see this, first note that we have the identity ring homomorphism $R/(t) \to \gr_{0}(R)$. (By definition, we have $\gr_{0}(R) = R_{0}/R_{1}$.) \newline
+	By the universal property of polynomial rings, extending this map to a ring homomorphism $\frac{R}{(t)}[X] \to \gr(R)$ is the same as giving an element of $\gr(R)$ and mapping $X$ to it. We map $X$ to the image of $t$ in $\gr_{1}(R) = (t)/(t^{2})$. This gives us a ring homomorphism $\varphi : \frac{R}{(t)}[X] \to \gr(R)$.
+
+	This is surjective as $\bar{r} X^{n}$ maps to $r t^{n} + (t^{n + 1})$ and thus, the image contains $\gr_{n}(R)$ for all $n \ge 0$. 
+
+	We now show that $\ker(\varphi) = 0$. Let $\sum \overline{r_{i}} X^{i} \in \ker(\varphi)$, where $\overline{r_{i}}$ denotes the image of $r_{i} \in R$ in $R/(t)$. \newline
+	Applying $\varphi$ gives us that $r_{i} t^{i} \in (t^{i + 1})$ for all $i$. Thus, we can write
+	\begin{equation*} 
+		r_{i} t^{i} = s_{i} t^{i + 1}
+	\end{equation*}
+	for some $s_{i}$. Since $t$ is a nonzerodivisor, we may cancel $t^{i}$ to get $r_{i} = s_{i} t \in (t)$, i.e., $\overline{r_{i}} = 0$, as desired.
+\end{ex}
+
+\begin{ex}
+	Let $R = \kk[\![X_{1}, \ldots, X_{n}]\!]$ denote the $n$-variable power series ring over a field $\kk$, and $\mathfrak{m} \vcentcolon= (X_{1}, \ldots, X_{n})$. Consider the $\mathfrak{m}$-adic filtration on $R$. Note that $f \in \mathfrak{m}^{d}$ iff $\ord(f) \ge d$. (The order $\ord(f)$ of a nonzero power series to defined to be the minimum of $\md{\alpha}$ taking over all $\alpha$ such that $X^{\alpha}$ appears in $f$.) \newline
+	Moreover, as a $\kk$-vector space, $R_{d}/R_{d + 1}$ is isomorphic to the space of all homogeneous polynomials of degree $d$. It is a quick check from here to see that
+	\begin{equation*} 
+		\gr(R) \cong \kk[X_{1}, \ldots, X_{n}],
+	\end{equation*}
+	the polynomial ring.
+\end{ex}
+
+\begin{defn} \label{defn:associated-graded-module}
+	Let $R$ be a filtered ring and $M$ a filtered $R$-module. Let
+	\begin{equation*} 
+		\gr_{n}(M) \vcentcolon= M_{n}/M_{n + 1} \andd \gr(M) \vcentcolon= \bigoplus_{n \ge 0} \gr_{n}(M).
+	\end{equation*}
+	Then, $\gr(M)$ has the structure of a \underline{graded} $\gr(R)$-module given by
+	\begin{equation*} 
+		(a + R_{m + 1})(x + M_{n + 1}) = ax + M_{m + n + 1}
+	\end{equation*}
+	for $a \in R_{m}$ and $x \in M_{n}$. This module is called the \deff{associated graded module} of $M$.
+\end{defn}
+
+\begin{defn} \label{defn:gr-on-maps}
+	Let $R$ be a filtered ring, $M$, $N$ filtered $R$-modules, and $f : M \to N$ a map of filtered $R$-modules. Then, there is a natural map
+	\begin{equation*} 
+		\gr(f) : \gr(M) \to \gr(N)
+	\end{equation*}
+	given on $\gr_{n}(M)$ by
+	\begin{equation*} 
+		m + M_{n + 1} \mapsto f(m) + N_{n + 1}
+	\end{equation*}
+	for $m \in M_{n}$.
+\end{defn}
+
+\begin{rem}
+	As $f(M_{n + 1}) \subset N_{n + 1}$, the above map is well-defined.
+\end{rem}
+
+The explicit definition leads to an easy proof of the following proposition.
+
+\begin{prop}
+	With notations as in \Cref{defn:gr-on-maps}, we have the following.
+	\begin{enumerate}
+		\item $\gr(f)$ is a map of graded $R$-modules.
+		\item $\gr(\id_{M}) = \id_{\gr(M)}$.
+		\item If $h : N \to K$ is a map of filtered $R$-modules, then $\gr(h \circ f) = \gr(h) \circ \gr(f)$.
+	\end{enumerate}
+\end{prop}
+
+\begin{ex}
+	Let $R = \mathbb{Z}$, $I = (n)$ for some fixed $n > 1$. Let $M = N = \mathbb{Z}$. We have the $R$-linear map $f : M \to N$ given by $x \mapsto nx$. Giving the $I$-adic filtration to each of $R$, $M$, $N$ yields that $f$ is also a filtered map. Thus, we get a map $\gr(f) : \gr(M) \to \gr(N)$. It is clear that $\gr(f)$ is the zero map, even though $f$ was a nonzero map. In fact, $f$ was injective.
+\end{ex}
+
+\begin{prop}
+	Let $R$ be a filtered, $M$, $N$ filtered $R$-modules, and $f : M \to N$ a map of filtered $R$-modules. Suppose that $\bigcap_{n \ge 0} M_{n} = 0$. \newline
+	If $\gr(f)$ is injective, then $f$ is injective.
+\end{prop}
+\begin{proof} 
+	By assumption, the restriction $\gr_{n}(f) : M_{n}/M_{n + 1} \to N_{n}/N_{n + 1}$ is injective for all $n$. Thus, if $f(x_{n}) \in N_{n + 1}$ for some $x_{n} \in M_{n}$, then $x_{n} \in M_{n}$. In other words, 
+	\begin{equation*} 
+		f^{-1}(N_{n + 1}) \cap M_{n} \subset M_{n + 1}.
+	\end{equation*}
+	Moreover, note that 
+	\begin{equation*} 
+		f^{-1}(N_{0}) \subset M_{0}.
+	\end{equation*} 
+	Indeed, if $f(x_{0} + \cdots + x_{n}) \in N_{0}$, then $f(x_{1}) = \cdots = f(x_{n}) = 0$ and hence, $x_{i} = 0$ for $i > 0$.
+
+	The above inclusions inductively give us that
+	\begin{equation*} 
+		f^{-1}(N_{n}) \subset M_{n}
+	\end{equation*}
+	for all $n \ge 0$. In turn,
+	\begin{equation*} 
+		f^{-1}(0) \subset f^{-1}\left(\bigcap_{n \ge 0} N_{n}\right) = \bigcap_{n \ge 0} f^{-1}(N_{n}) \subset \bigcap_{n \ge 0} M_{n} = (0). \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{rem}
+	The above is not true if ``injective'' is replace with ``surjective''.
+\end{rem}
+
+\begin{prop} \label{prop:graded-ring-noetherian-equivalent}
+	Let $R$ be a graded ring with gradation $(R_{n})_{n \ge 0}$. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $R$ is Noetherian.
+		\item $R_{0}$ is Noetherian and $R$ is a finitely generated $R_{0}$-algebra.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(ii) $\Rightarrow$ (i) is a consequence of Hilbert's basis theorem. We prove the other direction. 
+
+	Assume $R$ is Noetherian. Note that $R_{+} = \bigoplus_{n > 1} R_{n}$ is an ideal of $R$ with $R_{0} \cong R/R_{+}$. Thus, $R_{0}$ is Noetherian. \newline
+	As $R$ is Noetherian, $R_{+}$ is finitely generated. Using \Cref{exe:graded-submodule-equivalent}, we may choose a finite generating set consisting of homogeneous elements, say $\{r_{1}, \ldots, r_{n}\}$, where $r_{i}$ has degree $n_{i}$. Let $R'$ be the $R_{0}$-subalgebra of $R$ generated by $\{r_{i}\}_{i}$. We show by induction that $R_{n} \subset R'$ for all $n$.
+
+	Clearly, $R_{0} \subset R'$. Fix $n \ge 0$ and suppose that $R_{k} \subset R'$ for all $k \le n$. Let $r \in R_{n + 1} \subset R_{+}$ be arbitrary. Then, we can write
+	\begin{equation*} 
+		r = \sum \lambda_{i} r_{i}.
+	\end{equation*}
+	After expanding each $\lambda_{i}$ in terms of its homogeneous components and comparing the degree $n + 1$ component, we may assume that $\lambda_{i}$ is homogeneous of degree $n + 1 - n_{i}$. Note that $n_{i} \ge 1$ for all $i$ and thus, $n + 1 - n_{i} \le n$. By induction, $\lambda_{i} \in R'$. In turn, $r \in R'$.
+\end{proof}
+
+\begin{rem}
+	Note that under the above hypothesis, $R$ need not be a finitely generated $R_{0}$-module. Indeed, consider the example of $R = \kk[X]$ with the usual grading.	
+\end{rem}
+
+\begin{defn} \label{defn:I-filtration}
+	Let $M$ be a filtered $R$-module, and $I \unlhd R$ an ideal. The filtration $(M_{n})_{n \ge 0}$ is called an \deff{$I$-filtration} if $I M_{n} \subset M_{n + 1}$ for all $n \ge 0$. \newline
+	Furthermore, if there exists $m$ such that $I M_{n} = M_{n + 1}$ for all $n \ge m$, then the filtration is said to be \deff{$I$-stable}.
+\end{defn}
+
+\begin{ex}
+	The $I$-adic filtration is $I$-stable.
+\end{ex}
+
+\begin{prop} \label{prop:filtration-I-stable-equivalent}
+	Let $M$ be a finitely generated filtered $R$-module over a Noetherian ring $R$ with an $I$-filtration. The following conditions are equivalent.
+	\begin{enumerate}
+		\item The filtration on $M$ is $I$-stable.
+		\item If $R^{\ast} = \bigoplus_{n \ge 0} I^{n}$ and $M^{\ast} = \bigoplus_{n \ge 0} M_{n}$, the graded $R^{\ast}$-module $M^{\ast}$ is finitely generated.
+	\end{enumerate}
+\end{prop}
+Note that the direct sums above are \emph{external} direct sums. Note that $(M_{n})_{n \ge 0}$ here is a filtration and not a gradation. The filtration on $M$ being an $I$-filtration is what lets us define the graded module structure above. 
+\begin{proof} 
+	Set $N_{n} \vcentcolon= M_{0} \oplus \cdots \oplus M_{n}$. Note that each $M_{i}$ is finitely generated over $R$ and hence, so is each $N_{n}$. For $n \ge 0$, define the $R^{\ast}$-submodule $M_{n}^{\ast}$ of $M^{\ast}$ by
+	\begin{equation*} 
+		M_{n}^{\ast} \vcentcolon= M_{0} \oplus \cdots \oplus M_{n} \oplus I M_{n} \oplus I^{2} M_{n} \oplus \cdots.
+	\end{equation*}
+	Since $N_{n}$ is a finitely generated $R$-module, we see that $M_{n}^{\ast}$ is a finitely generated $R^{\ast}$-module.
+
+	Hence, $M = \bigcup_{n \ge 0} M_{n}^{\ast}$ is finitely generated over $R^{\ast}$ iff $M^{\ast} = M_{m}^{\ast}$ for some $m$ iff $M_{m + k} = I^{k} M_{m}$ for some $m$ and all $k \ge 1$. The last condition is precisely the definition of $(M_{n})_{n \ge 0}$ being $I$-stable.
+\end{proof}
+
+\begin{prop}[Artin-Rees Lemma] \label{prop:artin-rees}
+	Let $M$ be a filtered $R$-module with an $I$-stable filtration. Assume $R$ is Noetherian and $M$ is a finitely generated $R$-module. Then, the filtration induced by $M$ on a submodule $N \le M$ is also $I$-stable.
+\end{prop}
+\begin{proof} 
+	Recall that the filtration on $N$ is given by $N_{n} \vcentcolon= M \cap N_{n}$. Define the objects
+	\begin{equation*} 
+		R^{\ast} \vcentcolon= \bigoplus_{n} I^{n},\, M^{\ast} \vcentcolon= \bigoplus_{n} M_{n},\, N^{\ast} \vcentcolon= \bigoplus_{n} N_{n}.
+	\end{equation*}
+	As $R$ is Noetherian, $I$ is finitely generated. In turn, $R^{\ast}$ is a finitely generated $R$-algebra. By \Cref{prop:graded-ring-noetherian-equivalent}, it follows that $R^{\ast}$ is Noetherian. By \Cref{prop:filtration-I-stable-equivalent}, it follows that $M^{\ast}$ is finitely generated. Since $R^{\ast}$ is Noetherian, this implies that $N^{\ast}$ is also finitely generated. By \Cref{prop:filtration-I-stable-equivalent} again, the filtration on $N$ is $I$-stable.
+\end{proof}
+
+\begin{cor} \label{cor:artin-rees}
+	Let $R$ be a Noetherian ring, $I \unlhd R$ an ideal, and $M$ a finitely generated $R$-module, and $N$ a submodule of $R$. Then there exists $m \ge 0$ such that
+	\begin{equation*} 
+		I^{k}(I^{m} M \cap N) = I^{m + k} M \cap N
+	\end{equation*}
+	for all $k \ge 1$.
+\end{cor}
+\begin{proof} 
+	Apply \mynameref{prop:artin-rees} to the $I$-adic filtration on $M$.
+\end{proof}
+
+\subsection{Completion}
+
+Dual to colimits (\Cref{subsec:introduction-colimits}), one may define the limit of a functor. As before, one may look at poset categories. The reader is encouraged to formulate the definition of a limit in the general setting, by flipping the arrows. For the purpose of our exposition, it suffices to restrict to a particular case that we define below.
+
+\begin{defn}
+	An \deff{inverse system} of $R$-modules if a collection of $R$-modules $(M_{n})_{n \ge 0}$ and homomorphisms $(\theta_{n})_{n \ge 1}$, where $\theta_{n} : M_{n} \to M_{n - 1}$. \newline
+	If $\theta_{n}$ is surjective for all $n$, then the system is said to be a \deff{surjective system}.
+
+	The \deff{inverse limit} of this system is an $R$-module $M$ together with $R$-homomorphisms $(f_{i})_{i \ge 1}$, where $f_{i} : M \to M_{i}$ are such that $\theta_{i + 1} \circ f_{i + 1} = f_{i}$ for all $i \ge 0$, and $M$ is \emph{universal} for this property, i.e., if $M'$ is another $R$-module with maps $g_{i} : M' \to M_{i}$ satisfying $\theta_{i + 1} g_{i + 1} = g_{i}$, then there exists a unique $R$-linear map $\lambda : M' \to M$ with $f_{i} \lambda = g_{i}$ for all $i \ge 0$.
+\end{defn}
+
+\begin{ex}
+	If we have a filtration
+	\begin{equation*} 
+		M = M_{0} \supset M_{1} \supset M_{2} \supset \cdots,
+	\end{equation*}
+	then we have an inverse system $(M/M_{n})_{n \ge 0}$ with
+	\begin{equation*} 
+		\theta_{n + 1} : M/M_{n + 1} \to M/M_{n}
+	\end{equation*}
+	being the natural map $x + M_{n + 1} \mapsto x + M_{n}$.
+
+	Moreover, this is a \emph{surjective system}.
+\end{ex}
+
+\begin{prop} \label{prop:inverse-limit-existence}
+	The inverse limit of $((M_{n}), (\theta_{n}))$ exists and is unique up to unique isomorphism.
+\end{prop}
+\begin{proof} 
+	We only prove existence. The uniqueness follows from the universal properties as usual.
+
+	Define $N \vcentcolon= \prod_{i \ge 0} M_{i}$ and let $\pi_{i} : N \to M_{i}$ denote projection onto the $i$-th coordinate. \newline
+	Consider the submodule $M \subset N$ consisting of \deff{coherent sequences}, i.e., sequences $(x_{i})_{i \ge 0} \in N$ satisfying
+	\begin{equation*} 
+		\theta_{i + 1}(x_{i + 1}) = x_{i} \quad \text{for all } i \ge 0.
+	\end{equation*}
+	Define $f_{i} : M \to N_{i}$ to be $\pi_{i}|_{M}$. Then, $(M, (f_{i}))$ is the inverse limit.
+\end{proof}
+
+The inverse limit is denoted by
+\begin{equation*} 
+	\limit_{n} M_{n}.
+\end{equation*}
+
+An element $(x_{n})_{n \ge 0}$ of the inverse limit may also be written as
+\begin{equation*} 
+	(\ldots, x_{2}, x_{1}, x_{0}).
+\end{equation*}
+
+\begin{ex} \label{ex:polynomial-inverse-limit-power-series}
+	Let $R = \kk$ be a field. For $n \ge 0$, consider the $R$-module $M_{n} \vcentcolon= \kk[X]/(X^{n})$. There is a natural map $\theta_{n + 1} : M_{n + 1} \to M_{n}$ induced by the quotient map. \newline
+	Note that elements of $M_{n + 1}$ have a canonical representative given by a polynomial of degree at most $n$. Moreover, $\theta_{n + 1}$ simply truncates the $X^{n}$ term. Using this, identify $\limit_{n} M_{n}$ as $\kk[\![X]\!]$.
+
+	More generally, consider $R$ to be any ring, fix $k \ge 1$, and define $R' \vcentcolon= R[X_{1}, \ldots, X_{k}]$, $\mathfrak{m} \vcentcolon= (X_{1}, \ldots, X_{k})$. If $M_{n} \vcentcolon= R'/\mathfrak{m}^{n}$, then we have
+	\begin{equation*} 
+		\limit_{n} M_{n} \cong R[\![X_{1}, \ldots, X_{k}]\!].
+	\end{equation*}
+\end{ex}
+
+\begin{defn}
+	Let $M$ be a filtered $R$-module. The filtration $(M_{n})_{n \ge 0}$ on $M$ defines a topological group structure on $M$ (recall \Cref{subsec:topology-module}) for which $(M_{n})_{n \ge 0}$ is a fundamental system of neighbourhoods of $\{0\}$. This is called the \deff{topology induced by the filtration} $(M_{n})_{n}$.
+\end{defn}
+
+Note that $R$ is also now a topological space due to the filtration $(R_{n})_{n \ge 0}$. For $a, b \in R$, we have
+\begin{equation*} 
+	(a + R_{n})(b + R_{n}) \subset ab + R_{n}
+\end{equation*}
+for all $n \ge 0$. This implies that multiplication on $R$ is continuous. Furthermore, if $x \in M$, then
+\begin{equation*} 
+	(a + R_{n})(x + M_{n}) \subset ax + M_{n}.
+\end{equation*}
+Thus, the scalar multiplication $R \times M \to M$ is also continuous. This means that $R$ is a \deff{topological ring} and $M$ a \deff{topological $R$-module}.
+
+\begin{prop}
+	Let $N$ be a submodule of the filtered module $M$. In the topology on $M$ induced by the filtration, we have
+	\begin{equation*} 
+		\overline{N} = \bigcap_{n \ge 0} (N + M_{n}).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Let $x \in M$. $x \notin \overline{N}$ iff there exists some neighbourhood of $x$ not intersecting $N$ iff there exists $n \ge 0$ such that $(x + M_{n}) \cap N = \emptyset$, i.e., $x \notin N + M_{n}$ for some $n$.
+\end{proof}
+
+\begin{cor} \label{cor:filtration-hausdorff-intersection-zero}
+	The topology defined by the filtration is Hausdorff if and only if $\bigcap_{n \ge 0} M_{n} = \{0\}$.
+\end{cor}
+\begin{proof} 
+	Use \Cref{lem:abelian-group-hausdorff}.
+\end{proof}
+
+Recall that in \Cref{subsubsec:completion-cauchy}, we had defined the completion of an arbitrary topological abelian group using Cauchy sequences. In our case of the topology being defined via filtrations, we see that the definition of Cauchy sequences can be formulated by using just $(M_{n})_{n}$ instead of an arbitrary neighbourhood $U$. Moreover, two Cauchy sequences $(x_{n})_{n}$ and $(y_{n})_{n}$ are equivalent iff for each $m$ there exists $n_{0}$ such that $x_{n} - y_{n} \in M_{m}$ for all $n \ge n_{0}$. \newline
+Note that if $(x_{n})_{n}$ is a Cauchy sequence and $r \in R$, then $(r x_{n})_{n}$ is a Cauchy sequence. (Use the filtered structure.) \newline
+Moreover, the equivalence class of this product depends only on the equivalence class of $(x_{n})_{n}$. Thus, $\widehat{M}$ is also an $R$-module. (So far, we have not defined any topology on $\widehat{M}$.)
+
+We now show the completion can also be obtained as a direct limit.
+
+\begin{prop}
+	Let $M$ be a filtered $R$-module with filtration $(M_{n})_{n \ge 0}$ and the topology induced by this filtration. Then,
+	\begin{equation*} 
+		\widehat{M} \cong \limit_{n} M/M_{n},
+	\end{equation*}
+	as $R$-modules.
+\end{prop}
+\begin{proof} 
+	We shall use the construction of $\widetilde{M} \vcentcolon= \lim_{n} M/M_{n}$ as defined in \Cref{prop:inverse-limit-existence} and the construction of $\widehat{M}$ as in \Cref{subsubsec:completion-cauchy}. 
+
+	We define a map
+	\begin{equation*} 
+		\alpha : \limit_{n} M/M_{n} \to \widehat{M}
+	\end{equation*}
+	as follows: Let $y \in \widetilde{M}$ with $y = (y_{n})_{n}$ being a coherent sequence. For each $n$, choose $x_{n} \in M$ such that $\overline{x_{n}} = y_{n}$. Note that $x_{n} - x_{m} \in M_{m}$ for all $n \ge m$ and thus, $(x_{n})_{n}$ is a Cauchy sequence. \newline
+	Similarly, if we had chosen another sequence $(x_{n}')_{n}$ such that $\overline{x_{n}'} = y_{n}$ for all $n$, then we would have $x_{n}' - x_{n} \in M_{m}$ for all $m$ and all $n \ge m$. Thus, the two Cauchy sequences are equivalent and we get a well-defined map
+	\begin{equation*} 
+		\alpha(y) \vcentcolon= [(x_{n})_{n}].
+	\end{equation*}
+	$\alpha$ is easily seen to be $R$-linear. We show that $\alpha$ is an isomorphism.
+
+	Suppose $y = (y_{n})_{n} \in \ker(\alpha)$. Then, $(x_{n})_{n}$ is equivalent to $(0)_{n}$, i.e., $x_{n} \to 0$. Thus, for every $m$ there exists $n_{0}$ such that $x_{n} \in M_{m}$ for all $n \ge n_{0}$. Thus, we may find $n > m$ such that $x_{n} \in M_{m}$. Note that by construction, we have that the image of $x_{n} + M_{n}$ under the compositions
+	\begin{equation*} 
+		M/M_{n} \xrightarrow{\theta_{n}} \cdots \xrightarrow{\theta_{m + 1}} M/M_{m}
+	\end{equation*}
+	is $x_{n} + M_{m}$. On the other hand, by the coherence condition, it equals $x_{m} + M_{m}$. Thus, $x_{m} - x_{n} \in M_{m}$. As $x_{n} \in M_{m}$, we get $x_{m} \in M_{m}$. We have shown that $x_{m} \in M_{m}$ for all $m \ge 0$. Thus, $y = 0$.
+
+	To see that $\alpha$ is surjective, given Cauchy sequence $(z_{n})_{n}$ in $M$, we can inductively pick a subsequence $(x_{n})_{n}$ such that $x_{n + 1} - x_{n} \in M_{n}$ for all $n$. If $y_{n} \vcentcolon= x_{n} + M$, then $y \vcentcolon= (y_{n})_{n}$ satisfies $\alpha(y) = [(z_{n})_{n}]$.
+\end{proof}
+
+\begin{rem}
+	From this point on, we shall work with topologies induced by filtrations. We shall interchangeably use the description of $\widehat{M}$ in terms of (equivalence classes) of Cauchy sequences and in terms of coherent sequences.
+
+	There is a map $M \to \widehat{M}$ given by
+	\begin{equation*} 
+		x \mapsto (x + M_{n})_{n}.
+	\end{equation*}
+\end{rem}
+
+\begin{obs}
+	The natural map $\varphi : M \to \widehat{M}$ is injective iff $\bigcap_{n \ge 0} M_{n} = 0$. In turn, this is equivalent to $M$ being Hausdorff (\Cref{cor:filtration-hausdorff-intersection-zero}). 
+
+	Indeed, $x \in \ker(\varphi)$ iff $x \in M_{n}$ for all $n \ge 0$.
+\end{obs}
+
+\begin{defn}
+	$M$ is said to be \deff{complete} if the natural map $M \to \widehat{M}$ is an isomorphism.
+\end{defn}
+Note that in such a case, the kernel must be zero, i.e., $\bigcap_{n \ge 0} M_{n} = 0$, i.e., $M$ is Hausdorff.
+
+\begin{rem}
+	Note that if $R$ is a ring, then $\widehat{R}$ as defined above is an $R$-module. However, note that $\widehat{R}$ is also quite naturally a ring with multiplication being the natural one (in either interpretation -- via Cauchy sequences or coherent sequences -- there is a natural product which is indeed well-defined). 
+
+	Along with the natural map $R \to \widehat{R}$, we see that $\widehat{R}$ is an $R$-algebra.
+\end{rem}
+
+\begin{defn}
+	Given inverse systems $(M_{n}', \theta_{n}')$ and $(M_{n}, \theta_{n})$, a \deff{morphism of inverse systems}
+	\begin{equation*} 
+		f : (M_{n}')_{n} \to (M_{n})_{n}
+	\end{equation*} 
+	is a family of maps $f_{n} : M_{n}' \to M_{n}$ for $n \ge 0$ such that the following diagram commutes for all $n$:
+	\begin{equation*} 
+		\begin{tikzcd}
+			M_{n + 1}' \arrow[d, "\theta_{n + 1}'"'] \arrow[r, "f_{n + 1}"] & M_{n + 1} \arrow[d, "\theta_{n + 1}"] \\
+			M_{n}' \arrow[r, "f_{n}"] & M_{n} 
+		\end{tikzcd}
+	\end{equation*}
+
+	A sequence of inverse system morphisms
+	\begin{equation*} 
+		0 \to (M_{n}') \xrightarrow{f} (M_{n}) \xrightarrow{g} (M_{n}'') \to 0
+	\end{equation*}
+	is said to be \deff{exact} if the corresponding sequence is exact for each $n$.
+\end{defn}
+Given a morphism as above, one can ``take limits on both sides'' and get an induced map
+\begin{equation*} 
+	\limit_{n} M_{n}' \to \limit_{n} M_{n}
+\end{equation*}
+defined by
+\begin{equation*} 
+	(x_{n}')_{n} \mapsto (f_{n}(x_{n}'))_{n}.
+\end{equation*}
+
+The diagram commuting ensures that the sequence on the right is coherent.
+
+\begin{prop} \label{prop:completion-exact-properties}
+	Suppose we have an exact sequence
+	\begin{equation*} 
+		0 \to (A_{n}) \xrightarrow{f} (B_{n}) \xrightarrow{g} (C_{n}) \to 0
+	\end{equation*}
+	of inverse systems. Then, the sequence
+	\begin{equation*} 
+		0 \to \limit_{n} A_{n} \to \limit_{n} B_{n} \to \limit_{n} C_{n}
+	\end{equation*}
+	is exact. Furthermore, if $(A_{n})_{n}$ is a surjective system, then
+	\begin{equation*} 
+		0 \to \limit_{n} A_{n} \to \limit_{n} B_{n} \to \limit_{n} C_{n} \to 0
+	\end{equation*}
+	is exact.
+\end{prop}
+\begin{proof} 
+	Let $A \vcentcolon= \prod_{n} A_{n}$ and define $d^{A} : A \to A$ by 
+	\begin{equation*} 
+		(a_{n}) \mapsto (a_{n} - \theta_{n + 1}(a_{n + 1}))_{n}.
+	\end{equation*}
+	Note that $\ker(d^{A}) = \limit A_{n}$. Define $B$, $C$, $d^{B}$, $d^{C}$ similarly. We now have a commutative diagram with exact rows as follows
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & A \arrow[r] \arrow[d, "d^{A}"] & B \arrow[r] \arrow[d, "d^{B}"] & C \arrow[r] \arrow[d, "d^{C}"] & 0 \\
+			0 \arrow[r] & A \arrow[r] & B \arrow[r] & C \arrow[r] & 0 \\
+		\end{tikzcd}.
+	\end{equation*}
+	This gives us an exact sequence
+	\begin{equation*} 
+		0 \to \ker(d^{A}) \to \ker(d^{B}) \to \ker(d^{C}) \to \coker(d^{A}),
+	\end{equation*}
+	as desired. Finally, if $(A_{n})_{n}$ is a surjective system, we need to show that $d^{A}$ is surjective. But this is simple because we just need to inductively solve
+	\begin{equation*} 
+		x_{n} - \theta_{n + 1}(x_{n + 1}) = a_{n}. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{cor} \label{cor:completion-exact-induced-filtrations}
+	Let 
+	\begin{equation*} 
+		0 \to M' \to M \xrightarrow{p} M'' \to 0
+	\end{equation*}
+	be an exact sequence and $(M_{n})_{n}$ a filtration of $M$ with induced filtrations on $M'$ and $M''$. If completions are taken with respect to these filtrations, then the sequence
+	\begin{equation*} 
+		0 \to \widehat{M'} \to \widehat{M} \to \widehat{M''} \to 0
+	\end{equation*}
+	is exact.
+\end{cor}
+\begin{proof} 
+	Apply \Cref{prop:completion-exact-properties} to
+	\begin{equation*} 
+		0 \to \frac{M'}{M' \cap M_{n}} \to \frac{M}{M_{n}} \to \frac{M''}{p(M_{n})} \to 0. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{cor} \label{cor:completion-quotient-filtration}
+	Given a filtration $(M_{n})_{n}$ on $M$, $\widehat{M_{n}}$ can be realised as submodule of $\widehat{M}$ and 
+	\begin{equation} \label{eq:09}
+		\widehat{M}/\widehat{M_{n}} \cong M/M_{n}.
+	\end{equation}
+\end{cor}
+\begin{proof} 
+	Fix $n$. Using \Cref{cor:completion-exact-induced-filtrations} on $M' = M_{n}$ and $M'' = M/M_{n}$ shows us that
+	\begin{equation*} 
+		\widehat{M}/\widehat{M_{n}} \cong \widehat{M''}.
+	\end{equation*}
+	On the other hand, note that the filtration on $M''$ is given as $\left(\frac{M_{m} + M_{n}}{M_{n}}\right)_{m}$. For $m \ge n$, we have $(M_{m} + M_{n})/M_{n} = 0$. Thus, the topology on $M''$ is the discrete one and hence, $M'' \cong \widehat{M''}$ (as Cauchy sequences are eventually constant and two Cauchy sequences are equivalent iff they are eventually equal). Thus, we have
+	\begin{equation*} 
+		\widehat{M}/\widehat{M_{n}} \cong M'' = M/M_{n}. \qedhere
+	\end{equation*}
+\end{proof}
+
+Note that the identification of $\widehat{M_{n}}$ as a submodule of $\widehat{M}$ is in the natural way: a Cauchy sequence in $M_{n}$ remains a Cauchy sequence in $M$, and this defines a map on the equivalence classes also. The exactness property tells us that if two Cauchy sequences were inequivalent in $M_{n}$, then they continue to be so in $M$. The isomorphism above is the natural one: We have the natural maps $M \to \widehat{M} \to \widehat{M}/\widehat{M_{n}}$ and the kernel of this composition is $M_{n}$.
+
+It is also straightforward to see that $(\widehat{M_{n}})_{n}$ defines a filtration on $\widehat{M}$. Thus, $\widehat{M}$ itself can now be regarded as a topological abelian group.
+
+\begin{cor}
+	Under the filtration $(\widehat{M_{n}})_{n}$ of $\widehat{M}$, we have
+	\begin{equation*} 
+		\widehat{\widehat{M}} \cong \widehat{M}.
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	Take limits in \Cref{eq:09}.
+\end{proof}
+
+\begin{disc}
+	Here is a summary of what we have done:
+
+	We started with a filtered ring $R$ and a filtered $R$-module $M$. \newline
+	Using the filtration $(M_{n})_{n \ge 0}$, we can defined a topology on $M$. In particular, this gives a topology on $R$ as well. \newline
+	We see that $R$ is a topological ring, and $M$ a topological $R$-module. \newline
+	Then, we constructed a new $R$-module $\widehat{M}$, which we called the completion of $\widehat{M}$. This could be constructed in two ways:
+	\begin{enumerate}
+	 	\item equivalence classes of Cauchy sequences in $M$,
+	 	\item coherent sequences in $\prod_{n \ge 0} M/M_{n}$.
+	 \end{enumerate}
+	 In either case, we only saw how to get a module (without any topology). Then, we saw that there is a natural filtration on $\widehat{M}$ given by $(\widehat{M_{n}})_{n \ge 0}$. \newline
+	 This makes $\widehat{M}$ into a topological $R$-module. One could repeat the same thing again but we saw that $\widehat{M} \cong \widehat{\widehat{M}}$. In particular, this shows that $\widehat{M}$ is complete, and thus, every Cauchy sequence in $\widehat{M}$ converges.
+\end{disc}
+
+\begin{obs} \label{obs:power-series-in-completion-converges}
+	Let $M$ be a filtered $R$-module. Let $(x_{n})_{n \ge 0}$ be a sequence such that $x_{n} \in M_{n}$ for all $n \ge 0$. Then, 
+	\begin{equation*} 
+		x_{0} + x_{1} + x_{2} + \cdots
+	\end{equation*}
+	converges in $\widehat{M}$. (To be precise, we mean the image of $x_{i}$ under the natural map $M \to \widehat{M}$, which is not an inclusion unless $\bigcap_{n} M_{n} = 0$.)
+
+	Indeed, for $n \ge m$, we have
+	\begin{equation*} 
+		x_{m} + x_{m + 1} + \cdots + x_{n} \in M_{m}.
+	\end{equation*}
+	Thus, the sequence of partial sums is Cauchy in $M$ and hence has a limit in $\widehat{M}$.
+
+	In particular, if we consider $R$ with the $I$-adic filtration, then we see that
+	\begin{equation*} 
+		1 + a + a^{2} + \cdots
+	\end{equation*}
+	has a limit in $\widehat{R}$ for any $a \in I$. 
+
+	Also, note that if $a \in I$, then $a^{n} \in I^{n}$ and hence, $\lim_{n \to \infty} a^{n} = 0$. Thus, taking limits on both sides of
+	\begin{equation*} 
+		(1 - a)(1 + a + \cdots + a^{n}) = 1 - a^{n + 1}
+	\end{equation*}
+	shows that $1 + a + a^{2} + \cdots$ is the inverse of $1 - a$ in $\widehat{R}$.
+\end{obs}
+
+We now make some general remarks. Our first aim is to observe a scenario where two different filtrations given the same topology. As a motivational example, the reader may recall that two norms $\|\cdot\|_{1}, \|\cdot\|_{2}$ on a real vector space are said to be equivalent if there exists constants $c, C > 0$ such that $c \|x\|_{1} \le \|x\|_{2} \le C \|x\|_{1}$ for all vectors $x$. It is an easy check that equivalent norms induce the same topology.
+
+\begin{defn}
+	Let $R$ be a filtered ring and $M$ be an $R$-module. Two filtrations $(M_{n})_{n}$ and $(M_{n}')_{n}$ on $M$ are said to be \deff{equivalent} if there exists an integer $k \ge 0$ such that
+	\begin{equation*} 
+		M_{n + k} \subset M_{n}' \andd M_{n + k}' \subset M_{n}
+	\end{equation*}
+	for all $n \ge 0$.
+\end{defn}
+
+Note that the above is equivalent to asking for the existence of two integers $k_{1}, k_{2} \ge 0$ such that
+\begin{equation*} 
+	M_{n + k_{1}} \subset M_{n}' \andd M_{n + k_{2}}' \subset M_{n}
+\end{equation*}
+for all $n \ge 0$.
+
+One direction (getting $k_{1}$ and $k_{2}$ from $k$) is trivial. \newline
+For the other, note that taking $k = \max\{k_{1}, k_{2}\}$ does the job since
+\begin{equation*} 
+	M_{n + k} = M_{n + k - k_{1} + k_{1}} \subset M_{n + k - k_{1}}' \subset M_{n}'
+\end{equation*}
+and similarly, $M_{n + k}' \subset M_{n}$.
+
+\begin{prop}
+	Equivalent filtrations induce the same topology. Furthermore, the completions with respect to these filtrations are isomorphic.
+\end{prop}
+\begin{proof} 
+	Let the notations be as before. We first show that the topologies induced are the same. It suffices to consider open neighbourhoods of $0$. Let $U$ be an open neighbourhood of $0$ with respect to the $(M_{n})_{n}$-topology. We show that $U$ is open in the $(M_{n}')_{n}$ topology.
+
+	Fix $y \in U$. Then $U$ contains $y + M_{n}$ for some $n \ge 0$. Note that
+	\begin{equation*} 
+		y + M_{n + k}' \subset y + M_{n}.
+	\end{equation*}
+	As $y + M_{n + k}'$ is open in the $(M_{n}')$-topology and $y \in U$ was arbitrary, we are done.
+
+	We now show that the completions are isomorphic. Let
+	\begin{equation*} 
+		M_{1} \vcentcolon= \limit_{n} M/M_{n} \andd M_{2} \vcentcolon= \limit_{n} M/M_{n}'.
+	\end{equation*}
+	Define $\Phi : M_{1} \to M_{2}$ by
+	\begin{equation*} 
+		(\ldots, x_{2} + M_{2}, x_{1} + M_{1}, x_{0} + M_{0}) \mapsto (\ldots, x_{k + 2} + M_{2}', x_{k + 1} + M_{1}', x_{k} + M_{0}').
+	\end{equation*}
+	The map above is well-defined since $M_{n + k} \subset M_{n}'$ for all $n \ge 0$. Similarly, define $\Psi : M_{2} \to M_{1}$ by
+	\begin{equation*} 
+		(\ldots, x_{2} + M_{2}', x_{1} + M_{1}', x_{0} + M_{0}') \mapsto (\ldots, x_{k + 2} + M_{2}, x_{k + 1} + M_{1}, x_{k} + M_{0}).
+	\end{equation*}
+	Then, $\Psi \circ \Phi$ is given by
+	\begin{equation*} 
+		(\ldots, x_{2} + M_{2}, x_{1} + M_{1}, x_{0} + M_{0}) \mapsto (\ldots, x_{2k + 2} + M_{2}, x_{2k + 1} + M_{1}, x_{2k} + M_{0}).
+	\end{equation*}
+	Note that since the sequence on the left is a coherent sequence (by definition of the inverse limit), we have $x_{2k + n} + M_{n} = x_{n} + M_{n}$ and thus, the above map is indeed the identity map. Similarly, so is $\Phi \circ \Psi$ and we are done.
+\end{proof}
+
+% Note that if the topologies are the same, then the completions will also be the same 
+
+\begin{cor} \label{cor:artin-rees-isomorphic-completions}
+	Let $R$ be a Noetherian, $M$ a finitely generated $R$-module, and $N$ a submodule of $M$. If $I$ is an ideal in $R$, then the two filtrations on $N$, viz. $(I^{n} N)_{n \ge 0}$ and $(N \cap I^{n} M)_{n \ge 0}$ are equivalent. Consequently, the completions of $N$ with respect to these topologies are the same.
+\end{cor}
+\begin{proof} 
+	Firstly, note that
+	\begin{equation*} 
+		I^{n} N \subset N \cap I^{n} M
+	\end{equation*}
+	for all $n \ge 0$.
+
+	We must show that there exists $k$ such that
+	\begin{equation*} 
+		N \cap I^{n + k} M \subset I^{n} N.
+	\end{equation*}
+	By \Cref{cor:artin-rees}, there exists $k \ge 0$ such that
+	\begin{equation*} 
+		N \cap I^{n + k} M = I^{n} (N \cap I^{m} M) \subset I^{n} N
+	\end{equation*}
+	for all $n \ge 0$, as desired.
+\end{proof}
+
+\subsection{\texorpdfstring{$I$}{I}-adic filtration}
+
+Let $R$ be a ring, $M$ an $R$-module, and $I \unlhd R$ an ideal of $R$.
+
+Recall that we have the \emph{$I$-adic} filtrations $R_{n} \vcentcolon= I^{n}$ and $M_{n} \vcentcolon= I^{n} M$ defined on $R$ and $M$, respectively. With these filtrations, $R$ is a filtered ring and $M$ is a filtered $R$-module.
+
+\begin{defn}
+	The topology defined on $M$ be the $I$-adic filtration is called the \deff{$I$-adic topology} and the completion is called the \deff{$I$-adic completion}.
+\end{defn}
+
+\begin{ex}
+	Let $R = \kk[X]$ with $\kk$ a field and $I = (X)$. Then, $\widehat{R} = \limit_{n} R/(X^{n})$. By \Cref{ex:polynomial-inverse-limit-power-series}, we see that this is $\kk[\![X]\!]$.
+
+	More generally, the completion of $\kk[X_{1}, \ldots, X_{k}]$ with respect to the $(X_{1}, \ldots, X_{n})$-adic topology is $\kk[\![X_{1}, \ldots, X_{k}]\!]$.
+\end{ex}
+
+\begin{ex}
+	Let $R = \mathbb{Z}$ and $I = (p)$, where $p \ge 2$ is a prime. Then, the completion $\widehat{R} = \limit_{n} \mathbb{Z}/p^{n} \mathbb{Z}$ is called the ring of $p$-adic integers.
+\end{ex}
+
+Let $\widehat{R}$ and $\widehat{M}$ denote the $I$-adic completions of $R$ and $M$, respectively. Then, we have a well-defined map $\widehat{R} \times \widehat{M} \to \widehat{M}$ given by
+\begin{equation*} 
+	[(a_{n})_{n}] \cdot [(x_{n})_{n}] \vcentcolon= [(a_{n} x_{n})_{n}].
+\end{equation*}
+The above makes $\widehat{M}$ into an $\widehat{R}$-module.
+
+Note that if $M$ and $N$ are $R$-module and $f : M \to N$ is any $R$-linear homomorphism, then $f(I^{n} M) \subset I^{n} f(M)$ for all $n \ge 0$. This induces an $R$-linear map $f_{n} : M/I^{n} M \to N/I^{n} N$ such that 
+\begin{equation*} 
+	\begin{tikzcd}
+		M/I^{n + 1} M \arrow[r, "f_{n + 1}"] \arrow[d] & N/I^{n + 1} N \arrow[d] \\
+		M/I^{n} M \arrow[r, "f_{n}"'] & N/I^{n} N
+	\end{tikzcd}
+\end{equation*} 
+commutes for all $n$.
+% $f$ is also a filtered map when all objects are given the $I$-adic filtration (\Cref{ex:homomorphism-filtered-homomorphism}).
+
+In other words, $f$ is a morphism of the appropriate inverse systems. As seen before, this induces a map $\widehat{f} : \widehat{M} \to \widehat{N}$. 
+
+\begin{prop} \label{prop:noetherian-I-adic-completion-exact}
+	Let $R$ be a Noetherian ring, and $I \unlhd R$ an ideal. Let $0 \to A \xrightarrow{f} B \xrightarrow{g} C \to 0$ be an exact sequence of finitely generated $R$-modules. Then, the $I$-adic completions form an exact sequence of $\widehat{R}$ modules
+	\begin{equation*} 
+		0 \to \widehat{A} \xrightarrow{\widehat{f}} \widehat{B} \xrightarrow{\widehat{g}} \widehat{C} \to 0.
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	We wish to use \Cref{prop:completion-exact-properties}. First, consider the filtrations on $A$ and $C$ \emph{induced} from that of $B$. As usual, we may as well assume that $f$ is an inclusion and $C = B/A$ with $g$ being the canonical quotient map. Then, the induced filtration on $A$ is $(A \cap I^{n} B)_{n \ge 0}$ and that on $C$ is $((A + I^{n} B)/A)_{n \ge 0}$. Let the completions with respect to these filtrations be $\widehat{A}'$ and $\widehat{C}'$. Then, \Cref{prop:completion-exact-properties} tells us that
+	\begin{equation*} 
+		0 \to \widehat{A}' \to \widehat{B} \to \widehat{C}' \to 0
+	\end{equation*}
+	is exact. 
+
+	Now, note that $(A + I^{n} B)/A$ is equal to $I^{n} (B/A) = I^{n} C$. Thus, $\widehat{C} = \widehat{C}'$. \newline
+	On the other hand, by \Cref{cor:artin-rees-isomorphic-completions}, we have $\widehat{A}' \cong \widehat{A}$. Moreover, the isomorphism is such that we have a commutative ladder as
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & \widehat{A}' \arrow[d, "\cong"] \arrow[r] & \widehat{B} \arrow[d, equals] \arrow[r] & \widehat{C}' \arrow[d, equals] \arrow[r] & 0 \\
+			0 \arrow[r] & \widehat{A} \arrow[r] & \widehat{B} \arrow[r] & \widehat{C} \arrow[r] & 0
+		\end{tikzcd},
+	\end{equation*}
+	which proves the statement.
+\end{proof}
+
+\begin{rem} \label{rem:noetherian-I-adic-completion-exact}
+	In the above proof, the Noetherian and finitely generated hypothesis was only required for invoking Artin-Rees. In particular, $\widehat{g}$ being surjective did not require either hypothesis.
+\end{rem}
+
+Let $M$ be an $R$-module and $I$ and ideal in $R$. Recall that we had natural maps $R \to \widehat{R}$ and $M \to \widehat{M}$. This gives us $R$-linear maps
+\begin{equation*} 
+	\widehat{R} \otimes_{R} M \to \widehat{R} \otimes_{R} \widehat{M} \to \widehat{R} \otimes_{\widehat{R}} \widehat{M} \cong \widehat{M}.
+\end{equation*}
+Let $\phi_{M}$ denote the composition $\widehat{R} \otimes_{R} M \to \widehat{M}$. On simple tensors, it is given by
+\begin{equation*} 
+	(a_{n} + R_{n})_{n} \otimes x \mapsto (a_{n} x + M_{n})_{n},
+\end{equation*}
+where we describing the modules in terms of coherent sequences. (To check their understanding, the reader may quickly reason why the sequence on the right is indeed a coherent sequence.)
+
+\begin{prop} \label{prop:finitely-generated-tensor-completion-isomorphism}
+	Let $R$ be a ring, and $M$ a finitely generated $R$-module. Then, the map $\phi_{M} : \widehat{R} \otimes_{R} M \to \widehat{M}$ is surjective. If, further, $R$ is Noetherian, then $\phi_{M}$ is an isomorphism.
+\end{prop}
+\begin{proof} 
+	Clearly, $\phi_{R} : \widehat{R} \otimes_{R} R \to \widehat{R}$ is an isomorphism. Also, the natural maps make the following diagram commute
+	\begin{equation*} 
+		\begin{tikzcd}
+			(\widehat{R} \otimes_{R} M) \oplus (\widehat{R} \otimes_{R} N) \arrow[r, "\cong"] \arrow[d, "\phi_{M} \oplus \phi_{N}"'] & \widehat{R} \otimes_{R} (M \oplus N) \arrow[d, "\phi_{M \oplus N}"] \\
+			\widehat{M} \oplus \widehat{N} \arrow[r, "\cong"'] & \widehat{M \oplus N}
+		\end{tikzcd}.
+	\end{equation*}
+
+	Thus, $\phi_{M}$ is an isomorphism when $M$ is a finite rank free module.
+
+	Now, if $M$ is an arbitrary finitely generated $R$-module, then there is an exact sequence
+	\begin{equation*} 
+		0 \to N \xrightarrow{f} F \xrightarrow{g} M \to 0,
+	\end{equation*}
+	where $F$ is free of finite rank. This gives us a commutative diagram as
+	\begin{equation*} 
+		\begin{tikzcd}
+			& \widehat{R} \otimes_{R} N \arrow[r] \arrow[d] & \widehat{R} \otimes_{R} F \arrow[r] \arrow[d] & \widehat{R} \otimes_{R} M \arrow[r] \arrow[d] & 0 \\
+			0 \arrow[r] & \widehat{N} \arrow[r, "\widehat{f}"'] & \widehat{F} \arrow[r, "\widehat{g}"'] & \widehat{M} \arrow[r] & 0
+		\end{tikzcd}.
+	\end{equation*}
+	The top row is exact since tensor is right-exact. The proof of \Cref{prop:noetherian-I-adic-completion-exact} shows that $\widehat{g}$ is surjective (cf. \Cref{rem:noetherian-I-adic-completion-exact}). Since $\phi_{F}$ is an isomorphism, it follows that $\phi_{M}$ is surjective.
+
+	Assume now that $R$ is Noetherian. Then, \Cref{prop:noetherian-I-adic-completion-exact} tells us that the bottom row is exact. Moreover, $\widehat{N}$ is also finitely generated and hence, $\phi_{N}$ is surjective. This now implies that $\phi_{M}$ is injective (by a diagram chase).
+\end{proof}
+
+Recall that an $R$-module $F$ is said to be \deff{flat} if $- \otimes_{R} F$ is an exact functor. Also recall that this functor is always right exact. Thus, flatness is equivalent to showing that whenever $N \xrightarrow{f} M$ is an injection, so is the induced map $N \otimes_{R} F \xrightarrow{f_{\ast}} M \otimes_{R} F$. \newline
+It is relatively simple to show that one may relax the condition to $N$ and $M$ being just finitely generated, i.e., $F$ is flat iff whenever $N$ and $M$ are finitely generated $R$-modules and $N \xrightarrow{f} M$ is an injection, then so is the induced map $N \otimes_{R} F \xrightarrow{f_{\ast}} M \otimes_{R} F$.
+
+Thus, the above result then gives us the following.
+
+\begin{cor}
+	Let $R$ be a Noetherian ring, $I \unlhd R$ an ideal in $R$. Then, the $I$-adic completion $\widehat{R}$ is a flat $R$-algebra.
+\end{cor}
+
+\begin{cor}
+	Let $R$ be a Noetherian ring, $I \unlhd R$ an ideal in $R$, and $\widehat{R}$ the $I$-adic completion. If $a \in R$ is nonzerodivisor on $R$, then it is also a nonzerodivisor on $\widehat{R}$.
+\end{cor}
+\begin{proof} 
+	Consider the homothety $\mu_{a} : R \to R$ given by $b \mapsto ab$. Then, the induced map $\widehat{\mu_{a}} : \widehat{R} \to \widehat{R}$ is multiplication by $a$. Since $a$ was a nonzerodivisor on $R$, $\mu_{a}$ was injective and in turn, so is $\widehat{\mu_{a}}$ and hence, $a$ is a nonzerodivisor on $\widehat{R}$.
+\end{proof}
+
+\begin{rem}
+	If $R$ is a domain, it is \textbf{not} necessary that $\widehat{R}$ is also a domain. % See the next example.
+\end{rem}
+
+\begin{prop} \label{prop:I-adic-completion-properties}
+	Let $R$ be a Noetherian ring, $I \unlhd R$ an ideal in $R$, and $\widehat{R}$ the $I$-adic completion. Then,
+	\begin{enumerate}
+		\item $\widehat{I} \cong \widehat{R} \otimes_{R} I \cong \widehat{R} I$,
+		\item $\widehat{I^{n}} \cong (\widehat{I})^{n}$ for all $n \ge 0$, i.e., completion and taking powers commute,
+		\item $I^{n}/I^{n + 1} \cong \widehat{I}^{n}/\widehat{I}^{n + 1}$ for all $n \ge 0$,
+		\item $\widehat{I}$ is contained in the Jacobson radical of $\widehat{R}$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	\phantom{hi}
+	\begin{enumerate}
+		\item Since $R$ is Noetherian, $I$ is finitely generated and 
+		\begin{equation*} 
+			\phi_{I} : \widehat{R} \otimes_{R} I \to \widehat{I}
+		\end{equation*}
+		is an isomorphism (\Cref{prop:finitely-generated-tensor-completion-isomorphism}). Since $\widehat{R}$ is flat, the natural map
+		\begin{equation*} 
+			\widehat{R} \otimes_{R} I \to \widehat{R} \otimes_{R} R
+		\end{equation*}
+		is an injection with image $\widehat{R} I$.
+		\item Apply the earlier part to $I^{n}$ to get
+		\begin{equation*} 
+			\widehat{I^{n}} \cong \widehat{R} I^{n} = (\widehat{R} I)^{n} \cong (\widehat{I})^{n}.
+		\end{equation*}
+		\item We had seen natural isomorphisms $R/I^{n} \cong \widehat{R}/\widehat{I^{n}}$ in \Cref{cor:completion-quotient-filtration}. Using the third isomorphism theorem gives us the desired isomorphism.
+		\item Let $a \in \widehat{I}$. It suffices to show that $1 - ra$ is a unit for any $r \in \widehat{R}$. Note that $ra$ is again an element of $\widehat{I}$ and thus, it suffices to show that $1 - a$ is a unit. As in \Cref{obs:power-series-in-completion-converges}, we see that
+		\begin{equation*} 
+			1 + a + a^{2} + \cdots
+		\end{equation*}
+		is the inverse of $1 - a$. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{cor} \label{cor:completion-noetherian-local-is-local}
+	Let $(R, \mathfrak{m})$ be a Noetherian local ring. Then, the $\mathfrak{m}$-adic completion $\widehat{R}$ is also a local ring with unique maximal ideal $\widehat{\mathfrak{m}}$.
+\end{cor}
+It is also true that $\widehat{R}$ is Noetherian, see \Cref{cor:completion-noetherian-is-noetherian}.
+\begin{proof} 
+	$\widehat{R}/\widehat{\mathfrak{m}} \cong R/\mathfrak{m}$ and thus, $\widehat{\mathfrak{m}}$ is indeed maximal. Furthermore, $\widehat{\mathfrak{m}}$ is contained in the Jacobson radical. Thus, $\widehat{\mathfrak{m}}$ must be equal to the Jacobson radical and be the unique maximal ideal of $\widehat{R}$.
+\end{proof}
+
+\begin{thm}[Krull's Intersection Theorem] \label{thm:KIT}
+	Let $R$ be a Noetherian ring, $M$ be a finitely generated $R$-module, $I$ an ideal of $R$, and define $N \vcentcolon= \bigcap_{n \ge 0} I^{n} M$. 
+
+	If $x \in M$ is annihilated by some element of $1 + I$, then $x \in N$.
+
+	Moreover, there exists $a \in I$ such that $(1 + a) N = 0$.
+\end{thm}
+\begin{rem}
+	Note that if $\widehat{M}$ is the $I$-adic completion of $M$, then $N$ above is precisely the kernel of the natural map $M \to \widehat{M}$.
+\end{rem}
+\begin{proof} 
+	If $a \in I$ and $x \in M$ are such that $(1 - a) x = 0$, then
+	\begin{equation*} 
+		x = a x = a^{2} x = a^{3} x = \cdots \in I^{n} M
+	\end{equation*}
+	for all $n \ge 0$.
+
+	Note that by \mynameref{prop:artin-rees}, there exists $n \ge 1$ such that
+	\begin{equation*} 
+		(I^{n + k} M) \cap N = I^{k} (I^{n} M \cap N)
+	\end{equation*}
+	for all $k \ge 0$. In particular, taking $k = 1$ shows that $N \subset IN$ and hence, $N = IN$. Thus, there exists some $a \in I$ such that $(1 - a)N = 0$. This finishes the proof.
+\end{proof}
+
+\begin{cor} \label{cor:krull-noetherian-domain}
+	Let $R$ be a Noetherian domain, and $I \subsetneq R$ be a proper ideal of $R$. Then, $\bigcap_{n \ge 0} I^{n} = 0$.
+\end{cor}
+\begin{proof} 
+	$I$ does not contain $-1$ and thus, $1 + I$ does not contain $0$. Thus, every element of $1 + I$ is a nonzerodivisor.
+\end{proof}
+
+\begin{cor} \label{cor:ideal-in-jacobson-hausdorff}
+	Let $M$ be a finitely generated module over a Noetherian ring $R$ and let $I \subset \mathcal{J}(R)$ be an ideal contained in the Jacobson radical of $R$. Then, $\bigcap_{n \ge 0} I^{n} M = 0$, i.e., the $I$-adic topology on $M$ is Hausdorff.
+\end{cor}
+\begin{proof} 
+	Every element of $1 + I$ is a unit.
+\end{proof}
+
+\begin{cor} \label{cor:noetherian-local-m-adic-hausdorff}
+	Let $M$ be a finitely generated module over a Noetherian local ring $(R, \mathfrak{m})$. Then, the $\mathfrak{m}$-adic topology on $M$ is Hausdorff. In particular, the $\mathfrak{m}$-adic topology on $R$ is Hausdorff.
+
+	Algebraically: $\bigcap_{n \ge 0} \mathfrak{m}^{n} = 0$.
+\end{cor}
+\begin{proof} 
+	We have $\mathfrak{m} = \mathcal{J}(R)$. Use \Cref{cor:ideal-in-jacobson-hausdorff}.
+\end{proof}
+
+\begin{cor} \label{cor:jacobson-ideals-are-closed}
+	Let $R$ be a Noetherian ring, $M$ be a finitely generated $R$-module, and $I \subset \mathcal{J}(R)$ be an ideal. Every submodule of $M$ is closed in the $I$-adic topology. In particular, every ideal of $R$ is closed in the $I$-adic topology.
+\end{cor}
+\begin{proof} 
+	Let $N \le M$ be a submodule. By \Cref{cor:ideal-in-jacobson-hausdorff}, $M/N$ is Hausdorff and thus, $\{\bar{0}\} \subset M/N$ is closed. Note that the canonical map $\pi : M \to M/N$ is continuous and thus, $N = \pi^{-1}(\{\bar{0}\})$ is closed in $M$.
+\end{proof}
+
+\begin{ex}
+	Let us show that \mynameref{thm:KIT} is not true without the Noetherian hypothesis. Let $R = \mathcal{C}^{\infty}(\mathbb{R})$ be the ring of infinitely differentiable real-valued functions defined on $\mathbb{R}$. $R$ is a commutative ring under pointwise addition and multiplication. 
+
+	Consider the ideal $I$ of functions vanishing at $0$, i.e., $I$ is the kernel of the ring homomorphism $R \to \mathbb{R}$ given by $f \mapsto f(0)$. 
+
+	Note that if $g \in 1 + I$, then $g$ is strictly positive on an interval around $0$. Thus, if $f \in R$ is annihilated by $g$, then $f$ vanishes on a neighbourhood of $0$. In particular, $f$ defined below is not annihilated by any element of $1 + I$.
+
+	\begin{equation*} 
+		f(x) \vcentcolon= 
+		\begin{cases}
+			\exp\left(-\frac{1}{x^{2}}\right) & x \neq 0, \\
+			0 & x = 0.
+		\end{cases}
+	\end{equation*}
+
+	It is an exercise in analysis to check that $f \in R$.
+
+	We claim that $f \in \bigcap_{n \ge 0} I^{n}$. By definition, it is clear that $f \in I$ since $f(0) = 0$. For $n \ge 1$, define $f_{n} \in I$ by
+	\begin{equation*} 
+		f_{n}(x) \vcentcolon= 
+		\begin{cases}
+			\exp\left(-\frac{1}{n x^{2}}\right) & x \neq 0, \\
+			0 & x = 0.
+		\end{cases}
+	\end{equation*}
+	Now, $f = f_{n}^{n} \in I^{n}$, as desired.
+\end{ex}
+
+\subsection{An application to Prime Avoidance}
+
+We first recall a standard fact from commutative algebra.
+
+\begin{thm}[Prime Avoidance]
+	Let $R$ be a ring, and $\mathfrak{a} \unlhd R$ an ideal. Let $\mathfrak{p}_{1}, \ldots, \mathfrak{p}_{n}$ be prime ideals of $R$. If $\mathfrak{a} \subset \bigcup_{i = 1}^{n} \mathfrak{p}_{i}$, then $\mathfrak{a} \subset \mathfrak{p}_{j}$ for some $j \in [n]$.
+\end{thm}
+\begin{proof} 
+	The statement is clear for $n = 1$. We prove it for $n \ge 2$ by induction.
+
+	We prove the contrapositive, i.e., assume that $\mathfrak{a} \not\subset \mathfrak{p}_{i}$ for all $i$. We construct an element of $\mathfrak{a}$ which is not in the union $\bigcup_{i = 1}^{n} \mathfrak{p}_{i}$. 
+
+	By inductive hypothesis, for each $j \in [n]$, we can find an element 
+	\begin{equation*} 
+		x_{j} \in \mathfrak{a} \setminus \bigcup_{i : i \neq j} \mathfrak{p}_{i}.
+	\end{equation*}
+	Then, consider the element
+	\begin{equation*} 
+		x = x_{1} \cdots x_{n - 1} + x_{n}.
+	\end{equation*}
+	Clearly, $x \in \mathfrak{a}$. We show that $x$ is not in any $\mathfrak{p}_{j}$.
+
+	If $x \in \mathfrak{p}_{j}$ for some $j \in [n - 1]$, then $x_{n} \in \mathfrak{p}_{j}$, contrary to construction. \newline
+	If $x \in \mathfrak{p}_{n}$, then $x_{1} \cdots x_{n - 1} \in \mathfrak{p}_{n}$, contrary to the assumption that $\mathfrak{p}_{n}$ is prime.
+\end{proof}
+
+Looking at the above proof, one sees that one can actually make a stronger statement.
+
+\begin{por}[Prime Avoidance refined]
+	Let $R$ be a ring, and $E \subset R$ be an additive subgroup of $R$ which is also closed under multiplication. \newline
+	Let $I_{1}, \ldots, I_{n}$ be ideals of $R$ such that $I_{i}$ is prime for $i \ge 3$. \newline
+	If $E \subset \bigcup_{i = 1}^{n} I_{i}$, then $I \subset I_{j}$ for some $j \in [n]$.
+\end{por}
+
+We now wish to prove a version with countably many primes (and not just finitely many) under some more topological hypothesis. 
+
+Let $R$ be a ring, and $I \unlhd R$ an ideal. Assume that $\bigcap_{n \ge 1} I^{n} = 0$, i.e., the $I$-adic topology on $R$ is Hausdorff. Then, one can define a metric on $R$ by
+\begin{equation*} 
+	d_{I}(x, y) = \inf \{2^{-n} : x - y \in I^{n}\}.
+\end{equation*}
+Note that if $x \neq y$, then the set on the right is finite and we have $d(x, y) > 0$. Clearly, we also have $d(x, x) = 0$ and $d(x, y) = d(y, x)$. Now, if $x, y, z \in R$ satisfy $x - y \in I^{n}$ and $y - z \in I^{m}$ for $m \ge n$, then we have
+\begin{equation*} 
+	x - z = (x - y) + (y - z) \in I^{n} + I^{m} = I^{n}.
+\end{equation*}
+
+Using the above, we conclude the following.
+
+\begin{prop}
+	$d_{I}$ is a metric on $R$. In fact, $d_{I}$ is an ultrametric, i.e.,
+	\begin{equation*} 
+		d_{I}(x, z) \le \max\{d_{I}(x, y), d_{I}(y, z)\}
+	\end{equation*}
+	for all $x, y, z \in R$.
+\end{prop}
+
+\textbf{Notation.} For $x \in R$ and $r > 0$, let $B_{I}(r) \vcentcolon= \{x \in R : d_{I}(0, x) < r\}$.
+
+Fix $n \ge 1$. Let $r$ be such that $2^{-(n + 1)} < r < 2^{-n}$. Then, $B_{I}(r)$ contains $I^{n + 1}$ as $d_{I}(0, x) \le 2^{-(n + 1)}$ for any $x \in I^{n + 1}$. Conversely, if $x \in B_{I}(r)$, then $d_{I}(0, x) \le 2^{-(n + 1)}$ which implies that $x \in I^{n + 1}$. Thus, we have shown that
+\begin{equation*} 
+	B_{I}(r) = I^{n + 1}.
+\end{equation*}
+
+Note that the metric is translation invariant. The $r$-neighbourhood of $x$ is simply $x + B_{I}(r)$. This discussion essentially leads to the following.
+
+\begin{prop}
+	The $I$-adic and $d_{I}$-induced topologies on $R$ coincide.
+\end{prop}
+
+Before moving on to the promised applications, we recall a theorem from topology.
+
+\begin{thm}[Baire's Category Theorem] \label{thm:BCT}
+	Let $X$ be a complete metric space. Then, $X$ cannot be written as a countable union of closed sets with empty interior.
+\end{thm}
+
+As usual, $\overline{X_{i}}$ above denotes the closure of $X_{i}$.
+
+\begin{defn}
+	A \deff{complete local ring} is a local ring $(R, \mathfrak{m})$ which is complete with respect to the $\mathfrak{m}$-adic topology.
+\end{defn}
+Note that in particular, the topology is Hausdorff and thus, our previous discussion of $R$ being a metric space (with the $d_{\mathfrak{m}}$ metric) applies.
+
+\begin{thm}
+	Let $(R, \mathfrak{m})$ be a Noetherian local ring. Let $(\mathfrak{p}_{i})_{i \ge 1}$ be a family of prime ideals of $R$, $\mathfrak{a}$ an ideal of $R$, and $r \in R$. Let $r + \mathfrak{a}$ denote the additive coset of $\mathfrak{a}$.
+
+	If $r + \mathfrak{a} \subset \bigcup_{i \ge 1} \mathfrak{p}_{i}$, then $r + \mathfrak{a} \subset \mathfrak{p}_{j}$ for some $j \ge 1$ (and in turn, $rR + \mathfrak{a} \subset \mathfrak{p}_{j}$).
+\end{thm}
+\begin{proof} 
+	Note that $\mathfrak{a}$ is closed in $R$ by \Cref{cor:jacobson-ideals-are-closed} and hence, $r + \mathfrak{a}$ is a complete metric space with
+	\begin{equation*} 
+		r + \mathfrak{a} = \bigcup_{i \ge 1} ((r + \mathfrak{a}) \cap \mathfrak{p}_{i}).
+	\end{equation*}
+	Note that each $\mathfrak{p}_{i}$ is also closed in $R$ and thus, the union on the right is of closed sets. By \mynameref{thm:BCT}, we may fix $j \ge 1$ and pick an element $c$ in the interior of $(r + \mathfrak{a}) \cap \mathfrak{p}_{j}$. (This is interior within $r + \mathfrak{a}$.)
+
+	By our preceding discussion, we see that an open ball (in $R$) around $c$ is of the form $c + \mathfrak{m}^{n}$ for some $n \ge 0$. Thus, there exists $n \ge 1$ such that 
+	\begin{equation} \label{eq:10}
+		(r + \mathfrak{a}) \cap (c + \mathfrak{m}^{n}) \subset (r + \mathfrak{a}) \cap \mathfrak{p}_{j}.
+	\end{equation}
+
+	\textbf{Claim.} $\mathfrak{a} \cap \mathfrak{m}^{n} \subset \mathfrak{p}_{j}$.
+	\begin{proof}[Proof of Claim] 
+		Let $x \in \mathfrak{a} \cap \mathfrak{m}^{n}$. Define $y \vcentcolon= x + c$. \newline
+		Note that
+		\begin{equation*} 
+			y = x + c = r + (x + (r - c)) \in r + \mathfrak{a},
+		\end{equation*}
+		since $c \in r + \mathfrak{a}$ by construction and $x \in \mathfrak{a}$.
+
+		Similarly, $y \in c + \mathfrak{m}^{n}$ since $x \in \mathfrak{m}^{n}$.
+
+		Thus, by \Cref{eq:10}, it follows that $y \in \mathfrak{p}_{j}$. $c \in \mathfrak{p}_{j}$ by construction and thus, $x = y - c \in \mathfrak{p}_{j}$.
+	\end{proof}
+
+	As $\mathfrak{p}_{j}$ is prime, we see that $\mathfrak{a} \cap \mathfrak{m}^{n} \subset \mathfrak{p}_{j}$ implies that either $\mathfrak{a} \subset \mathfrak{p}_{j}$ or $\mathfrak{m}^{n} \subset \mathfrak{p}_{j}$. \newline
+	In the latter case, it follows that $\mathfrak{m} = \mathfrak{p}_{j}$ and the claim is clear since $r$ cannot be a union (as it is contained in a union of prime ideals) and thus, $rR + \mathfrak{a}$ is a proper ideal and hence, must be contained in the (unique) maximal ideal $\mathfrak{m}$. \newline
+	In the former case, we have $c \in \mathfrak{p}_{j}$ and $r - c \in \mathfrak{a} \subset \mathfrak{p}_{j}$, from which is follows that $r \in \mathfrak{p}_{j}$ as well.
+\end{proof}
+
+The special case of $r = 0$ above gives us the more familiar prime avoidance-esque result.
+
+\begin{cor}
+	Let $R$ be a complete local ring, $(\mathfrak{p}_{i})_{i \ge 1}$ be a family of prime ideals of $R$, and $I$ an ideal of $R$.
+
+	If $\mathfrak{a} \subset \bigcup_{i \ge 1} \mathfrak{p}_{i}$, then $\mathfrak{a} \subset \mathfrak{p}_{j}$ for some $j \ge 1$.
+\end{cor}
+
+\subsection{Associated graded rings}
+
+Let $R$ be a ring, $M$ an $R$-module, and $I$ an ideal in $R$. Consider the $R$-adic filtrations on $M$ and $R$ and the corresponding graded module $\gr_{I}(M)$ over $\gr_{I}(R)$ (recall \Cref{defn:associated-graded-ring} and \Cref{defn:associated-graded-module}). \newline
+We shall discuss relations between the $\gr_{I}(R)$-module $\gr_{I}(M)$ and the $R$-module $M$. At times, we do not need to assume the $I$-adic filtration on $M$. Rather, just being an $I$-filtration or an $I$-stable filtration is sufficient (recall \Cref{defn:I-filtration}). In such cases, the associated graded module is denoted $\gr(M)$. Note that we still have that $M$ is a filtered module with respect to the $I$-adic filtration on $R$.
+
+\begin{prop} \label{prop:associated-graded-I-basic}
+	Let $R$ be a Noetherian ring, $M$ a finitely generated $R$-module, and $I$ an ideal in $R$. Let $(M_{n})_{n \ge 0}$ be an $I$-stable filtration on $M$. Then,
+	\begin{enumerate}[label=(\roman*)]
+		\item $\gr_{I}(R)$ is Noetherian,
+		\item $\gr_{I}(R) \cong \gr_{\widehat{I}}(\widehat{R})$ as graded rings,
+		\item $\gr(M)$ is a finitely generated $\gr_{I}(R)$-module.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	\phantom{hi}
+	\begin{enumerate}[label=(\roman*)]
+		\item Let $I = (a_{1}, \ldots, a_{n})$. Then, the set $\{a_{1} + I^{2}, \ldots, a_{n} + I^{2}\} \subset I/I^{2}$ generates $\gr_{I}(R)$ as an algebra over $R/I$. Since $R/I$ is Noetherian, the same is true for $\gr_{I}(R)$ by \Cref{prop:graded-ring-noetherian-equivalent}.
+		%
+		\item Use \Cref{prop:I-adic-completion-properties} (see the proofs to check that the isomorphisms $I^{n}/I^{n + 1} \cong \widehat{I}^{n}/\widehat{I}^{n + 1}$ are suitably natural).
+		%
+		\item Fix $m$ such that $I^{r} M = M_{m + r}$ for all $r \ge 1$. Then, $\gr(M)$ is generated by $\bigoplus_{n = 0}^{m} M_{n}/M_{n + 1}$ over $\gr_{I}(R)$.
+
+		Note that each $M_{n}/M_{n + 1}$ is a Noetherian $R$-module and annihilated by $I$. Thus, each $M_{n}/M_{n + 1}$ is a finitely generated $R/I$-module. In turn, $\gr_{I}(M)$ is a finitely generated $\gr_{I}(R)$-module. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{prop} \label{prop:gr-injective-implies-completion-injective}
+	Let $M$ and $N$ be filtered $R$-modules, and $\phi : M \to N$ a homomorphism of filtered modules. \newline
+	Let $\gr(\phi) : \gr(M) \to \gr(N)$ and $\widehat{\phi} : \widehat{M} \to \widehat{N}$ be as usual. \newline
+	If $\gr(\phi)$ is injective (resp. surjective), then $\widehat{\phi}$ is injective (resp. surjective).
+\end{prop}
+\begin{proof} 
+	As $\phi$ is a filtered homomorphism, we have $\phi(M_{n}) \subset N_{n}$. Thus, we have a natural commutative ladder as shown below.
+
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & \frac{M_{n}}{M_{n + 1}} \arrow[r] \arrow[d, "f_{n}"] & \frac{M}{M_{n + 1}} \arrow[r] \arrow[d, "\phi_{n + 1}"] & \frac{M}{M_{n}} \arrow[r] \arrow[d, "\phi_{n}"] & 0 \\
+			0 \arrow[r] & \frac{N_{n}}{N_{n + 1}} \arrow[r] & \frac{N}{N_{n + 1}} \arrow[r] & \frac{N}{N_{n}} \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+
+	This give us an exact sequence
+	\begin{equation} \label{eq:11}
+		\ker(f_{n}) \to \ker(\phi_{n + 1}) \to \ker(\phi_{n}) \to \coker(f_{n}) \to \coker(\phi_{n + 1}) \to \coker(\phi_{n}).
+	\end{equation}
+
+	Suppose that $\gr(\phi)$ is injective (resp. surjective). We first prove by induction that each $\phi_{n}$ is injective (resp. surjective). For $n = 0$, we see that $\phi_{0}$ is the $0$ map between $0$ modules. For $n = 1$, note that $\phi_{1} = f_{0}$. Now, let $n \ge 1$. By inductive hypothesis, we have $\ker(\phi_{n}) = 0$ (resp. $\coker(\phi_{n}) = 0$). As $\gr(\phi)$ is injective (resp. surjective), we also have that $\ker(f_{n}) = 0$ (resp. $\coker(f_{n}) = 0$). Thus, exactness of \Cref{eq:11} gives us that $\ker(\phi_{n + 1}) = 0$ (resp. $\coker(\phi_{n + 1}) = 0$). 
+
+	We have now shown that $\phi_{n}$ is injective (resp. surjective) for all $n$. By \Cref{prop:completion-exact-properties}, the theorem now follows.
+\end{proof}
+
+\begin{thm} \label{thm:gr-M-finite-implies-M-finite}
+	Let $R$ be a ring, $I$ an ideal in $R$. Give $R$ the $I$-adic filtration and let $M$ be a filtered $R$-module with an $I$-filtration $(M_{n})_{n \ge 0}$. \newline
+	Assume that $R$ is complete in the $I$-adic topology and $\bigcap_{n \ge 0} M_{n} = 0$. If $\gr(M)$ is a finitely generated $\gr_{I}(R)$-module, then $M$ is a finitely generated $R$-module.
+\end{thm}
+\begin{proof} 
+	Consider a finite generating set of $\gr(M)$ over $\gr_{I}(R)$ consisting of homogeneous elements, say $\{y_{1}, \ldots, y_{t}\}$. Let $n_{i} \vcentcolon= \deg(y_{i})$ and choose $x_{i} \in M_{n_{i}}$ such that $x_{i} + M_{n_{i} + 1} = y_{i}$, for all $i \in [t]$. 
+
+	Let $F \vcentcolon= R^{\oplus t}$, and define the filtration on $F$ by
+	\begin{equation*} 
+		F_{n} \vcentcolon= \{(a_{1}, \ldots, a_{t}) : a_{i} \in I^{n - n_{i}} \text{ for all $i \in [t]$}\}
+	\end{equation*}
+	for $n \ge 0$. (We are using the convention that $I^{k} = R$ for $k \le 0$.) Under this filtration, the map $\phi : F \to M$ defined by
+	\begin{equation*} 
+		(a_{1}, \ldots, a_{t}) \mapsto \sum_{i \in [t]} a_{i} x_{i}
+	\end{equation*}
+	is a homomorphism of filtered $R$-modules.
+
+	The associated homomorphism $\gr(\phi) : \gr(F) \to \gr(M)$ is surjective as $\{y_{i}\}_{i}$ generates $\gr(M)$. Thus, by \Cref{prop:gr-injective-implies-completion-injective}, we see that $\widehat{\phi} : \widehat{F} \to \widehat{M}$ is surjective. Note that we have the commutative diagram
+	\begin{equation*} 
+		\begin{tikzcd}
+			F \arrow[d, "f"'] \arrow[r, "\phi"] & M \arrow[d, "g"] \\
+			\widehat{F} \arrow[r, "\widehat{\phi}"'] & \widehat{M}
+		\end{tikzcd}
+	\end{equation*}
+	$f$ is an isomorphism since $R$ is complete and $F$ is a finite direct sum of copies of $R$. $g$ is injective since $\bigcap_{n \ge 0} M_{n} = 0$. $\widehat{\phi}$ is surjective by the discussion above. In turn, $\phi$ is surjective and thus, $M$ is finitely generated by $\{x_{1}, \ldots, x_{t}\}$.
+\end{proof}
+
+\begin{cor} \label{cor:gr-M-noetherian-implies-M-noetherian}
+	With the same hypothesis as above, if $\gr_{I}(M)$ is a Noetherian $\gr_{I}(R)$-module, then $M$ is a Noetherian $R$-module.
+\end{cor}
+\begin{proof} 
+	Let $N \le M$ be a submodule. We show that $N$ is finitely generated.
+
+	Consider the induced filtration on $N$ given by $N_{n} \vcentcolon= N \cap M_{n}$. Then, $(N_{n})_{n \ge 0}$ is also an $I$-filtration and we have injections $N_{n}/N_{n + 1} \to M_{n}/M_{n + 1}$ for $n \ge 0$. In turn, we have an injection $\gr(N) \to \gr(M)$. Since $\gr(M)$ is a Noetherian $\gr_{I}(R)$-module, $\gr(N)$ is also a Noetherian $\gr_{I}(R)$-module. By \Cref{thm:gr-M-finite-implies-M-finite}, $N$ is finitely generated.
+\end{proof}
+
+\begin{cor} \label{cor:completion-noetherian-is-noetherian}
+	Let $R$ be a Noetherian ring and $I$ an ideal in $R$. Then, the $I$-adic completion $\widehat{R}$ is Noetherian.
+\end{cor}
+\begin{proof} 
+	As $R$ is Noetherian, so is $\gr_{I}(R)$, by \Cref{prop:associated-graded-I-basic}. Since $\gr_{I}(R) \cong \gr_{\widehat{I}}(\widehat{R})$, it follows that $\gr_{\widehat{I}}(\widehat{R})$ is Noetherian. Since $\widehat{R}$ is complete, we have $\bigcap_{n \ge 0} \widehat{I}^{n} = 0$. By \Cref{cor:gr-M-noetherian-implies-M-noetherian}, it follows that $\widehat{R}$ is Noetherian.
+\end{proof}
+
+\begin{cor}
+	If $R$ is Noetherian, then the power series ring $R[\![X_{1}, \ldots, X_{n}]\!]$ is Noetherian.
+\end{cor}
+\begin{proof} 
+	Consider the $(X_{1}, \ldots, X_{n})$-adic completion of the Noetherian ring $R[X_{1}, \ldots, X_{n}]$.	
+\end{proof}
+
+Combing \Cref{cor:completion-noetherian-is-noetherian} and \Cref{cor:completion-noetherian-local-is-local}, we get the following.
+
+\begin{cor}
+	Let $(R, \mathfrak{m})$ be a Noetherian local ring. Then, the $\mathfrak{m}$-adic completion $\widehat{R}$ is also a local Noetherian ring with unique maximal ideal $\widehat{\mathfrak{m}}$.
+\end{cor}
+
+\begin{prop}
+	Let $R$ be a Noetherian ring and $I \unlhd R$ an ideal of $R$. Suppose that $R$ is Hausdorff in the $I$-adic topology. (By \Cref{cor:ideal-in-jacobson-hausdorff}, a particular example is if $I \subset \mathcal{J}(R)$.) If $\gr_{I}(R)$ is a domain, then $R$ is a domain.
+\end{prop}
+\begin{proof} 
+	Let $a, b \in R \setminus \{0\}$. By hypothesis, $\bigcap_{n \ge 0} I^{n} = 0$. Pick $n, m \ge 0$ such that $a \in I^{m} \setminus I^{m + 1}$ and $b \in I^{n} \setminus I^{n + 1}$. \newline
+	Then, $\overline{a} \vcentcolon= a + I^{m + 1}$ and $\overline{b} \vcentcolon= b + I^{n + 1}$ are nonzero elements of $\gr_{I}(R)$. By assumption, $\overline{a} \cdot \overline{b} \neq 0$ in $\gr_{I}(R)$. In turn, $ab \neq 0$ in $R$, as desired.
+\end{proof}
+
+Recall that by a \deff{complete local ring}, we mean a local ring $(R, \mathfrak{m}, \kk)$ such that $R$ is complete in the $\mathfrak{m}$-adic topology. \newline
+Given a polynomial $f = \sum a_{i} X^{i} \in R[X]$, we shall use the notation $\bar{f}$ to denote the polynomial $\sum \overline{a_{i}} X^{i} \in \kk[X]$.
+
+\begin{thm}[Hensel's Lemma] \label{thm:hensel}
+	Let $(R, \mathfrak{m}, \kk)$ be a complete local ring. Let $f \in R[X]$ be a monic polynomial, and $\alpha, \beta \in \kk[X]$ be relatively prime monic polynomials such that
+	\begin{equation*} 
+		\bar{f} = \alpha \beta 
+	\end{equation*}
+	in $\kk[X]$. 
+
+	Then, there exist monic polynomials $g, h \in R[X]$ such that
+	\begin{enumerate}
+		\item $f = gh$ in $R[X]$,
+		\item $\bar{g} = \alpha$ and $\deg(g) = \deg(\alpha)$,
+		\item $\bar{h} = \beta$ and $\deg(h) = \deg(\beta)$.
+	\end{enumerate}
+\end{thm}
+In other words, we can lift the factorisation from $\kk[X]$ to $R[X]$ such that the lifts have the same degree. See \Cref{ex:hensel-not-coprime} to note that the coprime hypothesis cannot be dropped.
+\begin{proof} 
+	Let the degrees of $\alpha$ and $\beta$ be $a$ and $b$, respectively. We shall construct sequences of polynomials $(g_{n})_{n \ge 1}$ and $(h_{n})_{n \ge 1}$ in $R[X]$, such that for all $n \ge 1$, we have
+	\begin{enumerate}[label=(P\arabic*)]
+		\item $\deg(g_{n}) \le a$ and $\deg(h_{n}) \le b$,
+		\item $\overline{g_{n}} = \alpha$ and $\overline{h_{n}} = \beta$,
+		\item $f - g_{n} h_{n} \in \mathfrak{m}^{n} R[X]$,
+		\item $g_{n} - g_{n - 1} \in \mathfrak{m}^{n - 1} R[X]$ and $h_{n} - h_{n - 1} \in \mathfrak{m}^{n - 1} R[X]$.
+	\end{enumerate}
+
+	Assuming the construction for now, let us see how this gives the desired result. \newline
+	Note that by (P1), each $g_{n}$ is of the form $c_{n}^{(0)} + c_{n}^{(1)} X + \cdots + c_{n}^{(a)} X^{a}$. \newline
+	By (P4), we see that each of $(c_{n}^{(0)})_{n \ge 1}, \ldots, (c_{n}^{(a)})_{n \ge 1}$ is a Cauchy sequence. By taking limits coefficient-wise, we get $g \vcentcolon= \lim_{n} g_{n} \in R[X]$. \newline
+	Similarly, we get $h \vcentcolon= \lim_{n} h_{n}$. 
+
+	We now show that $f = gh$ by showing that $f - gh \in \mathfrak{m}^{n} R[X]$ for all $n \ge 1$. (By completeness, we have $\bigcap_{n \ge 1} \mathfrak{m}^{n} = 0$.) \newline
+	Fix $n \ge 1$. Since $g_{m} \to g$ and $h_{m} \to h$ coefficient-wise, we can fix $m \gg 0$ such that $g_{m} - g \in \mathfrak{m}^{n} R[X]$ and $h_{m} - h \in \mathfrak{m}^{n} R[X]$. In turn,
+	\begin{align*} 
+		f - gh = (f - g_{m} h_{m}) + g_{m} (h_{m} - h) + (g_{m} - g)h.
+	\end{align*}
+	All the bracketed terms above are in $\mathfrak{m}^{n} R[X]$, as desired. \newline
+	Taking $n = 1$ in the above also shows that $\bar{g} = \overline{g_{1}} = \alpha$ and $\bar{h} = \beta$. Since $\deg(g) \le a$ and $\deg(h) \le b$ but $\deg(g) + \deg(h) = \deg(f) = a + b$, it follows that $\deg(g) = \deg(\alpha)$ and $\deg(h) = \deg(\beta)$. \newline
+	Lastly, by $f$ being monic, we see that the leading coefficients of $g$ and $h$ are inverses of each other. Since $\alpha$ is monic, the coefficients are of the form $(1 + a)$ and $(1 + a)^{-1}$ for $a \in \mathfrak{m}$. By appropriate scaling, we may assume that $g$ and $h$ are monic and still continue to have $\bar{g} = \alpha$ and $\bar{h} = \beta$. Thus, we have the desired lifts.
+
+	We now simply have to construct the sequences with the above desired properties. We define these sequences inductively.
+
+	$n = 1$: Pick coefficient-wise lifts $g_{1}$ and $h_{1}$ of $\alpha$ and $\beta$, respectively. (P1) and (P2) are satisfied trivially and (P4) is not to be checked. Moreover, $\overline{f - g_{1} h_{1}} = \alpha\beta - \alpha\beta = 0$ and thus, $f - g_{1} h_{1} \in \mathfrak{m} R[X]$, satisfying (P3).
+
+	Assume now that $n \ge 1$ and that $g_{n}$ and $h_{n}$ have been constructed satisfying (P1) - (P4). Let $d \vcentcolon= a + b = \deg(f)$. Then, we can write
+	\begin{equation*} 
+		f - g_{n} h_{n} = \sum_{i = 0}^{d} \lambda_{i} X^{i}
+	\end{equation*}
+	for $\lambda_{i} \in \mathfrak{m}^{n}$. 
+
+	Since $\alpha$ and $\beta$ are relatively prime, for each $i \in [d]$, we can find polynomials $u_{i}, v_{i} \in R[X]$ of degrees at most $b$ and $a$ respectively, such that
+	\begin{equation*} 
+		X^{i} = \overline{u_{i}} \alpha + \overline{v_{i}} \beta
+	\end{equation*}
+	in $\kk[X]$. Since $\alpha = \overline{g_{n}}$ and $\beta = \overline{h_{n}}$, we get
+	\begin{equation*} 
+		X^{i} - u_{i} g_{n} - v_{i} h_{n} \in \mathfrak{m} R[X].
+	\end{equation*}
+	Define
+	\begin{align*} 
+		g_{n + 1} &\vcentcolon= g_{n} + \sum_{i} \lambda_{i} v_{i}, \\
+		h_{n + 1} &\vcentcolon= h_{n} + \sum_{i} \lambda_{i} u_{i}.
+	\end{align*}
+	Clearly, we have $\deg(g_{n + 1}) \le a$ and $\deg(h_{n + 1}) \le b$. As the $\lambda_{i}$ are all in $\mathfrak{m}^{n}$, we see that (P2) and (P4) are also satisfied (for $n + 1$). To check (P3), note that
+	\begin{align*} 
+		f - g_{n + 1} h_{n + 1} &= f - (g_{n} + \sum_{i} \lambda_{i} v_{i})(h_{n} + \sum_{i} \lambda_{i} u_{i}) \\
+		&= f - g_{n} h_{n} - g_{n} \sum_{i} \lambda_{i} u_{i} - h_{n} \sum_{i} \lambda_{i} v_{i} - \sum_{i, j} \lambda_{i} \lambda_{j} v_{i} u_{j} \\
+		&= \sum_{i} \lambda_{i} X^{i} - g_{n} \sum_{i} \lambda_{i} u_{i} - h_{n} \sum_{i} \lambda_{i} v_{i} - \sum_{i, j} \lambda_{i} \lambda_{j} v_{i} u_{j} \\
+		&= \sum_{i} \lambda_{i} (X^{i} - g_{n} v_{i} - h_{n} u_{i}) - \sum_{i, j} \lambda_{i} \lambda_{j} v_{i} u_{j}.
+	\end{align*}
+	Each term above is in $\mathfrak{m}^{n + 1} R[X]$, as desired.
+\end{proof}
+
+\begin{ex} \label{ex:hensel-not-coprime}
+	We now show that the hypothesis of $\alpha$ and $\beta$ being coprime in \mynameref{thm:hensel} is not unnecessary. 
+
+	Consider the local ring $R = \mathbb{Q}[\![t]\!]$ with maximal ideal $\mathfrak{m} = (t)$ and residue field $\kk = \mathbb{Q}$. Note that $R$ is indeed complete in the $\mathfrak{m}$-adic topology.
+
+	Consider $f = X^{2} - t \in R[X]$. Then, $\bar{f} = X^{2} = X \cdot X$ in $\mathbb{Q}[X]$. Now, if there exist $g$ and $h$ as in the theorem, then $f$ has a root in $R$. But there is no power series $a \in \mathbb{Q}[\![t]\!]$ such that $a^{2} = t$.
+\end{ex}
+
+\begin{cor} \label{cor:complete-local-ring-simple-root-lift}
+	Let $(R, \mathfrak{m}, \kk)$ be a complete local ring. Let $f \in R[X]$ be a monic polynomial such that $\bar{f} \in \kk[X]$ has a simple root $\xi \in \kk$. Then, $f$ has a simple root $a \in R$ such that $\bar{a} = \xi$.
+\end{cor}
+\begin{proof} 
+	By hypothesis, we can factorise $\bar{f}$ as $(X - \xi)\beta(X)$. $\xi$ being a simple root tells us that $X - \xi$ and $\beta(X)$ are coprime. Using \mynameref{thm:hensel} gives us the desired result.
+\end{proof}
+
+\begin{cor}[Implicit Function Theorem]
+	Let $\kk$ be a field, and $R = \kk[\![X_{1}, \ldots, X_{t}]\!] = \kk[\![\mathbf{X}]\!]$ be the power series ring in $t$ variables over $\kk$. Let
+	\begin{equation*} 
+		f(z) = z^{n} + a_{1}(\mathbf{X}) z^{n - 1} + \cdots + a_{n}(\mathbf{X}) \in R[z]
+	\end{equation*}
+	be a monic polynomial such that
+	\begin{equation*} 
+		z^{n} + a_{1}(\mathbf{0}) z^{n - 1} + \cdots + a_{n}(\mathbf{0}) \in \kk[z]
+	\end{equation*}
+	has a simple root $\xi \in \kk$. Then, there exists some $g(\mathbf{X}) \in R$ with $g(0) = \xi$ and $f(g(\mathbf{X})) = 0$.
+\end{cor}
+\begin{proof} 
+	Simply apply \Cref{cor:complete-local-ring-simple-root-lift} to the complete local ring $(\kk[\![\mathbf{X}]\!], (\mathbf{X}), \kk)$. (Note that the image of $a(\mathbf{X}) \in \kk[\![X]\!]$ under the quotient map $R \to \kk$ is precisely $a(\mathbf{0})$.)
+\end{proof}
+
+\begin{cor}
+	Let $R = \kk[\![X_{1}, \ldots, X_{t}]\!]$ be a power series ring over a field, and $d$ an integer relatively prime to $\chr(\kk)$. Let $a(\mathbf{X}) \in R$ be such that $a(\mathbf{0})$ is nonzero and is a $d$-th power in $\kk$. Then, $a(\mathbf{X})$ is a $d$-th power in $R$.
+\end{cor}
+\begin{proof} 
+	Consider $f(z) = z^{d} - a(\mathbf{X})$ and use the earlier corollary. Note that $\bar{f}(z) = z^{d} - a(\mathbf{0})$ has a root by hypothesis. The root is simple by the derivative test (here is where we use that $\gcd(d, \chr(\kk)) = 1$ and $a(\mathbf{0}) \neq 0$.)
+\end{proof}
+
+\begin{ex}
+	Let us look at a concrete example of the previous corollary. Let $\kk$ be a field of characteristic different from $2$. Then, $a(X) = 1 + X \in \kk[\![X]\!]$ and $d = 2$ satisfy the hypothesis. Thus, $\sqrt{1 + X}$ makes sense as a power series. More precisely, there exists a power series $b \in \kk [\![X]\!]$ such that $b^{2} = 1 + X$.
+\end{ex}
