@@ -1,0 +1,343 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\def\univname{}
+\def\coursenum{}
+\def\coursename{Differential Topology}
+\def\professor{}
+\def\student{Aryaman Maithani}
+\def\semesteryear{Spring 2022}
+\def\imagename{../icon.pdf}		  
+\def\scalesize{2}
+\usepackage{../aryaman}
+\setcounter{tocdepth}{2}
+
+\newcommand{\opsub}{\subset_{\operatorname{op}}}
+
+\begin{document}
+\coverpage
+\thispagestyle{empty}
+\updated{\today}
+\thispagestyle{empty}
+% \setcounter{tocdepth}{1}
+\tableofcontents
+\pagestyle{fancy}
+\setcounter{page}{1}
+\setcounter{section}{-1}
+
+\section{Preface}
+
+I am making this while I study \emph{Differential Topology} by Victor Guillemin and Alan Pollack. These notes will likely not be helpful to anyone who is looking to learn this material from scratch. I am just going to be noting down the theorems and definitions from the book, not bothering with basic notations/definitions from topology. I also skip proofs.
+
+\section{Manifolds and Smooth Maps}
+\subsection{Definitions}
+
+\textbf{Notation.} ``$U \opsub X$'' stands for ``$U$ is a nonempty open subset of $X$''. \newline
+Given a function $f : X \to \mathbb{R}^{m}$, we can write $f = (f_{1}, \ldots, f_{m})$ for functions $f_{i} : X \to \mathbb{R}$ ($i = 1, \ldots, m$). These $f_{i}$ will be referred to as \deff{component functions (of $f$)}.
+
+\begin{defn}
+	A function $f$ from $U \opsub \mathbb{R}^{n}$ into $\mathbb{R}^{m}$ is called \deff{smooth} if each component function $f_{i}$ has partial derivatives of all orders.
+
+	More generally, if $X \subset \mathbb{R}^{n}$, then a map $f : X \to \mathbb{R}^{m}$ is called \deff{smooth} if for each point $x \in X$, there exists an open set $U_{x} \opsub \mathbb{R}^{n}$ containing $x$ and a smooth function $F : U \to \mathbb{R}^{m}$ such that $F = f$ on $U_{x} \cap X$.
+\end{defn}
+
+\begin{defn}
+	A map $f : X \to Y$ between subsets of Euclidean spaces is called a \deff{diffeomorphism} if $f$ is smooth and bijective with $f^{-1}$ also smooth.
+
+	$X$ and $Y$ are said to be \deff{homeomorphic} if such a map exists.
+\end{defn}
+
+\begin{ex}
+	Show that if $f : X \to Y$ is smooth, then $f$ is continuous. \newline
+	In particular, diffeomorphic spaces are homeomorphic.
+\end{ex}
+
+\begin{defn}
+	Let $X \subset \mathbb{R}^{N}$. $X$ is said to be a \deff{$k$-dimensional manifold} if each $x \in X$ possesses a neighbourhood $V \opsub X$ which is diffeomorphic to an open subset $U \opsub \mathbb{R}^{k}$. We define the \deff{dimension} of $X$ as $\dim(X) = k$.
+
+	A diffeomorphism $\phi : U \to V$ is called a \deff{parametrisation} of the neighbourhood $V$. The inverse diffeomorphism $\phi^{-1} : V \to U$ is called a \deff{coordinate system} on $V$. \newline
+	Writing $\phi^{-1} = (x_{1}, \ldots, x_{k})$, the component functions $x_{1}, \ldots, x_{k}$ are called \deff{coordinate functions}.
+\end{defn}
+
+Note that $\dim X = k$ is well-defined. Indeed, if $U \opsub \mathbb{R}^{n}$ and $U' \opsub \mathbb{R}^{m}$ are nonempty and homeomorphic, then $n = m$.
+
+\begin{ex}
+	The circle $S^{1} \subset \mathbb{R}^{2}$ is $1$-dimensional manifold.
+\end{ex}
+
+\begin{ex}
+	If $X \subset \mathbb{R}^{N}$ and $Y \subset \mathbb{R}^{M}$ are manifolds, then so is $X \times Y$ with
+	\begin{equation*} 
+		\boxed{\dim(X \times Y) = \dim(X) + \dim(Y).}
+	\end{equation*}
+
+	Indeed, let $k \vcentcolon= \dim(X)$, $l \vcentcolon= \dim(Y)$, and let $(x, y) \in X \times Y$ be arbitrary. Let $U \opsub \mathbb{R}^{k}$ (resp. $W \opsub \mathbb{R}^{l}$) be open and $\phi : U \to X$ (resp. $\psi : W \to Y$) be a parametrisation around $x$ (resp. $y$). 
+
+	Define $\phi \times \psi : U \times W \to X \times Y$ by
+	\begin{equation*} 
+		(\phi \times \psi)(u, w) \vcentcolon= (\phi(u), \psi(w)).
+	\end{equation*}
+
+	Note that $(U \times W) \opsub \mathbb{R}^{k + l}$ and $f \vcentcolon= \phi \times \psi$ is smooth (the component functions of $f$ are the component functions of $\phi$ followed by those of $\psi$). We only need to verify that this is indeed a local parametrisation.
+
+	Note that $\phi$ and $\psi$ are diffeomorphisms onto their images (and the images are open in $X$ and $Y$ respectively). Thus, $V \vcentcolon= \phi(U) \times \psi(W)$ is an open neighbourhood of $(x, y)$ in $X \times Y$. Moreover, $g : V \to U \times W$ by $(x', y') \mapsto (\phi^{-1}(x'), \psi^{-1}(y'))$ is the inverse of $f$. \newline
+	The only check that needs to be done is that $g$ is smooth. We leave this to the reader. (Use the smoothness of $\phi^{-1}$ and $\psi^{-1}$ defined in the more general sense.)
+\end{ex}
+
+\begin{defn}
+	If $X$ and $Y$ are both manifolds in $\mathbb{R}^{N}$ and $Z \subset X$, then $Z$ is a \deff{submanifold} of $X$.
+\end{defn}
+
+\begin{ex}
+	$S^{1}$ is a submanifold of $\{\mathbf{x} \in \mathbb{R}^{2} : \|\mathbf{x}\| < 2\}$. \newline
+	Note that the dimensions are different.
+\end{ex}
+
+\begin{rem}
+	We have defined manifolds only as subsets of Euclidean spaces.
+\end{rem}
+
+\begin{rem}
+	Note that any open ball in $\mathbb{R}^{k}$ is diffeomorphic to $\mathbb{R}^{k}$ (check). Thus, the domains of local parametrisations may be assumed to be $\mathbb{R}^{k}$.
+\end{rem}
+
+\subsection{Derivatives and Tangents}
+
+\begin{defn}
+	Let $U \opsub \mathbb{R}^{n}$, $f : U \to \mathbb{R}^{m}$ be smooth, and $x \in U$. The \deff{derivative of $f$ at $x$} is the function
+	\begin{equation*} 
+		df_{x} : \mathbb{R}^{n} \to \mathbb{R}^{m}
+	\end{equation*}
+	defined by
+	\begin{equation*} 
+		df_{x}(v) \vcentcolon= \lim_{t \to 0} \frac{f(x + tv) - f(x)}{t}.
+	\end{equation*}
+\end{defn}
+Note that $df_{x}$ is defined on all of $\mathbb{R}^{n}$ even if $U \neq \mathbb{R}^{n}$.
+
+\begin{rem}
+	$df_{x}$ is a linear map. In particular, we may represent $df_{x}$ as a matrix using the standard bases. If $f = (f_{1}, \ldots, f_{m})$, then we have
+	\begin{equation*} 
+		df_{x} = 
+		\begin{bmatrix}
+			\dfrac{\partial f_{1}}{\partial x_{1}}(x) & \cdots & \dfrac{\partial f_{1}}{\partial x_{n}}(x) \\
+			\vdots & \ddots & \vdots \\
+			\dfrac{\partial f_{m}}{\partial x_{1}}(x) & \cdots & \dfrac{\partial f_{m}}{\partial x_{n}}(x)
+		\end{bmatrix}.
+	\end{equation*}
+\end{rem}
+
+\begin{ex}
+	If $L : \mathbb{R}^{n} \to \mathbb{R}^{m}$ is a linear map, then $L_{x} = L$ for all $x \in \mathbb{R}^{n}$. \newline
+	In particular, if $i : U \into \mathbb{R}^{n}$ is the inclusion map, then $i_{x} = \id_{\mathbb{R}^{n}}$ for all $x \in U$.
+\end{ex}
+
+\begin{thm}[Chain rule]
+	Let $U \opsub \mathbb{R}^{n}$, $V \opsub \mathbb{R}^{m}$. Suppose $f : U \to V$ and $g : V \to \mathbb{R}^{l}$ are smooth. For all $x \in U$, we have
+	\begin{equation*} 
+		d(g \circ f)_{x} = dg_{f(x)} \circ df_{x}.
+	\end{equation*}
+\end{thm}
+
+\begin{defn}
+	Let $X \subset \mathbb{R}^{N}$, $x \in X$, $U \opsub \mathbb{R}^{k}$, and $\phi : U \to X$ be a local parametrisation around $x$. For convenience, assume that $0 \in U$ and $\phi(0) = x$.
+
+	The \deff{tangent space} of $X$ at $x$ to be the image of the map $d \phi_{0} : \mathbb{R}^{k} \to \mathbb{R}^{N}$. This is denoted by $T_{x}(X)$. \newline
+	A \deff{tangent vector} to $X$ at $x$ is a point $v \in T_{x}(X) \subset \mathbb{R}^{N}$.
+\end{defn}
+
+Note that in the above, we are making use of the fact that $X$ is a subset of $\mathbb{R}^{N}$. The issue to clarify above is whether the above subspace $T_{x}(X)$ depends on $\phi$ or not. Suppose that $\psi : V \to X$ is another local parametrisation with $\psi(0) = x$. Note that $\phi(U)$ and $\psi(V)$ are both (relatively) open neighbourhoods of $x$. By passing to a subset, we may assume $\phi(U) = \psi(V)$. Thus, $h = \psi^{-1} \circ \phi : U \to V$ is a diffeomorphism. Using the chain rule on the relation $\phi = \psi \circ h$ gives
+\begin{equation*} 
+	d \phi_{0} = d \psi_{0} \circ d h_{0}.
+\end{equation*}
+Thus, $\im(d \phi_{0}) \subset \im(d \psi_{0})$. By symmetry, the converse is true too, as desired.
+
+\begin{thm}
+	With above notations,
+	\begin{equation*} 
+		\boxed{\dim(T_{x}(X)) = \dim(X),}
+	\end{equation*}
+	where the dimension on the left is the dimension as a vector space over $\mathbb{R}$.
+
+	In particular, $d\phi_{0} : \mathbb{R}^{k} \to T_{x}(X)$ is an isomorphism.
+\end{thm}
+
+\begin{defn}
+	Let $f : X \to Y$ be a smooth map of arbitrary manifolds. Let $x \in X$ and $y \vcentcolon= f(x)$. The \deff{derivative} of $f$ at $x$ is a linear map
+	\begin{equation*} 
+		df_{x} : T_{x}(X) \to T_{y}(Y)
+	\end{equation*}
+	defined as follows: Fix parametrisations $\phi : U \to X$ and $\psi : V \to Y$ around $x$ and $y$. ($U \opsub \mathbb{R}^{k}$ and $V \opsub \mathbb{R}^{l}$.) Assume $\phi(0) = x$ and $\psi(0) = y$.
+
+	After passing to a subset of $U$, we have the following commutative square:
+	\begin{equation*} 
+		\begin{tikzcd}
+			X \arrow[rr, "f"] & & Y \\
+			U \arrow[u, "\phi"] \arrow[rr, "h = \psi^{-1} \circ f \circ \phi"'] & & V \arrow[u, "\psi"']
+		\end{tikzcd}.
+	\end{equation*}
+
+	We define $df_{x}$ to be the unique map making the following square commute:
+	\begin{equation*} 
+		\begin{tikzcd}
+			T_{x}(X) \arrow[rr, "df_{x}"] & & T_{y}(Y) \\
+			\mathbb{R}^{k} \arrow[u, "d\phi_{0}"] \arrow[rr, "dh_{0}"'] & & \mathbb{R}^{l} \arrow[u, "d\psi_{0}"']
+		\end{tikzcd}.
+	\end{equation*}
+\end{defn}
+Note that $d\phi_{0}$ is an isomorphism and thus, $df_{x}$ is uniquely determined as
+\begin{equation*} 
+	df_{x} = d\psi_{0} \circ dh_{0} \circ d\phi_{0}^{-1}.
+\end{equation*}
+
+\begin{ex}
+	Check that the above does not depend on choice of $\phi$ or $\psi$.
+\end{ex}
+
+\begin{thm}[Chain rule]
+	If $X \xrightarrow{f} Y \xrightarrow{g} Z$ are smooth maps of manifolds, then
+	\begin{equation*} 
+		d(g \circ f)_{x} = dg_{f(x)} \circ df_{x},
+	\end{equation*}
+	for all $x \in X$.
+\end{thm}
+
+\subsection{The Inverse Function Theorem and Immersions}
+
+\begin{defn}
+	Let $f : X \to Y$ be a smooth map of manifolds, and $x \in X$. $f$ is called a \deff{local diffeomorphism at $x$} if $f$ maps a neighbourhood of $x$ diffeomorphically onto a neighbourhood of $y \vcentcolon= f(x)$.
+
+	$f$ is called a \deff{local diffeomorphism} if it is a local diffeomorphism at $x$ for every $x \in X$.
+\end{defn}
+
+\begin{thm}[Inverse Function Theorem]
+	Suppose that $f : X \to Y$ is a smooth map of manifolds, and let $x \in X$. \newline
+	$f$ is a local diffeomorphism at $x$ iff $df_{x}$ is an isomorphism.
+\end{thm}
+
+\begin{rem}
+	If $df_{x}$ is an isomorphism, one can choose local coordinates around $x$ and $y$ so that $f$ appears to be the identity $f(x_{1}, \ldots, x_{k}) = (x_{1}, \ldots, x_{k})$ on some neighbourhood of $x$.
+
+	More precisely: there exists $U \opsub \mathbb{R}^{k}$ and local parametrisations $\phi : U \to X$, $\psi : U \to Y$ such that the following diagram commutes:
+	\begin{equation*} 
+		\begin{tikzcd}
+			X \arrow[rr, "f"] & & Y \\
+			U \arrow[u, "\phi"] \arrow[rr, "\text{identity}"'] & & U \arrow[u, "\psi"']
+		\end{tikzcd}.
+	\end{equation*}
+\end{rem}
+
+\begin{defn}
+	Two maps $f : X \to Y$ and $f' : X' \to Y'$ are said to be \deff{equivalent} (or \deff{same up to diffeomorphism}) if there exist diffeomorphisms $\alpha$ and $\beta$ making the following diagram commute:
+	\begin{equation*}  
+		\begin{tikzcd}
+			X \arrow[rr, "f"] & & Y \\
+			U \arrow[u, "\alpha"] \arrow[rr, "f'"'] & & U \arrow[u, "\beta"']
+		\end{tikzcd}.		
+	\end{equation*}
+\end{defn}
+
+\begin{defn} \label{defn:immersions}
+	$f : X \to Y$ smooth map of manifolds, $x \in X$, $y \vcentcolon= f(x)$.
+
+	$f$ is said to be an \deff{immersion at $x$} if $df_{x} : T_{x}(X) \to T_{y}(Y)$ is injective. \newline
+	$f$ is said to be an \deff{immersion} if $f$ is an immersion at $x$ for all $x \in X$. 
+
+	The \deff{canonical immersion} is the standard inclusion $\mathbb{R}^{k} \into \mathbb{R}^{l}$ for $k \le l$ given by $(x_{1}, \ldots, x_{k}) \mapsto (x_{1}, \ldots, x_{k}, 0, \ldots, 0)$.
+\end{defn}
+
+\begin{thm}[Local immersion theorem]
+	Suppose that $f : X \to Y$ is an immersion at $x \in X$, and $y = f(x)$. Then, there exist local coordinates around $x$ and $y$ such that
+	\begin{equation*} 
+		f(x_{1}, \ldots, x_{k}) = (x_{1}, \ldots, x_{k}, 0, \ldots, 0).
+	\end{equation*}
+
+	In other words, $f$ is locally equivalent to the canonical immersion around $x$.
+\end{thm}
+
+\begin{cor}
+	If $f$ is an immersion at $x$, then it is an immersion in a neighbourhood of $x$.
+\end{cor}
+
+\begin{rem}
+	If $\dim(X) = \dim(Y)$, then local immersions and local diffeomorphisms are the same.
+\end{rem}
+
+\begin{rem}
+	If $f : X \to Y$ is a smooth map, it is not necessary that $f(X)$ is a manifold. This is not true even if $f$ is assumed to an immersion and injective. 
+
+	One can construct a smooth map $f : \mathbb{R} \to \mathbb{R}^{2}$ which is an injective immersion but the image of $f$ is the figure eight.
+\end{rem}
+
+\begin{defn}
+	$f : X \to Y$ is called \deff{proper} if the preimage of every compact set in $Y$ is a compact subset of $X$. An immersion which is injective and proper is called an \deff{embedding}.
+\end{defn}
+
+\begin{thm}
+	An embedding $f : X \to Y$ maps $X$ diffeomorphically onto a submanifold of $Y$.
+\end{thm}
+
+\begin{rem}
+	If $X$ is compact, then every $f : X \to Y$ is proper. In this case, embeddings are same as injective immersions.
+\end{rem}
+
+\section{Submersion}
+
+We now study the case where $\dim(X) \ge \dim(Y)$. If $f : X \to Y$ carries $x$ to $y$, then we can demand surjectivity of $df_{x} : T_{x}(X) \to T_{y}(Y)$. Identical to the definitions in \Cref{defn:immersions}, we have the following.
+
+\begin{defn} 
+	$f : X \to Y$ smooth map of manifolds, $x \in X$, $y \vcentcolon= f(x)$.
+
+	$f$ is said to be a \deff{submersion at $x$} if $df_{x} : T_{x}(X) \to T_{y}(Y)$ is surjective. \newline
+	$f$ is said to be a \deff{submersion} if $f$ is an submersion at $x$ for all $x \in X$. 
+
+	The \deff{canonical submersion} is the standard inclusion $\mathbb{R}^{k} \into \mathbb{R}^{l}$ for $k \ge l$ given by $(x_{1}, \ldots, x_{k}) \mapsto (x_{1}, \ldots, x_{l})$.
+\end{defn}
+
+\begin{thm}[Local submersion theorem]
+	Suppose that $f : X \to Y$ is a submersion at $x \in X$, and $y = f(x)$. Then, there exist local coordinates around $x$ and $y$ such that
+	\begin{equation*} 
+		f(x_{1}, \ldots, x_{k}) = (x_{1}, \ldots, x_{l}).
+	\end{equation*}
+
+	In other words, $f$ is locally equivalent to the canonical submersion around $x$.
+\end{thm}
+
+\begin{cor}
+	If $f$ is a submersion at $x$, then it is a submersion in a neighbourhood of $x$.
+\end{cor}
+
+\begin{defn}
+	For a smooth map $f : X \to Y$, a point $y \in Y$ is called a \deff{regular value for $f$} if $df_{x} : T_{x}(X) \to T_{y}(Y)$ is surjective for every $x \in f^{-1}(y)$. Else, $y$ is called a \deff{critical value}.
+\end{defn}
+Points not in the image of $f$ are also regular values. In fact, if $\dim(X) < \dim(Y)$, then the regular values are precisely the points in $Y \setminus f(X)$.
+
+\begin{thm}[Preimage Theorem]
+	If $y$ is a regular value for $f : X \to Y$, then $f^{-1}(y)$ is a submanifold of $X$, with
+	\begin{equation*} 
+		\boxed{\dim(f^{-1}(y)) = \dim(X) - \dim(Y).}
+	\end{equation*}
+\end{thm}
+
+\begin{exe}
+	Use the above to show that $S^{k - 1}$ is a manifold of dimension $k - 1$. (Use the map $f : \mathbb{R}^{k} \to \mathbb{R}$ defined by $x \mapsto \|x\|^{2}$ and check that $1$ is a regular value.)
+\end{exe}
+
+\begin{exe}
+	Note that $M(n)$ -- the space of all $n \times n$ matrices -- can be identified with $\mathbb{R}^{n^{2}}$ in a natural way and is thus a manifold of dimension $n^{2}$. Check that that subset $S(n)$ of symmetric matrices is a submanifold diffeomorphic to $\mathbb{R}^{k}$ where $k = n(n + 1)/2$.
+
+	Check that we have a map $f : M(n) \to S(n)$ given by $A \mapsto AA^{\top}$ which is smooth. Show that the identity matrix $I \in S(n)$ is a regular value. Conclude that $O(n)$ -- the subspace of orthogonal matrices -- is a submanifold of $M(n)$ with dimension $n(n - 1)/2$.
+\end{exe}
+
+\begin{defn}
+	A group that is a manifold such that the basic operations are smooth is called a \deff{Lie group}.
+\end{defn}
+By ``basic operations'', we mean the maps $(a, b) \mapsto ab$ and $a \mapsto a^{-1}$.
+
+\begin{ex}
+	$O(n)$ is a Lie group.
+\end{ex}
+
+
+
+\end{document}
