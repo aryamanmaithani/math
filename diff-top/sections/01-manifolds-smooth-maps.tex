@@ -1,0 +1,640 @@
+\section{Manifolds and Smooth Maps}
+\subsection{Definitions}
+
+\begin{defn}
+	A function $f$ from $U \opsub \mathbb{R}^{n}$ into $\mathbb{R}^{m}$ is called \deff{smooth} if each component function $f_{i}$ has partial derivatives of all orders.
+
+	More generally, if $X \subset \mathbb{R}^{n}$, then a map $f : X \to \mathbb{R}^{m}$ is called \deff{smooth} if for each point $x \in X$, there exists an open set $U \opsub \mathbb{R}^{n}$ containing $x$ and a smooth function $F : U \to \mathbb{R}^{m}$ such that $F = f$ on $U \cap X$.
+\end{defn}
+
+\begin{defn}
+	A map $f : X \to Y$ between subsets of Euclidean spaces is called a \deff{diffeomorphism} if $f$ is smooth and bijective with $f^{-1}$ also smooth.
+
+	$X$ and $Y$ are said to be \deff{diffeomorphic} if such a map exists.
+\end{defn}
+
+\begin{exe}
+	Show that if $f : X \to Y$ is smooth, then $f$ is continuous. \newline
+	In particular, diffeomorphic spaces are homeomorphic.
+\end{exe}
+
+\begin{defn}
+	Let $X \subset \mathbb{R}^{N}$. $X$ is said to be a \deff{$k$-dimensional manifold} if each $x \in X$ possesses a neighbourhood $V \opsub X$ which is diffeomorphic to an open subset $U \opsub \mathbb{R}^{k}$. We define the \deff{dimension} of $X$ as $\dim(X) = k$.
+
+	A diffeomorphism $\phi : U \to V$ is called a \deff{parametrisation} of the neighbourhood $V$. The inverse diffeomorphism $\phi^{-1} : V \to U$ is called a \deff{coordinate system} on $V$. \newline
+	Writing $\phi^{-1} = (x_{1}, \ldots, x_{k})$, the component functions $x_{1}, \ldots, x_{k}$ are called \deff{coordinate functions}.
+\end{defn}
+
+Note that $\dim X = k$ is well-defined. Indeed, if $U \opsub \mathbb{R}^{n}$ and $U' \opsub \mathbb{R}^{m}$ are homeomorphic, then $n = m$.
+
+\begin{ex}
+	Any nonempty open subset of $\mathbb{R}^{N}$ is an $N$-dimensional manifold.
+\end{ex}
+
+\begin{ex}
+	The circle $S^{1} \subset \mathbb{R}^{2}$ is a $1$-dimensional manifold.
+
+	The open disc $B_{1}(0) = \{x \in \mathbb{R}^{2} : \|x\| < 1\}$ is a $2$-dimensional manifold but the closed disc $\overline{B_{1}(0)}$ is not. 
+
+	Similarly, $(0, 1)$ is a $1$-manifold but $[0, 1]$ is not. This is due to the boundary points.
+
+	Later, we shall see the concept of \emph{manifold with boundary}.
+\end{ex}
+
+\begin{ex}
+	If $X \subset \mathbb{R}^{N}$ and $Y \subset \mathbb{R}^{M}$ are manifolds, then so is $X \times Y$ with
+	\begin{equation*} 
+		\boxed{\dim(X \times Y) = \dim(X) + \dim(Y).}
+	\end{equation*}
+
+	Indeed, let $k \vcentcolon= \dim(X)$, $l \vcentcolon= \dim(Y)$, and let $(x, y) \in X \times Y$ be arbitrary. Let $U \opsub \mathbb{R}^{k}$ (resp. $W \opsub \mathbb{R}^{l}$) be open and $\phi : U \to X$ (resp. $\psi : W \to Y$) be a parametrisation around $x$ (resp. $y$). 
+
+	Define $\phi \times \psi : U \times W \to X \times Y$ by
+	\begin{equation*} 
+		(\phi \times \psi)(u, w) \vcentcolon= (\phi(u), \psi(w)).
+	\end{equation*}
+
+	Note that $(U \times W) \opsub \mathbb{R}^{k + l}$ and $f \vcentcolon= \phi \times \psi$ is smooth (the component functions of $f$ are the component functions of $\phi$ followed by those of $\psi$). We only need to verify that this is indeed a local parametrisation.
+
+	Note that $\phi$ and $\psi$ are diffeomorphisms onto their images (and the images are open in $X$ and $Y$ respectively). Thus, $V \vcentcolon= \phi(U) \times \psi(W)$ is an open neighbourhood of $(x, y)$ in $X \times Y$. Moreover, $g : V \to U \times W$ by $(x', y') \mapsto (\phi^{-1}(x'), \psi^{-1}(y'))$ is the inverse of $f$. \newline
+	The only check that needs to be done is that $g$ is smooth. We leave this to the reader. (Use the smoothness of $\phi^{-1}$ and $\psi^{-1}$ defined in the more general sense.)
+\end{ex}
+
+\begin{defn}
+	If $X$ and $Y$ are both manifolds in $\mathbb{R}^{N}$ and $Z \subset X$, then $Z$ is a \deff{submanifold} of $X$.
+
+	The \deff{codimension} of $Z$ (in $X$) is defined by $\codim_{X}(Z) = \dim(X) - \dim(Z)$.
+\end{defn}
+If the ambient manifold $X$ is clear, we will simply write $\codim(Z)$.
+
+\begin{ex}
+	$S^{1}$ is a submanifold of $B_{2}(0) \subset \mathbb{R}^{2}$ of codimension $1$.
+\end{ex}
+
+\begin{rem}
+	We have defined manifolds only as subsets of Euclidean spaces.
+\end{rem}
+
+\begin{rem}
+	Note that any open ball in $\mathbb{R}^{k}$ is diffeomorphic to $\mathbb{R}^{k}$ (check). Thus, the domains of local parametrisations may be assumed to be $\mathbb{R}^{k}$.
+\end{rem}
+
+\subsection{Derivatives and Tangents}
+
+\begin{defn}
+	Let $U \opsub \mathbb{R}^{n}$, $f : U \to \mathbb{R}^{m}$ be smooth, and $x \in U$. The \deff{derivative of $f$ at $x$} is the function
+	\begin{equation*} 
+		df_{x} : \mathbb{R}^{n} \to \mathbb{R}^{m}
+	\end{equation*}
+	defined by
+	\begin{equation*} 
+		df_{x}(v) \vcentcolon= \lim_{t \to 0} \frac{f(x + tv) - f(x)}{t}.
+	\end{equation*}
+\end{defn}
+Note that $df_{x}$ is defined on all of $\mathbb{R}^{n}$ even if $U \neq \mathbb{R}^{n}$.
+
+\begin{rem}
+	$df_{x}$ is a linear map. In particular, we may represent $df_{x}$ as a matrix using the standard bases. If $f = (f_{1}, \ldots, f_{m})$, then we have
+	\begin{equation*} 
+		df_{x} = 
+		\begin{bmatrix}
+			\dfrac{\partial f_{1}}{\partial x_{1}}(x) & \cdots & \dfrac{\partial f_{1}}{\partial x_{n}}(x) \\
+			\vdots & \ddots & \vdots \\
+			\dfrac{\partial f_{m}}{\partial x_{1}}(x) & \cdots & \dfrac{\partial f_{m}}{\partial x_{n}}(x)
+		\end{bmatrix}.
+	\end{equation*}
+\end{rem}
+
+\begin{ex}
+	If $L : \mathbb{R}^{n} \to \mathbb{R}^{m}$ is a linear map, then $dL_{x} = L$ for all $x \in \mathbb{R}^{n}$. \newline
+	In particular, if $i : U \into \mathbb{R}^{n}$ is the inclusion map, then $di_{x} = \id_{\mathbb{R}^{n}}$ for all $x \in U$.
+\end{ex}
+
+\begin{thm}[Chain rule]
+	Let $U \opsub \mathbb{R}^{n}$, $V \opsub \mathbb{R}^{m}$. Suppose $f : U \to V$ and $g : V \to \mathbb{R}^{l}$ are smooth. For all $x \in U$, we have
+	\begin{equation*} 
+		d(g \circ f)_{x} = dg_{f(x)} \circ df_{x}.
+	\end{equation*}
+\end{thm}
+
+\begin{defn}
+	Let $X \subset \mathbb{R}^{N}$, $x \in X$, $U \opsub \mathbb{R}^{k}$, and $\phi : U \to X$ be a local parametrisation around $x$. For convenience, assume that $0 \in U$ and $\phi(0) = x$.
+
+	The \deff{tangent space} of $X$ at $x$ to be the image of the map $d \phi_{0} : \mathbb{R}^{k} \to \mathbb{R}^{N}$. This is denoted by $T_{x}(X)$. \newline
+	A \deff{tangent vector} to $X$ at $x$ is a point $v \in T_{x}(X) \subset \mathbb{R}^{N}$.
+\end{defn}
+
+Note that in the above, we are making use of the fact that $X$ is a subset of $\mathbb{R}^{N}$. Also note that $T_{x}(X)$ is a very concrete subspace of $\mathbb{R}^{N}$ -- it is not ``just defined up to isomorphism''. No matter what $\phi$ we choose, we always get the same explicit subspace of $\mathbb{R}^{N}$. The translate $x + T_{x}(X)$ will pass through $x$ and will be ``tangent'' (in a geometric manner) to $X$. Similarly, a tangent vector $v \in T_{x}(X)$ is to be imagined as a segment from $x$ to $x + v$.
+
+The issue to clarify above is whether the above (concrete!) subspace $T_{x}(X)$ depends on $\phi$ or not. Suppose that $\psi : V \to X$ is another local parametrisation with $\psi(0) = x$. Note that $\phi(U)$ and $\psi(V)$ are both (relatively) open neighbourhoods of $x$. By passing to a subset, we may assume $\phi(U) = \psi(V)$. Thus, $h = \psi^{-1} \circ \phi : U \to V$ is a diffeomorphism. Using the chain rule on the relation $\phi = \psi \circ h$ gives
+\begin{equation*} 
+	d \phi_{0} = d \psi_{0} \circ d h_{0}.
+\end{equation*}
+Thus, $\im(d \phi_{0}) \subset \im(d \psi_{0})$. By symmetry, the converse is true too, as desired.
+
+\begin{thm}
+	With above notations,
+	\begin{equation*} 
+		\boxed{\dim(T_{x}(X)) = \dim(X),}
+	\end{equation*}
+	where the dimension on the left is the dimension as a vector space over $\mathbb{R}$.
+
+	In particular, $d\phi_{0} : \mathbb{R}^{k} \to T_{x}(X)$ is an isomorphism.
+\end{thm}
+
+We now define derivative for an arbitrary smooth map $f : X \to Y$.
+
+\begin{defn}
+	Let $f : X \to Y$ be a smooth map of arbitrary manifolds. Let $x \in X$ and $y \vcentcolon= f(x)$. The \deff{derivative} of $f$ at $x$ is a linear map
+	\begin{equation*} 
+		df_{x} : T_{x}(X) \to T_{y}(Y)
+	\end{equation*}
+	defined as follows: Fix parametrisations $\phi : U \to X$ and $\psi : V \to Y$ around $x$ and $y$. ($U \opsub \mathbb{R}^{k}$ and $V \opsub \mathbb{R}^{l}$.) Assume $\phi(0) = x$ and $\psi(0) = y$.
+
+	After passing to a subset of $U$ (so that $f(\phi(U)) \subset \psi(V)$), we have the following commutative square:
+	\begin{equation*} 
+		\begin{tikzcd}
+			X \arrow[rr, "f"] & & Y \\
+			U \arrow[u, "\phi"] \arrow[rr, "h = \psi^{-1} \circ f \circ \phi"'] & & V \arrow[u, "\psi"']
+		\end{tikzcd}.
+	\end{equation*}
+
+	We define $df_{x}$ to be the unique map making the following square commute:
+	\begin{equation*} 
+		\begin{tikzcd}
+			T_{x}(X) \arrow[rr, "df_{x}"] & & T_{y}(Y) \\
+			\mathbb{R}^{k} \arrow[u, "d\phi_{0}"] \arrow[rr, "dh_{0}"'] & & \mathbb{R}^{l} \arrow[u, "d\psi_{0}"']
+		\end{tikzcd}.
+	\end{equation*}
+\end{defn}
+Note that $d\phi_{0}$ is an isomorphism and thus, $df_{x}$ is uniquely determined as
+\begin{equation*} 
+	df_{x} = d\psi_{0} \circ dh_{0} \circ d\phi_{0}^{-1}.
+\end{equation*}
+
+\begin{exe}
+	Check that the above does not depend on choice of $\phi$ or $\psi$.
+\end{exe}
+
+One way of the doing the above exercise is to consider this alternate definition of $df_{x}$. Let $X \subset \mathbb{R}^{N}$, $Y \subset \mathbb{R}^{M}$, $f$, $x$, $y$, $U \opsub \mathbb{R}^{k}$, $V \opsub \mathbb{R}^{l}$, $\phi : U \to X$, $\psi : V \to Y$ have the usual meanings. \newline
+By definition of $f$ being smooth, there exists an open subset $U' \opsub \mathbb{R}^{N}$ and $F : U' \to \mathbb{R}^{M}$ smooth such that $F = f$ on $U' \cap X$. Now, by shrinking $U$ and $U'$ if necessary, we get a diagram as follows:
+\begin{equation*} 
+	\begin{tikzcd}
+		U' \arrow[rr, "F"] & & \mathbb{R}^{M} \\
+		\phi(U) \arrow[u, hook] \arrow[rr, "f"] & & \psi(V) \arrow[u, hook] \\
+		U \arrow[u, "\phi"] \arrow[rr, "h = \psi^{-1} \circ f \circ \phi"'] & & V \arrow[u, "\psi"']
+	\end{tikzcd}.
+\end{equation*}
+The upper and lower squares commute and thus, the big outer rectangle commutes. In turn, the usual chain on open subsets of Euclidean spaces tells us that the following big rectangle commutes:
+\begin{equation*} 
+	\begin{tikzcd}
+		\mathbb{R}^{N} \arrow[rr, "dF_{x}"] & & \mathbb{R}^{M} \\
+		T_{x}(X) \arrow[u, hook] & & T_{y}(Y) \arrow[u, hook] \\
+		\mathbb{R}^{k} \arrow[u, "d\phi_{0}"] \arrow[rr, "dh_{0}"'] & & \mathbb{R}^{l} \arrow[u, "d\psi_{0}"']
+	\end{tikzcd}.
+\end{equation*}
+
+A simple diagram chase shows that the image of $dF_{X}$ restricted to $T_{x}(X)$ lands within $T_{y}(Y)$. Thus, we get an induced map
+\begin{equation*} 
+	\begin{tikzcd}
+		\mathbb{R}^{N} \arrow[rr, "dF_{x}"] & & \mathbb{R}^{M} \\
+		T_{x}(X) \arrow[u, hook] \arrow[rr, dashed, "dF_{X}|_{T_{x}(X)}"] & & T_{y}(Y) \arrow[u, hook] \\
+		\mathbb{R}^{k} \arrow[u, "d\phi_{0}"] \arrow[rr, "dh_{0}"'] & & \mathbb{R}^{l} \arrow[u, "d\psi_{0}"']
+	\end{tikzcd}
+\end{equation*}
+which makes the lower square commute. But we had already checked that there is a unique such map. Thus, we have
+\begin{equation*} 
+	dF_{x} = d\psi_{0} \circ dh_{0} \circ d\phi_{0}^{-1}.
+\end{equation*}
+
+Note that the left side is independent of parametrisations and the right side is independent of the extension $F$. In turn, both sides are independent of both and hence, we have our well-defined candidate for $df_{x}$. 
+
+The above definition also makes it easy to solve the following exercise. 
+
+\begin{exe}
+	For a submanifold $X$ of $Y$, let $i : X \to Y$ be the inclusion map. Check that $di_{x}$ is the inclusion map of $T_{x}(X)$ into $T_{x}(Y)$.
+\end{exe}
+\begin{soln} 
+	Let $X \subset Y \subset \mathbb{R}^{N}$. Consider the extension $I : \mathbb{R}^{N} \to \mathbb{R}^{N}$ which is the identity map. Then, $di_{x} = dI_{x}|_{T_{x}(X)}$. As noted earlier, $dI_{x} = I$ and we are done.
+\end{soln}
+I got the above from \url{https://math.stackexchange.com/a/861132/427810}.
+
+Note that in particular, the above exercise implies that if $Z \subset X$ is a submanifold and $z \in Z$, then $T_{z}(Z) \subset T_{z}(X)$. (Once again, we emphasise that it makes sense to talk about these inclusions since the tangent spaces are concrete subspaces.)
+
+\begin{thm}[Chain rule]
+	If $X \xrightarrow{f} Y \xrightarrow{g} Z$ are smooth maps of manifolds, then
+	\begin{equation*} 
+		d(g \circ f)_{x} = dg_{f(x)} \circ df_{x},
+	\end{equation*}
+	for all $x \in X$.
+\end{thm}
+
+\subsection{The Inverse Function Theorem and Immersions}
+
+\begin{defn}
+	Let $f : X \to Y$ be a smooth map of manifolds, and $x \in X$. $f$ is called a \deff{local diffeomorphism at $x$} if $f$ maps a neighbourhood of $x$ diffeomorphically onto a neighbourhood of $y \vcentcolon= f(x)$.
+
+	$f$ is called a \deff{local diffeomorphism} if it is a local diffeomorphism at $x$ for every $x \in X$.
+\end{defn}
+
+\begin{thm}[Inverse Function Theorem]
+	Suppose that $f : X \to Y$ is a smooth map of manifolds, and let $x \in X$. \newline
+	$f$ is a local diffeomorphism at $x$ iff $df_{x}$ is an isomorphism.
+\end{thm}
+
+\begin{rem}
+	If $df_{x}$ is an isomorphism, one can choose local coordinates around $x$ and $y$ so that $f$ appears to be the identity $f(x_{1}, \ldots, x_{k}) = (x_{1}, \ldots, x_{k})$ on some neighbourhood of $x$.
+
+	More precisely: there exists $U \opsub \mathbb{R}^{k}$ and local parametrisations $\phi : U \to X$, $\psi : U \to Y$ such that the following diagram commutes:
+	\begin{equation*} 
+		\begin{tikzcd}
+			X \arrow[rr, "f"] & & Y \\
+			U \arrow[u, "\phi"] \arrow[rr, "\text{identity}"'] & & U \arrow[u, "\psi"']
+		\end{tikzcd}.
+	\end{equation*}
+	Note that the same $U$ is being used to parametrise.
+\end{rem}
+
+\begin{defn}
+	Two maps $f : X \to Y$ and $f' : X' \to Y'$ are said to be \deff{equivalent} (or \deff{same up to diffeomorphism}) if there exist diffeomorphisms $\alpha$ and $\beta$ making the following diagram commute:
+	\begin{equation*}  
+		\begin{tikzcd}
+			X \arrow[rr, "f"] & & Y \\
+			X' \arrow[u, "\alpha"] \arrow[rr, "f'"'] & & Y' \arrow[u, "\beta"']
+		\end{tikzcd}.		
+	\end{equation*}
+\end{defn}
+
+\begin{defn} \label{defn:immersions}
+	$f : X \to Y$ smooth map of manifolds, $x \in X$, $y \vcentcolon= f(x)$.
+
+	$f$ is said to be an \deff{immersion at $x$} if $df_{x} : T_{x}(X) \to T_{y}(Y)$ is injective. \newline
+	$f$ is said to be an \deff{immersion} if $f$ is an immersion at $x$ for all $x \in X$. 
+
+	The \deff{canonical immersion} is the standard inclusion $\mathbb{R}^{k} \into \mathbb{R}^{l}$ for $k \le l$ given by $(x_{1}, \ldots, x_{k}) \mapsto (x_{1}, \ldots, x_{k}, 0, \ldots, 0)$.
+\end{defn}
+
+Check that the canonical immersion is an immersion.
+
+\begin{thm}[Local immersion theorem]
+	Suppose that $f : X \to Y$ is an immersion at $x \in X$, and $y = f(x)$. Then, there exist local coordinates around $x$ and $y$ such that
+	\begin{equation*} 
+		f(x_{1}, \ldots, x_{k}) = (x_{1}, \ldots, x_{k}, 0, \ldots, 0).
+	\end{equation*}
+
+	In other words, $f$ is locally equivalent to the canonical immersion around $x$.
+\end{thm}
+
+\begin{cor}
+	If $f$ is an immersion at $x$, then it is an immersion in a neighbourhood of $x$.
+\end{cor}
+
+\begin{rem}
+	If $\dim(X) = \dim(Y)$, then local immersions and local diffeomorphisms are the same.
+\end{rem}
+
+\begin{rem} \label{rem:immersion-injective-not-embedding}
+	If $f : X \to Y$ is a smooth map, it is not necessary that $f(X)$ is a manifold. This is not true even if $f$ is assumed to an immersion and injective. 
+
+	One can construct a smooth map $f : \mathbb{R} \to \mathbb{R}^{2}$ which is an injective immersion but the image of $f$ is the figure eight.
+\end{rem}
+
+\begin{defn}
+	$f : X \to Y$ is called \deff{proper} if the preimage of every compact set in $Y$ is a compact subset of $X$. An immersion which is injective and proper is called an \deff{embedding}.
+\end{defn}
+
+\begin{thm}
+	An embedding $f : X \to Y$ maps $X$ diffeomorphically onto a submanifold of $Y$.
+\end{thm}
+
+\begin{rem} \label{rem:compact-injective-immersion-embedding}
+	If $X$ is compact, then every $f : X \to Y$ is proper. In this case, embeddings are same as injective immersions.
+
+	To see why $f$ is proper, note that if $K \subset Y$ is compact, then $K$ is closed and hence, $f^{-1}(K)$ is closed in $X$ by continuity. Any closed subset of a compact space is compact and we are done.
+\end{rem}
+
+\subsection{Submersions}
+
+We now study the case where $\dim(X) \ge \dim(Y)$. If $f : X \to Y$ carries $x$ to $y$, then we can demand surjectivity of $df_{x} : T_{x}(X) \to T_{y}(Y)$. Identical to the definitions in \Cref{defn:immersions}, we have the following.
+
+\begin{defn} 
+	$f : X \to Y$ smooth map of manifolds, $x \in X$, $y \vcentcolon= f(x)$.
+
+	$f$ is said to be a \deff{submersion at $x$} if $df_{x} : T_{x}(X) \to T_{y}(Y)$ is surjective. \newline
+	$f$ is said to be a \deff{submersion} if $f$ is an submersion at $x$ for all $x \in X$. 
+
+	The \deff{canonical submersion} is the standard inclusion $\mathbb{R}^{k} \into \mathbb{R}^{l}$ for $k \ge l$ given by $(x_{1}, \ldots, x_{k}) \mapsto (x_{1}, \ldots, x_{l})$.
+\end{defn}
+
+\begin{thm}[Local submersion theorem]
+	Suppose that $f : X \to Y$ is a submersion at $x \in X$, and $y = f(x)$. Then, there exist local coordinates around $x$ and $y$ such that
+	\begin{equation*} 
+		f(x_{1}, \ldots, x_{k}) = (x_{1}, \ldots, x_{l}).
+	\end{equation*}
+
+	In other words, $f$ is locally equivalent to the canonical submersion around $x$.
+\end{thm}
+
+\begin{cor}
+	If $f$ is a submersion at $x$, then it is a submersion in a neighbourhood of $x$.
+\end{cor}
+
+\begin{defn}
+	For a smooth map $f : X \to Y$, a point $y \in Y$ is called a \deff{regular value for $f$} if $df_{x} : T_{x}(X) \to T_{y}(Y)$ is surjective for every $x \in f^{-1}(y)$. Else, $y$ is called a \deff{critical value}.
+\end{defn}
+Points not in the image of $f$ are also regular values. In fact, if $\dim(X) < \dim(Y)$, then the regular values are precisely the points in $Y \setminus f(X)$.
+
+\begin{thm}[Preimage Theorem]
+	If $y$ is a regular value for $f : X \to Y$, then $f^{-1}(y)$ is a submanifold of $X$, with
+	\begin{equation*} 
+		\boxed{\dim(f^{-1}(y)) = \dim(X) - \dim(Y).}
+	\end{equation*}
+\end{thm}
+
+\begin{exe}
+	Use the above to show that $S^{k - 1}$ is a manifold of dimension $k - 1$. (Use the map $f : \mathbb{R}^{k} \to \mathbb{R}$ defined by $x \mapsto \|x\|^{2}$ and check that $1$ is a regular value.)
+\end{exe}
+
+\begin{exe}
+	Note that $M(n)$ -- the space of all $n \times n$ matrices -- can be identified with $\mathbb{R}^{n^{2}}$ in a natural way and is thus a manifold of dimension $n^{2}$. Check that that subset $S(n)$ of symmetric matrices is a submanifold diffeomorphic to $\mathbb{R}^{k}$ where $k = n(n + 1)/2$.
+
+	Check that we have a map $f : M(n) \to S(n)$ given by $A \mapsto AA^{\top}$ which is smooth. Show that the identity matrix $I \in S(n)$ is a regular value. Conclude that $O(n)$ -- the subspace of orthogonal matrices -- is a submanifold of $M(n)$ with dimension $n(n - 1)/2$.
+\end{exe}
+
+\begin{defn}
+	A group that is a manifold such that the basic operations are smooth is called a \deff{Lie group}.
+\end{defn}
+By ``basic operations'', we mean the maps $(a, b) \mapsto ab$ and $a \mapsto a^{-1}$.
+
+\begin{ex}
+	$O(n)$ is a Lie group.
+\end{ex}
+
+\begin{defn}
+	Let $g_{1}, \ldots, g_{l} : X \to \mathbb{R}$ be smooth functions, and $x \in X$. \newline
+	$g_{1}, \ldots, g_{l}$ are said to be \deff{independent at $x$} if $d(g_{1})_{x}, \ldots, d(g_{l})_{x}$ are linearly independent functionals on $T_{x}(X)$, i.e., linearly independent as elements of the dual $T_{x}(X)^{\ast}$.
+\end{defn}
+
+\begin{prop}
+	Let $g_{1}, \ldots, g_{l}$ be as in the above definition. Define the function
+	\begin{equation*} 
+		g : X \to \mathbb{R}^{l}
+	\end{equation*}
+	by $g \vcentcolon= (g_{1}, \ldots, g_{l})$.
+
+	Then, $dg_{x}$ is a surjection iff $g_{1}, \ldots, g_{l}$ are independent at $x$.
+\end{prop}
+
+Note that in the above notation, $g^{-1}(0)$ is the set of common zeroes of $g_{1}, \ldots, g_{l}$. This gives us the following.
+
+\begin{thm}
+	If the smooth, real-valued functions $g_{1}, \ldots, g_{l}$ on $X$ are independent at each common zero, then the set $Z$ of common zeroes is a submanifold of $X$ with $\codim(Z) = l$.
+\end{thm}
+
+There are two partial converses to the above.
+
+\begin{prop}
+	If $y$ is a regular value of a smooth map $f : X \to Y$, then the preimage submanifold $f^{-1}(y)$ can be cut out by independent functions.
+\end{prop}
+
+\begin{prop}
+	Every submanifold of $X$ is \emph{locally} cut out by independent functions. 
+
+	More precisely: let $Z$ be a submanifold of codimension $l$, and $z \in Z$. Then, there exist $l$ independent functions $g_{1}, \ldots, g_{l}$ defined on some neighbourhood $W \opsub X$ of $z$ such that $Z \cap W$ is the common vanishing set of the $g_{i}$.
+\end{prop}
+
+\begin{prop}
+	Let $Z$ be the preimage of a regular value $y \in Y$ under the smooth map $f : X \to Y$. Then the kernel of the derivative $df_{x} : T_{x}(X) \to T_{y}(Y)$ at any point $x \in Z$ is precisely the tangent space $T_{x}(Z)$.
+\end{prop}
+
+\subsection{Transversality}
+
+So far we discussed the problem of when $f^{-1}(y)$ is a manifold, given a smooth map $f : X \to Y$. Now, we wish to study the more general case of when $f^{-1}(Z)$ is a manifold, where $Z \subset Y$ is a submanifold. Note that being a manifold is a local problem. More precisely: $f^{-1}(Z)$ is a manifold iff every $x \in f^{-1}(Z)$ has a neighbourhood $U \opsub X$ such that $f^{-1}(Z) \cap U$ is a manifold. This observation along with some calculations leads to the following definition and theorem.
+
+\begin{defn}
+	Let $f : X \to Y$ be a smooth map, and $Z \subset Y$ a manifold. The map $f$ is said to be \deff{transversal} to the submanifold $Z$, abbreviated $f \trans Z$, if the following equation holds true at each point $x \in f^{-1}(Z)$:
+	\begin{equation*} 
+		\boxed{\im(df_{x}) + T_{y}(Z) = T_{y}(Y),}
+	\end{equation*}
+	where $y \vcentcolon= f(x)$.
+\end{defn}
+
+\begin{thm}
+	If the smooth map $f : X \to Y$ is transversal to a submanifold $Z \subset Y$, then $f^{-1}(Z)$ is a submanifold of $X$. Moreover,
+	\begin{equation*} 
+		\codim(f^{-1}(Z)) = \codim(Z).
+	\end{equation*}
+\end{thm}
+
+Note that when $Z$ is a single point, then $T_{y}(Z)$ is the zero subspace and the transversality condition reduces to $\im(df_{x}) = T_{y}(Y)$, i.e., $df_{x}$ is surjective. Thus, the case of $y$ being a regular value was a special case.
+
+\begin{defn}
+	Let $Y$ be a manifold, and let $X$ and $Z$ be submanifolds of $Y$. We say that $X$ and $Z$ are \deff{transversal}, abbreviated $X \trans Z$ if
+	\begin{equation*} 
+		\boxed{T_{x}(X) + T_{x}(Z) = T_{x}(X \cap Z),}
+	\end{equation*}
+	for every $x \in X \cap Z$.
+\end{defn}
+The above is simply saying that $i \trans Z$, where $i$ is the inclusion $i : X \into Y$. By symmetry, it is also the same as $j \trans X$ for $j : Z \into Y$. The earlier theorem then specialises to the following.
+
+\begin{thm}
+	The intersection of two transversal submanifold manifolds of $Y$ is again a submanifold. Moreover,
+	\begin{equation*} 
+		\codim(X \cap Z) = \codim(X) + \codim(Z).
+	\end{equation*}
+\end{thm}
+In terms of dimensions, the above says
+\begin{equation*} 
+	\dim(X \cap Z) = \dim(X) + \dim(Z) - \dim(Y).
+\end{equation*}
+In particular, note that if $\dim(X) + \dim(Z) < \dim(Y)$, then $X$ and $Z$ can only intersect transversally by not intersecting at all. 
+
+\begin{ex}
+	The two coordinate axes intersect transversally in $\mathbb{R}^{2}$ but not when considered submanifolds of $\mathbb{R}^{3}$.
+\end{ex}
+
+\begin{exe}
+	Suppose $A : \mathbb{R}^{k} \to \mathbb{R}^{n}$ is a linear map and $V$ is a vector space of $\mathbb{R}^{n}$. Check that $A \trans V \Leftrightarrow A(\mathbb{R}^{k}) + V = \mathbb{R}^{n}$. 
+
+	In particular, if $W$ is another subspace of $\mathbb{R}^{n}$, then $V \trans W \Leftrightarrow V + W = \mathbb{R}^{n}$.
+\end{exe}
+
+\subsection{Homotopy and Stability}
+
+Let $I$ denote the unit interval $[0, 1] \subset \mathbb{R}$.
+
+\begin{defn}
+	Let $f_{0}, f_{1} : X \to Y$ be smooth maps. We say that $f_{0}$ and $f_{1}$ are \deff{homotopic}, abbreviated $f_{0} \sim f_{1}$, if there exists a smooth map $F : X \times I \to Y$ such that $F(x, 0) = f_{0}(x)$ and $F(x, 1) = f_{1}(x)$ for all $x \in X$. \newline
+	$F$ is called a \deff{homotopy} between $f_{0}$ and $f_{1}$.
+\end{defn}
+
+It is easily checked that $\sim$ is an equivalence relation on smooth maps from $X$ to $Y$, and the equivalence class to which a mapping belongs is its \deff{homotopy class}. We also get a family of smooth maps $(f_{t})_{t \in [0, 1]}$ from $X$ to $Y$ given by
+\begin{equation*} 
+	f_{t}(x) \vcentcolon= F(x, t).
+\end{equation*}
+
+We sometimes also say ``$f_{t} : X \to Y$'' is a homotopy to denote a family $(f_{t})_{t \in I}$ of smooth maps from $X$ to $Y$ such that the map $F : X \times I \to Y$ defined by $(x, t) \mapsto f_{t}(x)$ is a homotopy between $f_{0}$ and $f_{1}$.
+
+\begin{defn}
+	A property of smooth maps is said to be \deff{stable} provided that whenever $f_{0} : X \to Y$ possesses the property and $f_{t} : X \to Y$ is a homotopy of $f_{0}$, then, for some $\varepsilon > 0$, each $f_{t}$ with $t < \varepsilon$ also possesses the property.
+
+	The collection of maps that posses a particular property may be referred to as a \deff{stable class} of maps. 
+\end{defn}
+
+\begin{ex}
+	Consider curves in the planes, i.e., smooth maps from $\mathbb{R}^{1}$ to $\mathbb{R}^{2}$. The property that a curve pass through the origin is not stable. Nor is the property of intersecting the $x$-axis stable. (Think about the mapping $x \mapsto (x, x^{2})$ and the homotopy $(x, t) \mapsto (x, x^{2} + t)$ in both cases.)
+
+	However, transversal intersection with the $x$-axis \emph{is} a stable property.
+\end{ex}
+
+\begin{exe}
+	Verify the last line above.
+\end{exe}
+
+\begin{thm}[Stability theorem]
+	Let $X$ be a compact manifold, and $Y$ an arbitrary manifold. The following classes of smooth maps are stable classes:
+	\begin{enumerate}
+		\item local diffeomorphisms,
+		\item immersions,
+		\item submersions,
+		\item maps transversal to a fixed submanifold $Z \subset Y$,
+		\item embeddings,
+		\item diffeomorphisms.
+	\end{enumerate}
+\end{thm}
+
+\section{Sard's Theorem and Morse Functions}
+
+Recall when a subset of a Euclidean space is said to have measure zero.
+
+\begin{defn}
+	Let $Y$ be a manifold and $C \subset Y$. $C$ is said to have \deff{measure zero} if for every local parametrisation $\psi$ of $Y$, the preimage $\psi^{-1}(C)$ has measure zero in Euclidean space.
+\end{defn}
+
+It can be checked that the following is reducible to the following: there exists a collection of local parametrisations $\{\psi_{\alpha}\}_{\alpha}$ such that $C$ is covered by the images of $\psi_{\alpha}$ and $\psi_{\alpha}^{-1}(C)$ has measure zero for all $\alpha$.
+
+\begin{thm}[Sard's Theorem]
+	Let $f : X \to Y$ be any smooth map of manifolds. \newline
+	Almost every point in $Y$ is a regular value, i.e., the set of critical values has measure zero.
+\end{thm}
+
+\begin{cor}
+	The regular values of any smooth map $f : X \to Y$ are dense in $Y$. In fact, if $f_{i} : X \to Y$ are any countable number of smooth maps, then the points of $f_{i}$ that are simultaneously regular values for all of the $f_{i}$ are dense.
+\end{cor}
+
+\begin{defn}
+	Let $f : X \to Y$ be a smooth map, and $x \in X$. \newline
+	If $df_{x}$ is surjective, then we say that \deff{$f$ is regular at $x$} or that \deff{$x$ is a regular point of $f$}. Else, we say that \deff{$x$ is a critical point of $x$}.
+\end{defn}
+
+\begin{rem}
+	Let $f : X \to Y$ be smooth, and $y \in Y$. \newline
+	$y$ is a regular value $\Leftrightarrow$ \emph{every} point in $f^{-1}(y)$ is a regular point. \newline
+	$y$ is a critical value $\Leftrightarrow$ \emph{some} point in $f^{-1}(y)$ is a critical point. 
+\end{rem}
+
+\begin{defn}
+	Let $f : \mathbb{R}^{k} \to \mathbb{R}$ be a smooth function. The \deff{Hessian matrix of $f$} is the $k \times k$ matrix
+	\begin{equation*} 
+		H = \left(\frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}\right)_{i, j}.
+	\end{equation*}
+	If $H$ is nonsingular at a critical point $x$, then $x$ is said to be a \deff{nondegenerate critical point of $f$}.
+\end{defn}
+
+\begin{prop}
+	Nondegenerate critical points are isolated from other critical points of $f$.
+\end{prop}
+\begin{proof}[Sketch]
+	Define $g : \mathbb{R}^{k} \to \mathbb{R}^{k}$ by $g = \left(\frac{\partial f}{\partial x_{1}}, \ldots, \frac{\partial f}{\partial x_{k}}\right)$. \newline
+	Then $dg_{x}$ is nonsingular and thus, $g \neq 0$ on a punctured neighbourhood of $x$.
+\end{proof}
+
+\begin{thm}[Morse Lemma]
+	Suppose $a \in \mathbb{R}^{k}$ is a nondegenerate critical point of $f : \mathbb{R}^{k} \to \mathbb{R}$, and
+	\begin{equation*} 
+		(h_{ij}) = \left(\frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}(a)\right)
+	\end{equation*}
+	is the Hessian of $f$ at $a$. Then there exists a local coordinate system $(x_{1}, \ldots, x_{k})$ around $a$ such that
+	\begin{equation*} 
+		f = f(a) + \sum h_{ij} x_{i} x_{j}
+	\end{equation*}
+	near $a$.
+\end{thm}
+
+We now extend the concept of nondegeneracy of critical points to arbitrary manifolds.
+
+\begin{defn}
+	Suppose that $f : X \to \mathbb{R}$ has a critical point at $x$ and that $\phi$ is a local parametrisation carrying the origin to $x$. (Then, $0$ is a critical point for $f \circ \phi$: use chain rule.) \newline
+	We declare $x$ to be \deff{nondegenerate for $f$} if $0$ is nondegenerate for $f \circ \phi$.
+\end{defn}
+
+One can check that the above does not depend on $\phi$.
+
+\begin{defn}
+	A function $X \to \mathbb{R}$ whose critical points are all nondegenerate is called a \deff{Morse function}.
+\end{defn}
+
+\textbf{Notation:} If $f$ is a function on $X \subset \mathbb{R}^{N}$ and $a = (a_{1}, \ldots, a_{N}) \in \mathbb{R}^{N}$, we define a new function $f_{a} : X \to \mathbb{R}$ by
+\begin{equation*} 
+	f_{a}(x_{1}, \ldots, x_{N}) = f + a_{1} x_{1} + \cdots + a_{N} x_{N}.
+\end{equation*}
+
+\begin{thm}
+	Let $f : X \to \mathbb{R}$ be an arbitrary smooth function. For almost every $a \in \mathbb{R}^{N}$, the function $f_{a}$ is a Morse function on $X$.
+\end{thm}
+
+\subsection{Embedding Manifolds in Euclidean Space}
+
+We had defined a $k$-dimensional manifold as some subset of $\mathbb{R}^{N}$. We now ``show'' that we may assume $N = 2k + 1$. That is, if $X$ is a $k$-dimensional manifold and $n \ge 2k + 1$, then there exists an embedding $X \to \mathbb{R}^{n}$. (Note that $\mathbb{R}^{n}$ naturally embeds inside $\mathbb{R}^{m}$ for $m \ge n$.)
+
+\begin{defn}
+	Let $X \subset \mathbb{R}^{N}$ be a manifold. The \deff{tangent bundle of $X$}, abbreviated $T(X)$, is defined as
+	\begin{equation*} 
+		T(X) \vcentcolon= \{(x, v) \in X \times \mathbb{R}^{N} : v \in T_{x}(X)\} \subset X \times \mathbb{R}^{2N}.
+	\end{equation*}
+\end{defn}
+$T(X)$ contains a copy of $X$: $X_{0} = \{(x, 0) : x \in X\}$. Note that $T(X)$ is again a concrete subset of $\mathbb{R}^{2N}$.
+
+\begin{defn}
+	Any smooth map $f : X \to Y$ induces a global \deff{derivative map} $df : T(X) \to T(Y)$ defined by
+	\begin{equation*} 
+		df(x, v) = (f(x), df_{x}(v)).
+	\end{equation*}
+\end{defn}
+
+Note that if $X \subset \mathbb{R}^{N}$ and $Y \subset \mathbb{R}^{M}$, then $df$ is a map from a subset of $\mathbb{R}^{2N}$ into a subset of $\mathbb{R}^{2M}$, and it makes sense to talk about smoothness of $df$.
+
+\begin{prop}
+	$df$ is a smooth map. Moreover, $d(g \circ f) = dg \circ df$. Consequently, if $f$ is a diffeomorphism, then so is $df$.
+\end{prop}
+In particular, the tangent bundle $T(X)$ is determined up to diffeomorphism, and does not depend on the ambient $\mathbb{R}^{N}$.
+
+\begin{prop}
+	The tangent bundle of a manifold is another manifold, with twice the dimension.
+
+	In symbols: If $X$ is a manifold, then so is $T(X)$ and $\dim(T(X)) = 2 \dim(X)$.
+\end{prop}
+
+\begin{thm}
+	Every $k$-dimensional manifold admits a one-to-one immersion in $\mathbb{R}^{2k + 1}$.
+\end{thm}
+Note that one-to-one immersions are weaker than embeddings (\Cref{rem:immersion-injective-not-embedding}) but the two coincide for compact spaces (\Cref{rem:compact-injective-immersion-embedding}). To go from compact to arbitrary manifolds, we use partitions of unity.
+
+\begin{thm}
+	Let $X$ be an \underline{arbitrary subset} of $\mathbb{R}^{N}$. For any covering of $X$ by (relatively) open subsets $(U_{\alpha})_{\alpha}$, there exists a sequence $(\theta_{i})_{i \ge 1}$ of smooth functions on $X$, called a \deff{partition of unity subordinate to $(U_{\alpha})_{\alpha}$}, with the following properties:
+	\begin{enumerate}
+		\item $0 \le \theta_{i}(x) \le 1$ for each $x \in X$ and all $i \ge 1$.
+		\item Each $x \in X$ has a neighbourhood on which all but finitely many $\theta_{i}$ are zero.
+		\item Each function $\theta_{i}$ is zero outside some closed set contained in some $U_{\alpha}$.
+		\item For each $x \in X$, $\sum \theta_{i}(x) = 1$.	
+	\end{enumerate}
+\end{thm}
+Note that the last sum is finite for all $x$, in view of the second point.
+
+\begin{cor}
+	On any manifold $X$, there exists a proper (smooth) map $\rho : X \to \mathbb{R}$.
+\end{cor}
+
+\begin{thm}[Whitney Theorem]
+	Every $k$-dimensional manifold embeds in $\mathbb{R}^{2k + 1}$.
+\end{thm}
