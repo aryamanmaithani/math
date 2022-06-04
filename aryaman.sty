@@ -200,6 +200,7 @@
 \DeclareMathOperator{\Ass}{Ass}
 \DeclareMathOperator{\Frac}{Frac}
 \DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\codim}{codim}
 % \newcommand*{\sHom}{\mathscr{H}\text{\kern -5pt {\calligra\large om}}\,}
 
 % Categories
@@ -386,7 +387,8 @@
 
 {\color{UnivColor} \Huge\noindent\coursenum \par\vspace{0.2cm}\noindent\coursename \par\vspace{0.1cm} \noindent\rule{0.65\textwidth}{0.05cm}\par\vspace{0.2cm}}
 
-{\color{UnivColor} \large \noindent Professor: \professor \par\noindent Notes By: \student}
+\ifthenelse{\equal{\professor}{}}{}{{\color{UnivColor} \large \noindent Professor: \professor \par\noindent }}
+Notes By: \student
 
 \vfill
 \begin{center} {\huge \color{UnivColor} \semesteryear} \end{center}
