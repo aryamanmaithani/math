@@ -1,0 +1,364 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+\setcounter{tocdepth}{2}
+
+\title{Square roots of matrices}
+\author{Aryaman Maithani}
+\date{June 5, 2022}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section{Introduction}
+
+Given a complex square matrix $A$, can we always find a square matrix $B$ such that $B^{2} = A$? We shall see that the answer to this is ``no'' (see \Cref{exe:inexistence-of-square-root}). \newline
+We shall show that this \emph{is} true for invertible matrices. The crux will be to show that this is true for (invertible) Jordan blocks. The general result follows from that quite simply. 
+
+After that, we will show that the square root can actually be written as a polynomial in $A$. This has a pleasant consequence that an invertible symmetric matrix has a symmetric square root. Again, the trick will be to show it first for Jordan blocks. However, the generalisation is not so easy now since the polynomials we get will depend on the Jordan block. Thus, we need to get a suitable ``interpolating'' polynomial to finish the task.
+
+The facts used will be quite simple, namely the existence of Jordan canonical form and the existence of a (formal) power series of $\sqrt{1 + x}$.
+
+This was inspired by \url{https://math.stackexchange.com/q/4465256/427810}.
+
+\section{Basic notions and preliminaries}
+\subsection{Jordan blocks}
+
+We shall use $M_{n}(\mathbb{C})$ to denote the set of all $n \times n$ matrices with complex entries. The identity matrix will be denoted by $I$, the size will be clear from context. \newline
+Given \emph{any} $M \in M_{n}(\mathbb{C})$, we define $M^{0} \vcentcolon= I$. \newline
+
+
+Recall that a \deff{Jordan block} refers to a matrix of the form
+\begin{equation*} 
+	J = 
+	\begin{bmatrix}
+		\lambda & 1 & 0 & \cdots & 0 & 0 \\
+		0 & \lambda & 1 & \ddots & 0 & 0 \\
+		0 & 0 & \lambda & \ddots & 0 & 0 \\
+		0 & 0 & 0 & \ddots & 1 & 0 \\
+		\vdots & \ddots & \ddots & \ddots & \ddots & 1 \\
+		0 & 0 & 0 & \cdots & 0 & \lambda \\
+	\end{bmatrix}.
+\end{equation*}
+
+In words: it is a matrix with all diagonal entries $\lambda$, all superdiagonal entries $1$, and all other entries $0$. The value $\lambda$ is the \emph{eigenvalue} of $J$.
+
+Lastly, recall the existence of a \emph{Jordan (canonical) form}.
+
+\begin{thm}[Jordan form] \label{thm:jordan-form}
+	Let $A \in M_{n}(\mathbb{C})$. Then, there exists an invertible matrix $P$ such that $P^{-1} A P$ is of the form
+	\begin{equation} \label{eq:01}
+		\mathbf{J} = \begin{bmatrix}
+			J_{1} & O & O & \cdots & O \\
+			O & J_{2} & O & \cdots & O \\
+			O & O & J_{3} & \cdots & O \\
+			\vdots & \vdots & \vdots & \ddots & \vdots \\
+			O & O & O & \cdots & J_{k}
+		\end{bmatrix},
+	\end{equation}
+	where each $J_{i}$ is a Jordan block (of possibly different sizes) and each $O$ is a zero matrix of the appropriate size.
+\end{thm}
+Note that it is possible that the same $\lambda$ appears in different Jordan blocks. 
+
+The above form is particularly useful since block matrices can be multiplied in the na\"ive way. In particular, one has
+\begin{equation} \label{eq:03}
+	\begin{bmatrix}
+		A_{1} & O & \cdots & O \\
+		O & A_{2} & \cdots & O \\
+		\vdots & \vdots & \ddots & \vdots \\
+		O & O & \cdots & A_{k}
+	\end{bmatrix}^{2} 
+	=
+	\begin{bmatrix}
+		A_{1}^{2} & O & \cdots & O \\
+		O & A_{2}^{2} & \cdots & O \\
+		\vdots & \vdots & \ddots & \vdots \\
+		O & O & \cdots & A_{k}^{2}
+	\end{bmatrix},
+\end{equation}
+where $A_{1}, \ldots, A_{k}$ are \emph{any} square matrices (and the $O$s are zero matrices of appropriate sizes).
+
+Thus, to find a square root for the matrix $\mathbf{J}$ in \Cref{eq:01}, it suffices to find square roots for each Jordan block $J_{i}$. Moreover, once we have found a square root of $\mathbf{J}$, we also have a square of $A$, by the following observation.
+
+\begin{obs} 
+	Given $M, P \in M_{n}(\mathbb{C})$ with $P$ invertible, we have
+	\begin{equation*} 
+		(P M P^{-1})^{k} = P M^{k} P^{-1}
+	\end{equation*}
+	for all $k \ge 0$.
+
+	In particular, if $M^{2} = \mathbf{J}$ and $A = P\mathbf{J}P^{-1}$, then
+	\begin{equation*} 
+		(PMP^{-1})^{2} = PM^{2}P^{-1} = P\mathbf{J}P^{-1} = A.
+	\end{equation*}
+\end{obs}
+
+\subsection{Formal square root}
+
+Define $\dbinom{\frac{1}{2}}{0} \vcentcolon= 1$ and
+\begin{equation*} 
+	\binom{\frac{1}{2}}{n + 1} \vcentcolon= \frac{\frac{1}{2} - n}{n + 1}\binom{\frac{1}{2}}{n}
+\end{equation*}
+for $n \ge 0$. More directly, we have 
+\begin{equation*} 
+	\binom{\frac{1}{2}}{n} = \frac{\left(\frac{1}{2}\right)\left(\frac{1}{2} - 1\right) \cdots \left(\frac{1}{2} - (n - 1)\right)}{n!},
+\end{equation*}
+resembling the usual formula for $\binom{m}{n}$ when $m$ is a nonnegative integer. 
+
+Then, from analysis, one knows that 
+\begin{equation*} 
+	\sqrt{1 + x} = \sum_{n \ge 0} \binom{\frac{1}{2}}{n} x^{n}
+\end{equation*}
+when $\md{x} < 1$. 
+
+For the paper, we are content with the above being true in a \emph{formal} sense. More precisely, we want that
+\begin{equation*} 
+	\left(\sum_{n \ge 0} \binom{\frac{1}{2}}{n} X^{n}\right)^{2} = 1 + X
+\end{equation*}
+in $\mathbb{C}[\![X]\!]$, which translates to the following:
+\begin{prop} \label{prop:formal-square-root}
+	\begin{align*} 
+		\binom{\frac{1}{2}}{0} &= 1,\\
+		\binom{\frac{1}{2}}{0}\binom{\frac{1}{2}}{1} + \binom{\frac{1}{2}}{1}\binom{\frac{1}{2}}{0} &= 1,\,\text{and} \\
+		\sum_{k = 0}^{n} \binom{\frac{1}{2}}{k} \binom{\frac{1}{2}}{n - k} &= 0 \text{ for all $n \ge 2$.}
+	\end{align*}
+\end{prop}
+
+\begin{exe}
+	Find a proof of the above. 
+\end{exe}
+
+\subsection{Polynomials in matrices}
+
+Let $A \in M_{n}(\mathbb{C})$ be a square matrix and $p(X) \in \mathbb{C}[X]$ be a polynomial, say
+\begin{equation*} 
+	p(X) = a_{0} + a_{1} X + \cdots + a_{m} X^{m}.
+\end{equation*}
+Then, it makes sense to talk about the \deff{evaluation at $A$}, denoted $p(A)$, given by
+\begin{equation*} 
+	p(A) = a_{0} I + a_{1} A + \cdots + a_{m} A^{m}.
+\end{equation*}
+
+A matrix that can be written as $p(A)$ for some polynomial $p(X)$ is said to a \deff{polynomial in $A$}.
+
+Note the following subtlety: We are assuming that we have written the polynomial in expanded form and \emph{then} we replace $X$ by $A$ (and the constant is treated as a scalar multiple of the appropriate size identity matrix). \newline
+To emphasise the importance of the above, consider the following equality in $\mathbb{C}[X]$:
+\begin{equation*} 
+	(X - 1)(X + 1) = X^{2} - 1.
+\end{equation*}
+If we wish to evaluate the above polynomial at $A$, then the definition says that we must substitute $A$ on the \emph{right hand side}. It does \textbf{not} say that we can evaluate it as $(A - I)(A + I)$. However, convince yourself that this \emph{is} actually always valid. Similarly, convince yourself that a similar thing holds true for addition of polynomials. \newline
+In fancy lingo, we have a \emph{homomorphism}. 
+
+We now state two results on polynomial evaluations, the proofs of which are elementary and are left to the reader.
+
+\begin{thm} \label{thm:similar-polynomial-evaluation}
+	Let $A, P \in M_{n}(\mathbb{C})$ with $P$ invertible, and let $p(X) \in \mathbb{C}[X]$. Then,
+	\begin{equation*} 
+		p(P^{-1} A P) = P^{-1} p(A) P.
+	\end{equation*}
+\end{thm}
+
+\begin{thm} \label{thm:block-diagonal-polynomial}
+	Suppose $A_{1}, \ldots, A_{k}$ are square matrices of possibly different sizes, and $p(X) \in \mathbb{C}[X]$. Then, the polynomial can be evaluated on a block diagonal matrix as follows:
+
+	\begin{equation*} 
+		p\left(\begin{bmatrix}
+					A_{1} & O & \cdots & O \\
+					O & A_{2} & \cdots & O \\
+					\vdots & \vdots & \ddots & \vdots \\
+					O & O & \cdots & A_{k}
+				\end{bmatrix}\right)
+		=
+		\begin{bmatrix}
+			p(A_{1}) & O & \cdots & O \\
+			O & p(A_{2}) & \cdots & O \\
+			\vdots & \vdots & \ddots & \vdots \\
+			O & O & \cdots & p(A_{k})
+		\end{bmatrix}.
+	\end{equation*}
+\end{thm}
+
+In fact, \Cref{eq:03} was a special case of the above.
+
+\section{Square roots of Jordan blocks} \label{sec:square-root-Jordan}
+
+In this section, we tackle the problem of finding square roots for Jordan blocks. We immediately start by seeing an example where a Jordan block does \emph{not} have a square root.
+
+\begin{exe} \label{exe:inexistence-of-square-root}
+	Let $J = \two{0}{1}{0}{0}$. Show that there is no $M \in M_{2}(\mathbb{C})$ such that $M^{2} = J$.
+\end{exe}
+\begin{soln}
+	One way of solving the above is to simply assume four variables as the entries of $M$ and show that there is no solution. 
+
+	Another way is to use the following fact: Suppose $M \in M_{n}(\mathbb{C})$ is a nilpotent matrix, i.e., $M^{k} = O$ for \emph{some} $k \ge 1$. Then, $M^{n} = O$ (note that $n$ is the size of $M$).\footnote{One way of proving this fact is by showing that the only eigenvalue of $M$ is $0$ and then consider the characteristic polynomial.} \newline
+	Now, we see that any supposed square root $M$ would have to satisfy $M^{4} = O$. But the fact then would force that $M^{2} = O \neq J$.
+\end{soln}
+
+Thus, going forward, we shall assume that the Jordan block has nonzero eigenvalue. This is equivalent to the Jordan block being invertible. Moreover, in the notations of \Cref{thm:jordan-form}, $A$ being invertible is equivalent to each Jordan block $J_{i}$ being invertible.
+
+Let $J$ be a Jordan block with eigenvalue $\lambda \neq 0$. Then, we can write
+\begin{equation*} 
+	J = \lambda(I + N),
+\end{equation*}
+where $N$ is the matrix with $1/\lambda$ on the superdiagonal, and $0$ everywhere else.
+
+Note that $N$ is a nilpotent matrix with $N^{n} = O$. Thus, $I + N$ has a square root given by the binomial power series
+\begin{equation*} 
+	(I + N)^{1/2} = \sum_{k \ge 0} \binom{\frac{1}{2}}{k} N^{k} = I + \frac{1}{2} N - \frac{1}{8} N^{2} + \cdots.
+\end{equation*}
+The crucial point to note is that the power series above will actually reduce to a finite sum since the terms involving $N^{n}$ and higher powers will vanish.
+
+Thus, we have shown the following.
+\begin{thm} \label{thm:square-root-jordan}
+	Let $J$ be a Jordan block of size $n$ with eigenvalue $\lambda \neq 0$. Define $N \vcentcolon= \frac{1}{\lambda} J - I$, and let $\alpha \in \mathbb{C}$ be a square root of $\lambda$. Then, $J$ has a square $S$ given by
+	\begin{equation} \label{eq:02}
+		S = \alpha \sum_{k = 0}^{n} \binom{\frac{1}{2}}{k} N^{k}.
+	\end{equation}
+\end{thm}
+
+\begin{exe}
+	Convince yourself that $S^{2}$ is indeed $\lambda(I + N)$, using \Cref{prop:formal-square-root}.
+\end{exe}
+
+\begin{obs} \label{obs:polynomial-jordan-root}
+	Note that the $S$ is actually a polynomial in $J$ since $N$ is so.
+\end{obs}
+
+\section{Square roots of invertible matrices}
+
+Combining the results and observations of the previous sections, we get the following.
+
+\begin{thm}
+	Let $A \in M_{n}(\mathbb{C})$ be an invertible matrix. Then, there exists $B \in M_{n}(\mathbb{C})$ such that $B^{2} = A$.
+\end{thm}
+We had already seen that $A$ being invertible is not completely unnecessary since we have a counterexample with $A = \two{0}{1}{0}{0}$.
+
+To recall, the square root was computed in quite a hands-on manner: We first put $A$ in Jordan form as
+\begin{equation*} 
+	P^{-1} A P = 
+	\begin{bmatrix}
+		J_{1} & O & \cdots & O \\
+		O & J_{2} & \cdots & O \\
+		\vdots & \vdots & \ddots & \vdots \\
+		O & O & \cdots & J_{k}
+	\end{bmatrix}.
+\end{equation*}
+Then, for each $J_{i}$, we find a square root, let us denote this by $\sqrt{J_{i}}$.\footnote{Note that each Jordan block can have multiple square roots. We just found one explicitly, which we are denoting by $\sqrt{J_{i}}$.} Then, the matrix
+\begin{equation*} 
+	P\begin{bmatrix}
+		\sqrt{J_{1}} & O & \cdots & O \\
+		O & \sqrt{J_{2}} & \cdots & O \\
+		\vdots & \vdots & \ddots & \vdots \\
+		O & O & \cdots & \sqrt{J_{k}}
+	\end{bmatrix}P^{-1}
+\end{equation*}
+is a square root for $A$, simple!
+
+Now, note that we observed that $\sqrt{J_{i}}$ is actually a polynomial in $J_{i}$ (\Cref{obs:polynomial-jordan-root}). Moreover, we noted how polynomials of block diagonal matrices are computed (\Cref{thm:block-diagonal-polynomial}), and how polynomial evaluations interacted with similarity (\Cref{thm:similar-polynomial-evaluation}). Using these two facts, one would hope that we can write $\sqrt{A}$ also as a polynomial in $A$. \newline
+However, the hindrance is the following: We did \emph{not} find a common polynomial $p(X)$ such that $p(J_{i}) = \sqrt{J_{i}}$. Rather, for each $J_{i}$, we found some polynomial $p_{i}(X)$ such that $p_{i}(J_{i}) = \sqrt{J_{i}}$. 
+
+The next section is devoted to finding a common polynomial.
+
+\section{Interpolation}
+
+In this section, given a Jordan block $J$, we shall denote the square found in \Cref{sec:square-root-Jordan} by $\sqrt{J}$. Similarly, given $\lambda \in \mathbb{C}$, $\sqrt{\lambda}$ will denote some square root of $\lambda$.
+
+\begin{thm} \label{thm:common-polynomial-same-eigenvalue}
+	Let $J_{1}, \ldots, J_{k}$ be Jordan blocks (of possibly different sizes), all having the same eigenvalue $\lambda \neq 0$. Then, there exists a common polynomial $p(X) \in \mathbb{C}[X]$ such that
+	\begin{equation*} 
+		p(J_{i}) = \sqrt{J_{i}}
+	\end{equation*}
+	for all $i \in \{1, \ldots, k\}$. 
+\end{thm}
+\begin{proof} 
+	Following our earlier calculations, we see that if we set $m$ as the size of the largest Jordan block, then the polynomial
+	\begin{equation*} 
+		p(X) \vcentcolon= \sqrt{\lambda} \sum_{k = 0}^{m - 1} \binom{\frac{1}{2}}{k} \left(\frac{X}{\lambda} - 1\right)^{k}
+	\end{equation*}
+	does the job.
+\end{proof}
+
+\begin{rem}
+	Note that the polynomial above depends on $\lambda$ as well as the size of the largest Jordan block. Thus, the theorem is only applicable to a finite collection of Jordan blocks. In particular, we have \emph{not} found a polynomial that gives a square root for all Jordan blocks with eigenvalue $\lambda$.
+\end{rem}
+
+\begin{thm} \label{thm:interpolating-distinct-eigenvalues}
+	Fix $m \ge 1$ and distinct complex numbers $\lambda, \mu \in \mathbb{C}$. \newline
+	Then, there exists a polynomial $q(X) \in \mathbb{C}[X]$ with the following property: $q(A) = O$ for all Jordan blocks of size at most $m$ with eigenvalue $\mu$, and $q(B) = I$ for all Jordan blocks of size at most $m$ with eigenvalue $\lambda$.	
+\end{thm}
+\begin{proof} 
+	Consider the polynomials $a(X) = (X - \mu)^{m}$ and $b(X) = (X - \lambda)^{m}$. The polynomials are coprime and thus, by the \href{https://en.wikipedia.org/wiki/Chinese_remainder_theorem#Over_univariate_polynomial_rings_and_Euclidean_domains}{Chinese Remainder Theorem}, there exists a polynomial $q(X) \in \mathbb{C}[X]$ such that
+	\begin{align*} 
+		q(X) \equiv 0 &\mod a(X), \\
+		q(X) \equiv 1 &\mod b(X).
+	\end{align*}
+
+	Now, let $A$ and $B$ be matrices as given in the hypothesis. Then, $a(A) = O$ and in turn, $q(A) = O$. Similarly, $b(B) = O$ and thus, $q(B) = I$, as desired.
+\end{proof}
+
+\begin{cor} \label{cor:jordan-common-polynomial}
+	Let $J_{1}, \ldots, J_{k}$ be arbitrary Jordan blocks. There exists a polynomial $p(X) \in \mathbb{C}[X]$ such that $p(J_{i}) = \sqrt{J_{i}}$ for all $i$.
+\end{cor}
+\begin{proof} 
+	Let $\Lambda = \{\lambda_{1}, \ldots, \lambda_{r}\}$ be the set of distinct eigenvalues corresponding to the Jordan blocks. Let $m$ be the size of the largest Jordan block. \newline
+	For each $\lambda \in \Lambda$, let $p_{\lambda}(X) \in \mathbb{C}[X]$ be such that $p_{\lambda}(J_{i}) = \sqrt{J_{i}}$ for those $J_{i}$ having $\lambda$ as its eigenvalue (existence is given by \Cref{thm:common-polynomial-same-eigenvalue}). \newline
+	For each $\lambda, \mu \in \Lambda$ with $\lambda \neq \mu$, let $q_{\lambda, \mu}(X) \in \mathbb{C}[X]$ be a polynomial that is $O$ on the Jordan blocks corresponding to $\mu$ and is $I$ on those corresponding to $\lambda$ (existence is given by \Cref{thm:interpolating-distinct-eigenvalues}).
+
+	Next, for each $\lambda \in \Lambda$, define the polynomial
+	\begin{equation*} 
+		Q_{\lambda}(X) \vcentcolon= \prod_{\mu \in \Lambda \setminus \{\lambda\}} q_{\lambda, \mu}(X).
+	\end{equation*}
+	Then, note that if $J_{i}$ is a block with eigenvalue $\lambda$, then we have $Q_{\lambda}(J_{i}) = I$. Otherwise, we have $Q_{\lambda}(J_{i}) = O$.
+
+	Finally, defining the polynomial
+	\begin{equation*} 
+		p(X) \vcentcolon= \sum_{\lambda \in \Lambda} Q_{\lambda}(X) p_{\lambda}(X)
+	\end{equation*}
+	does the job.
+\end{proof}
+
+\begin{rem}
+	The reader familiar with Lagrange interpolation would have realised that we are essentially trying to cook up the analogous Lagrange polynomials in the above proof.
+\end{rem}
+
+\section{Square roots as polynomials}
+
+Combining the results of the previous sections, we see that we have proven the following theorem.
+
+\begin{thm}
+	Let $A \in M_{n}(\mathbb{C})$ be an invertible square matrix. Then, there exists a polynomial $p(X) \in \mathbb{C}[X]$ such that $(p(A))^{2} = A$. 
+
+	In words: $A$ has a square root that can be written as a polynomial in $A$.
+\end{thm}
+\begin{proof} 
+	Let $J_{1}, \ldots, J_{k}$ be as in \Cref{thm:jordan-form}. Let $p(X)$ be as in \Cref{cor:jordan-common-polynomial}, i.e., $(p(J_{i}))^{2} = J_{i}$ for all $i \in \{1, \ldots, k\}$. Check that $(p(A))^{2} = A$.
+\end{proof}
+
+The above has the following interesting corollary.
+\begin{cor}
+	Let $A \in M_{n}(\mathbb{C})$ be a symmetric invertible matrix. Then, $A$ has a symmetric square root.
+\end{cor}
+\begin{proof} 
+	By the earlier result, $A$ has a square root that can be expressed as a polynomial in $A$. Any polynomial in a symmetric matrix is again symmetric.
+\end{proof}
+
+\begin{rem}
+	You may be tempted to use Spectral theorem to somehow deduce the above. However, note that Spectral theorem deals with \emph{Hermitian} matrices and not symmetric.
+\end{rem}
+
+\section{Extensions to other fields}
+
+We briefly discuss the dependence of our discussion on the underlying field $\mathbb{C}$. 
+
+To begin with, the existence of Jordan form (for every matrix) is guaranteed precisely when the field is algebraically closed. Secondly, our definition of the binomial coefficients $\dbinom{\frac{1}{2}}{n}$ only makes sense when the field has characteristic $0$.\footnote{Actually, when the coefficients are written in reduced form, then the denominator is a power of $2$ and hence, it would make sense as long as characteristic is different from $2$. See \url{https://math.stackexchange.com/q/4465623/427810}.} However, one can show that if $\mathsf{k}$ is a field with $\chr(\mathsf{k}) \neq 2$, then there does exist a square root of $\sqrt{1 + X}$ in $\mathsf{k}[\![X]\!]$, which is all we need. Lastly, we also required the existence of square roots of the eigenvalues (of course, this is automatically guaranteed if the field is algebraically closed). 
+
+\begin{thm}
+	Let $\mathsf{k}$ be an algebraically closed field with $\chr(\mathsf{k}) \neq 2$. Let $A \in M_{n}(\mathsf{k})$ be invertible. Then, $A$ has a square root.
+\end{thm}
+
+Another relaxation is the following: The existence of Jordan form of a fixed matrix $A$ is also granted if the characteristic polynomial of $A$ factors into linear factors. Thus, if $A$ is a real matrix such that the characteristic polynomial factors into linear factors with positive roots, then $A$ has a real square root.
+
+\end{document}
