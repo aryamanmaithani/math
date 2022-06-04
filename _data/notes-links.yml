@@ -1,3 +1,21 @@
+ma-839:
+  tit: Advanced Commutative Algebra
+
+ma-526:
+  tit: Commutative Algebra
+
+ma-5101:
+  tit: Algebra II
+
+ma-414:
+  tit: Galois Theory
+
+ma-5110:
+  tit: Noncommutative Algebra
+
+ma-524:
+  tit: Algebraic Number Theory
+
 ma-406:
   tit: General Topology
 
@@ -7,14 +25,8 @@ ma-408:
 ma-5106:
   tit: Introduction to Fourier Analysis
 
-ma-839:
-  tit: Advanced Commutative Algebra
-
-ma-526:
-  tit: Commutative Algebra
-
-ma-5101:
-  tit: Algebra II
+ma-814:
+  tit: Graduate-level Complex Analysis
 
 ma-412:
   tit: Complex Analysis
@@ -30,15 +42,3 @@ ma-419:
 
 ma-107:
   tit: MA 107 notes
-
-ma-414:
-  tit: Galois Theory
-
-ma-5110:
-  tit: Noncommutative Algebra
-
-ma-524:
-  tit: Algebraic Number Theory
-
-ma-814:
-  tit: Graduate-level Complex Analysis
