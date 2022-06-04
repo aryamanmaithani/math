@@ -10,18 +10,18 @@
 \def\professor{}
 \def\student{Aryaman Maithani}
 \def\semesteryear{Spring 2020-21}
-\def\imagename{iitb.png}		    % Replace with University Seal
+\def\imagename{icon.pdf}		    % Replace with University Seal
 \def\scalesize{2}					% Scale Logo Size 
 
 % Style Package (Load After Cover Information)
-\usepackage{lecture-notes}	% Change to match style file
-\DeclareMathOperator{\Ass}{Ass}
+\usepackage{aryaman}	% Change to match style file
+% \DeclareMathOperator{\Ass}{Ass}
 \DeclareMathOperator{\mSpec}{mSpec}
-\DeclareMathOperator{\Supp}{Supp}
-\DeclareMathOperator{\ann}{ann}
+% \DeclareMathOperator{\Supp}{Supp}
+% \DeclareMathOperator{\ann}{ann}
 \DeclareMathOperator{\nil}{nil}
-\DeclareMathOperator{\htt}{height}
-\DeclareMathOperator{\gr}{gr}
+% \DeclareMathOperator{\htt}{height}
+% \DeclareMathOperator{\gr}{gr}
 
 % -------------------
 % Content
@@ -50,8 +50,13 @@
 \pagestyle{fancy}
 \setcounter{page}{1}
 
-\textbf{Notation}
+\setcounter{section}{-1}
+
+\section{Notations and Conventions}
 \begin{enumerate}
+	\item $R$ will denote a commutative ring with unity. Modules will be unital.
+	\item If $M$ is an $R$-module, then $\ann_{R}(M) = \{r \in R : rM = 0\}$. \newline
+	A similar definition holds for elements and subsets of $M$. 
 	\item $\mathcal{N}(R)$ denotes the nilradical of $R.$
 	\item $\mathcal{J}(R)$ denotes the Jacobson radical of $R.$
 	\item $\Spec(R)$ denotes the set of prime ideals of $R.$
@@ -72,32 +77,33 @@
 	\end{equation*}
 \end{defn}
 \begin{defn}%[]
-	Let $M$ be an $R$-module and $0 \neq x \in M.$ If $\mathfrak{p} = 0:_Rx$ is a prime in $R,$ then we say that $\mathfrak{p}$ is an \deff{associated prime} of $M.$
+	Let $M$ be an $R$-module and $x \in M.$ If $\mathfrak{p} = 0:_Rx$ is a prime in $R,$ then we say that $\mathfrak{p}$ is an \deff{associated prime} of $M.$
 	\begin{equation*} 
-		\Ass_R(M) \vcentcolon= \{\mathfrak{p} \in \Spec(R) \mid \mathfrak{p} = 0 :_R x \text{ for some } x \in M \setminus \{0\}\}.
+		\Ass_R(M) \vcentcolon= \{\mathfrak{p} \in \Spec(R) \mid \mathfrak{p} = 0 :_R x \text{ for some } x \in M\}.
 	\end{equation*}
 \end{defn}
+Note that the $x$ above would have to be nonzero since primes are proper ideals.
 \begin{defn}%[]
 	The elements of $\Ass(M)$ which are not minimal in $\Ass(M)$ are called \deff{embedded primes}.
 \end{defn}
 \begin{defn}%[]
-	Fix $x \in X.$ The map $\mu_x : R \to M$ defined by $r \mapsto rx$ is called the \deff{homothety} by $x.$
+	Fix $x \in M.$ The map $\mu_x : R \to M$ defined by $r \mapsto rx$ is called the \deff{homothety} by $x.$
 \end{defn}
-Note that $\ker \mu_x = 0:_Rx.$
+Note that $\ker \mu_x = 0:_R x = \ann_{R}(x).$
 
 \begin{prop}
 	A prime $\mathfrak{p}$ is an associated prime of $M$ iff $R/\mathfrak{p}$ is isomorphic to a submodule of $M.$
 \end{prop}
 
 \begin{defn}%[]
-	$a \in R$ is a \deff{zero divisor} on $M$ if $ax = 0$ for some $0 \neq x \in M.$
+	$a \in R$ is a \deff{zerodivisor} on $M$ if $ax = 0$ for some $0 \neq x \in M.$
 	\begin{equation*} 
-		\mathcal{Z}(M) \vcentcolon= \{a \in R \mid a \text{ is a zero divisor on }M\}.
+		\mathcal{Z}(M) \vcentcolon= \{a \in R \mid a \text{ is a zerodivisor on }M\}.
 	\end{equation*} 
-	If $a$ is not a zero divisor, then $\mu_a$ is called a \deff{non zero divisor} on $M$ or \deff{$M$-regular}.
+	If $a$ is not a zerodivisor, then $a$ is called a \deff{nonzerodivisor} on $M$ or \deff{$M$-regular}.
 \end{defn}
 
-Note that $a$ is a zero divisor iff $\mu_a$ is not injective.
+Note that $a$ is a zerodivisor iff $\mu_a$ is not injective.
 
 \begin{prop}
 	Let $R$ be Noetherian and $M \neq 0$ finitely generated $R$-module. Then,
@@ -115,7 +121,7 @@ Note that $a$ is a zero divisor iff $\mu_a$ is not injective.
 	Let $S \subset R$ be a multiplicatively closed set. Then,
 	\begin{enumerate}
 		\item $\Ass_{S^{-1}R}(S^{-1}M) = \{S^{-1}\mathfrak{p} \mid \mathfrak{p} \in \Ass(M),\;\mathfrak{p} \cap S = \emptyset\}.$
-		\item $\mathfrak{p} \in \Ass_R(M) \iff \mathfrak{p}R_{\mathfrak{p}} \in \Ass_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}).$
+		\item $\mathfrak{p} \in \Ass_R(M) \Leftrightarrow \mathfrak{p}R_{\mathfrak{p}} \in \Ass_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}).$
 	\end{enumerate}
 \end{prop}
 
@@ -184,9 +190,9 @@ Note that if $R$ is Noetherian and $I \unlhd R$ is an ideal, then $\Ass(R/I) \su
 \begin{proof} 
 	Note that $(R/\mathfrak{q})_{\mathfrak{p}} \cong R_{\mathfrak{p}}/\mathfrak{q}R_{\mathfrak{p}}$ as $\mathbb{R}_{\mathfrak{p}}$-modules. By \Cref{prop:assoflocalisation}, we see that
 	\begin{align*} 
-		\mathfrak{a}R_{\mathfrak{p}} \in \Ass_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}/\mathfrak{q}R_{\mathfrak{p}}) &\iff \mathfrak{a}R_{\mathfrak{p}} \in \Ass_{R_{\mathfrak{p}}}\left((R/\mathfrak{q})_{\mathfrak{p}}\right)\\
-		&\iff \mathfrak{a} \in \Ass_R(R/\mathfrak{q}) = \{\mathfrak{p}\}\\
-		&\iff \mathfrak{a} = \mathfrak{p}
+		\mathfrak{a}R_{\mathfrak{p}} \in \Ass_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}/\mathfrak{q}R_{\mathfrak{p}}) &\Leftrightarrow \mathfrak{a}R_{\mathfrak{p}} \in \Ass_{R_{\mathfrak{p}}}\left((R/\mathfrak{q})_{\mathfrak{p}}\right)\\
+		&\Leftrightarrow \mathfrak{a} \in \Ass_R(R/\mathfrak{q}) = \{\mathfrak{p}\}\\
+		&\Leftrightarrow \mathfrak{a} = \mathfrak{p}
 	\end{align*}
 	and hence, $\mathfrak{q}R_{\mathfrak{p}}$ is $\mathfrak{p}R_{\mathfrak{p}}$-primary.
 \end{proof}
@@ -207,7 +213,7 @@ Note that if $R$ is Noetherian and $I \unlhd R$ is an ideal, then $\Ass(R/I) \su
 	If $\Ass(M) = \{\mathfrak{p}\},$ then $\mathcal{Z}(M) = \nil(M) = \sqrt{\ann(M)}.$
 \end{prop}
 \begin{thm}
-	$\md{\Ass M} = 1 \iff \mathcal{Z}(M) = \nil(M).$\\
+	$\md{\Ass M} = 1 \Leftrightarrow \mathcal{Z}(M) = \nil(M).$\\
 	If either condition holds, we have $\Ass M = \{\sqrt{\ann(M)}\}.$
 \end{thm}
 
@@ -287,7 +293,7 @@ We now drop the assumption from the previous chapter of rings and modules being 
 	\begin{enumerate}
 		\item If $I$ is an ideal of $R,$ then $R/I$ is an Artinian ring.
 		\item If $R$ is an integral domain, then $R$ is a field.
-		\item More generally, every non zero divisor of $R$ is a unit.
+		\item More generally, every nonzerodivisor of $R$ is a unit.
 		\item If $\mathfrak{p} \in \Spec(R),$ then $\mathfrak{p}$ is maximal. That is, $\Spec(R) = \mSpec(R).$ \\
 		Thus, $\mathcal{N}(R) = \mathcal{J}(R).$
 		\item $R$ has finitely many maximal ideals. (It may have infinitely many ideals, however.)
@@ -301,7 +307,7 @@ We now drop the assumption from the previous chapter of rings and modules being 
 
 \begin{prop}
 	Let $M$ be an $R$-module and $\mathfrak{m}_1, \ldots, \mathfrak{m}_n \in \mSpec R$ are maximal ideals such that $\mathfrak{m}_1\cdots\mathfrak{m}_nM = 0.$ Then,\\
-	$M$ is Noetherian $\iff$ $M$ is Artinian.
+	$M$ is Noetherian $\Leftrightarrow$ $M$ is Artinian.
 \end{prop}
 Note that the maximal ideals above need not be distinct. Moreover, $R$ is not assumed to be Artinian.
 
@@ -343,7 +349,7 @@ Note that the maximal ideals above need not be distinct. Moreover, $R$ is not as
 Note that a composition series has finite length, by definition.
 
 \begin{thm}
-	$M$ has a composition series $\iff$ $M$ is Artinian and Noetherian.
+	$M$ has a composition series $\Leftrightarrow$ $M$ is Artinian and Noetherian.
 \end{thm}
 
 \begin{defn}
@@ -402,7 +408,7 @@ Note that $M$ is finite length iff $N$ and $L$ both are.
 \section{Integral Extensions of Rings}
 
 \begin{defn}%[]
-	Let $R \subset S$ be non-zero commutative rings. An element $s \in S$ is called \deff{integral} over $R$ if there exists a \underline{monic} polynomial $f(x) \in R[x]$ such that $f(s) = 0.$
+	Let $R \subset S$ be nonzero commutative rings. An element $s \in S$ is called \deff{integral} over $R$ if there exists a \underline{monic} polynomial $f(x) \in R[x]$ such that $f(s) = 0.$
 
 	Let
 	\begin{equation*} 
@@ -443,11 +449,11 @@ The converse is not true.
 \end{cor}
 
 \begin{cor}
-	Let $R$ be a non-zero commutative ring. Then, $R^n \cong R^m$ (as $R$-modules) iff $n = m.$
+	Let $R$ be a nonzero commutative ring. Then, $R^n \cong R^m$ (as $R$-modules) iff $n = m.$
 \end{cor}
 
 \begin{thm}
-	Let $R \subset S$ be non-zero commutative rings and $s \in S.$ TFAE:
+	Let $R \subset S$ be nonzero commutative rings and $s \in S.$ TFAE:
 	\begin{enumerate}
 		\item $s$ is integral over $R.$
 		\item $R[s]$ is a finitely generated as an $R$-module.
@@ -498,12 +504,12 @@ Then, $I^c = \ker (\pi \circ i)$ and hence, $R/I^c$ is isomorphic to a subring o
 
 \begin{lem} 
 	Let $R \subset S$ be an integral extension of integral domains. \\
-	Then, $R$ is a field $\iff$ $S$ is a field.
+	Then, $R$ is a field $\Leftrightarrow$ $S$ is a field.
 \end{lem}
 
 \begin{cor}
 	Let $R \subset S$ be rings (not necessarily domains) and $\mathfrak{q} \in \Spec S.$ Define $\mathfrak{p} \vcentcolon= R \cap \mathfrak{q}.$ \\
-	Then, $\mathfrak{p} \in \mSpec R \iff \mathfrak{q} \in \mSpec S.$
+	Then, $\mathfrak{p} \in \mSpec R \Leftrightarrow \mathfrak{q} \in \mSpec S.$
 
 	In particular, given an integral extension, the contraction of a maximal ideal is maximal.
 \end{cor}
@@ -879,7 +885,7 @@ In the following, we have the following notation: Let $R$ be a ring, $I \unlhd R
 \begin{thm}
 	Suppose $R$ is Noetherian, $I \unlhd R$ an ideal, $M$ a finitely generated $R$-module and $G$ a filtration of $R$-submodules of $M$ which is $\{I^n\}_{n \ge 0}$-compatible. Then,
 	\begin{equation*} 
-		\mathcal{R}(G) \text{ is a finitely generated }\mathcal{R}(I)\text{-module} \iff G \text{ is } I \text{-stable}.
+		\mathcal{R}(G) \text{ is a finitely generated }\mathcal{R}(I)\text{-module} \Leftrightarrow G \text{ is } I \text{-stable}.
 	\end{equation*}
 \end{thm}
 
@@ -972,7 +978,7 @@ In other words, if $IM_n = M_{n + 1}$ for $n \gg 0,$ then $I(M_n \cap N) = M_{n 
 	Note that $I^* \subset I.$
 \end{defn}
 
-Recall that $I = I^* \iff I$ is generated by homogeneous elements. (\nameref{thm:chargradedsubmodules}.)
+Recall that $I = I^* \Leftrightarrow I$ is generated by homogeneous elements. (\nameref{thm:chargradedsubmodules}.)
 
 \begin{prop}
 	Let $R = \bigoplus_{n \ge 0}R_n$ be a graded ring.
@@ -981,7 +987,7 @@ Recall that $I = I^* \iff I$ is generated by homogeneous elements. (\nameref{thm
 		\item Any minimal prime of $R$ is a graded ideal.
 		\item Maximal graded ideals of $R$ are precisely of the of the form $\mathfrak{m} \oplus R_1 \oplus R_2 \oplus \cdots$ for $\mathfrak{m} \in \mSpec(R).$
 		\item If $R$ is Noetherian and $M = \bigoplus_{n \ge 0}M_n$ graded, then $\mathfrak{p} \in \Ass_R(M)$ is graded and $\mathfrak{p} = \ann_R(x)$ for some \emph{homogeneous} element $x \in M.$
-		\item If the non-zero \emph{homogeneous} elements of $R$ are non-zero-divisors, then $R$ is an integral domain.
+		\item If the nonzero \emph{homogeneous} elements of $R$ are nonzerodivisors, then $R$ is an integral domain.
 		\item Let $\mathfrak{p} \neq R$ be a graded ideal. If for all \emph{homogeneous} elements $a, b \in R$ the following holds:
 		\begin{equation*} 
 			ab \in \mathfrak{p} \implies a \in \mathfrak{p} \text{ or } b \in \mathfrak{p},
@@ -1071,7 +1077,6 @@ Note that if $M \neq 0$ and $M$ has finite length, then $c(M) = 0.	$
 	The $n \mapsto l_{R_0}(M_n)$ is (loosely) called the \deff{Hilbert polynomial} of $M.$
 \end{defn}
 Note that the above is a polynomial-\emph{like} function and not necessarily given by a polynomial itself.
-
 
 % \begin{defn}%[]
 % 	Let $(R, \mathfrak{m})$ be a Noetherian local ring and $M$ a finite $R$-module. The \deff{$\mathfrak{m}$-adic} filtration of $R$ is
