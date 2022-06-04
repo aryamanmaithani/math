@@ -34,7 +34,7 @@ Here are notes I've made for various courses I've taken at IITB. These are many 
   {%- for blink in site.data.notes-links -%}
     {%- assign link = blink[1] -%}
       <li> <a href="/math{{ blink[0] | relative_url }}">
-      <h3 class="post-title">{{ link.tit }} ({{ blink[0] }})</h2>
+      <h3 class="post-title">{{ link.tit }} ({{ blink[0] }})</h3>
       </a> </li>
   {%- endfor -%}
 </ul>
