@@ -28,13 +28,13 @@ To view those, you can go to the appropriate folder that you may find [here](htt
 </div>
 
 # Class Notes
-Here are notes I've made for various courses. These are many notes that I haven't yet linked here but you can dig around and find them at [this link](https://github.com/aryamanmaithani/math).
+Here are notes I've made for various courses I've taken at IITB. These are many notes that I haven't yet linked here but you can dig around and find them at [this link](https://github.com/aryamanmaithani/math).
 
 <ul>
   {%- for blink in site.data.notes-links -%}
     {%- assign link = blink[1] -%}
       <li> <a href="/math{{ blink[0] | relative_url }}">
-      <h2 class="post-title">{{ link.tit }}</h2>
+      <h3 class="post-title">{{ link.tit }} ({{ blink[0] }})</h2>
       </a> </li>
   {%- endfor -%}
 </ul>
