@@ -25,7 +25,7 @@ To view those, you can go to the appropriate folder that you may find [here](htt
             </div>
           </div>
           {%- endif -%}
-        <li>
+        </li>
     {%- endfor -%}
 </ul>
 
