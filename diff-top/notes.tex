@@ -104,14 +104,18 @@ From now on, when we mean interior and boundary, we mean so in the manifold-with
 	We shall continue to use the word ``manifold'' in the sense of the first chapter. For emphasis, we may sometimes refer to them as \emph{boundaryless}.
 \end{rem}
 
-\begin{ex}
+\begin{ex} \label{ex:product-not-manifold-boundary}
 	$X \vcentcolon= [0, 1]$ is a manifold with boundary. We have $\partial X = \{0, 1\}$. \newline
 	Similarly, the closed disc $X' \vcentcolon= \overline{B_{1}(0)} \subset \mathbb{R}^{2}$ is a manifold with boundary. We have $\partial X' = S^{1}$.
 
 	The product of two manifolds with boundary need not again be a manifold with boundary. For example, $[0, 1] \times [0, 1]$ is not a manifold with boundary (the corners are too pointy!).
 \end{ex}
 
-The failure is essentially because $\mathbb{H}^{k} \times \mathbb{H}^{l}$ is not open in $\mathbb{H}^{k + l}$ (look at the case $k = l = 1$). However, $\mathbb{R}^{k} \times \mathbb{H}^{l}$ \emph{is} open in $\mathbb{H}^{k + l}$, giving us the next proposition. (We actually have $\mathbb{R}^{k} \times \mathbb{H}^{l} = \mathbb{H}^{k + l}$.)
+\begin{exe}
+	Show that $\partial X$ is a closed subset of $X$.
+\end{exe}
+
+The failure in \Cref{ex:product-not-manifold-boundary} is essentially because $\mathbb{H}^{k} \times \mathbb{H}^{l}$ is not open in $\mathbb{H}^{k + l}$ (look at the case $k = l = 1$). However, $\mathbb{R}^{k} \times \mathbb{H}^{l}$ \emph{is} open in $\mathbb{H}^{k + l}$, giving us the next proposition. (We actually have $\mathbb{R}^{k} \times \mathbb{H}^{l} = \mathbb{H}^{k + l}$.)
 
 \begin{prop}
 	Let $X$ be a boundaryless manifold, and $Y$ be a manifold with boundary. \newline
@@ -253,6 +257,27 @@ Note that $N(Y)$ depends on the ambient space $\mathbb{R}^{M}$. There is a natur
 		\im(df_{x}) + T_{f(x)}(Z) = T_{f(x)}(Y)
 	\end{equation*}
 	holds for all $x \in C \cap f^{-1}(Z)$.
+
+	This is denoted as ``$f \trans Z$ on $C$''.
 \end{defn}
+
+\begin{prop}
+	If $U$ is an open neighbourhood of a closed set $C$ in $X$, then there exists a smooth function $\gamma : X \to [0, 1]$ that is identically equal to $1$ outside $U$ but is $0$ on a neighbourhood of $C$.
+\end{prop}
+
+\begin{thm}[Extension Theorem]
+	Suppose that $Z$ is a \underline{closed} submanifold of $Y$, both boundaryless, and $C$ is a \underline{closed} subset of $X$. 
+
+	Let $f : X \to Y$ be a smooth map with $f \trans Z$ on $C$ and $\partial f \trans Z$ on $C \cap \partial X$. \newline
+	Then, there exists a smooth map $g : X \to Y$ homotopic to $f$, such that $g \trans Z$ and $\partial g \trans Z$, and on a neighbourhood of $C$, we have $g = f$.
+\end{thm}
+In less precise language: We have modified $f$ homotopically outside a neighbourhood of $C$ to make the transversality conditions hold on all of $X$. 
+
+Picking $C = \partial X$ (this is always closed!) gives us the following corollary.
+
+\begin{cor}
+	If, for $f : X \to Y$, the boundary map $\partial f : \partial X \to Y$ is transversal to a closed submanifold $Z \subset Y$, then there exists a map $g : X \to Y$ homotopic to $f$ such that $\partial g = \partial f$ and $g \trans Z$.
+\end{cor}
+A useful restatement: Supposed $h : \partial X \to Y$ is transversal to $Z$. If $h$ extends to a map $X \to Y$, then $h$ extends to a map that is transversal to $Z$.
 
 \end{document}
