@@ -17,7 +17,7 @@ To view those, you can go to the appropriate folder that you may find [here](htt
         <li>
           <a href="/math{{ blink[0] | relative_url }}">
           <h2 class="post-title">{{ link.tit }}</h2>
-          </a><br>
+          </a>
           {%- if link.desc -%}
           <div class="post-entry-container">
             <div class="post-entry">
