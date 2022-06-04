@@ -28,14 +28,17 @@
 \makeatother
 
 \begin{document}
+
+\pagenumbering{Alph}
 \coverpage
 \thispagestyle{empty}
 \updated{\today}
 \thispagestyle{empty}
 % \setcounter{tocdepth}{1}
+\pagenumbering{arabic}
 \tableofcontents
 \pagestyle{fancy}
-\setcounter{page}{1}
+% \setcounter{page}{1}
 \setcounter{section}{-1}
 
 \section{Preface}
@@ -49,8 +52,207 @@ I am making this while I study \emph{Differential Topology} by Victor Guillemin 
 	\item $S^{k} \subset \mathbb{R}^{k + 1}$ is the unit sphere.
 	\item $B_{r}(p)$ will denote the open ball of radius $r$ around the point $p$. The ambient metric space will be clear from context.
 	\item Given a function $T : V \to W$, $\im(T)$ denotes the image of $T$.
+	\item $\mathbb{H}^{k}$ denotes the upper half-space in $\mathbb{R}^{k}$, i.e.,
+	\begin{equation*} 
+		\mathbb{H}^{k} \vcentcolon= \{(x_{1}, \ldots, x_{k}) \in \mathbb{R}^{k} : x_{k} \ge 0\}.
+	\end{equation*}
+	$\partial \mathbb{H}^{k}$ consists of those points in $\mathbb{R}^{k}$ with final coordinate $0$.
 \end{enumerate}
 
+\begin{thm}[Invariance of Domain] \label{thm:invariance-of-domain}
+	If $U \subset \mathbb{R}^{n}$ is open and $f : U \to \mathbb{R}^{n}$ is an injective continuous function, then $f(U)$ is open in $\mathbb{R}^{n}$.
+\end{thm}
+
+\begin{cor}
+	Let $U \opsub \mathbb{R}^{n}$ and $V \opsub \mathbb{R}^{m}$. If $U$ and $V$ are homeomorphic, then $n = m$. In particular, $\mathbb{R}^{n}$ and $\mathbb{R}^{m}$ are not homeomorphic for $n \neq m$.
+\end{cor}
+Note that our notation forces $U$ and $V$ above to be nonempty.
+\begin{proof} 
+	Suppose $n \neq m$. Without loss of generality, $m > n$. Let $f : V \to U$ be a homeomorphism. Let $g : U \to \mathbb{R}^{m}$ denote the restriction of the inclusion $\mathbb{R}^{n} \into \mathbb{R}^{m}$ given by $\mathbf{x} \mapsto (\mathbf{x}, \mathbf{0})$. \newline
+	Thus, $g \circ f : V \to \mathbb{R}^{m}$ is an injective continuous function mapping $V$ onto $g(U) \subset \mathbb{R}^{m}$. But $g(U)$ is not open in $\mathbb{R}^{m}$, contradicting \mynameref{thm:invariance-of-domain}.
+\end{proof}
+
+\begin{cor} \label{cor:boundary-Hk-intrinsic}
+	Let $x, y \in \mathbb{H}^{k}$. Let $U$ and $V$ be open neighbourhoods of $x$ and $y$ in $\mathbb{H}^{k}$ respectively. If $U$ and $V$ are homeomorphic, then either both $x$ and $y$ belong to $\partial \mathbb{H}^{k}$ or neither does.
+\end{cor}
+The above corollary is useful later in developing a consistent definition of ``boundary''. It says that the boundary points have topologically different neighbourhoods.
+\begin{proof} 
+	Suppose that the statement were false. Without loss of generality, $y \in \partial \mathbb{H}^{k}$ and $x \notin \mathbb{H}^{k}$. Note that $f$ restricted to a subset of $U$ is again homeomorphism onto its image. Thus, by shrinking $U$, we may assume that $U$ is an open ball in $\mathbb{R}^{k}$ contained in $\mathbb{H}^{k}$. 
+
+	Let $f : U \to V$ be a homeomorphism. Pick $r > 0$ such that $B_{r}(y) \cap \mathbb{H}^{k} \subset V$. (Here, $B_{r}(y)$ denotes the ball in $\mathbb{R}^{k}$.) 
+
+	Let $V' \vcentcolon= B_{r}(y) \cap \mathbb{H}^{k}$. Note that $V'$ is not open in $\mathbb{R}^{k}$. But $f$ restricted to $f^{-1}(V')$ is an injective continuous map from an open subset of $\mathbb{R}^{k}$ onto the non-open subset $V'$, contradicting \mynameref{thm:invariance-of-domain}.
+\end{proof}
+
 \input{sections/01-manifolds-smooth-maps}
+
+\section{Transversality and Intersection}
+\subsection{Manifolds with Boundary}
+
+\begin{defn}
+	A subset $X \subset \mathbb{R}^{N}$ is a \deff{$k$-dimensional manifold with boundary} if every point of $X$ possesses a (relative) neighbourhood diffeomorphic to an open subset of $\mathbb{H}^{k}$. A \deff{local parametrisation} is defined similarly as before.
+
+	The \deff{boundary of $X$}, denoted $\partial X$, consists of those points that belong to the image of $\partial \mathbb{H}^{k}$ under some local parametrisation. Its complement is called the \deff{interior of $X$}, denoted $\Int(X) = X \setminus \partial X$.
+\end{defn}
+Note that \Cref{cor:boundary-Hk-intrinsic} shows that if $x$ belongs to the image of $\partial \mathbb{H}^{k}$ under \emph{some} local parametrisation, then it does so under \emph{any}.
+
+From now on, when we mean interior and boundary, we mean so in the manifold-with-boundary sense and not as a subset of $\mathbb{R}^{N}$. 
+
+\begin{rem}
+	Manifolds considered in the earlier chapter are also ``manifolds with boundary'' with $\partial X = \emptyset$.
+
+	We shall continue to use the word ``manifold'' in the sense of the first chapter. For emphasis, we may sometimes refer to them as \emph{boundaryless}.
+\end{rem}
+
+\begin{ex}
+	$X \vcentcolon= [0, 1]$ is a manifold with boundary. We have $\partial X = \{0, 1\}$. \newline
+	Similarly, the closed disc $X' \vcentcolon= \overline{B_{1}(0)} \subset \mathbb{R}^{2}$ is a manifold with boundary. We have $\partial X' = S^{1}$.
+
+	The product of two manifolds with boundary need not again be a manifold with boundary. For example, $[0, 1] \times [0, 1]$ is not a manifold with boundary (the corners are too pointy!).
+\end{ex}
+
+The failure is essentially because $\mathbb{H}^{k} \times \mathbb{H}^{l}$ is not open in $\mathbb{H}^{k + l}$ (look at the case $k = l = 1$). However, $\mathbb{R}^{k} \times \mathbb{H}^{l}$ \emph{is} open in $\mathbb{H}^{k + l}$, giving us the next proposition. (We actually have $\mathbb{R}^{k} \times \mathbb{H}^{l} = \mathbb{H}^{k + l}$.)
+
+\begin{prop}
+	Let $X$ be a boundaryless manifold, and $Y$ be a manifold with boundary. \newline
+	Then, $X \times Y$ is a manifold with boundary with
+	\begin{equation*} 
+		\partial(X \times Y) = X \times \partial Y \andd \dim(X \times Y) = \dim(X) + \dim(Y).
+	\end{equation*}
+\end{prop}
+
+The earlier notions of derivatives and tangent spaces go as usual.
+
+First, suppose that $U \opsub \mathbb{H}^{k}$ and $g : U \to \mathbb{R}^{l}$ is smooth. If $u$ is an interior point of $U$, then $dg_{u}$ is already defined. If $u \in \partial U$ (i.e., $u \in U \cap \partial \mathbb{H}$), then smoothness of $g$ allows an extension $\widetilde{g}$ to an open neighbourhood of $u$ in $\mathbb{R}^{k}$. $dg_{u}$ is then $d\widetilde{g}_{u} : \mathbb{R}^{k} \to \mathbb{R}^{l}$. \newline
+Note that $dg_{u}$ is still a map from $\mathbb{R}^{k}$ to $\mathbb{R}^{l}$.
+
+Now, if $X \subset \mathbb{R}^{N}$ is a manifold with boundary, and $x \in X$, then the \deff{tangent space} $T_{x}(X)$ is defined to be the image of any local parametrisation around $x$. As before, $T_{x}(X)$ is a $k$-dimensional (``concrete'') subspace, even when $x \in \partial X$. 
+
+Lastly, given a smooth map $f : X \to Y$ between manifolds with boundary, the derivative may be defined as a linear transformation $df_{x} : T_{x}(X) \to T_{f(x)}(Y)$.
+
+The chain rule remains valid as before.
+
+\begin{prop}
+	Let $X$ be a $k$-dimensional manifold with boundary. \newline
+	$\Int(X)$ is a $k$-dimensional manifold (without boundary). \newline
+	$\partial X$ is a $(k - 1)$-dimensional manifold (without boundary).
+\end{prop}
+
+All definitions from earlier formulated in terms of derivatives of mappings make sense verbatim when the manifolds have boundaries (immersions, submersions, regular values, transversality).
+
+\begin{ex}
+	Consider the smooth map $f : \mathbb{H}^{2} \to \mathbb{R}$ given by $(x_{1}, x_{2}) \mapsto x_{2}$. Note that $\mathbb{H}^{2}$ is a manifold with boundary. \newline
+	Let $Z = \{0\}$. Then, we have $f \trans Z$, i.e., $0$ is a regular value of $f$. Indeed, let $x \in f^{-1}(Z)$. We have $\im(df_{x}) = \spn\left\{\begin{bmatrix}
+		0 & 1
+	\end{bmatrix}\right\}$.
+
+	We have $f^{-1}(Z) = \partial \mathbb{H}^{2}$ -- this is a one dimensional manifold without boundary. Note that the equation
+	\begin{equation*} 
+		\partial(f^{-1}(Z)) = f^{-1}(Z) \cap \partial X
+	\end{equation*}
+	does not hold.
+\end{ex}
+
+\begin{obs}
+	If $x \in \partial X$, then $T_{x}(\partial X)$ is a linear subspace of $T_{x}(X)$ of codimension $1$. \newline
+	Given a map $f : X \to Y$, let $\partial f : \partial X \to Y$ denote the restriction of $f$ to $\partial X$. \newline
+	The derivative of $\partial f$ at $x$ is just the restriction of $df_{x}$ to the subspace $T_{x}(\partial X)$.
+\end{obs}
+
+\begin{thm}
+	Let $f$ be a smooth map of a manifold with boundary $X$ into a boundaryless manifold $Y$, and suppose that both $f : X \to Y$ and $\partial f : \partial X \to Y$ are transversal with respect to a boundaryless manifold $Z \subset Y$. Then, the preimage $f^{-1}(Z)$ is a manifold with boundary
+	\begin{equation*} 
+		\partial(f^{-1}(Z)) = f^{-1}(Z) \cap \partial X,
+	\end{equation*}
+	and $\codim_{X}(f^{-1}(Z)) = \codim_{Y}(Z)$.
+\end{thm}
+
+\begin{cor}
+	Suppose that $S$ is a manifold without boundary and that $\pi : S \to \mathbb{R}$ is a smooth function with regular value $0$. Then the subset $\{s \in S : \pi(s) \ge 0\}$ is a manifold with boundary, and the boundary is $\pi^{-1}(0)$.
+\end{cor}
+As an application of the above corollary, we see that the closed unit ball in $\mathbb{R}^{n}$ is a manifold with boundary.
+
+\begin{thm}[Sard's Theorem] \label{thm:sard-boundary}
+	Let $f : X \to Y$ be a smooth map, where $X$ is a boundary with manifold and $Y$ is boundaryless. Almost every point of $Y$ is a regular value for both $f$ and $\partial f$.
+\end{thm}
+
+\subsection{One-Manifolds and Some Consequences}
+
+\begin{thm}
+	Every compact, connected, one-dimensional manifold with boundary is diffeomorphic to either $[0, 1]$ or $S^{1}$.
+\end{thm}
+
+\begin{cor}
+	The boundary of any compact one-dimensional manifold with boundary consists of an even number of points.
+\end{cor}
+
+\begin{thm}
+	If $X$ is any compact manifold with boundary, then there exists no smooth map $g : X \to \partial X$ such that $\partial g : \partial X \to \partial X$ is the identity.
+\end{thm}
+
+\begin{thm}[Brouwer Fixed-Point Theorem]
+	Any smooth map $f$ of the closed unit ball into itself has a fixed point.
+\end{thm}
+
+\subsection{Transversality}
+
+Earlier we saw that transversality is a stable property (\mynameref{thm:stability}), when the domain is compact. We now see something more valuable.
+
+\begin{rem}
+	One may generalise the idea of homotopies slightly by considering the parameter to come from a more general set than just $I$.
+
+	Suppose $f_{s} : X \to Y$ is a family of smooth maps, indexed by a parameter $s$ that ranges over some set $S$. As we did with homotopies, consider the map $F : X \times S \to Y$ defined by $(x, s) \mapsto f_{s}(x)$. We require that the family vary smoothly by assuming $S$ to be a manifold and $F$ to be smooth.
+\end{rem}
+
+\begin{thm}[The Transversality Theorem]
+	Suppose that $F : X \times S \to Y$ is a smooth map of manifolds, where only $X$ has boundary, and let $Z \subset Y$ be a boundaryless submanifold. If both $F$ and $\partial F$ are transversal to $Z$, then for almost every $s \in S$, both $f_{s}$ and $\partial f_{s}$ are transversal to $Z$.
+\end{thm}
+\begin{rem}
+	Let $W \subset X \times S$ be the preimage of $Z$. (By the earlier results, $W$ is a manifold with boundary $\partial W = W \cap \partial(X \times S)$.) Let $\pi : W \to S$ be the projection $(x, s) \mapsto s$.
+
+	The proof shows that if $s$ is a regular value for $\pi$, then we have $f_{s} \trans Z$ and that if $s$ is a regular value for $\partial \pi$, then we have $\partial f_{s} \trans Z$. By \mynameref{thm:sard-boundary}, the result then follows.
+\end{rem}
+
+As a consequence, we have the following: Let $f : X \to \mathbb{R}^{M}$ be a smooth map, take $S$ to be any open ball of $\mathbb{R}^{M}$, and define $F : X \times S \to \mathbb{R}^{M}$ by $F(x, s) = f(x) + s$. Fixing $x$, the map $F(x, -)$ is a submersion of $S$. In turn, $F$ is a submersion and hence, transversal to any manifold $Z \subset \mathbb{R}^{M}$. The same is true for $\partial F$ as well. (Note that $\partial(X \times S) = (\partial X) \times S$.) Fix a manifold $Z \subset \mathbb{R}^{M}$. \newline
+By the transversality theorem, we have that $x \mapsto f(x) + s$ is transversal to $Z$ for almost every $s$. Thus, $f$ may be deformed into a transversal map by the addition of an arbitrarily small quantity $s$.
+
+Some extra work needs to be done to replace the target $\mathbb{R}^{M}$ with an arbitrary manifold $Y$.	
+
+\begin{thm}[$\epsilon$-neighbourhood Theorem]
+	For a compact boundaryless manifold $Y \subset \mathbb{R}^{M}$ and a positive number $\epsilon$, let $Y^{\epsilon}$ be the open set of points in $\mathbb{R}^{M}$ with distance less than $\epsilon$ from $Y$. If $\epsilon$ is sufficiently small, then each point $w \in Y^{\epsilon}$ possesses a unique closest point in $Y$, denoted $\pi(w)$. Moreover, the map $\pi : Y^{\epsilon} \to Y$ is a submersion.
+
+	When $Y$ is not compact, there still exists a submersion $\pi : Y^{\epsilon} \to Y$ that is the identity on $Y$, but now $\epsilon$ must be allowed to be a smooth positive function on $Y$, and $Y^{\epsilon}$ is defined as $\{w \in \mathbb{R}^{M} : \|w - y\| < \epsilon(y) \text{ for some } y \in Y\}$.
+\end{thm}
+
+\begin{cor}
+	Let $f : X \to Y$ be a smooth map with $Y$ boundaryless. Then, there is an open ball $S$ in the ambient space of $Y$ and a smooth map $F : X \times S \to Y$ such that $F(-, 0) = f$, and for any fixed $x \in X$, the map $s \mapsto F(x, s)$ is a submersion $S \to Y$. In particular, both $F$ and $\partial F$ are submersions.
+\end{cor}
+
+\begin{thm}[Transversality Homotopy Theorem]
+	Let $X, Y, Z$ be manifolds with $Z \subset Y$ and only $X$ having boundary. 
+
+	For any smooth map $f : X \to Y$, there exists a smooth map $g : X \to Y$ homotopic to $f$ such that $g \trans Z$ and $\partial g \trans Z$.
+\end{thm}
+
+\begin{defn}
+	Let $Y \subset \mathbb{R}^{M}$ be a manifold. For $y \in Y$, the \deff{normal space of $Y$ at $y$}, denoted $N_{y}(Y)$, is defined to be the orthogonal complement of $T_{y}(Y)$ in $\mathbb{R}^{M}$. The \deff{normal bundle of $Y$}, denoted $N(Y)$, is defined as
+	\begin{equation*} 
+		\{(y, v) \in Y \times \mathbb{R}^{M} : v \in N_{y}(Y)\} \subset R^{2M}.
+	\end{equation*}
+\end{defn}
+
+Note that $N(Y)$ depends on the ambient space $\mathbb{R}^{M}$. There is a natural projection $\sigma : N(Y) \to Y$ defined by $(y, v) \mapsto y$.
+
+\begin{prop}
+	If $Y \subset \mathbb{R}^{M}$, then $N(Y)$ is a manifold of dimension $M$ and the projection $N(Y) \to Y$ is a submersion.
+\end{prop}
+
+\begin{defn}
+	Let $C \subset X$ be an arbitrary subset. A map $f : X \to Y$ is \deff{transversal to $Z$ on $C$} if the transversality condition
+	\begin{equation*} 
+		\im(df_{x}) + T_{f(x)}(Z) = T_{f(x)}(Y)
+	\end{equation*}
+	holds for all $x \in C \cap f^{-1}(Z)$.
+\end{defn}
 
 \end{document}

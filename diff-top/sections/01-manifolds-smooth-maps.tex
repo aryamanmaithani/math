@@ -29,6 +29,8 @@ Note that $\dim X = k$ is well-defined. Indeed, if $U \opsub \mathbb{R}^{n}$ and
 
 \begin{ex}
 	Any nonempty open subset of $\mathbb{R}^{N}$ is an $N$-dimensional manifold.
+
+	More generally, if $X$ is a manifold and $V \opsub X$, then $V$ is a manifold with $\dim(V) = \dim(X)$.
 \end{ex}
 
 \begin{ex}
@@ -120,8 +122,8 @@ Note that $df_{x}$ is defined on all of $\mathbb{R}^{n}$ even if $U \neq \mathbb
 \begin{defn}
 	Let $X \subset \mathbb{R}^{N}$, $x \in X$, $U \opsub \mathbb{R}^{k}$, and $\phi : U \to X$ be a local parametrisation around $x$. For convenience, assume that $0 \in U$ and $\phi(0) = x$.
 
-	The \deff{tangent space} of $X$ at $x$ to be the image of the map $d \phi_{0} : \mathbb{R}^{k} \to \mathbb{R}^{N}$. This is denoted by $T_{x}(X)$. \newline
-	A \deff{tangent vector} to $X$ at $x$ is a point $v \in T_{x}(X) \subset \mathbb{R}^{N}$.
+	The \deff{tangent space of $X$ at $x$} to be the image of the map $d \phi_{0} : \mathbb{R}^{k} \to \mathbb{R}^{N}$. This is denoted by $T_{x}(X)$. \newline
+	A \deff{tangent vector to $X$ at $x$} is a point $v \in T_{x}(X) \subset \mathbb{R}^{N}$.
 \end{defn}
 
 Note that in the above, we are making use of the fact that $X$ is a subset of $\mathbb{R}^{N}$. Also note that $T_{x}(X)$ is a very concrete subspace of $\mathbb{R}^{N}$ -- it is not ``just defined up to isomorphism''. No matter what $\phi$ we choose, we always get the same explicit subspace of $\mathbb{R}^{N}$. The translate $x + T_{x}(X)$ will pass through $x$ and will be ``tangent'' (in a geometric manner) to $X$. Similarly, a tangent vector $v \in T_{x}(X)$ is to be imagined as a segment from $x$ to $x + v$.
@@ -145,7 +147,7 @@ Thus, $\im(d \phi_{0}) \subset \im(d \psi_{0})$. By symmetry, the converse is tr
 We now define derivative for an arbitrary smooth map $f : X \to Y$.
 
 \begin{defn}
-	Let $f : X \to Y$ be a smooth map of arbitrary manifolds. Let $x \in X$ and $y \vcentcolon= f(x)$. The \deff{derivative} of $f$ at $x$ is a linear map
+	Let $f : X \to Y$ be a smooth map of arbitrary manifolds. Let $x \in X$ and $y \vcentcolon= f(x)$. The \deff{derivative of $f$ at $x$} is a linear map
 	\begin{equation*} 
 		df_{x} : T_{x}(X) \to T_{y}(Y)
 	\end{equation*}
@@ -219,7 +221,7 @@ The above definition also makes it easy to solve the following exercise.
 \end{soln}
 I got the above from \url{https://math.stackexchange.com/a/861132/427810}.
 
-Note that in particular, the above exercise implies that if $Z \subset X$ is a submanifold and $z \in Z$, then $T_{z}(Z) \subset T_{z}(X)$. (Once again, we emphasise that it makes sense to talk about these inclusions since the tangent spaces are concrete subspaces.)
+Note that in particular, the above exercise implies that if $Z \subset X$ is a submanifold and $z \in Z$, then $T_{z}(Z) \subset T_{z}(X)$. (Once again, we emphasise that it makes sense to talk about these inclusions since the tangent spaces are concrete subspaces of $\mathbb{R}^{N}$.)
 
 \begin{thm}[Chain rule]
 	If $X \xrightarrow{f} Y \xrightarrow{g} Z$ are smooth maps of manifolds, then
@@ -252,7 +254,9 @@ Note that in particular, the above exercise implies that if $Z \subset X$ is a s
 			U \arrow[u, "\phi"] \arrow[rr, "\text{identity}"'] & & U \arrow[u, "\psi"']
 		\end{tikzcd}.
 	\end{equation*}
-	Note that the same $U$ is being used to parametrise.
+	Note that the same $U$ is being used to parametrise both $X$ and $Y$.
+
+	To see why the above is true, we may start with any local parametrisation $\phi : U \to X$ around $x$. Since $f$ is a local diffeomorphism, we may shrink $U$ such that $\phi(U)$ is contained in a neighbourhood of $x$ that is mapped diffeomorphically via $f$. Now, define $\psi : U \to Y$ by $f \circ \phi$.
 \end{rem}
 
 \begin{defn}
@@ -298,6 +302,12 @@ Check that the canonical immersion is an immersion.
 
 	One can construct a smooth map $f : \mathbb{R} \to \mathbb{R}^{2}$ which is an injective immersion but the image of $f$ is the figure eight.
 \end{rem}
+
+\begin{thm}
+	Let $f : X \to Y$ be a local diffeomorphism which is injective. Then, $f$ is a diffeomorphism of $X$ onto an open subset of $Y$ (and hence, a submanifold of $Y$).
+\end{thm}
+
+Compare the above with the previous remark. Note that the local diffeomorphism condition forces that $\dim(X) = \dim(Y)$. Thus, when $\dim(X) = \dim(Y)$, then being an injective immersion is good enough.
 
 \begin{defn}
 	$f : X \to Y$ is called \deff{proper} if the preimage of every compact set in $Y$ is a compact subset of $X$. An immersion which is injective and proper is called an \deff{embedding}.
@@ -409,7 +419,9 @@ There are two partial converses to the above.
 
 \subsection{Transversality}
 
-So far we discussed the problem of when $f^{-1}(y)$ is a manifold, given a smooth map $f : X \to Y$. Now, we wish to study the more general case of when $f^{-1}(Z)$ is a manifold, where $Z \subset Y$ is a submanifold. Note that being a manifold is a local problem. More precisely: $f^{-1}(Z)$ is a manifold iff every $x \in f^{-1}(Z)$ has a neighbourhood $U \opsub X$ such that $f^{-1}(Z) \cap U$ is a manifold. This observation along with some calculations leads to the following definition and theorem.
+So far we discussed the problem of when $f^{-1}(y)$ is a manifold, given a smooth map $f : X \to Y$. Now, we wish to study the more general case of when $f^{-1}(Z)$ is a manifold, where $Z \subset Y$ is a submanifold. Note that being a manifold is a local problem. More precisely: $f^{-1}(Z)$ is a manifold iff every $x \in f^{-1}(Z)$ has a neighbourhood $U \opsub X$ such that $f^{-1}(Z) \cap U$ is a manifold. Now, if $y = f(x)$, then, near $y$, we may write $Z$ as the set of common zeroes of independent functions $g_{1}, \ldots, g_{l}$ (where $l = \codim_{Y}(Z)$). Near $x$, $f^{-1}(Z)$ is the set of common zeroes of $g_{1}, \ldots, g_{l}$. By the earlier results, we see that $f^{-1}(Z)$ is a manifold when $0$ is a regular value of $g \circ f$, where $g = (g_{1}, \ldots, g_{l}) : Y \to \mathbb{R}^{l}$. 
+
+Some calculations show that the above condition can be phrased in terms of $f$ and $Z$ alone, as the next definition and theorem show.
 
 \begin{defn}
 	Let $f : X \to Y$ be a smooth map, and $Z \subset Y$ a manifold. The map $f$ is said to be \deff{transversal} to the submanifold $Z$, abbreviated $f \trans Z$, if the following equation holds true at each point $x \in f^{-1}(Z)$:
@@ -422,7 +434,7 @@ So far we discussed the problem of when $f^{-1}(y)$ is a manifold, given a smoot
 \begin{thm}
 	If the smooth map $f : X \to Y$ is transversal to a submanifold $Z \subset Y$, then $f^{-1}(Z)$ is a submanifold of $X$. Moreover,
 	\begin{equation*} 
-		\codim(f^{-1}(Z)) = \codim(Z).
+		\codim_{X}(f^{-1}(Z)) = \codim_{Y}(Z).
 	\end{equation*}
 \end{thm}
 
@@ -450,7 +462,9 @@ In terms of dimensions, the above says
 In particular, note that if $\dim(X) + \dim(Z) < \dim(Y)$, then $X$ and $Z$ can only intersect transversally by not intersecting at all. 
 
 \begin{ex}
-	The two coordinate axes intersect transversally in $\mathbb{R}^{2}$ but not when considered submanifolds of $\mathbb{R}^{3}$.
+	The two coordinate axes intersect transversally in $\mathbb{R}^{2}$ but not when considered submanifolds of $\mathbb{R}^{3}$. 
+
+	Note that the above also shows that the transversality condition is only a sufficient condition for the intersection to be a manifold, and not a necessary one.
 \end{ex}
 
 \begin{exe}
@@ -464,7 +478,7 @@ In particular, note that if $\dim(X) + \dim(Z) < \dim(Y)$, then $X$ and $Z$ can 
 Let $I$ denote the unit interval $[0, 1] \subset \mathbb{R}$.
 
 \begin{defn}
-	Let $f_{0}, f_{1} : X \to Y$ be smooth maps. We say that $f_{0}$ and $f_{1}$ are \deff{homotopic}, abbreviated $f_{0} \sim f_{1}$, if there exists a smooth map $F : X \times I \to Y$ such that $F(x, 0) = f_{0}(x)$ and $F(x, 1) = f_{1}(x)$ for all $x \in X$. \newline
+	Let $f_{0}, f_{1} : X \to Y$ be smooth maps. We say that $f_{0}$ and $f_{1}$ are \deff{homotopic}, abbreviated $f_{0} \sim f_{1}$, if there exists a \underline{smooth} map $F : X \times I \to Y$ such that $F(x, 0) = f_{0}(x)$ and $F(x, 1) = f_{1}(x)$ for all $x \in X$. \newline
 	$F$ is called a \deff{homotopy} between $f_{0}$ and $f_{1}$.
 \end{defn}
 
@@ -483,15 +497,13 @@ We sometimes also say ``$f_{t} : X \to Y$'' is a homotopy to denote a family $(f
 
 \begin{ex}
 	Consider curves in the planes, i.e., smooth maps from $\mathbb{R}^{1}$ to $\mathbb{R}^{2}$. The property that a curve pass through the origin is not stable. Nor is the property of intersecting the $x$-axis stable. (Think about the mapping $x \mapsto (x, x^{2})$ and the homotopy $(x, t) \mapsto (x, x^{2} + t)$ in both cases.)
-
-	However, transversal intersection with the $x$-axis \emph{is} a stable property.
 \end{ex}
 
 \begin{exe}
-	Verify the last line above.
+	Show that the following class of maps $[0, 1] \to \mathbb{R}^{2}$ is stable: maps intersecting the $x$-axis \emph{transversally}.
 \end{exe}
 
-\begin{thm}[Stability theorem]
+\begin{thm}[Stability theorem] \label{thm:stability}
 	Let $X$ be a compact manifold, and $Y$ an arbitrary manifold. The following classes of smooth maps are stable classes:
 	\begin{enumerate}
 		\item local diffeomorphisms,
@@ -503,7 +515,7 @@ We sometimes also say ``$f_{t} : X \to Y$'' is a homotopy to denote a family $(f
 	\end{enumerate}
 \end{thm}
 
-\section{Sard's Theorem and Morse Functions}
+\subsection{Sard's Theorem and Morse Functions}
 
 Recall when a subset of a Euclidean space is said to have measure zero.
 
@@ -524,7 +536,7 @@ It can be checked that the following is reducible to the following: there exists
 
 \begin{defn}
 	Let $f : X \to Y$ be a smooth map, and $x \in X$. \newline
-	If $df_{x}$ is surjective, then we say that \deff{$f$ is regular at $x$} or that \deff{$x$ is a regular point of $f$}. Else, we say that \deff{$x$ is a critical point of $x$}.
+	If $df_{x}$ is surjective, then we say that \deff{$f$ is regular at $x$} or that \deff{$x$ is a regular point of $f$}. Else, we say that \deff{$x$ is a critical point of $f$}.
 \end{defn}
 
 \begin{rem}
@@ -590,10 +602,10 @@ We had defined a $k$-dimensional manifold as some subset of $\mathbb{R}^{N}$. We
 \begin{defn}
 	Let $X \subset \mathbb{R}^{N}$ be a manifold. The \deff{tangent bundle of $X$}, abbreviated $T(X)$, is defined as
 	\begin{equation*} 
-		T(X) \vcentcolon= \{(x, v) \in X \times \mathbb{R}^{N} : v \in T_{x}(X)\} \subset X \times \mathbb{R}^{2N}.
+		T(X) \vcentcolon= \{(x, v) \in X \times \mathbb{R}^{N} : v \in T_{x}(X)\} \subset X \times \mathbb{R}^{N} \subset \mathbb{R}^{2N}.
 	\end{equation*}
 \end{defn}
-$T(X)$ contains a copy of $X$: $X_{0} = \{(x, 0) : x \in X\}$. Note that $T(X)$ is again a concrete subset of $\mathbb{R}^{2N}$.
+$T(X)$ contains a copy of $X$: $X_{0} = \{(x, 0) : x \in X\}$. Note that $T(X)$ is again a ``concrete'' subset of $\mathbb{R}^{2N}$.
 
 \begin{defn}
 	Any smooth map $f : X \to Y$ induces a global \deff{derivative map} $df : T(X) \to T(Y)$ defined by
@@ -605,7 +617,7 @@ $T(X)$ contains a copy of $X$: $X_{0} = \{(x, 0) : x \in X\}$. Note that $T(X)$ 
 Note that if $X \subset \mathbb{R}^{N}$ and $Y \subset \mathbb{R}^{M}$, then $df$ is a map from a subset of $\mathbb{R}^{2N}$ into a subset of $\mathbb{R}^{2M}$, and it makes sense to talk about smoothness of $df$.
 
 \begin{prop}
-	$df$ is a smooth map. Moreover, $d(g \circ f) = dg \circ df$. Consequently, if $f$ is a diffeomorphism, then so is $df$.
+	$df$ is a smooth map. Moreover, $d(g \circ f) = dg \circ df$ and $d(\id_{X}) = \id_{T(X)}$. Consequently, if $f$ is a diffeomorphism, then so is $df$.
 \end{prop}
 In particular, the tangent bundle $T(X)$ is determined up to diffeomorphism, and does not depend on the ambient $\mathbb{R}^{N}$.
 
@@ -638,3 +650,4 @@ Note that the last sum is finite for all $x$, in view of the second point.
 \begin{thm}[Whitney Theorem]
 	Every $k$-dimensional manifold embeds in $\mathbb{R}^{2k + 1}$.
 \end{thm}
+
