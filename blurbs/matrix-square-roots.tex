@@ -98,38 +98,56 @@ Thus, to find a square root for the matrix $\mathbf{J}$ in \Cref{eq:01}, it suff
 
 \subsection{Formal square root}
 
-Define $\dbinom{\frac{1}{2}}{0} \vcentcolon= 1$ and
+We wish to find a power series expansion for ``$\sqrt{1 + X}$''. What we mean is: we wish to find a sequence $(a_{n})_{n \ge 0}$ of complex numbers such that
 \begin{equation*} 
-	\binom{\frac{1}{2}}{n + 1} \vcentcolon= \frac{\frac{1}{2} - n}{n + 1}\binom{\frac{1}{2}}{n}
+	\left(\sum_{n \ge 0} a_{n} X^{n}\right)^{2} = 1 + X,
 \end{equation*}
-for $n \ge 0$. More directly, we have 
-\begin{equation*} 
-	\binom{\frac{1}{2}}{n} = \frac{\left(\frac{1}{2}\right)\left(\frac{1}{2} - 1\right) \cdots \left(\frac{1}{2} - (n - 1)\right)}{n!},
-\end{equation*}
-resembling the usual formula for $\binom{m}{n}$ when $m$ is a nonnegative integer. 
+where the above equality is to be interpreted \emph{formally}, i.e., in the power series ring $\mathbb{C}[\![X]\!]$. If you do not know what this means, you can simply just restrict your attention to the following:
 
-Then, from analysis, one knows that 
-\begin{equation*} 
-	\sqrt{1 + x} = \sum_{n \ge 0} \binom{\frac{1}{2}}{n} x^{n}
-\end{equation*}
-when $\md{x} < 1$. 
-
-For the paper, we are content with the above being true in a \emph{formal} sense. More precisely, we want that
-\begin{equation*} 
-	\left(\sum_{n \ge 0} \binom{\frac{1}{2}}{n} X^{n}\right)^{2} = 1 + X
-\end{equation*}
-in $\mathbb{C}[\![X]\!]$, which translates to the following:
 \begin{prop} \label{prop:formal-square-root}
+	There exists a sequence of complex numbers $(a_{n})_{n \ge 0}$ such that the following conditions are true:
 	\begin{align*} 
-		\binom{\frac{1}{2}}{0} &= 1,\\
-		\binom{\frac{1}{2}}{0}\binom{\frac{1}{2}}{1} + \binom{\frac{1}{2}}{1}\binom{\frac{1}{2}}{0} &= 1,\,\text{and} \\
-		\sum_{k = 0}^{n} \binom{\frac{1}{2}}{k} \binom{\frac{1}{2}}{n - k} &= 0 \text{ for all $n \ge 2$.}
+		a_{0}^{2} &= 1,\\
+		2a_{0}a_{1} &= 1,\,\text{and} \\
+		\sum_{k = 0}^{n} a_{k} a_{n - k} &= 0 \text{ for all $n \ge 2$.}
 	\end{align*}
 \end{prop}
+\begin{sketch} 
+	Start by setting $a_{0} = 1$. Check that the remaining $a_{n}$ can be recursively calculated. The crucial point to note is that in each linear equation, the coefficient of the highest index term will be $2a_{0}$ and we can divide by $2a_{0}$.
+\end{sketch}
 
-\begin{exe}
-	Find a proof of the above. 
-\end{exe}
+In the proof above, we get a unique sequence $(a_{n})_{n \ge 0}$ once we fix $a_{0} = 1$. We will use the suggestive notation $\dbinom{\frac{1}{2}}{n}$ for $a_{n}$.
+
+\begin{rem}
+	The reader familiar with some analysis might have already known that the above sequence exists and is explicitly given as
+	\begin{equation*} 
+		\binom{\frac{1}{2}}{n} = \frac{\left(\frac{1}{2}\right)\left(\frac{1}{2} - 1\right) \cdots \left(\frac{1}{2} - (n - 1)\right)}{n!}.
+	\end{equation*}
+
+	However, note that we are satisfied by the equality being a purely formal one, and not bothering with any convergence issues. We also do not care about the exact value of the coefficient above.
+\end{rem}
+
+% Define $\dbinom{\frac{1}{2}}{0} \vcentcolon= 1$ and
+% \begin{equation*} 
+% 	\binom{\frac{1}{2}}{n + 1} \vcentcolon= \frac{\frac{1}{2} - n}{n + 1}\binom{\frac{1}{2}}{n}
+% \end{equation*}
+% for $n \ge 0$. More directly, we have 
+% \begin{equation*} 
+% 	\binom{\frac{1}{2}}{n} = \frac{\left(\frac{1}{2}\right)\left(\frac{1}{2} - 1\right) \cdots \left(\frac{1}{2} - (n - 1)\right)}{n!},
+% \end{equation*}
+% resembling the usual formula for $\binom{m}{n}$ when $m$ is a nonnegative integer. 
+
+% Then, from analysis, one knows that 
+% \begin{equation*} 
+% 	\sqrt{1 + x} = \sum_{n \ge 0} \binom{\frac{1}{2}}{n} x^{n}
+% \end{equation*}
+% when $\md{x} < 1$. 
+
+% For the paper, we are content with the above being true in a \emph{formal} sense. More precisely, we want that
+% \begin{equation*} 
+% 	\left(\sum_{n \ge 0} \binom{\frac{1}{2}}{n} X^{n}\right)^{2} = 1 + X
+% \end{equation*}
+% in $\mathbb{C}[\![X]\!]$, which translates to the following:
 
 \subsection{Polynomials in matrices}
 
@@ -235,27 +253,28 @@ Combining the results and observations of the previous sections, we get the foll
 	Let $A \in M_{n}(\mathbb{C})$ be an invertible matrix. Then, there exists $B \in M_{n}(\mathbb{C})$ such that $B^{2} = A$.
 \end{thm}
 We had already seen that $A$ being invertible is not completely unnecessary since we have a counterexample with $A = \two{0}{1}{0}{0}$.
-
-To recall, the square root was computed in quite a hands-on manner: We first put $A$ in Jordan form as
-\begin{equation*} 
-	P^{-1} A P = 
-	\begin{bmatrix}
-		J_{1} & O & \cdots & O \\
-		O & J_{2} & \cdots & O \\
-		\vdots & \vdots & \ddots & \vdots \\
-		O & O & \cdots & J_{k}
-	\end{bmatrix}.
-\end{equation*}
-Then, for each $J_{i}$, we find a square root, let us denote this by $\sqrt{J_{i}}$.\footnote{Note that each Jordan block can have multiple square roots. We just found one explicitly, which we are denoting by $\sqrt{J_{i}}$.} Then, the matrix
-\begin{equation*} 
-	P\begin{bmatrix}
-		\sqrt{J_{1}} & O & \cdots & O \\
-		O & \sqrt{J_{2}} & \cdots & O \\
-		\vdots & \vdots & \ddots & \vdots \\
-		O & O & \cdots & \sqrt{J_{k}}
-	\end{bmatrix}P^{-1}
-\end{equation*}
-is a square root for $A$, simple!
+\begin{proof} 
+	We first put $A$ in Jordan form as
+	\begin{equation*} 
+		P^{-1} A P = 
+		\begin{bmatrix}
+			J_{1} & O & \cdots & O \\
+			O & J_{2} & \cdots & O \\
+			\vdots & \vdots & \ddots & \vdots \\
+			O & O & \cdots & J_{k}
+		\end{bmatrix}.
+	\end{equation*}
+	Then, for each $J_{i}$, we find a square root, let us denote this by $\sqrt{J_{i}}$.\footnote{Note that each Jordan block can have multiple square roots. We just found one explicitly, which we are denoting by $\sqrt{J_{i}}$.} Then, the matrix
+	\begin{equation*} 
+		P\begin{bmatrix}
+			\sqrt{J_{1}} & O & \cdots & O \\
+			O & \sqrt{J_{2}} & \cdots & O \\
+			\vdots & \vdots & \ddots & \vdots \\
+			O & O & \cdots & \sqrt{J_{k}}
+		\end{bmatrix}P^{-1}
+	\end{equation*}
+	is a square root for $A$, simple!
+\end{proof}
 
 Now, note that we observed that $\sqrt{J_{i}}$ is actually a polynomial in $J_{i}$ (\Cref{obs:polynomial-jordan-root}). Moreover, we noted how polynomials of block diagonal matrices are computed (\Cref{thm:block-diagonal-polynomial}), and how polynomial evaluations interacted with similarity (\Cref{thm:similar-polynomial-evaluation}). Using these two facts, one would hope that we can write $\sqrt{A}$ also as a polynomial in $A$. \newline
 However, the hindrance is the following: We did \emph{not} find a common polynomial $p(X)$ such that $p(J_{i}) = \sqrt{J_{i}}$. Rather, for each $J_{i}$, we found some polynomial $p_{i}(X)$ such that $p_{i}(J_{i}) = \sqrt{J_{i}}$. 
@@ -353,12 +372,16 @@ The above has the following interesting corollary.
 
 We briefly discuss the dependence of our discussion on the underlying field $\mathbb{C}$. 
 
-To begin with, the existence of Jordan form (for every matrix) is guaranteed precisely when the field is algebraically closed. Secondly, our definition of the binomial coefficients $\dbinom{\frac{1}{2}}{n}$ only makes sense when the field has characteristic $0$.\footnote{Actually, when the coefficients are written in reduced form, then the denominator is a power of $2$ and hence, it would make sense as long as characteristic is different from $2$. See \url{https://math.stackexchange.com/q/4465623/427810}.} However, one can show that if $\mathsf{k}$ is a field with $\chr(\mathsf{k}) \neq 2$, then there does exist a square root of $\sqrt{1 + X}$ in $\mathsf{k}[\![X]\!]$, which is all we need. Lastly, we also required the existence of square roots of the eigenvalues (of course, this is automatically guaranteed if the field is algebraically closed). 
+To begin with, the existence of Jordan form (for every matrix) is guaranteed precisely when the field is algebraically closed. Secondly, we needed a formal square root of $1 + X$. One can check that the proof sketch of \Cref{prop:formal-square-root} works in any field with characteristic different from $2$. Lastly, we also required the existence of square roots of the eigenvalues (of course, this is automatically guaranteed if the field is algebraically closed). 
 
 \begin{thm}
-	Let $\mathsf{k}$ be an algebraically closed field with $\chr(\mathsf{k}) \neq 2$. Let $A \in M_{n}(\mathsf{k})$ be invertible. Then, $A$ has a square root.
+	Let $\mathsf{k}$ be an algebraically closed field with $\chr(\mathsf{k}) \neq 2$. Let $A \in M_{n}(\mathsf{k})$ be invertible. Then, $A$ has a square root (which can be written as a polynomial in $A$).
 \end{thm}
 
-Another relaxation is the following: The existence of Jordan form of a fixed matrix $A$ is also granted if the characteristic polynomial of $A$ factors into linear factors. Thus, if $A$ is a real matrix such that the characteristic polynomial factors into linear factors with positive roots, then $A$ has a real square root.
+Another relaxation is the following: The existence of Jordan form of a fixed matrix $A$ is also granted if the characteristic polynomial of $A$ factors into linear factors. 
+
+\begin{thm}
+	Let $A \in M_{n}(\mathbb{R})$ be a real matrix such that the characteristic polynomial of $A$ factors into real linear factors with each root positive. Then, $A$ has a square root (which can be written as a polynomial in $A$).
+\end{thm}
 
 \end{document}
