@@ -12,9 +12,9 @@ title_separator          : "-"
 name                     : &name "Aryaman Maithani"
 description              : &description "My academic-ish webpage"
 url                      : https://aryamanmaithani.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : "/math2" # the subpath of your site, e.g. "/blog"
-repository               : "aryamanmaithani/math2"
-full_link                : "https://github.com/aryamanmaithani/math2"
+baseurl                  : "/math" # the subpath of your site, e.g. "/blog"
+repository               : "aryamanmaithani/math"
+full_link                : "https://github.com/aryamanmaithani/math"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
