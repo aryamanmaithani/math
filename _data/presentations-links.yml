@@ -1,0 +1,17 @@
+ma-850:
+  tit: Model Categories
+
+ma-814:
+  tit: Extending Riemann maps to the boundary
+
+alg-geo:
+  tit: Algebraic Geometry
+  desc: Presentation on Algebraic Geometry as part of VSRP  
+
+group-theory-gd:
+  tit: Group theory GD
+  desc: Presentation on an introduction to Group Theory
+
+posets:
+  tit: Posets
+  desc: Small presentations I gave on the topic of posets
