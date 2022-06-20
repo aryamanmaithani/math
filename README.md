@@ -1,0 +1,1 @@
+This repository contains the source of the math content that I've written. You can see the main website [here](https://aryamanmaithani.github.io/math/).
