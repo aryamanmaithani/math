@@ -327,8 +327,8 @@
 {\end{fakedefn}\end{shaded}}
 
 \newenvironment{exe}
-{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeexe}}
-{\end{fakeexe}\end{shaded}}
+{\begin{blockquote}\begin{fakeexe}}
+{\end{fakeexe}\end{blockquote}}
 
 \newenvironment{ex}
 {\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeex}}
@@ -339,7 +339,7 @@
 {\end{fakeobs}\end{shaded}}
 
 \newenvironment{blockquote}
-{\begin{mdframed}[skipabove=0pt, skipbelow=0pt, innertopmargin=4pt, innerbottommargin=4pt, bottomline=false,topline=false,rightline=false, linewidth=2pt]}
+{\begin{mdframed}[skipbelow=0pt, innertopmargin=4pt, innerbottommargin=4pt, bottomline=false,topline=false,rightline=false, linewidth=2pt]}
 {\end{mdframed}}
 \newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
 \newenvironment{sketch}{\begin{proof}[Sketch]}{\end{proof}}

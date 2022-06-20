@@ -1,0 +1,300 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+\setcounter{tocdepth}{2}
+
+\title{Rational Canonical Form}
+\author{Aryaman Maithani}
+\date{June 18, 2022}
+
+\DeclareMathOperator{\RCF}{RCF}
+
+\usepackage[
+	hyperref = true,      	% Link to online documents
+  	backend  = bibtex,      % Use bibtex instead of biber
+  	sorting  = nyt,       	% Sorts by (name, year, title)
+  	style  = alphabetic 	% Citations look like [Har77]
+]{biblatex}
+\addbibresource{rational-canonical-form.bib}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section{Introduction}
+
+This report is simply an application of the structure theorem of finitely generated modules over a PID. We state this theorem without proof. We require the reader to be familiar with the language of modules (the structure theorem can be taken as a blackbox, but the reader must know the terminology to understand what it is saying). \newline
+We do \emph{not} assume any result about minimal polynomials or even the Cayley-Hamilton theorem. We derive these as consequences. Another pleasant consequence is discussed in \Cref{subsec:similarity-field-extensions} where we conclude that similarity of two matrices does not change under field extensions.
+
+The theory here is standard, one reference is \cite{DF}.
+
+\section{Structure Theorem of a Module over a PID}
+
+In this section, $R$ will denote a principal ideal domain (PID). 
+
+\begin{thm}[Structure Theorem] \label{thm:structure-theorem}
+	Let $R$ be a PID, and $M$ be a finitely generated $R$-module. Then, there exists $r \ge 0$, $s \ge 0$, and nonzero nonunits $a_{1}, \ldots, a_{s} \in R$ satisfying $a_{1} \mid a_{2} \mid \cdots \mid a_{s}$ such that
+	\begin{equation*} 
+		M \cong R^{r} \oplus R/(a_{1}) \oplus R/(a_{2}) \oplus \cdots \oplus R/(a_{s}).
+	\end{equation*}
+	The integers $r$ and $s$ are uniquely determined. Moreover, the $a_{i}$ are uniquely determined up to units. Equivalently, the ideals $(a_{i})$ are uniquely determined.
+\end{thm}
+\begin{proof} 
+	See page 462 of \cite{DF}.
+\end{proof}
+
+Note that $R$ and $R/(a_{i})$ are all cyclic modules. Thus, the above says that every finitely generated module (over a PID) is a sum of cyclic submodules. 
+
+\begin{exe}
+	For an $R$-module $M$, define $\Tor(M) \vcentcolon= \{x \in M : rx = 0 \text{ for some $r \neq 0$}\}$. Show that $\Tor(M)$ is a submodule of $M$ (you will use the fact that $R$ is an integral domain).
+
+	Now, assume that $M$ is finitely generated. With notation as in \mynameref{thm:structure-theorem}, show that $M/\Tor(M) \cong R^{r}$. This shows that $r$ is uniquely determined.\footnotemark Moreover, 
+	\begin{equation*} 
+		\Tor(M) \cong R/(a_{1}) \oplus R/(a_{2}) \oplus \cdots \oplus R/(a_{s}).
+	\end{equation*}
+\end{exe}
+\footnotetext{We are using the fact that a nonzero commutative ring has the invariant basis number property: if $R^{n} \cong R^{m}$ for integers $n, m \ge 0$, then $m = n$.}
+
+\section{Vector spaces as \texorpdfstring{$\mathbb{F}[x]$}{F[x]}-modules}
+
+In what follows, $\mathbb{F}$ will denote a field, $V$ an $n$-dimensional vector space ($n \ge 1$), and $T : V \to V$ an $\mathbb{F}$-linear transformation. As usual, $\mathbb{F}[x]$ will denote the polynomial ring over $\mathbb{F}$.
+
+We quickly set up some notations: $\mathbb{F}^{n \times n}$ is the ring of $n \times n$ matrices, and $\End(V)$ is the ring of all $\mathbb{F}$-linear transformations from $V$ to $V$. \newline
+We will use the notation $B = (v_{1}, \ldots, v_{n})$ to denote an \underline{ordered} basis of $V$.
+
+\begin{obs}
+	$V$ can be viewed as $\mathbb{F}[x]$-module by defining $x \cdot v \vcentcolon= T(v)$ for $v \in V$. 
+
+	More generally, any polynomial $p(x)$ acts on $v$ via $p(T)$.
+
+	We shall refer to this module structure as ``$\mathbb{F}[x]$ acts on $V$ via $T$''.
+\end{obs}
+
+\begin{exe} \label{exe:Fx-submodule}
+	Note that $\mathbb{F}$ is a subring of $\mathbb{F}[x]$. Thus, $V$ inherits an $\mathbb{F}$-module structure by restriction of the $\mathbb{F}[x]$-module structure. Check that this is the usual vector space structure.
+
+	Show that a subset $W \subset V$ is an $\mathbb{F}[x]$-submodule iff $W$ is an $\mathbb{F}$-submodule and $W$ is $T$-invariant.\footnotemark
+\end{exe}
+\footnotetext{Recall that $W \subset V$ is said to be $T$-invariant if $T(w) \in W$ for all $w \in W$.}
+
+Recall that $\mathbb{F}[x]$ is a PID. Since $V$ is finite-dimensional over $\mathbb{F}$, it is finitely generated as an $\mathbb{F}$-module and hence, as an $\mathbb{F}[x]$-module. Now, by the \mynameref{thm:structure-theorem}, we have an isomorphism $V \cong F \oplus \Tor(V)$, where $F$ is a free $\mathbb{F}[x]$-module. Note that this isomorphism is also as $\mathbb{F}$-vector spaces. Since $\mathbb{F}[x]$ has infinite dimension over $\mathbb{F}$ and $V$ has finite, it follows that $F = 0$. Thus, we obtain the following.
+
+\begin{thm}
+	We have an isomorphism of $\mathbb{F}[x]$-modules given as
+	\begin{equation} \label{eq:02}
+		V \cong \mathbb{F}[x]/(p_{1}) \oplus \cdots \oplus \mathbb{F}[x]/(p_{s}),
+	\end{equation}
+	where $p_{1}, \ldots, p_{s} \in \mathbb{F}[x]$ are nonconstant monic polynomials such that $p_{i} \mid p_{i + 1}$. Moreover, each $p_{i}$ is uniquely determined.
+\end{thm}
+
+In the above, we have used the fact that each nonzero ideal in $\mathbb{F}[x]$ has a unique monic generator. Moreover, the generator being a nonunit is characterised by the generator being nonconstant.
+
+We first look at the module $\mathbb{F}[x]/(p)$ for some fixed $p \in \mathbb{F}[x]$. 
+
+\begin{defn}
+	Given a monic polynomial
+	\begin{equation*} 
+		p = x^{n} + a_{n - 1} x^{n - 1} + \cdots + a_{0} \in \mathbb{F}[x],
+	\end{equation*}
+	we define the \deff{companion matrix} of $p$ as
+	\begin{equation*} 
+		C_{p} \vcentcolon= 
+		\begin{bmatrix}
+			0 & 0 & \cdots & 0 & -a_{0} \\
+			1 & 0 & \cdots & 0 & -a_{1} \\
+			0 & 1 & \cdots & 0 & -a_{2} \\
+			\vdots & \vdots & \ddots & \vdots & \vdots \\
+			0 & 0 & \cdots & 1 & -a_{n - 1} \\
+		\end{bmatrix}.
+	\end{equation*}
+	The matrix above has $1$s on the subdiagonal, the coefficients of $p$ in the last column (in the manner shown), and $0$ everywhere else.
+\end{defn}
+Note that the lower left $(n - 1) \times (n - 1)$ block is simply the identity matrix.
+
+\begin{exe} \label{exe:companion-cyclic-basis}
+	Let $B$ be an ordered basis of $V$. Show that the following are equivalent:
+	\begin{enumerate}
+		\item $B$ is of the form $(v, Tv, \ldots, T^{n - 1}v)$ for some $v \in V$.
+		\item $[T]_{B}$ is of the form $C_{p}$ for some monic $p \in \mathbb{F}[x]$ (necessarily of degree $n$).
+	\end{enumerate}
+	More explicitly, show that the correspondence is given as: \\
+	$T^{n} v = -(a_{0} v + \cdots + a_{n - 1} T^{n - 1}v)$ corresponds to $p = a_{0} + \cdots + a_{n - 1} x^{n - 1} + x^{n}$. In particular, $p(T)v = 0$.
+\end{exe}
+
+\begin{thm} \label{thm:good-basis-cyclic}
+	Suppose that $V \cong \mathbb{F}[x]/(p)$ for some nonconstant monic $p \in \mathbb{F}[x]$. Write
+	\begin{equation*} 
+		p = a_{0} + a_{1} x + \cdots + a_{n - 1} x^{n - 1} + x^{n}.
+	\end{equation*} 
+	Then, there exists $v \in V$ such that $B = (v, Tv, \ldots, T^{n - 1})$ is an ordered basis and the matrix of $T$ with respect to $B$ is a companion matrix.
+\end{thm}
+\begin{proof} 
+	Fix an isomorphism $\varphi : \mathbb{F}[x]/(p) \to V$ and let $v \in V$ be the image of $\bar{1}$. We claim that the set $B = (v, Tv, \ldots, T^{n - 1} v)$ is linearly independent. Note that $\mathbb{F}[x]/(p)$ (and hence, $V$) has dimension $n$ over $\mathbb{F}$ (exercise). Thus, $B$ will then turn out to be a basis. By \Cref{exe:companion-cyclic-basis}, the statement about $[T]_{B}$ will follow.
+
+	Thus, all is needed to show is that $B$ is actually linearly independent. To this end, suppose $c_{0}, \ldots, c_{n - 1} \in \mathbb{F}$ are such that
+	\begin{equation*} 
+		c_{0} v + c_{1} Tv + \cdots + c_{n - 1} T^{n - 1} v = 0.
+	\end{equation*}
+	Using the definition of the module structure, we get 
+	\begin{equation*} 
+		(c_{0} + c_{1} x + \cdots + c_{n - 1} x^{n - 1}) v = 0.
+	\end{equation*}
+	Recall that $v = \varphi(\bar{1})$. Since $\varphi$ is injective, we get that $(c_{0} + c_{1} x + \cdots + c_{n - 1} x^{n - 1}) \cdot \overline{1} = 0$ in $\mathbb{F}[x]/(p)$. Using this, conclude that $p(x)$ divides $\sum c_{i} x^{i - 1}$. But comparing degrees forces $c_{i} = 0$ for all $i$, as desired.
+\end{proof}
+
+The converse is true as well.
+
+\begin{thm} \label{thm:converse-good-basis}
+	Suppose that $V$ has an ordered basis $B$ such that $[T]_{B} = C_{p}$ for some $p \in \mathbb{F}[x]$. Then, $V \cong \mathbb{F}[x]/(p)$ as $\mathbb{F}[x]$-modules.
+\end{thm}
+\begin{sketch}
+	By \Cref{exe:companion-cyclic-basis}, we know that $B$ is of the form $(v, Tv, \ldots, T^{n - 1}v)$ for some $v \in V$. Define $\varphi : \mathbb{F}[x] \to V$ by $1 \mapsto v$. Since $B$ is a basis, $\varphi$ is surjective. Moreover, $p \in \ker(\varphi)$\footnote{Use the correspondence stated in \Cref{exe:characteristic-companion}.}. This induces an $\mathbb{F}[x]$-linear surjection $\mathbb{F}[x]/(p) \to V$. Note that this is also $\mathbb{F}$-linear and comparing dimensions shows that the induced map is actually an isomorphism.
+\end{sketch}
+
+\section{Obtaining the Rational Canonical Form}
+
+\begin{defn}
+	The \deff{characteristic polynomial} of an $n \times n$ matrix $A$ is defined as $c_{A}(x) \vcentcolon= \det(xI - A)$.
+\end{defn}
+
+Note that as per our definition, $c_{A}(x)$ is a monic polynomial of degree $n$. (Some places define it to be $\det(A - xI)$, in which case the two definitions differ by a sign of $(-1)^{n}$.)
+
+\begin{exe} \label{exe:characteristic-companion}
+	Let $p(x) \in \mathbb{F}[x]$ be a monic polynomial. Show that $p(x)$ is the equal to the characteristic polynomial of the companion matrix of $p(x)$. 
+
+	(Suggestion: use induction and expand the determinant along the first column.)
+\end{exe}
+
+% We can now use the results from the previous section to get two corresponding theorems for direct sums.
+
+\begin{thm}
+	Let $V$ be an $n$-dimensional $\mathbb{F}$-vector space, and $T : V \to V$ be a linear transformation. Then, there exists an ordered basis $B$ of $V$ such that $[T]_{B}$ is a block diagonal matrix of the form
+	\begin{equation} \label{eq:03}
+		\begin{bmatrix}
+			C_{p_{1}} & & & \\
+			& C_{p_{2}} & & \\
+			& & \ddots & \\
+			& & & C_{p_{s}}
+		\end{bmatrix},
+	\end{equation}
+	for some nonconstant monic polynomial $p_{1}, \ldots, p_{s}$ satisfying $p_{i} \mid p_{i + 1}$. 
+
+	Moreover, this sequence of polynomials does not depend on the choice of $B$.
+\end{thm}
+Note that the statement of the theorem makes no reference to the structure of $V$ as an $\mathbb{F}[x]$-module.
+
+\textbf{Notation.} For convenience, we denote the block matrix in \Cref{eq:03} as $\diag(C_{p_{1}}, \ldots, C_{p_{s}})$.
+
+\begin{proof} 
+	Treat $V$ as an $\mathbb{F}[x]$-module as earlier. To prove existence of such a basis, we use \Cref{thm:good-basis-cyclic} and the existence statement of the \mynameref{thm:structure-theorem}.
+
+	Write $V$ as a sum of cyclic $\mathbb{F}[x]$-modules as in \Cref{eq:02}. Note that under this isomorphism, each $\mathbb{F}[x]/(p_{i})$ corresponds to some $T$-invariant subspace (\Cref{exe:Fx-submodule}), call this subspace $V_{i}$. Using \Cref{thm:good-basis-cyclic}, we get an ordered basis $B_{i}$ of $V_{i}$ such that $[T|_{V_{i}}]_{B_{i}}$ is the companion matrix $C_{p_{i}}$.
+
+	Now, consider the (ordered) union $B \vcentcolon= B_{1} \cup \cdots \cup B_{s}$ to get a basis of $V$ such that $[T]_{B}$ has the form mentioned.
+
+	For uniqueness, we use \Cref{thm:converse-good-basis} and the uniqueness statement of \mynameref{thm:structure-theorem}. 
+
+	Suppose that $B'$ is an ordered basis such that $[T]_{B'} = \diag(C_{q_{1}}, \ldots, C_{q_{r}})$, with the $q_{j}$ being nonconstant monic polynomials such that $q_{j} \mid q_{j + 1}$. 
+
+	The above naturally decomposes $V$ as a direct sum $W_{1} \oplus \cdots \oplus W_{r}$ of $T$-invariant subspaces, i.e., $\mathbb{F}[x]$-submodules. By \Cref{thm:converse-good-basis}, each $W_{j}$ is isomorphic to $\mathbb{F}[x]/(q_{j})$. In turn, we see that $V = \bigoplus_{j = 1}^{r} \mathbb{F}[x]/(q_{j})$. Now, \mynameref{thm:structure-theorem} forces $r = s$ and $p_{i} = q_{i}$ for all $i$.
+\end{proof}
+
+Recall that two matrices $A, B \in \mathbb{F}^{n \times n}$ are said to be \deff{similar} if there exists an invertible matrix $P$ such that $P^{-1} A P = B$. This is denoted by $A \sim B$.
+
+The dictionary between linear transformations (and change of basis) and matrices (and similarity) gives us the following theorem.
+
+\begin{thm}
+	Let $A \in \mathbb{F}^{n \times n}$ be a square matrix. Then, there exists an invertible matrix $P \in \mathbb{F}^{n \times n}$ and nonconstant monic polynomials $p_{1}, \ldots, p_{s}$ such that
+	\begin{equation} \label{eq:04}
+		P^{-1} A P = \diag(C_{p_{1}}, \ldots, C_{p_{s}})
+	\end{equation}
+	with $p_{i} \mid p_{i + 1}$. Moreover, $p_{1}, \ldots, p_{s}$ are uniquely determined.
+
+	The matrix on the right is called \underline{the} \deff{rational canonical form} of $A$, denoted $\RCF(A)$. The polynomials $p_{i}$ are called the \deff{invariant factors} of $A$.
+\end{thm}
+
+We have theoretically shown the existence of the RCF. See page 480 of \cite{DF} to see an algorithm for actually computing the RCF and finding the invariant factors.
+
+\section{Applications}
+
+\subsection{Similarity over field extensions} \label{subsec:similarity-field-extensions}
+
+Let $A, B \in \mathbb{F}^{n \times n}$. If $\RCF(A) = \RCF(B)$, then $A \sim B$ since each matrix is similar to its RCF. Conversely, if $A$ is similar to $B$, then $B$ is similar to $\RCF(A)$. The uniqueness of RCF then forces $\RCF(A) = \RCF(B)$. Thus, we have obtained:
+
+\begin{thm}
+	Two square matrices are similar iff they have the same rational canonical form.
+\end{thm}
+
+The word ``rational'' refers to the fact that this form does not require one to go to a field extension (unlike Jordan canonical form, which requires the field to be algebraically closed in general).
+
+Another feature of the RCF is the following: Let $A \in \mathbb{F}^{n \times n}$, and let $\mathbb{E}$ be a field extension of $\mathbb{F}$. Then, $\RCF(A)$ (over $\mathbb{F}$) is similar to $A$ over $\mathbb{E}$ as well. Moreover, it continues to satisfy the definition of being a rational form over $\mathbb{E}$ (that is, it is a block diagonal matrix consisting of companion matrices of polynomials that divide the next one). Thus, we see that the rational canonical form is independent of $\mathbb{F}$. In particular, this has the following consequence:
+
+\begin{cor}
+	Let $A, B \in \mathbb{F}^{n \times n}$, and $\mathbb{F} \subset \mathbb{E}$ be a field extension. $A$ and $B$ are similar over $\mathbb{F}$ iff $A$ and $B$ are similar over $\mathbb{E}$.
+\end{cor}
+
+Note that the above is useful because similarity over $\mathbb{E}$ may possibly be easier to check (using say, Jordan canonical form). At least for theoretical purposes, it shows that two matrices are similar if they have the same Jordan form (the existence of which may require passing to an extension).
+
+\subsection{Minimal polynomial}
+
+\begin{defn}
+	The \deff{minimal polynomial} of a matrix $A \in \mathbb{F}^{n \times n}$ is the monic polynomial $m_{A}(x) \in \mathbb{F}[x]$ of lowest degree such that $m_{A}(A)$ is the zero matrix.
+
+	Similarly, the \deff{minimal polynomial} of a linear transformation $T : V \to V$ is the monic polynomial $m_{T}(x) \in \mathbb{F}[x]$ of lowest degree such that $m_{T}(T)$ is the zero map.
+\end{defn}
+
+To recall: given a polynomial $p(x) = a_{0} + a_{1} x + \cdots + a_{n} x^{n} \in \mathbb{F}[x]$ and $A \in \mathbb{F}^{n \times n}$, one defines
+\begin{equation*} 
+	p(A) \vcentcolon= a_{0} I + a_{1} A + \cdots + a_{n} A^{n} \in \mathbb{F}^{n \times n}.
+\end{equation*}
+$p(T)$ is similarly defined by ``replacing $x$ with $T$'' (and the constant is multiplied with the identity map). Note that these notions make sense because $\mathbb{F}^{n \times n}$ and $\End(V)$ are rings.
+
+\begin{exe} \label{exe:T-and-A-same-minimal}
+	Let $T$ be a linear transformation and $A$ be its matrix with respect to some ordered basis. Show that the minimal polynomials of $T$ and $A$ coincide.
+\end{exe}
+
+\begin{exe}
+	Let $A \in \mathbb{F}^{n \times n}$. Let $q(x) \in \mathbb{F}[x]$ be a polynomial such that $q(A) = O$. Show that $m_{A}(x) \mid q(x)$. \newline
+	Derive a similar result for the minimal polynomial of a linear transformation.
+\end{exe}
+
+Given a matrix $A \in \mathbb{F}^{n \times n}$, there is a ring homomorphism $\mathbb{F}[x] \to \mathbb{F}^{n \times n}$ given by $p(x) \mapsto p(A)$. The above shows that the kernel is $(m_{A}(x))$.
+
+\begin{exe}
+	Recall that given an $R$-module $M$, the \deff{annihilator} of $M$ is the ideal of $R$ defined as $\{r \in R : rx = 0 \text{ for all $x \in M$}\}$. 
+
+	Show that when $\mathbb{F}[x]$ acts on $V$ via $T$, then the annihilator of $V$ is precisely the ideal generated by $m_{T}(x)$.
+\end{exe}
+
+\begin{thm}
+	The minimal polynomial of $A \in \mathbb{F}^{n \times n}$ is its largest invariant factor.
+\end{thm}
+\begin{sketch}
+	We leave the details to the reader. Using \Cref{exe:T-and-A-same-minimal}, it suffices to prove the statement for a linear transformation $T \in \End(V)$. 
+
+	As usual, write 
+	\begin{equation*} 
+		V \cong \mathbb{F}[x]/(p_{1}) \oplus \cdots \oplus \mathbb{F}[x]/(p_{s}),
+	\end{equation*} 
+	with $p_{i} \mid p_{i + 1}$.
+
+	Note that the annihilator of the module on the right is precisely $(p_{s})$.
+\end{sketch}
+
+\begin{thm}
+	The characteristic polynomial of $A \in \mathbb{F}^{n \times n}$ is the product of the invariant factors.
+\end{thm}
+\begin{sketch}
+	Note that the objects appearing in the statement do not change if $A$ is replaced by a matrix similar to $A$. Thus, we may assume that $A$ is in RCF. Recall that for a block diagonal matrix $M = \diag(A_{1}, \ldots, A_{k})$ with square blocks, one has $\det(M) = \det(A_{1}) \cdots \det(A_{k})$. 
+
+	Now, use \Cref{exe:characteristic-companion} to conclude the result.
+\end{sketch}
+
+\begin{cor}[Cayley-Hamilton]
+	The minimal polynomial divides the characteristic polynomial. Equivalently, every square matrix satisfies its characteristic polynomial.
+\end{cor}
+
+\printbibliography
+\end{document}
