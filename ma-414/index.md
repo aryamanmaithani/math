@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 414
 subtitle: Galois Theory Notes
 ---

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 850
 subtitle: Topics in Topology II
 ---

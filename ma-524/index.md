@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 524
 subtitle: Algebraic Number Theory Notes
 ---

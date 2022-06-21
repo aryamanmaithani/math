@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: Posets
 date: 2019-10-01
 ---

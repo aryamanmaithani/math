@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 526
 subtitle: Advanced Commutative Algebra Notes
 ---

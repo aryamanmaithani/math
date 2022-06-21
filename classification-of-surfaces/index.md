@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: Classification of surfaces
 ---
 #### [PDF](/math/classification-of-surfaces/Classification of Surfaces.pdf) | [TEX](https://github.com/aryamanmaithani/math/tree/master/classification-of-surfaces)

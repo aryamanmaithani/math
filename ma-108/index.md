@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 108 - ODEs
 subtitle: Summary
 ---

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 419
 subtitle: Group Theory Notes
 ---

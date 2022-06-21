@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 107
 subtitle: Collection of Notes, Assignments and Tests
 ---

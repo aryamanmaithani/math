@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: Category Theory
 date: 2019-03-28
 ---

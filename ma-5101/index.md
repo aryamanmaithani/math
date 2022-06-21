@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 5101
 subtitle: Algebra II Notes
 ---

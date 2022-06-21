@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: Representation Theory
 subtitle: of Finite Groups
 ---

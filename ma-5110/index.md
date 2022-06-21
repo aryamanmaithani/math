@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 5110
 subtitle: Noncommutative Algebra Notes
 ---

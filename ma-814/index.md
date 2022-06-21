@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 814
 subtitle: Complex Analysis Notes
 ---

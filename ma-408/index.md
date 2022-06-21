@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 408
 subtitle: Measure Theory Notes
 ---

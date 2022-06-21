@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: MA 5106
 subtitle: Fourier Analysis Notes
 ---
