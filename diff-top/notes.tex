@@ -13,6 +13,8 @@
 \setcounter{tocdepth}{2}
 
 \newcommand{\opsub}{\subset_{\operatorname{op}}}
+\newcommand{\T}{\mathscr{T}}
+\DeclareMathOperator{\Alt}{Alt}
 
 \newcommand{\trans}{\mathrel{\text{\tpitchfork}}}
 \makeatletter
@@ -57,6 +59,7 @@ I am making this while I study \emph{Differential Topology} by Victor Guillemin 
 		\mathbb{H}^{k} \vcentcolon= \{(x_{1}, \ldots, x_{k}) \in \mathbb{R}^{k} : x_{k} \ge 0\}.
 	\end{equation*}
 	$\partial \mathbb{H}^{k}$ consists of those points in $\mathbb{R}^{k}$ with final coordinate $0$.
+	\item For $n \in \mathbb{N}$, $[n]$ will denote the set $\{1, \ldots, n\}$.
 \end{enumerate}
 
 \begin{thm}[Invariance of Domain] \label{thm:invariance-of-domain}
@@ -279,5 +282,268 @@ Picking $C = \partial X$ (this is always closed!) gives us the following corolla
 	If, for $f : X \to Y$, the boundary map $\partial f : \partial X \to Y$ is transversal to a closed submanifold $Z \subset Y$, then there exists a map $g : X \to Y$ homotopic to $f$ such that $\partial g = \partial f$ and $g \trans Z$.
 \end{cor}
 A useful restatement: Supposed $h : \partial X \to Y$ is transversal to $Z$. If $h$ extends to a map $X \to Y$, then $h$ extends to a map that is transversal to $Z$.
+
+\section{Oriented Intersection Theory}
+
+\subsection{Orientation}
+
+Let $V$ be a vector space, and $\beta = (v_{1}, \ldots, v_{k})$ and $\beta' = (v_{1}', \ldots, v_{k}')$ be two ordered bases of $V$. Let $A : V \to V$ be the unique linear isomorphism such that $Av_{i} = v_{i}'$ for all $i \in [k]$.
+
+\begin{defn}
+	$\beta$ and $\beta'$ are said to be \deff{equivalently oriented} if $\det(A) > 0$.
+\end{defn}
+
+The above defines an equivalence relation on the set of all ordered bases of $V$. There are precisely two equivalence classes.
+
+\begin{defn}
+	An \deff{orientation of $V$} is an arbitrary decision to affix a positive sign to the elements of one equivalence class and a negative sign to the others.
+
+	The sign given an ordered basis $\beta$ is called its \deff{orientation}, so $\beta$ is either \deff{positively oriented} or \deff{negatively oriented}, depending on which equivalence class it belongs to. 
+\end{defn}
+
+There are precisely two possible orientations for any (nonzero finite-dimensional) vector space $V$. In order to fix an orientation, it suffices to pick a standard ordered basis and assign a sign to it.
+
+The \deff{standard orientation of Euclidean space} is the one for which the standard ordered basis is positively oriented.
+
+For the zero vector space, an orientation is simply a choice of $+1$ or $-1$ (associated to the empty basis, if you wish).
+
+% \textbf{Notation:} Given an ordered subset $\beta = (v_{1}, \ldots, v_{k})$ of $V$ and a map $A : V \to W$, we denote by $A\beta$ the ordered subset $(Av_{1}, \ldots, Av_{k}) \subset W$.
+
+\begin{defn}
+	Let $V$ and $W$ be oriented vector spaces, and $A : V \to W$ be a linear isomorphism. $A$ is said to \deff{preserve orientation} if $A \beta$ is a positively oriented basis of $W$ for any choice of positively oriented basis $\beta \subset V$.
+\end{defn}
+Note: If $\beta$ and $\beta'$ are ordered bases of $V$ from the same orientation class, then $A \beta$ and $A \beta'$ will also have the same orientation class in $W$. Thus, the above definition can be verified by checking the effect on $A$ on some fixed basis $\beta$.
+
+\section{Integration on Manifolds}
+
+\subsection{Exterior algebra}
+
+We quickly recall some linear algebra. Throughout, $V$ will denote a $k$-dimensional vector space over $\mathbb{R}$ and $p$ is a positive integer.
+
+\begin{enumerate}[leftmargin=*]
+	% \item $V^{p} = \underbrace{V \times \cdots \times V}_{p \text{ times}}$.
+	\item A \deff{$p$-tensor on $V$} is a multilinear function $V^{p} \to \mathbb{R}$.
+	%
+	\item The collection of all $p$-tensors is a vector space, denoted $\T^{p}(V^{\ast})$. \newline
+	Note that $\T^{1}(V^{\ast})$ is simply the dual of $V$, denoted $V^{\ast}$.
+	%
+	\item If $T$ is a $p$-tensor and $S$ a $q$-tensor, then the \deff{tensor product of $T$ with $S$}, denoted $T \otimes S$, is the $(p + q)$-tensor defined by
+	\begin{equation*} 
+		(T \otimes S)(v_{1}, \ldots, v_{p}, v_{p + 1}, \ldots, v_{p + q}) \vcentcolon= T(v_{1}, \ldots, v_{p}) \cdot S(v_{p + 1}, \ldots, v_{p + q}).
+	\end{equation*}
+	%
+	\item Tensor product is associative and distributes over addition. However, it is not commutative in general.
+	%
+	\item If $\{\phi_{1}, \ldots, \phi_{k}\}$ is a basis for $V^{\ast}$, then $\{\phi_{i_{1}} \otimes \cdots \otimes \phi_{i_{p}} : 1 \le i_{1}, \ldots, i_{p} \le k\}$ is a basis for $\T^{p}(V^{\ast})$. Consequently, $\dim(\T^{p}(V^{\ast})) = (\dim(V))^{p}$.
+	%
+	\item For $\sigma \in S_{p}$, we denote the sign of $\sigma$ by $(-1)^{\sigma}$. \newline
+	For a $p$-tensor $T$, define $T^{\sigma}$ to be the tensor given by
+	\begin{equation*} 
+		T^{\sigma}(v_{1}, \ldots, v_{p}) \vcentcolon= T(v_{\sigma(1)}, \ldots, v_{\sigma(p)}).
+	\end{equation*}
+	If $\tau \in S_{p}$ is any permutation, one has $(T^{\sigma})^{\tau} = T^{\tau \circ \sigma}$.
+	%
+	\item A $p$-tensor $T$ is said to be \deff{alternating} if $T^{\pi} = (-1)^{\pi} T$ for all transpositions $\pi \in S_{p}$ (and consequently, for \emph{all} $\pi \in S_{p}$).
+	%
+	\item If $T$ is any $p$-tensor, we define
+	\begin{equation*} 
+		\Alt(T) \vcentcolon= \frac{1}{p!} \sum_{\sigma \in S_{p}} (-1)^{\sigma} T^{\sigma}.
+	\end{equation*}
+	Then, $\Alt(T)$ is an alternating tensor. If $T$ were alternating to begin with, then $\Alt(T) = T$.
+	%
+	\item The alternating $p$-tensors form a vector subspace of $\T^{p}(V^{\ast})$, denoted $\Lambda^{p}(V^{\ast})$. 
+	%
+	\item If $T \in \Lambda^{p}(V^{\ast})$ and $S \in \Lambda^{q}(V^{\ast})$, we define their \deff{wedge product} $T \wedge S \in \Lambda^{p + q}(V^{\ast})$ by
+	\begin{equation*} 
+		T \wedge S \vcentcolon= \Alt(T \otimes S).
+	\end{equation*}
+	Note that the above definition would make sense even if $T$ and $S$ were not alternating. However, we reserve the use of $\wedge$ for alternating tensors.
+	%
+	\item If $T \in \T^{p}(V^{\ast})$ and $S \in \T^{q}(V^{\ast})$ and $\Alt(T) = 0$, then $\Alt(T \otimes S) = 0 = \Alt(S \otimes T)$. 
+	%
+	\item Wedge product is associative. We have
+	\begin{equation*} 
+		(T \wedge S) \wedge R = \Alt(T \otimes S \otimes R) = T \wedge (S \wedge R)
+	\end{equation*}
+	for all alternating tensors $T, S, R$. \newline
+	The wedge product also distributes over addition. \newline
+	The wedge product is \emph{anticommutative}: if $T \in \Lambda^{p}(V^{\ast})$ and $S \in \Lambda^{q}(V^{\ast})$, then
+	\begin{equation*} 
+		T \wedge S = (-1)^{pq} S \wedge T.
+	\end{equation*}
+	In particular, if $p$ is odd, then $T \wedge T = 0$. As a special case, we have $\phi \wedge \phi = 0$ for all $\phi \in V^{\ast}$.
+	%
+	\item If $\{\phi_{1}, \ldots, \phi_{k}\}$ is a basis for $V^{\ast}$, then $\{\phi_{i_{1}} \wedge \cdots \wedge \phi_{i_{p}} : 1 \le i_{1} < \cdots < i_{p} \le k\}$ is a basis for $\T^{p}(V^{\ast})$. Consequently, 
+	\begin{equation*} 
+		\dim(\T^{p}(V^{\ast})) = \binom{k}{p} = \frac{k!}{p! (k - p)!}.
+	\end{equation*}
+	(Here $k = \dim(V)$.)
+	%
+	\item We define $\Lambda^{0}(V^{\ast}) = \mathbb{R}$. The wedge product is extended by defining the product with an element $\lambda \in \mathbb{R}$ as scalar multiplication. The wedge product then makes the direct sum
+	\begin{equation*} 
+		\Lambda(V^{\ast}) = \Lambda^{0}(V^{\ast}) \oplus \Lambda^{1}(V^{\ast}) \oplus \cdots \oplus \Lambda^{k}(V^{\ast})
+	\end{equation*}
+	a noncommutative algebra, called the \deff{exterior algebra of $V^{\ast}$}.
+	%
+	\item Suppose $A : V \to W$ is a linear map. Then, the transpose map $T^{\ast} : W^{\ast} \to V^{\ast}$ extends to the exterior algebras, $A^{\ast} : \Lambda^{p}(W^{\ast}) \to \Lambda^{p}(V^{\ast})$ for all $p \ge 1$ by
+	\begin{equation*} 
+		(A^{\ast}T)(v_{1}, \ldots, v_{p}) \vcentcolon= T(Av_{1}, \ldots, Av_{p})
+	\end{equation*}
+	for $T \in \Lambda^{p}(W^{\ast})$ and $(v_{1}, \ldots, v_{p}) \in V^{p}$. For $p = 0$, we define $A^{\ast}(\lambda) = \lambda$.
+
+	Then, $A^{\ast}$ is linear, $A^{\ast}(T \wedge S) = (A^{\ast} T) \wedge (A^{\ast} S)$, and $A^{\ast}(1) = 1$. Thus, $A^{\ast}$ is an algebra homomorphism. \newline
+	If $B : V \to W$ is another linear map, then $(AB)^{\ast} = B^{\ast} A^\ast$.
+\end{enumerate}
+
+\begin{thm}[Determinant Theorem] \label{thm:determinant-theorem}
+	Let $V$ be a $k$-dimensional vector space.
+
+	If $A : V \to V$ is a linear isomorphism, then $A^{\ast} : \Lambda^{k}(V^{\ast}) \to \Lambda^{k}(V^{\ast})$ is given by multiplication by the scalar $\det(A)$. 
+
+	In particular, if $\phi_{1}, \ldots, \phi_{k} \in \Lambda^{1}(V^{\ast})$, then
+	\begin{equation*} 
+		A^{\ast} \phi_{1} \wedge \cdots \wedge A^{\ast} \phi_{k} = (\det(A)) \phi_{1} \wedge \cdots \wedge \phi_{k}.
+	\end{equation*}
+\end{thm}
+
+\begin{defn}
+	Let $V$ be an oriented $k$-dimensional vector subspace of $\mathbb{R}^{N}$. There is a unique alternating $k$-tensor $T \in \Lambda^{k}(V^{\ast})$ such that $T(v_{1}, \ldots, v_{k}) = 1/k!$ for all positively oriented ordered orthonormal bases $(v_{1}, \ldots, v_{k})$. $T$ is called the \deff{volume element of $V$}.
+\end{defn}
+
+\begin{exe}
+	Show that the volume element is given as follows: Let $\phi_{1}, \ldots, \phi_{k} \in V^{\ast}$ be the (ordered) dual basis corresponding to some positively oriented ordered orthonormal basis for $V$. Then, the volume element is $\phi_{1} \wedge \cdots \wedge \phi_{k}$.
+\end{exe}
+\begin{soln}
+	By solving this exercise, we shall show the existence of a volume element. The uniqueness then follows since $\dim(\Lambda^{k}(V^{\ast})) = 1$.
+
+	Let $(v_{1}, \ldots, v_{k})$ be a positively oriented ordered orthonormal basis (POOOB) for $V$ and $(\phi_{1}, \ldots, \phi_{k})$ denote the dual basis. Let $(w_{1}, \ldots, w_{k})$ be any other POOOB for $V$. Then, there exists an orthogonal linear map $A : V \to V$ such that $Av_{i} = w_{i}$ for all $i$. Furthermore, since $(w_{i})_{i}$ is also positively oriented, we have $\det(A) = 1$. Now, by the \mynameref{thm:determinant-theorem}, we have
+	\begin{align*} 
+		1 \cdot  &= \left[(A^{\ast} \phi_{1}) \wedge \cdots \wedge (A^{\ast} \phi_{k})\right](w_{1}, \ldots, w_{k}) \\
+		&= \Alt(A^{\ast}\phi_{1} \otimes \cdots \otimes A^{\ast}\phi_{k})(w_{1}, \ldots, w_{k}) \\
+		&= \frac{1}{k!} \sum_{\sigma \in S_{k}} (-1)^{\sigma} (A^{\ast}\phi_{1} \otimes \cdots \otimes A^{\ast}\phi_{k})^{\sigma}(w_{1}, \ldots, w_{k}) \\
+		&= \frac{1}{k!} \sum_{\sigma \in S_{k}} (-1)^{\sigma} (A^{\ast}\phi_{1} \otimes \cdots \otimes A^{\ast}\phi_{k})(w_{\sigma(1)}, \ldots, w_{\sigma(k)}) \\
+		&= \frac{1}{k!} \sum_{\sigma \in S_{k}} (-1)^{\sigma} \phi_{1}(Aw_{\sigma(1)}) \cdots \phi_{k}(Aw_{\sigma(k)}).
+	\end{align*}
+	The only nonzero summand is when $\sigma = \id$ for otherwise we have $\sigma(i) \neq i$ for some $i$ and consequently $\phi_{i}(Aw_{\sigma(i)}) = \phi_{i}(v_{\sigma(i)}) = 0$. Thus, we are left with
+	\begin{equation*} 
+		(\phi_{1} \wedge \cdots \wedge \phi_{k})(w_{1}, \ldots, w_{k}) = \frac{1}{k!}. \qedhere
+	\end{equation*}
+\end{soln}
+
+\subsection{Differential forms}
+
+\begin{defn}
+	Let $X$ be a smooth manifold with or without boundary. A \deff{$p$-form on $X$} is a function $\omega$ defined on $X$ such that $\omega(x) \in \Lambda^{p}[T_{x}(X)^{\ast}]$ for all $x \in X$.
+\end{defn}
+Note that there is no condition on $\omega$. For example, $0$-forms on $X$ are \emph{arbitrary} real-valued functions on $X$ (need not even be continuous).
+
+The sum of two $p$-forms is defined pointwise. Similarly, if $\omega$ is a $p$-form and $\theta$ a $q$-form, then their wedge product is defined pointwise and satisfies $\omega \wedge \theta = (-1)^{pq} \theta \wedge \omega$.
+
+\begin{defn}
+	If $\phi : X \to \mathbb{R}$ is a smooth function, then $d\phi_{x} : T_{x}(X) \to \mathbb{R}$ is a linear map at each point $x$. Thus, the assignment $x \mapsto d\phi_{x}$ defines a $1$-form $d\phi$ on $X$, called the \deff{differential of $\phi$}.
+\end{defn}
+
+\begin{ex}
+	Let $x_{1}, \ldots, x_{k} : \mathbb{R}^{k} \to \mathbb{R}$ denote the projection functions. Then, for each $z \in \mathbb{R}^{k}$, we have $T_{z}(\mathbb{R}^{k}) = \mathbb{R}^{k}$ and
+	\begin{equation*} 
+		dx_{i}(z)(a_{1}, \ldots, a_{k}) = a_{i}.
+	\end{equation*}
+	Thus, at each $z \in \mathbb{R}^{k}$, the linear functionals $dx_{1}(z), \ldots, dx_{k}(z)$ just form the standard basis of $(\mathbb{R}^{k})^{\ast}$.
+\end{ex}
+
+For each strictly increasing sequence $I = (i_{1}, \ldots, i_{p})$ of integers, define
+\begin{equation*} 
+	dx_{I} = dx_{i_{1}} \wedge \cdots \wedge dx_{i_{p}}.
+\end{equation*}
+The above is a $p$-form on $\mathbb{R}^{k}$.
+
+\begin{prop}
+	Every $p$-form on an open set $U \opsub \mathbb{R}^{k}$ may be uniquely expressed as a sum $\sum f_{I} dx_{I}$, over increasing index sequences with $f_{I}$ being real-valued functions on $U$.
+\end{prop}
+
+\begin{exe} \label{exe:d-phi-summation-partials}
+	Show that if $\phi$ is a smooth function on $\mathbb{R}^{k}$, then
+	\begin{equation*} 
+		d \phi = \sum \frac{\partial \phi}{\partial x_{i}} dx_{i}.
+	\end{equation*}
+\end{exe}
+\begin{soln}
+	Both elements written above are $p$-forms and we check that they are equal by evaluating them both at an arbitrary $z \in \mathbb{R}^{k}$.
+
+	By definition, we have $d \phi(z) = d\phi_{z}$. Note that $d\phi_{z}$ is a function from $T_{z}(\mathbb{R}^{k})$ to $\mathbb{R}$. Moreover this function is given as follows:
+	\begin{equation*} 
+		d \phi(z)(y_{1}, \ldots, y_{k}) = 
+		\begin{bmatrix}
+			\dfrac{\partial \phi}{\partial x_{1}}(z) & \cdots & \dfrac{\partial \phi}{\partial x_{k}}(z)
+		\end{bmatrix}
+		\begin{bmatrix}
+			y_{1} \\
+			\vdots \\
+			y_{k} \\
+		\end{bmatrix}
+		= \frac{\partial \phi}{\partial x_{1}}(z) y_{1} + \cdots + \frac{\partial \phi}{\partial x_{k}}(z) y_{k}.
+	\end{equation*}
+	On the other hand, we noted that
+	\begin{equation*} 
+		dx_{i}(y_{1}, \ldots, y_{k}) = y_{i}
+	\end{equation*}
+	for all $i$. Thus, we get
+	\begin{equation*} 
+		d \phi(z)(y_{1}, \ldots, y_{k}) = \frac{\partial \phi}{\partial x_{1}}(z) dx_{1}(y_{1}, \ldots, y_{k}) + \cdots + \frac{\partial \phi}{\partial x_{k}}(z) dx_{k}(y_{1}, \ldots, y_{k}),
+	\end{equation*}
+	as desired.
+\end{soln}
+
+\begin{defn}
+	Let $f : X \to Y$ be a smooth map, and $\omega$ a $p$-form on $Y$. The \deff{pullback of $\omega$ by $f$}, denoted $f^{\ast} \omega$, is a $p$-form on $X$ defined by
+	\begin{equation*} 
+		f^{\ast} \omega(x) \vcentcolon= (df_{x})^{\ast} \omega[f(x)].
+	\end{equation*}
+\end{defn}
+Unraveling: Let $x \in X$, and set $y \vcentcolon= f(x)$. Then, we have a linear map $df_{x} : T_{x}(X) \to T_{x}(Y)$. This induces the transpose map $(df_{x})^{\ast} : \Lambda^{p}(T_{x}(Y)) \to \Lambda^{p}(T_{x}(X))$. Since $\omega(y)$ is an element of $\Lambda^{p}(T_{x}(Y))$, the above definition gives us an element of $\Lambda^{p}(T_{x}(X))$, as desired.
+
+\begin{ex}
+	When $\omega$ is a $0$-form, i.e., a function on $Y$, then the pullback $f^{\ast} \omega$ is simply the function $\omega \circ f$.
+\end{ex}
+
+\begin{exe}
+	Prove the following:
+	\begin{enumerate}
+		\item $f^{\ast}(\omega_{1} + \omega_{2}) = f^{\ast}\omega_{1} + f^{\ast}\omega_{2}$,
+		\item $f^{\ast}(\omega \wedge \theta) = (f^{\ast}\omega) \wedge (f^{\ast}\theta)$,
+		\item $(f \circ h)^{\ast} \omega = h^{\ast} f^{\ast} \omega$.
+	\end{enumerate}
+\end{exe}
+
+\begin{ex}
+	Let $U \opsub \mathbb{R}^{k}$ and $V \opsub \mathbb{R}^{l}$, and $f : V \to U$ be smooth. Use $x_{1}, \ldots, x_{k}$ (resp. $y_{1}, \ldots, y_{l}$) for the standard coordinates on $\mathbb{R}^{k}$ (resp. $\mathbb{R}^{l}$). \newline
+	Write $f = (f_{1}, \ldots, f_{k})$. The derivative $df_{y}$ at a point $y \in V$ is represented by the matrix
+	\begin{equation*} 
+		\left[\frac{\partial f_{i}}{\partial y_{j}}(y)\right]_{i, j}.
+	\end{equation*}
+	The transpose $(df_{y})^{\ast}$ on $1$-forms is given by the transpose of the above matrix.
+
+	Consequently, given the $1$-form $dx_{i}$ (where $1 \le i \le k$), we have
+	\begin{equation*} 
+		f^{\ast} dx_{i}(y) = (df_{y})^{\ast} dx_{i}(f(y)).
+	\end{equation*}
+	The above quantity is an element of $\Lambda^{1}(T_{y}(V)) = \Lambda^{1}(\mathbb{R}^{l})$. Given $z = (z_{1}, \ldots, z_{l}) \in \mathbb{R}^{l}$, the right hand side evaluates as
+	\begin{align*} 
+		(df_{y})^{\ast} dx_{i}(f(y))(z) &= dx_{i}(f(y)) (df_{y}(z)).
+	\end{align*}
+	Now, recall that $dx_{i}(f(y))$ is simply the functional that is dual to $x_{i}$. Thus, the above quantity is simply the $i$-th coordinate of $df_{y}(z)$ and is given as
+	\begin{equation*} 
+		\sum_{j = 1}^{l} \frac{\partial f_{i}}{\partial y_{j}}(y) z_{j}.
+	\end{equation*}
+	Note that the $z_{j}$ above can in turn be written as $dy_{j}(y)(z)$. Thus, we have shown
+	\begin{equation*} 
+		f^{\ast} dx_{i}(y)(z) = \sum_{j = 1}^{l} \frac{\partial f_{i}}{\partial y_{j}}(y) dy_{j}(y)(z).
+	\end{equation*}
+	In concise notation, we have
+	\begin{equation*} 
+		f^{\ast} dx_{i} = \sum_{j = 1}^{l} \frac{\partial f_{i}}{\partial y_{j}} dy_{j} = d f_{i}
+	\end{equation*}
+	for all $1 \le i \le k$. (The second equality above is simply \Cref{exe:d-phi-summation-partials}.)
+\end{ex}
 
 \end{document}
