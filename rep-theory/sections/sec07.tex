@@ -18,7 +18,7 @@ Note that there is no unique period associated to a periodic function. Indeed, i
 \end{rem}
 
 \begin{rem}
-    Recall that \Cref{cor:orthnormalbasis} gave us an orthonormal basis of $L(G).$ Since the irreducible representations of $\mathbb{Z}/n\mathbb{Z}$ are all of degree one, we see that the set is simply $\{\chi_k : 0 \le k < n\},$ where $\chi_k([m]) = w_n^{mk}.$
+    Recall that \Cref{cor:orthnormalbasis} gave us an orthonormal basis of $L(G).$ Since the irreducible representations of $\mathbb{Z}/n\mathbb{Z}$ are all of degree one, we see that the set is simply $\{\chi_k : 0 \le k < n\},$ where $\chi_k([m]) = \omega_n^{mk}.$
     
     Thus, for $f \in L(\mathbb{Z}/n\mathbb{Z})$ we get 
     \begin{equation*}
@@ -28,12 +28,12 @@ Note that there is no unique period associated to a periodic function. Indeed, i
 
 \begin{defn} \label{defn:fourierZnZ}
     Let $f : \mathbb{Z}/n\mathbb{Z} \to \mathbb{C}.$ The \deff{Fourier transform} $\mathcal{F}(f) = \widehat{f} : \mathbb{Z}/n\mathbb{Z} \to \mathbb{C}$ of $f$ is defined as
-    \begin{equation*}
+    \begin{equation} \label{eq:013}
         \widehat{f}([m]) = \sum_{k = 0}^{n - 1} f([k])e^{-2\pi\iota mk/n} = \sum_{k = 0}^{n - 1} f([k])\omega_n^{-mk} = n\langle f, \chi_m\rangle.
-    \end{equation*}
+    \end{equation}
 \end{defn}
 
-The last equality follows by the definition of $\langle \cdot , \cdot\rangle$ and the fact that $n \md{\mathbb{Z}/n\mathbb{Z}}.$ Moreover, note that $\mathcal{F} : L(\mathbb{Z}/n\mathbb{Z}) \to L(\mathbb{Z}/n\mathbb{Z})$ is linear since
+The last equality follows by the definition of $\langle \cdot , \cdot\rangle$ and the fact that $n = \md{\mathbb{Z}/n\mathbb{Z}}.$ Moreover, note that $\mathcal{F} : L(\mathbb{Z}/n\mathbb{Z}) \to L(\mathbb{Z}/n\mathbb{Z})$ is linear since
 $\langle \cdot , \cdot\rangle$ is linear in the first variable.
 
 \begin{prop}
@@ -43,14 +43,7 @@ $\langle \cdot , \cdot\rangle$ is linear in the first variable.
     \end{equation*}
 \end{prop}
 \begin{proof}
-    We simply compute $\langle f, \chi_k\rangle$ and show that it equals $\widehat{f}([k])/n.$
-    
-    To this end, note that
-    \begin{align*}
-        \langle f, \chi_k\rangle &= \frac{1}{n} \sum_{j = 0}^{n - 1}f([j])\overline{\chi_k(j)} \\
-        &= \frac{1}{n} \sum_{j = 0}^{n - 1}f([j])e^{-2\pi\iota kj/n} \\
-        &= \frac{1}{n} \widehat{f}([k]). \qedhere
-    \end{align*}
+    Since $\{\chi_{k}\}_{k = 0}^{n - 1}$ is an orthonormal basis, it suffices to prove that $\langle f, \chi_{k}\rangle = \widehat{f}([k])/n$. This follows from \Cref{eq:013}.
 \end{proof}
 
 \subsection{The Convolution Product}

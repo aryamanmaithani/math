@@ -1141,15 +1141,15 @@ In fact, the proof of the proposition is simply giving an algorithm on construct
 	If $\alpha \in \mathbb{Q}$ is an algebraic integer, then $\alpha \in \mathbb{Z}.$ In other words, the rational algebraic integers are precisely the integers.
 \end{prop}
 \begin{proof} 
-	Let $r = p/q \in \mathbb{Q}$ be algebraic with $p \in \mathbb{Z}, q \in \mathbb{N}$ and $\gcd(p, q) = 1.$ Since $r$ is algebraic, there exist $a_0, \ldots, a_{n-1}$ such that
+	Let $\alpha = p/q \in \mathbb{Q}$ be an algebraic integer with $p \in \mathbb{Z}, q \in \mathbb{N}$ and $\gcd(p, q) = 1.$ Since $\alpha$ is an algebraic integer, there exist $a_0, \ldots, a_{n-1}$ such that
 	\begin{equation*} 
-		r^n + a_{n - 1}r^{n - 1} + \cdots + r_0 = 0.
+		\alpha^n + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0.
 	\end{equation*}
 	Multiplying the above with $q^n,$ we get
 	\begin{equation*} 
 		p^n + a_{n - 1}p^{n - 1}q + \cdots + r_0q^n = 0.
 	\end{equation*}
-	Clearly, every term except for the first is divisible by $q.$ Thus, so is the first term. That is, $q \mid p^n.$ Since $\gcd(p, q) = 1$ and $q > 0,$ we get $q = 1.$ Thus, $r = p \in \mathbb{Z},$ as desired.
+	Clearly, every term except for the first is divisible by $q.$ Thus, so is the first term. That is, $q \mid p^n.$ Since $\gcd(p, q) = 1$ and $q > 0,$ we get $q = 1.$ Thus, $\alpha = p \in \mathbb{Z},$ as desired.
 \end{proof}
 
 We would like to show that $\mathbb{A}$ is closed under sums and products. Since $0, 1 \in \mathbb{A}$ and $\mathbb{A}$ is closed under inverses, this would show that $\mathbb{A}$ is a subring of $\mathbb{C}.$ For that, we see an alternate characterisation of elements of $\mathbb{A}.$
@@ -1169,7 +1169,7 @@ We would like to show that $\mathbb{A}$ is closed under sums and products. Since
 			y_t
 		\end{bmatrix}.
 	\end{equation*}
-	In other words, each $yy_i$ is an integral linear combination of the $y_j.$
+	In other words, each $yy_i$ is an integral linear combination of the $y_j.$ In yet other words, $y$ is an eigenvalue of an integer matrix.
 \end{prop}
 \begin{proof} 
 	$(\implies)$ Suppose that $y \in \mathbb{A}.$ Let $y$ be a root of 

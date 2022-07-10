@@ -1020,11 +1020,7 @@ We shall now fix the following notation: $G$ is a finite group and $\left\{\varp
 	\end{align*}
 	as desired. By \Cref{thm:calcequivfromchar}, $L \sim d_1 \varphi^{(1)} \oplus \cdots \oplus d_s \varphi^{(s)}$ follows.
 
-	In turn, \Cref{lem:charactersadd} gives us
-	\begin{equation*} 
-		\chi_L = d_1\chi_1 + \cdots + d_s\chi_s.
-	\end{equation*}
-	Evaluating both sides at $1$ finishes the proof.
+	Comparing degrees now gives the result.
 \end{proof}
 
 \begin{rem} \label{rem:regrepcontainsallreps}
@@ -1179,7 +1175,7 @@ We shall now fix the following notation: $G$ is a finite group and $\left\{\varp
 
 \begin{defn}%[Character table]
 	\label{defn:charactertable}
-	Let $G$ be a finite group with irreducible $\chi_1, \ldots, \chi_s$ and conjugacy classes $C_1, \ldots, C_s.$ The \deff{character table} of $G$ is the $s \times s$ matrix $\mathsf{X}$ with $\mathsf{X}_{ij} = \chi_i(C_j).$ In other words, the rows of $\mathsf{X}$ are indexed by the characters of $G$ and columns by the conjugacy classes; the $(ij)$-th entry of $\mathsf{X}$ denotes the value of the $i$-th character on the $j$-th conjugacy class.
+	Let $G$ be a finite group with irreducible characters $\chi_1, \ldots, \chi_s$ and conjugacy classes $C_1, \ldots, C_s.$ The \deff{character table} of $G$ is the $s \times s$ matrix $\mathsf{X}$ with $\mathsf{X}_{ij} = \chi_i(C_j).$ In other words, the rows of $\mathsf{X}$ are indexed by the characters of $G$ and columns by the conjugacy classes; the $(ij)$-th entry of $\mathsf{X}$ denotes the value of the $i$-th character on the $j$-th conjugacy class.
 \end{defn}
 
 Note that the fact that the above table is square (that is, the number of irreducible characters equals the number of conjugacy classes) is due to \Cref{cor:numirredrepsconjclass}. We had seen an example of the character table of $S_3.$ (Recall \Cref{tab:charS3}.)
@@ -1260,7 +1256,7 @@ Retaining the notation as in \Cref{defn:charactertable}, we get the following th
 \end{proof}
 
 \subsection{Representations of Abelian Groups}
-We now conclude this section with completing our discussion of finite abelian groups. By \Cref{thm:irredabelgroup}, we know that every degree one representation of $G$ has degree one. Moreover, by \Cref{cor:numberofirredrepsofG}, we know that there are $\md{G}$ many such. We now explicitly calculate all of these.
+We now conclude this section with completing our discussion of finite abelian groups. By \Cref{thm:irredabelgroup}, we know that every irreducible representation of $G$ has degree one. Moreover, by \Cref{cor:numberofirredrepsofG}, we know that there are $\md{G}$ many such. We now explicitly calculate all of these.
 
 Note that the structure theorem of finite abelian groups tells us that every such group is a direct product of cyclic groups. Since we already know explicitly these representations (and their character tables) by \Cref{ex:ZnZCstardeg1}, we would get a complete description for all abelian groups.
 

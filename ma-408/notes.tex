@@ -15,6 +15,10 @@
 % Style Package (Load After Cover Information)
 \usepackage{../aryaman}	% Change to match style file
 
+\newcommand{\loc}{L^{1}_{\operatorname{loc}}}
+\DeclareMathOperator{\BV}{BV}
+\DeclareMathOperator{\NBV}{NBV}
+
 % -------------------
 % Content
 % -------------------
@@ -790,6 +794,51 @@ The product measure is almost never complete, even if $\mu$ and $\nu$ are so.
 	\end{equation*}
 \end{thm}
 
+\subsection{Integration in Polar Coordinates}
+
+If $x \in \mathbb{R}^{n} \setminus \{0\}$, the \deff{polar coordinates} of $x$ are
+\begin{equation*} 
+	r \vcentcolon= \|x\| \in (0, \infty), \quad x' \vcentcolon= \frac{x}{r} \in S^{n - 1}.
+\end{equation*}
+The map $\Phi(x) \vcentcolon= (r, x')$ is a homeomorphism from $\mathbb{R}^{n} \setminus \{0\}$ onto $(0, \infty) \times S^{n - 1}$.
+
+$m_{\ast}$ is the Borel measure on $(0, \infty) \times S^{n - 1}$ defined by
+\begin{equation*} 
+	m_{\ast}(E) \vcentcolon= m(\Phi^{-1}(E)).
+\end{equation*}
+We define the measure $\rho = \rho_{n}$ on $(0, \infty)$ by $\rho(E) \vcentcolon= \int_{E} r^{n - 1} \,{\mathrm d} r$.
+
+\begin{thm}
+	There is a unique measure $\sigma = \sigma_{n - 1}$ on $S^{n - 1}$ such that $m_{\ast} = \rho \times \sigma$. If $f$ is Borel measurable on $\mathbb{R}^{n}$ and $f \ge 0$ or $f \in L^{1}(m)$, then
+	\begin{equation*} 
+		\int_{\mathbb{R}^{n}} f(x) \,{\mathrm{d}}x = \int_{0}^{\infty} \int_{S^{n - 1}} f(r x') r^{n - 1} \,{\mathrm{d}}\sigma(x') \,{\mathrm{d}}r.
+	\end{equation*}
+\end{thm}
+
+$\sigma$ above is defined as follows: given a Borel set $E \subset S^{n - 1}$, define $E' = \Phi^{-1}((0, 1] \times E) = \{rx' : 0 < r \le 1, x' \in E\}$, and set $\sigma(E) \vcentcolon= n \cdot m(E')$.
+
+\begin{cor}
+	If $f$ is a measurable function on $\mathbb{R}^{n}$ such that $f \in L^{+} \cup L^{1}$ and $f(x) = g(\|x\|)$ for some function $g$ on $(0, \infty)$, then
+	\begin{equation*} 
+		\int_{\mathbb{R}^{n}} f(x) \,{\mathrm{d}}x = \sigma(S^{n - 1}) \int_{0}^{\infty} g(r) r^{n - 1} \,{\mathrm{d}}r.
+	\end{equation*}
+\end{cor}
+
+\begin{prop}
+	For $a > 0$, we have
+	\begin{equation*} 
+		\int_{\mathbb{R}^{n}}^{} \exp(-a \|x\|^{2}) \,{\mathrm{d}}x = \left(\frac{\pi}{a}\right)^{n/2}.
+	\end{equation*}
+	Moreover,
+	\begin{equation*} 
+		\sigma(S^{n - 1}) = \frac{2 \pi^{n/2}}{\Gamma(n/2)}.
+	\end{equation*}
+	If $B^{n} = \{x \in \mathbb{R}^{n} : \|x\| < 1\}$, then
+	\begin{equation*} 
+		m(B^{n}) = \frac{\pi^{n/2}}{\Gamma\left(\frac{1}{2}n + 1\right)}.
+	\end{equation*}
+\end{prop}
+
 \section{Signed Measures and Differentiation}
 
 \subsection{Signed measures}
@@ -822,7 +871,7 @@ Measures as defined earlier are examples of signed measures. For emphasis, we ma
 	\end{enumerate}
 \end{ex}
 \begin{rem}
-	Note that monotonicity is not a property of a signed measure that takes strictly negative values.
+	Note that monotonicity is not a property of a signed measure. (In fact, monotonicity is a property iff the measure is positive.)
 \end{rem}
 
 \begin{prop}
@@ -863,7 +912,9 @@ The decomposition $X = P \sqcup N$ of $X$ as a disjoint union of a positive set 
 \end{defn}
 
 \begin{thm}[The Jordan Decomposition Theorem]
-	If $\nu$ is a signed measure, there exist unique positive measures $\nu^{+}$ and $\nu^{-}$ such that $\nu = \nu^{+} - \nu^{-}$ and $\nu^{+} \perp \nu^{-}$.
+	If $\nu$ is a signed measure on $(X, \mathcal{M})$, there exist unique positive measures $\nu^{+}$ and $\nu^{-}$ such that $\nu = \nu^{+} - \nu^{-}$ and $\nu^{+} \perp \nu^{-}$.
+
+	Given a Hahn decomposition $X = P \sqcup N$, we have $\nu^{+}(E) = \nu(E \cap P)$ and $\nu^{-}(E) = -\nu(E \cap N)$ for all $E \in \mathcal{M}$.
 \end{thm}
 
 The measures $\nu^{+}$ and $\nu^{-}$ are called the \deff{positive} and \deff{negative variations} of $\nu$, and $\nu = \nu^{+} - \nu^{-}$ is called the \deff{Jordan decomposition} of $\nu$. The \deff{total variation} of $\nu$ is the positive measure $\md{\nu}$ defined by $\md{\nu} = \nu^{+} + \nu^{-}$.
@@ -893,6 +944,15 @@ Integration with respect to a signed measure $\nu$ is defined as follows:
 \end{align*}
 
 A signed measure $\nu$ is called \deff{finite} (resp. \deff{$\sigma$-finite}) if $\md{\nu}$ is so.
+
+\begin{prop}
+	Let $\nu$ be a signed measure on $(X, \mathcal{M})$, and $E \in \mathcal{M}$. Then,
+	\begin{align*} 
+		\nu^{+}(E) &= \sup\{\nu(F) : F \subset E,\, F \in \mathcal{M}\}, \\
+		\nu^{-}(E) &= -\inf\{\nu(F) : F \subset E,\, F \in \mathcal{M}\}, \\
+		\md{\nu}(E) &= \sup\left\{\sum_{j = 1}^{n} \md{\nu(E_{j})} : n \in \mathbb{N},\, E = \bigsqcup_{j = 1}^{n} E_{j},\, E_{1}, \ldots, E_{n} \in \mathcal{M}\right\}.
+	\end{align*}
+\end{prop}
 
 \subsection{The Lebesgue-Radon-Nikodym Theorem}
 
@@ -939,7 +999,7 @@ Note that $\nu \ll \mu$ iff $\md{\nu} \ll \mu$ and hence, the ``$\md{\nu(E)} < \
 \end{exe}
 
 \begin{cor}
-	If $f \in L^{1}(\mu)$, for every $\epsilon > 0$, there exists $\delta > 0$ such that $\md{\int_{E}^{} f \,{\mathrm{d}}\mu} < \epsilon$ whenever $\mu(E) < \delta$.
+	If $f \in L^{1}(\mu)$, for every $\epsilon > 0$, there exists $\delta > 0$ such that $\md{\int_{E} f \,{\mathrm{d}}\mu} < \epsilon$ whenever $\mu(E) < \delta$.
 \end{cor}
 
 \begin{prop}
@@ -1005,4 +1065,285 @@ Note that $\nu$ cannot take infinite values. So, a usual positive measure is a c
 	If $\mu$ is a positive measure, and $f \in L^{1}(\mu)$, then $f \,{\mathrm d}\mu$ is a complex measure.
 \end{ex}
 
-\end{document}	
+If $\nu$ is a complex measure, we write $\nu_{r}$ and $\nu_{i}$ for the real and imaginary parts of $\nu$. $\nu_{r}$ and $\nu_{i}$ are signed measures which do not take the values $\pm \infty$ and hence, finite. Thus, $\nu$ is a bounded subset of $\mathbb{C}$.
+
+Integration: $L^{1}(\nu) \vcentcolon= L^{1}(\nu_{r}) \cap L^{1}(\nu_{i})$, and for $f \in L^{1}(\nu)$, we define
+\begin{equation*} 
+	\int f \,{\mathrm{d}}\nu \vcentcolon= \int f \,{\mathrm{d}}\nu_{r} + \iota \int f \,{\mathrm{d}}\nu_{i}.
+\end{equation*}
+
+If $\nu$ and $\mu$ are complex measures, we say $\nu \perp \mu$ if $\nu_{a} \perp \mu_{b}$ for all $\{a, b\} \subset \{i, r\}$. If $\lambda$ is a positive measure, we say $\nu \ll \lambda$ if $\nu_{r} \ll \lambda$ and $\nu_{i} \ll \lambda$.
+
+\begin{thm}[The Lebesgue-Radon-Nikodym Theorem]
+	If $\nu$ is a complex measure and $\mu$ a $\sigma$-finite positive measure on $(X, \mathcal{M})$, there exist a complex measure $\lambda$ and an $f \in L^{1}(\mu)$ such that $\lambda \perp \mu$ and ${\mathrm d} \nu = {\mathrm d} \lambda + f \, {\mathrm d} \mu$. \newline
+	If also $\lambda' \perp \mu$ and ${\mathrm d} \nu = {\mathrm d} \lambda' + f \, {\mathrm d} \mu$, then $\lambda = \lambda'$ and $f = f'$ $\mu$-a.e.
+\end{thm}
+As before, if $\nu \ll \mu$, we denote $f$ above by ${\mathrm d}\nu/{\mathrm d}\mu$.
+
+Given any complex measure $\nu$, we can write $\nu$ as ${\mathrm d}\nu = f \,{\mathrm d}\mu$ for some positive measure $\mu$ (one candidate is $\mu = \md{\nu_{r}} + \md{\nu_{i}}$). The \deff{total variation} of $\nu$ is the positive measure $\md{\nu}$ determined by 
+\begin{equation*} 
+	{\mathrm d}\md{\nu} = \md{f} \,{\mathrm d}\mu.
+\end{equation*}
+One can check that this $\nu$ is independent of $f$ and $\mu$. Moreover, this coincides with the earlier definition for a (finite) signed measure.
+
+\begin{prop}
+	Let $\nu$ be a complex measure on $(X, \mathcal{M})$.
+	\begin{enumerate}
+		\item $\md{\nu(E)} \le \md{\nu}(E)$ for all $E \in \mathcal{M}$.
+		\item $\nu \ll \md{\nu}$, and ${\mathrm d}\nu/{\mathrm d}\md{\nu}$ has absolute value $1$ $\md{\nu}$-a.e.
+		\item $L^{1}(\nu) = L^{1}(\md{\nu})$, and if $f \in L^{1}(\nu)$, then $\md{\int f \,{\mathrm{d}}\nu} \le \int \md{f} \,{\mathrm{d}}\md{\nu}$.
+	\end{enumerate}
+\end{prop}
+
+\begin{prop}
+	$\md{\nu_{1} + \nu_{2}} \le \md{\nu_{1}} + \md{\nu_{2}}$ for complex measures $\nu_{1}$, $\nu_{2}$ on $(X, \mathcal{M})$.
+\end{prop}
+
+\subsection{Differentiation on Euclidean Space}
+
+In this section, we look at the special case of the Lebesgue measure $m$ on $\mathbb{R}^{n}$. The terms ``integrable'' and ``almost everywhere'' will mean with respect to the Lebesgue measure.
+
+\begin{prop}
+	Let $\mathcal{C}$ be a collection of open balls in $\mathbb{R}^{n}$, and let $U = \bigcup_{B \in \mathcal{C}} B$. If $c < m(U)$, there exist disjoint $B_{1}, \ldots, B_{k} \in \mathcal{C}$ such that $\sum_{j = 1}^{k} m(B_{j}) > 3^{-n} c$.
+\end{prop}
+
+\begin{defn}
+	A measurable function $f : \mathbb{R}^{n} \to \mathbb{C}$ is called \deff{locally integrable} if $\int_{K} \md{f} < \infty$ for every bounded measurable set $K \subset \mathbb{R}^{n}$. (Equivalently, for every compact set $K \subset \mathbb{R}^{n}$.)
+
+	The space of locally integrable functions is denoted by $\loc$. If $f \in \loc$, $x \in \mathbb{R}^{n}$, and $r > 0$, we define $A_{r}f(x)$ by
+	\begin{equation*} 
+		A_{r}f(x) \vcentcolon= \frac{1}{m(B(r, x))} \int_{B(r, x)} f.
+	\end{equation*}
+\end{defn}
+
+\begin{prop}
+	If $f \in \loc$, $A_{r}f(x)$ is jointly continuous in $r$ and $x$ ($r > 0$, $x \in \mathbb{R}^{n}$).
+\end{prop}
+
+\begin{defn}
+	If $f \in \loc$, we define its \deff{Hardy-Littlewood maximal function} $Hf$ by
+	\begin{equation*} 
+		Hf(x) \vcentcolon= \sup_{r > 0} A_{r}\md{f}(x) = \sup_{r > 0} \frac{1}{m(B(r, x))} \int_{B(r, x)} \md{f}.
+	\end{equation*}
+\end{defn}
+$Hf$ is a measurable function.
+
+\begin{thm}
+	Fix $n$. There is a constant $C > 0$ such that for all $f \in L^{1}(\mathbb{R}^{n})$ and all $\alpha > 0$,
+	\begin{equation*} 
+		m(\{x : Hf(x) > \alpha\}) \le \frac{C}{\alpha} \int_{\mathbb{R}^{n}} \md{f}.
+	\end{equation*}
+\end{thm}
+
+\begin{thm}
+	If $f \in \loc$, then $\lim_{r \to 0} A_{r}f(x) = f(x)$ for a.e. $x \in \mathbb{R}^{n}$.
+\end{thm}
+
+\begin{defn}
+	For $f \in \loc$, define the \deff{Lebesgue set} $L_{f}$ of $f$ to be 
+	\begin{equation*} 
+		L_{f} \vcentcolon= \left\{x \in \mathbb{R}^{n} : \lim_{r \to 0} \frac{1}{m(B(r, x))} \int_{B(r, x)} \md{f(x) - f(y)} \,{\mathrm{d}}y\right\}.
+	\end{equation*}
+\end{defn}
+
+\begin{thm}
+	If $f \in \loc$, then $m((L_{f})^{c}) = 0$.
+\end{thm}
+Note that this is a strengthening of the previous theorem.
+
+\begin{defn}
+	A family $(E_{r})_{r > 0}$ of Borel subsets of $\mathbb{R}^{n}$ is said to \deff{shrink nicely} to $x \in \mathbb{R}^{n}$ if
+	\begin{enumerate}
+		\item $E_{r} \subset B(r, x)$ for each $r$;
+		\item there is a constant $\alpha > 0$, independent of $r$, such that $m(E_{r}) > \alpha m(B(x, r))$ for all $r$.
+	\end{enumerate}
+\end{defn}
+Note that $x \in E_{r}$ is not necessary.
+
+\begin{thm}[The Lebesgue Differentiation Theorem]
+	Suppose $f \in \loc$. For every $x \in L_{f}$ -- in particular, for almost every $x$ -- we have
+	\begin{align*} 
+		\lim_{r \to 0} \frac{1}{m(E_{r})} \int_{E_{r}} \md{f(y) - f(x)} \,{\mathrm{d}}y &= 0 \andd \\
+		\lim_{r \to 0} \frac{1}{m(E_{r})} \int_{E_{r}} f &= f(x)
+	\end{align*}
+	for every family $(E_{r})_{r > 0}$ that shrinks nicely to $x$.
+\end{thm}
+
+\begin{defn}
+	A Borel measure $\nu$ on $\mathbb{R}^{n}$ will be called \deff{regular} if
+	\begin{enumerate}
+		\item $\nu(K) < \infty$ for every compact $K$;
+		\item $\nu(E) = \inf\{\nu(U) : U \supset E,\, U \text{ open}\}$ for every $E \in \mathcal{B}(\mathbb{R}^{n})$.
+	\end{enumerate}
+	A signed or complex Borel measure $\nu$ will be called \deff{regular} if $\md{\nu}$ is regular.
+\end{defn}
+The second condition is actually implied by the first. For $n = 1$, this follows from results in the first section.
+
+Every regular measure is $\sigma$-finite. 
+
+\begin{ex}
+	If $f \in L^{+}(\mathbb{R}^{n})$, the measure $f \,{\mathrm d}m$ is regular iff $f \in \loc$.
+\end{ex}
+
+\begin{thm}
+	Let $\nu$ be a regular signed or complex Borel measure on $\mathbb{R}^{n}$, and let ${\mathrm d}\nu = {\mathrm d}\lambda + f \, {\mathrm d}m$ be its Lebesgue-Radon-Nikodym representation. Then, for $m$-almost every $x \in \mathbb{R}^{n}$,
+	\begin{equation*} 
+		\lim_{r \to 0} \frac{\nu(E_{r})}{m(E_{r})} = f(x)
+	\end{equation*}
+	for every family $(E_{r})_{r > 0}$ that shrinks nicely to $x$.
+\end{thm}
+
+\subsection{Functions of Bounded Variation}
+
+\textbf{Notations}: For a function $F : \mathbb{R} \to \mathbb{R}$, $F(x+)$ denotes the right limit $\lim_{y \to x^{+}} F(y)$. (This will exist, for example, when $F$ is increasing.) $F(x-)$ is defined similarly. \newline
+If $F$ is increasing and right-continuous, $\mu_{F}$ is the Borel measure on $\mathbb{R}$ determined by $\mu_{F}((a, b]) = F(b) - F(a)$.
+
+\begin{thm}
+	Let $F : \mathbb{R} \to \mathbb{R}$ be increasing, and let $G(x) = F(x+)$. 
+	\begin{enumerate}
+		\item The set of discontinuities of $F$ is countable.
+		\item $F$ and $G$ are differentiable a.e., and $F' = G'$ a.e.
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}
+	If $F : \mathbb{R} \to \mathbb{C}$ and $x \in \mathbb{R}$, we define
+	\begin{equation*} 
+		T_{F}(x) \vcentcolon= \sup \left\{\sum_{j = 1}^{n} \md{F(x_{j}) - F(x_{j - 1})} : n \in \mathbb{N},\, -\infty < x_{0} < \cdots < x_{n} = x\right\}.
+	\end{equation*}
+	$T_{F}$ is called the \deff{total variation} of $F$.
+\end{defn}
+
+If $a < b$, we have
+\begin{equation} \label{eq:005}
+	T_{F}(b) - T_{F}(a) = \sup\left\{\sum_{j = 1}^{n} \md{F(x_{j}) - F(x_{j - 1})} : n \in \mathbb{N},\, a = x_{0} < \cdots < x_{n} = b\right\}.
+\end{equation}
+
+$T_{F}$ is an increasing function with values in $[0, \infty]$. 
+
+\begin{defn}
+	If $T_{F}(\infty) = \lim_{x \to \infty} T_{F}(x)$ is finite, we say that $F$ is of \deff{bounded variation} on $\mathbb{R}$, and we denote the space of all such $F$ by $\BV$.
+\end{defn}
+
+$\BV$ forms a complex vector space.
+
+The supremum on the right in \Cref{eq:005} is called the \deff{total variation} of $F$ on $[a, b]$. The space of functions $F : [a, b] \to \mathbb{C}$ whose total variation on $[a, b]$ is finite is denoted $\BV([a, b])$.
+
+\begin{rem}
+	If $F \in \BV$, then $F|[a, b]$ is in $\BV([a, b])$ for all $a, b \in \mathbb{R}$ with $a < b$.
+
+	Conversely, if $F \in \BV([a, b])$ and we set $F(x) = F(a)$ for $x < a$ and $F(x) = F(b)$ for $x > b$, then $F \in \BV$.
+\end{rem}
+\begin{ex}
+	\begin{enumerate}
+		\item If $F : \mathbb{R} \to \mathbb{R}$ is bounded and increasing, then $F \in \BV$.
+		\item $\sin \in \BV([a, b])$ for all reals $a < b$ but $\sin \notin \BV$.
+		\item If $F$ is differentiable and $F'$ is bounded, then $F \in \BV([a, b])$ for all reals $a < b$.
+		\item 
+	\end{enumerate}
+\end{ex}
+
+\begin{prop}
+	If $F \in \BV$ is real-valued, then $T_{F} + F$ and $T_{F} - F$ are increasing.
+\end{prop}
+
+\begin{thm}
+	Let $F : \mathbb{R} \to \mathbb{C}$.
+	\begin{enumerate}
+		\item $F \in \BV$ iff $\Re(F) \in \BV$ and $\Im(F) \in \BV$.
+		\item If $F$ is real valued, then $F \in \BV$ iff $F$ is the difference of two bounded increasing functions; for $F \in \BV$, these functions may be taken to be $\frac{1}{2}(T_{F} \pm F)$.
+		\item If $F \in \BV$, then $F(x+)$ and $F(x-)$ exist for all $x \in \mathbb{R}$, as do $F(\pm \infty)$.
+		\item If $F \in \BV$, the set of discontinuities of $F$ is countable.
+		\item If $F \in \BV$ and $G(x) \vcentcolon= F(x+)$, then $F'$ and $G'$ exist a.e. and are equal a.e.
+	\end{enumerate}
+\end{thm}
+
+The representation
+\begin{equation*} 
+	F = \frac{1}{2}(T_{F} + F) - \frac{1}{2}(T_{F} - F)
+\end{equation*}
+of a real-valued $F \in \BV$ is called a \deff{Jordan decomposition} of $F$, and $\frac{1}{2}(T_{F} + F)$ and $\frac{1}{2}(T_{F} - F)$ are called the \deff{positive} and \deff{negative variations} of $F$. 
+
+For $x \in \mathbb{R}$, define $x^{+} \vcentcolon= \max(x, 0) = \frac{1}{2}(\md{x} + x)$ and $x^{-} \vcentcolon= \max(-x, 0) = \frac{1}{2}(\md{x} - x)$. We then have
+\begin{equation*} 
+	\frac{1}{2}(T_{F} \pm F)(x) = \sup\left\{\sum_{j = 1}^{n} \left[F(x_{j}) - F(x_{j - 1})\right]^{\pm} : n \in \mathbb{N},\, x_{0} < \cdots < x_{n} = x \right\} \pm \frac{1}{2} F(-\infty).
+\end{equation*}
+
+We define the space $\NBV$ (N for ``normalised''):
+\begin{equation*} 
+	\NBV \vcentcolon= \{F \in \BV : F \text{ is right-continuous and } F(-\infty) = 0\} \subset \BV.
+\end{equation*}
+
+If $F \in \BV$, then the function defined by $G(x) \vcentcolon= F(x+) - F(-\infty)$ is in $\NBV$ and $F' = G'$ a.e.
+
+\begin{prop}
+	If $F \in \BV$, then $T_{F}(-\infty) = 0$. If $F$ is also right-continuous, then so is $T_{F}$.
+\end{prop}
+
+\begin{thm}
+	If $\mu$ is a complex Borel measure on $\mathbb{R}$ and $F(x) \vcentcolon= \mu((-\infty, x])$, then $F \in \NBV$. \newline
+	Conversely, if $F \in \NBV$, then there is a unique complex Borel measure $\mu_{F}$ such that $F(x) = \mu_{F}((-\infty, x])$; moreover, $\md{\mu_{F}} = \mu_{T_{F}}$.
+\end{thm}
+
+\begin{prop}
+	If $F \in \NBV$, then $F' \in L^{1}(m)$.
+	\begin{enumerate}
+		\item $\mu_{F} \perp m$ iff $F' = 0$ a.e.
+		\item $\mu_{F} \ll m$ iff $F$ is absolutely continuous iff $F(x) = \int_{-\infty}^{x} F'(t) \,{\mathrm{d}}t$.
+	\end{enumerate}
+	If $f \in L^{1}(m)$, then the function $F(x) \vcentcolon= \int_{-\infty}^{x} f(t) \,{\mathrm{d}}t$ is in $\NBV$ and is absolutely continuous, and $f = F'$ a.e. 
+\end{prop}
+
+Recall that $F : \mathbb{R} \to \mathbb{C}$ is \deff{absolutely continuous} if for every $\epsilon > 0$, there exists $\delta > 0$ such that for any finite set of disjoint intervals $(a_{1}, b_{1}), \ldots, (a_{N}, b_{N})$,
+\begin{equation*} 
+	\sum_{j} (b_{j} - a_{j}) < \delta \Rightarrow \sum_{j} \md{F(b_{j}) - F(a_{j})} < \epsilon.
+\end{equation*}
+More generally, $F$ is said to be absolutely continuous on $[a, b]$ if this condition is satisfied whenever $(a_{j}, b_{j})$ all lie in $[a, b]$.
+
+If $F$ is differentiable on $\mathbb{R}$ and $F'$ is bounded, then $F$ is absolutely continuous.
+
+For the following results, $a$ and $b$ are reals with $a < b$.
+
+\begin{prop}
+	If $F$ is absolutely continuous on $[a, b]$, then $F \in \BV([a, b])$.
+\end{prop}
+
+\begin{thm}[The Fundamental Theorem of Calculus for Lebesgue Integrals]
+	For $F : [a, b] \to \mathbb{C}$, the following are equivalent:
+	\begin{enumerate}
+		\item $F$ is absolutely continuous on $[a, b]$.
+		\item $F(x) - F(a) = \int_{x}^{a} f(t) \,{\mathrm{d}}t$ for some $f \in L^{1}([a, b], m)$.
+		\item $F$ is differentiable a.e. on $[a, b]$, $F' \in L^{1}([a, b], m)$, and $F(x) - F(a) = \int_{x}^{a} F'(t) \,{\mathrm{d}}t$.
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}
+	A complex measure $\mu$ on $\mathbb{R}^{n}$ is called \deff{discrete} if there is a countable set $\{x_{j}\}_{j \ge 1} \subset \mathbb{R}^{n}$ and complex numbers $(c_{j})_{j \ge 1}$ such that $\sum \md{c_{j}} < \infty$ and $\mu = \sum_{j} c_{j} \delta_{x_{j}}$, where $\delta_{x}$ is the point mass at $x$.
+
+	$\mu$ is called \deff{continuous} if $\mu(\{x\}) = 0$ for all $x \in \mathbb{R}^{n}$.
+\end{defn}
+
+Any complex measure $\mu$ can be uniquely written as $\mu = \mu_{d} + \mu_{c}$ where $\mu_{d}$ is discrete and $\mu_{c}$ continuous. \newline
+$\mu$ is discrete $\Rightarrow$ $\mu \perp m$. \newline
+$\mu \ll m$ $\Rightarrow$ $\mu$ is continuous.
+
+Any (regular) complex Borel measure on $\mathbb{R}^{n}$ can be written uniquely as
+\begin{equation*} 
+	\mu_{d} + \mu_{ac} + \mu_{sc},
+\end{equation*}
+where $\mu_{d}$ is discrete, $\mu_{ac}$ is absolutely continuous with respect to $m$, and $\mu_{sc}$ is a ``singular continuous'' measure, that is, $\mu_{sc}$ is continuous but $\mu_{sc} \perp m$.
+
+If $F \in \NBV$, we denote the integral of a function $g$ with respect to $\mu_{F}$by $\int g \,{\mathrm d} F$ or $\int g(x) \,{\mathrm d}F(x)$; such integrals are \deff{Lebesgue-Stieltjes integrals}.
+
+\begin{thm}
+	If $F$ and $G$ are in $\NBV$ and at least one of them is continuous, then for $-\infty < a < b < \infty$,
+	\begin{equation*} 
+		\int_{(a, b]} F \,{\mathrm{d}}G + \int_{(a, b]} G \,{\mathrm{d}}F = F(b) G(b) - F(a) G(a).
+	\end{equation*}
+	If $F$ and $G$ are absolutely continuous on $[a, b]$, then so is $FG$, and
+	\begin{equation*} 
+		\int_{a}^{b} (FG' + G'F) = F(b) G(b) - F(a) G(a).
+	\end{equation*}
+\end{thm}
+
+\end{document}
