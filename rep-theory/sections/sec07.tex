@@ -175,7 +175,7 @@ Note that $\widehat{f}$ is a function $\widehat{f} : \widehat{G} \to \mathbb{C}.
 \begin{rem}
     Recall we had constructed an isomorphism $\mathbb{Z}/n\mathbb{Z} \cong \widehat{\mathbb{Z}/n\mathbb{Z}}$ in \Cref{prop:ZnZconghatZnZ}. The isomorphism was given as $[k] \leftrightarrow \chi_k,$ where $\chi_k \in \widehat{\mathbb{Z}/n\mathbb{Z}},$ as before is
     \begin{equation*} 
-        \chi_k([m]) = w_n^{mk}.
+        \chi_k([m]) = \omega_n^{mk}.
     \end{equation*}
 
     Under this identification, we see that the Fourier transform defined above agrees with the one in \Cref{defn:fourierZnZ}.
@@ -417,7 +417,7 @@ We now also wish $\mathcal{F}$ to be an isomorphism of rings. However, for this 
             0 & x \notin S. 
         \end{cases}
     \end{equation*} 
-    Consider the matrix $A = (a_{ij})$ given by $a_{ij} = f([j] - [i]).$ Then, note that 
+    Consider the matrix $A = (a_{ij})$ given by $a_{ij} = \delta_{S}([j] - [i]).$ Then, note that 
     \begin{equation*} 
         a_{ij} = 1 \iff [j] - [i] \in S \iff \{[i], [j]\} \in E,
     \end{equation*}
@@ -457,7 +457,7 @@ We now also wish $\mathcal{F}$ to be an isomorphism of rings. However, for this 
     \end{equation*}
     and hence, $\chi$ is an eigenvector with eigenvalue $\widehat{a}(\chi).$
 
-    Note that the irreducible characters of $G$ form a basis of $Z(L(G)),$ by \Cref{thm:onbforzlg}. Since $G$ is abelian, the irreducible characters are precisely the elements of $\widehat{G}$ and $Z(L(G)) = L(G).$ Thus, we see that $\widehat{G}$ forms a basis of $L(G)$ and have just shown that all these elements are eigenvectors of $A.$ Thus, $\widehat{G}$ is an eigenbasis of $L(G)$ corresponding and $A$ is diagonalisable.
+    Note that the irreducible characters of $G$ form a basis of $Z(L(G)),$ by \Cref{thm:onbforzlg}. Since $G$ is abelian, the irreducible characters are precisely the elements of $\widehat{G}$ and $Z(L(G)) = L(G).$ Thus, we see that $\widehat{G}$ forms a basis of $L(G)$ and have just shown that all these elements are eigenvectors of $A.$ Thus, $\widehat{G}$ is an eigenbasis of $L(G)$ corresponding to $A$ and hence, $A$ is diagonalisable.
 \end{proof}
 
 \begin{thm} \label{thm:adjcayleyeigen}
@@ -482,6 +482,8 @@ We now also wish $\mathcal{F}$ to be an isomorphism of rings. However, for this 
     \begin{equation*} 
         F(b) = \delta_S * b.
     \end{equation*}
+    We shall eventually show that $A$ is the matrix representation of $F$ (with respect to some ordered basis). We first prove the result for $F$.
+
     Then, by \Cref{lem:convolvediagonal}, $F$ has eigenvectors $\chi_i$ with corresponding eigenvalue
     \[\begin{WithArrows}[displaystyle]
         \widehat{\delta_S}(\chi_i) = n\langle \delta_S, \chi_i\rangle &= \sum_{x \in G} \delta_S(x)\overline{\chi_i(x)}\\
@@ -490,12 +492,12 @@ We now also wish $\mathcal{F}$ to be an isomorphism of rings. However, for this 
         &= \sum_{y \in S} \chi_i(y)\\
         &= \lambda_i.
     \end{WithArrows}\]
-    This proves that $\lambda_i$ is an eigenvalue for each $1 \le i \le n.$ (Note that $\lambda_i \in \mathbb{R}$ follows since $A$ is symmetric.\footnote{Alternately, one can note that that sum in the definition of $\lambda_i$ is real. Indeed, if $s = s^{-1}$, then $\chi(s) = \chi(s^{-1}) = \overline{\chi(s)} \in \mathbb{R}.$ On the other hand, if $s \neq s^{-1},$ then pairing up $\chi(s)$ and $\chi(s^{-1})$ in the sum gives $\chi(s) + \chi(s^{-1}) = \chi(s) + \overline{\chi(s)} \in \mathbb{R}.$})
+    This proves that $\lambda_i$ is an eigenvalue for each $1 \le i \le n.$ (Note that $\lambda_i \in \mathbb{R}$ will eventually follow since $A$ is symmetric.\footnote{Alternately, one can note that that sum in the definition of $\lambda_i$ is real. Indeed, if $s = s^{-1}$, then $\chi(s) = \chi(s^{-1}) = \overline{\chi(s)} \in \mathbb{R}.$ On the other hand, if $s \neq s^{-1},$ then pairing up $\chi(s)$ and $\chi(s^{-1})$ in the sum gives $\chi(s) + \chi(s^{-1}) = \chi(s) + \overline{\chi(s)} \in \mathbb{R}.$})
 
     Consider the ordered basis $B = (\delta_{g_1}, \ldots, \delta_{g_n})$ for $L(G).$ Let $[F]_B$ denote the matrix of $F$ with respect to this ordered basis. Note that the coordinate vector of $\chi_i$ with respect to $B$ is precisely $\sqrt{\md{G}}v_i.$ The above shows that it is an eigenvector with eigenvalue $\lambda_i.$ The orthogonality of $v_i$ follows from \Cref{thm:secondorthorel}. (Note that the conjugacy classes are singletons since $G$ is abelian.) \\
     Lastly, the orthonormality follows from noting that
     \begin{equation*} 
-        \|v_i\|^2 = \frac{1}{G}\left(\md{\chi_i(g_1)}^2 + \cdots + \md{\chi_i(g_n)}^2\right) = \|\chi_i\|^2 = 1.
+        \|v_i\|^2 = \frac{1}{\md{G}}\left(\md{\chi_i(g_1)}^2 + \cdots + \md{\chi_i(g_n)}^2\right) = \|\chi_i\|^2 = 1.
     \end{equation*}
     Thus, to complete the proof, it suffices to show that $A = [F]_B.$
 
@@ -642,7 +644,7 @@ Note that $M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})$ is a ri
     The Fourier transform $\mathcal{F} : L(G) \to M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C})$ is an isomorphism of rings.
 \end{thm}
 \begin{proof} 
-    All that is required to be proven is that $T(f * g) = Tf \cdot Tg,$ where the latter product is in the ring $M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C}).$ Let $a, b \in L(G).$
+    All that is required to be proven is that $\mathcal{F}(f * g) = \mathcal{F}(f) \cdot \mathcal{F}(g),$ where the latter product is in the ring $M_{d_1}(\mathbb{C}) \times \cdots \times M_{d_s}(\mathbb{C}).$ Let $a, b \in L(G).$
 
     Since the latter product is coordinate-wise, it suffices to show that
     \begin{equation*} 
