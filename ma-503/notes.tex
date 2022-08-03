@@ -1,0 +1,678 @@
+\documentclass[12pt]{article}	% Always compile at least twice.
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+% \usepackage{pdfpages}
+
+% Cover Information	
+\def\univname{}
+\def\coursenum{MA 503}
+\def\coursename{Functional Analysis}
+\def\professor{}
+\def\student{Aryaman Maithani}
+\def\semesteryear{Autumn 2021-22}
+\def\imagename{../icon.pdf}
+\def\scalesize{2}					% Scale Logo Size 
+
+% Style Package (Load After Cover Information)
+\usepackage{../aryaman}	% Change to match style file
+\newcommand{\weak}{\rightharpoonup}
+\newcommand{\weaks}{\overset{\ast}{\weak}}
+
+% -------------------
+% Content
+% -------------------
+\begin{document}
+
+
+% Cover Page
+\coverpage
+
+% Last Updated
+\updated{\today}
+
+% Table of Contents
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\setcounter{page}{1}
+
+\section{Definitions} 
+
+\subsection{Banach spaces}
+
+$\mathbb{F}$ will either be $\mathbb{R}$ or $\mathbb{C}$ throughout, with the usual Euclidean topology. All vector spaces considered will be over $\mathbb{F}$.
+
+\begin{defn}
+ 	A \deff{topological vector space} $V$ is a vector space with a topology such that
+ 	\begin{enumerate}
+ 		\item $V$ is Hausdorff;
+ 		\item the map $(v, w) \mapsto v + w$ is continuous;
+ 		\item the map $(\alpha, v) \mapsto \alpha v$ is continuous.
+ 	\end{enumerate}
+\end{defn} 
+
+\begin{defn}
+	A \deff{norm} on a vector space $V$ is a function $\|\cdot\| : V \to [0, \infty)$ such that
+	\begin{enumerate}
+		\item $\|x\| = 0$ iff $x = \mathbf{0}$;
+		\item $\|\alpha x\| = \md{\alpha} \|x\|$ for all $(\alpha, x) \in \mathbb{F} \times V$;
+		\item (\deff{Triangle Inequality}) $\|x + y\| \le \|x\| + \|y\|$ for every $x, y \in V$.
+	\end{enumerate}
+	The pair $(V, \|\cdot\|)$ is called a \deff{normed linear space (NLS)}.
+\end{defn}
+
+\begin{prop}[Reverse Triangle Inequality]
+	Let $V$ be an NLS. $\md{\|x\| - \|y\|} \le \|x - y\|$ for all $x, y \in V$.
+\end{prop}
+
+The norm induces a metric on $V$ defined by $(x, y) \mapsto d(x, y)$. This gives $V$ a topology. Check that this also makes $V$ a topological vector space, and that the norm map is continuous. Since this $V$ is a metric space, it makes sense to talk about completeness.
+
+\begin{defn}
+	A normed linear space is said to be a \deff{Banach space} if it is complete.
+\end{defn}
+
+\begin{defn}
+	A Banach algebra $A$ is an (associative unital) $\mathbb{F}$-algebra that is also a Banach space satisfying 
+	\begin{enumerate}
+		\item $\|xy\| \le \|x\| \|y\|$ for all $x, y \in A$;
+		\item $\|\mathbf{1}\| = 1$.
+	\end{enumerate}
+\end{defn}
+The first condition ensures that the multiplication map is continuous.
+
+\begin{defn}
+	For $p \in [1, \infty]$, we define $p^{\ast} \in [1, \infty]$ to be the unique number satisfying
+	\begin{equation*} 
+		\frac{1}{p} + \frac{1}{p^{\ast}} = 1.
+	\end{equation*}
+	$p^{\ast}$ is called the \deff{conjugate exponent} to $p$.
+\end{defn}
+
+\subsection{Continuous Linear Transformations}
+
+\begin{defn}
+	Let $V$ and $W$ be normed linear spaces. 
+
+	A linear map $T : V \to W$ is said to be \deff{continuous} if $T$ is continuous with respect to the norm topologies on $V$ and $W$. The space of all continuous functions from $V$ to $W$ is denoted by $\mathcal{L}(V, W)$. We also define $\mathcal{L}(V) \vcentcolon= \mathcal{L}(V, V)$. This is an $\mathbb{F}$-algebra.
+
+	$T$ is said to be \deff{bounded} if there exists $C \ge 0$ such that $\|Tx\|_{W} \le C \|x\|_{V}$ for all $x \in V$. 
+\end{defn}
+
+\begin{defn}
+	$T \in \mathcal{L}(V, W)$ is said to be an \deff{isomorphism} if there exists $S \in \mathcal{L}(W, V)$ such that $T \circ S$ and $S \circ T$ are the appropriate identity maps.
+\end{defn}
+Equivalently: $T$ is bijective, linear, continuous with $T^{-1}$ also continuous.
+
+\begin{defn}
+	Two norms $\|\cdot\|_{1}$ and $\|\cdot\|_{2}$ on a vector space $V$ are said to be equivalent if either of two equivalent conditions holds:
+	\begin{enumerate}
+		\item both induce the same topology (the identity map is a homeomorphism, interpreted correctly);
+		\item there exist constants $c, C > 0$ such that for all $x \in V$, we have
+		\begin{equation*} 
+			c \|x\|_{1} \le \|x\|_{2} \le C \|x\|_{1}.
+		\end{equation*}
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}
+	Let $V$ and $W$ be NLS, and $T : V \to W$ be a continuous linear transform. Let $B$ be the closed unit ball in $V$. The \deff{norm} of $T$, denoted $\|T\|$, is given by
+	\begin{equation*} 
+		\|T\| \vcentcolon= \sup_{x \in B} \|T x\|_{W}.
+	\end{equation*}
+\end{defn}
+This makes $\mathcal{L}(V, W)$ into a normed linear space.
+
+\begin{defn}
+	Let $V$ be a normed linear space. The \deff{dual space} of $V$ is defined by
+	\begin{equation*} 
+		V^{\ast} \vcentcolon= \mathcal{L}(V, \mathbb{F}).
+	\end{equation*}
+\end{defn}
+Note that $V^{\ast}$ is a Banach space since $\mathbb{F}$ is so.
+
+\subsection{Hahn-Banach theorems}
+
+\begin{defn}
+	Let $V$ be a vector space over $\mathbb{F}$. A \deff{sublinear functional} is a map $p : V \to \mathbb{R}$ such that
+	\begin{enumerate}
+		\item $p(\alpha x) = \alpha p(x)$ for all $\alpha \in (0, \infty)$ and all $x \in V$ \newline
+		(this condition holds iff $p(\alpha x) \le \alpha p(x)$ for all $\alpha > 0$ and all $x \in V$);
+		\item $p(x + y) \le p(x) + p(y)$ for all $x, y \in V$.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}
+	Let $V$ be an NLS, and $x \in V$. Define $J_{x} : V^{\ast} \to \mathbb{R}$ by
+	\begin{equation*} 
+		J_{x}(f) \vcentcolon= f(x).
+	\end{equation*}
+	It follows that $J_{x} \in (V^{\ast})^{\ast} = V^{\ast \ast}$. (In fact, $\|J_{x}\|_{V^{\ast \ast}} = \|x\|_{V}$.)
+
+	Define $J : V \to V^{\ast \ast}$ by $x \mapsto J_{x}$. This is an isometry.
+
+	A Banach space $V$ is said to be reflexive if the canonical embedding $J : V \to V^{\ast \ast}$ is surjective.
+\end{defn}
+Since $V$ is a Banach space, $J$ above being surjective is equivalent to $J$ being an isomorphism.
+
+\subsection{Baire's Theorem and Applications}
+
+\begin{defn}
+	A subset of a metric space is a \deff{$G_{\delta}$ set} if is a countable intersection of open sets.
+\end{defn}
+
+\begin{defn}
+	Let $f : X \to Y$ be a function. The \deff{graph} of $f$, denoted $G(f)$, is defined as
+	\begin{equation*} 
+		G(f) \vcentcolon= \{(x, f(x)) : x \in X\} \subset X \times Y.
+	\end{equation*}
+\end{defn}
+If $X$ and $Y$ are topological spaces, $f$ is continuous, and $Y$ is Hausdorff, then $G(f)$ is closed in the product space $X \times Y$.
+
+\subsection{Weak and Weak* Topologies}
+
+\begin{defn}
+	Let $V$ be an NLS. The \deff{weak topology} on $V$ is the coarsest (smallest) such that every element of $V^{\ast}$ is continuous.
+
+	If $(x_{n})_{n}$ converges to $x$ in the weak topology, we write this as $x_{n} \weak x$.
+\end{defn}
+Note that this is coarser than the norm topology since every element of $V^{\ast}$ \emph{is} (by definition) continuous in the norm topology.
+
+\begin{defn}
+	Let $X$ be a topological space and $f : X \to \mathbb{R}$ a function. $f$ is \deff{lower semi-continuous} if
+	\begin{equation*} 
+		f^{-1}[(-\infty, \alpha]] = \{x \in X : f(x) \le \alpha\}
+	\end{equation*}
+	is closed in $X$, for every $\alpha \in \mathbb{R}$.
+\end{defn}
+
+\begin{defn}
+	Let $V$ and $W$ be NLS, and let $T : V \to W$ be a linear mapping. $T$ is said to be \deff{weakly continuous} if $T$ is continuous as a mapping from $V$ to $W$, each space being endowed with its weak topology.
+\end{defn}
+
+\begin{defn}
+	Let $V$ be a Banach space. The \deff{weak* topology} on $V^{\ast}$ is the coarsest (smallest) topology such that the functionals $\{J_{x} : x \in V\}$ are all continuous.
+
+	If $(x_{n})_{n}$ converges to $x$ in the weak* topology, we write this as $x_{n} \weaks x$.
+\end{defn}
+Note that $V^{\ast}$ is a Banach space in its own right and has a weak topology $\mathcal{W}$ and norm topology $\mathcal{S}$. Let $\mathcal{W}^{\ast}$ denote the weak* topology on $V^{\ast}$. Then, we have
+\begin{equation*} 
+	\mathcal{W}^{\ast} \subset \mathcal{W} \subset \mathcal{S}.
+\end{equation*}
+
+If $V$ is reflexive, then $\mathcal{W}^{\ast} = \mathcal{W}$.
+
+\section{Examples}
+
+\subsection{Banach spaces}
+
+\begin{defn}
+	Let $p \in [1, \infty)$. For $x = (x_{1}, \ldots, x_{N}) \in \mathbb{R}^{N}$, we define
+	\begin{equation*} 
+		\|x\|_{p} \vcentcolon= \left(\sum_{i = 1}^{N} \md{x_{i}}^{p}\right)^{1/p}.
+	\end{equation*}
+
+	For $p = \infty$, define
+	\begin{equation*} 
+		\|x\|_{\infty} \vcentcolon= \max_{1 \le i \le N} \md{x_{i}}.
+	\end{equation*}
+
+	$\|\cdot\|_{p}$ is a norm on $\mathbb{R}^{N}$. The pair $(\mathbb{R}^{N}, \|\cdot\|_{p})$ will be denoted by $\ell_{p}^{N}$. 
+\end{defn}
+
+\begin{defn}
+	$\mathbb{F}^{\mathbb{N}}$ denotes the vector space of all $\mathbb{F}$-sequences. An element of $\mathbb{F}^{N}$ is written as $x = (x_{n})_{n}$ or $(x_{n})_{n \ge 1}$.
+
+	For $p \in [1, \infty)$, we define the space
+	\begin{equation*} 
+		\ell_{p} \vcentcolon= \left\{x \in \mathbb{F}^{\mathbb{N}} : \sum_{i = 1}^{\infty} \md{x_{i}}^{p} < \infty \right\}.
+	\end{equation*}
+	For $x \in \ell_{p}$, we define
+	\begin{equation*} 
+		\|x\|_{p} \vcentcolon= \left(\sum_{i = 1}^{\infty} \md{x_{i}}^{p}\right)^{1/p}.
+	\end{equation*}
+
+	For $p = \infty$, we define
+	\begin{equation*} 
+		\ell_{\infty} \vcentcolon= \left\{x \in \mathbb{F}^{\mathbb{N}} : \sup_{i} \md{x_{i}} < \infty \right\}.
+	\end{equation*}
+	For $x \in \ell_{\infty}$, we define
+	\begin{equation*} 
+		\|x\|_{\infty} \vcentcolon= \sup_{i} \md{x_{i}}.
+	\end{equation*}
+\end{defn}
+
+$\ell_{p}^{N}$ and $\ell_{p}$ are Banach spaces for all $p \in [1, \infty]$ and all $N \ge 1$.
+
+\begin{defn}
+	Given a topological space $X$, $\mathcal{C}(X)$ denotes the vector space of all real-valued functions on $X$.
+
+	If $X$ is compact, $\mathcal{C}(X)$ has a norm given by
+	\begin{equation*} 
+		\|f\|_{\infty} \vcentcolon= \sup_{x \in X} \md{f(x)},
+	\end{equation*}
+	for $f \in \mathcal{C}(X)$. This is also called the \deff{sup-norm}.
+\end{defn}
+
+\begin{ex}
+	$\mathcal{C}(X)$ is a Banach space, whenever $X$ is compact. Convergence in this metric is uniform convergence.
+
+	$\mathcal{C}^{1}[0, 1]$ -- the space of continuously differentiable functions -- is a dense and proper subspace of $\mathcal{C}[0, 1]$.
+\end{ex}
+
+\begin{ex}
+	$\mathcal{L}(V, W)$ is a Banach space, whenever $W$ is so. $V^{\ast}$ is always a Banach space (even if $V$ is not). $\mathcal{L}(W)$ is a Banach algebra whenever $W$ is a Banach space.
+\end{ex}
+
+\begin{ex}
+	Let $\mathcal{C}^{1}[0, 1]$ be the subspace of $\mathcal{C}[0, 1]$ consisting of continuously differentiable function (this is also endowed with the sup-norm). Then, the map
+	\begin{equation*} 
+		T : \mathcal{C}^{1}[0, 1] \to \mathcal{C}[0, 1]
+	\end{equation*}
+	defined by
+	\begin{equation*} 
+		f \mapsto f'
+	\end{equation*}
+	is linear but not continuous.
+
+	However, if we endow the domain with the new norm
+	\begin{equation*} 
+		\|f\|_{1} \vcentcolon= \|f\|_{\infty} + \|f'\|_{\infty},
+	\end{equation*}
+	then the map is continuous.
+\end{ex}
+
+\begin{ex}
+	Consider the new norm on $\mathcal{C}[0, 1]$ given by
+	\begin{equation*} 
+		\|f\|_{1} \vcentcolon= \int_{0}^{1} \md{f(t)} \,{\mathrm{d}}t.
+	\end{equation*}
+	Then, $\|\cdot\|_{\infty}$ and $\|\cdot\|_{1}$ are not equivalent. (Consider the functions $f_{n}(x) = x^{n}$ and their limits.)
+\end{ex}
+
+\subsection{\texorpdfstring{$L^{p}$}{Lp} and \texorpdfstring{$\ell_{p}$}{lp} spaces}
+
+$c_{0}$ is the subspace of $\ell_{\infty}$ consisting of sequences that converge to $0$ (equipped with the $\|\cdot\|_{\infty}$ norm). This is a Banach space. \newline
+
+\begin{thm} 
+	We have the following isometric isomorphisms.
+	\begin{enumerate}
+		\item $(c_{0})^{\ast} \cong \ell_{1}$.
+		\item $(\ell_{p})^{\ast} \cong \ell_{p^{\ast}}$ for $p \in [1, \infty)$ and not for $p = \infty$.
+	\end{enumerate}
+
+	In both cases, the identification of the right space with the left is made as follows: Given an element $y \in \ell_{p^{\ast}}$, we get an element $f_{y} \in \ell_{p}^{\ast}$ (or $c_{0}^{\ast}$ if $p^{\ast} = 1$) defined as
+	\begin{equation*} 
+		f_{y}(x) \vcentcolon= \sum_{i = 1}^{\infty} x_{i} y_{i}.
+	\end{equation*}
+\end{thm}
+
+\begin{thm}
+	Let $(X, \mathcal{M}, \mu)$ be a measure space. We have the following isometric isomorphisms.
+	\begin{enumerate}
+		\item $(L^{p}(\mu))^{\ast} \cong L^{p^{\ast}}(\mu)$ for $p \in (1, \infty)$. 
+		\item If $\mu$ is $\sigma$-finite, then $(L^{1}(\mu))^{\ast} \cong L^{\infty}(\mu)$.
+	\end{enumerate}
+	In particular, the above is true when $X$ is an open subset of $\mathbb{R}^{n}$ with the Lebesgue measure.
+\end{thm}
+
+\begin{thm}[Riesz]
+	Given $l \in (\mathcal{C}[0, 1])^{\ast}$, there exists $\alpha \in \operatorname{BV}([0, 1])$ such that $\alpha(0) = 0$ and
+	\begin{equation*} 
+		l(f) = \int_{[0, 1]} f \,{\mathrm{d}}\alpha
+	\end{equation*}
+	for all $f \in \mathcal{C}[0, 1]$.
+\end{thm}
+The integral above is the Lebesgue-Stieltjes integral, which is just integrating against the \emph{signed} Borel measure induced by $\alpha$.
+
+In the following, $\Omega$ will be an open subset of $\mathbb{R}^{N}$ with Lebesgue measure.
+
+\begin{thm}[Dense subsets]
+	Fix $p \in [1, \infty)$. The following subsets of $L^{p}(\Omega)$ are dense:
+	\begin{enumerate}
+		\item the set of all simple functions which vanish outside a set of finite measure,
+		\item $\mathcal{C}_{c}(\Omega)$ -- the space of all continuous functions with compact support,
+		\item $\mathcal{C}_{c}^{\infty}(\Omega)$ -- the space of all infinitely differentiable functions with compact support.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}
+	$\ell_{p}$ and $L^{p}(\Omega)$ are separable for $1 \le p < \infty$ and not separable for $p = \infty$.
+\end{thm}
+
+\begin{thm}
+	$\ell_{p}$ and $L^{p}(\Omega)$ are reflexive for $1 < p < \infty$ and not reflexive for $p \in \{1, \infty\}$.
+\end{thm}
+
+\begin{thm}[Young's Inequality]
+	Let $1 < p < \infty$. Let $f \in L^{1}(\mathbb{R}^{N})$ and $g \in L^{p}(\mathbb{R}^{N})$. The map
+	\begin{equation*} 
+		x \mapsto \int_{\mathbb{R}^{N}}^{} f(y) g(x - y) \,{\mathrm{d}}y
+	\end{equation*}
+	is well-defined almost everywhere in $\mathbb{R}^{N}$. The function thus defined is denoted $f \ast g$ and is called the \deff{convolution} of $f$ and $g$. Further, $f \ast g \in L^{p}(\mathbb{R}^{N})$ and we have
+	\begin{equation*} 
+		\|f \ast g\|_{p} \le \|f\|_{1} \|g\|_{p}.
+	\end{equation*}
+\end{thm}
+
+\subsection{Weak and Weak* topologies}
+
+\begin{ex}[Weak convergence does not imply convergence]
+	Consider $V = \ell_{p}$ for $1 < p < \infty$. Consider the sequence $(e_{n})_{n}$ in $\ell_{p}$. Since $\|e_{n} - e_{m}\|_{2} = 2^{1/p}$ for all $n \neq m$, it is clear that not only does $(e_{n})_{n}$ not converge, but neither does any subsequence of $(e_{n})_{n}$.
+
+	However, we $e_{n} \weak 0$. Indeed, given any $f \in \ell_{p}^{\ast}$, it is of the form $f_{y}$, for some $y \in \ell_{p^{\ast}}$ (as discussed earlier). Thus,
+	\begin{equation*} 
+		f_{y}(e_{n}) = y_{n}.
+	\end{equation*}
+	Since $\sum \md{y_{n}}^{p}$ converges, it follows that $y_{n} \to 0$ (in $\mathbb{F}$) and thus, $f(e_{n}) \to f(0)$, as desired.
+\end{ex}
+
+\section{Results}
+
+\subsection{Banach spaces}
+
+\begin{prop}
+	Let $p \in (1, \infty)$. If $a, b \ge 0$, then
+	\begin{equation*} 
+		a^{1/p} b^{1/p^{\ast}} \le \frac{a}{p} + \frac{b}{p^{\ast}}.
+	\end{equation*}
+\end{prop}
+
+\begin{prop}[H\"older's inequality]
+	Let $p \in [1, \infty)$. If $x \in \ell_{p}$ and $y \in \ell_{p^{\ast}}$, then 
+	\begin{equation*} 
+		\sum_{i = 1}^{\infty} \md{x_{i} y_{i}} \le \|x\|_{p} \|y\|_{p^{\ast}}.
+	\end{equation*}
+\end{prop}
+
+\begin{prop}[Minkwoski's Inequality]
+	Let $p \in [1, \infty)$. Let $x, y \in \ell_{p}$. Then
+	\begin{equation*} 
+		\|x + y\|_{p} \le \|x\|_{p} + \|y\|_{p}.
+	\end{equation*}	
+\end{prop}
+
+\begin{prop}
+	Let $V$ be an NLS, and $W$ a \emph{closed} subspace. Then, 
+	\begin{equation*} 
+		\|x + W\|_{V/W} \vcentcolon= \inf_{w \in W} \|x + w\|_{V}
+	\end{equation*}
+	defines a norm on $V/W$.
+
+	If $V$ is Banach space, then so is $V/W$.
+\end{prop}
+
+\subsection{Continuous linear transformations}
+
+$V$ and $W$ will be assumed to be normed linear spaces throughout.
+
+\begin{prop}
+	Let $T : V \to W$ be linear. The following are equivalent:
+	\begin{enumerate}
+		\item $T$ is continuous.
+		\item $T$ is continuous at $\mathbf{0}$.
+		\item $T$ is bounded.
+	\end{enumerate}
+\end{prop}
+
+\begin{prop}
+	Let $T : V \to W$ be continuous, and $V \neq 0$. Then,
+	\begin{align*} 
+		\|T\| &= \sup_{\|x\|_{V} = 1}\|T x\|_{W} \\
+		&= \sup_{x \in V \setminus \{\mathbf{0}\}}\frac{\|T x\|_{W}}{\|x\|_{V}} \\
+		&= \inf\{K > 0 : \|Tx\|_{W} \le K \|x\|_{V} \text{ for all } x \in V\}.
+	\end{align*}
+\end{prop}
+\begin{cor}
+	$\|T(x)\| \le \|T\| \|x\|$ for all $x \in V$.
+\end{cor}
+
+\begin{prop}
+	If $W$ is complete, then so is $\mathcal{L}(V, W)$. In particular, $V^{\ast}$ is always a Banach space, and $\mathcal{L}(W)$ is a Banach algebra whenever $W$ is a Banach space.
+\end{prop}
+
+\begin{prop}
+	Any two norms on a finite-dimensional $\mathbb{F}$-vector space are equivalent. In particular, given any norm on $\mathbb{F}^{N}$, the topology induced is the Euclidean topology.
+\end{prop}
+
+\begin{cor}
+	Any finite dimensional NLS is complete. Any finite dimensional subspace of any NLS is closed. If $T : V \to W$ is linear and $\dim(V) < \infty$, then $T$ is continuous.
+\end{cor}
+
+\begin{thm}[Riesz' Lemma]
+	Let $V$ be an NLS and $W \subsetneq V$ a \emph{closed} and proper subspace. Then, for every $\varepsilon > 0$, there exists $u = u(\varepsilon) \in V$ such that
+	\begin{equation*} 
+		\|u\| = 1 \andd d(u, W) \ge 1 - \varepsilon.
+	\end{equation*}
+\end{thm}
+
+\begin{prop}
+	Let $V$ be an NLS. $V$ is finite-dimensional iff the closed unit ball is compact.
+\end{prop}
+
+\subsection{Hahn-Banach theorems}
+
+\begin{thm}[Hahn-Banach theorem]
+	Let $V$ be a vector space over $\mathbb{R}$. Let $p : V \to \mathbb{R}$ be a sublinear functional. Let $W \subset V$ be a subspace and let $g : W \to \mathbb{R}$ be a linear map such that
+	\begin{equation*} 
+		g \le p \quad \text{on $W$.}
+	\end{equation*}
+
+	Then, there exists a linear extension $f : V \to \mathbb{R}$ of $g$ such that $f \le p$.
+\end{thm}
+Note that this was a statement purely about sublinear functionals, without any reference to norms or continuity.
+
+\begin{cor}[Hahn-Banach Theorem]
+	Let $V$ be an NLS over $\mathbb{F}$. Let $W \subset V$ be a subspace, and let $g \in W^{\ast}$. Then, there exists a continuous linear extension $f \in V^{\ast}$ of $g$ such that
+	\begin{equation*} 
+		\|f\|_{V^{\ast}} = \|g\|_{W^{\ast}}.
+	\end{equation*}
+\end{cor}
+
+\begin{cor}
+	Let $V$ be an NLS and $x_{0} \in V$ be nonzero. Then, there exists $f \in V^{\ast}$ such that $\|f\| = 1$ and $f(x_{0}) = x_{0}$.
+
+	In particular, if $x \neq y$ are elements of $V$, then there exists $f \in V^{\ast}$ such that $f(x) \neq f(y)$.
+\end{cor}
+
+\begin{cor}
+	Let $V$ be an NLS, and $x \in V$. Then,
+	\begin{equation*} 
+		\|x\| = \sup_{f \in V^{\ast}, \|f\| \le 1} \md{f(x)} = \max_{f \in V^{\ast}, \|f\| \le 1} \md{f(x)}.
+	\end{equation*}
+\end{cor}
+Note the duality with the \emph{definition} of $\|f\|$. (The above is a result, and not a definition.) In particular, the above says that the supremum is always achieved, which need not be the case for the operator norm.
+
+\subsection{Baire's Theorem and Applications}
+
+\begin{thm}[Baire Category Theorem]
+	Let $(X, d)$ be a complete metric space. Let $(U_{n})_{n \ge 1}$ be a sequence of open dense sets. Then, $\bigcap_{n \ge 1} U_{n}$ is also dense (in particular, nonempty, if $X$ is nonempty).
+\end{thm}
+
+\begin{thm}[Banach-Steinhaus Theorem]
+	Let $V$ be a Banach space and $W$ an NLS. Let $I$ be an arbitrary indexing set. Let $T_{i} \in \mathcal{L}(V, W)$ for each $i \in I$ be given. Then, one of the two is true:
+	\begin{enumerate}
+		\item $\sup_{i \in I} \|T_{i}\| < \infty$,
+		\item $\sup_{i \in I} \|T_{i}(x)\| = \infty$ for all $x$ belonging to some $G_{\delta}$ set in $V$.
+	\end{enumerate}
+\end{thm}
+
+\begin{cor}[Uniform boundedness principle]
+	Let $V$ be a Banach space, and $W$ an NLS. Let $T_{i} \in \mathcal{L}(V, W)$ for all $i \in I$. 
+	\begin{equation*} 
+		\sup_{i \in I} \|T_{i}(x)\| < \infty \text{ for all $x \in V$} \Rightarrow \sup_{i \in I} \|T_{i}\| < \infty.
+	\end{equation*}
+\end{cor}
+
+\begin{cor}
+	Let $V$ be a Banach space, and $W$ an NLS. Let $(T_{n})_{n}$ be a sequence in $\mathcal{L}(V, W)$. Assume that $(T_{n}(x))_{n}$ converges in $W$, for all $x \in V$. Define
+	\begin{equation*} 
+		T(x) \vcentcolon= \lim_{n \to \infty} T_{n}(x),
+	\end{equation*}
+	for $x \in V$.
+
+	Then $T \in \mathcal{L}(V, W)$ and $\|T\| \le \liminf_{n} \|T_{n}\|$.
+\end{cor}
+
+\begin{cor}
+	Let $V$ be a Banach space, and $B \subset V$ any subset. Assume that $f[B] \subset \mathbb{F}$ is bounded for all $f \in V^{\ast}$. Then, $B$ is bounded in $V$.
+\end{cor}
+
+\begin{prop}
+	Let $V$ and $W$ be Banach spaces, and $T \in \mathcal{L}(V, W)$ be surjective. Then, there exists $c > 0$ such that
+	\begin{equation*} 
+		B_{W}(\mathbf{0}, c) \subset T[B_{V}(\mathbf{0}, 1)].
+	\end{equation*}
+\end{prop}
+
+\begin{thm}[Open Mapping Theorem]
+	Let $W$ and $W$ be Banach spaces, and $T \in \mathcal{L}(V, W)$ be surjective. Then, $T$ is an open map.
+\end{thm}
+
+\begin{cor}
+	Let $W$ and $V$ be Banach spaces, and $T \in \mathcal{L}(V, W)$ be bijective. Then, $T$ is an isomorphism.
+\end{cor}
+
+\begin{thm}
+	Let $W$ and $V$ be Banach spaces, and $T : V \to W$ be linear. \newline
+	The graph $G(T)$ is closed in $V \times W$ iff $T$ is continuous.
+\end{thm}
+
+\subsection{Weak and Weak* Topologies}
+
+\begin{prop}
+	The weak topology is Hausdorff.
+\end{prop}
+
+\begin{prop}
+	Let $V$ be a Banach space and let $W$ be a closed subspace of $V$. The weak topology on $W$ is the topology induced on $W$ by the weak topology on $V$.
+\end{prop}
+
+\begin{prop}
+	Let $V$ be a Banach space, and $(x_{n})_{n}$ a sequence in $V$.
+	\begin{enumerate}
+		\item $x_{n} \weak x$ iff $f(x_{n}) \to f(x)$ for all $f \in V^{\ast}$.
+		\item $x_{n} \to x$ implies $x_{n} \weak x$.
+		\item $x_{n} \weak x$ implies $(\|x_{n}\|)_{n}$ is bounded and $\|x\| \le \liminf_{n} \|x_{n}\|$.
+		\item $x_{n} \weak x$ and $f_{n} \to f$ in $V^{\ast}$ implies $f_{n}(x_{n}) \to f(x)$.
+	\end{enumerate}
+\end{prop}
+
+\begin{rem}
+	Contrary to sequences, note that ``weakly open $\Rightarrow$ open''.
+\end{rem}
+
+\begin{prop}
+	If $V$ is finite dimensional, then norm and weak topologies coincide.
+\end{prop}
+
+\begin{prop}
+	Let $V$ be a Banach space, and $C$ be a convex and (norm) closed subset of $V$. Then $C$ is also weakly closed.
+\end{prop}
+
+\begin{prop}
+	Let $V$ be a Banach space. Consider the following subsets
+	\begin{align*} 
+		D &\vcentcolon= \{x \in V : \|x\| < 1\} \quad \text{(open unit ball)}, \\
+		B &\vcentcolon= \{x \in V : \|x\| \le 1\} \quad \text{(closed unit ball)}, \\
+		S &\vcentcolon= \{x \in V : \|x\| = 1\} \quad \text{(unit sphere)}.
+	\end{align*}
+
+	Suppose $V$ is infinite-dimensional.
+
+	$B$ is closed in norm topology and convex. Hence, $B$ is closed in weak topology. \newline
+	$B$ is the weak closure of $S$. In particular, $S$ is never weakly closed (but it is norm closed). \newline
+	Similarly, $D$ is never weakly open. 
+\end{prop}
+In the proof of the above, one sees that given any $x_{0} \in D$ and any weakly open neighbourhood $U$ of $x_{0}$, there exists $y_{0} \in V \setminus \{\mathbf{0}\}$ such that $U$ contains the (affine) line $\{x_{0} + t y_{0} : t \in \mathbb{R}\}$.
+
+\begin{cor}
+	If $V$ is an infinite-dimensional Banach space, the weak topology is strictly coarser than the norm topology.
+\end{cor}
+
+\begin{thm}[Schur's Lemma]
+	In the space $\ell_{1}$, a sequence is convergent in the weak topology iff it converges in the norm topology.
+\end{thm}
+\begin{obs}
+	Note that the weak topology is still strictly coarser on $\ell_{1}$ than the norm topology. The point is that topologies are not determined by sequences for general topological spaces. This also shows that the weak topology on $\ell_{1}$ is not metrisable.
+\end{obs}
+
+\begin{prop}
+	If $X$ is a topological space, $x_{n} \to x$ in X, and $f : X \to \mathbb{R}$ is lower semi-continuous, then $f(x) \le \liminf_{n} f(x_{n})$.
+\end{prop}
+
+\begin{cor}
+	Let $V$ be a Banach space and $\varphi : V \to \mathbb{R}$ be convex and lower semi-continuous (with respect to norm topology). Then $\varphi$ is also lower semi-continuous with respect to weak topology.	
+
+	In particular, the map $x \mapsto \|x\|$, being continuous, is also lower semi-continuous with respect to the weak topology, and if $x_{n} \weak x$ in $V$, we have $\|x\| \le \liminf_{n} \|x_{n}\|$.	
+\end{cor}
+
+\begin{thm}
+	Let $V$ and $W$ be NLS, and $T : V \to W$ be linear. The following are equivalent:
+	\begin{enumerate}
+		\item $T$ is weakly continuous.
+		\item $f \circ T$ is weakly continuous for every $f \in W^{\ast}$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}
+	Let $V$ and $W$ be \emph{Banach} spaces, and $T : V \to W$ be linear. $T$ is continuous iff $T$ is weakly continuous.
+\end{thm}
+
+\begin{prop}
+	Let $V$ be a Banach space. The weak* topology on $V^{\ast}$ is Hausdorff.
+\end{prop}
+
+\begin{prop}
+	Let $V$ be a Banach space and let $(f_{n})_{n}$ be a sequence in $V^{\ast}$.
+	\begin{enumerate}
+		\item $f_{n} \weaks f$ iff $f_{n}(x) \to f(x)$ for all $x \in V$.
+		\item $f_{n} \to f \Rightarrow f_{n} \weak f \Rightarrow f_{n} \weaks f$.
+		\item $f_{n} \weaks f$ in $V^{\ast}$ and $x_{n} \to x$ in $V$ implies $f_{n}(x_{n}) \to f(x)$.
+	\end{enumerate}
+\end{prop}
+
+\begin{prop}
+	Let $V$ be a Banach space, and $\phi$ be a linear functional on $V^{\ast}$ which is continuous with respect to the weak* topology. Then $\varphi = J_{x}$ for some $x \in V$.
+
+	In other words, $\{J_{x} : x \in V\}$ is the complete set of functions which are continuous with respect to the weak* topology.
+\end{prop}
+
+\begin{thm}[Banach-Alaoglu Theorem]
+	Let $V$ be a Banach space. Then, $B^{\ast}$, the closed unit ball in $V^{\ast}$, is weak* compact.
+\end{thm}
+
+\begin{thm}
+	Let $V$ be a Banach space. Let $B$ be the closed unit ball in $V$ and $B^{\ast \ast}$ the closed unit ball in $V^{\ast \ast}$. Let $J : V \to V^{\ast \ast}$ be the canonical embedding. 
+
+	$B^{\ast \ast}$ is the weak* closure of $J(B)$ in $V^{\ast \ast}$.
+\end{thm}
+
+\begin{rem}
+	Let $V$ be a Banach space. Since $J$ is an isometry, it follow that $J[B]$ is closed in $V^{\ast \ast}$. Thus, either $J[B] = B^{\ast \ast}$ (which happens iff $V$ is reflexive) or $J[B]$ is a closed and proper subspace of $B^{\ast \ast}$ (and hence, not dense).
+\end{rem}
+
+\subsection{Reflexivity}
+
+\begin{thm}
+	A Banach space is reflexive iff the closed unit ball is weakly compact.
+\end{thm}
+
+\begin{cor}
+	Let $V$ be a reflexive Banach space. A subset of $V$ is weakly compact iff it is bounded and weakly closed.
+
+	In particular, if $K \subset V$ is a closed, bounded and convex subset, then $K$ is weakly compact.
+\end{cor}
+
+\begin{cor}
+	Let $V$ and $W$ be Banach spaces that are isometrically isomorphic. If $V$ is reflexive, then so is $W$.
+\end{cor}
+
+\begin{cor}
+	A closed subspace of a reflexive space is reflexive.
+\end{cor}
+
+\begin{cor}
+	Let $V$ be a Banach space. $V$ is reflexive $\Leftrightarrow$ $V^{\ast}$ is reflexive.
+\end{cor}
+
+\end{document}
