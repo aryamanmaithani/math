@@ -1,0 +1,1726 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\def\univname{}
+\def\coursenum{}
+\def\coursename{Commutative Algebra Notes}
+\def\professor{}
+\def\student{Aryaman Maithani}
+\def\semesteryear{}
+\def\imagename{}		  
+\def\scalesize{0.20}
+\usepackage{aryaman}
+\setcounter{tocdepth}{2}
+
+\begin{document}
+\coverpage
+\thispagestyle{empty}
+\updated{\today}
+\thispagestyle{empty}
+% \setcounter{tocdepth}{1}
+\tableofcontents
+\pagestyle{fancy}
+\setcounter{page}{1}
+% \setcounter{section}{-1}
+
+\section{Artinian and Noetherian rings}
+
+We assume basic results about Artinian and Noetherian rings. We prove some others.
+
+\subsection{Primary decompositions}
+
+\subsection{Artinian rings}
+
+\begin{prop}
+	Let $R$ be a ring, and $I \subset R$ an ideal. Let $M$ be an $R$-module such that $IM = 0$. Equivalently, $M$ is an $R/I$-module.
+
+	Then, $M$ is Artinian (resp. Noetherian) as an $R$-module if it is so as an $R/I$-module.
+\end{prop}
+\begin{proof} 
+	Check that the family of submodules is the same in both cases.
+\end{proof}
+
+\begin{prop} \label{prop:artinian-noetherian-two-of-three}
+	Let $0 \to N \to M \to L \to 0$ be an exact sequence of $R$-modules. The following are equivalent:
+	\begin{enumerate}
+		\item $M$ is Artinian (resp. Noetherian).
+		\item $N$ and $L$ are Artinian (resp. Noetherian).
+	\end{enumerate}
+\end{prop}
+
+\begin{cor}
+	Any quotient of an Artinian ring is Artinian (as a ring).
+\end{cor}
+
+\begin{cor}
+	Every prime ideal in an Artinian ring is maximal. In other words, the (Krull) dimension of an Artinian ring is zero.
+\end{cor}
+
+Since it is convenient to refer to this, we make a special definition of dimension now. We have an elaborate discussion of dimension later.
+
+\begin{defn}
+	A ring $R$ is said to be of \deff{dimension zero}, denoted $\dim(R) = 0$, if every prime ideal of $R$ is maximal.
+\end{defn}
+
+\begin{prop}
+	An Artinian ring has finitely many prime (maximal) ideals.
+\end{prop}
+\begin{proof} 
+	Suppose not. Let $\mathfrak{m}_{1}, \mathfrak{m}_{2}, \ldots$ be a sequence of distinct prime (and hence, maximal) ideals. Note that the chain
+	\begin{equation*} 
+		\mathfrak{m}_{1} \supset \mathfrak{m}_{1} \cap \mathfrak{m}_{2} \supset \cdots
+	\end{equation*}
+	must stabilise. Thus, there exists $n$ such that
+	\begin{equation*} 
+		\mathfrak{m}_{1} \cap \cdots \cap \mathfrak{m}_{n} = \mathfrak{m}_{1} \cap \cdots \cap \mathfrak{m}_{n} \cap \mathfrak{m}_{n + 1}.
+	\end{equation*}
+	Note that the ideal on the right is contained in $\mathfrak{m}_{n + 1}$. Thus, $\mathfrak{m}_{n + 1}$ contains the intersection on the left. But then, since $\mathfrak{m}_{n + 1}$ is prime, it must contain some $\mathfrak{m}_{i}$ with $i \le n$. This contradicts that $\mathfrak{m}_{i}$ and $\mathfrak{m}_{n + 1}$ are distinct maximal ideals.
+\end{proof}
+
+\begin{prop}
+	Let $R$ be a field, and $M$ an $R$-module, i.e., an $R$-vector space. Then, $M$ is Noetherian iff $M$ is Artinian (iff $\dim_{R}(M) < \infty$).
+\end{prop}
+
+\begin{prop}
+	Let $M$ be an $R$-module. Suppose there exists a filtration of submodules
+	\begin{equation*} 
+		0 = M_{0} \subset M_{1} \subset M_{2} \subset \cdots \subset M_{n} = M
+	\end{equation*}
+	such that each $M_{i + 1}/M_{i}$ is Artinian (resp. Noetherian). Then, $M$ is Artinian (resp. Noetherian).
+
+	Conversely, if $M$ is an Artinian (resp. Noetherian) module and we have a filtration as above, then each $M_{i + 1}/M_{i}$ is Artinian (resp. Noetherian).
+\end{prop}
+\begin{proof} 
+	By hypothesis, $M_{1} \cong M_{1}/M_{0}$ is Artinian (resp. Noetherian). The exact sequence
+	\begin{equation*} 
+		0 \to M_{1} \to M_{2} \to M_{2}/M_{1}
+	\end{equation*}
+	shows the same for $M_{2}$. Induct.
+
+	The converse is again an easy consequence of \Cref{prop:artinian-noetherian-two-of-three}.
+\end{proof}
+
+\begin{cor} \label{cor:annihilated-maximals-artinian-noetherian}
+	Let $R$ be any ring, and $M$ an $R$-module. Let $\mathfrak{m}_{1}, \ldots, \mathfrak{m}_{n}$ be maximal ideals of $R$ (not necessarily distinct) such that $\mathfrak{m}_{1} \cdots \mathfrak{m}_{n} M = 0$.
+
+	Then, $M$ is Noetherian iff $M$ is Artinian.
+\end{cor}
+\begin{proof} 
+	Consider the filtration
+	\begin{equation*} 
+		0 = \mathfrak{m}_{1} \cdots \mathfrak{m}_{n} M \subset \mathfrak{m}_{1} \cdots \mathfrak{m}_{n - 1} M \subset \cdots \subset \mathfrak{m}_{1} M \subset M.
+	\end{equation*}
+	Note that $\mathfrak{m}_{1} \cdots \mathfrak{m}_{i} M/\mathfrak{m}_{1} \cdots \mathfrak{m}_{i + 1} M$ is an $R/\mathfrak{m}_{i + 1}$-module. 
+
+	Now use the previous two propositions.
+\end{proof}
+
+\begin{prop}
+	Let $R$ be an Artinian ring. The nilradical $\mathcal{N}$ is nilpotent, i.e., $\mathcal{N}^{k} = 0$ for some $k \ge 0$.
+\end{prop}
+\begin{proof} 
+	The descending chain of powers of $\mathcal{N}$ must stabilise to some $\mathcal{N}^{k}$. We claim $\mathcal{N}^{k} = 0$. 
+
+	Suppose not. Let $I \vcentcolon= \mathcal{N}^{k}$. By hypothesis, $I I = I \neq 0$. Thus, by the Artinian condition, we may pick $J$ minimal with respect to the property that $IJ \neq 0$.
+
+	Thus, there exists $z \in J$ with $Iz \neq 0$. But also, $I(Iz) = Iz \neq 0$. \newline
+	Since $Iz \subset (z) \subset J$, minimality forces $Iz = (z)$. Thus, we can write $z = xz$ for some $x \in I$. Thus, we have $z = xz = x^{2} z = x^{3} z = \cdots$. \newline
+	But $x$ is nilpotent, since $I \subset \mathcal{N}$. Thus, $z = 0$, contradicting that $Iz \neq 0$.
+\end{proof}
+
+\begin{cor}
+	Any Artinian ring is Noetherian.
+\end{cor}
+\begin{proof} 
+	Let $R$ an an Artinian ring. Note that $\mathcal{N} = \bigcap_{\mathfrak{p} \in \Spec R} \mathfrak{p}$. Since $R$ is Artinian, $\mathcal{N}$ is the intersection of all the finitely many maximal ideals of $R$. \newline
+	But this is just the product $\prod \mathfrak{m}_{i}$ since the ideals are comaximal. In turn, $\mathcal{N}^{k}$ is a product of maximal ideals. Now use \Cref{cor:annihilated-maximals-artinian-noetherian}.
+\end{proof}
+
+\begin{cor} \label{cor:artinian-noetherian-dimension-zero}
+	Let $R$ be a ring. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $R$ is Artinian.
+		\item $R$ is Noetherian and $\dim(R) = 0$.
+	\end{enumerate}
+\end{cor}
+\begin{proof} 
+	(i) $\Rightarrow$ (ii) follows from earlier.
+
+	(ii) $\Rightarrow$ (iii): Since $R$ is Noetherian, $R$ has finitely many minimal primes. Since $\dim(R) = 0$, all of these are maximal as well. Since every prime contains a minimal prime, it follows that there are only finitely many primes. Then, we have $\mathcal{N} = \bigcap_{i} \mathfrak{p}_{i} = \prod_{i} \mathfrak{p}_{i}$. But in a Noetherian ring, the nilradical is nilpotent and thus, $\mathcal{N}^{k} = 0$ for some $k$. Using \Cref{cor:annihilated-maximals-artinian-noetherian}, we get that $R$ is Artinian.
+\end{proof}
+
+\section{Valuation rings}
+
+\subsection{Definitions}
+
+\begin{defn}
+	A \deff{valuation ring} is an integral domain $R$ such that for all $a, b \in R$: either $a$ divides $b$ or $b$ divides $a$.
+
+	Equivalently, the set of principal ideals is totally ordered by inclusion.
+
+	Equivalently, if $K = \Frac(R)$, then for every $x \in K^{\times}$, either $x \in R$ or $x^{-1} \in R$.
+\end{defn}
+
+Recall that a totally ordered abelian group is an abelian group $(A, +)$ with a total order $\le$ such that $x \le y \Rightarrow x + z \le y + z$ for all $x, y, z \in A$. \newline
+We often consider the ordered set $A_{\infty} \vcentcolon= A \sqcup \{\infty\}$, this extends the order from $A$ by defining $a < \infty$ for all $a \in A$.
+
+\begin{defn}
+	Let $K$ be a field, and $A$ a totally ordered abelian group. A \deff{valuation} is a map
+	\begin{equation*} 
+		\nu : K \to A \sqcup \{\infty\}
+	\end{equation*}
+	such that
+	\begin{itemize}
+		\item $\nu(0) = \infty$,
+		\item $\nu(K^{\times}) \subset A$,
+		\item $\nu(xy) = \nu(x) + \nu(y)$ for all $x, y \in K^{\times}$,
+		\item $\nu(x + y) \ge \min(\nu(x), \nu(y))$ for all $x, y \in K$.
+	\end{itemize}
+\end{defn}
+Note that the third point is simply stating that $\nu$ is a group homomorphism when restricted to $K^{\times} \to A$. We often just specify valuations by defining them on $K^{\times}$.
+
+\begin{obs}
+	Since $\nu$ is a group homomorphism, we have $\nu(1) = 0$ and $\nu(x^{-1}) = -\nu(x)$ for $x \in K^{\times}$.
+\end{obs}
+
+\begin{prop}
+	Let $R$ be an integral domain, and $K = \Frac(R)$. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $R$ is a valuation ring.
+		\item There exists a totally ordered abelian group $A$ and a valuation $\nu : K \to A_{\infty}$ such that $R = \{x \in K : \nu(x) \ge 0\}$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	We prove the nontrivial direction, namely (i) $\Rightarrow$ (ii).
+
+	Assume that $R$ is a valuation ring. Define a preorder on $K^{\times}$ as follows: $x \le y$ iff $y/x \in R$. By hypothesis, any two elements are comparable. \newline
+	Define the equivalence relation $\sim$ on $K^{\times}$ as $x \sim y$ iff $x \le y$ and $y \le x$. \newline
+	Let $A \vcentcolon= K^{\times}/{\sim}$. Note that we can define multiplication on $A$ by $[x] \cdot [y] = [xy]$. (Check that this is well-defined.) \newline
+	The map $\nu : K^{\times} \to A$ defined by $x \mapsto [x]$ does the job. 
+\end{proof}
+
+In view of the above proposition, whenever we talk about a valuation ring $R$, we always have an associated valuation with it. Proceeding forward, $K$ will denote the fraction field of $R$. We have the relation $R = \{x \in K : \nu(x) \ge 0\}$. \newline
+For $x, y \in R$, we see that $x \mid y$ is equivalent to $\nu(x) \le \nu(y)$.
+
+\begin{prop}
+	Any valuation ring $R$ is normal.
+\end{prop}
+\begin{proof} 
+	Let $x \in K$ be integral over $R$. We wish to show $\nu(x) \ge 0$. Write
+	\begin{equation*} 
+		x^{n} = a_{n - 1} x^{n - 1} + \cdots + a_{1} x + a_{0}
+	\end{equation*}
+	for $a_{i} \in R$. Applying $\nu$, we get
+	\begin{equation*} 
+		n \nu(x) \ge \min(\nu(a_{n - 1}) + (n - 1) \nu(x), \ldots, \nu(a_{0})).
+	\end{equation*}
+	Thus, there exists some $i \in \{0, \ldots, n - 1\}$ such that $n \nu(x) \ge \nu(a_{i}) + i \nu(x)$. Thus, $(n - i) \nu(x) \ge \nu(a_{i}) \ge 0$. This proves the result.
+\end{proof}
+
+\begin{prop}
+	Any valuation ring $R$ is normal. The unique maximal ideal is given by $\{x\in R : \nu(x) > 0\} = \{x \in K : \nu(x) > 0\}$.
+\end{prop}
+\begin{proof} 
+	Let $\mathfrak{m} \vcentcolon= \{x \in R : \nu(x) > 0\}$. The properties of valuation imply that $\mathfrak{m}$ is indeed an ideal. $\mathfrak{m}$ is proper since $\nu(1) = 0$ and thus, $1 \notin \mathfrak{m}$.
+
+	On the other hand, if $x \in R \setminus \mathfrak{m}$, then $\nu(x) = 0$. This means that $x^{-1} \in K$ also satisfies $\nu(x^{-1}) = -\nu(x) = 0$ and thus, $x^{-1} \in R$, i.e., $x$ is a unit.
+\end{proof}
+
+\begin{thm}
+	Let $R$ be a domain, not necessarily a valuation ring. \newline
+	Let $\mathfrak{p} \in \Spec R$, and $K = \Frac(R)$. \newline
+	Then, there exists a valuation ring $V$ such that
+	\begin{itemize}
+		\item $R \subset V \subset K$,
+		\item the maximal ideal of $V$ contracts to $\mathfrak{p}$.
+	\end{itemize}
+	In particular, if $\nu$ is the associated valuation to $V$, we have $\mathfrak{p} = \{x \in R : \nu(x) > 0\}$.
+\end{thm}
+\begin{proof} 
+	Throughout this proof, localisations of $R$ (and of other subrings of $K$) will be considered as subrings of $K$ in the natural way.
+
+	Let $\Sigma$ denote the collection of intermediate subrings $R$': $R_{\mathfrak{p}} \subset R' \subset K$ such that $\mathfrak{p} R' \neq R'$. 
+
+	$\Sigma$ is nonempty since $R_{\mathfrak{p}} \in \Sigma$. Ordering $\Sigma$ by inclusion, we note that $\Sigma$ satisfies the hypothesis of Zorn's Lemma\footnote{Note that $1 \in \mathfrak{p}R'$ is a ``finite condition''.} and thus, there exists a maximal $V$. We show that $V$ has the desired properties.
+
+	\claim{1} $V$ is local. 
+	\begin{proof} 
+		By construction, $\mathfrak{p}V \neq V$. Thus, $\mathfrak{p}V$ is contained in some maximal ideal $\mathfrak{m} \subset V$. In turn, $\mathfrak{p} V_{\mathfrak{m}}$ is a proper subset of $V_{m}$ and hence, $V_{\mathfrak{m}} \in \Sigma$. By maximality, we must have $V = V_{\mathfrak{m}}$, proving that $V$ is a local ring.
+	\end{proof}
+
+	Going forth, let $\mathfrak{m}$ denote the maximal ideal of $V$. Note that $\mathfrak{p} V \subset \mathfrak{m}$. In particular, intersecting with $R_{\mathfrak{p}}$ shows that
+	\begin{equation*} 
+		\mathfrak{p} V \cap R_{\mathfrak{p}} = \mathfrak{m} \cap R_{\mathfrak{p}}.
+	\end{equation*}
+	But $\mathfrak{p} R_{\mathfrak{p}}$ is clearly contained in the left ideal. Thus, we have
+	\begin{equation*} 
+		\mathfrak{p} R_{\mathfrak{p}} = \mathfrak{m} \cap R_{\mathfrak{p}}.
+	\end{equation*}
+	Further contracting to $R$ gives us
+	\begin{equation*} 
+		\mathfrak{p} = \mathfrak{m} \cap R.
+	\end{equation*}
+	Thus, we now only need to prove that $V$ is a valuation ring.
+
+	\claim{2} $V$ is normal.
+	\begin{proof} 
+		Let $x \in K$ be integral over $V$. Showing $x \in V$ is equivalent to saying $V = V[x]$. Using maximality of $V$ in $\Sigma$, it suffices to prove that $V[x] \in \Sigma$.
+
+		Note that $V \into V[x]$ is an integral extension. Thus, there is a prime $\mathfrak{m}' \subset V[x]$ lying over $V$. In particular, $\mathfrak{p} \subset \mathfrak{m}'$ showing that $\mathfrak{p} V[x] \neq V[x]$.
+	\end{proof}
+
+	We are now ready to show that $V$ is a valuation ring. Let $x \in K^{\times}$ with $x \notin V$. We need to show that $x^{-1} \in V$. \newline
+	
+	Consider the subring $V[x]$. This is strictly larger than $V$. By maximality, we must have that $V[x] \notin \Sigma$ and thus, $1 \in \mathfrak{p} V[x]$. We can then write
+	\begin{equation*} 
+		1 = p_{0} + p_{1} x + \cdots + p_{t} x^{t}
+	\end{equation*}
+	for some $p_{i} \in \mathfrak{p} V$.
+
+	Rearrange the above to get
+	\begin{equation*} 
+		1 - p_{0} = p_{1} x + \cdots + p_{t} x^{t}.
+	\end{equation*}
+	Note that $p_{0} \in \mathfrak{p} V \subset \mathfrak{m}$ and thus, $1 - p_{0}$ is a unit in $V$. Thus, we can write
+	\begin{equation*} 
+		\frac{1}{x^{t}} = \frac{1}{1 - p_{0}}\left(\frac{p_{1}}{x^{t - 1}} + \cdots + p_{t}\right).
+	\end{equation*}
+	The above shows that $x^{-1}$ is integral over $V$. By Claim 2, it follows that $x^{-1} \in V$, as desired.
+\end{proof}
+
+\begin{cor}
+	Let $R$ be an integral domain, and let $\mathfrak{q} \subset \mathfrak{p}$ be primes. There exists a valuation ring $V$ and a ring homomorphism $f : R \to V$ such that $f^{-1}(\mathfrak{m}_{V}) = \mathfrak{p}$ and $f^{-1}(0) = \mathfrak{q}$. \newline
+	($\mathfrak{m}_{V}$ denotes the maximal ideal of $V$.)
+\end{cor}
+\begin{proof} 
+	Applying the previous proposition to $R/\mathfrak{q}$, there exists a valuation ring $V$ and an injection $g : R/\mathfrak{q} \into V$ such that $g^{-1}(\mathfrak{m}_{V}) = \mathfrak{p}/\mathfrak{q}$ (and necessarily $g^{-1}(0) = 0$). \newline
+	Compose this with the projection $R \onto R/\mathfrak{q}$.
+\end{proof}
+
+\begin{cor}
+	If $R$ is a normal domain, then
+	\begin{equation*} 
+		R = \bigcap_{\substack{R \subset V \subset K \\ V \text{ is a valuation ring}}} V.
+	\end{equation*}
+	More generally, if $R$ is any integral domain, and $\overline{R}$ is its integral closure in $K$, then
+	\begin{equation*} 
+		\overline{R} = \bigcap_{\substack{R \subset V \subset K \\ V \text{ is a valuation ring}}} V.
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	Note that since valuation rings are integrally closed, it follows that $\overline{R}$ is contained the intersection. 
+
+	Conversely, suppose $x$ belongs to the intersection. This means that $\nu(x) \ge 0$ for every valuation $\nu$ on $K$. We must show that $x$ is integral over $R$.
+
+	Let $R' = R\left[\frac{1}{x}\right]$ and $I = \left(\frac{1}{x}\right) R'$. 
+
+	\claim{} $I = R'$.
+	\begin{proof} 
+		If not, then $I \subset \mathfrak{m}$ for some maximal ideal $\mathfrak{m} \subset R'$. By the previous proposition, there exists a valuation ring $V \supset R'$ such that $x^{-1} \in \mathfrak{m}_{V}$. This implies that $\nu(x) = -\nu(x^{-1}) > 0$. A contradiction.
+	\end{proof}
+
+	Thus, $I = R'$. In other words, $1/x$ is a unit in $R'$ and hence, $x \in R'$. This means we can write
+	\begin{equation*} 
+		x = r_{0} + \frac{r_{1}}{x} + \cdots + \frac{r_{n}}{x^{n}}
+	\end{equation*}
+	for some $r_{i} \in R$. Multiplying with $x^{n}$ shows that $x$ satisfies a monic polynomial over $R$, as desired.
+\end{proof}
+
+\begin{prop} \label{prop:valuation-local-bezout}
+	Let $R$ be an integral domain. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $R$ is a valuation ring.
+		\item $R$ is a local B\'ezout domain. (That is, $R$ is a local ring, where every finitely generated ideal is principal.)
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(i) $\Rightarrow$ (ii): Suppose $R$ is a valuation ring. We have already seen that $R$ is local. Let $I = (f_{1}, \ldots, f_{n})$ be a finitely generated ideal. By definition of a valuation ring, we may pick a maximal ideal among the principal ideals $(f_{1}), \ldots, (f_{n})$. Then, $I$ is equal to that principal ideal.
+
+	(ii) $\Rightarrow$ (i): Let $x, y \in R$ be nonzero. We wish to show that either $x \mid y$ or $y \mid x$. \newline
+	By hypothesis, we can write $(x, y) = (d)$ for some $d \in R$. In turn, we have the relations
+	\begin{equation*} 
+		x = dx',\, y = dy',\, d = ax + by,
+	\end{equation*}
+	for some $a, b, x', y' \in R$. 
+
+	Plugging the first two relations in the last gives us
+	\begin{equation*} 
+		d = (ax' + by')d.
+	\end{equation*}
+	We may cancel $d$ to see that $(x', y') = (1)$. Since $R$ is a local ring, this implies that one of $x'$ or $y'$ is a unit. Without loss of generality, $x'$ is a unit (in $R$).
+
+	Then, we have
+	\begin{equation*} 
+		y = dy' = \frac{y'}{x'} x. \qedhere
+	\end{equation*}
+\end{proof}
+
+\subsection{Discrete Valuation Rings}
+
+\begin{defn}
+	A valuation $\nu : K \to A_{\infty}$ is said to be a \deff{discrete valuation} if $\nu(K^{\times})$ is isomorphic to $\mathbb{Z}$.
+
+	A \deff{discrete valuation ring (DVR)} is a ring that is of the form $\{x \in K : \nu(x) \ge 0\}$ for some discrete valuation $\nu : K \to A_{\infty}$.
+\end{defn}
+Note that the trivial valuation is not a discrete valuation. Equivalently, a field is not a discrete valuation ring. \newline
+Note that given a discrete valuation, we may always assume that $A = \mathbb{Z}$ and that $\nu(x) \neq 0$ for some $x \in K$.
+
+\begin{prop} \label{prop:valuation-noetherian}
+	Let $R$ be a valuation ring. The following are equivalent.
+	\begin{enumerate}[label=(\roman*)]
+		\item $R$ is Noetherian.
+		\item $R$ is a DVR or a field.
+		\item $R$ is a local PID.
+	\end{enumerate}
+	((ii) and (iii) are equivalent even without the a priori assumption that $R$ is a valuation ring. See \Cref{cor:local-PID-DVR})
+\end{prop}
+\begin{proof} 
+	Let $\nu : K \to A_{\infty}$ and $\mathfrak{m} \subset R$ be as usual
+
+	(i) $\Leftrightarrow$ (iii) is clear by \Cref{prop:valuation-local-bezout}.
+
+	(iii) $\Rightarrow$ (ii): Assume $R$ is a local PID and not a field. \newline
+	By hypothesis, we have $\mathfrak{m} = (x)$ with $0 < \nu(x) < \infty$. In turn,
+	\begin{equation*} 
+		\nu(x) = \min\{\nu(r) : r \in K,\, \nu(r) > 0\}.
+	\end{equation*}
+	(The above follows since $\nu(r) > 0 \Rightarrow r \in \mathfrak{m} = (x) \Rightarrow x \mid r$.) \newline
+	In other words, $\nu(x)$ is the smallest positive valuation.
+
+	We show that $\nu(K^{\times})$ is generated by $\nu(x)$. Let $y \in K^{\times}$ be arbitrary. We may assume $y$ is not a unit. By replacing $y$ with $y^{-1}$, we may assume that $\nu(y) > 0$ and hence, $y \in R$. 
+
+	Consider the following subsets of $K$:
+	\begin{equation*} 
+		y R \subsetneq \frac{y}{x} R \subsetneq \frac{y}{x^{2}} R \subsetneq \cdots.
+	\end{equation*}
+	Note that as long as $y/x^{n} \in R$, the set $(y/x^{n}) R$ is an ideal of $R$. Since $R$ is Noetherian, the chain must eventually escape $R$, i.e., there exists $n \ge 0$ such that $y/x^{n + 1} \notin R$. Choose the smallest such $n$. Then, we have
+	\begin{equation*} 
+		\nu(y/x^{n}) \ge 0 > \nu(y/x^{n + 1}).
+	\end{equation*}
+	If $\nu(y/x^{n}) = 0$, then we are done since we have $\nu(y) = n \nu(x)$. If this is not the case, then we have strict inequalities above, which gives
+	\begin{equation*} 
+		\nu(y/x^{n}) > 0 > \nu(y/x^{n + 1}).
+	\end{equation*}
+	Rearranging gives
+	\begin{equation*} 
+		\nu(x) > \nu(x^{n + 1}/y) > 0.
+	\end{equation*}
+	But this contradicts that $x$ had smallest positive valuation.
+
+	(ii) $\Rightarrow$ (i): Clearly we may assume that $R$ is a DVR. Let $\nu : K \to \mathbb{Z}_{\infty}$ be the associated valuation. Consider the ideals $I_{n}$ defined as
+	\begin{equation*} 
+		I_{n} \vcentcolon= \{x \in R : \nu(x) \ge n\},
+	\end{equation*}
+	for $n \ge 0$. ($I_{n}$ is an ideal by properties of valuation.)
+
+	We claim that any nonzero ideal in $R$ is of the form. Indeed, given a nonzero ideal $J$, let $n \ge 0$ and $x \in J$ be such that $\nu(x) = n$ is the smallest valuation among elements of $J$. \newline
+	In particular, $J \subset I_{n}$. Conversely, if $y \in I_{n}$, then $\nu(x) \le \nu(y)$ shows that $x \mid y$ in $R$ and hence, $y \in (x) \subset J$.
+
+	Thus, the ideals of $R$ all appear in the following chain:
+	\begin{equation*} 
+		I_{0} \supset I_{1} \supset I_{2} \supset \cdots \supset 0.
+	\end{equation*}
+	It follows that $R$ is Noetherian.
+\end{proof}
+
+Note that if $\nu : K \to \mathbb{Z}_{\infty}$ is a valuation, then $\nu(K^{\times})$ is a nonzero subgroup of $\mathbb{Z}$ and thus, of the form $n \mathbb{Z}$ for some $n > 0$. This gives us a new valuation $\nu' : K \to \mathbb{Z}_{\infty}$ defined by $\nu'(x) = \nu(x)/n$. \newline
+Both of these define the same valuation ring. Thus, we may always assume that a discrete valuation surjects onto $\mathbb{Z}_{\infty}$.
+
+From the last part of the above proof, we extract the following.
+
+\begin{por}[Description of ideals in DVRs]
+	Let $R$ be a DVR, and $\nu : K \onto \mathbb{Z}_{\infty}$ the associated valuation. \newline
+	Pick any $t \in K$ with $\nu(t) = 1$. Then, the ideals
+	\begin{equation*} 
+		(1), (t), (t^{2}), (t^{3}), \ldots, (0)
+	\end{equation*}
+	are all the distinct ideals of $R$. 
+
+	In particular, $R$ is a local PID.
+\end{por}
+
+\begin{cor} \label{cor:local-PID-DVR}
+	Let $R$ be a ring which is not a field. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $R$ is a local PID.
+		\item $R$ is a DVR.
+	\end{enumerate}
+\end{cor}
+\begin{proof} 
+	In either case, we need to show that $R$ is a valuation ring and then we can appeal to \Cref{prop:valuation-noetherian}. If we assume (ii), then this follows tautologically. If we assume (i), then this follows from \Cref{prop:valuation-local-bezout}.
+\end{proof}
+
+\section{Graded rings and modules}
+
+Going forth, we make the convention that $0 \in \mathbb{N}$.
+
+\subsection{Graded rings and modules}
+
+\begin{defn}
+	A \deff{($\mathbb{N}$-)graded ring} is a ring $R$ with a sequence of additive subgroups $\langle R_{n} \rangle_{n \ge 0}$ such that
+	\begin{equation*} 
+		R = \bigoplus_{n \ge 0} R_{n} \andd R_{m} R_{n} \subset R_{m + n}
+	\end{equation*}
+	for all $n, m \ge 0$.
+
+	Elements of $R_{0} \cup R_{1} \cup \cdots$ are called \deff{homogeneous elements}. A nonzero homogeneous element $x$ belongs to $R_{n}$ for some unique $n$, this is called the \deff{degree} of $x$.
+
+	$R_{+} \vcentcolon= \bigoplus_{n \ge 1} R_{n}$ is an ideal of $R$, called the \deff{irrelevant ideal}.
+\end{defn}
+
+Note that $0 \in R_{n}$ for all $n$. There is some care that must be taken when defining the degree of $0$. We do not bother about it and leave the edge cases to the reader.
+
+Note that being graded is not a property of a ring. Rather, it consists of additional data given to a ring. (In contrast to something like how being a field is a property of a ring.) \newline
+However, we still often say ``$R$ is a graded ring'' and tacitly assume that we are given a \emph{grading} $\langle R_{n} \rangle_{n \in \mathbb{N}}$.
+
+\begin{defn}
+	Let $R$ be a graded ring. A \deff{graded $R$-module} is an $R$-module $M$ with a sequence of additive subgroups $\langle M_{n} \rangle_{n \in \mathbb{Z}}$ such that
+	\begin{equation*} 
+		M = \bigoplus_{n \in \mathbb{Z}} M_{n} \andd R_{m} M_{n} \subset M_{m + n}
+	\end{equation*}
+	for all $n, m \ge 0$.
+
+	A \deff{homogeneous element} and its \deff{degree} is defined as before.
+\end{defn}
+
+\begin{prop}
+	Let $R$ be a graded ring, and $M$ a graded $R$-module. \newline
+	Then, $R_{0}$ is a subring of $R$. In particular, $1 \in R$. \newline
+	Moreover, each $M_{n}$ is an $R_{0}$-module.
+\end{prop}
+Note that $M_{n}$ will typically \emph{not} be an $R$-module.
+\begin{proof} 
+	The only nontrivial thing to check is that $1 \in R$. By hypothesis, we can write
+	\begin{equation} \label{eq:001}
+		1 = r_{0} + r_{1} + \cdots,
+	\end{equation}
+	where $r_{i} \in R_{i}$ and $r_{n} = 0$ for $n \gg 0$.
+
+	We show that $r_{i} = 0$ for all $i > 0$ and hence, $1 = r_{0} \in R_{0}$. \newline
+	Multiplying \Cref{eq:001} with $r_{0}$ shows
+	\begin{equation*} 
+		r_{0} = r_{0}^{2} + r_{0}r_{1} + \cdots .
+	\end{equation*}
+	Comparing the homogeneous components on each side shows that $r_{0} r_{i} = 0$ for $i > 0$. \newline
+
+	Now, fix $i > 0$ and multiply \Cref{eq:001} with $r_{i}$ to get
+	\begin{equation*} 
+		r_{i} = r_{0} r_{i} + r_{1} r_{i} + \cdots.
+	\end{equation*}
+	Again, comparing the homogeneous components gives
+	\begin{equation*} 
+		r_{i} = r_{0} r_{i}.
+	\end{equation*}
+	But by the earlier calculation, the element on the right is $0$. 
+\end{proof}
+
+\begin{ex}
+	\begin{enumerate}
+		\item If $k$ is a field, and $R = k[x_{1}, \ldots, x_{d}]$, then $R$ has a natural grading with $R_{n}$ consisting of the $k$-vector space generated by monomials of degree $n$. 
+		%
+		\item Let $R$ be a graded ring, and $f \in R$ be a nonzero homogeneous element. Then, $R_{f} = R[f^{-1}]$ has a natural $R$-module structure. (Note that unless $f$ is nilpotent (in which case, $R_{f} = 0$) or $\deg(f) = 0$, $R_{f}$ will have graded pieces in the negative component. Thus, $R_{f}$ is not an $\mathbb{N}$-graded ring.)
+		%
+		\item More generally, let $S \subset R$ be a multiplicative subset consisting of homogeneous elements. Then, $S^{-1}R$ is a graded $R$-module: $(S^{-1} R)_{n}$ consists of elements of the form $r/s$ where $r \in R$ and $s \in S$ are homogeneous with $\deg(r) - \deg(s) = n$. (If $r/s = r'/s'$ with $r'$ and $s'$ also homogeneous, it will follow that $\deg(r') - \deg(s') = n$.) 
+
+		By the above definition, it follows that $R_{n} (S^{-1} R)_{m} \subset (S^{-1} R)_{m + n}$. In fact, it even follows that $S^{-1}R$ is a $\mathbb{Z}$-graded ring (the definition is the obvious one). 
+
+		Even in this case, the homogeneous elements of degree $0$ form a subring of $S^{-1} R$. 
+
+		If $\mathfrak{p} \subset R$ is a graded homogeneous prime ideal (defined just below), then one can consider $S$ to be the set of homogeneous elements not contained in $\mathfrak{p}$. This is a multiplicative subset. The $0$-degree subring of $S^{-1} R$ is sometimes denoted $R_{(\mathfrak{p})}$.	
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}[Rees algebra] \label{ex:rees-algebra}
+	Given a ring $R$ and an ideal $I$, we can construct the \deff{Rees algebra} as follows: \newline
+	Let $S_{0} \vcentcolon= R$, $S_{n} \vcentcolon= I^{n}$ for $n \ge 1$. Then,
+	\begin{equation*} 
+		\bigoplus_{n \ge 0} S_{n}
+	\end{equation*}
+	has a natural ring structure.
+
+	There is a notational issue as to how one would write an element of $S$. One way is to write them as tuples, this is unwieldy. We would like to write them as sums, but then there's the issue of whether one interprets an element $x \in I$ as sitting in $S_{1}$ or $S_{0}$. 
+
+	To combat this, we attach a dummy variable and define
+	\begin{equation*} 
+		R[It] \vcentcolon= \bigoplus_{n \ge 0} I^{n} t^{n} \cong \bigoplus_{n \ge 0} S_{n}.
+	\end{equation*}
+	The upshot is that the variable $t$ now succinctly acts as a bookkeeping device. Given a ring $R$ and an ideal $I$, we can construct the \deff{Rees algebra} as follows: \newline
+	Let $S_{0} \vcentcolon= R$, $S_{n} \vcentcolon= I^{n}$ for $n \ge 1$. Then,
+	\begin{equation*} 
+		\bigoplus_{n \ge 0} S_{n}
+	\end{equation*}
+	has a natural ring structure.
+
+	There is a notational issue as to how one would write an element of $S$. One way is to write them as tuples, this is unwieldy. We would like to write them as sums, but then there's the issue of whether one interprets an element $x \in I$ as sitting in $S_{1}$ or $S_{0}$. 
+
+	To combat this, we attach a dummy variable and define
+	\begin{equation*} 
+		R[It] \vcentcolon= \bigoplus_{n \ge 0} I^{n} t^{n} \cong \bigoplus_{n \ge 0} S_{n}.
+	\end{equation*}
+	The upshot is that the variable $t$ now succinctly acts as a bookkeeping device.
+\end{ex}
+
+\begin{defn}
+	Let $M, N$ be graded $R$-modules. A \deff{graded module homomorphism} $f : M \to N$ is a module homomorphism $f$ such that $f(M_{n}) \subset N_{n}$. 
+
+	A sequence of graded modules is defined similarly.
+\end{defn}
+
+\begin{defn}
+	Given a graded $R$-module $M$, and an integer $d$, we defined the \deff{shift} $M(d)$ to be the graded $R$-module $M$ with new grading
+	\begin{equation*} 
+		(M(d))_{n} = M_{d + n}.
+	\end{equation*}
+\end{defn}
+
+\begin{obs}
+	Let $M$ be a graded $R$-module, and $x \in R$ a homogeneous element of degree $d$. Note that 
+	\begin{equation*} 
+		M \xrightarrow{x} M
+	\end{equation*}
+	is a map of $R$-modules, but not a graded map (barring some trivial cases). 
+
+	However, by shifting the domain, we do get a graded map as
+	\begin{equation*} 
+		M(-d) \xrightarrow{x} M.
+	\end{equation*}
+	Indeed, note that if $m \in (M(-d))_{n}$, then
+	\begin{equation*} 
+		xm \in R_{d}M_{-d + n} \subset M_{n},
+	\end{equation*}
+	as desired.
+\end{obs}
+
+\begin{defn}
+	Let $M$ be a graded $R$-module. A submodule $N \subset M$ is said to be a \deff{graded (or homogeneous) $R$-submodule} if $N$ satisfies any of the following equivalent properties:
+	\begin{enumerate}
+		\item $N$ is generated by homogeneous elements.
+		\item $N = \bigoplus_{n \in \mathbb{Z}} (N \cap M_{n})$.
+		\item Whenever $x \in N$, every homogeneous component (in $M$) of $x$ is an element of $N$.
+	\end{enumerate}
+\end{defn}
+
+\begin{obs}
+	If $N \le M$ is a graded submodule, then $M/N$ has a natural grading given by
+	\begin{equation*} 
+		(M/N)_{n} \vcentcolon= M_{n}/(N \cap M_{n}).
+	\end{equation*}
+	Note that by definition, we have $N = \bigoplus_{n \in \mathbb{Z}} (N \cap M_{n})$, where this is an internal direct sum. Thus, one has the natural isomorphism $M/N \cong \bigoplus_{n \in \mathbb{Z}} (M/N)_{n}$.
+
+	Under this grading, we have an exact sequence of graded $R$-modules given as
+	\begin{equation*} 
+		0 \to N \to M \to M/N \to 0.
+	\end{equation*}
+\end{obs}
+
+For homogeneous ideals, primality can be checked on homogeneous elements:
+
+\begin{prop}
+	Let $I \subset R$ be a graded ideal with the property that if $x$, $y$ are homogeneous elements with $xy \in I$, then either $x \in I$ or $y \in I$. Then, $I$ is prime.
+\end{prop}
+
+\begin{prop} \label{prop:graded-ideal-algebra-generator}
+	Let $R$ be a graded ring. Let $S \subset R_{+}$ be any subset. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $S$ generates $R_{+}$ as an $R$-ideal.
+		\item $S$ generates $R$ as an $R_{0}$-algebra.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	Only (i) $\Rightarrow$ (ii) is nontrivial. Let $T \vcentcolon= R_{0}[S]$. We show that $R = T$ by proving $R_{n} \subset R$ for all $n \ge 0$. 
+
+	We prove this by induction. $n = 0$ is clear. Let $n > 0$. By hypothesis, we have $R_{n} \subset R_{+} = RS$. Thus,
+	\[\begin{WithArrows}[displaystyle]
+		R_{n} &= (R \cdot S) \cap R_{n} \Arrow{If $m \ge n$, then $R_{m} S \cap R_{n} = 0$ } \\
+		&= (R_{0} + \cdots + R_{n - 1}) S \cap R_{n} \Arrow{by induction} \\
+		&\subset TS \cap R_{n} \\
+		&\subset T,
+	\end{WithArrows}\]
+	as desired.
+\end{proof}
+
+\begin{cor} \label{cor:graded-noetherian-rings}
+	Let $R$ be a graded ring. \newline
+	$R$ is a Noetherian ring iff $R_{0}$ is a Noetherian ring and $R$ is a finitely generated $R_{0}$-algebra.
+\end{cor}
+\begin{proof} 
+	\backward Follows from Hilbert's Basis Theorem since we can write $R$ as a quotient of $R[x_{1}, \ldots, x_{d}]$. 
+
+	\forward $R_{+}$ is a finitely generated as an ideal and thus, $R$ is finitely generated as an $R_{0}$-algebra. $R_{0}$ is Noetherian since $R_{0} = R/R_{+}$.
+\end{proof}
+
+\begin{defn}
+	Let $R$ be a graded ring with grading $\langle R_{n} \rangle_{n \ge 0}$. Let $d > 0$. \newline
+	We define the \deff{twisted} graded ring $R^{(d)}$ to be the graded ring with
+	\begin{equation*} 
+		\left(R^{(d)}\right)_{n} = R_{dn}.
+	\end{equation*}
+
+	This is also called the \deff{$d$-th Veronese subalgebra}.
+\end{defn}
+
+$R^{(d)}$ can be visualised as follows: We have the additive subgroups $R_{0}, R_{d}, R_{2d}, \ldots$ of $R$ such that their \emph{internal} sum is direct. This realises $R^{(d)}$ as a subset (subgroup even) of $R$. We now just scale the grading by $d$.
+
+\begin{ex}
+	Consider $R = k[x, y]$ with the standard grading. Then, $R^{(2)}$, when considered as a subring of $R$ consists of those polynomials such that each monomial has even degree. 
+
+	This can be written as $k[x^{2}, xy, y^{2}]$, as a set. However, $x^{2}$ now has degree $1$ in $R^{(2)}$.
+
+	Similarly, $R^{(3)} = k[x^{3}, x^{2}y, xy^{2}, y^{3}]$.
+\end{ex}
+
+\begin{defn}
+	Let $M$ be a graded $R$-module, and $d > 0$. Let $\ell \in \{0, \ldots, d - 1\}$. Then, we define
+	\begin{equation*} 
+		M^{(d, \ell)} \vcentcolon= \bigoplus_{k : k \equiv \ell (d)} M_{k}.	
+	\end{equation*}
+	The above has the structure of a graded $R^{(d)}$-module.
+\end{defn}
+A slightly more precise way of writing the above would be to specify that the $n$-th graded component of $M^{(d, \ell)}$ is $nd + \ell$. Note that
+\begin{equation*} 
+	R^{(d)}_{m} M^{(d, \ell)}_{n} = R_{md} M_{nd + \ell} \subset M_{(m + n)d + \ell} = M^{(d, \ell)}_{m + n}
+\end{equation*}
+and thus, $M^{(d, \ell)}$ is indeed a graded $R^{(d)}$-module.
+
+\begin{defn}
+	Given a graded ring $R$, $\Proj(R)$ denotes the set of homogeneous primes of $R$ not containing $R_{+}$.
+\end{defn}
+
+Fact: $\Proj(R)$ is in bijection with $\Proj(R^{(d)})$ for all $d > 0$. 
+
+\begin{prop} \label{prop:finite-module-over-graded-ring}
+	Let $R$ be a graded ring such that $R$ is a finitely generated $R_{0}$-algebra. Let $M$ be a finitely generated graded $R$-module. (For example, if $R$ and $M$ are both Noetherian.) Let $d > 0$. \newline
+	Then, 
+	\begin{enumerate}[label=(\roman*)]
+		\item $M_{i}$ is a finitely generated $R_{0}$-module for all $i$. Moreover, $M_{i} = 0$ for $i \ll 0$.
+		\item $M^{(d, \ell)}$ is a finitely generated $R^{(d)}$-module for all $\ell$ and thus,
+		\begin{equation*} 
+			M \cong \bigoplus_{\ell = 0}^{d - 1} M^{(d, \ell)}
+		\end{equation*}
+		is so. 
+		\item In particular, $R$ is a finitely generated $R^{(d)}$-module.
+		\item $R^{(d)}$ is a finitely generated $R_{0}$-algebra.
+	\end{enumerate}
+\end{prop}
+Note that in the above, $M$ (and similarly $R$) is an ordinary $R^{(d)}$-module, not a graded one. (The module structure is the one inherited by virtue of $R^{(d)}$ being a subring of $R$, ignoring grading.)
+\begin{proof} 
+	We may assume that $m_{1}, \ldots, m_{t}$ are nonzero homogeneous and generate $M$. Let $d = \min_{i} \deg(m_{i})$. Then, $M_{n}$ must be zero for $i < d$ since any $R$-linear combination of the $m_{i}$ has degree at least $d$.\footnote{It was crucial here that $R$ is $\mathbb{N}$-graded.}
+
+	Now, let $r_{1}, \ldots, r_{p} \in R_{+} \setminus \{0\}$ be homogeneous elements that generate $R$ as an $R_{0}$-algebra. Let $d_{i} \vcentcolon= \deg(r_{i})$. 
+
+	Now, note that elements of $M_{i}$ can be written as $R_{0}$-linear combination of elements of the form
+	\begin{equation*} 
+		r_{1}^{a_{1}} \cdots r_{p}^{a_{p}} m_{s},
+	\end{equation*}
+	where $s \in \{1, \ldots, t\}$ and $a_{1}, \ldots, a_{p} \ge 0$ satisfy
+	\begin{equation*} 
+		\deg(m_{s}) + \sum_{j} a_{j} d_{j} = i.
+	\end{equation*}
+
+	But there are only finitely many such ways to pick $s$ and $a_{1}, \ldots, a_{p}$ (once we fix $i$). Thus, each $M_{i}$ is a finite $R_{0}$-module. This proves (i).
+
+	Note that each $M^{(d, \ell)}$ is a quotient of $M$ and hence it suffices to prove that $M$ is finitely generated. $M$ can be generated \emph{over $R_{0}$} by elements of the form
+	\begin{equation*} 
+		r_{1}^{a_{1}} \cdots r_{p}^{a_{p}} m_{s}
+	\end{equation*}
+	where $a_{1}, \ldots, a_{p} \ge 0$ and $s \in \{1, \ldots, t\}$. 
+
+	Since all powers of the form $r_{i}^{kd}$ are in $R^{(d)}$, we see that we have a finite generating set by restricting the $a_{i}$ to be in $[0, d - 1]$. This proves (ii) and (iii).
+
+	Since $R$ is a finitely generated $R_{0}$-algebra, $R_{+}$ is a finitely generated $R$-module (\Cref{prop:graded-ideal-algebra-generator}). By (ii), we see that $R_{+}$ is a finitely generated $R^{(d)}$-module. But $(R^{(d)})_{+} = (R_{+})^{(d, 0)}$ and thus, part (ii) tells us that this is a finitely generated $R^{(d)}$-module. Using \Cref{prop:graded-ideal-algebra-generator} again, we see that $R^{(d)}$ is a finitely generated $R_{0}$-algebra. (Note that $(R^{(d)})_{0} = R_{0}$.) \newline
+	This proves (iv). 
+\end{proof}
+
+\begin{cor}
+	If $R$ is a Noetherian graded ring, then so is $R^{(d)}$ for all $d > 0$.
+\end{cor}
+\begin{proof} 
+	Use \Cref{cor:graded-noetherian-rings} and part (iv) of the previous proposition.
+\end{proof}
+
+\begin{prop} \label{prop:n-d-stabilise}
+	Let $R$ be a graded ring, finitely generated as an $R_{0}$-algebra. Let $M$ be a finitely generated graded $R$-module. \newline
+	Then, there exist integers $n_{0}, d \ge 0$ such that
+	\begin{equation*} 
+		R_{d} M_{n} = M_{d + n}
+	\end{equation*}
+	for all $n \ge n_{0}$.
+\end{prop}
+Note that we always have $R_{d} M_{n} \subset M_{d + n}$. 
+\begin{proof} 
+	Let notation be as in the earlier proof: $m_{1}, \ldots, m_{t}$ are nonzero homogeneous and generate $M$ over $R$; $r_{1}, \ldots, r_{p} \in R_{+} \setminus \{0\}$ are homogeneous elements that generate $R$ as an $R_{0}$-algebra, with $d_{i} \vcentcolon= \deg(r_{i})$.
+
+	Set $d \vcentcolon= \lcm_{i} d_{i}$ and $n_{0} \vcentcolon= 1 + pd + \max_{i} \deg(m_{i})$. For $1 \le i \le p$, define $s_{i} \vcentcolon= r_{i}^{d/d_{i}} \in R_{d}$. \newline
+	We show that $d$ and $n_{0}$ have the properties as desired. To this end, let $n \ge n_{0}$. Pick $m \in M_{n}$. As seen earlier, we can write $m$ as an $R_{0}$-linear combination of elements of the form
+	\begin{equation} \label{eq:002}
+		r_{1}^{a_{1}} \cdots r_{p}^{a_{p}} m_{s}
+	\end{equation}
+	such that $a_{1} d_{1} + \cdots + a_{p} d_{p} + \deg(m_{s}) = n$. Note that
+	\begin{equation*} 
+		a_{1} d_{1} + \cdots + a_{p} d_{p} = n - \deg(m_{s}) > pd.
+	\end{equation*}
+	Thus, there is some $i \in \{1, \ldots, p\}$ such that $a_{i} d_{i} > d$ and thus, $a_{i} > d/d_{i}$. Thus, we may write
+	\begin{equation*} 
+		r_{i}^{a_{i}} = r_{i}^{d/d_{i}} r_{i}^{a_{i} - d/d_{i}} = s_{i} r_{i}^{a_{i} - d/d_{i}}.
+	\end{equation*}
+
+	Thus, each term of the form in \Cref{eq:002} can be written as an element of $R_{d} M_{n - d}$.
+\end{proof}
+
+Looking at the above proof, we may in fact extract a special result.
+
+\begin{por} \label{por:n-d-stabilise}
+	With the same hypothesis as earlier, assume further that $R = R_{0}[r_{1}, \ldots, r_{p}]$ with $\deg(r_{i}) = 1$ for all $i$. \newline
+	Then, we may take $d = 1$ above, i.e., $R_{1} M_{n} = M_{n + 1}$ for $n \gg 0$.
+\end{por}
+
+\begin{cor}
+	Suppose $R$ is a graded ring and a finitely generated $R_{0}$-algebra. Then, there exists $d > 0$ such that $R^{(d)}$ is generated over $R_{0}$ by $(R^{(d)})_{1} = R_{d}$.
+\end{cor}
+In other words, by taking a high enough Veronese subalgebra, we can ensure that it is generated in degree $1$.
+\begin{proof} 
+	By \Cref{prop:n-d-stabilise}, there exist $d', n_{0} > 0$ such that $R_{d'} R_{n} = R_{n + d'}$ for all $n \ge n_{0}$. \newline
+	Let $d$ be a multiply of $d'$ which is greater than $n_{0}$. Then, for $n \ge d$, we have
+	\begin{equation*} 
+		R_{d + n} = R_{d'} R_{d - d_{0} + n} = \cdots = R_{d} R_{n}.
+	\end{equation*}
+	In particular, we have $R_{kd} = (R_{d})^{k}$ for all $k \ge 1$, as desired.
+\end{proof}
+
+\subsection{Filtrations and Topology}
+
+\begin{defn}
+	Let $R$ be a ring. A \deff{filtration} on $R$ is a sequence of ideals $\langle I_{n} \rangle_{n \in \mathbb{N}}$ satisfying
+	\begin{equation*} 
+		R = I_{0} \supset I_{1} \supset I_{2} \supset \cdots \andd I_{n} I_{m} \subset I_{n + m}
+	\end{equation*}
+	for all $n, m \ge 0$. \newline
+	We say that $(R, \langle I_{n} \rangle_{n \in \mathbb{N}})$ is a \deff{filtered ring}.
+
+	Given such a filtered ring, and an $R$-module $M$, a \deff{filtration} on $M$ is a sequence of $R$-submodules $\langle M_{n} \rangle_{n \in \mathbb{N}}$ satisfying
+	\begin{equation*} 
+		M = M_{0} \supset M_{1} \supset M_{2} \supset \cdots \andd I_{n} M_{m} \subset M_{n + m}
+	\end{equation*}
+	for all $n, m \ge 0$.
+\end{defn}
+
+\begin{ex}
+	Let $R$ be any ring, $I \subset R$ an ideal, and $M$ an $R$-module. The \deff{$I$-adic filtration} on $R$ is the sequence $\langle I^{n} \rangle_{n \ge 0}$. Corresponding to this filtration, we have the filtration on $M$ given by $\langle I^{n} M \rangle_{n \ge 0}$.
+\end{ex}
+
+\begin{ex}
+	Let $R$ be a graded ring with grading $\langle R_{n} \rangle_{n \ge 0}$. Set $I_{n} \vcentcolon= R_{\ge n} = \bigoplus_{i \ge n} R_{i}$. \newline
+	Then, $\langle I_{n} \rangle_{n \ge 0}$ is a filtration on $R$.
+\end{ex}
+
+\begin{defn}
+	Let $(R, \langle I_{n} \rangle_{n \ge 0})$ be a filtered ring. The \deff{associated graded ring} $\gr(R)$ is defined by
+	\begin{equation*} 
+		\gr(R) \vcentcolon= R/I_{1} \oplus I_{1}/I_{2} \oplus I_{2}/I_{3} \oplus \cdots.
+	\end{equation*}
+	This has the natural structure of a graded ring.
+
+	Correspondingly, if we have a filtered module $(M, \langle M_{n} \rangle_{n \ge 0})$, then we define
+	\begin{equation*} 
+		\gr(M) \vcentcolon= M/M_{1} \oplus M_{1}/M_{2} \oplus M_{2}/M_{3} \oplus \cdots.
+	\end{equation*}
+	$\gr(M)$ is a graded $\gr(R)$-module.
+\end{defn}
+
+\begin{defn}
+	A \deff{topological ring} $R$ is a ring with a topology such that the following three maps are continuous:
+	\begin{itemize}
+		\item $+ : R \times R \to R$, $(x, y) \mapsto x + y$;
+		\item $\cdot : R \times R \to R$, $(x, y) \mapsto x y$;
+		\item $- : R \to R$, $x \mapsto -x$.
+	\end{itemize}
+
+	$R$ is said to have a \deff{linear topology} if $0$ has a neighbourhood basis of ideals (that is, there is a collection of ideals $\mathcal{I}$ such that any neighbourhood of $0$ contains an ideal $I \in \mathcal{I}$).
+\end{defn}
+
+Note for any fixed $x \in R$, the translation map $T_{x} : R \to R$ defined by $y \mapsto x + y$ is a homeomorphism which takes $0$ to $x$. Thus, studying neighbourhoods of $0$ is sufficient.
+
+Note that if $\langle I_{n} \rangle_{n \ge 0}$ is a filtration on a ring $R$, then the collection of all cosets $\{x + I_{n} : x \in R,\, n \ge 0\}$ is a basis for a topology on $R$. Indeed, it is clear that the union is all of $R$. Suppose that $z \in (x + I_{n}) \cap (y + I_{m})$. Then, check that
+\begin{equation*} 
+	z \in (z + I_{n + m}) \subset (x + I_{n}) \cap (y + I_{m}).
+\end{equation*}
+
+\begin{defn}
+	Given a filtration $\langle I_{n} \rangle_{n \ge 0}$ on $R$, the topology generated by the basis $\{x + I_{n} : x \in R,\, n \ge 0\}$ is called the \deff{topology induced} by $\langle I_{n} \rangle_{n \ge 0}$.
+
+	Similarly, given a filtration $\langle M_{n} \rangle_{n \ge 0}$ on an $R$-module $M$, one gives $M$ a topology.
+\end{defn}
+
+This is the topology that we will be focusing on now.
+
+\begin{prop}
+	Let $\langle I_{n} \rangle_{n \ge 0}$ be a filtration on $R$. Then, $R$ is a topological ring under the induced topology. (Similarly, $M$ is a topological $R$-module.)
+\end{prop}
+\begin{proof} 
+	For $x, y \in R$ and $n \ge 0$, note that
+	\begin{align*} 
+		(x + I_{n}) + (y + I_{n}) &\subset x + y + I_{n}, \\
+		(x + I_{n}) \cdot (y + I_{n}) &\subset xy + I_{n}, \\
+		-(x + I_{n}) = -x + I_{n}.
+	\end{align*}
+	The continuity of the three operations now follows. The reader may formulate the definition of a topological module and prove the result similarly.
+\end{proof}
+
+\begin{obs}
+	Note that the $I_{n}$ are clopen subsets of $R$. Indeed, each $I_{n}$ by virtue of being a basis element. On the other hand, we can write the complement as a union of open sets as well: $R \setminus I_{n} = \bigcup_{x \notin I_{n}} (x + I_{n})$. 
+
+	Similarly, each $x + I_{n}$ is a clopen subset.
+\end{obs}
+
+\begin{ex}
+	We consider the $\mathfrak{m}$-adic topology on $R$ for the following cases.
+	\begin{enumerate}
+		\item $R = \mathbb{Z}$, $\mathfrak{m} = (p)$ for some prime $p$. \newline
+		In this topology, $x$ and $y$ are ``close'' if $x - y$ is divisible by a ``large'' power of $p$.
+		%
+		\item $R = k[x, y]$, $\mathfrak{m} = (x, y)$. \newline
+		Here, $f$ and $g$ are ``close'' if $f - g \in \mathfrak{m}^{i}$ for ``large'' $i$ (i.e., all monomials appearing in $f - g$ have degree $\ge i$).
+	\end{enumerate}
+\end{ex}
+
+\begin{prop} \label{prop:hausdorff-iff-trivial-intersection}
+	$\langle I_{n} \rangle_{n \ge 0}$ induces a Hausdorff topology iff $\bigcap_{n \ge 0} I_{n} = 0$. \newline
+	Similarly, a filtered $R$-module $M$ is Hausdorff iff $\bigcap_{n \ge 0} M_{n}$.
+\end{prop}
+\begin{proof} 
+	We prove the statement about rings and leave the other one to the reader.
+
+	\forward Suppose $\bigcap_{n \neq 0} I_{n} \neq 0$. Pick a nonzero $y$ in the intersection. Then, $y$ and $0$ cannot be separated.
+
+	\backward As noted, each $I_{n}$ is closed. Thus, the intersection being $0$ implies that $\{0\}$ is closed. By continuity of multiplication, the diagonal is then closed in $R \times R$, which is equivalent to $R$ being Hausdorff.
+\end{proof}
+
+An alternate proof for \backward direction: Let $x, y \in R$ be distinct. Pick $N$ large such that $x - y \notin I_{N}$. Then, $x + I_{N}$ and $y + I_{N}$ are disjoint neighbourhoods.
+
+\begin{prop}
+	Let $M$ be a filtered $R$-module, and $N \le M$ a submodule. Then,
+	\begin{equation*} 
+		\overline{N} = \bigcap_{n \ge 0} (N + M_{n}).
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	Let $x \in M$. $x \in \overline{N}$ iff every basic neighbourhood of $x$ intersects $N$ iff $(x + M_{n}) \cap N \neq \emptyset$ for all $n$. This happens iff $x \in N + M_{n}$ for all $n$.
+\end{proof}
+
+\subsection{The Artin-Rees Lemma}
+
+We wish to prove the Artin-Rees Lemma. Loosely speaking, it tells us the following (under Noetherian hypotheses): Suppose $N \subset M$ is a submodule, and $I \subset R$ an ideal. Give $M$ the $I$-adic topology. Now, we can give $N$ a topology in two ways: either the subspace topology, or the $I$-adic topology. The Artin-Rees lemma gives us that the two are the same.
+
+We will assume the following setup for this subsection.
+
+\begin{tcolorbox}
+	\textbf{Setup.} $R$ is a Noetherian ring. $I \subset R$ is an ideal, and $R$ is given the $I$-adic filtration. \newline
+	$M$ is a finitely generated $R$-module with some filtration $\langle M_{n} \rangle_{n \ge 0}$. $N \subset M$ is an $R$-submodule. \newline
+	$S \vcentcolon= R[It]$ is the Rees algebra (as defined in \Cref{ex:rees-algebra}).
+\end{tcolorbox}
+
+\begin{defn}
+	The filtration $\langle M_{n} \rangle_{n \ge 0}$ is said to be $I$-good if $I M_{n} = M_{n + 1}$ for $n \gg 0$.
+\end{defn}
+
+\begin{lem} \label{lem:I-good-finitely-generated}
+	$\langle M_{n} \rangle_{n \ge 0}$ is $I$-good iff $F = \bigoplus_{n \ge 0} M_{n} t^{n}$ is a finitely generated $S$-module.
+\end{lem}
+As before, the variable $t^{n}$ in the direct sum above is for bookkeeping. This definition makes $F$ a graded $S$-module. (Indeed, the definition of filtration implies that $I_{n}t^{n} M_{m}t^{m} \subset M_{n + m}t^{n + m}$.)
+\begin{proof} 
+	\backward Suppose $F$ is a finitely generated $S$-module. Note that $S$ is finitely generated in degree $1$. Thus, \Cref{por:n-d-stabilise} tells us that $S_{1} M_{n} = M_{n + 1}$ for $n \gg 0$. This translates to $I M_{n} = M_{n + 1}$ for $n \gg 0$, which is precisely being $I$-good.
+
+	\forward Let $n_{0}$ be such that $I M_{n} = M_{n + 1}$ holds for all $n \ge n_{0}$. \newline
+	Now, each of $M_{0}, \ldots, M_{n_{0}}$ is finitely generated (over $R = S_{0}$) and the above equation shows that using generators for these is enough to generate everything.
+\end{proof}
+
+\begin{lem} \label{lem:rees-algebra-noetherian}
+	$S$ is Noetherian.
+\end{lem}
+\begin{proof} 
+	Note that $S_{0} = R$ is Noetherian, and $S$ is a finitely generated $R$-algebra. (Indeed, if $x_{1}, \ldots, x_{n}$ generate $I$ as an $R$-ideal, then $x_{1} t, \ldots, x_{n} t$ generate $S$ as an $R_{0}$-algebra.)
+\end{proof}
+
+\begin{thm}[Artin-Rees Lemma] \label{thm:artin-rees}
+	Let $R$ be a Noetherian ring, $I \subset R$ an ideal, $M$ a finitely generated $R$-module, and $N \subset M$ a submodule. \newline
+	Then,
+	\begin{enumerate}[label=(\roman*)]
+		\item there exists $c \ge 1$ such that $I^{n + c} M \cap N = I^{n}(I^{c} M \cap N)$ for all $n \ge 1$;
+		\item there exists $c \ge 1$ such that $I^{n + c} M \cap N \subset I^{n} N$ for all $n \ge 1$;
+		\item the subspace topology on $N$ (when $M$ is given the $I$-adic topology) agrees with the $I$-adic topology on $N$.
+	\end{enumerate}
+\end{thm}
+In the statement of (ii), we can add some more obvious inclusions:
+\begin{equation*} 
+	I^{n + c} M \subset I^{n + c} M \cap N \subset I^{n} N \subset I^{n} M.
+\end{equation*}
+This shows how (ii) implies (iii). It is also clear that (i) implies (ii). So we shall only prove (i).
+
+\begin{proof} 
+	Note that (i) is equivalent to proving the filtration $\langle I^{n} M \cap N \rangle_{n \ge 0}$ on $N$ is $I$-good. \newline
+	Clearly, the $I$-adic filtration on $M$ is $I$-good. Thus, $\bigoplus_{n \ge 0} I^{n} M$ is a finitely generated $S$-module (\Cref{lem:I-good-finitely-generated}). \newline
+	Since $S$ is Noetherian (\Cref{lem:rees-algebra-noetherian}), it follows that the submodule $\bigoplus_{n \ge 0} (I^{n} M \cap N)$ is finitely generated. \newline
+	Now, using \Cref{lem:I-good-finitely-generated} again shows that $\langle I^{n} M \cap N \rangle_{n \ge 0}$ is $I$-good, as desired.
+\end{proof}
+
+\subsection{Krull's intersection theorems}
+
+We now use the Artin-Rees lemma to deduce that certain infinite intersections are zero. In view of \Cref{prop:hausdorff-iff-trivial-intersection}, it is saying that a certain module is Hausdorff.
+
+\begin{thm} \label{thm:KIT}
+	Let $(R, \mathfrak{m})$ be a local Noetherian ring, and $I \subsetneq R$ a proper ideal. If $M$ is a finitely generated $R$-module, then
+	\begin{equation*} 
+		\bigcap_{n \ge 0} I^{n} M = 0.
+	\end{equation*}
+	That is, the $I$-adic topology on $M$ is Hausdorff. 
+
+	In particular, $\bigcap_{n \ge 0} I^{n} = 0$. 
+\end{thm}
+A special case is $I = \mathfrak{m}$. 
+\begin{proof} 
+	Let $N \vcentcolon= \bigcap_{n \ge 0} \mathfrak{m}^{n} M$. We wish to show that $N = 0$. Let $c$ be as given by the \mynameref{thm:artin-rees}. Note that $N \subset \mathfrak{m}^{1 + c} M$, by definition of $N$. Thus, we have
+	\begin{equation*} 
+		N \subset \mathfrak{m}^{1 + c} M \cap N \subset \mathfrak{m} N.
+	\end{equation*}
+	Now, using NAK, we see that $N = 0$, as desired.
+\end{proof}
+\begin{proof}[Aliter.]
+	We use topological language in this proof. As before, let $N$ be the intersection. \newline
+	\mynameref{thm:artin-rees} tells us that the $\mathfrak{m}$-adic topology on $N$ is the restriction of the $\mathfrak{m}$-adic topology on $M$. Note that $N$ is contained in every $\mathfrak{m}$-adic neighbourhood of $0$ in $M$. Thus, only neighbourhood of $0$ in $N$ is $N$ itself. \newline
+	It follows that $N$ has the indiscrete topology. But $\mathfrak{m} N$ is a nonempty open subset in the $\mathfrak{m}$-adic topology. Thus, $N = \mathfrak{m} N$ and hence, $N = 0$ by NAK.
+\end{proof}
+
+\begin{por}
+	If $R$ is a commutative ring, $M$ a finitely generated $R$-module, and $I$ is contained in the Jacobson radical of $R$, then $\bigcap_{n \ge 0} I^{n} M = 0$.
+\end{por}
+
+\begin{cor}
+	Let $R$ be a Noetherian ring, $M$ a finitely generated $R$-module, and $I$ be an ideal contained in the Jacobson radical. Then, every submodule $N \le M$ is closed in the $I$-adic topology. In particular, every ideal of $R$ is closed in the $I$-adic topology.
+\end{cor}
+\begin{proof} 
+	$M/N$ is a Hausdorff space in the $I$-adic topology. In particular, $\{0\}$ is closed. The map $\pi : M \to M/N$ is continuous (both have the $I$-adic topology). Thus, $N = \pi^{-1}(0)$ is closed.
+\end{proof}
+
+\begin{thm}
+	Let $R$ be a Noetherian integral domain (not necessarily local). \newline
+	Let $I \subsetneq R$ be a proper ideal. Then,
+	\begin{equation*} 
+		\bigcap_{n \ge 0} I^{n} = 0.
+	\end{equation*}
+\end{thm}
+\begin{proof} 
+	Let $\mathfrak{m} \supset I$ be maximal. Since $R$ is a domain, have the inclusion $R \into R_{\mathfrak{m}}$. Thinking of $R$ and $R_{\mathfrak{m}}$ as subrings of the fraction field, we note the containments
+	\begin{align*} 
+		\bigcap_{n \ge 0} I^{n} &\subset \left(\bigcap_{n \ge 0} I^{n}\right) R_{\mathfrak{m}} \\
+		&\subset \bigcap_{n \ge 0} (I R_{\mathfrak{m}})^{n} = 0,
+	\end{align*} 
+	where the last equality follows from \Cref{thm:KIT}, since $R_{\mathfrak{m}}$ is local.
+\end{proof}
+
+\begin{ex}
+	The theorems breaks down if drop both the hypotheses of being local and integral domain. \newline
+	Indeed, take any ring $R$ with a nontrivial idempotent $e$. Then, the ideal $(e)$ is an idempotent ideal and hence $\bigcap_{n \ge 0} (e)^{n} = (e) \neq 0$. (Note that this is possible when $R$ is Noetherian, finite even.)
+
+	If $R$ is not assumed Noetherian, then one cannot conclude even with the integral domain and local hypothesis. Consider $R = \mathbb{Z}_{(p)}[p^{1/p}, p^{1/p^{2}}, \ldots]$. \newline
+	Then, $R$ is a local domain with maximal ideal $\mathfrak{m} = (p^{1/p}, p^{1/p^{2}}, \ldots)$. But $\mathfrak{m}$ is idempotent.
+\end{ex}
+
+\section{Dimension Theory}
+
+We may tacitly be assuming that $M \neq 0$ in many places, when we talk about dimension. It may be safe to assume that we are defining $\dim(M) = -1$ when $M = 0$.
+
+\subsection{Integer valued polynomials}
+
+As before, we continue with the notation that $0 \in \mathbb{N}$. We use $\mathbb{N}_{\ge 1}$ to denote the set of positive integers.
+
+\begin{defn}
+	A function $f : \mathbb{Z} \to \mathbb{Z}$ is an \deff{eventual polynomial} if there exists a polynomial $P(t) \in \mathbb{Q}[t]$ such that 
+	\begin{equation*} 
+		f(n) = P(n) \quad \text{for all $n \gg 0$}.
+	\end{equation*}
+	The \deff{degree} of $f$ is defined to be the degree of $P$.
+\end{defn}
+Note that the polynomial $P$ is uniquely determined. For if $Q$ is another such polynomial, then $P - Q$ vanishes at infinitely many points. Thus, the degree is well-defined.
+
+\begin{defn}
+	For a function $f : \mathbb{Z} \to \mathbb{Z}$, we define the \deff{difference function} $\Delta f : \mathbb{N}_{\ge 1} \to \mathbb{Z}$ by
+	\begin{equation*} 
+		(\Delta f)(n) \vcentcolon= f(n) - f(n - 1).
+	\end{equation*}
+\end{defn}
+
+\begin{prop} \label{prop:eventually-polynomial-iff-difference}
+	Let $f : \mathbb{Z} \to \mathbb{Z}$ be any function. The following are equivalent:
+	\begin{enumerate}
+		\item $f$ is eventually polynomial.
+		\item $\Delta f$ is eventually polynomial.
+	\end{enumerate}
+	In this case, we have $\deg(f) = \deg(\Delta f) + 1$.
+\end{prop}
+We are not worrying about degree of the zero polynomial. The reader can take care of that.
+\begin{proof} 
+	If $f$ agrees with $P$ eventually, then $\Delta f$ agrees with $\Delta P$ eventually. In this case, we clearly have $\deg(f) = \deg(\Delta f)$.
+
+	Now suppose that $\Delta f$ is eventually a polynomial. Assume $Q(t) \in \mathbb{Q}[t]$ and $N > 1$ are such that
+	\begin{equation*} 
+		\Delta f(n) = Q(n)
+	\end{equation*}
+	for $n \ge N$.
+
+	For $n > N$, note that we have $f(n) = f(n - 1) + \Delta f(n)$. Adding such equalities gives us
+	\begin{equation*} 
+		f(n) = f(N) + \sum_{k = N}^{n - 1} \Delta f(k) = f(N) + \sum_{k = N}^{n - 1} Q(k).
+	\end{equation*}
+	Thus, for a constant $C \in \mathbb{Z}$, we can write
+	\begin{equation*} 
+		f(n) = C + \sum_{k = 0}^{n - 1} Q(k).
+	\end{equation*}
+	But now note that the sum is itself a polynomial of degree $\deg(Q) + 1$. This finishes the proof.
+\end{proof}
+
+\begin{defn}
+	For $n \ge 0$, define the rational polynomial $\binom{t}{n} \in \mathbb{Q}[t]$ as
+	\begin{equation*} 
+		\binom{t}{n} \vcentcolon= \frac{t(t - 1) \cdots (t - (n - 1))}{n!}.
+	\end{equation*}
+\end{defn}
+
+Note that $\binom{t}{n}$ is a polynomial with (non-integer) rational coefficients, but takes integer values at all integers. We show that these polynomials are essentially all.
+
+\begin{prop}
+	Let $P(t) \in \mathbb{Q}[t]$. The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $P(t) = \sum_{n} c_{n} \binom{t}{n}$ for some sequence of integers $\langle c_{n} \rangle_{n \ge 0}$ eventually zero.
+		\item $P(n) \in \mathbb{Z}$ for all $n \in \mathbb{Z}$.
+		\item $P(n) \in \mathbb{Z}$ for all $n \gg 0$.
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	(i) $\Rightarrow$ (ii) $\Rightarrow$ (iii) is clear.
+
+	(iii) $\Rightarrow$ (ii): Write $P(x) = Q(x)/M$ for $Q(x) \in \mathbb{Z}[x]$ and $M \in \mathbb{N}_{\ge 1}$. \newline
+	If there exists $n \in \mathbb{Z}$ such that $M$ does not divide $Q(n)$, then $M$ does not divide $Q(n + M)$ either. \newline
+	In other words, if $P(n) \notin \mathbb{Z}$, then $P(n + M)$, $P(n + 2M)$, $\ldots$ are also not in $\mathbb{Z}$.
+
+	(ii) $\Rightarrow$ (i): Let $d \vcentcolon= \deg(P)$. By linear algebra, we can write
+	\begin{equation*} 
+		P(t) = \sum_{k = 0}^{d} a_{k} \binom{t}{k},
+	\end{equation*}
+	for some choice of rationals $a_{k} \in \mathbb{Q}$. 
+
+	Now, evaluating the above sequentially at $t = 0, \ldots, d$ shows that each $a_{k}$ is an integer. (Note that for such $t$, $\binom{t}{k}$ vanishes when $k > t$ and equals $1$ when $k = t$.)
+\end{proof}
+
+\begin{rem}
+	The above holds even if we started with $P(t) \in \mathbb{R}[t]$ or $\mathbb{C}[t]$. Lagrange interpolation immediately tells us that such a $P$ must have rational coefficients.
+\end{rem}
+
+\subsection{Embedding dimension}
+
+\begin{defn}
+	Let $(R, \mathfrak{m}, k)$ be a local Noetherian ring. The \deff{embedding dimension} of $R$ is defined as
+	\begin{equation*} 
+		\edim(R) \vcentcolon= \dim_{k}(\mathfrak{m}/\mathfrak{m}^{2}).
+	\end{equation*}
+\end{defn}
+
+By Nakayama's lemma, the above is equal to the minimum number of generators needed to generate $\mathfrak{m}$ (as an $R$-ideal). This is not a very good notion. We try capture information by looking at all quotients of the form $\mathfrak{m}^{k}/\mathfrak{m}^{k + 1}$.
+
+\subsection{Dimension \`{a} la Hilbert polynomials}
+
+We now define some functions, which we show are eventually polynomial. Then we define dimension using the degree.
+
+\begin{defn} \label{defn:hilbert-samuel-function}
+	Let $(R, \mathfrak{m}, k)$ be a local Noetherian ring. The function
+	\begin{equation*} 
+		n \mapsto \ell(R/\mathfrak{m}^{n})
+	\end{equation*}
+	is eventually polynomial. This function is called the \deff{Hilbert-Samuel function}. \newline
+	The corresponding polynomial is called the \deff{Hilbert-Samuel polynomial}. Its degree is defined to be the \deff{dimension} of $R$, denoted $\dim(R)$.
+
+	More generally, if $M \neq 0$ is a finitely generated $R$-module, then
+	\begin{equation*} 
+		n \mapsto \ell(M/\mathfrak{m}^{n} M)
+	\end{equation*}
+	is eventually polynomial, whose degree defines $\dim(M)$. We define the \deff{Hilbert-Samuel polynomial} $H_{M}(t) \in \mathbb{Q}[t]$ to be the polynomial such that $H_{M}(n) = \ell(M/\mathfrak{m}^{n} M)$ for $n \gg 0$.
+
+	Moreover, $\dim(M) \le \edim(R)$. (In particular, $\dim(R) \le \edim(R)$.)
+\end{defn}
+These assertions are \Cref{prop:hilbert-samuel-function}.
+
+In the above, $\ell$ denotes the length of the $R$-module. Note that $M/\mathfrak{m}^{n} M$ is annihilated by $\mathfrak{m}^{n}$ and is hence, Artinian (\Cref{cor:annihilated-maximals-artinian-noetherian}) and therefore has finite length. We also have
+\begin{equation*} 
+	\ell(M/\mathfrak{m}^{n}) = \sum_{i = 0}^{n - 1} \dim_{k}(\mathfrak{m}^{i}M/\mathfrak{m}^{i + 1}M).
+\end{equation*}
+
+\begin{defn} \label{defn:hilbert-function}
+	Let $k$ be a field, and $M \neq 0$ be a finitely generated graded module over the polynomial ring $k[x_{1}, \ldots, x_{r}]$. Then, the \deff{Hilbert function}, defined by
+	\begin{equation*} 
+		n \mapsto \sum_{i \le n} \dim_{k}(M_{i})
+	\end{equation*}
+	is eventually a polynomial of degree $\le r$ (\Cref{prop:hilbert-function}).
+
+	 The corresponding polynomial is denoted by $f_{M}^{+}(t) \in \mathbb{Q}[t]$, and is called the \deff{Hilbert polynomial}. We also define $f_{M} \vcentcolon= \Delta f_{M}^{+}$.
+\end{defn}
+Note that in the above, it makes sense to talk about $\dim_{k}(M_{i})$ since $k$ is in fact a subring of the polynomial ring. (As opposed to earlier, when we cannot talk about $\dim_{k}(R/\mathfrak{m}^{n})$.) Moreover, these dimensions are finite, by \Cref{prop:finite-module-over-graded-ring}.
+
+\begin{ex}[Dimension of a field] \label{ex:dimension-field}
+	Let $k$ be a field (and hence, a local ring), and $M \neq 0$ be a finitely generated $k$-module. Then, $\dim(M) = 0$. In particular, $\dim(k) = 0$. (Note the contrast from the usual vector space dimension.)
+
+	To see this, note that the maximal ideal here is $0$. Thus, $\ell(M/\mathfrak{m}^{n} M) = \ell(M)$ for all $n$. Thus, the Hilbert-Samuel polynomial is constant, i.e., its degree is zero.
+\end{ex}
+
+\begin{ex}[Dimension of a polynomial ring] \label{ex:dimension-polynomial-field}
+	Let $k$ be a field, and $R = k[x_{1}, \ldots, x_{d}]_{(x_{1}, \ldots, x_{d})}$. \newline
+	Note that $R$ is a local ring with maximal ideal $\mathfrak{m} = (x_{1}, \ldots, x_{d})$. We claim that $\dim(R) = d$.
+
+	To see this, note that $\mathfrak{m}^{n}/\mathfrak{m}^{n + 1}$ has a $k$-basis given by (the images of) the monomials of degree $n$. (Here we are looking at $k$ as the quotient $R/\mathfrak{m}$ and not the subring $k \subset R$.) \newline
+	Thus,
+	\begin{equation*} 
+		\dim_{k}(\mathfrak{m}^{n}/\mathfrak{m}^{n + 1}) = \binom{d + n - 1}{d - 1}.
+	\end{equation*}
+	Thus, the above is a polynomial (in $n$) of degree $d - 1$. In turn, $\ell(M/\mathfrak{m}^{n})$ is a polynomial of degree $d$.
+\end{ex}
+
+\begin{prop} \label{prop:hilbert-function}
+	The assertions made in \Cref{defn:hilbert-function} hold.
+\end{prop}
+\begin{proof} 
+	Define $g_{M} : \mathbb{Z} \to \mathbb{Z}$ to be $g_{M}(n) = \dim_{k}(M_{n})$. Note that this is the difference function of the one given in the definition. Thus, by \Cref{prop:eventually-polynomial-iff-difference}, it suffices to show that that $g_{M}$ is eventually polynomial.
+
+	We repeatedly use the following fact: If 
+	\begin{equation*} 
+		0 \to M' \to M \to M'' \to 0
+	\end{equation*}
+	is an exact sequence of \emph{graded} $R$-modules, then $g_{M} = g_{M'} + g_{M''}$.
+
+	Note that as a consequence, we get that if we there is a filtration
+	\begin{equation*} 
+		0 = M_{0} \subset M_{1} \subset \cdots \subset M_{t},
+	\end{equation*}
+	then
+	\begin{equation*} 
+		g_{M_{t}} = g_{M_{t}/M_{t - 1}} + \cdots + g_{M_{1}/M_{0}}.
+	\end{equation*}
+	In particular, if all the functions on the right are eventually polynomials of degree $d$, then the same is true for $g_{M_{t}}$. ($t$ here is fixed.)
+
+	Another trick that we will use is that we will consider modules annihilated by $x_{r}$, so that we can view them as modules over a smaller polynomial ring. Note that the function $g_{M}$ does not change.
+
+	We prove the statement by induction on $r$.
+
+	If $r = 0$, then the statement is clear since $g_{M}$ is eventually zero. Thus, $f_{M}^{+}$ is a constant polynomial.
+
+	Since $x_{r}$ is homogeneous, we have a chain of graded submodules of $M$ given by
+	\begin{equation*} 
+		0 \subset \ann_{M}(x_{r}) \subset \ann_{M}(x_{r}^{2}) \subset \cdots.
+	\end{equation*}
+	Since $M$ is Noetherian, then above stabilises to some $M'$. 
+
+	Note that each $\ann_{M}(x_{r}^{i})/\ann_{M}(x_{r}^{i + 1})$ is a finitely generated module over the polynomial ring in $r - 1$ variables. By induction, each of these modules have a Hilbert polynomial\footnote{By this, we mean that the corresponding function is eventually polynomial for them.} of degree $\le r - 1$. Thus, by our observation about filtrations, the same is true for $M'$. 
+
+	Thus, we have shown that $g_{M'}$ is a eventually a polynomial of degree $\le r - 1$. Since we have the graded exact sequence
+	\begin{equation*} 
+		0 \to M' \to M \to M/M' \to 0,
+	\end{equation*}
+	it suffices to prove that $g_{M/M'}$ is eventually a polynomial of degree $\le r$. Thus, we may replace $M$ with $M/M'$. The gain is that $x_{r}$ is a nonzerodivisor on $M/M'$.
+
+	Now, note that we have a graded exact sequence
+	\begin{equation*} 
+		0 \to M(-1) \xrightarrow{x_{r}} M \to M/(x_{r}) \to 0.
+	\end{equation*}
+	Thus, we have
+	\begin{equation*} 
+		g_{M} - g_{M(-1)} = g_{M/(x_{r})}.
+	\end{equation*}
+	Again, by induction, the right function is eventually polynomial of degree $\le r - 1$. Moreover the left function is exactly $\Delta g_{M}$. Thus, \Cref{prop:eventually-polynomial-iff-difference} tells us that $g_{M}$ is eventually a polynomial of degree $\le r$. 
+\end{proof}
+
+\begin{rem}
+	Note that in the above proof, we did not really use that $k[x_{1}, \ldots, x_{r}]$ is a polynomial ring. Rather, all we needed was a finitely generated graded $k$-algebra, with generators in degree $1$. (The proof would have to be slightly modified if the generators are homogeneous of different degrees.)
+\end{rem}
+
+\begin{prop} \label{prop:hilbert-samuel-function}
+	The assertions made in \Cref{defn:hilbert-samuel-function} hold.
+\end{prop}
+\begin{proof} 
+	We prove the result for modules. Consider the associated graded ring $\gr(R) = \bigoplus_{n \ge 0} \mathfrak{m}^{n}/\mathfrak{m}^{n + 1}$ and the associated graded module $\gr(M) = \bigoplus_{n \ge 0} \mathfrak{m}^{n} M/\mathfrak{m}^{n + 1} M$.
+
+	Let $r = \edim(R)$. Then, we can generate $\mathfrak{m}$ by some $t_{1}, \ldots, t_{r} \in \mathfrak{m}$. Note that $\gr(R)_{0} = R/\mathfrak{m} = k$. We have a surjective map of graded $k$-algebras 
+	\begin{equation*} 
+		k[x_{1}, \ldots, x_{r}] \to \gr(R)
+	\end{equation*}
+	given by
+	\begin{equation*} 
+		x_{i} \mapsto \overline{t_{i}}.	
+	\end{equation*}
+	(Note that $x_{i}$ and $\overline{t}_{i} \in \mathfrak{m}/\mathfrak{m}^{2}$ both do have degree $1$.)
+
+	Thus, $\gr(M)$ is a finitely generated graded $k[x_{1}, \ldots, x_{r}]$-module. Now, by \Cref{prop:hilbert-function}, the function
+	\begin{equation*} 
+		n \mapsto \dim_{k}(\mathfrak{m}^{n} M/\mathfrak{m}^{n + 1} M)
+	\end{equation*}
+	is eventually polynomial, of degree $\le r - 1$.
+
+	In turn, the Hilbert-Samuel function
+	\begin{equation*} 
+		n \mapsto \sum_{i = 0}^{n - 1} \dim_{k}(\mathfrak{m}^{i} M/\mathfrak{m}^{i + 1} M)
+	\end{equation*}
+	is eventually a polynomial of degree $\le r$.
+\end{proof}
+
+\subsection{Properties of dimension}
+
+To summarise, we have shown the following:
+\begin{itemize}
+	\item If $M$ is a finitely generated module over $(R, \mathfrak{m})$, then we have a polynomial $H_{M}$ such that $H_{M}(n) = \ell(M/\mathfrak{m}^{n} M)$ for large $n$.
+	%
+	\item If $M$ is a finitely generated graded module over $k[x_{1}, \ldots, x_{r}]$, then there are polynomials $f_{M}$, $f_{M}^{+}$ such that
+	\begin{equation*} 
+		f_{M}(n) = \dim_{k}(M_{n}) \andd f_{M}^{+}(n) = \sum_{i \le n} \dim_{k}(M_{i})
+	\end{equation*}
+	for large $n$.
+\end{itemize}
+
+We now wish to see how the degrees of these polynomials interact with exact sequences. It is direct for the graded case. The local case requires more work.
+
+\begin{prop}
+	Suppose we have an exact sequence
+	\begin{equation*} 
+		0 \to M' \to M \to M'' \to 0
+	\end{equation*}
+	of graded modules over $k[x_{1}, \ldots, x_{r}]$. Then,
+	\begin{equation*} 
+		f_{M} = f_{M'} + f_{M''} \andd f_{M}^{+} = f_{M'}^{+} + f_{M''}^{+}.
+	\end{equation*}
+	Consequently, $\deg(f_{M}) = \max(\deg(f_{M'}), \deg(f_{M''}))$.
+\end{prop}
+\begin{proof} 
+	The first result about the sum is clear since the exact sequence is graded, giving an exact sequence of $k$-vector space. \newline
+	The statement about degree follows since the leading coefficients of the concerned polynomials are positive.
+\end{proof}
+
+\begin{prop} \label{prop:local-dimensions-short-exact-sequence}
+	Let $(R, \mathfrak{m})$ be a Noetherian local ring. Let
+	\begin{equation*} 
+		0 \to M' \to M \to M'' \to 0
+	\end{equation*}
+	be an exact sequence of finite $R$-modules. Then, $\dim(M) = \max(\dim(M'), \dim(M''))$.
+\end{prop}
+\begin{proof} 
+	Note that since $\otimes_{R} R/\mathfrak{m}^{n}$ is a right-exact functor, we have the exact sequence
+	\begin{equation*} 
+		M'/\mathfrak{m}^{n} M' \to M/\mathfrak{m}^{n} M \to M''/\mathfrak{m}^{n} M'' \to 0.
+	\end{equation*}
+	We show that the genuine kernel is a ``good approximation'' for the leftmost term there. To this end, let $M'_{n} \vcentcolon= M'/\mathfrak{m}^{n} M'$, and let $K_{n}$ be the genuine kernel, i.e., the sequence
+	\begin{equation} \label{eq:003}
+		0 \to K_{n} \to M/\mathfrak{m}^{n} M \to M''/\mathfrak{m}^{n} M'' \to 0
+	\end{equation}
+	is exact.
+
+	Note that $K_{n} \cong (M' + \mathfrak{m}^{n}M)/\mathfrak{m}^{n}M \cong M'/(N' \cap \mathfrak{m}^{n}N)$. In particular, we have a surjection $M'_{n} \onto K_{n}$ and thus, $\ell(K_{n}) \le \ell(M'_{n})$.
+
+	On the other hand, \mynameref{thm:artin-rees} implies the existence of $c \ge 1$ such that
+	\begin{equation*} 
+		M' \cap \mathfrak{m}^{n} M \subset \mathfrak{m}^{n - c} M'
+	\end{equation*}
+	for all $n \ge c$.
+
+	Thus, for $n \ge c$, we have
+	\begin{equation} \label{eq:004}
+		\ell(M'_{n - c}) \le \ell(K_{n}) \le \ell(M'_{n}).
+	\end{equation}
+
+	Note that \Cref{eq:003} tells us that the Hilbert polynomials satisfy
+	\begin{equation} \label{eq:005}
+		H_{M}(n) = H_{M''}(n) + \ell(K_{n})
+	\end{equation}
+	for all $n$.
+
+	This implies that $n \mapsto \ell(K_{n})$ is eventually a polynomial. \Cref{eq:004} shows that $H_{M'}$ has the same degree as this. The result now follows from \Cref{eq:005} since the leading coefficients of the polynomials in questions are positive.
+\end{proof}
+
+\begin{cor} \label{cor:dimension-direct-sum}
+	If $M$ is a Noetherian module over a Noetherian local ring, then $\dim(M^{\oplus n}) = \dim(M)$ for all $n \ge 1$.
+\end{cor}
+
+\begin{thm}
+	Let $R$ be a local Noetherian ring. Then, $\dim(R) = \dim(R/\nil(R))$.
+\end{thm}
+$\nil(R)$ above denotes the ideal of nilpotents.
+\begin{proof} 
+	Let $I = \nil(R)$. Since $R$ is Noetherian, we have $I^{n} = 0$ for $n \gg 0$. Thus, it suffices to prove that
+	\begin{equation*} 
+		\dim(R/I^{k}) = \dim(R/I^{k + 1})
+	\end{equation*}
+	for all $k \ge 1$.
+
+	Note that we have an exact sequence
+	\begin{equation*} 
+		0 \to I^{k}/I^{k + 1} \to R/I^{k + 1} \to R/I^{k} \to 0
+	\end{equation*}
+	of $R$-modules.
+
+	In view of \Cref{prop:local-dimensions-short-exact-sequence}, it suffices to show that $\dim(I^{k}/I^{k + 1}) \le \dim(R/I^{k + 1})$.
+
+	Note that $I^{k}/I^{k + 1}$ is a (finitely generated) $R/I^{k}$-module. Thus, we have a surjection of the form
+	\begin{equation*} 
+		\bigoplus_{i = 1}^{N} R/I^{k} \to I^{k}/I^{k + 1} \to 0.
+	\end{equation*}
+	\Cref{cor:dimension-direct-sum} and \Cref{prop:local-dimensions-short-exact-sequence} now imply that $\dim(R/I^{k}) \ge \dim(I^{k}/I^{k + 1})$.
+\end{proof}
+
+\begin{thm} \label{thm:dimension-depends-support}[Dimension only depends on support]
+	Let $(R, \mathfrak{m})$ be a local Noetherian, and $M \neq 0$ a finitely generated $R$-module. Then,
+	\begin{equation*} 
+		\dim(M) = \max_{\substack{\mathfrak{p} \in \Supp(M) \\ \mathfrak{p} \text{ minimal}}} \dim(R/\mathfrak{p}).
+	\end{equation*}
+	In particular, $\dim(R) = \max_{\mathfrak{p}} \dim(R/\mathfrak{p})$, where $\mathfrak{p}$ runs over all minimal primes.
+\end{thm}
+\begin{proof} 
+	There exists a filtration of $M$ of the form
+	\begin{equation*} 
+		0 = M_{0} \subset M_{1} \subset \cdots \subset M_{m} = M
+	\end{equation*}
+	such that each $M_{i + 1}/M_{i}$ is isomorphic to some $R/\mathfrak{p}_{i}$, with $\mathfrak{p}_{i} \in \Supp(M)$. 
+
+	Using \Cref{prop:local-dimensions-short-exact-sequence} successively on exact sequences of the form $0 \to M_{i} \to M_{i + 1} \to M_{i + 1}/M_{i} \to 0$, we see that
+	\begin{equation*} 
+		\dim(M) = \max_{i} \dim(R/\mathfrak{p}_{i}) \le \sup_{\mathfrak{p} \in \Supp M} \dim(R/\mathfrak{p}).
+	\end{equation*}
+	To prove the reverse inequality, we fix $\mathfrak{p} \in \Supp(M)$ and show that $\dim(R/\mathfrak{p}) \le \dim(M)$.
+
+	Since $M_{\mathfrak{p}} \neq 0$ and localisation is exact, we must have that $(R/\mathfrak{p}_{i})_{\mathfrak{p}} \neq 0$ for some $i$\footnote{Indeed, localise the filtration $M_{0} \subset \cdots \subset M_{m}$ at $\mathfrak{p}$. Since $(M_{m})_{\mathfrak{p}} \neq 0$, there is some $i$ with $(M_{i})_{\mathfrak{p}} \neq (M_{i + 1})_{\mathfrak{p}}$.} and hence, $\mathfrak{p}_{i} \subset \mathfrak{p}$. This gives us $\dim(R/\mathfrak{p}) \le \dim(R/\mathfrak{p}_{i})$. \newline
+	This also shows that the supremum is indeed a maximum.
+
+	To see that the maximum can be taken over minimal primes, first note that we clearly have
+	\begin{equation*} 
+		\max_{\mathfrak{p} \in \Supp M} \dim(R/\mathfrak{p}) \ge \max_{\substack{\mathfrak{p} \in \Supp(M) \\ \mathfrak{p} \text{ minimal}}} \dim(R/\mathfrak{p}).
+	\end{equation*}
+	For the other direction, note that if $\mathfrak{p} \in \Supp M$, then $\mathfrak{p} \supset \mathfrak{q}$ for some minimal $\mathfrak{q} \in \Supp M$ and $\dim(R/\mathfrak{p}) \le \dim(R/\mathfrak{q})$.
+\end{proof}
+
+\begin{cor}
+	With the same hypothesis, $\dim(M) = \dim(R/\ann(M))$. \newline
+	In particular, $\dim(M) \le \dim(R)$.
+\end{cor}
+\begin{proof} 
+	It suffices to show that $\Supp(M) = \Supp(R/\ann(M))$. But note that $\Supp(M) = V(\ann(M))$, since $M$ is finitely generated. But $V(\ann(M)) = \Supp(R/\ann(M))$.
+\end{proof}
+
+\begin{thm}
+	Let $(R, \mathfrak{m})$ be local, and $M \neq 0$ be a finitely generated $R$-module. \newline
+	Let $x \in \mathfrak{m}$ be a nonzerodivisor on $M$. Then,
+	\begin{equation*} 
+		\dim(M/xM) = \dim(M) - 1.
+	\end{equation*}
+\end{thm}
+\begin{proof} 
+	We have the exact sequence
+	\begin{equation*} 
+		0 \to xM \to M \to M/xM \to 0.
+	\end{equation*}
+	Thus,
+	\begin{equation*} 
+		0 \to xM/(xM \cap \mathfrak{m}^{n} M) \to M/\mathfrak{m}^{n} M \to M/(xM + \mathfrak{m}^{n} M) \to 0
+	\end{equation*}
+	is an exact sequence for all $n$. In terms of the Hilbert polynomials, we see that
+	\begin{equation} \label{eq:006}
+		H_{M}(n) = H_{M/xM}(n) + \ell(xM/(xM \cap \mathfrak{m}^{n} M))
+	\end{equation}
+	for $n \gg 0$. In particular, the rightmost term is eventually polynomial. 
+
+	Note that since $x$ is a nonzerodivisor, we have $xM \cong M$ and hence,
+	\begin{equation*} 
+		xM/(xM \cap \mathfrak{m}^{n} M) \cong M/N_{n},
+	\end{equation*}
+	where $N_{n} = (\mathfrak{m}^{n}M :_{M} x) = \{a \in M : xa \in \mathfrak{m}^{n} M\}$. Indeed, $N_{n}$ is the preimage of $xM \cap \mathfrak{m}^{n} M$ under the isomorphism $M \xrightarrow{x} xM$.
+
+	Note that since $x \in \mathfrak{m}$, we have $\mathfrak{m}^{n - 1} M \subset N_{n}$ and hence, 
+	\begin{equation*} 
+		\ell(M/N_{n}) \le \ell(M/\mathfrak{m}^{n - 1} M) \le H_{M}(n - 1)
+	\end{equation*}
+	for $n \gg 0$. Combining this with \Cref{eq:006} gives
+	\begin{equation*} 
+		H_{M}(n) \le H_{M/xM}(n) + H_{M}(n - 1)
+	\end{equation*}
+	for $n \gg 0$. Thus, $H_{M/xM} \ge \Delta H_{M}$ eventually and hence, $\dim(M/xM) \ge \dim(M) - 1$.
+
+	We now need to prove the other direction of the inequality. 
+
+	The \mynameref{thm:artin-rees} tells us that there exists $c$ such that $N_{n + c} \subset \mathfrak{m}^{n} M$ for all $n$.\footnote{Indeed, it tells us that there exists $c$ such that $\mathfrak{m}^{n + c} M \cap xM \subset \mathfrak{m}^{n} (xM)$ for all $n$. Now, take preimages under the isomorphism $M \xrightarrow{x} xM$.} Thus,
+	\begin{equation*} 
+		\ell(M/N_{n}) \ge \ell(M/\mathfrak{m}^{n - c} M) = H_{M}(n - c)
+	\end{equation*}
+	for $n \gg 0$. Since $M/N_{n} \cong xM/(xM \cap \mathfrak{m}^{n} M)$, \Cref{eq:006} now tells us that
+	\begin{equation*} 
+		H_{M}(n) \ge H_{M/xM}(n) + H_{M}(n - c)
+	\end{equation*}
+	for $n \gg 0$.
+
+	Thus, $H_{M/xM}(n) \le H_{M}(n) - H_{M}(n - c)$ and thus, the degree drops in the desired way giving us $\dim(M/xM) \le \dim(M) - 1$.
+\end{proof}
+
+Using the above, we can prove a weaker inequality when $x$ is possibly a zerodivisor.
+
+\begin{cor}
+	Let $M$ be a finitely generated module over the local Noetherian ring $(R, \mathfrak{m})$. \newline
+	If $x \in \mathfrak{m}$, then
+	\begin{equation*} 
+		\dim(M) - 1 \le \dim(M/xM) \le \dim(M).
+	\end{equation*}
+	In words, the dimension can drop by at most $1$.
+\end{cor}
+\begin{proof} 
+	$\dim(M/xM) \le \dim(M)$ is clear since $M$ surjects onto $M/xM$.
+
+	Let $N$ denote the $x$-torsion submodule of $M$, i.e., $N = \{a \in M : x^{n} a = 0 \text{ for some } n \ge 1\}$. Let $M'' = M/N$. Then, we have an exact sequence
+	\begin{equation*} 
+		0 \to N \to M \to M'' \to 0.
+	\end{equation*}
+	Tensoring with $R/x$ gives us an exact sequence
+	\begin{equation*} 
+		0 \to N/xN \to M/xM \to M''/xM'' \to 0.
+	\end{equation*}
+	We only need to check that $N/xN \to M/xM$ is indeed an inclusion. This is equivalent to showing $N \cap (xM) \subset xN$. But this is is clear.\footnote{If $a \in M$ and $xa \in N$, then $x^{n}(xa) = 0$ for some $n$ and hence, $a \in N$.} 
+
+	Now, note that $\dim(M''/xM'') = \dim(M'') - 1$ since $x$ is a nonzerodivisor on $M''$, by construction. \newline
+	On the other hand, $\dim(N/xN) = \dim(N)$ since dimension only depends on the support (\Cref{thm:dimension-depends-support}), and $\Supp(N/xN) = \Supp(N)$ since $N$ is $x$-torsion.\footnote{In general, $\Supp(N/xN) = \Supp(N) \cap V(x)$. Now, since $N$ is $x$-torsion, if $N_{\mathfrak{p}} \neq 0$, we must have $x \in \mathfrak{p}$. Thus, $\Supp(N) \subset V(x)$.} We now apply \Cref{prop:local-dimensions-short-exact-sequence} twice. We have
+	\begin{align*} 
+		\dim(M/xM) &= \max(\dim(M''/xM''), \dim(N/xN)) \\
+		&= \max(\dim(M'') - 1, \dim(N)) \\
+		&\ge \max(\dim(M'') - 1, \dim(N) - 1) \\
+		&= \max(\dim(M''), \dim(N)) - 1 = \dim(M). \qedhere
+	\end{align*}
+\end{proof}
+
+\begin{cor} \label{cor:dimension-zero-domain-field}
+	Let $(R, \mathfrak{m})$ be a (nonzero) local Noetherian ring of dimension zero. \newline
+	Then, every element of $\mathfrak{m}$ is a zerodivisor. In particular, if $R$ is a domain, then $R$ is a field.
+\end{cor}
+\begin{proof} 
+	Let $x \in \mathfrak{m}$ be arbitrary. If $x$ is a nonzerodivisor, then
+	\begin{equation*} 
+		\dim(R) = \dim(R/xR) + 1 \ge 1,
+	\end{equation*}
+	a contradiction.
+\end{proof}
+Note that the above is a converse of sorts to \Cref{ex:dimension-field}. However, note that there do exist rings of dimension zero which are not fields. Indeed, Artinian local rings are precisely these zero dimensional Noetherian local rings. \newline
+We have already shown most of this in \Cref{cor:artinian-noetherian-dimension-zero}; we only need to show that the notion of $\dim(R)$ is the same.
+
+\subsection{Characterisation of dimension}
+
+For this discussion, assume that $(R, \mathfrak{m}, k)$ is local Noetherian. We showed that the function $n \mapsto \ell(R/\mathfrak{m}^{n})$ is eventually polynomial, and defined $\dim(R)$ to be the degree of this (unique) polynomial. 
+
+We also showed the following properties.
+
+\begin{enumerate}[label=(P\arabic*)]
+	\item $\dim(R) = \max_{\mathfrak{p} \text{ a minimal prime}} \dim(R/\mathfrak{p})$. \newline
+	(Note that $R$ has only finitely many minimal primes.)
+	%
+	\item $\dim(R) = 0$ if $R$ is a field (\Cref{ex:dimension-field}).
+	%
+	\item If $R$ is a domain, and $x \in \mathfrak{m} \setminus \{0\}$, then $\dim(R/(x)) = \dim(R) - 1$.
+\end{enumerate}
+Note that (P3) above implies the following.
+\begin{enumerate}[label=(P\arabic*')]
+	\setcounter{enumi}{2}
+	\item If $R$ is a domain which is not a field, then $\dim(R) = \sup_{x \in \mathfrak{m} \setminus \{0\}} \dim(R/xR) + 1$.
+\end{enumerate}
+
+\begin{thm}
+	(P1)-(P3) uniquely characterise the dimension function. In other words, if we are given a function 
+	\begin{equation*} 
+		d : \{\text{local Noetherian rings}\} \to \mathbb{Z}_{\ge 0}
+	\end{equation*}
+	satisfying (P1)-(P3), then $d = \dim$.
+
+	The statement is true even if we replace (P3) with (P3').
+\end{thm}
+(We are ignoring any set-theoretic issues and using the term ``function''.)
+\begin{proof} 
+	Note that if $d$ satisfies (P3), then it satisfies (P3'). Thus, we may assume that $d$ satisfies (P1), (P2), (P3'), and show that $d = \dim$.
+
+	It suffices to show $d(R) = \dim(R)$ whenever $R$ is a domain. It then follows for a general ring by using (P1).
+
+	We prove this by induction on $\dim(R)$. 
+
+	$\dim(R) = 0$: In this case, $R$ is a field, by \Cref{cor:dimension-zero-domain-field}. But then $d(R) = 0$, by (P2).
+
+	$\dim(R) > 0$: Then, $R$ is not a field (by (P2)). By (P3'), there exists $x \in \mathfrak{m} \setminus \{0\}$ such that $d(R) = d(R/xR) + 1$. \newline
+	Note that the ring $R' = R/xR$ has dimension equal to $\dim(R) - 1$.\footnote{We are allowed to use (P3) for $\dim$!} We wish to use the inductive hypothesis, but $R'$ need not be a domain. But note that $R'/\mathfrak{p}$ is, for every $\mathfrak{p} \in \Spec(R')$. \newline
+	Moreover, $\dim(R'/\mathfrak{p}) \le \dim(R') < \dim(R)$ due to (P1). Thus, the induction hypothesis applies to all such quotients. Now using (P1) again, we see
+	\begin{equation*} 
+		d(R') = \max_{\mathfrak{p} \text{ minimal}} d(R'/\mathfrak{p}) = \max_{\mathfrak{p} \text{ minimal}} \dim(R'/\mathfrak{p}) = \dim(R').
+	\end{equation*}
+	Thus, $d(R) = d(R') + 1 = \dim(R') + 1 = \dim(R)$.
+\end{proof}
+
+\subsection{Krull dimension}
+
+We now define a new notion of dimension that makes sense for any commutative ring (with the additional possibility of it being $\infty$ in some cases). We will then show that when restricted to local Noetherian rings, this dimension function is finite and satisfies (P1), (P2), (P3'). This will show that the newly defined dimension agrees with the earlier definition.
+
+\begin{defn}
+	Let $R$ be any commutative ring. A \deff{chain of prime ideals} in $R$ is a finite sequence of prime ideals
+	\begin{equation*} 
+		\mathfrak{p}_{0} \subsetneq \mathfrak{p}_{1} \subsetneq \cdots \subsetneq \mathfrak{p}_{n}.
+	\end{equation*}
+	The above chain is said to have \deff{length} $n$.
+
+	The \deff{Krull dimension} of $R$ is defined as 
+	\begin{equation*} 
+		\krdim(R) \vcentcolon= \sup\{n : \text{there exists a chain of prime ideals of length $n$}\}.
+	\end{equation*}
+\end{defn}
+
+\begin{ex}
+	\Cref{cor:artinian-noetherian-dimension-zero} told us that Artinian rings are precisely Noetherian rings with Krull dimension zero.
+\end{ex}
+
+\begin{thm}
+	If $(R, \mathfrak{m})$ is a Noetherian local ring, then $\krdim(R) = \dim(R)$.
+\end{thm}
+\begin{proof} 
+	We refer to (P1), (P2), (P3') from the previous section.
+
+	(P1): Any chain in $R/\mathfrak{p}$ can lifted back to $R$ showing that $\dim(R/\mathfrak{p}) \le \dim(R)$ for all $\mathfrak{p} \in \Spec(R)$. \newline
+	Conversely, any chain of primes in $R$ contains a minimal prime and then continues to be a chain in the quotient by that prime.
+
+	(P2): Obvious.
+
+	(P3'): Let $R$ be a domain and not a field. \newline
+	Let $x \in \mathfrak{m} \setminus \{0\}$ be arbitrary. A chain of length $n$ in $R/xR$ can be lifted to a chain of length $n$ in $R$. Moreover, $(0)$ is a prime strictly contained in this chain. Thus, we have a chain of length $n + 1$ in $R$. This shows
+	\begin{equation} \label{eq:007}
+		\krdim(R) \ge \sup_{x \in \mathfrak{m} \setminus \{0\}} \krdim(R/xR) + 1.
+	\end{equation}
+	Conversely, if 
+	\begin{equation*} 
+		0 = \mathfrak{p}_{0} \subsetneq \mathfrak{p}_{1} \subsetneq \cdots \subsetneq \mathfrak{p}_{m + 1} = \mathfrak{m}
+	\end{equation*}
+	is a chain of length $m + 1$ in $R$, then pick any nonzero $x \in \mathfrak{p}_{1}$. Then,
+	\begin{equation*} 
+		\mathfrak{p}_{1}/(x) \subsetneq \cdots \subsetneq \mathfrak{p}_{m + 1}/(x)
+	\end{equation*}
+	is a chain of length $m$ in $R/xR$, proving equality in \Cref{eq:007}.
+
+	To finish concluding, we must show that $\krdim(R) < \infty$ for all local Noetherian rings $R$. We do this by showing that $\krdim(R) \le \dim(R)$ for all Noetherian local \emph{domains} $R$. (The general case then follows by (P1).)
+
+	We prove this by induction on $\dim(R)$. 
+
+	$\dim(R) = 0$: In this case, $R$ must be a field, for which the statement is known.
+
+	Now, assume that $d \vcentcolon= \dim(R) \ge 1$ and that the statement is known whenever $\dim < R$. \newline
+	For the sake of contradiction, assume that $\krdim(R) > d$. Thus, there exists a chain
+	\begin{equation*} 
+		0 = \mathfrak{p}_{0} \subsetneq \cdots \subsetneq \mathfrak{p}_{d + 1} = \mathfrak{m}.
+	\end{equation*}
+	Pick $x \in \mathfrak{p}_{1} \setminus \{0\}$. Then, $\dim(R/xR) = \dim(R) - 1$. Since we have a surjection $R/x \onto R/\mathfrak{p}_{1}$, we get $\dim(R/\mathfrak{p}_{1}) \le d - 1$ as well. \newline
+	But $R/\mathfrak{p}_{1}$ is a domain in which we have the chain
+	\begin{equation*} 
+		0 \subset \mathfrak{p}_{2}/\mathfrak{p}_{1} \subset \cdots \subset \mathfrak{p}_{d + 1}/\mathfrak{p}_{1},
+	\end{equation*}
+	of length $d$, contradicting the inductive hypothesis.
+\end{proof}
+
+A related concept is the height of a prime.
+
+\begin{defn}
+	Let $R$ be a commutative ring. The \deff{height} of a prime $\mathfrak{p} \in R$ is defined to be 
+	\begin{equation*} 
+		\htt(\mathfrak{p}) \vcentcolon= \sup\{n : \text{there exists a chain of prime ideals of length $n$ ending at $\mathfrak{p}$}\}.
+	\end{equation*}
+	Equivalently, $\htt(\mathfrak{p}) = \krdim(R_{\mathfrak{p}})$.
+\end{defn}
+
+Note that under this definition, we have
+\begin{equation*} 
+	\krdim(R) = \sup_{\mathfrak{p} \in \Spec(R)} \htt(\mathfrak{p}).
+\end{equation*}
+Note that $\htt(\mathfrak{p})$ is always finite if $R$ is Noetherian, since then $\htt(\mathfrak{p}) = \krdim(R_{\mathfrak{p}}) = \dim(R_{\mathfrak{p}}) < \infty$. \newline
+Moreover, for a local ring $(R, \mathfrak{m})$, we have $\dim(R) = \htt(\mathfrak{m})$.
+
+\subsubsection{Whacky behaviour of Krull dimension}
+
+To begin with, $\krdim(R)$ can be infinite even when $R$ is Noetherian (and necessarily not local). 
+
+Note that in the local case, the (Krull) dimension being finite tells us that there exists a maximal chain of primes (i.e., a chain of primes which cannot be extended to a strictly larger chain of primes) with length equal to the dimension. (Thus, this chain is maximal in terms of inclusion and in terms of length.) \newline
+But even in the local case, there can exist maximal chains of different length.
+
+\textbf{Maximal chains of different lengths.} \newline
+Consider the local (!) Noetherian ring $R = k[x, y, z]_{(x, y, z)}/(xy, xz)$.
+
+$R$ has two minimal primes: $(\bar{x})$, $(\bar{y}, \bar{z})$. Computing dimension using (P1) shows that $\dim(R) = 2$. (\Cref{ex:dimension-polynomial-field} tells us that the dimensions of $k[x]_{x}$ and $k[y, z]_{(y, z)}$ are $1$ and $2$ respectively.) \newline
+$R$ has the following two maximal chains, of different lengths:
+\begin{align*} 
+	(\bar{y}, \bar{z}) \subsetneq (\bar{x}, \bar{y}, \bar{z}), \\
+	(\bar{x}) \subsetneq (\bar{x}, \bar{y}) \subsetneq (\bar{x}, \bar{y}, \bar{z}).
+\end{align*}
+
+Note that here the chains did start at different minimal primes. However, there are more complicated examples of local Noetherian domains with maximal chains of different lengths (these maximal chains are necessarily between the zero ideal and the maximal ideal).
+
+\textbf{Maximal ideals of different heights.} \newline
+Let $R = \mathbb{Q}[\![t]\!]$ be the power series ring over $\mathbb{Q}$ in one variable, and $\mathfrak{p} = (t)$ the maximal ideal. \newline
+Let $S = R[x]$. \newline
+Consider the ideals $\mathfrak{m}_{1} \vcentcolon= (tx - 1)$ and $\mathfrak{m}_{2} = (t, x)$. \newline
+Note that $S/\mathfrak{m}_{1} = R[x]/(tx - 1) \cong R[t^{-1}]$ is the field of Laurent series. In particular, $\mathfrak{m}_{1}$ is maximal. Moreover, since $tx - 1$ is prime, it follows that $\htt(\mathfrak{m}_{1}) = 1$.\footnote{Note that $R[x]$ is a unique factorisation domain since $R$ is a PID. Consequently, if $0 \subsetneq \mathfrak{p} \subset (tx - 1)$, then we can pick a nonzero element $f \in \mathfrak{p}$. By factoring and using the fact that $\mathfrak{p}$ is prime, we may assume that $f$ is irreducible. But $f \in (tx - 1)$ implies that $tx - 1 \mid f$. Thus, $(tx - 1) = (f)$.} \newline
+On the other hand, note that we have the chain $0 \subsetneq (x) \subsetneq (t, x)$ of primes showing that $\htt(\mathfrak{m}_{2}) \ge 2$. Thus, $\htt(\mathfrak{m}_{1}) \neq \htt(\mathfrak{m}_{2})$.
+
+More generally, one can replace $R$ with a DVR. In that case, $\mathfrak{p}$ will again be principally generated (\Cref{cor:local-PID-DVR}). Moreover, $R[t^{-1}] \cong \Frac(R)$, showing that $\mathfrak{m}_{1}$ is still maximal. \newline
+As we shall later see, $\dim(R[x]) = \dim(R) + 1 = 2$ and so we can in fact conclude $\htt(\mathfrak{m}_{2}) = 2$ and not just $\ge 2$.
+
+\subsubsection{Dimension theory for \texorpdfstring{$k$}{k}-algebras}
+
+We will show that the above behaviour does not happen for (finite type) $k$-algebras that are integral domains. We will prove the following theorem.
+
+\begin{thm}
+	Let $k$ be a field, and $R$ be an integral domain which is a finite type $k$-algebra. \newline
+	Then, every maximal ideal $\mathfrak{m}$ has the same height $d$, where $d = \trdeg_{k}(\Frac(R))$.
+
+	In particular, $\dim(R) = d = \trdeg_{k}(\Frac(R))$.
+\end{thm}
+
+We now look at some more theory to deduce the above result.
+
+\begin{defn}
+	Let $R$ be a ring. An $R$-module is said to be \deff{flat} if $- \otimes_{R} M$ is exact. \newline
+	A flat module is said to be \deff{faithfully flat (fflat)} if $- \otimes_{R} M$ is a faithful functor, i.e., the map
+	\begin{equation*} 
+		\Hom_{R}(N, N') \to \Hom_{R}(N \otimes_{R} M, N' \otimes_{R} M)
+	\end{equation*}
+	is an injection for all $R$-modules $N$, $N'$.
+\end{defn}
+
+We leave the following proposition as an exercise.
+
+\begin{prop} \label{prop:equiv-fflat}
+	The following are equivalent for an $R$-module $M$.
+	\begin{enumerate}
+		\item $M$ is fflat.
+		\item $N' \to N \to N''$ is exact iff $N' \otimes M \to N \otimes M \to N'' \otimes M$ is exact (for all sequences $N' \to N \to N''$).
+		\item $M$ is flat. For all $R$-modules $N$, $N \neq 0$ iff $N \otimes M \neq 0$.
+		\item $M$ is flat. For all $\mathfrak{p} \in \Spec(R)$, $M \otimes k(p) \neq 0$. (Here, $k(\mathfrak{p}) = R_{\mathfrak{p}}/\mathfrak{p} R_{\mathfrak{p}}$.)
+		\item \label{item:fflat-5} $M$ is flat. For all maximal ideals $\mathfrak{m} \subset R$, $M \otimes k(\mathfrak{m}) \neq 0$.
+	\end{enumerate}
+\end{prop}
+
+\begin{ex}
+	$0$ is flat but not fflat (unless $R = 0$).
+
+	$\mathbb{Q}$ is a flat $\mathbb{Z}$-module, but not fflat. (Flatness follows since $\mathbb{Q}$ is a localisation. On the other hand, the nonzero map $\mathbb{Z} \onto \mathbb{Z}/2$ becomes the zero map after tensoring.)
+
+	$R^{\oplus n}$ is fflat.
+\end{ex}
+
+\begin{lem} 
+	Suppose $f : (R, \mathfrak{m}) \to (S, \mathfrak{n})$ is a ring homomorphism of local rings such that $f^{-1}(\mathfrak{n}) = \mathfrak{m}$. \newline
+	If $S$ is a flat $R$-module (via $f$), then $S$ is fflat.
+\end{lem}
+\begin{proof} 
+	We use \Cref{item:fflat-5} of \Cref{prop:equiv-fflat}. We only need to show that $S \otimes_{R} k(\mathfrak{m})$ is nonzero. Note that
+	\begin{align*} 
+		S \otimes_{R} k(\mathfrak{m}) &\cong S \otimes_{R} R/\mathfrak{m} \\
+		&\cong S/\mathfrak{m}S.
+	\end{align*}
+	By hypothesis, $\mathfrak{m} S \subset \mathfrak{n} \neq S$. Thus, the quotient $S/\mathfrak{m} S$ is nonzero.
+\end{proof}
+
+\end{document}
