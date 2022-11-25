@@ -52,7 +52,7 @@ We assume basic results about Artinian and Noetherian rings. We prove some other
 	Any quotient of an Artinian ring is Artinian (as a ring).
 \end{cor}
 
-\begin{cor}
+\begin{cor} \label{cor:artin-primes-maximal}
 	Every prime ideal in an Artinian ring is maximal. In other words, the (Krull) dimension of an Artinian ring is zero.
 \end{cor}
 
@@ -126,6 +126,13 @@ Since it is convenient to refer to this, we make a special definition of dimensi
 	Thus, there exists $z \in J$ with $Iz \neq 0$. But also, $I(Iz) = Iz \neq 0$. \newline
 	Since $Iz \subset (z) \subset J$, minimality forces $Iz = (z)$. Thus, we can write $z = xz$ for some $x \in I$. Thus, we have $z = xz = x^{2} z = x^{3} z = \cdots$. \newline
 	But $x$ is nilpotent, since $I \subset \mathcal{N}$. Thus, $z = 0$, contradicting that $Iz \neq 0$.
+\end{proof}
+
+\begin{cor} \label{cor:artin-local-nilpotent-maximal}
+	If $(R, \mathfrak{m})$ is an Artinian local ring, then $\mathfrak{m}$ is nilpotent.
+\end{cor}
+\begin{proof} 
+	By \Cref{cor:artin-primes-maximal}, all primes of $R$ are maximal and there is only one such maximal ideal. Thus, the nilradical of $R$ is $\mathfrak{m}$.
 \end{proof}
 
 \begin{cor}
@@ -1268,6 +1275,19 @@ Note that in the above, it makes sense to talk about $\dim_{k}(M_{i})$ since $k$
 	is eventually a polynomial of degree $\le r$.
 \end{proof}
 
+\begin{ex} \label{ex:dim-zero-iff-artinian-module}
+	Let $(R, \mathfrak{m})$ be a local Noetherian ring and $M$ a finitely generated $R$-module. \newline
+	Then, $\dim(M) = 0$ iff $M$ is of finite length (iff $M$ is Artinian).
+
+	Indeed, if $\dim(M) = 0$, then the Hilbert-Samuel polynomial is constant. This means that $\mathfrak{m}^{n} M = \mathfrak{m}^{n + 1} M$ for $n \gg 0$. Nakayama's lemma now implies that $\mathfrak{m}^{n} M = 0$ for $n \gg 0$. In turn, \Cref{cor:annihilated-maximals-artinian-noetherian} tells us that $M$ is Artinian.
+
+	Conversely, if $M$ is Artinian, then the chain
+	\begin{equation*} 
+		M \supset \mathfrak{m} M \supset \mathfrak{m}^{2} M \supset \cdots
+	\end{equation*}
+	eventually stabilises. Thus, $\ell(\mathfrak{m}^{n} M/\mathfrak{m}^{n + 1}M) = 0$ for $n \gg 0$.
+\end{ex}
+
 \subsection{Properties of dimension}
 
 To summarise, we have shown the following:
@@ -1317,7 +1337,7 @@ We now wish to see how the degrees of these polynomials interact with exact sequ
 	\end{equation}
 	is exact.
 
-	Note that $K_{n} \cong (M' + \mathfrak{m}^{n}M)/\mathfrak{m}^{n}M \cong M'/(N' \cap \mathfrak{m}^{n}N)$. In particular, we have a surjection $M'_{n} \onto K_{n}$ and thus, $\ell(K_{n}) \le \ell(M'_{n})$.
+	Note that $K_{n} \cong (M' + \mathfrak{m}^{n}M)/\mathfrak{m}^{n}M \cong M'/(M' \cap \mathfrak{m}^{n}M)$. In particular, we have a surjection $M'_{n} \onto K_{n}$ and thus, $\ell(K_{n}) \le \ell(M'_{n})$.
 
 	On the other hand, \mynameref{thm:artin-rees} implies the existence of $c \ge 1$ such that
 	\begin{equation*} 
@@ -1407,7 +1427,7 @@ $\nil(R)$ above denotes the ideal of nilpotents.
 	It suffices to show that $\Supp(M) = \Supp(R/\ann(M))$. But note that $\Supp(M) = V(\ann(M))$, since $M$ is finitely generated. But $V(\ann(M)) = \Supp(R/\ann(M))$.
 \end{proof}
 
-\begin{thm}
+\begin{thm} \label{thm:nonzerodivisor-dimension-one-drop}
 	Let $(R, \mathfrak{m})$ be local, and $M \neq 0$ be a finitely generated $R$-module. \newline
 	Let $x \in \mathfrak{m}$ be a nonzerodivisor on $M$. Then,
 	\begin{equation*} 
@@ -1462,7 +1482,7 @@ $\nil(R)$ above denotes the ideal of nilpotents.
 
 Using the above, we can prove a weaker inequality when $x$ is possibly a zerodivisor.
 
-\begin{cor}
+\begin{cor} \label{cor:quotient-drop-at-most-one}
 	Let $M$ be a finitely generated module over the local Noetherian ring $(R, \mathfrak{m})$. \newline
 	If $x \in \mathfrak{m}$, then
 	\begin{equation*} 
@@ -1669,16 +1689,207 @@ As we shall later see, $\dim(R[x]) = \dim(R) + 1 = 2$ and so we can in fact conc
 
 \subsubsection{Dimension theory for \texorpdfstring{$k$}{k}-algebras}
 
-We will show that the above behaviour does not happen for (finite type) $k$-algebras that are integral domains. We will prove the following theorem.
+We introduce some terminology for ease of reference.
+
+\begin{defn}
+	Let $k$ be a ring. By a \deff{$k$-affine ring}, we mean a $k$-algebra of finite type, i.e., a ring of the form $k[x_{1}, \ldots, x_{n}]/I$. 
+\end{defn}
+
+\begin{defn}
+	Given a ring $R$ and a prime ideal $\mathfrak{p} \in \Spec R$, we define $\dim(\mathfrak{p}) \vcentcolon= \krdim(R/\mathfrak{p})$.
+\end{defn}
+
+Note that $\dim(\mathfrak{p})$ is dual to $\htt(\mathfrak{p})$. The former calculates the length of chain of primes \emph{starting} at $\mathfrak{p}$, whereas the latter calculates the length of those \emph{ending} at $\mathfrak{p}$. This immediately gives us
+\begin{equation*} 
+	\dim(\mathfrak{p}) + \htt(\mathfrak{p}) \le \dim(R)
+\end{equation*}
+for any ring $R$ and any prime $\mathfrak{p} \in \Spec(R)$.	Note that the above inequality can be strict. We will examine some cases where we can conclude better results. 
+
+\begin{defn}
+	A ring $R$ is \deff{catenary} if given any two primes $\mathfrak{p} \subsetneq \mathfrak{p}'$, any two maximal prime chains from $\mathfrak{p}$ to $\mathfrak{p}'$ have the same length.
+\end{defn}
+
+As noted in the previous section (without proof), there do exist Noetherian local domains which are not catenary. However, as we shall show, $k$-affine rings are always catenary.
+
+\begin{defn}
+	Let $k$ be a field, and $R$ a $k$-affine domain. Then, we define
+	\begin{equation*} 
+		\trdeg_{k}(R) \vcentcolon= \trdeg_{k}(\Frac(R)).
+	\end{equation*}
+\end{defn}
+
+\begin{lem} 
+	Let $R$ be a $k$-affine domain with $\trdeg_{k}(R) = d$, and let $\mathfrak{p} \in \Spec(R)$ be of height one. Then, $\trdeg_{k}(R/\mathfrak{p}) = d - 1$.
+\end{lem}
+\begin{proof} 
+	\textbf{Case 1.} $R = k[x_{1}, \ldots, x_{d}]$.
+
+	Suppose $\mathfrak{p} \subset R$ is a height one prime. Then, $\mathfrak{p} = (f)$ for some irreducible $f$.\footnote{Indeed, pick any nonzero $f \in \mathfrak{p}$. By primality, we may replace $f$ by an irreducible factor. Then, $(0) \subsetneq (f) \subseteq \mathfrak{p}$. Being height one forces equality $(f) = \mathfrak{p}$.} Without loss of generality, $f$ has positive degree in $x_{d}$. We may then write 
+	\begin{equation*} 
+	    f = g_{0}(x_{1}, \ldots, x_{d - 1}) + \cdots + g_{n}(x_{1}, \ldots, x_{d - 1}) x_{d}^{n},
+	\end{equation*}
+	where $n \ge 1$. \newline
+	Note that a degree comparison shows that $k[x_{1}, \ldots, x_{d - 1}] \cap (f) = (0)$. \newline
+	Thus, we have an inclusion $k[x_{1}, \ldots, x_{d - 1}] \hookrightarrow R/(f)$ and hence, the images of $x_{1}, \ldots, x_{d - 1}$ in $R/\mathfrak{p}$ are algebraically independent over $k$. But $\overline{x_{d}}$ is algebraic over $\Frac(k[\overline{x_{1}}, \ldots, \overline{x_{d - 1}}])$, as witnessed by $f$. \newline
+	Thus, $\trdeg_{k}(\Frac(R/\mathfrak{p})) = d - 1$.
+
+	\textbf{Case 2.} The general case.
+
+	Consider a Noetherian normalisation $A = k[x_{1}, \ldots, x_{n}] \subset R$. Necessarily, $n \le d$ since $\Frac(A) \subset \Frac(R)$. On the other hand $A \subset R$ is an integral extension, and hence $\Frac(R)$ is algebraic over $\Frac(A)$. This gives us $n = d$.
+
+	Now, given a height one prime $\mathfrak{p} \subset R$, consider its contraction $\mathfrak{p}_{0} = \mathfrak{p} \cap A$. Since $A$ is a UFD and $R$ a domain, the Going down theorem applies. This gives us that $\htt(\mathfrak{p}_{0}) = 1$. Case 1 now gives us that $\trdeg_{k}(A/\mathfrak{p}_{0}) = d - 1$. Now, since again $R/\mathfrak{p}$ is integral over $A/\mathfrak{p}_{0}$, we get $\trdeg_{k}(R/\mathfrak{p}) = d - 1$ as well.
+\end{proof}
 
 \begin{thm}
-	Let $k$ be a field, and $R$ be an integral domain which is a finite type $k$-algebra. \newline
-	Then, every maximal ideal $\mathfrak{m}$ has the same height $d$, where $d = \trdeg_{k}(\Frac(R))$.
+	Let $R$ be a $k$-affine ring, not necessarily a domain. Then, $R$ is catenary.
 
-	In particular, $\dim(R) = d = \trdeg_{k}(\Frac(R))$.
+	More precisely, any maximal chain from $\mathfrak{p}$ to $\mathfrak{p}'$ has length $\dim(\mathfrak{p}) - \dim(\mathfrak{p}')$. 
+
+	If $R$ is a domain, then all maximal ideals have the same length, which is equal to $\dim(R) = \trdeg_{k}(R)$.
 \end{thm}
+\begin{proof} 
+	Let 
+	\begin{equation*} 
+		\mathfrak{p}_{0} \subsetneq \cdots \subsetneq \mathfrak{p}_{r}
+	\end{equation*}
+	be a maximal chain. This gives us a sequence of ring maps
+	\begin{equation*} 
+		R/\mathfrak{p}_{0} \onto \cdots \onto R/\mathfrak{p}_{r}.
+	\end{equation*}
+	Each prime ideal $\mathfrak{p}_{i}/\mathfrak{p}_{i - 1}$ has height one in $R/\mathfrak{p}_{i - 1}$. Thus, each arrow above decreases the transcendence degree by exactly one. \newline
+	This gives 
+	\begin{equation*} 
+		\trdeg_{k}(R/\mathfrak{p}_{r}) = \trdeg_{k}(R/\mathfrak{p}_{0}) - r.
+	\end{equation*}
+	By the previous lemma, we can replace $\trdeg_{k}$ above with $\dim$, since $R/\mathfrak{p}_{i}$ are domains. Rearranging gives
+	\begin{equation*} 
+		r = \dim(R/\mathfrak{p}_{0}) - \dim(R/\mathfrak{p}_{r}) = \dim(\mathfrak{p}_{0}) - \dim(\mathfrak{p}_{r}).
+	\end{equation*}
 
-We now look at some more theory to deduce the above result.
+	To see the last statement, if $\mathfrak{m}$ is a maximal ideal, we can take $\mathfrak{p}_{0} = 0$ and $\mathfrak{p}_{r} = \mathfrak{m}$. We then get
+	\begin{equation*} 
+		r = \dim(0) - \dim(\mathfrak{m}) = \dim(R) - 0 = \trdeg_{k}(R). \qedhere
+	\end{equation*}
+\end{proof}
+
+Note that the affine ring $k[x, y, z]/(xy, xz)$ has maximal ideals of different height. (Thus, being a domain is not an unnecessary condition.)
+
+\begin{cor}
+	Let $R$ be a $k$-affine domain, and $\mathfrak{p} \in \Spec(R)$. Then,
+	\begin{equation*} 
+		\htt(\mathfrak{p}) + \dim(\mathfrak{p}) = \dim(R).
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	Pick a maximal chain of primes ending at $\mathfrak{p}$. This has length $\htt(\mathfrak{p})$. \newline
+	Pick a maximal chain of primes starting at $\mathfrak{p}$. This has length $\dim(\mathfrak{p})$. \newline
+	Join these together to get a maximal chain (ending at some maximal ideal). This total length is $\dim(R)$.
+\end{proof}
+
+\subsection{Dimension via length and ideals of definition}
+
+We now see yet another definition of dimension for local Noetherian rings. Recall the following.
+
+\begin{prop}
+	Let $(R, \mathfrak{m})$ be a local Noetherian ring, and $J \subsetneq R$ a proper ideal. The following are equivalent.
+	\begin{enumerate}
+		\item $J$ contains a power of $\mathfrak{m}$.
+		\item $\sqrt{J} = \mathfrak{m}$.
+		\item $J$ is $\mathfrak{m}$-primary.
+		\item $R/J$ is Artinian.
+	\end{enumerate}
+\end{prop}
+
+\begin{defn}
+	Let $(R, \mathfrak{m})$ be a local Noetherian ring. A proper ideal $J \subset \mathfrak{m}$ is said to be an \deff{ideal of definition} of $R$ if $J$ is $\mathfrak{m}$-primary.
+\end{defn}
+The above proposition tells us alternate definitions of an ideal of definition.
+
+\begin{prop}
+	Let $(R, \mathfrak{m})$ be a local Noetherian ring. Define
+	\begin{equation*} 
+		d'(R) \vcentcolon= \min\{n : \text{there exist an ideal of definition with $n$ generators}\}.
+	\end{equation*}
+	In other words, $d'(R)$ is the minimal $n$ such that there exist elements $x_{1}, \ldots, x_{n} \in \mathfrak{m}$ with $\sqrt{(x_{1}, \ldots, x_{n})} = \mathfrak{m}$.
+
+	Then, $d'(R) = \dim(R)$.
+\end{prop}
+
+The above will follow from the more general theorem about dimension of modules below.
+
+\begin{thm}
+	Let $(R, \mathfrak{m})$ be local Noetherian, and $M$ a finitely generated $R$-module. Then,
+	\begin{equation*} 
+		\dim(M) = \min\{n : \text{there exist $x_{1}, \ldots, x_{n} \in \mathfrak{m}$ such that $M/(x_{1}, \ldots, x_{n})M$ has finite length}\}.
+	\end{equation*}
+	Equivalently, the minimal $n$ such that $M/(x_{1}, \ldots, x_{n})M$ is Artinian.
+\end{thm}
+Note that one can always take generators for the maximal ideals to get a finitely generated module over a field. Thus, the set is indeed nonempty.
+\begin{proof} 
+	Let $d'(M)$ denote the minimal $n$ such that there exist $x_{1}, \ldots, x_{n}$ with $M/(x_{1}, \ldots, x_{n})M$ Artinian. We wish to show $\dim(M) = d'(M)$.
+
+	The inequality $\le$ is clear. Indeed, suppose that we have $x_{1}, \ldots, x_{n} \in \mathfrak{m}$. By \Cref{cor:quotient-drop-at-most-one}, we know that
+	\begin{equation*} 
+		\dim(M/(x_{1}, \ldots, x_{n}) M) \ge \dim(M) - n.
+	\end{equation*}
+	Thus, if the dimension of the quotient is zero, then $n \ge \dim(M)$.
+
+	We prove $d'(M) \le \dim(M)$ by induction on $\dim(M)$. If $\dim(M) = 0$, then $M$ is already of finite length (\Cref{ex:dim-zero-iff-artinian-module}).
+
+	Now suppose that $d = \dim(M) > 0$. We first construct $x_{1}, \ldots, x_{d}$ such that the desired quotient is Artinian. \newline
+	To this end, let $M' \subset M$ be a maximal submodule of finite length. There is an exact sequence
+	\begin{equation*} 
+		0 \to M' \to M \to M'' \to 0
+	\end{equation*}
+	where $M''$ has no finite length submodules. Note that $\dim(M') = 0$ by \Cref{ex:dim-zero-iff-artinian-module} and consequently, $\dim(M) = \dim(M'')$ by \Cref{prop:local-dimensions-short-exact-sequence}. \newline
+	On the other hand, for any $x_{1}, \ldots, x_{n} \in \mathfrak{m}$, we see that $M/(x_{1}, \ldots, x_{n})M$ has finite length iff $M''/(x_{1}, \ldots, x_{n})M''$ has finite length.\footnote{We have the exact sequence $0 \to K \to M/(x_{1}, \ldots, x_{n})M \to M''/(x_{1}, \ldots, x_{n})M'' \to 0$, where $K$ is a quotient of $M'$ and hence of finite length.} Thus, $d'(M) = d'(M'')$ and we may assume that $M = M''$.
+
+	Thus, $M$ does not have any submodule of finite length. In particular, $R/\mathfrak{m}$ does not inject into $M$, i.e., $\mathfrak{m} \notin \Ass(M)$. By prime avoidance, there exists $x_{1} \in \mathfrak{m}$ which is not in any associated prime. Thus, $x_{1}$ is a nonzerodivisor on $M$. By \Cref{thm:nonzerodivisor-dimension-one-drop}, we have $\dim(M/x_{1}) = \dim(M) - 1$. \newline
+	By inductive hypothesis, there exist $x_{2}, \ldots, x_{d}$ with
+	\begin{equation*} 
+		(M/x_{1} M)/(x_{2}, \ldots, x_{d})(M/x_{1} M) \cong M/(x_{1}, \ldots, x_{d})M
+	\end{equation*}
+	of finite length. 
+\end{proof}
+
+\subsection{Height and minimal generators}
+
+\begin{defn}
+	Given an ideal $I$ in a ring $R$, and a prime ideal $\mathfrak{p}$ containing $I$, we say that $\mathfrak{p}$ is \deff{minimal over $I$} if there does not exist a prime ideal $\mathfrak{q}$ such that
+	\begin{equation*} 
+		I \subset \mathfrak{q} \subsetneq \mathfrak{p}.
+	\end{equation*}
+	In other words, $\mathfrak{p}$ is minimal in the set of all primes containing $I$.
+\end{defn}
+Note that a prime ideal is always minimal over itself.
+
+\begin{prop}
+	Let $R$ be a Noetherian ring. Let $x \in R$.
+	\begin{enumerate}[label=(\roman*)]
+		\item If $\mathfrak{p}$ is minimal over $(x)$, then $\htt(\mathfrak{p}) \le 1$. If $x$ is a nonzerodivisor, then $\htt(\mathfrak{p}) = 1$.
+		\item If $\mathfrak{p}, \mathfrak{q} \in \Spec(R)$ and $\mathfrak{q}$ is minimal over $(\mathfrak{p}, x)$, then there is no prime strictly between $\mathfrak{p}$ and $\mathfrak{q}$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(i): Assume $\mathfrak{p}$ is minimal over $(x)$. Then, $\mathfrak{p} R_{\mathfrak{p}}$ is the only prime in $R_{\mathfrak{p}}$ that contains $(\frac{x}{1})$. Thus, $\sqrt{(\frac{x}{1})} = \mathfrak{p} R_{\mathfrak{p}}$, i.e., $(\frac{x}{1})$ is an ideal of definition generated by $1$ element. Thus, $\dim(R_{\mathfrak{p}}) \le 1$ or $\htt(\mathfrak{p}) \le 1$. \newline
+	Moreover, note that $\htt(\mathfrak{p}) = 0$ iff $R_{\mathfrak{p}}$ is already Artinian. This happens iff $\mathfrak{p} R_{\mathfrak{p}}$ is nilpotent (see \Cref{cor:artin-local-nilpotent-maximal} and \Cref{cor:annihilated-maximals-artinian-noetherian}). This happens iff $\frac{x}{1}$ is nilpotent in $R_{\mathfrak{p}}$. \newline
+	However, if $x$ is not a zerodivisor, then neither is $\frac{x}{1}$ and hence, $\htt(\mathfrak{p}) = 1$. 
+
+	(ii): By part (i), we see that $\htt(\mathfrak{q}/\mathfrak{p}) \le 1$ in $R/\mathfrak{p}$. Thus, there cannot be a prime strictly in between $\mathfrak{q}$ and $\mathfrak{p}$.
+\end{proof}
+
+The same proof gives the following more general result.
+
+\begin{prop}
+	Let $R$ be a Noetherian ring, and $x_{1}, \ldots, x_{r} \in R$.
+	\begin{enumerate}
+		\item If $\mathfrak{p}$ is minimal over $(x_{1}, \ldots, x_{r})$, then $\htt(\mathfrak{p}) \le r$. \newline
+		In particular, if $\mathfrak{p}$ is generated by $r$ elements, then $\htt(\mathfrak{p}) \le r$.
+		\item If $\mathfrak{p}, \mathfrak{q} \in \Spec(R)$ and $\mathfrak{q}$ is minimal over $(\mathfrak{p}, x_{1}, \ldots, x_{r})$, then every chain between $\mathfrak{p}$ and $\mathfrak{q}$ has length at most $r$.
+	\end{enumerate}
+\end{prop}
+
+\section{Faithfully flat modules}
 
 \begin{defn}
 	Let $R$ be a ring. An $R$-module is said to be \deff{flat} if $- \otimes_{R} M$ is exact. \newline
@@ -1687,6 +1898,8 @@ We now look at some more theory to deduce the above result.
 		\Hom_{R}(N, N') \to \Hom_{R}(N \otimes_{R} M, N' \otimes_{R} M)
 	\end{equation*}
 	is an injection for all $R$-modules $N$, $N'$.
+
+	A map of rings $f : R \to S$ is said to be \deff{flat} (resp. \deff{faithfully flat}) if $S$ is a flat (resp. faithfully flat) $R$-module via $f$.
 \end{defn}
 
 We leave the following proposition as an exercise.
@@ -1710,7 +1923,7 @@ We leave the following proposition as an exercise.
 	$R^{\oplus n}$ is fflat.
 \end{ex}
 
-\begin{lem} 
+\begin{lem} \label{lem:local-flat-fflat}
 	Suppose $f : (R, \mathfrak{m}) \to (S, \mathfrak{n})$ is a ring homomorphism of local rings such that $f^{-1}(\mathfrak{n}) = \mathfrak{m}$. \newline
 	If $S$ is a flat $R$-module (via $f$), then $S$ is fflat.
 \end{lem}
@@ -1722,5 +1935,141 @@ We leave the following proposition as an exercise.
 	\end{align*}
 	By hypothesis, $\mathfrak{m} S \subset \mathfrak{n} \neq S$. Thus, the quotient $S/\mathfrak{m} S$ is nonzero.
 \end{proof}
+
+\begin{thm}[Lying-over theorem for fflat maps]
+	Suppose $f : R \to S$ if fflat. Then, $\Spec(S) \to \Spec(R)$ is surjective.
+\end{thm}
+\begin{proof} 
+	Let $\mathfrak{p} \subset R$ be prime. Then, we have a map
+	\begin{equation*} 
+		k(\mathfrak{p}) \xrightarrow{\bar{f}} S \otimes_{R} k(\mathfrak{p})
+	\end{equation*}
+	of rings. 
+
+	Since $S$ is fflat, the ring on the right is nonzero. Thus, there exists a prime $Q \in \Spec(S \otimes_{R} k(\mathfrak{p}))$. Moreover, $\bar{f}^{-1}(Q)$ is a prime in $k(\mathfrak{p})$ and hence, is zero.
+
+	Now, note that
+	\begin{equation*} 
+		S \otimes_{R} k(\mathfrak{p}) \cong S_{p}/\mathfrak{p} S_{\mathfrak{p}}.
+	\end{equation*}
+	Primes of the above ring corresponding to primes of $S$ that contain $\mathfrak{p} S$ and do not intersect $f(R \setminus \mathfrak{p})$. Let $\mathfrak{q} \in \Spec(S)$ be the prime corresponding to $\mathfrak{p}$. 
+
+	Then, $f^{-1}(\mathfrak{q}) = \mathfrak{p}$.	
+\end{proof}
+
+\begin{thm}[Going-down theorem for flat maps]
+	If $f : R \to S$ is flat, then it has the going-down property.
+
+	More explicitly: if $\mathfrak{p}_{1}, \mathfrak{p}_{2} \in \Spec(R)$ and $\mathfrak{q}_{2} \in \Spec(S)$ satisfy
+	\begin{equation*} 
+		\mathfrak{p}_{1} \subset \mathfrak{p}_{2} = f^{-1}(\mathfrak{q}_{2}),
+	\end{equation*}
+	then there exists a prime $\mathfrak{q}_{1} \in \Spec(S)$ such that 
+	\begin{equation*} 
+		f^{-1}(\mathfrak{q}_{1}) = \mathfrak{p}_{1} \andd \mathfrak{q}_{1} \subset \mathfrak{q}_{2}.
+	\end{equation*}
+\end{thm}
+
+Note that $\mathbb{Z} \to \mathbb{Q}$ is flat and hence, has the going-down property. However, it does not have the lying-over property. There is no lift of $2 \mathbb{Z}$.
+
+\begin{proof} 
+	Note that
+	\begin{equation*} 
+		R_{\mathfrak{p}_{2}} \to S_{\mathfrak{q}_{2}}
+	\end{equation*}
+	is flat. Moreover, this is a map of local rings since $f^{-1}(\mathfrak{q}_{2}) = \mathfrak{p}_{2}$. Thus, \Cref{lem:local-flat-fflat} tells us that the map is fflat. Now use the lying-over theorem.
+\end{proof}
+
+\section{Completion}
+
+\begin{defn}
+	Let $R$ be a ring, and $\langle I_{n} \rangle_{n \ge 1}$ a collection of ideals such that $I_{n + 1} \subset I_{n}$. Then, we have a inverse system $R/I_{n + 1} \to R/I_{n}$ and we define
+	\begin{equation*} 
+		\widehat{R}^{\langle I_{n} \rangle_{n}} \vcentcolon= \limit_{n} R/I_{n}.
+	\end{equation*}
+	If $I_{n} = I^{n}$ for some ideal $I$, then the above inverse limit is denoted by $\widehat{R}^{I}$. In this case, we call $\widehat{R}^{I}$ the \deff{$I$-adic completion} of $R$.
+\end{defn}
+
+We will typically be interested in the case where $(R, \mathfrak{m})$ is a local ring and $I_{n} = \mathfrak{m}^{n}$. We may also typically write $\widehat{R}$ if the system of ideals is clear.
+
+Note that the limit $\limit_{n} R/I_{n}$ is the subring of $\prod_{n} R/I_{n}$ consisting of the elements of the form
+\begin{equation*} 
+	(\overline{a_{1}}, \overline{a_{2}}, \overline{a_{3}}, \ldots)
+\end{equation*}
+such that $\overline{a_{n + 1}} \mapsto \overline{a_{n}}$ under the map $R/I_{n + 1} \to R/I_{n}$.
+
+In particular, there is a map $R \to \widehat{R}$ given by
+\begin{align*} 
+	a \mapsto (\bar{a}, \bar{a}, \bar{a}, \ldots).
+\end{align*}
+
+\begin{prop}
+	Let $R$ be a ring, and $\langle I_{n} \rangle_{n \ge 1}$ a filtration on $R$. \newline
+	$R \to \widehat{R}$ is injective iff $\bigcap_{n \ge 1} I_{n} = 0$ iff $R$ is Hausdorff in the topology induced by $\langle I_{n} \rangle_{n}$.
+\end{prop}
+\begin{proof} 
+	Clearly, the kernel of $R \to \widehat{R}$ is $\bigcap_{n} I_{n}$. This gives the first equivalence. The last equivalence is just \Cref{prop:hausdorff-iff-trivial-intersection}.
+\end{proof}
+
+\begin{ex}
+	Let $R$ be a ring. Consider the polynomial ring $S = R[x_{1}, \ldots, x_{n}]$ and the ideal $\mathfrak{m} = (x_{1}, \ldots, x_{n})$. (Note that $\mathfrak{m}$ need not be maximal.) \newline
+	Then, the $\mathfrak{m}$-adic completion $\widehat{S}$ is isomorphic to $R[\![x_{1}, \ldots, x_{n}]\!]$.
+
+	To see this, note that we have a map
+	\begin{equation*} 
+		R[\![x_{1}, \ldots, x_{n}]\!] \to \limit_{t} R[x_{1}, \ldots, x_{n}]/(x_{1}, \ldots, x^{n})^{t}
+	\end{equation*}
+	given by truncation. It is easy to see that this is an isomorphism.
+\end{ex}
+
+We also recall the following.
+\begin{thm}
+	If $R$ is Noetherian, then so is the power series ring $R[\![x_{1}, \ldots, x_{n}]\!]$.
+\end{thm}
+
+Note that the power series has the analogous universal property of polynomial rings, in the following way: Suppose $J \subset R$ is an ideal generated by $y_{1}, \ldots, y_{n}$. \newline
+Then, we have a map
+\begin{equation*} 
+	R[x_{1}, \ldots, x_{n}] \to R
+\end{equation*}
+given by $x_{i} \mapsto y_{i}$. Note this maps $(x_{1}, \ldots, x_{n})$ onto $J$. More generally, this maps $(x_{1}, \ldots, x_{n})^{t}$ onto $J^{t}$ for all $t \ge 1$.
+
+For all $t \ge 1$, this induces maps
+\begin{equation*} 
+	R[x_{1}, \ldots, x_{n}]/(x_{1}, \ldots, x_{n})^{t} \to R/J^{t}.	
+\end{equation*}
+The universal property of limits now gives us a map
+\begin{equation*} 
+	R[\![x_{1}, \ldots, x_{n}]\!] \to \widehat{R}^{J}.
+\end{equation*}
+Note that under this map, we see that
+\begin{equation*} 
+	x_{i} \mapsto (\overline{y_{i}}, \overline{y_{i}}, \overline{y_{i}}, \ldots).
+\end{equation*}
+(Of course, in the first coordinate, we have $\overline{y_{i}} = 0$.)
+
+\begin{thm}
+	Let $R$ be a Noetherian ring, $J \subset R$ an ideal. \newline
+	Then, the $J$-adic completion $\widehat{R}$ is Noetherian.
+\end{thm}
+\begin{proof} 
+	Let $J = (y_{1}, \ldots, y_{n})$. Let $\widetilde{y_{i}}$ denote the image of $y_{i}$ in $\widehat{R}$ via $R \to \widehat{R}$. \newline
+	As noted, we have a (ring) map $\Phi : R[\![x_{1}, \ldots, x_{n}]\!] \to \widehat{R}$ given by
+	\begin{equation*} 
+		x_{i} \mapsto \widetilde{y_{i}}.
+	\end{equation*}
+
+	We claim that his map is onto. In particular, $\widehat{R}$ is Noetherian since $R[\![x_{1}, \ldots, x_{n}]\!]$ is so.
+
+	Let $\mathbf{a} = (\overline{a_{1}}, \overline{a_{2}}, \overline{a_{3}}, \ldots) \in \widehat{R}$, and let $a_{1}, \ldots, \in R$ be lifts. \newline
+	By hypothesis, we must have $a_{t + 1} - a_{t} \in J^{t}$. Thus, we can write
+	\begin{equation*} 
+		a_{t + 1} - a_{t} = F_{t}(y_{1}, \ldots, y_{n}),
+	\end{equation*}
+	where $F_{t}$ is a homogeneous polynomial of degree $t$. 
+
+	Then, $F = \sum_{t = 1}^{\infty} F_{t}(x_{1}, \ldots, x_{n}) \in R[\![x_{1}, \ldots, x_{n}]\!]$. Moreover, $\Phi(F) = \mathbf{a}$.  
+\end{proof}
+
 
 \end{document}
