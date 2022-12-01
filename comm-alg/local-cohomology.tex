@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+\clearthms{fakethm,fakeprop,fakeobs,fakerem}
+
+\newtheorem{fakethm}{Theorem}
+\newtheorem{fakeprop}[fakethm]{Proposition}
+\newtheorem{fakeobs}[fakethm]{Observation}
+\newtheorem{fakerem}[fakethm]{Remark}
+
+\fancyhf{}
+\fancyhead[L]{}
+\fancyhead[R]{}
+
+
+\title{Local Cohomology and Depth}
+\author{Aryaman Maithani}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Let $R$ be a noetherian ring, $I \subset R$ an ideal, and $M$ an arbitrary $R$-module. We have surjections
+\begin{equation*} 
+	\cdots \onto R/I^{2} \onto R/I,
+\end{equation*}
+giving us an \emph{inverse} limit system.
+
+In turn, this gives us a \emph{direct} limit system
+\begin{equation*} 
+	\cdots \to \Ext_{R}^{i}(R/I^{t}, M) \to \Ext_{R}^{i}(R/I^{t + 1}, M) \to \cdots,
+\end{equation*}
+for all $i \ge 0$.
+
+Considering the colimit (over $t$), we get the \deff{$i$-th local cohomology module of $M$ with support in $I$}:
+\begin{equation*} 
+	H_{I}^{i}(M) = \colimit_{t} \Ext_{R}^{i}(R/I^{t}, M).
+\end{equation*}
+
+\begin{obs}
+	When $i = 0$, then $\Ext_{R}^{i}(R/I^{t}, M) = \Hom_{R}(R/I^{t}, M)$. This can be identified with the submodule of $M$ consisting of elements killed by $I^{t}$. The colimit can then be identified with the union. We get
+	\begin{equation*} 
+		H_{I}^{0}(M) = \{x \in M : x \text{ is killed by some power of } I\}.
+	\end{equation*}
+\end{obs}
+
+\begin{obs}
+	Every element of $H_{I}^{i}(M)$ is killed by a power of $I$.
+\end{obs}
+\begin{proof} 
+	Every element is in the image of $\Ext_{R}^{i}(R/I^{t}, M)$ for some $t$, and $I^{t}$ kills this $\Ext$.
+\end{proof}
+
+Note that if we have a short exact sequence of modules
+\begin{equation*} 
+	0 \to A \to B \to C \to 0,
+\end{equation*}
+then for each $t$, we get a long exact sequence
+\begin{align*} 
+	0 \to \Ext_{R}^{0}(R/I^{t}, A) \to \Ext_{R}^{0}(R/I^{t}, B) \to \Ext_{R}^{0}(R/I^{t}, C) \to \Ext_{R}^{1}(R/I^{t}, A) \to \Ext_{R}^{1}(R/I^{t}, B) \to \cdots \\
+	\cdots \to \Ext_{R}^{i}(R/I^{t}, A) \to \Ext_{R}^{i}(R/I^{t}, B) \to \Ext_{R}^{i}(R/I^{t}, C) \to \Ext_{R}^{i + 1}(R/I^{t}, A) \to \cdots.
+\end{align*}
+Now, we also have arrows between varying $t$. Since colimits preserve exactness, we get a long exact sequence as
+\begin{align*} 
+	0 \to H_{I}^{0}(A) \to H_{I}^{0}(B) \to H_{I}^{0}(C) \to H_{I}^{1}(A) \to \cdots \\
+	\cdots \to H_{I}^{i}(A) \to H_{I}^{i}(B) \to H_{I}^{i}(C) \to H_{I}^{i + 1}(A) \to \cdots.
+\end{align*}
+
+\begin{thm}
+	Let $(R, \mathfrak{m})$ be a local ring, and $M$ be a nonzero finitely generated $R$-module. The least value of $i$ such that $H_{\mathfrak{m}}^{i}(M) \neq 0$ is the depth of $M$.
+\end{thm}
+\begin{proof} 
+	Let $x_{1}, \ldots, x_{d} \in \mathfrak{m}$ be a maximal $M$-sequence. By induction on $d$, we will show that $H_{\mathfrak{m}}^{i}(M) = 0$ if $i < d$ and $H_{\mathfrak{m}}^{d}(M) \neq 0$.
+
+	$d = 0$: This means that every element of $\mathfrak{m}$ is a zerodivisor on $M$. By prime avoidance,\footnote{We used finite generation of $M$ here.} $\mathfrak{m} \in \Ass(\mathfrak{m})$ and hence, there is some nonzero element $x \in M$ annihilated by $\mathfrak{m}$. Thus, $x \in H_{\mathfrak{m}}^{0}(M)$ is nonzero.
+
+	$d > 0$: The short exact sequence $0 \to M \xrightarrow{x} M \to M/x M \to 0$ with $x = x_{1}$ yields the following exact sequence
+	\begin{equation*} 
+		H_{\mathfrak{m}}^{i - 1}(M/xM) \to H_{\mathfrak{m}}^{i}(M) \xrightarrow{x} H_{\mathfrak{m}}^{i}(M).
+	\end{equation*}
+	If $i < d$, the induction hypothesis shows that the leftmost module above vanishes. Thus, $x$ is a nonzerodivisor on $H_{\mathfrak{m}}^{i}(M)$. But every element of this module is killed by a power of $x \in \mathfrak{m}$. Thus, $H_{\mathfrak{m}}^{i}(M) = 0$. \newline
+	If $i = d$, we use the following part of the exact sequence:
+	\begin{equation*} 
+		H_{\mathfrak{m}}^{d - 1}(M) \to H_{\mathfrak{m}}^{d - 1}(M/xM) \to H_{\mathfrak{m}}^{d}(M).
+	\end{equation*}
+	We have already concluded that the leftmost module is zero. By induction, the middle module is nonzero. Thus, the rightmost module is nonzero since a nonzero module injects into it.
+\end{proof}
+
+\end{document}
