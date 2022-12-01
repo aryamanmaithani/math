@@ -300,6 +300,17 @@
 \newtheorem{fakeobs}[fakethm]{Observation}
 % \newtheorem*{conject}{Conjecture}
 
+% --- introducing cleartheorem ---
+\makeatletter
+\def\cleartheorem#1{%
+    \expandafter\let\csname#1\endcsname\relax
+    \expandafter\let\csname c@#1\endcsname\relax
+}
+\def\clearthms#1{ \@for\tname:=#1\do{\cleartheorem\tname} }
+\makeatother
+% --- finishing cleartheorem ---
+
+
 % -------------------
 % Coloured theorem and other environments
 % -------------------

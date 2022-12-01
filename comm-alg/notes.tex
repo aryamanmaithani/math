@@ -897,7 +897,7 @@ This is the topology that we will be focusing on now.
 \begin{proof} 
 	We prove the statement about rings and leave the other one to the reader.
 
-	\forward Suppose $\bigcap_{n \neq 0} I_{n} \neq 0$. Pick a nonzero $y$ in the intersection. Then, $y$ and $0$ cannot be separated.
+	\forward Suppose $\bigcap_{n \ge 0} I_{n} \neq 0$. Pick a nonzero $y$ in the intersection. Then, $y$ and $0$ cannot be separated.
 
 	\backward As noted, each $I_{n}$ is closed. Thus, the intersection being $0$ implies that $\{0\}$ is closed. By continuity of multiplication, the diagonal is then closed in $R \times R$, which is equivalent to $R$ being Hausdorff.
 \end{proof}
@@ -1982,6 +1982,8 @@ Note that $\mathbb{Z} \to \mathbb{Q}$ is flat and hence, has the going-down prop
 
 \section{Completion}
 
+\subsection{Completion via inverse limits}
+
 \begin{defn}
 	Let $R$ be a ring, and $\langle I_{n} \rangle_{n \ge 1}$ a collection of ideals such that $I_{n + 1} \subset I_{n}$. Then, we have a inverse system $R/I_{n + 1} \to R/I_{n}$ and we define
 	\begin{equation*} 
@@ -1992,18 +1994,50 @@ Note that $\mathbb{Z} \to \mathbb{Q}$ is flat and hence, has the going-down prop
 
 We will typically be interested in the case where $(R, \mathfrak{m})$ is a local ring and $I_{n} = \mathfrak{m}^{n}$. We may also typically write $\widehat{R}$ if the system of ideals is clear.
 
+\begin{defn}
+	More generally, if $M$ is an $R$-module and $\langle M_{n} \rangle_{n \ge 1}$ a sequence of submodules with $M_{n} \subset M_{n - 1}$, then we define
+	\begin{equation*} 
+		\widehat{M}^{\langle M_{n} \rangle_{n}} \vcentcolon= \limit_{n} M/M_{n}.
+	\end{equation*}
+	If $M_{n} = I^{n} M$ for some ideal $I$, then the above inverse limit is denoted by $\widehat{M}^{I}$. In this case, we call $\widehat{M}^{I}$ the \deff{$I$-adic completion} of $M$.
+\end{defn}
+
+We will typically be interested in $I$-adic completions, and often write $\widehat{M}$ if the inverse system is clear.
+
 Note that the limit $\limit_{n} R/I_{n}$ is the subring of $\prod_{n} R/I_{n}$ consisting of the elements of the form
 \begin{equation*} 
 	(\overline{a_{1}}, \overline{a_{2}}, \overline{a_{3}}, \ldots)
 \end{equation*}
-such that $\overline{a_{n + 1}} \mapsto \overline{a_{n}}$ under the map $R/I_{n + 1} \to R/I_{n}$.
+such that $\overline{a_{n + 1}} \mapsto \overline{a_{n}}$ under the map $R/I_{n + 1} \to R/I_{n}$. (We may sometimes use the more elaborate notation $a_{n} + I_{n}$ instead of $\overline{a_{n}}$ for clarity.)
 
 In particular, there is a map $R \to \widehat{R}$ given by
 \begin{align*} 
-	a \mapsto (\bar{a}, \bar{a}, \bar{a}, \ldots).
+	a \mapsto (a + I_{1}, a + I_{2}, a + I_{3}, \ldots).
 \end{align*}
 
-\begin{prop}
+The description of $\widehat{M}$ is analogous. Similarly, we have a map $M \to \widehat{M}$.
+
+\begin{rem}
+	From the discussion, we note that $\widehat{R}$ is naturally a ring. Similarly, $\widehat{M}$ is an $R$-module. If both of these are $I$-adic completions, then $\widehat{M}$ is also an $\widehat{R}$-module.
+\end{rem}
+
+\begin{obs} \label{obs:completion-additive-functor}
+	Let $R$ be a ring, and $I \subset R$ an ideal. The description above should also make it clear that $I$-adic completion is a functor from the category of $R$-modules to itself.
+
+	Indeed, if $f : M \to N$ is an $R$-module homomorphism, then $f(J^{n} M) \subset J^{n} f(M) \subset J^{n} N$. \newline
+	Thus, we have compatible maps $M/J^{n} M \to N/J^{n} N$ inducing a map $\widehat{M} \to \widehat{N}$.
+
+	Explicitly, the map is given by
+	\begin{equation*} 
+		(m_{1} + I M, m_{2} + I^{2} M, \ldots) \mapsto (f(m_{1}) + I N, f(m_{2}) + I^{2} N, \ldots).
+	\end{equation*}
+
+	This also shows that $\widehat{\cdot}$ is an additive functor, i.e., $\widehat{f + g} = \widehat{f} + \widehat{g}$ for maps $f, g : M \to N$.
+
+	Consequently, $\widehat{M \oplus N} \cong \widehat{M} \oplus \widehat{N}$. In particular, $\widehat{R^{\oplus n}} \cong \widehat{R}^{\oplus n}$. (In general, any additive functor preserves finite direct sums.)
+\end{obs}
+
+\begin{prop} \label{prop:R-to-completion-injective-hausdorff}
 	Let $R$ be a ring, and $\langle I_{n} \rangle_{n \ge 1}$ a filtration on $R$. \newline
 	$R \to \widehat{R}$ is injective iff $\bigcap_{n \ge 1} I_{n} = 0$ iff $R$ is Hausdorff in the topology induced by $\langle I_{n} \rangle_{n}$.
 \end{prop}
@@ -2071,5 +2105,312 @@ Note that under this map, we see that
 	Then, $F = \sum_{t = 1}^{\infty} F_{t}(x_{1}, \ldots, x_{n}) \in R[\![x_{1}, \ldots, x_{n}]\!]$. Moreover, $\Phi(F) = \mathbf{a}$.  
 \end{proof}
 
+\begin{ex} \label{ex:J-adic-completion-R-mod-J}
+	Let $J \subset R$ be an ideal, and consider the $R$-module $M = R/J$. We claim that the map $M \to \widehat{M}^{J}$ is an isomorphism.
+
+	This follows immediately since $JM = 0$ and thus, $M/J^{t} M \cong M$ for all $t$ and the maps $M/J^{t + 1} M \to M/J^{t} M$ are just the identity maps. 
+
+	More generally, if $n \ge 1$ and $M = R/J^{n}$, then we have $M \cong \widehat{M}^{J}$ via the natural map. Explicitly, the map is given by
+	\begin{equation*} 
+		r + J^{n} \mapsto (r + J, r + J^{2}, \ldots, r + J^{n}, r + J^{n}, r + J^{n}, \ldots).
+	\end{equation*}
+	On the right, we have identified $M/J^{t} M \cong (R/J^{n})/(J^{t}/J^{n}) \cong R/J^{t}$ for $t \le n$. For $t > n$, we have $J^{t} M = 0$ and $M/J^{t} M \cong M = R/J^{n}$.
+\end{ex}
+
+\subsection{Completion via Cauchy Sequences}
+
+We quickly see an alternate description of $\widehat{R}$ to justify the term ``completion''. Throughout this discussion, we fix a ring $R$ and a system of ideals $\langle I_{n} \rangle_{n \ge 1}$ such that $I_{n + 1} \subset I_{n}$ for all $n$. % We may also assume that $I_{n} I_{m} \subset I_{n + m}$ for some remarks.
+
+\begin{defn}
+	A sequence $(a_{n})_{n \ge 1}$ in $R$ is said to be \deff{Cauchy} if for every $t \ge 0$, there exists $N = N(t) \ge 1$ such that
+	\begin{equation*} 
+		a_{n} - a_{m} \in I_{t}
+	\end{equation*}
+	for all $n, m \ge N$.
+\end{defn}
+
+Thus, these ideals replace the $\varepsilon$-balls.\footnote{If $R$ is Hausdorff, i.e., if $\bigcap_{t \ge 0} I_{t} = 0$, then the topology is indeed metrisable with $d(x, y) = \inf\{2^{-t} : x - y \in I^{t}\}$. In this case, the definition above coincides with the usual notion of a Cauchy sequence. Note that if $R$ is not Hausdorff, then $d$ is only a pseudometric.}
+
+For the moment, we now forget the notation $\widehat{R}$ from earlier and define it in a new way.
+
+First, define $\mathcal{R} = \prod_{\mathbb{N}} R$ to be the direct product of $\mathbb{N}$-many copies of $R$. In other words, $\mathcal{R}$ is the ring of all sequences in $R$. \newline
+Let $\mathcal{C} \subset \mathcal{R}$ be the set of all Cauchy sequences.
+
+\begin{exe}
+	Check that $\mathcal{C}$ is a subring of $\mathcal{R}$.
+\end{exe}
+
+Now, define $\mathcal{I} \subset \mathcal{C}$ to be the set of Cauchy sequences converging to $0$. ($(r_{n})_{n \ge 0}$ is said to converge to $0$ if for all $t \ge 1$, there exists $N = N(t)$ such that $r_{n} \in I_{t}$ for all $N \ge t$. Uniqueness of limit is not assumed.)
+
+\begin{exe}
+	Check that $\mathcal{I}$ is an ideal of $\mathcal{C}$.
+\end{exe}
+
+Finally, define $\widehat{R} = \mathcal{C}/\mathcal{I}$. The description of $\widehat{R}$ is given as follows: Its elements are equivalence classes of Cauchy sequences $(r_{n})_{n \ge 1}$, where the equivalence relation is
+\begin{equation*} 
+	(r_{n})_{n \ge 1} \sim (s_{n})_{n \ge 1} \Leftrightarrow \text{for all $t$, there exists $N$ such that $r_{n} - s_{n} \in U_{t}$ for all $n \ge N$}.
+\end{equation*}
+The ring operations are defined in the obvious manner. The previous exercises ensure that this is well-defined.
+
+Note that we have an obvious ring map $R \to \widehat{R}$, mapping $r \in R$ to the equivalence of the constant sequence $(r)_{n \ge 1}$.
+
+\begin{thm} \label{thm:equivalence-of-completions}
+	$\limit_{t} R/I_{t} \cong \widehat{R}$.
+
+	More precisely, there is an isomorphism $\varphi$ making the following diagram commute
+	\begin{equation*} 
+		\begin{tikzcd}
+			& \limit_{t} R/I_{t} \arrow[dd, "\cong"', "\varphi"] \\
+			R \arrow[ru] \arrow[rd] & \\
+			& \widehat{R}.
+		\end{tikzcd}
+	\end{equation*}
+\end{thm}
+\begin{proof} 
+	Define $\varphi$ as
+	\begin{equation*} 
+		(r_{1} + I_{1}, r_{2} + I_{2}, \ldots) \mapsto [(r_{1}, r_{2}, \ldots)].
+	\end{equation*}
+	We need to check that $\varphi$ is well-defined. Note that the above formula makes it clear that the desired diagram does commute.
+
+	Firstly, note that by definition of inverse limit, we have $r_{t + 1} - r_{t} \in I_{t}$ for all $t$. Since the ideals are decreasing, we get $r_{n} - r_{m} \in I_{t}$ for all $n, m \ge t$. This proves that the sequence $(r_{n})_{n \ge 1}$ is indeed Cauchy.
+
+	Second, note that if $(r_{t}')_{t \ge 1}$ is another sequence representing the same element of the inverse limit, i.e., if $r_{t} - r_{t}' \in I_{t}$ for all $t$, then $r_{n} - r_{n}' \in I_{t}$ for all $n \ge t$, proving that $(r_{t} - r_{t}')_{t \ge 1}$ converges to $0$.
+
+	Thus, $\varphi$ is well-defined. It is clearly a ring map. We now check that it is bijection.
+
+	Injection: Suppose that $(r_{1} + I_{1}, r_{2} + I_{2}, \ldots) \in \ker(\varphi)$. We wish to show that $r_{t} \in I_{t}$ for all $t$. \newline
+	Fix $t$. By hypothesis, there exists $N \ge t$ such that $r_{N} \in I_{t}$. By definition of an inverse limit, we must have $r_{N} - r_{t} \in I_{t}$, showing that $r_{t} \in I_{t}$.
+
+	Surjection: Let $(r_{1}, r_{2}, \ldots)$ be a Cauchy sequence. \newline
+	Pick $N_{1} < N_{2} < \cdots$ such that 
+	\begin{equation*} 
+		r_{n} - r_{m} \in I_{t}
+	\end{equation*}
+	for all $n, m \ge N_{t}$. \newline
+	Then, 
+	\begin{equation*} 
+		\mathbf{r} = (r_{N_{1}} + I_{1}, r_{N_{2}} + I_{2}, \ldots)
+	\end{equation*}
+	is an element of the inverse limit. \newline
+	We claim $\varphi(\mathbf{r}) = [(r_{1}, r_{2}, \ldots)]$ proving that $\varphi$ is onto. \newline
+	To see this, note that
+	\begin{equation*} 
+		\varphi(\mathbf{r}) = (r_{N_{1}}, r_{N_{2}}, \ldots).
+	\end{equation*}
+	We wish to show that
+	\begin{equation*} 
+		\lim_{t \to \infty} r_{N_{t}} - r_{t} = 0.
+	\end{equation*}
+	(We are not claiming uniqueness of limit.) \newline
+	To see this, note that $N_{n} \ge n$ for all $n$. Thus,
+	\begin{equation*} 
+		r_{N_{n}} - r_{n} \in I_{t}
+	\end{equation*}
+	for all $t$ and all $n \ge N_{t}$.
+\end{proof}
+
+\subsection{Exactness}
+
+Recall that one has the obvious definition of a morphism of inverse systems. In particular, a short exact sequence 
+\begin{equation*} 
+	0 \to \langle A_{n} \rangle_{n \ge 1} \to \langle B_{n} \rangle_{n \ge 1} \to \langle C_{n} \rangle_{n \ge 1} \to 0
+\end{equation*} 
+
+of inverse systems of $R$-modules corresponds to a commutative diagram of the form
+
+\begin{equation*} 
+	\begin{tikzcd}
+		& \vdots \arrow[d] & \vdots \arrow[d] & \vdots \arrow[d] & \\
+		0 \arrow[r] & A_{2} \arrow[d] \arrow[r] & B_{2} \arrow[d] \arrow[r] & C_{2} \arrow[d] \arrow[r] & 0 \\
+		0 \arrow[r] & A_{1} \arrow[d] \arrow[r] & B_{1} \arrow[d] \arrow[r] & C_{1} \arrow[d] \arrow[r] & 0 \\
+		0 \arrow[r] & A_{0} \arrow[r] & B_{0} \arrow[r] & C_{0} \arrow[r] & 0, 
+	\end{tikzcd}
+\end{equation*}
+where each row is exact.
+
+Corresponding to this, we can form the sequence
+\begin{equation*} 
+	0 \to \limit_{n} A_{n} \to \limit_{n} B_{n} \to \limit_{n} C_{n} \to 0.
+\end{equation*}
+
+\begin{prop}
+	The sequence above is exact, except possibly at $\limit_{n} C_{n}$. \newline
+	If $\langle A_{n} \rangle_{n \ge 1}$ is a surjective system, i.e., the map $A_{n + 1} \to A_{n}$ is a surjection for all $n$, then the sequence above is exact.
+\end{prop}
+
+Note that in the case that we are interested in, the inverse systems \emph{are} surjective. 
+
+\begin{proof} 
+	Diagram chase. Left as an exercise.
+\end{proof}
+
+\begin{thm}
+	Let $R$ be a Noetherian ring, $J \subset R$ an ideal. Let 
+	\begin{equation*} 
+		0 \to M' \to M \to M'' \to 0
+	\end{equation*}
+	be a short exact sequence of finitely generated $R$-modules.
+
+	Then, 
+	\begin{equation*} 
+		0 \to \widehat{M'}^{J} \to \widehat{M}^{J} \to \widehat{M''}^{J} \to 0
+	\end{equation*}
+	is exact.
+\end{thm}
+\begin{proof}[Sketch]
+	For each $n$, the sequence 
+	\begin{equation*} 
+		0 \to M'/(J^{n} M \cap M') \to M/J^{n} M \to M''/J^{n} M'' \to 0
+	\end{equation*}
+	is exact.
+
+	Thus, 
+	\begin{equation*} 
+		0 \to \limit_{n} M'/(J^{n} M \cap M') \to \widehat{M} \to \widehat{M''} \to 0
+	\end{equation*}
+	is exact.
+
+	Use \mynameref{thm:artin-rees} to conclude that the limit above is isomorphic to $\widehat{M'}$ (and that the appropriate diagram commutes).
+\end{proof}
+
+\begin{cor}
+	Let $R$ be a Noetherian ring, $J \subset R$ an ideal, and $M$ a finitely generated $R$-module. Then,
+	\begin{equation*} 
+		\widehat{M}^{J} \cong M \otimes_{R} \widehat{R}^{J}.
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	Since $R$ is Noetherian and $M$ finitely generated, $M$ is also finitely presented, i.e., there is an exact sequence
+	\begin{equation*} 
+		R^{\oplus m} \to R^{\oplus n} \to M \to 0.
+	\end{equation*}
+
+	Now, consider the following commutative diagram:
+
+	\begin{equation*} 
+		\begin{tikzcd}
+			\widehat{R^{\oplus m}} \arrow[r] \arrow[d, "\cong"] & \widehat{R^{\oplus n}} \arrow[r] \arrow[d, "\cong"] & \widehat{M} \arrow[r] & 0 \\
+			\widehat{R}^{\oplus m} \arrow[r] \arrow[d, "\cong"] & \widehat{R}^{\oplus n} \arrow[d, "\cong"] & \\
+			R^{\oplus m} \otimes_{R} \widehat{R} \arrow[r] & R^{\oplus n} \otimes_{R} \widehat{R} \arrow[r] & M \otimes_{R} \widehat{R} \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+
+	The top row is exact by the previous result. The bottom row is exact since tensoring is right exact. The vertical arrows are the natural ones that follow by virtue of completion and tensoring being additive functors (and therefore preserving finite direct sums). 
+
+	In turn, there is an induced isomorphism $\widehat{M} \to M \otimes_{R} \widehat{R}$. 
+\end{proof}
+
+\begin{cor}
+	If $R$ is a Noetherian ring, and $J \subset R$ an ideal, then the $J$-adic completion $\widehat{R}$ is a flat $R$-module.
+\end{cor}
+\begin{proof} 
+	In general, if $K$ is an $R$-module such that $\otimes_{R} K$ preserves short exact sequences of finitely generated modules, then $K$ is flat. 
+\end{proof}
+
+\begin{cor} \label{cor:completion-of-completion}
+	Let $R$ be a Noetherian ring, and $J \subset R$ an ideal. Let $\widehat{R}$ denote the $J$-adic completion. \newline
+	For each $n$, the natural projection map $\widehat{R} \onto R/J^{n}$ has kernel $J^{n} \widehat{R} \cong \widehat{J^{n}}$. \newline
+	In particular, $\widehat{R}/J^{n} \widehat{R} \cong R/J^{n}$.
+
+	Consequently, $\widehat{R} \cong \widehat{\widehat{R}}$, where the second completion is with respect to $J \widehat{R}$.
+\end{cor}
+\begin{proof} 
+	Fix $n$. We have the short exact sequence
+	\begin{equation*} 
+		0 \to J^{n} \to R \to R/J^{n} \to 0
+	\end{equation*}
+	of $R$-modules.
+
+	Note that by \Cref{ex:J-adic-completion-R-mod-J}, we have $\widehat{R/J^{n}} \cong R/J$. Thus, applying $\widehat{\cdot}$ to the above short exact sequence yields
+	\begin{equation*} 
+		0 \to \widehat{J^{n}} \to \widehat{R} \to R/J^{n} \to 0.
+	\end{equation*}
+	(Check that the map $\widehat{R} \to R/J^{n}$ is indeed the natural projection mentioned in the statement of the result.)
+
+	Moreover, note that $\widehat{J^{n}} \cong J^{n} \otimes_{R} \widehat{R} \cong J^{n} \widehat{R}$, where the last isomorphism follows since $\widehat{R}$ is flat. (Again, one has to check that the maps are the natural ones.)
+
+	Thus, we have shown that $J^{n} \widehat{R}$ is the kernel of $\widehat{R} \to R/J^{n}$.
+
+	The other statements follow as well.
+\end{proof}
+
+\begin{exe}
+	Check that in the above setup, we have $(J \widehat{R})^{n} = J^{n} \widehat{R}$.
+\end{exe}
+
+\subsection{Properties of completion}
+
+For this subsection, we shall assume that $R$ is a Noetherian ring, and $J \subset R$ is an ideal, $\widehat{R}$ will denote the $J$-adic completion.
+
+\begin{defn}
+	$R$ is said to be \deff{complete} in the $J$-adic topology if the map $R \to \widehat{R}$ is an isomorphism.
+\end{defn}
+
+\begin{rem}
+	Note that $R$ is complete $\Rightarrow$ $R$ is Hausdorff in the $J$-adic topology, by \Cref{prop:R-to-completion-injective-hausdorff}.
+\end{rem}
+
+In terms of Cauchy sequences, one can note the following.
+
+\begin{prop}
+	The following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $R$ is complete.
+		\item Every Cauchy sequence in $R$ has a unique limit.
+		\item Every Cauchy sequence in $R$ converges, and $R$ is Hausdorff.
+		\item Every Cauchy sequence in $R$ converges, and $\bigcap_{n \ge 1} J^{n} = 0$.
+	\end{enumerate}
+\end{prop}
+For the above proposition, one could work in the full generality of $R$ being an arbitrary ring and $\langle I_{t} \rangle_{t \ge 1}$ an arbitrary sequence of decreasing ideals.
+\begin{proof} 
+	(iii) $\Leftrightarrow$ (iv) is clear from earlier discussions (\Cref{prop:hausdorff-iff-trivial-intersection}). 
+
+	(iii) $\Rightarrow$ (ii) is clear from general topology. 
+
+	(ii) $\Rightarrow$ (iv): If there is a nonzero element $y \in \bigcap_{n \ge 1} J^{n}$, then the constant sequence $(0)_{n \ge 0}$ has converges to both $0$ and $y$.
+
+	Thus, it suffices to now show (i) $\Leftrightarrow$ (iv). The proof is very similar to that of \Cref{thm:equivalence-of-completions}, and is left to the reader.
+\end{proof}
+
+Note that \Cref{cor:completion-of-completion} told us that $\widehat{R}$ is complete in the $J \widehat{R}$-adic topology, in the sense that $\widehat{R} \to \widehat{\widehat{R}}$ is an isomorphism. In particular, this tells us that $\widehat{R}$ is Hausdorff and that every Cauchy sequence in $\widehat{R}$ converges (in the $J \widehat{R}$-adic topology). 
+
+\begin{cor}
+	If $u \in \widehat{R}$ is a unit, and $x \in J \widehat{R}$, then $u + x$ is a unit.
+
+	Consequently, $I \widehat{R}$ is contained in the Jacobson radical of $R$. (Equivalently, every maximal ideal of $\widehat{R}$ contains $I \widehat{R}$.)
+\end{cor}
+\begin{proof} 
+	It suffices to show that $1 - x$ is a unit. Consider the following sequence in $\widehat{R}$:
+	\begin{equation*} 
+		1, 1 + x, 1 + x + x^{2}, \ldots.
+	\end{equation*}
+	Note that if $m > n \ge M$, then
+	\begin{equation*} 
+		(1 + x + \cdots + x^{m}) - (1 + x + \cdots + x^{n}) = x^{m} + \cdots + x^{n + 1} \in (J \widehat{R})^{M}.
+	\end{equation*}
+	Thus, the sequence is Cauchy and has a limit, which we denote by $1 + x + x^{2} + \cdots$.
+
+	Note that
+	\begin{equation*} 
+		(1 - x)(1 + x + \cdots + x^{n}) = 1 - x^{n + 1}.
+	\end{equation*}
+	Thus,
+	\begin{equation*} 
+		1 - (1 - x)(1 + x + \cdots + x^{n}) = -x^{n + 1} \in (J \widehat{R})^{n + 1}.
+	\end{equation*}
+
+	From the above, conclude that $1 + x + x^{2} + \cdots$ is the desired inverse.
+\end{proof}
+
+\begin{cor}
+	Suppose $(R, \mathfrak{m})$ is a local Noetherian ring. Then, $(\widehat{R}, \mathfrak{m} \widehat{R})$ is a local Noetherian ring.
+
+	Moreover,
+	\begin{equation*} 
+		R \to \widehat{R}^{\mathfrak{m}}
+	\end{equation*}
+	is a local and faithfully flat ring map, with $R/\mathfrak{m} \cong \widehat{R}/\mathfrak{m}\widehat{R}$.
+\end{cor}
 
 \end{document}
