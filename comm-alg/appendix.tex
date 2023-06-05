@@ -1,0 +1,66 @@
+\section{Appendix}
+
+Miscellaneous facts that I haven't found a better place to put yet.
+
+\begin{thm}
+	Let $R$ be any local ring. Every projective $R$-module is free.
+\end{thm}
+
+\begin{prop} \label{prop:minimal-epimorphism}
+	Let $(R, \mathfrak{m}, k)$ be a noetherian local ring, $N$ a finite $R$-module, $F = R^{\oplus I}$ a free $R$-module. Let $\{e_{i}\}_{i \in I}$ be an $R$-basis for $F$, and $\varphi : F \onto N$ be an epimorphism. The following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\langle \varphi(e_{i}) \rangle_{i \in I}$ is a minimal generating set of $N$ (consisting of distinct elements),
+		\item $\ker(\varphi) \subset \mathfrak{m} F$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(a) $\Rightarrow$ (b): Assume (a). Let $\sum a_{i} e_{i} \in \ker(\varphi)$. If there is some $a_{i_{0}} \in R \setminus \mathfrak{m}$, then we may divide by it to get an equation
+	\begin{equation*} 
+		\varphi(e_{i_{0}}) = -\sum_{i \neq i_{0}} \frac{a_{i}}{a_{i_{0}}} \varphi(e_{i}),
+	\end{equation*}
+	contradicting the assumption about being a minimal generating set.
+
+	(b) $\Rightarrow$ (a): By assumption, $\langle \varphi(e_{i}) \rangle_{i \in I}$ \emph{is} a spanning set. Suppose it is not minimal. Then, we may pick $i_{0} \in I$ such that there is an equation
+	\begin{equation*} 
+		\varphi(e_{i_{0}}) = \sum_{i \neq i_{0}} a_{i} \varphi(e_{i}).
+	\end{equation*}
+	But then, $e_{i_{0}} - \sum a_{i} e_{i} \in \ker \varphi \setminus \mathfrak{m} F$.
+\end{proof}
+
+\begin{prop}[Generalised Prime Avoidance] \label{prop:gen-prime-avoidance}
+	Let $R$ be a ring, $\mathfrak{p}_{1}, \ldots, \mathfrak{p}_{m}$ prime ideals, $M$ an $R$-module, and $x_{1}, \ldots, x_{n} \in M$. Set $N = \sum R x_{i}$. If $N_{\mathfrak{p}_{j}} \not\subset \mathfrak{p}_{j} M_{\mathfrak{p}_{j}}$ for $j = 1, \ldots, m$, then there exist $a_{2}, \ldots, a_{n} \in R$ such that 
+	\begin{equation*} 
+		x_{1} + \sum_{i = 2}^{n} a_{i} x_{i} \notin \mathfrak{p}_{j} M_{\mathfrak{p}_{j}}
+	\end{equation*}
+	for $j = 1, \ldots, m$.
+\end{prop}
+In words: if $N_{\mathfrak{p}} \not\subset \mathfrak{p} M_{\mathfrak{p}}$ for a finite collection of primes, then there exists $x \in N$ such that $x \notin \mathfrak{p} M_{\mathfrak{p}}$ for those primes. Note that the only assumption was that $N$ is a finite $R$-module.
+\begin{proof} 
+	We use induction on $m$. The case $m = 1$ is vacuous. Now, suppose $m > 1$ and that we have elements $a_{2}', \ldots, a_{n}'$ such that $x'_{1} \vcentcolon= x_{1} + \sum_{i = 2}^{n} a_{i} x_{i} \notin \mathfrak{p}_{j} M_{\mathfrak{p}_{j}}$ for $1 \le j < m$. If $x'_{1} \notin \mathfrak{p}_{m} N_{\mathfrak{p}_{m}}$, then we are done already. Assume now that $x'_{1} \in \mathfrak{p}_{m} N_{\mathfrak{p}_{m}}$.
+
+	We may also assume that $\mathfrak{p}_{j}$ are pairwise distinct and $\mathfrak{p}_{m}$ is minimal among the $\mathfrak{p}_{j}$. Thus, we may pick $r \in (\bigcap_{j = 1}^{m - 1} \mathfrak{p}_{j}) \setminus \mathfrak{p}_{m}$.
+
+	Put $x'_{i} \vcentcolon= r x_{i}$ for $2 \le i \le n$, and $N' \vcentcolon= \sum_{i = 1}^{n} R x'_{i} \le N$. Since $r \notin \mathfrak{p}_{m}$, $N'_{\mathfrak{p}_{m}} = N_{\mathfrak{p}_{m}}$. \newline
+	On the other hand, since $r \in \mathfrak{p}_{j}$ for $1 \le j < m$, we have
+	\begin{equation*} 
+		x'_{1} + x'_{i} \notin \mathfrak{p}_{j} M_{\mathfrak{p}_{j}}
+	\end{equation*}
+	for $1 < i \le n$ and $1 \le j < m$. Now, since $x'_{1} \in \mathfrak{p}_{m} N_{\mathfrak{p}_{m}}$ and $N'_{\mathfrak{p}_{m}} \not\subset \mathfrak{p}_{m} M_{\mathfrak{p}_{m}}$, there is some $i \in \{2, \ldots, n\}$ such that $x'_{1} + x'_{i} \notin \mathfrak{p}_{m} M_{\mathfrak{p}_{m}}$. This is the desired element.
+\end{proof}
+
+\begin{thm}[Projective iff locally free] \label{thm:projective-locally-free}
+	Let $R$ be a ring, $M$ a finitely presented $R$-module. $M$ is projective iff $M_{\mathfrak{p}}$ is free (equivalently projective) for all $\mathfrak{p} \in \Spec R$ iff $M_{\mathfrak{m}}$ is free for all $\mathfrak{m} \in \MaxSpec R$.
+\end{thm}
+\begin{proof} 
+	$M$ projective implies that each $M_{\mathfrak{p}}$ is projective and hence free, since $R_{\mathfrak{p}}$ is local. The only nontrivial implication is that third implies the first.
+
+	We show that $\Hom_{R}(M, -)$ preserves surjections. Let $N \onto N'$ be a surjection. It suffices to show that the induced map
+	\begin{equation*} 
+		\Hom_{R}(M, N)_{\mathfrak{m}} \to \Hom_{R}(M, N')_{\mathfrak{m}}
+	\end{equation*}
+	is surjective for every $\mathfrak{m} \in \MaxSpec R$. Since $M$ is finitely presented, the above is equivalent to showing that
+	\begin{equation*} 
+		\Hom_{R_{\mathfrak{m}}}(M_{\mathfrak{m}}, N_{\mathfrak{m}}) \to \Hom_{R_{\mathfrak{m}}}(M_{\mathfrak{m}}, N'_{\mathfrak{m}})
+	\end{equation*}
+	is surjective for all $\mathfrak{m}$. But now, for a fixed $\mathfrak{m}$, we note that the above map is also induced by the surjection $N_{\mathfrak{m}} \onto N'_{\mathfrak{m}}$. Thus, the hypothesis of $M_{\mathfrak{m}}$ being projective finishes the proof.
+\end{proof}

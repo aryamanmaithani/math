@@ -551,20 +551,7 @@ Note that $M_{n}$ will typically \emph{not} be an $R$-module.
 	\begin{equation*} 
 		R[It] \vcentcolon= \bigoplus_{n \ge 0} I^{n} t^{n} \cong \bigoplus_{n \ge 0} S_{n}.
 	\end{equation*}
-	The upshot is that the variable $t$ now succinctly acts as a bookkeeping device. Given a ring $R$ and an ideal $I$, we can construct the \deff{Rees algebra} as follows: \newline
-	Let $S_{0} \vcentcolon= R$, $S_{n} \vcentcolon= I^{n}$ for $n \ge 1$. Then,
-	\begin{equation*} 
-		\bigoplus_{n \ge 0} S_{n}
-	\end{equation*}
-	has a natural ring structure.
-
-	There is a notational issue as to how one would write an element of $S$. One way is to write them as tuples, this is unwieldy. We would like to write them as sums, but then there's the issue of whether one interprets an element $x \in I$ as sitting in $S_{1}$ or $S_{0}$. 
-
-	To combat this, we attach a dummy variable and define
-	\begin{equation*} 
-		R[It] \vcentcolon= \bigoplus_{n \ge 0} I^{n} t^{n} \cong \bigoplus_{n \ge 0} S_{n}.
-	\end{equation*}
-	The upshot is that the variable $t$ now succinctly acts as a bookkeeping device.
+	The upshot is that the variable $t$ now succinctly acts as a bookkeeping device. 
 \end{ex}
 
 \begin{defn}
@@ -820,7 +807,7 @@ In other words, by taking a high enough Veronese subalgebra, we can ensure that 
 	Then, $\langle I_{n} \rangle_{n \ge 0}$ is a filtration on $R$.
 \end{ex}
 
-\begin{defn}
+\begin{defn} \label{defn:associated-graded}
 	Let $(R, \langle I_{n} \rangle_{n \ge 0})$ be a filtered ring. The \deff{associated graded ring} $\gr(R)$ is defined by
 	\begin{equation*} 
 		\gr(R) \vcentcolon= R/I_{1} \oplus I_{1}/I_{2} \oplus I_{2}/I_{3} \oplus \cdots.
@@ -974,7 +961,7 @@ This shows how (ii) implies (iii). It is also clear that (i) implies (ii). So we
 
 We now use the Artin-Rees lemma to deduce that certain infinite intersections are zero. In view of \Cref{prop:hausdorff-iff-trivial-intersection}, it is saying that a certain module is Hausdorff.
 
-\begin{thm} \label{thm:KIT}
+\begin{thm}[Krull's Intersection Theorem] \label{thm:KIT}
 	Let $(R, \mathfrak{m})$ be a local Noetherian ring, and $I \subsetneq R$ a proper ideal. If $M$ is a finitely generated $R$-module, then
 	\begin{equation*} 
 		\bigcap_{n \ge 0} I^{n} M = 0.
@@ -1420,7 +1407,7 @@ $\nil(R)$ above denotes the ideal of nilpotents.
 \end{proof}
 
 \begin{cor}
-	With the same hypothesis, $\dim(M) = \dim(R/\ann(M))$. \newline
+	With the same hypothesis, $\dim(M) = \dim(R/{\ann}(M))$. \newline
 	In particular, $\dim(M) \le \dim(R)$.
 \end{cor}
 \begin{proof} 
@@ -1479,6 +1466,7 @@ $\nil(R)$ above denotes the ideal of nilpotents.
 
 	Thus, $H_{M/xM}(n) \le H_{M}(n) - H_{M}(n - c)$ and thus, the degree drops in the desired way giving us $\dim(M/xM) \le \dim(M) - 1$.
 \end{proof}
+
 
 Using the above, we can prove a weaker inequality when $x$ is possibly a zerodivisor.
 
@@ -1649,6 +1637,11 @@ A related concept is the height of a prime.
 		\htt(\mathfrak{p}) \vcentcolon= \sup\{n : \text{there exists a chain of prime ideals of length $n$ ending at $\mathfrak{p}$}\}.
 	\end{equation*}
 	Equivalently, $\htt(\mathfrak{p}) = \krdim(R_{\mathfrak{p}})$.
+
+	For an arbitrary ideal $I \subset R$, one defines \deff{height} as
+	\begin{equation*} 
+		\htt(I) \vcentcolon= \inf \{\dim R_{\mathfrak{p}} : \mathfrak{p} \in V(I)\}.
+	\end{equation*}
 \end{defn}
 
 Note that under this definition, we have
@@ -1825,6 +1818,7 @@ The above will follow from the more general theorem about dimension of modules b
 	Equivalently, the minimal $n$ such that $M/(x_{1}, \ldots, x_{n})M$ is Artinian.
 \end{thm}
 Note that one can always take generators for the maximal ideals to get a finitely generated module over a field. Thus, the set is indeed nonempty.
+
 \begin{proof} 
 	Let $d'(M)$ denote the minimal $n$ such that there exist $x_{1}, \ldots, x_{n}$ with $M/(x_{1}, \ldots, x_{n})M$ Artinian. We wish to show $\dim(M) = d'(M)$.
 
@@ -1851,6 +1845,11 @@ Note that one can always take generators for the maximal ideals to get a finitel
 	\end{equation*}
 	of finite length. 
 \end{proof}
+
+\begin{defn}
+	Let $(R, \mathfrak{m})$ be a noetherian local ring, and $M \neq 0$ a finite $R$-module of dimension $n$. A \deff{system of parameters for $M$} is a sequence $x_{1}, \ldots, x_{n} \in \mathfrak{m}$ such that $M/(x_{1}, \ldots, x_{n}) M$ has finite length.
+\end{defn}
+The preceding theorem tells us that systems of parameters always exist.
 
 \subsection{Height and minimal generators}
 
@@ -1909,9 +1908,10 @@ We leave the following proposition as an exercise.
 	\begin{enumerate}
 		\item $M$ is fflat.
 		\item $N' \to N \to N''$ is exact iff $N' \otimes M \to N \otimes M \to N'' \otimes M$ is exact (for all sequences $N' \to N \to N''$).
-		\item $M$ is flat. For all $R$-modules $N$, $N \neq 0$ iff $N \otimes M \neq 0$.
-		\item $M$ is flat. For all $\mathfrak{p} \in \Spec(R)$, $M \otimes k(p) \neq 0$. (Here, $k(\mathfrak{p}) = R_{\mathfrak{p}}/\mathfrak{p} R_{\mathfrak{p}}$.)
-		\item \label{item:fflat-5} $M$ is flat. For all maximal ideals $\mathfrak{m} \subset R$, $M \otimes k(\mathfrak{m}) \neq 0$.
+		\item $M$ is flat, and $M \otimes_{R} N \neq 0$ for all nonzero $R$-modules $N$.
+		\item $M$ is flat, and $M \otimes k(\mathfrak{p}) \neq 0$ for all prime ideals $\mathfrak{p} \subset R$. \newline
+		(Here, $k(\mathfrak{p}) = R_{\mathfrak{p}}/\mathfrak{p} R_{\mathfrak{p}} \cong \Frac(R/\mathfrak{p})$.)
+		\item \label{item:fflat-5} $M$ is flat, and $M \otimes k(\mathfrak{m}) \neq 0$ for all maximal ideals $\mathfrak{m} \subset R$.
 	\end{enumerate}
 \end{prop}
 
@@ -2412,5 +2412,1232 @@ Note that \Cref{cor:completion-of-completion} told us that $\widehat{R}$ is comp
 	\end{equation*}
 	is a local and faithfully flat ring map, with $R/\mathfrak{m} \cong \widehat{R}/\mathfrak{m}\widehat{R}$.
 \end{cor}
+
+\section{Regular sequences and depth}
+
+\subsection{Regular sequences}
+
+\begin{defn}
+	Let $M$ be an $R$-module, and $x \in R$. We say that $x \in R$ is an \deff{$M$-regular element} if $x$ is a nonzerodivisor on $M$.
+
+	A sequence $\mathbf{x} = x_{1}, \ldots, x_{n}$ of elements in $R$ is called an \deff{$M$-regular sequence} or simply an \deff{$M$-sequence} if the following conditions are met:
+	\begin{enumerate}[label=(\roman*)]
+		\item $x_{i}$ is an $M/(x_{1}, \ldots, x_{n - 1})M$-regular sequence for $i \in \{1, \ldots, n\}$,
+		\item $M/\mathbf{x}M \neq 0$.
+	\end{enumerate}
+	A \deff{regular sequence} is an $R$-sequence.
+
+	A \deff{weak $M$-sequence} is only required satisfy (i).
+\end{defn}
+
+Note that if $(R, \mathfrak{m})$ is a local ring, $M \neq 0$ a finitely generated $R$-module, and $\mathbf{x} \subset M$, then condition (ii) is automatically satisfied due to Nakayama's lemma.
+
+Note that condition (i) can be rephrased as saying that the $R$-module map
+\begin{equation*} 
+	M/(\mathbf{x}_{< i})M \xrightarrow{x_{i}} M/(\mathbf{x}_{< i})M
+\end{equation*}
+is injective for all $i$.
+
+\begin{prop} \label{prop:regularity-flat-tensor}
+	Let $R$ be a ring, $M$ an $R$-module, and $\mathbf{x} \subset R$ a weak $M$-sequence. Suppose $\varphi : R \to S$ is a ring homomorphism, and $N$ an $S$-module which is flat as an $R$-module. \newline
+	Then, $\mathbf{x} \subset R$ and $\varphi(x) \subset S$ are weak $(M \otimes_{R} N)$-sequences. \newline
+	If $\mathbf{x}(M \otimes_{R} N) \neq M \otimes_{R} N$, then $\mathbf{x}$ and $\varphi(\mathbf{x})$ are $(M \otimes_{R} N)$-sequences.
+\end{prop}
+\begin{proof} 
+	For the first part, note that by hypothesis,
+	\begin{equation*} 
+		M/(\mathbf{x}_{< i})M \xrightarrow{x_{i}} M/(\mathbf{x}_{< i})M
+	\end{equation*}
+	is injective for all $i$. Since $N$ is a flat $R$-module, we get that
+	\begin{equation*} 
+		M/(\mathbf{x}_{< i})M \otimes_{R} N \xrightarrow{x_{i}} M/(\mathbf{x}_{< i})M \otimes_{R} N
+	\end{equation*}
+	is injective for all $i$. Furthermore, by exactness again, we have a natural isomorphism
+	\begin{equation*} 
+		M/(\mathbf{x}_{< i})M \otimes_{R} N \cong (M \otimes_{R} N)/((\mathbf{x}_{< i})(M \otimes_{R} N)).
+	\end{equation*}
+	This shows that $\mathbf{x} \subset R$ is weakly regular. The same is true for $\varphi(\mathbf{x}) \subset S$ because the $R$-$S$ bimodule structure on $N$ gives us
+	\begin{equation*} 
+		x (m \otimes n) = m \otimes (x \cdot n) = m \otimes (\varphi(x) n) = \varphi(x)(m \otimes n).
+	\end{equation*}
+
+	The second statement now follows by definition of being regular.
+\end{proof}
+
+\begin{cor} \label{cor:regularity-localisation-completion}
+	Let $R$ be a noetherian ring, $M$ a finite $R$-module, and $\mathbf{x}$ an $M$-sequence.
+	\begin{itemize}
+		\item Suppose $\mathfrak{p} \in \Supp M$ is such that $\mathbf{x} \subset \mathfrak{p}$. Then, $\mathbf{x} \subset R_{\mathfrak{p}}$ is an $M_{\mathfrak{p}}$-sequence.
+		\item Suppose that $R$ is local with maximal ideal $\mathfrak{m}$. Then, $\mathbf{x} \subset \widehat{R}$ is an $\widehat{M}$-sequence, where $\widehat{(-)}$ denotes completion with respect to $\mathfrak{m}$.
+	\end{itemize}
+\end{cor}
+\begin{proof} 
+	Both the extensions $R \to R_{\mathfrak{p}}$ and $R \to \widehat{R}$ are flat. We just need to ensure that quotient-ing by $\mathbf{x}$ in either case remains nonzero. 
+
+	For the first, note that $M_{\mathfrak{p}}$ is a finite $R_{\mathfrak{p}}$ module, which is nonzero by the hypothesis that $\mathfrak{p} \in \Supp M$. Thus, Nakayama's lemma now gives the result.
+
+	Similarly, $\widehat{M} = M \otimes_{R} \widehat{R}$ is a nonzero finite $\widehat{R}$-module.
+\end{proof}
+
+\begin{prop} \label{prop:regular-sequence-tensor}
+	Let $R$ be a ring, $M$ an $R$-module, and $\mathbf{x}$ a weak $M$-sequence. Then an exact sequence
+	\begin{equation*} 
+		N_{2} \xrightarrow{\varphi_{2}} N_{1} \xrightarrow{\varphi_{1}} N_{0} \xrightarrow{\varphi_{0}} M \to 0
+	\end{equation*}
+	of $R$-modules induces an exact sequence
+	\begin{equation*} 
+		N_{2}/\mathbf{x} N_{2} \xrightarrow{\varphi_{2}} N_{1}/\mathbf{x} N_{1} \xrightarrow{\varphi_{1}} N_{0}/\mathbf{x} N_{0} \xrightarrow{\varphi_{0}} M/\mathbf{x} M \to 0.
+	\end{equation*}
+\end{prop}
+\begin{proof} 
+	By induction on length of $\mathbf{x}$, it suffices to prove it in the case that $\mathbf{x}$ is a single element, say $x$. By right-exactness of $- \otimes_{R} R/x$, exactness only needs to be checked at $N_{1}/x N_{1}$.
+
+	This is now a simple diagram chase: let $\overline{n_{1}} \in \ker(\overline{\varphi_{1}})$.
+	\begin{itemize}
+		\item $\overline{\varphi_{1}(n_{1})} = 0$; hence, $\varphi_{1}(n_{1}) \in x N_{0}$.
+		\item Write $\varphi_{1}(n_{1}) = x n_{0}$ for some $n_{0} \in N_{0}$. 
+		\item $x \varphi_{0}(n_{0}) = \varphi_{0}(x n_{0}) = \varphi_{0}(\varphi_{1}(n_{1})) = 0$, since $\varphi_{0} \circ \varphi_{1} = 0$.
+		\item Since $x$ is a nonzerodivisor on $M$, we get $\varphi_{0}(n_{0}) = 0$. 
+		\item By exactness of original sequence, we can write $n_{0} = \varphi_{1}(n_{1}')$ for $n_{1}' \in N_{1}$.
+		\item Thus,
+		\begin{equation*} 
+			\varphi_{1}(n_{1}) = x n_{0} = x \varphi_{1}(n_{1}')
+		\end{equation*}
+		or $n_{1} - x n_{1}' \in \ker(\varphi_{1})$.
+		\item By exactness, we can write $n_{1} = x n_{1}' + \varphi_{2}(n_{2})$ for some $n_{2} \in N_{2}$.
+		\item Going modulo $x N_{1}$, we are done. \qedhere
+	\end{itemize}
+\end{proof}
+
+\begin{prop} \label{prop:regular-sequence-tensor-strong}
+	Let $R$ be a ring and
+	\begin{equation*} 
+		N_{\bullet} : \quad \cdots \to N_{m} \xrightarrow{\varphi_{m}} N_{m - 1} \to \cdots \to N_{0} \xrightarrow{\varphi_{0}} N_{-1} \to 0
+	\end{equation*}
+	an exact complex of $R$-complexes. If $\mathbf{x} \subset R$ is weakly $N_{i}$-regular for all $i \ge -1$, then $N_{\bullet} \otimes_{R} R/(\mathbf{x})$ is exact again.
+\end{prop}
+\begin{proof} 
+	Adapt the previous proof.
+\end{proof}
+
+\begin{prop}
+	Let $(R, \mathfrak{m})$ be a noetherian local ring, $M$ a finite $R$-module, and $\mathbf{x}$ and $M$-sequence (necessarily, $\mathbf{x} \subset \mathfrak{m}$). Then, every permutation of $\mathbf{x}$ is a regular sequence.
+\end{prop}
+\begin{proof} 
+	It suffices to prove the theorem for transpositions that switch consecutive elements. Thus, it suffices to prove it for the case $\mathbf{x} = x_{1}, x_{2}$.
+
+	\textbf{Step 1.} $x_{2}$ is $M$-regular.
+
+	Let $K \vcentcolon= (0 :_{M} x_{2})$. We wish to show $K = 0$. By Nakayama's lemma, it suffices to prove $K \subset x_{1} K$. 
+
+	Let $m \in K$. Thus, $x_{2} m = 0$. Going modulo $x_{1} M$ and using the regularity hypothesis, we get $\overline{m} = 0$ in $M/x_{1} M$. Write $m = x_{1} m'$. We show that $m' \in K$, i.e., $x_{2} m' = 0$. To this end, note
+	\begin{equation*} 
+		x_{1}(x_{2} m') = x_{2}(x_{1} m') = x_{2} m = 0.
+	\end{equation*}
+	Since $x_{1}$ is $M$-regular, we are done.
+
+	\textbf{Step 2.} $x_{1}$ is $M/x_{2} M$-regular.
+
+	Let $m \in M$ be such that $x_{1} m \in x_{2} M$. We wish to show $m \in x_{2} M$. \newline
+	Write $x_{1} m = x_{2} m'$. Going modulo $x_{1} M$ and using regularity shows $m' \in x_{1} M$. Write $m' = x_{1} m''$. Then,
+	\begin{equation*} 
+		x_{1} m = x_{1} x_{2} m''.
+	\end{equation*}
+	Cancel $x_{1}$ to get the result.
+\end{proof}
+
+Let $R$ be a ring, $M$ an $R$-module, and $\mathbf{X} = X_{1}, \ldots, X_{n}$ be indeterminates over $R$. We define $M[\mathbf{X}] \vcentcolon= M \otimes_{R} R[\mathbf{X}]$ and call its elements \deff{polynomials with coefficients in $M$}. \newline
+If $\mathbf{x} = x_{1}, \ldots, x_{n}$ is a sequence of elements in $R$, then the substitution $X_{i} \mapsto x_{i}$ induces an $R$-algebra map $R[\mathbf{X}] \to R$ and an $R$-module map $M[\mathbf{X}] \to M$. We write $F(\mathbf{x})$ for the image of $F \in M[\mathbf{X}]$ under this map.
+
+Since the monomials form a free $R$-basis for $R[\mathbf{X}]$, we may speak of the coefficients and the degree of an element of $M[\mathbf{X}]$. For example, in the one variable case, elements of $M[X]$ are of the form
+\begin{equation*} 
+	m_{0} + m_{1} X + \cdots + m_{n} X^{n}
+\end{equation*}
+for $m_{0}, \ldots, m_{n}$. The action of $r_{0} + \cdots + r_{m} X^{m} \in R[X]$ on the above element is given by the obvious definition.
+
+\begin{thm}[Rees] \label{thm:rees-regular-sequence}
+	Let $R$ be a ring, $M$ an $R$-module, $\mathbf{x} = x_{1}, \ldots, x_{n}$ an $M$-sequence, and $I = (\mathbf{x})$. Let $\mathbf{X} = X_{1}, \ldots, X_{n}$ be indeterminates over $R$. If $F \in M[\mathbf{X}]$ is homogeneous of (total) degree $d$ and $F(\mathbf{x}) \in I^{d + 1} M$, then the coefficients of $F$ are in $I M$.
+\end{thm}
+
+\begin{rem}
+	The above can be rephrased as following: Let $R$ be a ring, $M$ an $R$-module, $\mathbf{x} = x_{1}, \ldots, x_{n}$ an $M$-sequence, and $I = (\mathbf{x})$. Suppose we have an equation of the form
+	\begin{equation*} 
+		\sum_{\md{\alpha} = d} \mathbf{x}^{\alpha} m_{\alpha} = 0,
+	\end{equation*}
+	where $m_{\alpha} \in M$. (Notational clarification: $\alpha \in \mathbb{N}_{0}^{n}$ varies over multi-indices with $\sum \alpha_{i} = d$. $\mathbf{x}^{\alpha} \vcentcolon= x_{1}^{\alpha_{1}} \cdots x_{n}^{\alpha_{n}}$.) 
+
+	Then, $m_{\alpha} \in IM$ for all $\alpha$.
+\end{rem}
+
+\begin{proof} 
+	??
+\end{proof}
+
+Recall \Cref{defn:associated-graded}: given an ideal $I \unlhd R$, we define
+\begin{equation*} 
+	\gr_{I}(R) = \bigoplus_{i \ge 0} I^{i}/I^{i + 1},
+\end{equation*}
+and given an $R$-module $M$, we put
+\begin{equation*}
+	\gr_{I}(M) = \bigoplus_{i \ge 0} I^{i}M/I^{i + 1}M,
+\end{equation*}
+making $\gr_{I}(R)$ a graded ring, and $\gr_{I}(M)$ a graded $\gr_{I}(R)$-module.
+
+If $I = (x_{1}, \ldots, x_{n})$, then we have a natural surjective graded ring homomorphism
+\begin{equation} \label{eq:008}
+	R[X_{1}, \ldots, X_{n}] \onto \gr_{I}(R)
+\end{equation}
+given by $X_{i} \mapsto \overline{x_{i}} \in I/I^{2}$. (Elements of $R$ mapped via the natural map $R \to R/I$.) To see that this is a surjection, note that $\gr_{I}(R)$ is generated (as an $R/I$-algebra) by $I/I^{2}$.
+
+Similarly, there is an epimorphism (of graded abelian groups)
+\begin{equation*} 
+	\psi : M[X_{1}, \ldots, X_{n}] \onto \gr_{I}(M)
+\end{equation*}
+defined as following: a homogeneous polynomial $F \in M[\mathbf{X}]$ of degree $d$ is mapped to $\overline{F(\mathbf{x})} \in I^{d} M/I^{d + 1} M$. $\psi$ is then extended additively. Surjectivity is clear since any element of $I^{d} M$ is an additive linear combination of elements of the form $\mathbf{x}^{\alpha} m$, where $m \in M$ and $\md{\alpha} = d$.
+
+Now, note that \Cref{eq:008} makes $\gr_{I}(R)$ into an $R[\mathbf{X}]$-algebra. Thus, $\gr_{I}(M)$ has the structure of a graded $R[\mathbf{X}]$-module as well. With this structure, one checks $\psi$ is a map of graded $R[\mathbf{X}]$-modules.
+
+Note that $IM[\mathbf{X}] \subset \ker \psi$. Thus, we get an induced epimorphism
+\begin{equation*} 
+	\varphi : (M/IM)[\mathbf{X}] \onto \gr_{I}(M),
+\end{equation*}
+where we have used the isomorphism $M[\mathbf{X}]/IM[\mathbf{X}] \cong (M/IM)[\mathbf{X}]$ since $R[\mathbf{X}]$ is a flat (free even) $R$-module. Note that $\varphi$ is an isomorphism iff $IM[\mathbf{X}] = \ker \psi$. Since $\psi$ is a graded map, $\ker \psi$ is determined by its homogeneous components. Note that $F \in M[\mathbf{X}]$ of degree $d$ is in the kernel iff $F(\mathbf{x}) \in I^{d + 1} M$. Thus, a reformulation of \Cref{thm:rees-regular-sequence}, we get the following.
+
+\begin{thm} \label{thm:regular-polynomial-graded-isomorphism}
+	Let $R$ be a ring, $M$ an $R$-module, $\mathbf{x} = x_{1}, \ldots, x_{n}$ an $M$-sequence, and $I = (\mathbf{x})$. Then, the map
+	\begin{equation*} 
+		(M/IM)[X_{1}, \ldots, X_{n}] \to \gr_{I}(M)
+	\end{equation*}
+	induced by $X_{i} \mapsto \overline{x_{i}} \in I/I^{2}$ is an isomorphism.
+\end{thm}
+
+\begin{defn}
+	Let $R$ be a ring, $M$ an $R$-module, and $\mathbf{x} = x_{1}, \ldots, x_{n} \subset R$ a sequence of elements of $R$. \newline
+	We say that $\mathbf{x}$ is \deff{$M$-quasi-regular} if $\mathbf{x} M \neq M$ and the conclusion of \Cref{thm:regular-polynomial-graded-isomorphism}.
+\end{defn}
+
+\textbf{Exercises.}
+
+\begin{exe}
+	Let $0 \to U \to M \to N \to 0$ be an exact sequence of $R$-modules, and $\mathbf{x}$ a sequence which is weakly $U$-regular and (weakly) $N$-regular. Prove that $\mathbf{x}$ is (weakly) $M$-regular too.
+\end{exe}
+\begin{soln}
+	Write $\mathbf{x} = x_{1}, \ldots, x_{n}$. We have a commutative diagram with exact rows:
+	\begin{equation*} 
+		\begin{tikzcd}
+			0 \arrow[r] & U \arrow[d, "x_{1}"] \arrow[r] & M \arrow[d, "x_{1}"] \arrow[r] & N \arrow[d, "x_{1}"] \arrow[r] & 0 \\
+			0 \arrow[r] & U \arrow[r] & M \arrow[r] & N \arrow[r] & 0
+		\end{tikzcd}
+	\end{equation*}
+
+	The outer vertical arrows are injections by hypothesis. The Five Lemma now implies the same for the middle arrow. By \Cref{prop:regular-sequence-tensor-strong}, we see that the sequence
+	\begin{equation*} 
+		0 \to U/x_{1} U \to M/x_{1} M \to N/x_{1} N \to 0
+	\end{equation*}
+	is again exact. Induction now proves the statement involving ``weakly''.
+
+	Now, if $\mathbf{x} M = M$, then it follows that $\mathbf{x} N = N$. This finishes the proof.
+\end{soln}
+
+\begin{exe}
+	\begin{enumerate}[label=(\alph*)]
+		\item Let $x_{1}, \ldots, x_{i}, \ldots, x_{n}$ and $x_{1}, \ldots, x_{i} x_{i}', \ldots, x_{n}$ be (weakly) $M$-regular. Show that $x_{1}, \ldots, x_{i} x_{i}', \ldots, x_{n}$ is (weakly) $M$-regular.
+		\item Prove that $x_{1}^{e_{1}}, \ldots, x_{n}^{e_{n}}$ is (weakly) $M$-regular for all $e_{i} \ge 1$.
+	\end{enumerate}
+\end{exe}
+\begin{soln}
+	It is clear that (b) follows from (a). We prove (a). It suffices to assume $i = 1$. \newline
+	If $x_{1}$ and $x_{1}'$ are nonzerodivisors, then so is $x_{1} x_{1}'$. We now wish to prove that $\mathbf{x}_{> 1}$ is a (weakly) regular sequence on $M/x_{1} x_{1}' M$. 
+
+	We have a short sequence
+	\begin{equation*} 
+		0 \to M/x_{1}'M \xrightarrow{\iota} M/x_{1} x_{1}' M \xrightarrow{\pi} M/x_{1} M \to 0
+	\end{equation*}
+	where $\pi$ is the natural surjection and $\iota$ is given by $\overline{m} \mapsto \overline{x_{1} m}$. It is not difficult to check that $\iota$ is well-defined and that $\ker \pi = \im \iota$. \newline
+	To see that $\iota$ is injective, one uses that $x_{1}$ is a nonzerodivisor.
+
+	Now, by the previous exercise, the statement follows.
+\end{soln}
+
+\begin{exe}
+	Prove that the converse of \Cref{prop:regularity-flat-tensor} holds if, in the situation of \ref{prop:regularity-flat-tensor}, $N$ is faithfully flat over $R$.
+\end{exe}
+\begin{soln}
+	We wish to prove the following statement: \newline
+	
+	\begin{blockquote}
+		Let $R$ be a ring, $M$ an $R$-module, and $\mathbf{x} \subset R$. Suppose $\varphi : R \to S$ is a ring homomorphism, and $N$ an $S$-module which is faithfully flat as an $R$-module. \newline
+		If $\mathbf{x} \subset R$ (and $\varphi(x) \subset S$) are (weak) $(M \otimes_{R} N)$-sequences, then $\mathbf{x} \subset R$ is a (weak) $M$-sequence.
+	\end{blockquote}
+
+	Let $\mathbf{x} = x_{1}, \ldots, x_{n}$. First, we wish to show that $M \xrightarrow{x_{1}} M$ is injective. We are given that the map is injective after tensoring with $N$. Since $N$ is faithfully flat, it must have been injective to begin with.
+
+	Now, note that by flatness, we have
+	\begin{equation*} 
+		(M \otimes_{R} N)/(x_{1} (M \otimes_{R} N)) \cong (M/x_{1} M) \otimes_{R} N.
+	\end{equation*}
+
+	Thus, injectivity of $M/x_{1} M \xrightarrow{x_{2}} M/x_{1} M$ also follows similarly and so on.
+
+	Lastly, if $\mathbf{x} M = M$, then we must have $\mathbf{x} (M \otimes_{R} N) = M \otimes_{R} N$.
+\end{soln}
+
+\begin{exe}
+	\begin{enumerate}
+		\item Prove that if $\mathbf{x}$ is a weak $M$-sequence, then $\Tor^{R}_{1}(M, R/(\mathbf{x})) = 0$.
+		\item Prove that if, in addition, $\mathbf{x}$ is a weak $R$-sequence, then $\Tor^{R}_{i}(M, R/(\mathbf{x})) = 0$ for all $i \ge 1$.
+	\end{enumerate}
+\end{exe}
+\begin{soln}
+	?? Need Koszul.
+\end{soln}
+
+\begin{exe}
+	Let $R = k[X, Y, Z]$, $k$ a field. Show that $X$, $Y(1 - X)$, $Z(1 - X)$ is an $R$-sequence, but $Y(1 - X)$, $Z(1 - X)$, $X$ is not.
+\end{exe}
+\begin{soln}
+	Direct.
+\end{soln}
+
+\begin{exe}
+	Prove that $x_{1}, \ldots, x_{n}$ is $M$-quasi-regular if and only if $\overline{x_{1}}, \ldots, \overline{x_{n}} \in I/I^{2}$ is a $\gr_{I}(M)$-regular sequence where $I = (x_{1}, \ldots, x_{n})$.
+\end{exe}
+\begin{soln}
+	Let $\varphi$ denote the map
+	\begin{equation*} 
+		\varphi : (M/IM)[\mathbf{X}] \onto \gr_{I}(M)
+	\end{equation*}
+
+	\forward Suppose $\overline{\mathbf{x}}$ is $M$-quasi-regular, i.e., $\varphi$ is an isomorphism, and $\overline{\mathbf{x}} \gr_{I}(M) \neq \gr_{I}(M)$. Note that $\overline{\mathbf{x}} \subset \gr_{I}(R)$ acts on $\gr_{I}(M)$ via $\mathbf{X}$. Since $\varphi$ is an isomorphism, it suffices to show that $\mathbf{X}$ is $(M/IM)[\mathbf{X}]$-regular. But this is clear.
+
+	\backward We just need to show that $\varphi$ is one-one. Since $\varphi$ is graded, it suffices to show that there is no nonzero homogeneous element in the kernel. To this end, let $F \in \ker \varphi$ be homogeneous of degree $d$. Then, we can write
+	\begin{equation*} 
+		F  = \sum_{\md{\alpha} = d} \overline{m_{\alpha}} \mathbf{X}^{\alpha},
+	\end{equation*}
+	for $\overline{m_{\alpha}} \in M/IM$. We wish to show that $\overline{m_{\alpha}} = 0 \in M/IM$ for all $\alpha$. Note that $F$ being in the kernel gives us that
+	\begin{equation*} 
+		\sum_{\md{\alpha} = d} \mathbf{\overline{x}}^{\alpha} \overline{m_{\alpha}}= 0.
+	\end{equation*}
+	Now, \Cref{thm:rees-regular-sequence} tells us that $\overline{\mathfrak{m}_{\alpha}} \in J \gr_{I}(M)$ for all $\alpha$, where $J \vcentcolon= (\overline{\mathbf{x}}) \gr_{I}(R)$. But note that $\overline{m_{\alpha}}$ (as an element of $\gr_{I}(M)$) has degree zero, whereas every nonzero element of $J \gr_{I}(M)$ has positive degree. Thus, it follows that $\overline{m_{\alpha}} = 0$ in $M/IM$, as desired.
+\end{soln}
+
+\begin{exe}
+	Suppose that $\mathbf{x}$ is $M$-quasi-regular, and let $I = (x_{1}, \ldots, x_{n})$. Prove
+	\begin{enumerate}[label=(\alph*)]
+		\item if $x_{1} z \in I^{i + 1} M$ for $z \in M$, then $z \in I^{i} M$,
+		\item $x_{2}, \ldots, x_{n}$ is $(M/x_{1} M)$-quasi-regular,
+		\item if $R$ is noetherian local and $M$ is finite, then $\mathbf{x}$ is an $M$-sequence.
+	\end{enumerate}
+\end{exe}
+\begin{soln}
+	As before, we let $\varphi$ denote the map
+	\begin{equation*} 
+		\varphi : (M/IM)[\mathbf{X}] \xrightarrow{\cong} \gr_{I}(M)
+	\end{equation*}
+	\begin{enumerate}[label=(\alph*)]
+		\item Suppose $z \notin I^{i} M$. Pick the largest $j$ such that $z \in I^{j} M$.\footnote{Such a $j$ exists since $z \in I^{0}M$.} By hypothesis, $j \le i - 1$ and $\overline{z} \in I^{j} M/I^{j + 1} M$ is nonzero. Let $G \vcentcolon= \varphi^{-1}(\overline{z}) \neq 0$. 
+
+		Then,
+		\begin{equation*} 
+			\varphi(X_{1} \cdot G) = X_{1} \cdot \varphi(G) = \overline{x_{1} z} = 0.
+		\end{equation*}
+		The last equality follows since $x_{1} z \in I^{i + 1} M \subset I^{j + 2} M$, giving us $\overline{x_{1} z} = 0 \in I^{j + 1} M/I^{j + 2} M$. 
+
+		But this is a contradiction because $\varphi$ is an isomorphism and $X_{1} G \neq 0$ in $(M/IM)[\mathbf{X}]$.
+		%
+		\item Let $J \vcentcolon= (x_{2}, \ldots, x_{n})$. By the previous exercise, we know that $\overline{x_{1}}, \ldots, \overline{x_{n}} \in \gr_{I}(R)$ is regular on $\gr_{I}(M)$, and that it suffices to show that $\overline{x_{2}}, \ldots, \overline{x_{n}} \in \gr_{J}(R)$ is regular on $\gr_{J}(M/x_{1} M)$.
+
+		??
+		% By definition of regularity, we know that $\overline{x_{2}}, \ldots, \overline{x_{n}} \in \gr_{I}(R)$ is regular on $\gr_{I}(M)/x_{1} \gr_{I}(M)$. 
+		%
+		\item By part (b), it suffices to prove this in the case $\mathbf{x} = x$ is a single element. Necessarily, $I = (x) \subset \mathfrak{m}$.
+
+		Suppose that $m \in M$ is such that $x m = 0$. Then, $x m \in I^{i + 1} M$ for all $i$. By (a), this implies that $m \in \bigcap_{i \ge 0} I^{i} M$. But by \mynameref{thm:KIT}, we get that $m = 0$, as desired. \qedhere
+	\end{enumerate}
+\end{soln}
+
+\subsection{Grade and depth}
+
+\begin{defn}
+	Let $R$ be a ring, $M$ an $R$-module, and $I \subset R$ an ideal. An $M$-sequence $x_{1}, \ldots, x_{n}$ (contained in $I$) is \deff{maximal (in $I$)}, if $x_{1}, \ldots, x_{n + 1}$ is not an $M$-sequence for any $x_{n + 1} \in R$ ($x_{n + 1} \in I$).	
+\end{defn}
+
+Note that if $\mathbf{x}$ is an $M$-sequence, then the sequence $(x_{1}) \subsetneq (x_{1}, x_{2}) \cdots (x_{1}, \ldots, x_{n})$ strictly increases. Thus, every $M$-sequence (contained in $I$) can be extended to a maximal such sequence if the ring is noetherian.
+
+We recall the following fact regarding associated primes for noetherian rings and modules.
+
+\begin{prop}
+	Let $R$ be a noetherian ring, and $M \neq 0$ a finite $R$-module. If an ideal $I \subset R$ consists of zerodivisors of $M$, then $I \subset \mathfrak{p}$ for some $\mathfrak{p} \in \Ass(M)$.
+\end{prop}
+\begin{proof} 
+	Recall $\mathcal{Z}(M) = \bigcup_{\mathfrak{p} \in \Ass M} \mathfrak{p}$, and that $\Ass(M)$ is nonempty and finite. By prime avoidance, the result now follows.
+\end{proof}
+
+\begin{prop} \label{prop:Hom-N-M-zero-regular}
+	Let $R$ be a ring, and $M \neq 0$, $N$ be $R$-modules. Set $I \vcentcolon= \ann_{R}(N)$.
+	\begin{enumerate}[label=(\alph*)]
+		\item If $I$ contains an $M$-regular element, then $\Hom_{R}(N, M) = 0$.
+		\item Conversely, if $R$ is noetherian, and $M$, $N$ are finite, $\Hom_{R}(N, M) = 0$ implies that $I$ contains an $M$-regular element.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	\begin{enumerate}[label=(\alph*)]
+		\item Let $\varphi \in \Hom_{R}(N, M) = 0$, and $r \in I$ be $M$-regular. We wish to show that $\varphi(n) = 0$ for all $n$. To this end, note that
+		\begin{equation*} 
+			r \varphi(n) = \varphi(r n) = \varphi(0) = 0
+		\end{equation*}
+		for all $n \in N$. Since $r$ is $M$-regular, we may cancel $r$ to get the result.
+		%
+		\item Suppose that $I$ does not contain any $M$-regular element. Then, $I \subset \mathfrak{p}$ for some $\mathfrak{p} \in \Ass M$. Since $N$ is finite, we get that $\mathfrak{p} \in \Supp N$ and that $N_{\mathfrak{p}} \otimes_{R_{\mathfrak{p}}} k(\mathfrak{p})$ is nonzero. Since we are working over a field, we have an epimorphism 
+		\begin{equation*} 
+			N_{\mathfrak{p}} \otimes_{R_{\mathfrak{p}}} k(\mathfrak{p}) \onto k(\mathfrak{p}).
+		\end{equation*} 
+		Note that $\mathfrak{p} R_{\mathfrak{p}} \in \Ass(M_{\mathfrak{p}})$. This means that we have an inclusion $k(\mathfrak{p}) \into M_{\mathfrak{p}}$. Composing with the map above gives us a nonzero map $N_{\mathfrak{p}} \to M_{\mathfrak{p}}$. Since
+		\begin{equation*} 
+			\Hom_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}, N_{\mathfrak{p}}) \cong \Hom_{R}(M, N)_{\mathfrak{p}},
+		\end{equation*}
+		we are done. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{lem} \label{lem:Hom-Ext-regular-sequence}
+	Let $R$ be a ring, $M$, $N$ be $R$-modules, and $\mathbf{x} = x_{1}, \ldots, x_{n}$ a weak $M$-sequence in $\ann_{R}(N)$. Then,
+	\begin{equation*} 
+		\Hom_{R}(N, M/\mathbf{x}M) \cong \Ext_{R}^{n}(N, M).
+	\end{equation*}
+\end{lem}
+\begin{proof} 
+	We induct on $n$. The case $n = 0$ is clear. Now, assume $n \ge 1$. By induction, we have
+	\begin{equation*} 
+		\Ext_{R}^{n - 1}(N, M) \cong \Hom_{R}(N, M/\mathbf{x}_{< n} M).
+	\end{equation*}
+	Since $x_{n} \in \ann_{R}(N)$ is regular on $M/\mathbf{x}_{< n} M$, the above object is zero, by the previous result.
+
+	Note that we have the short exact sequence
+	\begin{equation*} 
+		0 \to M \xrightarrow{x_{1}} M \to M/x_{1} M \to 0.
+	\end{equation*}
+	Applying (the derived) $\Hom_{R}(N, -)$ to the above gives the long exact sequence
+	\begin{equation*} 
+		0 \to \Ext_{R}^{n - 1}(N, M/x_{1} M) \xrightarrow{\psi} \Ext_{R}^{n}(N, M) \xrightarrow{x_{1}} \Ext_{R}^{n}(N, M).
+	\end{equation*}
+	However, multiplication by $x_{1}$ above is zero since $x_{1} \in \ann_{R}(N)$. Thus, $\psi$ is an isomorphism. Using induction again proves the result.
+\end{proof}
+
+Let $R$ be noetherian, $I$ an ideal, $M$ a finite $R$-module with $M \neq IM$, and $\mathbf{x} = x_{1}, \ldots, x_{n}$ a maximal $M$-sequence contained in $I$. Using \Cref{prop:Hom-N-M-zero-regular} and \Cref{lem:Hom-Ext-regular-sequence}, we get that
+\begin{equation*} 
+	\Ext_{R}^{i - 1}(R/I, M) \cong \Hom_{R}(R/I, M/(x_{1}, \ldots, x_{i - 1})M) = 0 \qquad \text{for all $i = 1, \ldots, n$},
+\end{equation*}
+since $I$ contains an $M/(\mathbf{x_{< i}})M$-regular sequence (and $\ann_{R}(R/I) = I$). On the other hand, since $\mathbf{x}$ is a maximal $M$-sequence in $I$ and $IM \neq I$, $I$ must consist of zerodivisors of $M/\mathbf{x} M$.\footnote{Note that a different reason for $\mathbf{x}$ not being maximal could have been that $(\mathbf{x}, y)M = M$ for all $y \in I$. But $IM \neq M$ ensures that that is not the case.} Thus, $\Ext_{R}^{n}(R/I, M/\mathbf{x}M) \cong \Hom_{R}(R/I, M/\mathbf{x}M) \neq 0$.
+
+We have therefore proved the following.
+
+\begin{thm}[Rees] \label{thm:grade-ext}
+	Let $R$ be a noetherian ring, $M$ a finite $R$-module, and $I$ an ideal such that $IM \neq M$. Then, all maximal $M$-sequences in $I$ have the same length $n$ given by
+	\begin{equation*} 
+		n \vcentcolon= \inf \Ext_{R}^{\ast}(R/I, M).
+	\end{equation*}
+\end{thm}
+
+Notation: If $\langle V^{i} \rangle_{i \in \mathbb{Z}}$ is a sequence of $R$-modules, we set
+\begin{equation*} 
+	\inf V^{\ast} \vcentcolon= \inf\{i : V^{i} \neq 0\}.
+\end{equation*}
+Note that $\inf V^{\ast} = \infty$ iff $V^{i} = 0$ for all $i$.
+
+\begin{defn}
+	Let $R$ be a noetherian ring, $M$ a finite $R$-module, and $I$ an ideal such that $IM \neq M$. Then, the common length of the maximal $M$-sequences in $I$ is called the \deff{grade of $I$ on $M$}, denoted by $\grade(I, M)$.
+
+	If $IM = M$, we define $\grade(I, M) \vcentcolon= \infty$. (Including the possibility $M = 0$.)
+\end{defn}
+
+\begin{lem} 
+	If $R$ is noetherian, $M$ a finite $R$-module, and $I$ an ideal, then $IM = M$ iff $\Ext_{R}^{i}(R/I, M) = 0$ for all $i$. Thus, the convention for grade is consistent with $\inf \Ext_{R}^{\ast}(R/I, M)$.
+\end{lem}
+\begin{proof} 
+	\forward Assume $IM = M$. Then, $\Supp(M) \cap \Supp(R/I) = \emptyset$ by Nakayama's lemma,\footnote{Indeed, if not then there exists $\mathfrak{p} \in \Supp M$ such that $I \subset \mathfrak{p}$. Then, $IM = M$ implies $(I R_{\mathfrak{p}}) M_{\mathfrak{p}} = M_{\mathfrak{p}}$, a contradiction since $M_{\mathfrak{p}} \neq 0$.} hence
+	\begin{equation*} 
+		\Supp \Ext_{R}^{i}(R/I, M) \subset \Supp M \cap \Supp R/I = \emptyset
+	\end{equation*}
+	for all $i$. The inclusion above follows from the natural isomorphism
+	\begin{equation*} 
+		\Ext_{R_{\mathfrak{p}}}^{i}((R/I)_{\mathfrak{p}}, M_{\mathfrak{p}}) \cong \Ext_{R}^{i}(R/I, M)_{\mathfrak{p}}.
+	\end{equation*}
+
+	\backward If $IM \neq M$, then we have already seen $\grade(I, M)$ to be finite.
+\end{proof}
+
+\begin{defn}
+	Let $(R, \mathfrak{m})$ be a noetherian local ring, and $M$ a finite $R$-module. Then the \deff{depth of $M$} is defined as
+	\begin{equation*} 
+		\depth(M) \vcentcolon= \grade(\mathfrak{m}, M).
+	\end{equation*}
+\end{defn}
+We restate \Cref{thm:grade-ext} in term of depth.
+
+\begin{thm}
+	Let $(R, \mathfrak{m}, k)$ be a noetherian local ring, and $M$ a finite module. Then,
+	\begin{equation*} 
+		\depth M = \inf \Ext_{R}^{\ast}(k, M).
+	\end{equation*}
+\end{thm}
+
+The following also follows from the $\Ext$ characterisation.
+
+\begin{cor} \label{cor:depth-direct-sum}
+	Let $(R, \mathfrak{m}, k)$ be a noetherian local ring, and $M$, $M'$ finite $R$-modules. Then,
+	\begin{equation*} 
+		\depth(M \oplus M') = \min(\depth(M), \depth(M')).
+	\end{equation*}
+	In particular, if $F$ is a nonzero finite free $R$-module, then $\depth(F) = \depth(R)$.
+\end{cor}
+
+\begin{prop} \label{prop:grade-exact-sequence}
+	Let $R$ be a noetherian ring, $I \subset R$ an ideal, and $0 \to U \to M \to N \to 0$ an exact sequence of finite $R$-modules. Then,
+	\begin{align*} 
+		\grade(I, M) &\ge \min\{\grade(I, U), \grade(I, N)\}, \\
+		\grade(I, U) &\ge \min\{\grade(I, M), \grade(I, N) + 1\}, \\
+		\grade(I, N) &\ge \min\{\grade(I, U) - 1, \grade(I, M)\}.
+	\end{align*}
+\end{prop}
+\begin{proof}
+	Follows from the long exact sequence of $\Ext_{R}^{i}(R/I, -)$. For the first one, we have the exact sequence
+	\begin{equation*} 
+		\Ext_{R}^{i}(R/I, U) \to \Ext_{R}^{i}(R/I, M) \to \Ext_{R}^{i}(R/I, N).
+	\end{equation*}
+	Thus, if the outer two terms are zero, then so is the middle one. This proves the inequality.
+\end{proof}
+
+\begin{rem} \label{rem:grade-equalities-exact-sequences}
+	We can sometimes comment about equality if we know some more information. For example, if $\grade(I, U) < \grade(I, N)$, then for $i = \depth(I, U)$, we note that we have the exact sequence
+	\begin{equation*} 
+		0 = \Ext_{R}^{i - 1}(R/I, N) \to \Ext_{R}^{i}(R/I, U) \to \Ext_{R}^{i}(R/I, M) \to \Ext_{R}^{i}(R/I, N) = 0.
+	\end{equation*}
+	Thus, $\Ext_{R}^{i}(R/I, M) \cong \Ext_{R}^{i}(R/I, U) \neq 0$. 
+
+	This shows that $\grade(I, M) = \grade(I, U) = \min(\grade(I, U), \grade(I, N))$.
+
+	Similarly, if $\grade(I, N) < \grade(I, M)$, then for $i = \grade(I, N)$, we have
+	\begin{equation*} 
+		0 = \Ext_{R}^{i}(R/I, M) \to \Ext_{R}^{i}(R/I, N) \into \Ext_{R}^{i + 1}(R/I, U),
+	\end{equation*}
+	showing $\Ext_{R}^{i + 1}(R/I, U) \neq 0$. Coupled with
+	\begin{equation*} 
+		0 = \Ext_{R}^{i - 1}(R/I, N) \to \Ext_{R}^{i}(R/I, U) \to \Ext_{R}^{i}(R/I, M) = 0,
+	\end{equation*}
+	we get that $\grade(I, U) = \grade(I, N) + 1$.
+\end{rem}
+
+\begin{prop} \label{prop:grade-properties}
+	Let $R$ be a noetherian ring, $I$, $J$ ideals of $R$, and $M$ a finite $R$-module. Then,
+	\begin{enumerate}[label=(\alph*)]
+		\item $\grade(I, M) = \inf\{\depth_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}) : \mathfrak{p} \in V(I)\}$,
+		\item $\grade(I, M) = \grade(\sqrt{I}, M)$,
+		\item $\grade(I \cap J, M) = \min\{\grade(I, M), \grade(J, M)\}$,
+		\item if $\mathbf{x} = x_{1}, \ldots, x_{n}$ is an $M$-sequence in $I$, then $\grade(I/(\mathbf{x}), M/\mathbf{x}M) = \grade(I, M/\mathbf{x} M) = \grade(I, M) - n$,
+		\item if $N$ is a finite $R$-module with $\Supp N = V(I)$, then
+		\begin{equation*} 
+			\grade(I, M) = \inf \Ext_{R}^{\ast}(N, M).
+		\end{equation*}
+	\end{enumerate}
+\end{prop}
+The last property generalises the equation $\grade(I, M) = \inf \Ext_{R}^{\ast}(N, M)$.
+
+\begin{proof} 
+	(a): we may assume that $I \neq R$. Note that if $IM = M$, then the same is true for all primes containing $I$ and both sides are $\infty$. Thus, we may assume $IM \neq M$. In this case, grade is given by the length of the longest $M$-sequence in the ideal. This gives us $\grade(I, M) \le \inf\{\depth(M_{\mathfrak{p}}) : \mathfrak{p} \in V(I)\}$ (using \Cref{cor:regularity-localisation-completion}). \newline
+	We now show that equality is achieved: pick $\mathbf{x} \subset I$ to be a maximal $M$-sequence. Since $IM \neq M$, this tells us that $I$ consists of zerodivisors on $M/\mathbf{x} M$. Thus, $I \subset \mathfrak{p}$ for some $\mathfrak{p} \in \Ass(M)$. By definition, we have $\mathfrak{p} \in V(I)$. Moreover, $\mathbf{x} \subset \mathfrak{p} R_{\mathfrak{p}}$ is a regular sequence on $M_{\mathfrak{p}}$. But $\mathfrak{p} R_{\mathfrak{p}}$ is now an associated prime of $(M/\mathbf{x} M)_{\mathfrak{p}} = M_{\mathfrak{p}}/\mathbf{x} M_{\mathfrak{p}}$ showing that $\mathfrak{p} R_{\mathfrak{p}}$ consists of zerodivisors on $M_{\mathfrak{p}}/\mathbf{x} M_{\mathfrak{p}}$ and thus, $\mathbf{x}$ is a maximal $M_{\mathfrak{p}}$-sequence.
+
+	(b) and (c): Follow from (a) since $V(I) = V(\sqrt{I})$ and $V(I \cap J) = V(I) \cup V(J)$.
+
+	(d): Let $\overline{\cdot}$ denote going modulo $\mathbf{x}$. Note that
+	\begin{equation*} 
+		IM = M \Leftrightarrow I \overline{M} = \overline{M} \Leftrightarrow \overline{I} \, \overline{M} = \overline{M}.
+	\end{equation*}
+	Thus, we may only concern ourselves with the case of finite grade. The second equality follows since any regular sequence can be extended to a maximal one, whose length is the grade (and that $\mathbf{y}$ is regular on $M/\mathbf{x}$ iff $\mathbf{x}, \mathbf{y}$ is regular on $M$). For the first equality, one notes that $\mathbf{y} \subset I$ is an $\overline{M}$-sequence iff $\overline{\mathbf{y}} \subset \overline{I}$ is so.
+
+	(e): The hypothesis tells us that $V(\ann_{R}(N)) = V(I)$. By (a), we may assume that $I = \ann_{R}(N)$. Now, note that in the proof of \Cref{thm:grade-ext}, we only used that $\ann_{R}(R/I) = I$. 
+\end{proof}
+
+\begin{rem}
+	The name `grade' was originally used by Rees for a different invariant: given a noetherian ring $R$, and $M$ a finite $R$-module, the \deff{grade of $M$} is given by
+	\begin{equation*} 
+		\grade(M) \vcentcolon= \inf \Ext_{R}^{i}(M, R).
+	\end{equation*}
+	(Thus, grade of the zero module is $\infty$.)
+
+	Now, by \Cref{prop:grade-properties} (e), we know that $\inf \Ext_{R}^{i}(M, R) = \grade(\ann_{R}(M), R)$. Thus, $\grade(M) = \grade(\ann_{R}(M), R)$. 
+
+	It is customary to set
+	\begin{equation*} 
+		\grade(I) \vcentcolon= \grade(R/I) = \grade(I, R),
+	\end{equation*}
+	for an ideal $I \subset R$. ($\grade(I)$ now has two meanings, but we shall never use it to denote the grade of $I$ as an $R$-module.)
+
+	Note that if $I \neq R$, then $\grade(I)$ is the length of the longest ($R$-)regular sequence in $I$.
+\end{rem}
+
+\subsubsection{Depth and dimension} 
+
+Let $(R, \mathfrak{m})$ be noetherian local and $M \neq 0$ a finite $R$-module. By \Cref{thm:nonzerodivisor-dimension-one-drop}, we see that if $\mathbf{x}$ is an $M$-sequence (necessarily contained in $\mathfrak{m}$), then $\dim(M/\mathbf{x} M) = \dim(M) - n$. Since a regular sequence cuts down the dimension by the correct amount, we get the following.
+
+\begin{prop} \label{prop:depth-le-dim}
+	Let $(R, \mathfrak{m})$ be a noetherian local ring and $M \neq 0$ a finite $R$-module. Then every $M$-sequence is a part of a system of parameters of $M$. In particular, $\depth M \le \dim M$.
+\end{prop}
+
+In fact, something stronger can be proven.
+
+\begin{prop}
+	With the same notation as above, one has $\depth M \le \dim R/\mathfrak{p}$ for all $\mathfrak{p} \in \Ass M$.
+\end{prop}
+\begin{proof} 
+	We induct on $\depth M$. The base case $\depth M = 0$ is trivial. \newline
+	If $\depth M > 0$, there exists $x \in \mathfrak{m}$ which is $M$-regular. By \Cref{prop:grade-properties}, we have $\depth(M/xM) = \depth(M) - 1$ and thus, we may apply the inductive hypothesis.
+
+	Now, let $\mathfrak{p} \in \Ass M$ be arbitrary. We wish to show that $\depth M \le \dim(R/\mathfrak{p})$. Choose $z \in M$ such that $Rz$ is maximal among the cyclic submodules of $M$ annihilated by $\mathfrak{p}$.
+
+	\claim{} $\mathfrak{p}$ consists of zerodivisors of $M/xM$.
+	\begin{proof} 
+		Note that $\mathfrak{p}$ kills $\overline{z} \in M/xM$. We just need to show that $\overline{z} \neq 0 \in M/xM$, i.e., $z \notin xM$. \newline
+		To the contrary, assume that $z = xm$ for some $m \in M$. Then,
+		\begin{equation*} 
+			\mathfrak{p} z = x(\mathfrak{p} m) = 0
+		\end{equation*}
+		implies that $\mathfrak{p} m = 0$ since $x$ is $M$-regular.
+
+		But then, $\mathfrak{p}$ annihilates $Rm \supsetneq Rz$, a contradiction.
+	\end{proof}
+
+	Thus, $\mathfrak{p} \subset \mathfrak{q}$ for some $\mathfrak{q} \in \Ass(M/xM)$. 
+
+	Note that $x \notin \mathfrak{p}$ since $\mathfrak{p}$ is associated to $M$ whereas $x$ is regular on $M$. Consequently, $(M/xM)_{\mathfrak{p}} = 0$. Thus, $\mathfrak{p} \neq \mathfrak{q}$ since the latter is actually in the support of $M/xM$. 
+
+	Thus, we get
+	\begin{equation*} 
+		\dim(R/\mathfrak{p}) - 1 \ge \dim(R/\mathfrak{q}) \ge \depth(M/xM) = \depth(M) - 1,
+	\end{equation*}
+	as desired.
+\end{proof}
+
+The global analogue of the above says the following.
+
+\begin{prop}
+	Let $R$ be a noetherian ring, and $I \subset R$ an ideal. Then, $\grade I \le \htt I$.
+\end{prop}
+\begin{proof} 
+	We have $\grade(I) = \inf\{\depth R_{\mathfrak{p}} : \mathfrak{p} \in V(I)\}$ by \Cref{prop:grade-properties}, and $\htt(I) \vcentcolon= \inf\{\dim R_{\mathfrak{p}} : \mathfrak{p} \in V(I)\}$ by definition. The assertion now follows from \Cref{prop:depth-le-dim}.
+\end{proof}
+
+\subsubsection{Depth, type, and flat extensions}
+
+\begin{defn}
+	Let $(R, \mathfrak{m}, k)$ be a noetherian local ring, and $M \neq 0$ a finite $R$-module of depth $t$. The number
+	\begin{equation*} 
+		\type(M) \vcentcolon= \dim_{k} \Ext_{R}^{t}(k, M)
+	\end{equation*}
+	is called the \deff{type of $M$}.
+\end{defn}
+
+\begin{prop} \label{prop:local-algebra-depth-type-tensor}
+	Let $\varphi : (R, \mathfrak{m}, k) \to (S, \mathfrak{n}, \ell)$ be a homomorphism of noetherian local rings. Suppose $M$ is a finite $R$-module, and $N$ is a finite $S$-module which is flat over $R$; both nonzero. Then,
+	\begin{enumerate}[label=(\alph*)]
+		\item $\depth_{S}(M \otimes_{R} N) = \depth_{R}(M) + \depth_{S}(N/\mathfrak{m} N)$,
+		\item $\type_{R}(M \otimes_{R} N) = \type_{R}(M) \cdot \type_{S}(N/\mathfrak{m} N)$.
+	\end{enumerate}
+\end{prop}
+Note: the hypothesis above ensures $M \otimes_{R} N \neq 0$. Recall that $\varphi$ being a local map means $\varphi(\mathfrak{m}) \subset \mathfrak{n}$ (equivalently, $\varphi^{-1}(\mathfrak{n}) = \mathfrak{m}$). 
+\begin{lem} 
+	Under the same setup as above, the following hold:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\dim_{\ell} \Hom_{S}(\ell, M \otimes_{R} N) = \dim_{k} \Hom_{R}(k, M) \cdot \dim_{\ell} \Hom_{S}(\ell, N/\mathfrak{m} N)$,
+		\item if $\mathbf{y}$ is an $(N/\mathfrak{m} N)$-sequence in $S$, then $\mathbf{y}$ is an $(M \otimes_{R} N)$-sequence, and $N/\mathbf{y} N$ is flat over $R$.
+	\end{enumerate}
+\end{lem}
+\begin{proof} 
+	Set $T \vcentcolon= S/\mathfrak{m} S = k \otimes_{R} S$. There is a natural isomorphism
+	\begin{equation} \label{eq:009}
+		\Hom_{S}(\ell, M \otimes_{R} N) \cong \Hom_{S}(\ell, \Hom_{S}(T, M \otimes_{R} N)),
+	\end{equation}
+	since both sides can be identified with the submodule of $M \otimes_{R} N$ consisting of elements annihilated by $\mathfrak{n}$. 
+
+	As $N$ is flat over $R$, we have
+	\[\begin{WithArrows}[displaystyle]
+		\Hom_{S}(T, M \otimes_{R} N) &= \Hom_{S}(k \otimes_{R} S, M \otimes_{R} N) \\
+		&\cong \Hom_{R}(k, M \otimes_{R} N) \Arrow{$N$ flat, $k$ finite} \\
+		&\cong \Hom_{R}(k, M) \otimes_{R} N.
+	\end{WithArrows}\]
+
+	Now, $\Hom_{R}(k, M) \cong k^{s}$ for some finite $s \ge 0$, and so $\Hom_{R}(k, M) \otimes_{R} N \cong (N/\mathfrak{m} N)^{s}$. Combined with \Cref{eq:009}, this proves (a).
+
+	One has a natural isomorphism $(M \otimes_{R} N)/J(M \otimes_{R} N) \cong M \otimes_{R} (N/JN)$ for an arbitrary ideal $J \subset S$.\footnote{Both modules are isomorphic to $M \otimes_{R} N \otimes_{S} (S/J)$.}	Thus, it suffices it suffices to consider the case that $\mathbf{y} = y$ is a single element in $S$.
+
+	For the sake of contradiction, assume that $y$ is a zerodivisor on $M \otimes_{R} N$. Then, there exists nonzero $z \in M \otimes_{R} N$ such that $yz = 0$. By \mynameref{thm:KIT}, there exists $i \ge 0$ such that $z \in \mathfrak{m}^{i} (M \otimes_{R} N) \setminus \mathfrak{m}^{i + 1} (M \otimes_{R} N)$, but then $y$ would be a zerodivisor on 
+	\begin{equation*} 
+		\mathfrak{m}^{i} (M \otimes_{R} N) / \mathfrak{m}^{i + 1} (M \otimes_{R} N) \cong (\mathfrak{m}^{i} M/\mathfrak{m}^{m + 1}M) \otimes_{R} N \cong k^{t} \otimes_{R} N \cong (N/\mathfrak{m}N)^{t},
+	\end{equation*}
+	for some $t \ge 1$, contradicting the fact that $y$ is a zerodivisor on $N/\mathfrak{m} N$. (The first isomorphism above follows by flatness of $N$.)
+
+	In order to test flatness for $N/yN$, it suffices to consider exact sequences
+	\begin{equation*} 
+		0 \to M_{1} \to M_{2} \to M_{3} \to 0
+	\end{equation*}
+	of finite $R$-modules. By flatness of $N$, the sequence
+	\begin{equation*} 
+		0 \to M_{1} \otimes_{R} N \to M_{2} \otimes_{R} N \to M_{3} \otimes_{R} N \to 0
+	\end{equation*}
+	is exact. By what we just showed, $y$ is a regular sequence on $M_{3} \otimes_{R} N$. By \Cref{prop:regular-sequence-tensor}, the sequence above is exact even after tensoring with $S/yS$. But the obtained sequence is precisely
+	\begin{equation*} 
+		0 \to M_{1} \otimes_{R} (N/y N) \to M_{2} \otimes_{R} (N/y N) \to M_{3} \otimes_{R} (N/y N) \to 0. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:local-algebra-depth-type-tensor}]
+	Let $x_{1}, \ldots, x_{m}$ be a maximal $M$-sequence, and $y_{1}, \ldots, y_{n}$ a maximal $(N/\mathfrak{m} N)$-sequence. We will show that $\varphi(\mathbf{x}), \mathbf{y}$ is an $M \otimes_{R} N$-sequence. Moreover, showing $\Ext_{S}^{m + n}(\ell, M \otimes_{R} N) \neq 0$ will then prove (a).
+
+	By \Cref{prop:regularity-flat-tensor}, we already know that $\varphi(\mathbf{x})$ is an $(M \otimes_{R} N)$-sequence. Now, by part (b) of the previous lemma, we get that $\mathbf{y}$ is an $(\overline{M} \otimes_{R} N)$-sequence, where $\overline{M} \vcentcolon= M/\mathbf{x} M$. Since
+	\begin{equation*} 
+		\overline{M} \otimes_{R} N \cong (M \otimes_{R} N)/\varphi(\mathbf{x})(M \otimes_{R} N),
+	\end{equation*}
+	this proves that $\varphi(\mathbf{x}), \mathbf{y}$ is an $M \otimes_{R} N$-sequence.
+
+	Next, set $N' \vcentcolon= N/\mathbf{y} N$. We then see that going modulo the above regular sequence, we get
+	\begin{equation*} 
+		(M \otimes_{R} N)/(\varphi(\mathbf{x}), \mathbf{y})(M \otimes_{R} N) \cong \overline{M} \otimes_{R} N'.
+	\end{equation*}
+	Now, using \Cref{lem:Hom-Ext-regular-sequence}, we get
+	\begin{align*} 
+		\Hom_{R}(k, \overline{M}) \cong \Ext_{R}^{m}(k, M), \quad \Hom_{S}(\ell, N'/\mathfrak{m} N') \cong \Ext_{S}^{n}(\ell, N/\mathfrak{m} N), \\
+		\Hom_{S}(\ell, \overline{M} \otimes_{R} N') \cong \Ext_{R}^{m + n}(\ell, M \otimes_{R} N).
+	\end{align*}
+	Now, by the previous lemma, we get that
+	\begin{align*} 
+		\dim_{\ell} \Ext_{R}^{m + n}(\ell, M \otimes_{R} N) &= \dim_{\ell} \Hom_{S}(\ell, \overline{M} \otimes_{R} N') \\
+		&= \dim_{k} \Hom_{R}(k, \overline{M}) \cdot \dim_{\ell} \Hom_{S}(\ell, N') \\
+		&= \type_{R}(M) \cdot \type_{S}(N).
+	\end{align*}
+	In particular, the above $\Ext_{R}^{m + n}$ is nonzero. Thus, the depth is the desired one and the above quantity is the desired type.
+\end{proof}
+
+\begin{defn}
+	Let $M$ be a module over a local ring $(R, \mathfrak{m}, k)$. Then the \deff{socle of $M$} is defined as
+	\begin{equation*} 
+		\soc(M) \vcentcolon= (0 :_{M} \mathfrak{m}) = \Hom_{R}(k, M).
+	\end{equation*}
+\end{defn}
+The socle is the largest $R$-submodule of $M$ which has the structure of a $k$-module. The proof above showed us the following intermediate calculation.
+
+\begin{por}
+	Let $(R, \mathfrak{m}, k)$ be a noetherian local ring, $M$ a finite $R$-module, and $\mathbf{x}$ a maximal $M$-sequence. Then, $\type(M) = \dim_{k} \soc(M/\mathbf{x} M)$.
+\end{por}
+
+\textbf{Exercises.}
+
+\begin{exe}
+	Let $k$ be a field and $R = k[\![X]\!][Y]$. Deduce that $X$, $Y$ and $1 - XY$ are maximal $R$-sequences. (This example shows that $IM \neq M$ in \Cref{thm:grade-ext} is relevant.)
+\end{exe}
+\begin{soln}
+	It is clear that both sequences written are actually regular. Moreover, the ideal generated is maximal in either case. Thus, these sequences cannot be extended.
+\end{soln}
+
+??
+
+\subsection{Depth and projective dimension}
+
+Let $R$ be a ring, $M$ an $R$-module; $M$ has a(n augmented) projective resolution
+\begin{equation*} 
+	\cdots \to P_{n} \xrightarrow{\varphi_{n}} P_{n - 1} \to \cdots \to P_{1} \xrightarrow{\varphi_{1}} P_{0} \xrightarrow{\varphi_{0}} M \to 0.
+\end{equation*}
+
+Set $M_{0} \vcentcolon= M$ and $M_{i} \vcentcolon= \ker(\varphi_{i - 1})$ for $i \ge 1$. The modules $M_{i}$ are determined up to projective equivalence.\footnote{Modules $M$ and $N$ are said to be \deff{projectively equivalent} if there exist projectives $P$ and $Q$ with $A \oplus P \cong B \oplus Q$.} $M_{i}$ is called the \deff{$i$-th syzygy} of $M$. Since being projective is preserved by projective equivalence, the following definition makes sense.
+
+\begin{defn}
+	The \deff{projective dimension of $M$}, abbreviated $\projdim M$, is infinity if no syzygy of $M$ is projective; otherwise, it is the least integer $n$ for which the $n$-th syzygy is projective.
+\end{defn}
+
+If $n \vcentcolon= \projdim M$, then replacing $P_{n}$ by $M_{n}$, we get a finite projective resolution as follows:
+\begin{equation*} 
+	0 \to M_{n} \to P_{n - 1} \to \cdots \to P_{0} \to M \to 0.
+\end{equation*}
+
+Thus, one could equivalently define $\projdim M$ as the infimum of the lengths of all of its projective resolutions.
+
+Now, if $(R, \mathfrak{m}, k)$ is a noetherian local ring, and $M$ a finitely generated $R$-module, then the quantity
+\begin{equation*} 
+	\mu(M) \vcentcolon= \dim_{k}(M/\mathfrak{m} M)
+\end{equation*}
+is finite. This is the number of minimal generators of $M$. Set $\beta_{0} \vcentcolon= \mu(M)$. Let $x_{1}, \ldots, x_{\beta_{0}} \in M$ be a system of generators of $M$. Then, we get a surjection $\varphi_{0} : R^{\beta_{0}} \to M$ by mapping $e_{i} \mapsto x_{i}$. Repeating this procedure with $\ker(\varphi_{0})$ and so on, we get a resolution as
+\begin{equation*} 
+	F_{\bullet} : \quad \cdots \to R^{\beta_{n}} \xrightarrow{\varphi_{n}} R^{\beta_{n - 1}} \to \cdots \to R^{\beta_{1}} \xrightarrow{\varphi_{1}} R^{\beta_{0}} \to M \to 0.
+\end{equation*}
+
+\begin{exe}
+	$F_{\bullet}$ is determined up to isomorphism of complexes.
+\end{exe}
+\begin{soln}
+	Suppose that $G_{\bullet}$ is another resolution built in the same way. Note that necessarily, $G_{0} \cong R^{\beta_{0}}$. \newline
+	Let $x_{1}, \ldots, x_{\beta_{0}}$ be as before, and let $y_{1}, \ldots, y_{\beta_{0}}$ be a minimal generating set corresponding to $G_{0}$. Then, there exists an $n \times n$ matrix $A \in M_{n}(R)$ relating $\mathbf{x}$ and $\mathbf{y}$. Moreover, going modulo $\mathfrak{m}$ shows that $\overline{A}$ is related two bases of $k^{n}$. Thus, $\det(\overline{A}) \neq 0$ in $k$. Consequently, $\det(A)$ is a unit in $R$. This gives us an invertible map making the following diagram commute
+	\begin{equation*} 
+		\begin{tikzcd}
+			F_{0} \arrow[r, "\varphi_{0}"] \arrow[d, "\cong", "\eta_{0}"'] & M \arrow[d, equals] \arrow[r] & 0 \\
+			G_{0} \arrow[r, "\psi_{0}"] & M \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+	Now, a diagram chase shows that we have an induced map as shown
+	\begin{equation*} 
+		\begin{tikzcd}
+			\ker(\varphi_{0}) \arrow[d, dotted] \arrow[r] & F_{0} \arrow[r, "\varphi_{0}"] \arrow[d, "\eta_{0}"] & M \arrow[d, equals] \arrow[r] & 0 \\
+			\ker(\psi_{0}) \arrow[r] & G_{0} \arrow[r, "\psi_{0}"] & M \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+	The map above is just the restriction of $\eta_{0}$. By symmetry, $\eta_{0}^{-1}$ also restricts to a map in the other direction. Since the compositions are identity, we see that the kernels are isomorphic.
+
+	Now, $F_{1}$ and $G_{1}$ were constructed by mapping onto these kernels. The same argument as before shows that a dotted arrow below exists, making the diagram commute:
+
+	\begin{equation*} 
+		\begin{tikzcd}
+			F_{1} \arrow[d, "\eta_{1}", dotted] \arrow[r] & \ker(\varphi_{0}) \arrow[d, "\eta_{0}|_{\ker}"] \arrow[r] & 0 \\
+			G_{1} \arrow[r] & \ker(\psi_{0}) \arrow[r] & 0.
+		\end{tikzcd}
+	\end{equation*}
+
+	Induction finishes the job.
+\end{soln}
+
+\begin{defn}
+	The resolution built in the above way is called the \deff{minimal free resolution of $M$} (and is well-defined up to isomorphism of $R$-complexes). The number $\beta_{i}$ as above is called the \deff{$i$-th Betti number} of $M$, denoted $\beta_{i}(M)$.
+\end{defn}
+Note that projectives are free over a local ring.
+
+\begin{prop} \label{prop:free-resolution-minimal-equivalence}
+	Let $(R, \mathfrak{m}, k)$ be a local ring, $M$ a finite $R$-module, and
+	\begin{equation*} 
+		F_{\bullet} : \quad \cdots \to F_{n} \xrightarrow{\varphi_{n}} F_{n - 1} \to \cdots \to F_{1} \xrightarrow{\varphi_{1}} F_{0} \to 0
+	\end{equation*}
+	a free resolution of $M$. Then the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $F_{\bullet}$ is minimal,
+		\item $\varphi_{i}(F_{i}) \subset \mathfrak{m} F_{i - 1}$ for all $i \ge 1$,
+		\item $\rank F_{i} = \dim_{k} \Tor^{R}_{i}(M, k)$ for all $i \ge 0$,
+		\item $\rank F_{i} = \dim_{k} \Ext_{R}^{i}(M, k)$ for all $i \ge 0$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(a) $\Leftrightarrow$ (b) follows at once from \Cref{prop:minimal-epimorphism}, using our definition (/construction) of the minimal free resolution.
+
+	Note that the above free resolution comes with a surjection $F_{0} \xrightarrow{\varphi_{0}} M$ such that the augmented complex is exact. 
+
+	By definition, we have $\Tor^{R}_{i}(M, k) \cong H_{i}(F_{\bullet} \otimes_{R} k)$. \newline
+	
+	(b) $\Rightarrow$ (c), (d):  By the assumption of (b), we see that
+	\begin{equation*} 
+		F_{\bullet} : \quad \cdots \to F_{n}/\mathfrak{m} F_{n} \xrightarrow{0} F_{n - 1}/\mathfrak{m} F_{n - 1} \to \cdots \to F_{1}/\mathfrak{m} F_{1} \xrightarrow{0} F_{0}/\mathfrak{m} F_{0} \to 0.
+	\end{equation*}
+	Thus, the $i$-th homology is simply $F_{i}/\mathfrak{m} F_{i}$. Its rank as a $k$-vector space is precisely the same as $\rank F_{i}$. This proves (c). (d) follows in the same way.
+
+	(c) $\Rightarrow$ (b): After tensoring with $k$, we note that we have
+	\begin{equation*} 
+		\cdots \xrightarrow{\overline{\varphi_{i + 1}}} \overline{F_{i}} \xrightarrow{\overline{\varphi_{i}}} \cdots,
+	\end{equation*}
+	where $\overline{\cdot}$ denotes going mod $\mathfrak{m}$. 
+
+	Note that 
+	\begin{equation*} 
+		\dim_{k} \Tor^{R}_{i}(M, k) = \dim_{k}(\ker(\overline{\varphi_{i}})/\im(\overline{\varphi_{i + 1}})) \le \dim_{k}(\overline{F_{i}}) = \rank F_{i}.
+	\end{equation*}
+	Thus, for equality to hold, we must have $\ker(\overline{\varphi_{i}}) = \overline{F_{i}}$ and $\im(\overline{\varphi_{i + 1}}) = 0$. Thus, $\overline{\varphi_{i}} = 0$ for all $i$, giving us (b).
+
+	(d) $\Rightarrow$ (b): Follows the same way as above. Note that $\Hom_{R}(F_{i}, k) \cong k^{\rank F_{i}}$, as $R$-modules (and $k$-modules).
+\end{proof}
+
+\begin{cor} \label{cor:projdim-Tor-local}
+	Let $(R, \mathfrak{m}, k)$ be a noetherian local ring, and $M$ a finite $R$-module. Then, $\beta_{i}(M) = \Tor^{R}_{i}(M, k)$ for all $i$ and
+	\begin{equation*} 
+		\projdim M = \sup \Tor^{R}_{\ast}(M, k).
+	\end{equation*}
+\end{cor}
+
+\begin{cor} \label{cor:projdim-mod-regular-sequence}
+	Let $(R, \mathfrak{m})$ be a noetherian local ring, and $M$ a finite $R$-module. If $x \in \mathfrak{m}$ is $M$-regular and $R$-regular, then
+	\begin{equation*} 
+		\projdim_{R} M = \projdim_{R/(x)} M/x M.
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	Let $F_{\bullet} \to M$ be a minimal free resolution. Note that $x$ is regular on each $F_{i}$. By \Cref{prop:regular-sequence-tensor-strong}, it follows that we still have a resolution after going mod $(x)$. This continues to be minimal by \Cref{prop:free-resolution-minimal-equivalence}. Using that again with \Cref{cor:projdim-Tor-local}, we get the result.
+\end{proof}
+
+\begin{lem} \label{lem:injective-associated-tensor}
+	Let $(R, \mathfrak{m}, k)$ be a local ring, and $\varphi : F \to G$ a homomorphism of finite $R$-modules. Suppose that $F$ is free, and let $M$ be an $R$-module with $\mathfrak{m} \in \Ass M$. Suppose that $\varphi \otimes_{R} M$ is injective. Then,
+	\begin{enumerate}[label=(\alph*)]
+		\item $\varphi \otimes_{R} k$ is injective,
+		\item if $G$ is a free $R$-module, then $\varphi$ is injective, and $\varphi(F)$ is a direct summand of $G$.
+	\end{enumerate}
+\end{lem}
+\begin{proof} \phantom{h}
+	\begin{enumerate}[label=(\alph*)]
+		\item Since $\mathfrak{m} \in \Ass M$, there exists an embedding $\iota : k \into M$. $F$ being free implies that $F \otimes_{R} \iota$ is also injective. We have a commutative diagram as
+		\begin{equation*} 
+			\begin{tikzcd}
+				F \otimes_{R} k \arrow[d, "\varphi \otimes k"'] \arrow[r, "F \otimes \iota", hook] & F \otimes_{R} M \arrow[d, "\varphi \otimes M", hook] \\
+				G \otimes_{R} k \arrow[r, "G \otimes \iota"'] & G \otimes_{R} M,
+			\end{tikzcd}
+		\end{equation*}
+		proving that the left map is an injection.
+		%
+		\item We are given that $\varphi : R^{n} \to R^{m}$ is a map such that $\overline{\varphi} : k^{n} \to k^{m}$ is an injection. \newline
+		We wish to show that $\varphi$ is an injection and splits. 
+
+		Let $e_{1}, \ldots, e_{n}$ be the standard basis of $R^{n}$, and put $x_{i} \vcentcolon= \varphi(e_{i})$ for $i \in [n]$. Then, we are given that $\overline{x_{1}}, \ldots, \overline{x_{n}}$ are $k$-linearly independent. Thus, we may extend it to a $k$-basis $\overline{x_{1}}, \ldots, \overline{x_{m}}$ of $k^{m}$. Then, $x_{1}, \ldots, x_{m}$ is an $R$-basis for $R^{m}$. One can now define an inverse to $\varphi$ in the obvious way. \qedhere
+	\end{enumerate}
+\end{proof}
+
+\begin{thm}[Auslander-Buchsbaum] \label{thm:auslander-buchsbaum}
+	Let $(R, \mathfrak{m})$ be a noetherian local ring, and $M \neq 0$ a finite $R$-module. If $\projdim M < \infty$, then
+	\begin{equation*} 
+		\projdim M + \depth M = \depth R.
+	\end{equation*}
+\end{thm}
+\begin{proof} 
+	We proceed by induction on $\depth R$.
+
+	First, let $\depth R = 0$. We wish to show $\projdim M = \depth M = 0$. Suppose $n \vcentcolon= \projdim M > 0$. Then, $M$ has a minimal free resolution
+	\begin{equation*} 
+		0 \to F_{n} \xrightarrow{\varphi_{n}} F_{n - 1} \to \cdots \to F_{0} \xrightarrow{\varphi_{0}} \to M \to 0.
+	\end{equation*}
+	Now, $\depth R = 0$ tells us that $\mathfrak{m}$ consists of zero divisors, i.e., $\mathfrak{m} \in \Ass R$. Applying \Cref{lem:injective-associated-tensor} to $M = R$, we see that $\varphi_{n}$ maps $F_{n}$ isomorphically onto a free summand of $F_{n - 1}$, contradicting minimality of the above resolution. \newline
+	Thus, $n = 0$, proving that $M$ is projective and hence free. Consequently, $\depth M = \depth R = 0$.
+
+	Now, assume $\depth R > 0$. Suppose first that $\depth M = 0$. Let $M_{1}$ be the first syzygy of $M$. Note that $M_{1} \neq 0$ since $M$ is not free (since $\depth M \neq \depth R$). Now, by \Cref{rem:grade-equalities-exact-sequences}, we see that $\depth M' = 1$. Since $\projdim M' = \projdim M - 1$, it is enough to prove the result for $M'$. Thus, we may assume $\depth M > 0$. \newline
+	Now, this means that $\mathfrak{m} \notin \Ass M$ and $\mathfrak{m} \in \Ass R$. By prime avoidance, we may pick $x \in \mathfrak{m}$ which is both $\mathfrak{m}$-regular and $R$-regular.
+
+	Using \Cref{prop:grade-properties} and \Cref{cor:projdim-mod-regular-sequence}, induction now finishes the job.
+\end{proof}
+
+\textbf{Exercises.}
+
+\begin{ex}
+	Let $R$ be a noetherian local ring, $M$ a finite $R$-module, and $\mathbf{x}$ a $M$-sequence of length $n$. Show $\projdim_{R}(M/\mathbf{x} M) = \projdim_{R}(M) + n$.
+\end{ex}
+\begin{proof} 
+	Note that $\depth(M/\mathbf{x} M) = \depth(M) - n$ by \Cref{prop:grade-properties}. Thus, \mynameref{thm:auslander-buchsbaum} gives the result if both $M$ and $M/\mathbf{x} M$ have finite projective dimensions.
+
+	??
+\end{proof}
+
+\begin{ex}
+	Let $R$ be a noetherian local ring, and $N$ an $n$-th syzygy of a finite $R$-module in a finite free resolution. Prove that $\depth N \ge \min(n, \depth R)$.
+\end{ex}
+\begin{proof} 
+	Let $F_{\bullet} \to M \to 0$ be the finite free resolution mentioned. Let $M_{n}$ denote the $n$-th syzygy (with $M_{0} = M$). We prove by induction on $n$, that $\depth M_{n} \ge \min(n, \depth R)$. The statement is clear for $n = 0$. 
+
+	We have the exact sequence
+	\begin{equation*} 
+		0 \to M_{n} \to F_{n - 1} \to M_{n - 1} \to 0.
+	\end{equation*}
+	Note that $\depth(F_{n - 1}) = \depth(R)$ since $F_{n - 1}$ is a (nonzero) finite free module (\Cref{cor:depth-direct-sum}).\footnotetext{If $F_{n - 1} = 0$, then $\depth = \infty$ and there is nothing to prove.} Now, by \Cref{prop:grade-exact-sequence}, we see that
+	\begin{equation*} 
+		\depth M_{n} \ge \min(\depth(F_{n - 1}), \depth(M_{n - 1}) + 1) = \min(\depth(R), n). \qedhere
+	\end{equation*}
+\end{proof}
+
+\subsection{Some linear algebra}
+
+\subsubsection{Torsionfree and reflexive modules}
+
+Recall that $\mathcal{Z}(R)$ is the set of zerodivisors of $R$.
+\begin{defn}
+	Let $R$ be a ring, $M$ an $R$-module. An element $x \in M$ is said to be \deff{torsion} if there exists $r \in R \setminus \mathcal{Z}(R)$ such that $r x = 0$. \newline
+	$M$ is said to be \deff{torsionfree} if $M$ has no nonzero torsion elements. \newline
+	$M$ is said to be \deff{torsion} if every element of $M$ is torsion.
+\end{defn}
+The zero module is both torsion and torsionfree.
+
+Recall that the \deff{total ring of fractions} of a ring $R$, is the ring $W^{-1} R$, where $W$ consists of nonzerodivisors of $R$.
+\begin{prop}
+	Let $R$ be a ring, $Q$ its total ring of fractions, and $M$ an $R$-module.
+	\begin{enumerate}[label=(\alph*)]
+		\item $M$ is torsionfree iff the natural map $M \to M \otimes_{R} Q$ is injective.
+		\item $M$ is torsion iff $M \otimes_{R} Q = 0$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	Let $W$ denote the set of nonzerodivisors of $R$. Note that $M \otimes_{R} Q = W^{-1} M$ and the map $M \to M \otimes_{R} Q$ is simply $m \mapsto \frac{m}{1}$. 
+
+	This map is injective iff no nonzero element of $M$ is killed by an element of $W$. (a) follows.
+
+	Similarly, $W^{-1} M = 0$ iff every element of $M$ is killed by an element of $W$. (b) follows.
+\end{proof}
+
+\begin{defn}
+	Let $R$ be a ring, $M$ a module. 
+
+	The \deff{dual} of $M$ is the module $\Hom_{R}(M, R)$, denoted $M^{\ast}$; the \deff{bidual} is $M^{\ast \ast}$. \newline
+	The bilinear map $M \times M^{\ast} \to R$ given by $(x, \varphi) \mapsto \varphi(x)$ induces a natural (evaluation) map $h : M \to M^{\ast \ast}$. 
+
+	$M$ is \deff{torsionless} if $h$ is injective; $M$ is \deff{reflexive} if $h$ is an isomorphism.
+\end{defn}
+Note that $(-)^{\ast}$ is in fact a functor, with the obvious definition for homomorphisms.
+
+Some implications between the above terms are discussed in \Cref{exe:noetherian-torsion-reflexive-implications}.
+
+Note that if $R$ is noetherian, $M$ a finite $R$-module, $\mathfrak{p} \in \Spec R$, then
+\begin{equation*} 
+	\Hom_{R}(M, R)_{\mathfrak{p}} \cong \Hom_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}, R_{\mathfrak{p}}).
+\end{equation*}
+Thus, $(M^{\ast})_{\mathfrak{p}} \cong (M_{\mathfrak{p}})^{\ast}$, where the latter dual is considered with respect to $R_{\mathfrak{p}}$. 
+
+Similarly, $(M^{\ast \ast})_{\mathfrak{p}} \cong (M_{\mathfrak{p}})^{\ast \ast}$. Now, as $R_{\mathfrak{p}}$-modules, we have a map
+\begin{equation*} 
+	M_{\mathfrak{p}} \to M_{\mathfrak{p}}^{\ast \ast}.
+\end{equation*}
+We claim that the above is just the localisation of
+\begin{equation*} 
+	h : M \to M_{\mathfrak{p}},
+\end{equation*}
+under the identification mentioned earlier.
+
+\begin{obs} \label{obs:depth-and-ass}
+	Let $(R, \mathfrak{m})$ be a local ring, $M$ a finite $R$-module. 
+
+	Note that $\depth M = 0$ iff $\mathfrak{m}$ consists of zerodivisors on $M$ iff $\mathfrak{m} \in \Ass M$. 
+
+	Thus,
+	\begin{equation*} 
+		\depth M = 0 \Leftrightarrow \mathfrak{m} \in \Ass M; \qquad \depth M \ge 1 \Leftrightarrow \mathfrak{m} \notin \Ass M.
+	\end{equation*}
+
+	Now, let $R$ be an arbitrary noetherian ring, and $M$ a finite $R$-module. Since localisation behaves well with associated primes, we see that given any $\mathfrak{p} \in \Spec R$, we have
+	\begin{equation*} 
+		\depth_{R_{\mathfrak{p}}} M_{\mathfrak{p}} = 0 \Leftrightarrow \mathfrak{p} \in \Ass M; \qquad \depth_{R_{\mathfrak{p}}} M_{\mathfrak{p}} \ge 1 \Leftrightarrow \mathfrak{p} \notin \Ass M.
+	\end{equation*}
+	(We have used that $\mathfrak{p} \in \Ass M \Leftrightarrow \mathfrak{p} R_{\mathfrak{p}} \in \Ass M_{\mathfrak{p}}$.)
+\end{obs}
+
+\begin{prop}
+	Let $R$ be a noetherian ring, and $M$ a finite $R$-module. Then:
+	\begin{enumerate}[label=(\alph*)]
+		\item $M$ is torsionless if and only if
+		\begin{enumerate}[label=(\roman*)]
+			\item $M_{\mathfrak{p}}$ is torsionless for all $\mathfrak{p} \in \Ass R$, and
+			\item $\depth M_{\mathfrak{p}} \ge 1$ for $\mathfrak{p} \in \Spec R$ with $\depth R_{\mathfrak{p}} \ge 1$.
+		\end{enumerate}
+		\item $M$ is reflexive if and only if
+		\begin{enumerate}[label=(\roman*)]
+			\item $M_{\mathfrak{p}}$ is reflexive for all $\mathfrak{p}$ with $\depth R_{\mathfrak{p}} \le 1$, and
+			\item $\depth M_{\mathfrak{p}} \ge 2$ for $\mathfrak{p} \in \Spec R$ with $\depth R_{\mathfrak{p}} \ge 2$.
+		\end{enumerate}
+	\end{enumerate}
+\end{prop}
+In points (i) and (ii), $M_{\mathfrak{p}}$ and $R_{\mathfrak{p}}$ are being considered are $R_{\mathfrak{p}}$-modules.
+
+\begin{proof} 
+	Let $h : M \to M^{\ast \ast}$ be the evaluation map. Put $K \vcentcolon= \ker(h)$, and $C \vcentcolon= \coker(h)$. Note that $M$ ($M_{\mathfrak{p}}$) it torsionless iff $K$ ($K_{\mathfrak{p}}$) is zero; furthermore, reflexive iff $C$ ($C_{\mathfrak{p}}$) is zero. As noticed, $h$ behaves well with localisation. This proves that points (i) in (a) and (b) are necessary. 
+
+	By \Cref{exe:grade-Hom-min-2-grade}, we 
+	\begin{equation} \label{eq:010}
+		\depth M_{\mathfrak{p}}^{\ast \ast} \ge \min(2, \depth R_{\mathfrak{p}}).
+	\end{equation}
+	This proves necessity of (b) (ii). Next, if $M$ is torsionless, then $M_{\mathfrak{p}}$ is a submodule of $M_{\mathfrak{p}}^{\ast \ast}$. \Cref{prop:grade-exact-sequence} then tells us that
+	\begin{equation*} 
+		\depth(M_{\mathfrak{p}}) \ge \min(\depth(M_{\mathfrak{p}}^{\ast \ast}), 1).
+	\end{equation*}
+	Combined with \Cref{eq:010}, this proves the necessity of (a) (ii).
+
+	We now need to prove the sufficiency directions of (a) and (b). We will make use of \Cref{obs:depth-and-ass} repeatedly.
+
+	(a): It suffices to prove that $\Ass K = \emptyset$. Let $\mathfrak{p} \in \Spec R$. If $\depth R_{\mathfrak{p}} = 0$, then $\mathfrak{p} \in \Ass R$. For such $\mathfrak{p}$, (a) (i) tells us that $K_{\mathfrak{p}} = 0$ and thus, $\mathfrak{p} \notin \Ass K$. \newline
+	Now, if $\depth(R_{\mathfrak{p}}) \ge 1$, then $\depth(M_{\mathfrak{p}}) \ge 1$, proving that $\mathfrak{p} \notin \Ass(M) \supset \Ass(K)$.
+
+	(b): Suppose b (i) and (ii) hold. Check that this implies that (a) is true, i.e, $K = 0$. Thus, we have a short exact sequence
+	\begin{equation*} 
+		0 \to M \to M^{\ast \ast} \to C \to 0.
+	\end{equation*} 
+	As before, we show that $\Ass C = \emptyset$. \newline
+	Let $\mathfrak{p} \in \Spec R$. If $\depth R_{\mathfrak{p}} \le 1$, then we are done by (i). If $\depth R_{\mathfrak{p}} \ge 2$, then $\depth M_{\mathfrak{p}} \ge 2$. By \Cref{eq:010}, $\depth M_{\mathfrak{p}}^{\ast \ast} \ge 2$ as well. By \Cref{prop:grade-exact-sequence}, we get $\depth(C_{\mathfrak{p}}) \ge 1$. Thus, $\mathfrak{p} \notin \Ass C$.
+\end{proof}
+
+\subsubsection{Rank}
+
+\begin{defn}
+	Let $R$ be a ring, $Q$ its total ring of fractions, and $M$ an $R$-module. We say $M$ \deff{has a rank} if $M \otimes_{R} Q$ is a free $Q$-module. In this case, we define the \deff{rank} of $M$ to be $\rank_{Q}(M \otimes_{R} Q)$.
+
+	If $\varphi : M \to N$ is a homomorphism of $R$-modules, then $\varphi$ has \deff{rank} $r$ if $\im(\varphi)$ has rank $r$.
+\end{defn}
+We shall often just say ``$M$ has rank $r$'' to mean that $M$ has a rank, and that this rank is $r$. Note that not all modules have a rank. On the other hand, any free module has a rank, which coincides with its usual notion of a rank. At the same time, there are non-free modules which have a rank in the above sense. For example, the $\mathbb{Z}$-module $\mathbb{Z}/(2)$ has rank $0$.
+
+Recall that a ring $R$ is said to be \deff{semilocal} if $R$ has finitely many maximal ideals. (The zero ring is also a semilocal ring.)
+
+\begin{lem} \label{lem:semilocal-localisations-free}
+	Let $R$ be a semilocal ring, $M$ a finite projective $R$-module. Then, $M$ is free of rank $r$ iff the localisations $M_{\mathfrak{m}}$ (are free) have the same rank $r$ for all maximal ideals $\mathfrak{m}$ of $R$.
+\end{lem}
+Note that $M$ is assumed to be projective to begin with, so the localisations $M_{\mathfrak{m}}$ are automatically free since projective modules over local rings are free.
+\begin{proof} 
+	Only the direction \backward is to be proven. We prove this by induction. If $r = 0$, then $M = 0$ and the result is true. 
+
+	Now, assume $r > 0$. In particular $M \neq 0$ and thus, $M_{\mathfrak{m}} \not\subset \mathfrak{m} M_{\mathfrak{m}}$ for all the maximal ideals $\mathfrak{m}$. By \mynameref{prop:gen-prime-avoidance}, there exists $x \in M$ such that $x \notin \mathfrak{m} M_{\mathfrak{m}}$ for all $\mathfrak{m}$. Thus, $x$ is a part of a basis of $M_{\mathfrak{m}}$, for each $\mathfrak{m}$. In particular, $(M/Rx)_{\mathfrak{m}}$ is free of rank $r - 1$, for every $\mathfrak{m}$.  By \Cref{thm:projective-locally-free}, $M/Rx$ is again projective. \newline
+	Thus, the inductive hypothesis now tells us that $M/Rx$ is free of rank $r - 1$. In particular, $M \onto M/Rx$ splits, giving us $M \cong (M/Rx) \oplus Rx$. It now suffices to prove that $Rx$ is free of rank $1$. 
+
+	Note that the natural map $R \onto Rx$ is injective since it is injective after localisation at every maximal ideal. 
+\end{proof}
+
+\begin{prop} \label{prop:rank-equivalences}
+	Let $R$ be a noetherian ring, $M$ an $R$-module with a finite free presentation $F_{1} \xrightarrow{\varphi} F_{0} \to M \to 0$. Then the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $M$ has rank $r$;
+		\item $M$ has a free submodule $N$ of rank $r$ such that $M/N$ is a torsion module;
+		\item for all prime ideals $\mathfrak{p} \in \Ass R$ the $R_{\mathfrak{p}}$-module $M_{\mathfrak{p}}$ is free of rank $r$;
+		\item $\rank \varphi = \rank F_{0} - r$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	(a) $\Rightarrow$ (b): By clearing denominators, there is a $Q$-basis $\frac{x_{1}}{1}, \ldots, \frac{x_{r}}{1}$ of $M \otimes_{R} Q$, where $x_{i} \in M$. Put $N \vcentcolon= \sum R x_{i}$. We claim that $N$ has the desired properties. \newline 
+	Note that $(M/N) \otimes_{R} Q = (M \otimes Q)/(N \otimes Q) = 0$ by construction. Thus, $M/N$ is indeed torsion. \newline
+	We claim that $x_{1}, \ldots, x_{r}$ are $R$-linearly independent. Suppose 
+	\begin{equation*} 
+		a_{1} x_{1} + \cdots + a_{r} x_{r} = 0.
+	\end{equation*}
+	Viewing that as an equation in $M \otimes Q$, we get that $a_{i} = 0$ for all $i$. (Note that $a_{i} = 0$ in $Q$ implies $a_{i} = 0$ in $R$.)
+
+	(b) $\Rightarrow$ (a): We have the short exact sequence
+	\begin{equation*} 
+		0 \to N \to M \to M/N \to 0.
+	\end{equation*}
+	Since $Q$ is a flat $R$-module, tensoring with $Q$ is exact. By hypothesis, the tensored sequence looks like
+	\begin{equation*} 
+		0 \to Q^{r} \to M \otimes_{R} Q \to 0 \to 0.
+	\end{equation*}
+	Thus, $M$ has rank $r$.
+
+	(a) $\Rightarrow$ (c): Note that $\mathcal{Z}(R) = \bigcup_{\mathfrak{p} \in \Ass R} \mathfrak{p}$. Thus, if $\mathfrak{p} \in \Ass R$, then $M_{\mathfrak{p}}$ is just a further localisation of $M \otimes_{R} Q$.
+
+	(c) $\Rightarrow$ (a): $Q$ is a semilocal ring with $\MaxSpec Q = \Max(\Ass R)$. By \Cref{thm:projective-locally-free}, we see that $M \otimes_{R} Q$ is $Q$-projective. Now, by \Cref{lem:semilocal-localisations-free}, this module is free of rank $r$.
+
+	(c) $\Leftrightarrow$ (d): In view of (a) $\Leftrightarrow$ (c), we can replace (d) by the condition that $(\im \varphi)_{\mathfrak{p}}$ is free and $\rank(\im \varphi)_{\mathfrak{p}} = \rank F_{0} - r$ for all $\mathfrak{p} \in \Ass R$. We have the exact sequence
+	\begin{equation*} 
+		0 \to (\im \varphi)_{\mathfrak{p}} \to (F_{0})_{\mathfrak{p}} \to M_{\mathfrak{p}} \to 0.
+	\end{equation*}
+	If $M_{\mathfrak{p}}$ is free, then the sequence splits, showing that $(\im \varphi)_{\mathfrak{p}}$ is projective and hence, free. Since $\mathfrak{p} \in \Ass R$. Conversely, if $(\im \varphi)_{\mathfrak{p}}$ is free, then too the sequence splits since $\mathfrak{p} \in \Ass R$, by \Cref{lem:injective-associated-tensor}.
+\end{proof}
+
+\begin{prop} \label{prop:rank-two-out-of-three}
+	Let $R$ be a noetherian ring, and $0 \to U \to M \to N \to 0$ an exact sequence of finite $R$-modules. If two of $U$, $M$, $N$ have a rank, then so does the third, and $\rank M = \rank U + \rank N$.
+\end{prop}
+\begin{proof} 
+	In view of \Cref{prop:rank-equivalences} (and \Cref{obs:depth-and-ass}), we may assume $(R, \mathfrak{m})$ is local and $\depth R = 0$. 
+	\begin{itemize}
+		\item If $N$ is free then, $M \cong U \oplus N$. Now freeness of $M$ implies that of $U$ and conversely (since projectives are free over local rings).
+		\item If $M$ and $U$ are free, then again $M \cong U \oplus N$ by \Cref{lem:injective-associated-tensor} ($\mathfrak{m} \in \Ass R$ since $\depth R = 0$). Again, $N$ is free.
+	\end{itemize}
+	The result now follows.
+\end{proof}
+
+\begin{cor}
+	Let $R$ be a noetherian ring, $M$ an $R$-module with a finite free resolution 
+	\begin{equation*} 
+		F_{\bullet}: \quad 0 \to F_{s} \to F_{s - 1} \to \cdots \to F_{0}.
+	\end{equation*}
+	Then, $M$ has a rank and $\rank M = \sum_{j = 0}^{s} (-1)^{j} \rank F_{j}$.
+\end{cor}
+\begin{proof}
+	Use the previous result and induction on $s$.
+\end{proof}
+Note that the hypothesis above assumes that $M$ has a finite length finite free resolution. This need not always be true. For example, consider $R = k[x]/(x^{2})$, with $k$ a field. This is a local artinian ring. In particular, every nonzerodivisor is already a unit. Thus, its total field of fraction is $R$ itself. However, not every finitely generated $R$-module is free. Indeed, $k = R/(x)$ is not. Consequently, $k$ has no rank and no finite length finite free resolution either.
+
+\begin{cor}
+	Let $R$ be a noetherian ring, and $I \neq 0$ an ideal such that $I$ has a finite free resolution. Then, $I$ contains an $R$-regular element.
+\end{cor}
+\begin{proof} 
+	We have a short exact sequence $0 \to I \to R \to R/I \to 0$. By the previous result, $I$ has a rank. By \Cref{prop:rank-two-out-of-three}, so does $R/I$ and $\rank I + \rank R/I = 1$. Note that $I$ is torsionfree and nonzero; thus, $\rank I = 1$ and $\rank R/I = 0$. Thus, $R/I$ is torsion, i.e., annihilated by an $R$-regular element. This element is necessarily in $I$.
+\end{proof}
+
+
+\textbf{Exercises.}
+
+\begin{exe}
+	Let $R$ be a ring, and $M$ a finite torsionfree module. Prove that if $M$ has a rank, then $M$ is isomorphic to a submodule of a finite free $R$-module of the same rank.
+\end{exe}
+\begin{proof} 
+	Let $W \vcentcolon= R \setminus \mathcal{Z}(R)$. Then, the total ring of fractions is $W^{-1}R =\vcentcolon Q$.
+
+	Since $M$ is torsionfree, the map $\varphi : M \to W^{-1} M$ is injective. Since $M$ has a rank (say $r$), we know that $W^{-1} M \cong Q^{r}$. \newline
+	By clearing denominators, we may assume that $\frac{x_{1}}{1}, \ldots, \frac{x_{r}}{1}$ is a $Q$-basis for $W^{-1} M$, with $x_{i} \in M$. 
+
+	Then, it is clear that $F \vcentcolon= \sum R \frac{x_{i}}{1} \subset Q^{r}$ is a free $R$-module of rank $r$. We show that there exists $w \in W$ such that $\varphi(M) \subset \frac{1}{w} F$. Note that $\frac{1}{w} F$ is again a free $R$-module of rank $r$, which would prove the result.
+
+	\claim{} For every $x \in M$, there exists $w \in W$ such that $\frac{x}{1} \in \frac{1}{w} F$.
+	\begin{proof} 
+		By hypothesis, we can write
+		\begin{equation*} 
+			\frac{x}{1} = \sum \frac{a_{i} x_{i}}{w_{i}}
+		\end{equation*}
+		with $a_{i} \in R$ and $w_{i} \in W$. By clearing denominators, the result follows.
+	\end{proof}
+
+	The desired result now follows from the claim using finite generation of $M$.
+\end{proof}
+
+\begin{exe} \label{exe:grade-Hom-min-2-grade}
+	Let $R$ be a noetherian ring, $I$ an ideal, $M$, $N$ finite $R$-modules. Show that $\grade(I, \Hom_{R}(M, N)) \ge \min(2, \grade(I, N))$.
+\end{exe}
+\begin{soln}
+	Put $L \vcentcolon= \Hom_{R}(M, N)$. This is a finite $R$-module.
+
+	Edge cases: 
+	\begin{enumerate}[label=(\alph*)]
+		\item If $IL = L$, then there is nothing to prove.
+		\item $IN = N$. In this case, there exists $i \in I$ such that $in = n$ for all $n \in N$. \newline
+		Consequently, $i \varphi = \varphi$ for all $\varphi \in L$. We are back in case (a).
+		\item If $\grade(I, N) = 0$, then there is nothing to prove.
+	\end{enumerate}
+
+	Thus, we may now assume $IN \neq N$ and $IL \neq L$. Thus, both the relevant grades are given in terms of lengths of regular sequences.
+
+	\textbf{Case 1.} $\grade(I, N) = 1$. We wish to prove $\grade(I, L) \ge 1$. \newline
+	By hypothesis, there exists $x \in I$ which is regular on $N$. Consequently, $x$ is regular on $L$. Thus, $\grade(I, L) \ge 1$.
+
+	\textbf{Case 2.} $\grade(I, N) \ge 2$. We wish to prove $\grade(I, L) \ge 2$. \newline
+	Let $x, y \in I$ be regular on $N$. We show that $x, y$ is an $L$-sequence. As noted earlier, $x$ is regular on $L$. Suppose $\varphi \in L$ is such that $y \varphi \in x L$. We wish to show that $\varphi \in x L$. \newline
+	Writing $y \varphi = x \psi$, we see that
+	\begin{equation*} 
+		y \varphi(m) = x \psi(m)
+	\end{equation*}
+	for all $m \in M$. By hypothesis of regularity, $\varphi(m) \in x N$ for all $m \in M$. \newline
+	Thus, there is some function $\eta : M \to N$ such that $\varphi(m) = x \eta(m)$ for all $m$. \newline
+	In fact, there is a unique such $\eta$ since $x$ is $N$-regular. Using this, one gets that $\eta$ is actually $R$-linear, i.e., $\eta \in L$. \newline
+	Thus, $\varphi = x \eta \in x L$, as desired.
+\end{soln}
+
+\begin{exe} \label{exe:noetherian-torsion-reflexive-implications}
+	Let $R$ be a noetherian ring, and $M$ a finite $R$-module. Prove
+	\begin{enumerate}[label=(\alph*)]
+		\item if $M$ is torsionless, then it is torsionfree,
+		\item $M$ is torsionless if and only if it is a submodule of a finite free module,
+		\item if $M$ is reflexive, then it is a second syzygy, i.e., there is an exact sequence $0 \to M \to F_{0} \to F_{1}$ with $F_{i}$ finite and free.
+	\end{enumerate}
+\end{exe}
+\begin{proof} 
+	\phantom{h}
+	\begin{enumerate}[label=(\alph*)]
+		\item Suppose $M \into M^{\ast \ast}$. It suffices to show that $M^{\ast}$ is torsionfree for any $M$. \newline
+		To this end, let $r \in R \setminus \mathcal{Z}(R)$ and $\varphi \in M^{\ast}$ be such that $r \varphi = 0$. Then, $r \varphi(m) = 0$ for all $m \in M$. Since $r$ is regular on $R$, it follows that $\varphi(m) = 0$ for all $m \in M$, as desired.
+		%
+		\item \forward Suppose that $M$ is torsionless
+
+		\backward \claim{1} A submodule of a torsionless module is torsionless.
+		\begin{proof} 
+			Let $N \le M$ be modules with $M$ torsionless. Let $x \in N$ be nonzero. Then, there exists $\varphi \in M^{\ast}$ with $\varphi(x) \neq 0$. Consequently, $\psi \vcentcolon= \varphi|_{N} \in N^{\ast}$ satisfies $\psi(x) \neq 0$, as desired.
+		\end{proof}
+
+		\claim{2} Any finite free module $F$ is torsionless.
+		\begin{proof} 
+			Let $\{e_{i}\}_{i}$ be a basis for $F$. Then, there exists a dual basis $\{e_{i}^{\ast}\}_{i}$ for $F^{\ast}$. Now, given $x \in F \setminus \{0\}$, we can write $x = \sum a_{i} e_{i}$ with some $a_{i}$ nonzero. Then,
+			\begin{equation*} 
+				e_{i}^{\ast}(x) = a_{i} \neq 0. \qedhere
+			\end{equation*}
+		\end{proof}
+	\end{enumerate}
+\end{proof}
+
+\newpage
+\input{appendix}
 
 \end{document}
