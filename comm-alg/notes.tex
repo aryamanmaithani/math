@@ -492,12 +492,12 @@ However, we still often say ``$R$ is a graded ring'' and tacitly assume that we 
 
 \begin{prop}
 	Let $R$ be a graded ring, and $M$ a graded $R$-module. \newline
-	Then, $R_{0}$ is a subring of $R$. In particular, $1 \in R$. \newline
+	Then, $R_{0}$ is a subring of $R$. In particular, $1 \in R_{0}$. \newline
 	Moreover, each $M_{n}$ is an $R_{0}$-module.
 \end{prop}
 Note that $M_{n}$ will typically \emph{not} be an $R$-module.
 \begin{proof} 
-	The only nontrivial thing to check is that $1 \in R$. By hypothesis, we can write
+	The only nontrivial thing to check is that $1 \in R_{0}$. By hypothesis, we can write
 	\begin{equation} \label{eq:001}
 		1 = r_{0} + r_{1} + \cdots,
 	\end{equation}
@@ -2152,7 +2152,7 @@ Finally, define $\widehat{R} = \mathcal{C}/\mathcal{I}$. The description of $\wi
 \end{equation*}
 The ring operations are defined in the obvious manner. The previous exercises ensure that this is well-defined.
 
-Note that we have an obvious ring map $R \to \widehat{R}$, mapping $r \in R$ to the equivalence of the constant sequence $(r)_{n \ge 1}$.
+Note that we have an obvious ring map $R \to \widehat{R}$, mapping $r \in R$ to the equivalence class of the constant sequence $(r)_{n \ge 1}$.
 
 \begin{thm} \label{thm:equivalence-of-completions}
 	$\limit_{t} R/I_{t} \cong \widehat{R}$.
@@ -2616,7 +2616,7 @@ where we have used the isomorphism $M[\mathbf{X}]/IM[\mathbf{X}] \cong (M/IM)[\m
 	We say that $\mathbf{x}$ is \deff{$M$-quasi-regular} if $\mathbf{x} M \neq M$ and the conclusion of \Cref{thm:regular-polynomial-graded-isomorphism}.
 \end{defn}
 
-\textbf{Exercises.}
+\subsubsection{Exercises}
 
 \begin{exe}
 	Let $0 \to U \to M \to N \to 0$ be an exact sequence of $R$-modules, and $\mathbf{x}$ a sequence which is weakly $U$-regular and (weakly) $N$-regular. Prove that $\mathbf{x}$ is (weakly) $M$-regular too.
@@ -3129,7 +3129,7 @@ The socle is the largest $R$-submodule of $M$ which has the structure of a $k$-m
 	Let $(R, \mathfrak{m}, k)$ be a noetherian local ring, $M$ a finite $R$-module, and $\mathbf{x}$ a maximal $M$-sequence. Then, $\type(M) = \dim_{k} \soc(M/\mathbf{x} M)$.
 \end{por}
 
-\textbf{Exercises.}
+\subsubsection{Exercises}
 
 \begin{exe}
 	Let $k$ be a field and $R = k[\![X]\!][Y]$. Deduce that $X$, $Y$ and $1 - XY$ are maximal $R$-sequences. (This example shows that $IM \neq M$ in \Cref{thm:grade-ext} is relevant.)
@@ -3138,7 +3138,28 @@ The socle is the largest $R$-submodule of $M$ which has the structure of a $k$-m
 	It is clear that both sequences written are actually regular. Moreover, the ideal generated is maximal in either case. Thus, these sequences cannot be extended.
 \end{soln}
 
-??
+\begin{exe}
+	Let $R$ be a noetherian ring, $M$ a finite $R$-module, and $N$ an arbitrary $R$-module. Deduce that $\Ass \Hom_{R}(M, N) = \Supp M \cap \Ass N$.
+\end{exe}
+\begin{soln}
+	($\subset$) Let $\mathfrak{p} \in \Ass \Hom_{R}(M, N)$. Then, $\mathfrak{p} R_{\mathfrak{p}} \in \Ass \Hom_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}, N_{\mathfrak{p}})$. (Note that $\Hom$ and localisation commute since $M$ is finite.) 
+
+	In particular, $\Hom_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}, N_{\mathfrak{p}})$ is nonzero and hence, $M_{\mathfrak{p}} \neq 0$, i.e., $\mathfrak{p} \in \Supp M$. 
+
+	Let $k(\mathfrak{p})$ be the residue field $R_{\mathfrak{p}}/\mathfrak{p} R_{\mathfrak{p}}$. By definition of $\mathfrak{p} R_{\mathfrak{p}}$ being associated, we have an inclusion $k(\mathfrak{p}) \into \Hom_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}, N_{\mathfrak{p}})$. Thus,
+	\begin{equation*} 
+		0 \neq \Hom_{R_{\mathfrak{p}}}(k(\mathfrak{p}), \Hom_{R_{\mathfrak{p}}}(M_{\mathfrak{p}}, N_{\mathfrak{p}})) \cong \Hom_{R_{\mathfrak{p}}}(k(\mathfrak{p}) \otimes_{R_{\mathfrak{p}}} M_{\mathfrak{p}}, N_{\mathfrak{p}}).
+	\end{equation*}
+	The above now gives us $\Hom_{R_{\mathfrak{p}}}(k(\mathfrak{p}), N_{\mathfrak{p}}) \neq 0$. Note that any nonzero map must be an injection since $k(\mathfrak{p})$ is a simple $R_{\mathfrak{p}}$-module. Thus, $\mathfrak{p} \in \Ass N$.
+
+	($\supset$) Let $\mathfrak{p} \in \Supp M \cap \Ass N$. Arguing as earlier, it suffices to show
+	\begin{equation*} 
+		\Hom_{R_{\mathfrak{p}}}(k(\mathfrak{p}) \otimes_{R_{\mathfrak{p}}} M_{\mathfrak{p}}, N_{\mathfrak{p}}) \neq 0.
+	\end{equation*}
+	Note that Nakayama tells us that $k(\mathfrak{p}) \otimes_{R_{\mathfrak{p}}} M_{\mathfrak{p}} \neq 0$. 
+
+	By hypothesis, there is a map $k(\mathfrak{p}) \into N_{\mathfrak{p}}$. Linear algebra over fields tells us that there is also a surjection $k(\mathfrak{p}) \otimes_{R_{\mathfrak{p}}} M_{\mathfrak{p}} \onto k(\mathfrak{p})$. Thus, there is a nonzero map $k(\mathfrak{p}) \otimes_{R_{\mathfrak{p}}} M_{\mathfrak{p}} \to N_{\mathfrak{p}}$ obtained by composition.
+\end{soln}
 
 \subsection{Depth and projective dimension}
 
@@ -3312,7 +3333,7 @@ Note that projectives are free over a local ring.
 	Using \Cref{prop:grade-properties} and \Cref{cor:projdim-mod-regular-sequence}, induction now finishes the job.
 \end{proof}
 
-\textbf{Exercises.}
+\subsubsection{Exercises}
 
 \begin{ex}
 	Let $R$ be a noetherian local ring, $M$ a finite $R$-module, and $\mathbf{x}$ a $M$-sequence of length $n$. Show $\projdim_{R}(M/\mathbf{x} M) = \projdim_{R}(M) + n$.
@@ -3371,11 +3392,11 @@ Recall that the \deff{total ring of fractions} of a ring $R$, is the ring $W^{-1
 	Let $R$ be a ring, $M$ a module. 
 
 	The \deff{dual} of $M$ is the module $\Hom_{R}(M, R)$, denoted $M^{\ast}$; the \deff{bidual} is $M^{\ast \ast}$. \newline
-	The bilinear map $M \times M^{\ast} \to R$ given by $(x, \varphi) \mapsto \varphi(x)$ induces a natural (evaluation) map $h : M \to M^{\ast \ast}$. 
+	The bilinear map $M \times M^{\ast} \to R$ given by $(x, \varphi) \mapsto \varphi(x)$ induces a natural (evaluation) map $h_{M} : M \to M^{\ast \ast}$. 
 
 	$M$ is \deff{torsionless} if $h$ is injective; $M$ is \deff{reflexive} if $h$ is an isomorphism.
 \end{defn}
-Note that $(-)^{\ast}$ is in fact a functor, with the obvious definition for homomorphisms.
+Note that $(-)^{\ast}$ is in fact a functor, with the obvious definition for homomorphisms. Torsionless translates to the following: given any nonzero $x \in M$, there exists a map $\varphi : M \to R$ such that $\varphi(x) \neq 0$.
 
 Some implications between the above terms are discussed in \Cref{exe:noetherian-torsion-reflexive-implications}.
 
@@ -3387,13 +3408,24 @@ Thus, $(M^{\ast})_{\mathfrak{p}} \cong (M_{\mathfrak{p}})^{\ast}$, where the lat
 
 Similarly, $(M^{\ast \ast})_{\mathfrak{p}} \cong (M_{\mathfrak{p}})^{\ast \ast}$. Now, as $R_{\mathfrak{p}}$-modules, we have a map
 \begin{equation*} 
-	M_{\mathfrak{p}} \to M_{\mathfrak{p}}^{\ast \ast}.
+	h_{M_{\mathfrak{p}}} : M_{\mathfrak{p}} \to M_{\mathfrak{p}}^{\ast \ast}.
 \end{equation*}
-We claim that the above is just the localisation of
+Check that the above is just the localisation of
 \begin{equation*} 
-	h : M \to M_{\mathfrak{p}},
+	h_{M} : M \to M_{\mathfrak{p}},
 \end{equation*}
 under the identification mentioned earlier.
+
+\begin{prop}
+	Let $R$ be a ring, and $M$ an $R$-module. Then, $M^{\ast}$ is torsionless.
+\end{prop}
+\begin{proof} 
+	We have the natural map $M^{\ast} \xrightarrow{h_{M^{\ast}}} M^{\ast \ast \ast}$. Note that we also have the map $M \xrightarrow{h_{M}} M^{\ast \ast}$, dualising which gives a map $M^{\ast \ast \ast} \xrightarrow{h_{M}^{\ast}} M^{\ast}$. Check that the composition
+	\begin{equation*} 
+		M^{\ast} \xrightarrow{h_{M^{\ast}}} M^{\ast \ast \ast} \xrightarrow{h_{M}^{\ast}} M^{\ast}
+	\end{equation*}
+	is the identity, proving that $h_{M^{\ast}}$ is injective and hence, $M^{\ast}$ is torsionless.
+\end{proof}
 
 \begin{obs} \label{obs:depth-and-ass}
 	Let $(R, \mathfrak{m})$ be a local ring, $M$ a finite $R$-module. 
@@ -3412,7 +3444,7 @@ under the identification mentioned earlier.
 	(We have used that $\mathfrak{p} \in \Ass M \Leftrightarrow \mathfrak{p} R_{\mathfrak{p}} \in \Ass M_{\mathfrak{p}}$.)
 \end{obs}
 
-\begin{prop}
+\begin{prop} \label{prop:torsionless-reflexive-check-locally}
 	Let $R$ be a noetherian ring, and $M$ a finite $R$-module. Then:
 	\begin{enumerate}[label=(\alph*)]
 		\item $M$ is torsionless if and only if
@@ -3423,7 +3455,7 @@ under the identification mentioned earlier.
 		\item $M$ is reflexive if and only if
 		\begin{enumerate}[label=(\roman*)]
 			\item $M_{\mathfrak{p}}$ is reflexive for all $\mathfrak{p}$ with $\depth R_{\mathfrak{p}} \le 1$, and
-			\item $\depth M_{\mathfrak{p}} \ge 2$ for $\mathfrak{p} \in \Spec R$ with $\depth R_{\mathfrak{p}} \ge 2$.
+			\item $\depth M_{\mathfrak{p}} \ge 2$ for all $\mathfrak{p}$ with $\depth R_{\mathfrak{p}} \ge 2$.
 		\end{enumerate}
 	\end{enumerate}
 \end{prop}
@@ -3432,7 +3464,7 @@ In points (i) and (ii), $M_{\mathfrak{p}}$ and $R_{\mathfrak{p}}$ are being cons
 \begin{proof} 
 	Let $h : M \to M^{\ast \ast}$ be the evaluation map. Put $K \vcentcolon= \ker(h)$, and $C \vcentcolon= \coker(h)$. Note that $M$ ($M_{\mathfrak{p}}$) it torsionless iff $K$ ($K_{\mathfrak{p}}$) is zero; furthermore, reflexive iff $C$ ($C_{\mathfrak{p}}$) is zero. As noticed, $h$ behaves well with localisation. This proves that points (i) in (a) and (b) are necessary. 
 
-	By \Cref{exe:grade-Hom-min-2-grade}, we 
+	By \Cref{exe:grade-Hom-min-2-grade}, we have
 	\begin{equation} \label{eq:010}
 		\depth M_{\mathfrak{p}}^{\ast \ast} \ge \min(2, \depth R_{\mathfrak{p}}).
 	\end{equation}
@@ -3518,6 +3550,15 @@ Note that $M$ is assumed to be projective to begin with, so the localisations $M
 	If $M_{\mathfrak{p}}$ is free, then the sequence splits, showing that $(\im \varphi)_{\mathfrak{p}}$ is projective and hence, free. Since $\mathfrak{p} \in \Ass R$. Conversely, if $(\im \varphi)_{\mathfrak{p}}$ is free, then too the sequence splits since $\mathfrak{p} \in \Ass R$, by \Cref{lem:injective-associated-tensor}.
 \end{proof}
 
+\begin{cor} \label{cor:projective-rank-iff-locally}
+	Let $M$ be a finite module over a noetherian ring $R$. Then, $M$ is a projective module of rank $r$ iff $M_{\mathfrak{p}}$ is a free $R_{\mathfrak{p}}$-module of rank $r$ for all $\mathfrak{p} \in \Spec R$.
+\end{cor}
+\begin{proof} 
+	\forward This is clear because $M_{\mathfrak{p}}$ is then a free $R_{\mathfrak{p}}$-module.
+
+	\backward By \Cref{thm:projective-locally-free}, we first see that $M$ is projective. Now, (c) of \Cref{prop:rank-equivalences} tells us that $M$ has a rank and that this rank is $r$.
+\end{proof}
+
 \begin{prop} \label{prop:rank-two-out-of-three}
 	Let $R$ be a noetherian ring, and $0 \to U \to M \to N \to 0$ an exact sequence of finite $R$-modules. If two of $U$, $M$, $N$ have a rank, then so does the third, and $\rank M = \rank U + \rank N$.
 \end{prop}
@@ -3549,8 +3590,178 @@ Note that the hypothesis above assumes that $M$ has a finite length finite free 
 	We have a short exact sequence $0 \to I \to R \to R/I \to 0$. By the previous result, $I$ has a rank. By \Cref{prop:rank-two-out-of-three}, so does $R/I$ and $\rank I + \rank R/I = 1$. Note that $I$ is torsionfree and nonzero; thus, $\rank I = 1$ and $\rank R/I = 0$. Thus, $R/I$ is torsion, i.e., annihilated by an $R$-regular element. This element is necessarily in $I$.
 \end{proof}
 
+\subsubsection{Ideals of minors and Fitting invariants}
 
-\textbf{Exercises.}
+\begin{defn}
+	Let $R$ be a ring, and $U \in M_{m \times n}(R)$, where $m, n \ge 0$. For $t = 1, \ldots, \min(m, n)$ we then denote by $I_{t}(U)$ the ideal generated by the $t \times t$ minors of $U$. Furthermore, we set 
+	\begin{equation*} 
+		I_{t}(U) \vcentcolon= 
+		\begin{cases}
+			R & t \le 0, \\
+			0 & t > \min(m, n).
+		\end{cases}
+	\end{equation*}
+\end{defn}
+
+\begin{prop}
+	Let $R$ be a ring, $A \in M_{n \times m}(R)$ with coefficients in $R$. Then,
+	\begin{enumerate}[label=(\alph*)]
+		\item $I_{0}(A) \supset I_{1}(A) \supset I_{2}(A) \supset \cdots$,
+		\item if $B$ is an $(n + n') \times m$ matrix, and $A$ is the first $n$ rows of $B$, then $I_{t + n'}(B) \subset I_{t}(A)$,
+		\item if $C \in M_{n}(R)$, then $I_{t}(C A) \subset I_{t}(A)$,
+		\item if $A = \two{A_{1}}{}{}{A_{2}}$ is a block matrix, then $I_{t}(A) = \sum_{t_{1} + t_{2} = t} I_{t_{1}}(A_{1}) I_{t_{2}}(A_{2})$.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	Exercise.
+\end{proof}
+\begin{cor}
+	If $A = P B Q$, where $P$ and $Q$ are invertible, $A$ and $B$ of same size, then $I_{t}(A) = I_{t}(B)$ for all $t$.
+\end{cor}
+
+Let $\varphi : F \to G$ be a homomorphism of finite free $R$-modules. After fixing bases for $F$ and $G$, we can represent $\varphi$ by a matrix $U$. The above result shows that $I_{t}(U)$ does not depend on the choice of bases, and we may hence define $I_{t}(\varphi) \vcentcolon= I_{t}(U)$. We will show below that $I_{t}(\varphi)$ only depends on $\coker \varphi$ (when counted ``correctly'').
+
+\begin{prop}
+	Let $R$ be a ring, $M$ a finite $R$-module. Suppose, we have a presentation
+	\begin{equation*} 
+		R^{\oplus J} \xrightarrow{\varphi} R^{\oplus n} \to M \to 0,
+	\end{equation*}
+	where $n \in \mathbb{N}_{0}$, and $J$ is an arbitrary set. \newline
+	Let $A = (a_{i, j})_{1 \le i \le n,\, j \in J}$ be the matrix of $\varphi$. The ideal $\Fit_{k}(M) \vcentcolon= I_{n - k}(A)$ generated by the $(n - k) \times (n - k)$ minors of $A$ is independent of the choice of presentation. 
+\end{prop}
+\begin{proof} 
+	\url{https://stacks.math.columbia.edu/tag/07Z8}.
+\end{proof}
+
+In view of the above proposition, the following definition makes sense.
+\begin{defn}
+	Given an $R$-module $M$ with a finite free presentation
+	\begin{equation*} 
+		R^{\oplus m} \xrightarrow{\varphi} R^{\oplus n} \to M \to 0,
+	\end{equation*}
+	the \deff{$k$-th Fitting invariant of $M$} is defined to be $I_{n - k}(\varphi)$, and is denoted by $\Fit_{k}(M)$.
+\end{defn}
+
+\begin{rem}
+	Let $x_{1}, \ldots, x_{n} \in M$ be a generating set for $M$, leading to a natural surjection $R^{\oplus n} \xrightarrow{\varphi} M$. An element $\mathbf{a} \in \ker \varphi$ is precisely an $n$-tuple $(a_{1}, \ldots, a_{n})$ such that $\sum a_{i} x_{i} = 0$. 
+
+	Given $n - k$ elements $\mathbf{a}_{1}, \ldots, \mathbf{a}_{n - k} \in \ker \varphi$, we can form an $(n - k) \times n$ matrix $A$, having the $\mathbf{a}_{i}$ as rows. Then, $\Fit_{k}(M)$ is the ideal generated by all the $(n - k) \times (n - k)$ minors of all the matrices $A$ obtained in this way.
+\end{rem}
+
+\begin{rem}
+	Note that the formation of $I_{t}(\varphi)$ commutes with ring extensions: If $S$ is an $R$-algebra, then $I_{t}(\varphi \otimes_{R} S) = I_{t}(\varphi) S$. This follows at once using the matrix description.
+\end{rem}
+
+\begin{lem} 
+	Let $R$ be a ring, $M$ an $R$-module with a finite free presentation $F_{1} \xrightarrow{\varphi} F_{0} \to M \to 0$, and $\mathfrak{p}$ a prime ideal. Then the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $I_{t}(\varphi) \not\subset \mathfrak{p}$,
+		\item $(\im \varphi)_{\mathfrak{p}}$ contains a (necessarily free) direct summand of $(F_{0})_{\mathfrak{p}}$ of rank $t$,
+		\item $\mu(M_{\mathfrak{p}}) \le \rank F_{0} - t$.
+	\end{enumerate}
+\end{lem}
+Recall that given a finite module $M$ over a local ring $(R, \mathfrak{m}, k)$, $\mu(M) = \dim_{k}(M/\mathfrak{m} M)$.
+
+\begin{proof} 
+	Note that statements (b) and (c) are working over $R_{\mathfrak{p}}$. As for (a), we have $I_{t}(\varphi) \not\subset \mathfrak{p}$ iff $I_{t}(\varphi_{\mathfrak{p}}) \not\subset \mathfrak{p} R_{\mathfrak{p}}$. Thus, we may assume that $R$ is a local ring with maximal ideal $\mathfrak{m} = \mathfrak{p}$.
+
+	Let $\overline{\varphi}$ denote the induced map after going modulo $\mathfrak{m}$. Then, $\mu(M) = \dim_{k}(M/\mu M) = \rank_{R} F_{0} - \rank_{k} \overline{\varphi}$. Thus, (c) is equivalent to $\rank \overline{\varphi} \ge t$. Since ranks (over fields) can be detected by appropriate vanishing of minors, we see that (a) and (c) are equivalent.
+
+	The equivalence with (b) is also checked similarly by going modulo $\mathfrak{m}$ and lifting back using usual properties of local rings.
+\end{proof}
+
+\begin{lem} 
+	With the same notations as above, the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $I_{t}(\varphi) \not\subset \mathfrak{p}$ and $I_{t + 1}(\varphi)_{\mathfrak{p}} = 0$;
+		\item $(\im \varphi)_{\mathfrak{p}}$ is a free direct summand of $(F_{0})_{\mathfrak{p}}$ of rank $t$;
+		\item $M_{\mathfrak{p}}$ is free and $\rank M_{\mathfrak{p}} = \rank F_{0} - t$.
+	\end{enumerate}
+\end{lem}
+\begin{proof} 
+	We may again assume $(R, \mathfrak{m}, k)$ is local with $\mathfrak{m} = \mathfrak{p}$. We have the exact sequence
+	\begin{equation*} 
+		0 \to \im \varphi \to F_{0} \to M \to 0.
+	\end{equation*}
+	Both (b) and (c) are equivalent to the above sequence splitting.
+
+	Suppose (a) holds. Then, going modulo $\mathfrak{m}$, we see that $k^{m} \xrightarrow{\overline{\varphi}} k^{n}$ has rank exactly $t$. \newline
+	Let $x_{1}, \ldots, x_{t} \in F_{1}$ be such that $\overline{\varphi}(\overline{\mathbf{x}})$ is a basis for $\im \overline{\varphi}$. Set $y_{i} \vcentcolon= \varphi(x_{i}) \in F_{0}$ for $1 \le i \le t$. \newline
+	Note that $\overline{\mathbf{x}} \subset k^{m}$ is linearly independent and thus, we may extend $\mathbf{x}$ to a basis of $F_{1}$. Similarly, we may extend $\mathbf{y}$ to a basis of $F_{0}$. Expressing $\varphi$ with respect to this basis, we see that the matrix takes the form
+	\begin{equation*} 
+		\two{I_{t}}{A}{O}{B},
+	\end{equation*}
+	where $I_{t}$ is the $t \times t$ identity matrix. Now, since every $(t + 1) \times (t + 1)$ minor is zero, we see that $B = O$. By doing column operations now, we may also assume $A = O$. This gives us (b).
+
+	Suppose (b) holds. Then, $F_{0} = \im \varphi \oplus K$, where both the summands are free. Thus, there is a basis $y_{1}, \ldots, y_{t}, \ldots, y_{n}$ of $F_{0}$ such that $\mathbf{y}_{\le t}$ is a basis of $\im \varphi$ and $\mathbf{y}_{>t}$ of $K$. \newline
+	Pick $x_{1}, \ldots, x_{t} \in F_{1}$ such that $\varphi(x_{i}) = y_{i}$. As before, $\mathbf{x}$ can be extended to a basis of $F_{0}$. With respect to these bases, the matrix of $\varphi$ looks like
+	\begin{equation*} 
+		\two{I_{t}}{A}{O}{B}.
+	\end{equation*}
+	Note that we must have $B = O$ since $\im \varphi \cap K = 0$. Now, it is clear that (a) holds, since any $(t + 1) \times (t + 1)$ submatrix must have one row zero. Moreover, the top left $t \times t$ minor is $1$.
+\end{proof}
+
+Combining the above with \Cref{cor:projective-rank-iff-locally}, we get the following global version.
+\begin{prop} \label{prop:projective-rank-using-presentation}
+	Let $R$ be a noetherian ring, and $M$ a finite $R$-module with a finite free presentation $F_{1} \xrightarrow{\varphi} F_{0} \to M \to 0$. The following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $I_{r}(\varphi) = R$ and $I_{r + 1}(\varphi) = 0$;
+		\item $M$ is projective and $\rank M = \rank F_{0} - r$.
+	\end{enumerate}
+\end{prop}
+
+\begin{prop}
+	Let $R$ be a noetherian ring, and let $\varphi : F \to G$ be a homomorphism of finite free $R$-modules. Then $\rank \varphi = r$ if and only if $\grade I_{r}(\varphi) \ge 1$ and $I_{r + 1}(\varphi) = 0$.
+\end{prop}
+\begin{proof} 
+	Let $Q$ be the total ring of fractions of $R$. Note that $\grade I \ge 1$ iff $I$ contains a nonzerodivisor iff $IQ = Q$. Moreover, since $R \to Q$ is injective, we have also have $I = 0$ iff $IQ = 0$. \newline
+	Since the rank of a module is unchanged after passing to $Q$, we may assume $R = Q$ and prove that the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\rank \varphi = r$;
+		\item $I_{r}(\varphi) = R$ and $I_{r + 1}(\varphi) = 0$.
+	\end{enumerate}
+	But this now follows from \Cref{prop:projective-rank-using-presentation}.
+\end{proof}
+
+\subsubsection{The Buchsbaum-Eisenbud acyclicity criterion}
+
+\begin{defn}
+	Let $R$ be a ring. A complex
+	\begin{equation*} 
+		G_{\bullet}: \quad \cdots \to G_{m} \xrightarrow{\psi_{m}} G_{m - 1} \to \cdots \to G_{1} \xrightarrow{\psi_{1}} G_{0} \to 0
+	\end{equation*}
+	of $R$-modules is called \deff{acyclic} if $H_{i}(G_{\bullet}) = 0$ for all $i > 0$, and \deff{split acyclic} if it is acyclic and $\psi_{i + 1}(G_{i + 1})$ is a direct summand of $G_{i}$ for $i \ge 0$.
+\end{defn}
+
+Note that given a complex $(G_{\bullet}, \psi_{\bullet})$, we have a sequence of maps
+\begin{equation*} 
+	0 \to \im(\psi_{m + 1}) \to G_{m} \to \im(\psi_{m}) \to 0.
+\end{equation*}
+The above is a complex by definition. $G_{\bullet}$ is acyclic iff the above is exact for all $m \ge 1$. Moreover, $G_{\bullet}$ is split acyclic iff furthermore the above sequence is split exact for all $m \ge 1$ and $0 \to \im(\psi_{1}) \to G_{0} \to \coker(\psi_{1}) \to 0$ is split exact. 
+
+\begin{prop}
+	Let $R$ be a ring, 
+	\begin{equation*} 
+		F_{\bullet}: \quad 0 \to F_{s} \xrightarrow{\varphi_{s}} F_{s - 1} \to \cdots \to F_{1} \xrightarrow{\varphi_{1}} F_{0} \to 0
+	\end{equation*}
+	be a complex of finite free $R$-modules, and $\mathfrak{p} \subset R$ a prime ideal. Set $r_{i} \vcentcolon= \sum_{j = i}^{s} (-1)^{j - i} \rank F_{j}$ for $i = 1, \ldots, s$. Then, the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $F_{\bullet} \otimes_{R} R_{\mathfrak{p}}$ is split acyclic;
+		\item $I_{r_{i}}(\varphi_{i}) \not\subset \mathfrak{p}$ for $i = 1, \ldots, s$.
+	\end{enumerate}
+	If these conditions hold, then we have $I_{t}(\varphi_{i})_{\mathfrak{p}} = 0$ for all $t > r_{i}$ and $i = 1, \ldots, s$. 
+
+	If $M$ is an $R$-module and $\mathfrak{p} \in \Ass M$, then (a) and (b) are equivalent to
+	\begin{enumerate}[label=(\alph*)]
+		\setcounter{enumi}{2}
+		\item $F_{\bullet} \otimes_{R} M_{\mathfrak{p}}$ is acyclic.
+	\end{enumerate}
+\end{prop}
+\begin{proof} 
+	
+\end{proof}
+
+\subsubsection{Exercises}
 
 \begin{exe}
 	Let $R$ be a ring, and $M$ a finite torsionfree module. Prove that if $M$ has a rank, then $M$ is isomorphic to a submodule of a finite free $R$-module of the same rank.
@@ -3582,14 +3793,15 @@ Note that the hypothesis above assumes that $M$ has a finite length finite free 
 	Put $L \vcentcolon= \Hom_{R}(M, N)$. This is a finite $R$-module.
 
 	Edge cases: 
-	\begin{enumerate}[label=(\alph*)]
+	\begin{itemize}
 		\item If $IL = L$, then there is nothing to prove.
 		\item $IN = N$. In this case, there exists $i \in I$ such that $in = n$ for all $n \in N$. \newline
-		Consequently, $i \varphi = \varphi$ for all $\varphi \in L$. We are back in case (a).
-		\item If $\grade(I, N) = 0$, then there is nothing to prove.
-	\end{enumerate}
+		Consequently, $i \varphi = \varphi$ for all $\varphi \in L$. We are back in the previous case.
+	\end{itemize}
 
 	Thus, we may now assume $IN \neq N$ and $IL \neq L$. Thus, both the relevant grades are given in terms of lengths of regular sequences.
+
+	\textbf{Case 0.} If $\grade(I, N) = 0$, then there is nothing to prove.
 
 	\textbf{Case 1.} $\grade(I, N) = 1$. We wish to prove $\grade(I, L) \ge 1$. \newline
 	By hypothesis, there exists $x \in I$ which is regular on $N$. Consequently, $x$ is regular on $L$. Thus, $\grade(I, L) \ge 1$.
@@ -3620,7 +3832,13 @@ Note that the hypothesis above assumes that $M$ has a finite length finite free 
 		\item Suppose $M \into M^{\ast \ast}$. It suffices to show that $M^{\ast}$ is torsionfree for any $M$. \newline
 		To this end, let $r \in R \setminus \mathcal{Z}(R)$ and $\varphi \in M^{\ast}$ be such that $r \varphi = 0$. Then, $r \varphi(m) = 0$ for all $m \in M$. Since $r$ is regular on $R$, it follows that $\varphi(m) = 0$ for all $m \in M$, as desired.
 		%
-		\item \forward Suppose that $M$ is torsionless
+		\item \forward Suppose that $M$ is torsionless. Note that $M^{\ast}$ is finitely generated. Let $\varphi_{1}, \ldots, \varphi_{n}$ be a generating set for $M^{\ast}$. Define $\iota : M \to R^{\oplus n}$ by
+		\begin{equation*} 
+			x \mapsto (\varphi_{1}(x), \ldots, \varphi_{n}(x)).
+		\end{equation*}
+		We show $\iota$ is injective, proving the result. 
+
+		To this end, suppose $x \in \ker \iota$. Then, $\varphi_{i}(x) = 0$ for all $i$. Since $\{\varphi_{i}\}_{i}$ is a generating set for $M^{\ast}$, we get that $\varphi(x) = 0$ for all $x \in M^{\ast}$. Since $M$ is torsionless, this implies $x = 0$, as desired.
 
 		\backward \claim{1} A submodule of a torsionless module is torsionless.
 		\begin{proof} 
@@ -3634,8 +3852,35 @@ Note that the hypothesis above assumes that $M$ has a finite length finite free 
 				e_{i}^{\ast}(x) = a_{i} \neq 0. \qedhere
 			\end{equation*}
 		\end{proof}
+		These two claims give the result.
+		%
+		\item We have short exact sequences 
+		\begin{equation*} 
+			0 \to K \to F \xrightarrow{\pi} M^{\ast} \to 0
+		\end{equation*}
+		and
+		\begin{equation*} 
+			0 \to M^{\ast \ast} \xrightarrow{\pi^{\ast}} F^{\ast} \to C \to 0,
+		\end{equation*}
+		where $F$ is finite free, $K = \ker(\pi)$, $C = \coker(\pi^{\ast})$. Note that $C \into K^{\ast}$. Since $F \cong F^{\ast}$, it suffices to show that $C$ above is torsionless, then part (b) gives the result.
+
+		Taking dual gives:
+		\begin{equation*} 
+			0 \to C^{\ast} \to F^{\ast \ast} \xrightarrow{\pi^{\ast \ast}} M^{\ast \ast \ast}.
+		\end{equation*}
+
+		Note that the diagram
+		\begin{equation*} 
+			\begin{tikzcd}
+				F \arrow[r, "\pi"] \arrow[d, "\cong"'] & M^{\ast} \arrow[d, "\cong"] \\
+				F^{\ast \ast} \arrow[r, "\pi^{\ast \ast}"'] & M^{\ast \ast \ast}
+			\end{tikzcd}
+		\end{equation*}
+		commutes. The vertical maps are isomorphisms since $F$ is finite free, and $M$ is reflexive. Thus, $C^{\ast} \cong K$, showing $K$ is torsionless. Since $C \into K^{\ast}$, we get the desired result.
 	\end{enumerate}
 \end{proof}
+
+
 
 \newpage
 \input{appendix}
