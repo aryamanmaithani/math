@@ -1,0 +1,240 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+\setcounter{tocdepth}{2}
+
+\title{The Rank Conjectures}
+\author{Aryaman Maithani}
+\date{December 8, 2023}
+
+\usepackage[
+	hyperref = true,      	% Link to online documents
+  	backend  = bibtex,      % Use bibtex instead of biber
+  	sorting  = nyt,       	% Sorts by (name, year, title)
+  	style  = alphabetic, 	% Citations look like [Har77]
+  	doi = false,
+  	isbn = false,
+  	url = false
+]{biblatex}
+\addbibresource{blurbs.bib}
+
+\DeclareMathOperator{\rk}{rk}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section{Introduction}
+
+Let $G$ be a group acting on a topological space $X$. For $x \in X$, we define the subgroup $G_{x} \vcentcolon= \{g \in G : g(x) = x\}$, called the \deff{isotropy subgroup} at the point $x$. We say the action of $G$ is \deff{free} if $G_{x} = \{e\}$ for all $x \in X$, and \deff{almost free} if $G_{x}$ is finite group for all $x \in X$.
+
+The theme of the rank conjectures will be as follows: Given a group $G$ acting (almost) freely on $X$, what can we say about the ``ranks'' of $X$ and $G$. 
+
+Given a space $X$, and a field $k$, we define
+\begin{equation*} 
+	\rank_{k} H_{\ast}(X; k) \vcentcolon= \sum_{i = 0}^{\infty} \dim_{k} H_{i}(X; k).
+\end{equation*}
+In our examples, $X$ will either be a manifold or a finite-dimensional CW complex, so the sum above will be finite. As a beginning example, we note
+\begin{equation*} 
+	\rank H_{\ast}((S^{n})^{k}; \mathbb{Z}/p) = 2^{k}.
+\end{equation*}
+
+\section{Carlsson's rank conjecture}
+
+We first look at the action of elementary abelian $p$-groups on product of spheres. Recall that for $p$ a positive prime, an \deff{elementary abelian $p$-group} is a group of the form $(\mathbb{Z}/p)^{r}$ for some $r \ge 0$. This $r$ is uniquely determined, and is called the \deff{rank} of the group.
+
+Note that if $G$ acts on a space $X$, then functoriality of homology gives an action of $G$ on $H_{k}(X)$. More generally, an action on homology (and cohomology) with coefficients.
+
+The following is from \cite{CarlssonAbelianGroupsFreely}.
+\begin{thm}
+	Suppose $(\mathbb{Z}/p)^{r}$ acts freely on $(S^{n})^{k}$, with trivial action on integral homology. Then, $k \ge r$.
+\end{thm}
+
+A similar theorem on these lines is the following, see \cite[Theorem I.1]{CarlssonProblemInCommutativeAlgebra}.
+\begin{thm}
+	Suppose $G = (\mathbb{Z}/p)^{r}$ acts freely on a finite complex $X$ which is homotopy equivalent to $(S^{n})^{k}$, and suppose that the action of $G$ on $H_{n}(X; \mathbb{Z}/p)$ is trivial. Then, $k \ge r$.
+\end{thm}
+
+The above theorems have certain restrictions on the action: Not only must it be free, it must also be trivial on certain homologies. Moreover, the space to which it applies is not a general product of spheres, that would be a space of the form $S^{n_{1}} \times \cdots \times S^{n_{k}}$. A conjecture to this end would be the following, appearing in \cite{CarlssonFreeModTwoToThreeActions}.
+
+\begin{conj}[Carlsson]
+	If $(\mathbb{Z}/p)^{r}$ acts freely on a CW-complex $X$, then
+	\begin{equation*} 
+		\rank H_{\ast}(X; \mathbb{Z}/p) \ge 2^{r}.
+	\end{equation*}
+\end{conj}
+
+A purely algebraic generalisation to the above would be the following. 
+
+\begin{conj}
+	Let $k$ be a field of positive characteristic $p$, $G = (\mathbb{Z}/p)^{r}$, and $kG$ be the corresponding group algebra. If $F$ is a bounded complex of free $kG$-modules of finite rank and $H_{\ast}(F) \neq 0$, then $\rank_{k} H_{\ast}(F) \ge 2^{r}$.
+\end{conj}
+Carlsson proved this conjecture for $p = 2$ and $r \le 3$ \cite[Theorem 2]{CarlssonFreeModTwoToThreeActions}.  \newline
+The above conjecture would imply Carlsson's conjecture: In the case that $G$ acts freely (and cellularly?) on $X$, the chain complex that computes the cellular homology has the additional structure of being a complex of free $kG$-modules. \Big(Roughly: the $i$-th module in the complex is a free $k$-module, being indexed by the $i$-cells: $\bigoplus_{e^{i}_{\alpha}} k$. By the $G$-action, we can further refine this as
+\begin{equation*} 
+	\bigoplus_{\mathcal{O}^{i}_{\beta}} \bigoplus_{e^{i}_{\alpha} \in \mathcal{O}_{\beta}} k,
+\end{equation*}
+where $\mathcal{O}^{i}_{\beta}$ ranges over the $G$-orbits of the $i$-cells. Since the action is free, each orbit has size $\md{G}$. So, the inner term is isomorphic (at least as a $k$-vector space) to $kG$.\Big)
+
+However, the algebraic version is false for all $p$ odd and $r \ge 8$. Iyengar and Walker \cite{IyengarWalkerFiniteFreeComplexesSmallRankHomology} gave a counterexample. However, they remark that they do not know whether their complex comes from a space with a free $G$-action.
+
+\section{Toral rank conjecture}
+
+This section is taken from \cite{FelixOpreaTanreAlgebraicModels}.
+
+Now, we will consider the actions of Lie groups on manifolds. Specifically, the action of the $r$-torus $\mathbb{T}^{r} \vcentcolon= (S^{1})^{r}$. The \deff{rank} of a Lie group will be its dimension as a manifold.
+
+\begin{defn}
+	The \deff{toral rank} of a space $X$, denoted $\rk(X)$, is the largest integer $r$ such that a torus $\mathbb{T}^{r}$ acts almost freely on $X$.
+\end{defn}
+
+\begin{ex}
+	Let $X$ be the wedge of more than one sphere (of possibly different dimensions). We claim that $\rk(X) = 0$. 
+
+	Indeed, consider the ``wedge point'' $p \in X$. $p$ is the only point such that $X \setminus \{p\}$ is disconnected. Consequently, every homeomorphism of $X$ must fix $p$. Thus, if $G$ is an infinite group acting on $X$, then $G_{p}$ will be infinite.
+\end{ex}
+
+\begin{ex}
+	Recall the (free) Hopf action of $S^{1}$ on $S^{3} \subset \mathbb{C}^{2}$:
+	\begin{equation*} 
+		e^{\iota \theta} : (z, w) \mapsto (e^{\iota \theta} z, e^{\iota \theta} w).	
+	\end{equation*}
+	Similarly, $S^{1}$ also acts freely on $S^{1} \times S^{2}$ by
+	\begin{equation*} 
+		e^{\iota \theta} : (z, p) \mapsto (e^{\iota \theta} z, p).	
+	\end{equation*}
+	In each space, we can select an $S^{1}$-orbit, and glue $S^{3}$ and $S^{1} \times S^{2}$ along these orbits. Call this space $Y$. Evidently, $\rk(Y) \ge 1$.
+
+	However, one can check that $Y$ and $S^{2} \vee S^{3} \vee S^{3}$ are homotopy equivalent. Thus, the toral rank is \emph{not} a homotopy invariant.
+\end{ex}
+
+\begin{defn}
+	The \deff{rational toral rank} of a space $X$, $\rk_{0}(X)$, is the maximum of $\rk(Y)$ for all finite CW complexes $Y$ in the rational homotopy type of $X$.
+\end{defn}
+Tautologically, the rational toral rank is a homotopy invariant.
+
+Recall that $X$ and $Y$ are said to have the same \deff{rational homotopy type} if there is a finite sequence of maps
+\begin{equation*} 
+	X \to X_{1} \leftarrow \cdots \leftarrow X_{n} \to Y
+\end{equation*}
+such that each map is an isomorphism on rational homology. 
+
+\begin{defn}
+	A space $X$ is said to be \deff{nilpotent} if $\pi_{1}(X)$ is a nilpotent group and acts nilpotently on $\pi_{n}(X)$ for $n \ge 2$.
+
+	If $X$ is a nilpotent space with finite-dimensional rational cohomology, then $X$ is said to be \deff{rationally elliptic} if $\sum_{n \ge 2} \rank(\pi_{n}(X) \otimes \mathbb{Q}) < \infty$.
+
+	For a rationally elliptic space, the \deff{homotopy Euler characteristic} is defined by
+	\begin{equation*} 
+		\chi_{\pi}(X) \vcentcolon= \rank \pi_{\text{even}}(X) - \rank \pi_{\text{odd}}(X).
+	\end{equation*}
+\end{defn}
+
+\begin{ex}
+	Spheres are rationally elliptic spaces. Indeed, it is clear that they are nilpotent spaces. For $S^{1}$, this follows since the higher homotopy groups are zero. For the higher spheres, this follows since $\pi_{1}$ is trivial.
+
+	Serre computed the rational homotopy groups of spheres as:
+
+	\begin{align*} 
+		\pi_{i}(S^{2a - 1}) \otimes \mathbb{Q} &\cong 
+		\begin{cases}
+			\mathbb{Q} & i = 2a - 1, \\
+			0 & \text{otherwise}.
+		\end{cases}
+		\\
+		\pi_{i}(S^{2a}) \otimes \mathbb{Q} &\cong 
+		\begin{cases}
+			\mathbb{Q} & i \in \{2a, 4a - 1\}, \\
+			0 & \text{otherwise}.
+		\end{cases}
+	\end{align*}
+
+	In particular, $\chi_{\pi}(\text{odd sphere}) = -1$.
+\end{ex}
+
+For some of these spaces, we have some idea of the rational toral rank.
+
+\begin{thm}
+	If $M$ is a nilpotent rationally elliptic space, then $\rk_{0}(M) \le -\chi_{\pi}(M)$.
+
+	If $G$ is a compact connected Lie group, then $\rk_{0}(G) = \rank(G)$. More generally, if $K$ is a compact connected subgroup, then $\rk_{0}(G/K) = \rank(G) - \rank(K)$.
+\end{thm}
+The above calculations involve using minimal models and existence of maximal torus for one end of the bound.
+
+\begin{ex}
+	Let $X$ be an odd sphere. Then, the above theorem tells us $\rk_{0}(X) \le 1$. Since $X$ does admit a free $S^{1}$ action, we get $\rk_{0}(\text{odd sphere}) = 1$.
+\end{ex}
+
+\begin{ex}
+	Since $\mathbb{T}^{r}$ is a Lie group of rank $r$, we have $\rk_{0}(\mathbb{T}^{r}) = r$. As noted before, $\rank H^{\ast}(\mathbb{T}^{r}; \mathbb{Q}) = 2^{r} = 2^{\rk_{0}(\mathbb{T}^{r})}$.
+\end{ex}
+
+\begin{rem}
+	More generally, if $G$ is a compact Lie group, then $2^{\rank G} = \rank H^{\ast}(G; \mathbb{Q})$.
+\end{rem}
+% https://www.cambridge.org/core/services/aop-cambridge-core/content/view/0C4037B8995B2DDDB775672C7BFB32E2/S0008414X00045405a.pdf/the-betti-numbers-of-the-simple-lie-groups.pdf poincare polynomial of a rank n compact lie group is of the form \prod_{i = 1}^{n} (1 + t^{p_{i}})
+
+\begin{conj}[Toral Rank Conjecture (TRC)]
+	Let $X$ be a nilpotent finite CW complex. Then,
+	\begin{equation*} 
+		\rank H^{\ast}(X; \mathbb{Q}) \ge 2^{\rk_{0}(X)}.
+	\end{equation*}
+\end{conj}
+The above is open in general; we look at some cases for which it is proven.
+
+\begin{thm}
+	The TRC is true for a product of odd-dimensional spheres.
+\end{thm}
+\begin{proof} 
+	Suppose $\mathbb{T}^{r}$ acts almost freely on $X = S^{n_{1}} \times \cdots \times S^{n_{p}}$. Then, $r \le -\chi_{\pi}(X) = p$. Moreover, $2^{p} = \rank H^{\ast}(X; \mathbb{Q})$. So, $2^{r} \le \rank H^{\ast}(X; \mathbb{Q})$.
+\end{proof}
+
+\begin{thm}
+	If $G$ is a compact connected Lie group, and $K \subset G$ a compact connected subgroup, then the TRC is true for $G/K$.
+\end{thm}
+\begin{proof}[Sketch]
+	Putting together the previous results, it suffices to show that
+	\begin{equation*} 
+		\rank H^{\ast}(G) \le (\rank H^{\ast}(G/K)) \cdot (\rank H^{\ast}(K)).
+	\end{equation*}
+	This follows from the Serre spectral sequence $H^{\ast}(G/K) \otimes H^{\ast}(K) \Rightarrow H^{\ast}(G)$.
+\end{proof}
+
+A weaker form has been proved by Allday and Puppe \cite{AlldayPuppeMinimalHirschBrown}.
+\begin{thm}
+	If a torus $\mathbb{T}^{r}$ acts almost freely on a compact nilpotent manifold $M$, then
+	\begin{equation*} 
+		\dim H^{\ast}(M; \mathbb{Q}) \ge 2r.
+	\end{equation*}
+\end{thm}
+
+\section{Total Rank Conjecture}
+
+For simplicity, we state the local versions.
+\begin{conj}[Buchsbaum-Eisenbud-Horrocks (BEH)]
+	If $R$ is a noetherian local ring, and $M$ a nonzero $R$-module of finite length having a finite free resolution
+	\begin{equation*} 
+		0 \to F_{d} \to \cdots \to F_{0} \to M \to 0,
+	\end{equation*}
+	then
+	\begin{equation*} 
+		\rank F_{i} \ge \binom{\dim(R)}{i}.
+	\end{equation*}
+\end{conj}
+
+A slight weakening of the above gives the total rank conjecture.
+
+\begin{conj}[Total Rank Conjecture (TRC)]
+	With $R$, $M$, $F_{\ast}$ as above, we have
+	\begin{equation*} 
+		\rank F_{\ast} \ge 2^{\dim(R)},
+	\end{equation*}
+	where $\rank F_{\ast} = \sum_{i} \rank(F_{i})$.
+\end{conj}
+
+BEH remains open. However, the TRC has been proven (\cite{VandebogertTotalRankConjecture}) for all noetherian rings that contain a field! This had been proven earlier when the characteristic of $R$ was an odd prime (or if $R$ satisfied some other technical condition).  
+
+\printbibliography
+\end{document}
