@@ -168,6 +168,7 @@
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\MaxSpec}{MaxSpec}
 \DeclareMathOperator{\trace}{trace}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\diag}{diag}
@@ -201,14 +202,22 @@
 \DeclareMathOperator{\Frac}{Frac}
 \DeclareMathOperator{\gr}{gr}
 \DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\soc}{soc}
+\DeclareMathOperator{\depth}{depth}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Sing}{Sing}
+\DeclareMathOperator{\ara}{ara}
+\let\div\relax
+\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\Der}{Der}
 % \newcommand*{\sHom}{\mathscr{H}\text{\kern -5pt {\calligra\large om}}\,}
 
 % Categories
 \newcommand{\C}[1]{\mathbf{#1}}
 \newcommand{\Ab}{\C{Ab}}
 \newcommand{\F}[1]{\mathcal{#1}}
-\newcommand{\rmod}[1]{\C{mod}\text{-}#1}
-\newcommand{\lmod}[1]{#1\text{-}\C{mod}}
+\newcommand{\rMod}[1]{\C{Mod}\text{-}#1}
+\newcommand{\lMod}[1]{#1\text{-}\C{Mod}}
 \newcommand{\Ch}[1]{\C{Ch}(#1)}
 % \newcommand{\Set}{\mathbf{Set}}
 % \newcommand{\Mod}{\mathbf{Mod}}
@@ -292,6 +301,7 @@
 \newtheorem{fakeex}[fakethm]{Example}
 \newtheorem{fakeexe}[fakethm]{Exercise}
 \newtheorem{fakeobs}[fakethm]{Observation}
+\newtheorem{fakeconj}[fakethm]{Conjecture}
 % \newtheorem*{conject}{Conjecture}
 
 % -------------------
@@ -338,6 +348,10 @@
 {\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeobs}}
 {\end{fakeobs}\end{shaded}}
 
+\newenvironment{conj}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeconj}}
+{\end{fakeconj}\end{shaded}}
+
 \newenvironment{blockquote}
 {\begin{mdframed}[skipbelow=0pt, innertopmargin=4pt, innerbottommargin=4pt, bottomline=false,topline=false,rightline=false, linewidth=2pt]}
 {\end{mdframed}}
@@ -367,6 +381,7 @@
 \crefname{fakecor}{corollary}{corollaries}
 \crefname{fakeexe}{exercise}{exercises}
 \crefname{fakeobs}{observation}{observations}
+\crefname{fakeconj}{conjecture}{conjectures}
 \crefname{fakeex}{example}{examples}
 \crefname{fakerem}{remark}{remarks}
 \crefname{equation}{}{}
