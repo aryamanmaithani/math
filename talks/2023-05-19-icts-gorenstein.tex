@@ -1,0 +1,322 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+\setcounter{tocdepth}{2}
+
+\DeclareMathOperator{\ty}{type}
+\DeclareMathOperator{\soc}{soc}
+\DeclareMathOperator{\Perf}{Perf}
+\DeclareMathOperator{\Ferp}{InjPerf}
+\DeclareMathOperator{\Hilb}{Hilb}
+
+\title{Gorenstein Rings}
+\author{Aryaman Maithani}
+\date{May 19, 2023}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section{Dualising complexes}
+
+Let $R$ be a commutative noetherian ring. A complex $\omega_{R}$ is a \deff{dualising complex} if
+\begin{enumerate}[label=(\arabic*)]
+	\item $\omega_{R} \in D^{b}(\rmod{R})$,
+	\item $\injdim(\omega_{R}) < \infty$, i.e., $\omega_{R}$ is quasi-isomorphic to a bounded complex of injectives,
+	\item $R \xrightarrow{\simeq} \RHom_{R}(\omega_{R}, \omega_{R})$.
+\end{enumerate}
+
+$\omega_{R}$ is called \deff{semi-dualising} if (1) and (3) hold.
+
+\begin{rem}
+	$R$ is always semi-dualising. Thus, $R$ is dualising iff $\injdim R < \infty$. \newline
+	Recall that $R$ is said to be \deff{regular} if $\operatorname{gldim}(R_{\mathfrak{p}}) < \infty$ for all $\mathfrak{p} \in \Spec R$. \newline
+	In particular, if $R$ is regular local, then the global dimension of $R$ is finite and thus, $\injdim(R) < \infty$. Thus, $R$ is even a dualising complex.
+\end{rem}
+
+\begin{rem}[Existence]
+	Dualising complexes need not exist. Indeed, if $\omega_{R} \simeq I^{\bullet}$ is a minimal injective resolution, then up to shifts, one has that
+	\begin{equation*} 
+		I^{-n} \cong \bigoplus_{\substack{\mathfrak{p} \in \Spec(R) \\ \dim(R/\mathfrak{p}) = n}} E_{R}(R/\mathfrak{p}),
+	\end{equation*}
+	where $E_{R}(-)$ denotes the injective hull. 
+
+	The key point here is that every prime shows up exactly once, at location prescribed by its ``co-height''. In particular, if $\mathfrak{p} \subset \mathfrak{q}$ are primes, then any two saturated chains of prime ideals joining $\mathfrak{p}$ and $\mathfrak{q}$ must have the same length. That is, $R$ must be \deff{catenary}. \newline
+	However, as Nagata showed, there exists a noetherian local domain $(R, \mathfrak{m})$ of dimension three that is not catenary. % ?? catenary but no dualising complex?
+\end{rem}
+
+\begin{rem}[Uniqueness]
+	Even if $\omega_{R}$ exists, it need not be unique. For one, $\Sigma^{n} \omega_{R}$ is another dualising complex, for all $n \in \mathbb{Z}$. \newline
+	Slightly less trivial, if $P$ is a projective $R$-module of rank $1$ (i.e., $P_{\mathfrak{p}} \cong R_{\mathfrak{p}}$ for all $\mathfrak{p} \in \Spec R$), then $\omega_{R} \otimes_{R} P$ is again dualising. 
+
+	But this is all: Given any two dualising complexes, one can obtain the other by applying the above operations successively. In particular, if $R$ is local, then $\omega_{R}$ is unique up to shifts. (In fact, one can set $P \vcentcolon= \Sigma^{n} \RHom_{R}(\omega_{R}, \omega_{R}')$ for a suitable shift $n$.) 
+\end{rem}
+
+\begin{thm}[Local Duality Theorem]
+	Let $R$ be a commutative noetherian ring with a dualising complex $\omega_{R}$. The functor
+	\begin{equation*} 
+		(-)^{\dagger} \vcentcolon= \RHom_{R}(-, \omega_{R}) : D(R)^{\op} \to D(R)
+	\end{equation*}
+	restricts to auto-equivalences
+	\begin{equation*} 
+		\begin{tikzcd} % [row sep=small]
+		D^{b}(\rmod{R})^{\op} \arrow[r, "\cong"] & D^{b}(\rmod{R}) \arrow[l] \\
+		\Perf(R)^{\op} \arrow[r, "\cong"] \arrow[u, phantom, sloped, "\subset"] & \Ferp(R), \arrow[u, phantom, sloped, "\subset"] \arrow[l]
+		\end{tikzcd}
+	\end{equation*}
+	where $\Perf(R)$ (resp. $\Ferp(R)$) is the subcategory of objects with finite projective (resp. injective) dimension.
+	% okay to use Ferp??
+\end{thm}
+In fact, for $M \in D^{b}(\rmod{R})$, one has that the natural map $M \to M^{\dagger \dagger}$ is a quasi-isomorphism. This is seen by checking that the map factors as
+\begin{equation*} 
+	M \xrightarrow{\simeq} M \otimes^{\ell}_{R} \RHom_{R}(\omega_{R}, \omega_{R}) \xrightarrow{\simeq} \RHom_{R}(\RHom_{R}(M, \omega_{R}), \omega_{R}).
+\end{equation*}
+
+\textbf{Connection to Matlis duality}. If we further assume that $(R, m, k)$ is local and $\ell(M) < \infty$, then we see that $M$ is $\mathfrak{m}$-torsion. Then, letting $I^{\bullet}$ be the minimal injective resolution (as described below), we see that
+\begin{equation*} 
+	M^{\dagger} = \Hom_{R}(M, I^{\bullet}) = \Hom_{R}(M, E_{R}(k))
+\end{equation*}
+since every other $\Hom_{R}(M, E_{R}(R/\mathfrak{p}))$ must vanish. In particular, $M^{\dagger} = M^{\vee}$. (Strictly speaking, we first ``normalise'' the complex appropriately.) \newline
+Thus, Matlis duality is a special case of local duality.
+
+\section{Gorenstein rings}
+
+% For the sake of correctness, let us now further assume that $\dim R < \infty$. We say that $R$ is \deff{Gorenstein} if $\injdim R < \infty$, i.e., $R$ is self-dualising. If we do not assume $R$ to be 
+
+\begin{defn}
+	A noetherian local ring $(R, \mathfrak{m})$ is \deff{Gorenstein} if $\injdim R < \infty$. \newline
+	More generally, a noetherian ring $R$ is \deff{Gorenstein} if $R_{\mathfrak{m}}$ is Gorenstein for all $\mathfrak{m} \in \Max R$.
+\end{defn}
+
+In the case that $\dim(R) < \infty$, $R$ is Gorenstein iff $\injdim(R) < \infty$. In this case, being Gorenstein is the same as $R$ being self-dualising. \newline
+Side note: Recall Nagata's example of a noetherian domain with infinite Krull dimension. This is a regular ring and hence, Gorenstein. However, this ring has infinite injective dimension.
+
+\begin{rem}
+	One can show that $R$ being Gorenstein (in our sense) is equivalent to $\RHom_{R}(-, R)$ being an auto-equivalence on $D^{b}(\rmod{R})$.
+\end{rem}
+
+For the occasional noncommutative ring $A$, we shall use Gorenstein to mean that ${\injdim(_{A}A) < \infty}$ and $\injdim(A_{A}) < \infty$. This is what was defined as (Iwanaga-)Gorenstein in an earlier talk.
+
+\begin{ex}
+	Let $k$ be an arbitrary field, and $G$ a finite group. The group ring $kG$ is Gorenstein since it is self-injective. In the case that $\chr(k) \nmid \md{G}$, this follows since $kG$ is semisimple and thus, every $kG$-module is injective.
+\end{ex}
+
+As we remarked earlier, we have
+\begin{equation*} 
+	\text{regular $\Rightarrow$ Gorenstein}.
+\end{equation*}
+% ?? don't need dim < \infty here, right?
+% (At least for local rings.)
+
+In fact, one can check the following.
+
+\begin{lem} 
+	Let $(R, \mathfrak{m})$ be local, and $x \in \mathfrak{m}$ be a nonzerodivisor. Then, 
+	\begin{equation*} 
+		\text{$R$ is Gorenstein $\Leftrightarrow$ $R/xR$ is Gorenstein}.
+	\end{equation*} 
+\end{lem}
+\begin{cor}
+	For local rings, we have: Regular $\Rightarrow$ complete intersection $\Rightarrow$ Gorenstein. \newline
+	% (For correctness: One requires the fact that $R$ is Gorenstein iff $\widehat{R}$ is so?)
+\end{cor}
+
+\begin{thm}
+	For a noetherian local ring $(R, \mathfrak{m}, k)$ of Krull dimension $d$, the following are equivalent:
+	\begin{enumerate}
+		\item $R$ is Gorenstein.
+		\item $\Ext_{R}^{n}(k, R) = 0$ for $n \neq d$ and $\Ext_{R}^{d}(k, R) \cong k$.
+	\end{enumerate}
+	% ?? what did Greenlees mention about \Sigma^{a + r}?
+\end{thm}
+
+For a local ring $(R, \mathfrak{m}, k)$ with $d \vcentcolon= \depth(R)$, we define the \deff{type} of $R$ to be the $d$-th \emph{Bass number}:
+\begin{equation*} 
+	\ty(R) \vcentcolon= \rank_{k} \Ext_{R}^{\depth(R)}(k, R).
+\end{equation*}
+The above is simply the number of copies of $E_{R}(k)$ that appear in the $d$-th spot of the minimal injective resolution of $R$.
+
+Then, has the following.
+\begin{thm}
+	Let $(R, \mathfrak{m}, k)$ be local. Then,
+	\begin{equation*} 
+		\text{$R$ is Gorenstein $\Leftrightarrow$ $R$ is CM and $\ty(R) = 1$}.
+	\end{equation*}
+\end{thm}
+% In fact, one even has:
+% \begin{thm}[Roberts]
+% 	$\ty(R) = 1 \Rightarrow R$ is Gorenstein.
+% \end{thm}
+
+In particular, if $R$ is artinian, then $R$ is Cohen-Macaulay with $d = 0$. This gives us the following.
+
+\begin{thm}
+	Let $(R, \mathfrak{m}, k)$ be local artinian. TFAE:
+	\begin{enumerate}
+		\item $R$ is Gorenstein.
+		\item $\ty(R) = 1$.
+		\item $\Hom_{R}(k, R) \cong k$.
+		\item $\soc(R)$ is one-dimensional.
+	\end{enumerate}
+\end{thm}
+Note that $\Hom_{R}(k, R) = (0 :_{R} \mathfrak{m}) =\vcentcolon \soc(R)$ is the \deff{socle} of $R$. This is the largest submodule of $R$ which has a $k$-module structure. \newline
+Note that in the zero-dimensional case, the type is the dimension of the socle.
+
+\begin{ex}
+	The ring $R = k[X, Y]/(X^{2}, Y^{2})$ is an artinian ring. The socle is one-dimensional, being generated by $xy$. This was the example of the group ring $\mathbb{F}_{2} V_{4}$ which we saw yesterday.
+
+	On the other hand, if we quotient further to get $R = k[X, Y]/(X^{2}, XY, Y^{2})$, then the socle is two dimensional: generated by $x$ and $y$.
+
+	Both the rings \emph{are} Cohen-Macaulay, being zero-dimensional.
+\end{ex}
+
+\begin{thm}[Watanabe]
+	Let $K$ be a field of characteristic zero. Let $G$ be a finite subgroup of $\GL_{n}(K)$ acting on $S \vcentcolon= K[x_{1}, \ldots, x_{n}]$. \newline
+	If $G \le \SL_{n}(K)$, then $S^{G}$ is Gorenstein. \newline
+	If $G$ contains no pseudoreflections, then the converse holds too.
+\end{thm}
+
+Recall that an element $g \in \GL_{n}(k)$ is called a \deff{pseudoreflection} if $\rank(g - I) = 1$.
+
+\begin{ex}
+	$\mathbb{C}[x^{2}, xy, y^{2}]$ is Gorenstein, but $\mathbb{C}[x^{3}, x^{2} y, x y^{2}, y^{3}]$ is not. These appear as invariant rings of $\left \langle \two{\zeta}{}{}{\zeta} \right \rangle$ for $\zeta = -1$ and $\exp(2 \pi \iota/3)$. This is in $\SL_{2}(\mathbb{C})$ precisely in the former case. \newline
+	More generally, the $d$-th Veronese of $\mathbb{C}[x_{1}, \ldots, x_{n}]$ is Gorenstein iff $d \mid n$.
+
+	$\mathbb{C}[x^{n}, xy, y^{n}]$ is also Gorenstein for all $n \ge 1$. This is the invariant ring corresponding $\left \langle \two{\zeta}{}{}{\zeta^{-1}} \right \rangle$ for $\zeta = \exp(2 \pi \iota/n)$.
+\end{ex}
+
+\section{Symmetry}
+
+We now look at some more examples of Gorenstein rings.
+
+\begin{ex}[Poincar\'{e} Algebras]
+	Suppose that $R$ is a graded $k$-algebra of the form
+	\begin{equation*} 
+		R = k \oplus R_{1} \oplus \cdots \oplus R_{d}
+	\end{equation*}
+	with $\rank_{k} R < \infty$ and $R_{d} \neq 0$. Assume $R$ is either commutative or graded-commutative. $R$ being graded gives us bilinear maps
+	\begin{equation*} 
+		\langle -, - \rangle_{i} : R_{i} \times R_{d - i} \to R_{d}
+	\end{equation*}
+	for all $i \in [d]$. Equivalently, we have maps
+	\begin{equation*} 
+		\rho_{i} : R_{i} \to \Hom_{k}(R_{d - i}, R_{d}).
+	\end{equation*}
+
+	Then, the following are equivalent:
+	\begin{enumerate}
+		\item $R$ is Gorenstein.
+		\item $R_{d} \cong k$ and $\langle -, - \rangle_{i}$ is nondegenerate for all $i$.
+		\item $\rho_{i}$ is a bijection for all $i$.
+		\item $R \cong \Hom_{k}(R, k)[d]$ as $R$-modules. (Note that $A = k$ is a Noether normalisation since $R$ is finite-dimensional over $k$.)
+	\end{enumerate}
+	Note that in this case, we must necessarily have $\rank_{k}(R_{i}) = \rank_{k}(R_{d - i})$.
+\end{ex}
+
+\begin{ex}
+	Poincar\'{e} Duality tells us that for a compact manifold $M$, the ring $H^{\ast}(M; \mathbb{F}_{2})$ is Gorenstein. \newline
+	For example, $k[x]/(x^{n + 1})$ is Gorenstein, as can be seen using the criteria above. (For $k = \mathbb{F}_{2}$, this ring is the cohomology ring of $\mathbb{R}P^{n}$.)
+\end{ex}
+
+\begin{ex}
+	As a concrete example of the above, one can create many zero-dimensional Gorenstein rings as follows: Let $V$ be any finite-dimensional $k$-vector space, and let $\langle -, - \rangle$ be any (anti-)symmetric nondegenerate bilinear form on $V$. Then, give
+	\begin{equation*} 
+		R \vcentcolon= k \oplus V \oplus k
+	\end{equation*}
+	a graded ring structure in the obvious way. % (Multiplying elements of $V$ with the $k$ in degree $2$ gives zero; multiplication of two elements of $V$ is done using the pairing; multiplying elements of $k$ in degree $2$ gives zero.)
+
+	\hrulefill
+	
+	In fact, our earlier example $R = k[X, Y]/(X^{2}, Y^{2})$ fits in this form. We have
+	\begin{equation*} 
+		R = k \oplus k \cdot \{x, y\} \oplus k \cdot \{xy\}
+	\end{equation*}
+	with the pairing being given by $\smatrix{0 & 1 \\ 1 & 0}$. 
+
+	Similarly, the example $k[X, Y]/(X^{2}, XY, Y^{2})$ can be seen as non-Gorenstein using the above criteria since the top graded piece has dimension $> 1$.
+
+	On the other hand, $k[X, Y]/(X^{3}, XY, Y^{2}) \cong k \oplus k^{2} \oplus k$ is not Gorenstein because the pairing is degenerate. (Note that the dimensions are still palindromic!)
+	
+	\hrulefill
+	
+	Let us consider $R = k \oplus k \cdot \{x, y, z\} \oplus k \cdot T$ with pairing given by
+	\begin{equation*} 
+		z^{2} = xy = yx = T,
+	\end{equation*}
+	and all other pairs in $\{x, y, z\} \times \{x, y, z\}$ get mapped to zero. This is nondegenerate as this is given by the invertible matrix
+	\begin{equation*} 
+		\begin{pmatrix}
+			0 & 1 & 0 \\
+			1 & 0 & 0 \\
+			0 & 0 & 1 \\
+		\end{pmatrix}.
+	\end{equation*}
+	Thus, the ring $R$ is Gorenstein. In fact, it is not too difficult to check that we have
+	\begin{equation*} 
+		R \cong k[X, Y, Z]/(X^{2}, Y^{2}, XZ, YZ, Z^{2} - XY).
+	\end{equation*}
+	One can also show that the ideal above does not have fewer than $5$ generators. Thus, $R$ gives an example of a Gorenstein ring which is not a complete intersection.
+\end{ex}
+
+\begin{ex}
+	Suppose $R$ is a noetherian $\mathbb{N}$-graded ring with $K \vcentcolon= R_{0}$ a field. Let $A \subset R$ be a Noether normalisation. Then, $R$ is Gorenstein iff $R$ is Cohen-Macaulay and there exists $q \in \mathbb{Z}$ such that $\Hom_{A}(R, A) \cong R[q]$ as graded $R$-modules.
+
+	Using this, one gets that ``the'' numerator of the Hilbert series is a palindrome. More precisely: consider $A \subset R$, where $A$ is a homogeneous Noether normalisation and $R$ is Cohen-Macaulay. Say $A = K[f_{1}, \ldots, f_{n}]$, $\deg f_{i} = k_{i}$. Then,
+	\begin{equation*} 
+		\Hilb(A, t) = \frac{1}{\prod (1 - t^{k_{i}})} \andd \Hilb(R, t) = \frac{c_{0} + \cdots + c_{m} t^{m}}{\prod (1 - t^{k_{i}})},
+	\end{equation*}
+	where $c_{j}$ is the number of basis elements of degree $j$ in a homogeneous $A$-basis for $R$. Then, $\Hom_{A}(R, A) \cong R[q]$ gives us that
+	\begin{equation*} 
+		(c_{0}, \ldots, c_{m}) = (c_{m}, \ldots, c_{0}),
+	\end{equation*}
+	since $\Hom_{A}(-, A)$ negates the degrees of the basis elements.
+
+	(We assume $c_{m} \neq 0$.)
+
+	A more inherent symmetry is given as:
+	\begin{equation} \label{eq:01}
+		\Hilb(R, t^{-1}) = (-1)^{\dim R} t^{\ell} \Hilb(R, t)
+	\end{equation}
+	for some $\ell \in \mathbb{Z}$.
+
+	In fact, Stanley proved a converse as well: If $R$ is a Cohen-Macaulay graded domain satisfying \Cref{eq:01}, then $R$ is Gorenstein. \newline
+	Without the additional hypothesis, \Cref{eq:01} does not suffice: we already have an example from earlier.
+\end{ex}
+
+\begin{ex}[Numerical monoids]
+	A \deff{numerical monoid} $\Sigma$ is a subset $\Sigma \subset \mathbb{N}_{0}$ such that
+	\begin{enumerate}[label=(\arabic*)]
+		\item $0 \in \Sigma$,
+		\item $\Sigma$ is closed under addition,
+		\item $\mathbb{N}_{0} \setminus \Sigma$ is finite.
+	\end{enumerate}
+
+	Let $k$ be a field. Corresponding to $\Sigma$ above, we get a ring
+	\begin{equation*} 
+		k[\Sigma] \vcentcolon= k[x^{i} : i \in \Sigma] \subset k[x].
+	\end{equation*}
+	That is, $k[\Sigma]$ is the $k$-subalgebra of $k[x]$ generated by $\{x^{i} : i \in \Sigma\}$. 
+
+	By (3), there exists a smallest $c \ge 0$ such that $x^{\ge c} \in k[\Sigma]$. Then, $R$ is Gorenstein iff exactly half the numbers in $[0, c - 1]$ are not in $\Sigma$. Equivalently, the holes are anti-palindromic, i.e., for all $0 \le i \le c - 1$, $i \in \Sigma \Leftrightarrow c - 1 - i \notin \Sigma$.
+\end{ex}
+
+\begin{ex}
+	As concrete examples, one can check $R = K[x^{3}, x^{5}, x^{7}]$ is not Gorenstein. (Check with $c = 5$.)
+
+	On the other hand, $R = K[x^{4}, x^{5}, x^{6}]$ is Gorenstein. (Check with $c = 8$.)
+\end{ex}
+
+\begin{comment}
+\section{References}
+
+Two good papers for exposition and examples of Gorenstein rings are:
+\begin{itemize}
+	\item `On the ubiquity of Gorenstein rings' by \emph{Hyman Bass}.
+	\item `Hyman Bass and Ubiquity: Gorenstein Rings' by \emph{Craig Huneke}.
+\end{itemize}
+
+The material for this talk was mainly prepared using the material I learnt from a course on commutative algebra that I took under Professor Srikanth Iyengar at the University of Utah. 
+\end{comment}
+\end{document}
