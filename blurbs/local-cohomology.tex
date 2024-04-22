@@ -67,7 +67,7 @@ Note: $\soc(M) \cong \Hom_{R}(k, M)$. This is the largest $R$-submodule of $M$ t
 \end{defn}
 The next proposition shows that such absolute maximal essential extensions exist. \Cref{prop:essential-extension-basics} had shown that these exist in a relative sense.
 
-\begin{prop}
+\begin{prop} \label{prop:maximal-essential-inside-injective}
 	Let $R$ be any ring.
 	\begin{enumerate}[label=(\alph*)]
 		\item An $R$-module is injective iff it has no proper essential extension.
@@ -85,7 +85,7 @@ Dually, if $M \into N$ is an essential extension, we can extend it into a maxima
 \begin{prop}
 	Let $\{M_{i}\}_{i \in I}$ be a collection of $R$-modules. If $I$ is finite, then
 	\begin{equation*} 
-		E_{R}\left(\bigoplus_{i}\right) \cong \bigoplus_{i} E_{R}(M_{i}).
+		E_{R}\left(\bigoplus_{i \in I} M_{i} \right) \cong \bigoplus_{i \in I} E_{R}(M_{i}).
 	\end{equation*}
 	If $R$ is noetherian, then the above holds for an arbitrary $I$. (All that is needed is for the right side to actually be injective. When $R$ is noetherian, an arbitrary direct sum of injectives is injective.)
 \end{prop}
@@ -93,7 +93,7 @@ Dually, if $M \into N$ is an essential extension, we can extend it into a maxima
 \begin{defn}
 	Let $M$ be an $R$-module. An injective resolution $E^{\bullet}$ of $M$ is said to be a \deff{minimal injective resolution} if $M \to E^{0}$ is an injective hull and for every $i \ge 0$, $\im(E_{i}) \subset E_{i + 1}$ is an injective hull.
 \end{defn}
-Minimal injective resolutions always exist over any ring. Any two such resolutions are isomorphic as complexes.
+Minimal injective resolutions always exist over any ring (this amounts to showing that every module does have an injective hull, which amounts to showing that every module embeds into an injective module and then using \Cref{prop:maximal-essential-inside-injective}). Any two such resolutions are isomorphic as complexes.
 
 \subsection{The noetherian case}
 
@@ -102,12 +102,13 @@ Minimal injective resolutions always exist over any ring. Any two such resolutio
 	\begin{equation*} 
 		\Hom_{R}(M, \bigoplus_{i} N_{i}) \cong \bigoplus_{i} \Hom_{R}(M, N_{i}).
 	\end{equation*}
-	(In general, there is only an injection from the right to the left.)
+	(In general (i.e., when $M$ is not assumed to be finite), there is only an injection from the right to the left.)
 \end{prop}
 
 \begin{cor}
 	Let $R$ be a noetherian ring. An arbitrary direct sum of injective modules is injective.
 \end{cor}
+Use Baer's criterion for the above.
 
 \begin{thm} \label{thm:facts-about-E-R-P}
 	Let $R$ be a noetherian ring, and $\mathfrak{p} \in \Spec(R)$ a prime. Let $E \vcentcolon= E_{R}(R/\mathfrak{p})$ and $\kappa(\mathfrak{p}) \vcentcolon= \Frac(R/\mathfrak{p}) \cong R_{\mathfrak{p}}/\mathfrak{p} R_{\mathfrak{p}}$.
@@ -116,7 +117,7 @@ Minimal injective resolutions always exist over any ring. Any two such resolutio
 		\item $E$ is an $R_{\mathfrak{p}}$ module, i.e., multiplication by $r$ is an automorphism for every $r \in R \setminus \mathfrak{p}$.
 		\item $E$ is $\mathfrak{p}$-power torsion, i.e., every element of $E$ is killed by a power of $\mathfrak{p}$.
 		\item $\Ass(E(R/\mathfrak{p})) = \{\mathfrak{p}\}$; the annihilator of every nonzero element of $E$ is primary to $\mathfrak{p}$.
-		\item $\ann_{E}(\mathfrak{p}) \cong \kappa(\mathfrak{p})$. 
+		\item $\ann_{E}(\mathfrak{p}) \cong \kappa(\mathfrak{p})$. (In particular, if $(R, \mathfrak{m}, \kappa)$ is local, then the socle of $E(\kappa)$ is one-dimensional.)
 		\item The above inclusion $\kappa(\mathfrak{p}) \into E$ is an injective hull over $R$ and $R_{\mathfrak{p}}$ both. Thus, $E_{R}(R/\mathfrak{p}) \cong E_{R_{\mathfrak{p}}}(R_{\mathfrak{p}}/\mathfrak{p} R_{\mathfrak{p}})$.
 		\item If $I \subset \mathfrak{p}$ is an ideal, then
 		\begin{equation*} 
@@ -146,7 +147,7 @@ Minimal injective resolutions always exist over any ring. Any two such resolutio
 	\begin{equation*} 
 		E \cong \bigoplus_{\mathfrak{p} \in \Ass(E)} E_{R}(R/\mathfrak{p})^{a(\mathfrak{p})}.
 	\end{equation*}
-	Moreover, $a(\mathfrak{p})$ is determined as $\dim_{\kappa(\mathfrak{p})} \Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), E_{\mathfrak{p}})$. Thus, the representation is unique. Moreover, each $\mathfrak{p} \in \Ass(E)$ does appear in the decomposition.
+	Moreover, the cardinal $a(\mathfrak{p})$ is determined as $\dim_{\kappa(\mathfrak{p})} \Hom_{R_{\mathfrak{p}}}(\kappa(\mathfrak{p}), E_{\mathfrak{p}})$. Thus, the representation is unique. Moreover, each $\mathfrak{p} \in \Ass(E)$ does appear in the decomposition, i.e., $a(\mathfrak{p}) \neq 0$ for $\mathfrak{p} \in \Ass(E)$.
 \end{thm}
 \begin{cor}
 	Over a noetherian ring $R$, the indecomposable injectives are precisely $E_{R}(R/\mathfrak{p})$ for $\mathfrak{p} \in \Spec(R)$.
@@ -197,7 +198,7 @@ It makes sense to talk about \emph{equality} of the $\Hom$ sets, since both are 
 \begin{thm}
 	Let $(R, \mathfrak{m}, k) \to (S, \mathfrak{n}, \ell)$ be a local homomorphism of local rings and suppose that $S$ is a finite $R$-module. Let $E \vcentcolon= E_{R}(k)$. Then, $E_{S}(\ell) \cong \Hom_{R}(S, E)$.
 \end{thm}
-Idea: finiteness gives that $\mathfrak{m}S$ is $\mathfrak{n}$-primary and that the proposed $\Hom$ is then killed by a power of $\mathfrak{n}$, and hence is a sum of copies of $E_{S}(\ell)$ (already injective by earlier). Argue that only one copy.
+Idea: finiteness gives that $\mathfrak{m}S$ is $\mathfrak{n}$-primary. Also, the $\Hom$ is $\mathfrak{m}$-power torsion (since $E$ is so and $S$ is finitely generated) and in turn, $\mathfrak{n}$-power torsion. Hence, is a sum of copies of $E_{S}(\ell)$ (already injective by earlier). Argue that only one copy.
 
 \subsection{The case of an artin local ring}
 
@@ -212,7 +213,7 @@ Idea: finiteness gives that $\mathfrak{m}S$ is $\mathfrak{n}$-primary and that t
 \begin{thm}
 	Let $(R, \mathfrak{m}, k)$ be an artin local ring and let $E \vcentcolon= E_{R}(k)$. Then, the map $R \to \End_{R}(E)$ is an isomorphism.
 \end{thm}
-The map above is $r \mapsto (e \mapsto re)$. Note that $\End_{R}(E) = E^{\vee}$.
+The map above is $r \mapsto (e \mapsto re)$. Note that $\End_{R}(E) = E^{\vee}$. So the above says $R \cong E^{\vee}$.
 
 \begin{thm} \label{thm:local-ring-self-injective}
 	A local ring $(R, \mathfrak{m}, k)$ is a injective as a module over itself iff $\dim(R) = 0$ and $\soc(R)$ is one-dimensional as a $k$-vector space. In this case, $R \cong E_{R}(k)$.
@@ -233,14 +234,14 @@ We have the natural map $R \to \Hom_{R}(E, E)$. Note that $E = E_{\widehat{R}}(k
 \end{equation}
 
 \begin{thm}
-	\Cref{eq:001} is an isomorphism. In particular, if $R$ is a complete local ring, then the obvious map $R \to E^{\vee}$ is an isomorphism.
+	\Cref{eq:001} is an isomorphism. In particular, $\widehat{R} \cong E^{\vee}$. In turn, if $R$ is a complete local ring, then the obvious map $R \to E^{\vee}$ is an isomorphism.
 \end{thm}
 Note that we had this earlier for the case of $R$ being an artin local ring (which is automatically complete).
 
 \begin{cor}
 	Let $(R, \mathfrak{m}, k)$ be a local ring. Then, $E_{R}(k)$ is an artin $R$-module.
 \end{cor}
-Proof: An infinite chain $E \supset E_{1} \supsetneq E_{2} \supsetneq \cdots$ will give an infinite chain of proper surjections $\widehat{R} \onto S_{1} \onto S_{2} \onto \cdots$, giving infinitely ascending ideals in $\widehat{R}$.
+Idea: An infinite chain $E \supset E_{1} \supsetneq E_{2} \supsetneq \cdots$ will give an infinite chain of proper surjections $\widehat{R} \onto S_{1} \onto S_{2} \onto \cdots$, giving infinitely ascending ideals in $\widehat{R}$.
 
 \begin{ex}
 	$E_{R}(R/\mathfrak{p})$ need not be artin. Take $R = \mathbb{Q}[\![x]\!]$ and $\mathfrak{p} = 0$.
@@ -267,12 +268,30 @@ Proof: An infinite chain $E \supset E_{1} \supsetneq E_{2} \supsetneq \cdots$ wi
 		\item The category of noetherian $R$-modules is antiequivalent to the category of artin $R$-modules via $^{\vee}$.
 	\end{enumerate}
 
-	More generally, if $R$ is not complete, then we have
+	More generally, if $R$ is not complete, then we have an antiequivalence
 	\begin{equation*} 
 		\{\text{artin $R$-modules}\} \leftrightarrow \{\text{noetherian $\widehat{R}$-modules}\}
 	\end{equation*}
 	simply because $\{\text{artin $R$-modules}\} = \{\text{artin $\hat{R}$-modules}\}$.
 \end{thm}
+
+By straightforward calculations with resolutions, one also has the following duality.
+
+\begin{thm}[Matlis duality between Ext and Tor]
+	Let $(R, \mathfrak{m}, k)$ be a local ring and set $E \vcentcolon= E_{R}(k)$, and $^{\vee} = \Hom_{R}(-, E)$. 
+
+	For arbitrary $R$-modules $M$ and $N$, one has
+	\begin{equation*} 
+		\Tor^{R}_{i}(M, N)^{\vee} \cong \Ext_{R}^{i}(M, N^{\vee}).
+	\end{equation*}
+
+	Furthermore, if $M$ is finitely generated, then one also has
+	\begin{equation*} 
+		\Ext_{R}^{i}(M, N)^{\vee} \cong \Tor^{R}_{i}(M, N^{\vee}).
+	\end{equation*}
+\end{thm}
+
+\newpage
 
 \section{Local cohomology: a first look}
 
@@ -286,9 +305,7 @@ Let $R$ be a \underline{noetherian} ring, $M$ an arbitrary $R$-module, $(I_{t})_
                  & \vdots                                           & \vdots                                             &       
 \end{tikzcd}		
 \end{equation*}
-The vertical arrows are induced by the natural maps $R/I_{t + 1} \onto R/I_{t}$. The vertical arrows form direct limit systems, whereas the horizontal rows form cocomplexes. Thus, we have the option to direct limits and cohomologies in some order. Both of these give the same result by general nonsense. 
-
-\newpage
+The vertical arrows are induced by the natural maps $R/I_{t + 1} \onto R/I_{t}$. The vertical arrows form direct limit systems, whereas the horizontal rows form cocomplexes. Thus, we can compute direct limits and cohomologies in some order. Both of these give the same result by general nonsense. 
 
 \begin{defn}
 	Let $R$ be a noetherian ring, $M$ any $R$-module, $I$ an ideal. Consider the sequence of ideals $I_{t} \vcentcolon= I^{t}$. Then, the \deff{$i$-th local cohomology module of $M$ with support in $I$} is defined as
@@ -296,7 +313,9 @@ The vertical arrows are induced by the natural maps $R/I_{t + 1} \onto R/I_{t}$.
 		H_{I}^{i}(M) \vcentcolon= \colimit_{t} \Ext_{R}^{i}(R/I^{t}, M).
 	\end{equation*}
 \end{defn}
-By our earlier discussion, we have that $H_{I}^{i}(-)$ is the $i$-th derived functor of $H_{I}^{0}(-)$, which is given as
+The above corresponds to first computing cohomology and then taking its colimit.
+
+By our earlier discussion, we can compute this in the other order which gives us that $H_{I}^{i}(-)$ is the $i$-th derived functor of $H_{I}^{0}(-)$, which is given as
 \begin{equation*} 
 	H_{I}^{0}(M) = \colimit_{t} \Hom_{R}(R/I^{t}, M) \cong \bigcup_{t} \ann_{M}(I^{t}) = \{x \in M : x \text{ is killed by a power of $I$}\}.
 \end{equation*}
@@ -304,7 +323,7 @@ By our earlier discussion, we have that $H_{I}^{i}(-)$ is the $i$-th derived fun
 \begin{obs}
 	The direct limit is unchanged when $(I_{t})_{t}$ is replaced by an infinite subsequence.
 
-	Next, suppose $(I_{t})_{t}$ and $(J_{t})_{t}$ are decreasing sequences of ideals of $R$ which are \deff{cofinal}, i.e., for all $t$, there exist $u$ and $v$ such that $J_{u} \subset I_{t}$ and $I_{v} \subset J_{t}$. Indeed, we can form a sequence
+	Next, suppose $(I_{t})_{t}$ and $(J_{t})_{t}$ are decreasing sequences of ideals of $R$ which are \deff{cofinal}, i.e., for all $t$, there exist $u$ and $v$ such that $J_{u} \subset I_{t}$ and $I_{v} \subset J_{t}$. Then, the direct limit computed using either sequence is the same. Indeed, we can form a sequence
 	\begin{equation*} 
 		I_{a(1)} \supset J_{b(1)} \supset I_{a(2)} \supset J_{b(2)} \supset \cdots,
 	\end{equation*}
@@ -342,7 +361,11 @@ which is functorial in the short exact sequence.
 		\depth_{I} M = \min\{i : H_{I}^{i}(M) \neq 0\}.
 	\end{equation}
 \end{thm}
-Recall: $\depth_{I} M$ is the length of the longest sequence in $I$ which is regular on $M$. Moreover, it is customary to define this depth to be $\infty$ if $IM = M$. Thus, \Cref{eq:002} always holds.
+Recall: $\depth_{I} M$ is the length of the longest sequence in $I$ which is regular on $M$. Moreover, it is customary to define $\depth_{I}(M) \vcentcolon= \infty$ if $IM = M$; consistent with \Cref{eq:002}.
+
+\begin{cor}
+	Let $I$, $J$ be ideals in a noetherian ring $R$ with the same radical. Then, $\depth_{I}(M) = \depth_{J}(M)$ for all finitely generated modules $M$.
+\end{cor}
 
 \section{Tensor products of complexes and Koszul cohomology}
 
@@ -378,7 +401,7 @@ The cohomological version is defined as follows: As before, we define $K^{\bulle
 \begin{equation*} 
 	0 \to R \xrightarrow{x} R \to 0,
 \end{equation*}
-where the map is now going from (cohomological) degree $0$ to degree $1$. We then let
+where the middle map is now going from (cohomological) degree $0$ to degree $1$. We then let
 \begin{equation*} 
 	K^{\bullet}(\mathbf{x}; R) \vcentcolon= K^{\bullet}(x_{1}; R) \otimes_{R} \cdots \otimes_{R} K^{\bullet}(x_{n}; R).
 \end{equation*}
@@ -413,7 +436,7 @@ For $x \in R$, we can form a commutative diagram as follows
 	\end{tikzcd}
 \end{equation*}
 
-The horizontal complexes are the cohomological Koszul complexes (so the map is going from degree $0$ to $1$), and the vertical maps are identities. Thus, we have formed a direct system
+The horizontal complexes are the cohomological Koszul complexes (so the map is going from degree $0$ to $1$), and the vertical maps are as indicated. Thus, we have formed a direct system
 \begin{equation} \label{eq:003}
 	\cdots \to K^{\bullet}(x^{t}; R) \to K^{\bullet}(x^{t + 1}; R) \to \cdots
 \end{equation}
@@ -432,7 +455,7 @@ Tensoring further with an $R$-module $M$ gives
 As before, we can now do two operations and get the same object $H^{\bullet}(\mathbf{x}^{\infty}; M)$, the operations being:
 \begin{itemize}
 	\item take the direct limit of \Cref{eq:004} to form the cocomplex $K^{\bullet}(\mathbf{x}^{\infty}; M)$, and then take its cohomology;
-	\item take the cohomology of each object in \Cref{eq:004} to get a direct system $\to H^{\bullet}(\mathbf{x}^{t}; M) \to H^{\bullet}(\mathbf{x}^{t + 1}; M)$ and then take its limit.
+	\item take the cohomology of each object in \Cref{eq:004} to get a direct system $\cdots \to H^{\bullet}(\mathbf{x}^{t}; M) \to H^{\bullet}(\mathbf{x}^{t + 1}; M) \to \cdots$ and then take its limit.
 \end{itemize}
 
 The main theorem is:
@@ -470,7 +493,7 @@ for $1 \le i \le n$.
 	Let $\mathbf{x} = x_{1}, \ldots, x_{n}$ be a sequence of elements in any ring $R$, set $I \vcentcolon= \mathbf{x} R$. Let $M$, $M'$, $M''$, $M_{\lambda}$, etc. be arbitrary $R$-modules.
 	\begin{enumerate}[label=(\alph*)]
 		\item $K^{\bullet}(\mathbf{x}^{\infty}; R)$ is a complex of flat $R$-modules.
-		\item $H^{0}(\mathbf{x}^{\infty}; M)$ is the submodule of $M$ consisting of all elements killed by a power of $I$. Thus, if $R$ is noetherian, it coincides with $H_{O}^{0}(M)$.
+		\item $H^{0}(\mathbf{x}^{\infty}; M)$ is the submodule of $M$ consisting of all elements killed by a power of $I$. Thus, if $R$ is noetherian, it coincides with $H_{I}^{0}(M)$.
 		\item Given a short exact sequence $0 \to M' \to M \to M'' \to 0$ of $R$-modules, there is a long exact of sequence of cohomology:
 		\begin{align*} 
 			0 & \to H^{0}(\mathbf{x}^{\infty}; M') \to H^{0}(\mathbf{x}^{\infty}; M) \to H^{0}(\mathbf{x}^{\infty}; M'') \\
@@ -499,7 +522,7 @@ for $1 \le i \le n$.
 Idea: reduce to $R = M = k$ a field. Then argue separately based on whether $\mathbf{x} = \mathbf{0}$ or not.
 
 \begin{thm}
-	Let $R$ be a noetherian ring, $\mathbf{x}$ a sequence of elements of $R$, and $E$ an injective $R$-module. Then, $H^{j}(\mathbf{x}^{\infty}; M) = 0$ for all $j \ge 1$.
+	Let $R$ be a noetherian ring, $\mathbf{x}$ a sequence of elements of $R$, and $E$ an injective $R$-module. Then, $H^{j}(\mathbf{x}^{\infty}; E) = 0$ for all $j \ge 1$.
 \end{thm}
 Idea: reduce to $R$ local and $E = R_{R}(k)$. Then, $E$ is a direct limit of finite length submodules.
 
@@ -556,8 +579,9 @@ Idea: In the setup, we have $\depth_{I}(R) = n$, so $H_{I}^{<n}(R)$ vanishes. Th
 Recall that the \deff{type} of a (finitely generated) Cohen-Macaulay module $M$ of dimension $d$ over a local ring $(R, \mathfrak{m}, k)$ is equivalently
 \begin{enumerate}[label=(\alph*)]
 	\item $\dim_{k} \Ext_{R}^{d}(k, M)$; or
-	\item $\dim_{k} \soc M/(x_{1}, \ldots, x_{d}) M$, where $\mathbf{x}$ is any maximal $M$-sequence in $\mathfrak{m}$.
+	\item $\dim_{k} \soc(M/(x_{1}, \ldots, x_{d}) M)$, where $\mathbf{x}$ is any maximal $M$-sequence in $\mathfrak{m}$.
 \end{enumerate}	
+The equivalence is in view of the observation that $\soc(M) \cong \Hom_{R}(k, M)$ and the following equality: $\Hom_{R}(N, M/(x_{1}, \ldots, x_{d}) M) \cong \Ext_{R}^{d}(N, M)$, whenever $\mathbf{x}$ is an $M$-regular sequence contained in $\ann_{R}(N)$.
 
 If $z$ is a nonzerodivisor on $M$, then $M$ and $M/xM$ have the same type. The type is unaffected by completion. The type cannot increase when one localises. Thus, a Cohen-Macaulay ring has a type, and the type can only decrease as one localises. In view of this, the next definition makes sense.
 
@@ -652,7 +676,7 @@ The isomorphism is given as $(p \otimes m) \mapsto (f \mapsto f(p) m)$.
 	\end{equation*}
 	functorially in $M$. In particular, $H_{\mathfrak{m}}^{d}(R) \cong \Hom_{R}(R, R)^{\vee} \cong R^{\vee} \cong E_{R}(k)$.
 \end{thm}
-Idea: by \Cref{cor:cohen-macaulay-local-cohomology-tor}, we only have to show the last isomorphism. Consider a resolution $P_{\bullet} \to M$ by finitely generated free modules. Use the previous lemma to get $\Hom_{R}(\Hom_{R}(P_{\bullet}, R), E) \cong P_{\bullet} \otimes E$. The latter computes $\Tor$, whereas the former computes the dual of the $\Ext$.
+Idea: by \Cref{cor:cohen-macaulay-local-cohomology-tor}, we only have to show the last isomorphism ($E \cong H_{\mathfrak{m}}^{d}(R)$ since $R$ is Gorenstein). Consider a resolution $P_{\bullet} \to M$ by finitely generated free modules. Use the previous lemma to get $\Hom_{R}(\Hom_{R}(P_{\bullet}, R), E) \cong P_{\bullet} \otimes E$. The latter computes $\Tor$, whereas the former computes the dual of the $\Ext$.
 
 \begin{cor} \label{cor:local-cohomology-maximal-artin}
 	Let $R$ be a noetherian ring, and $\mathfrak{m}$ a maximal ideal. Then, for every finitely generated $R$-module $M$, $H_{\mathfrak{m}}^{i}(M)$ is artin.
@@ -691,7 +715,7 @@ More generally, if $R$ is a noetherian ring (not necessarily local), then one ha
 		\item Let $M$ be an $R$-module, and $S$ a set of primes such that if $\mathfrak{p} \in \Ass(M)$, then $\mathfrak{p}$ contains a prime in $S$. Suppose that for all $\mathfrak{p} \in S$, $H_{I}^{i}(R/\mathfrak{p})$ for all $i > d$. Then, $H_{I}^{i}(M) = 0$ for all $i > d$. \newline
 		If $M$ is finitely generated, we may choose to be the set of minimal primes of $\Ass M$.
 		\item $H_{I}^{i}(-) = 0$ for $i > \dim R$.
-		\item $H_{I}^{i}(M) = 0$ for $i > \dim(R/{\ann M})$.
+		\item $H_{I}^{i}(M) = 0$ for $i > \dim(R/{\ann M})$ for any $R$-module $M$.
 	\end{enumerate}
 \end{prop}
 
@@ -730,7 +754,7 @@ Idea: Need to show $\dim_{\kappa(\mathfrak{p})} \Ext_{R_{\mathfrak{p}}}^{j}(\kap
 \end{lem}
 
 \begin{thm}
-	For a noetherian ring $R$, $\id_{R} R$ is finite iff all localisations at primes (resp. maximal) are Gorenstein and $\dim R$ is finite. In this case, $\dim R = R$.
+	For a noetherian ring $R$, $\id_{R} R$ is finite iff all localisations at primes (resp. maximal) are Gorenstein and $\dim R$ is finite. In this case, $\dim R = \id_{R} R$.
 \end{thm}
 
 \begin{rem}
@@ -746,14 +770,14 @@ Recall that if $(R, \mathfrak{m}, k)$ is a local ring, then $M^{\vee} = \Hom_{R}
 	A \underline{finitely generated} $R$-module $\omega$ is called a \deff{canonical module} for $R$ if $\omega^{\vee} \cong H_{\mathfrak{m}}^{d}(R)$.
 \end{defn}
 If $R$ is complete, then $H_{\mathfrak{m}}^{d}(R)^{\vee}$ is a canonical module, by \mynameref{thm:matlis-duality} (since $H_{\mathfrak{m}}^{d}(R)$ is artin, by \Cref{cor:local-cohomology-maximal-artin}). If $R$ is Gorenstein, then $R$ is a canonical module, by \mynameref{thm:local-duality-gorenstein}. \newline
-We shall see that the canonical module, if it exists, is unique up to non-unique isomorphism. However, there are Cohen-Macaulay local rings for which no canonical module exists. \newline
+We shall see that the canonical module, if it exists, is unique up to non-unique isomorphism. However, there are Cohen-Macaulay local rings for which no canonical module exists. (A canonical module will exist iff the Cohen-Macaulay local ring is the homomorphic image of some (possibly non-local) Gorenstein ring.) \newline
 We shall usually write $\omega_{R}$ for a canonical module over the ring $R$.
 
 \begin{thm}[Local duality for Cohen-Macaulay rings] \label{thm:local-duality-cohen-macaulay}
 	Let $(R, \mathfrak{m}, k)$ be a local Cohen-Macaulay ring of dimension $d$, $E \vcentcolon= E_{R}(k) \cong H_{\mathfrak{m}}^{d}(R)$, $^{\vee} = \Hom_{R}(-, E)$, $\omega_{R}$ a canonical module for $R$. Fix an isomorphism $\omega_{R}^{\vee} \cong H_{\mathfrak{m}}^{d}(R)$. \newline
 	Then, for any finitely generated module $M$, we have
 	\begin{equation*} 
-		H_{\mathfrak{m}}^{i}(M) \cong \Ext_{R}^{d - i}(M, \omega_{R})^{\vee} \cong \Tor^{R}_{d - i}(M, H_{\mathfrak{m}}^{d}(R)),
+		\Ext_{R}^{d - i}(M, \omega_{R})^{\vee} \cong \Tor^{R}_{d - i}(M, \omega_{R}^{\vee}) \cong \Tor^{R}_{d - i}(M, H_{\mathfrak{m}}^{d}(R)) \cong H_{\mathfrak{m}}^{i}(M),
 	\end{equation*}
 	functorially in $M$.
 \end{thm}
@@ -961,7 +985,7 @@ In other words, for every $R$-module $M$, there is an isomorphism $\Hom_{R}(\Ome
 	\begin{equation*} 
 		d : R \to \prod_{I} R,
 	\end{equation*}
-	given by $f \mapsto \left(\frac{\partial}{\partial x_{i}} f\right)_{i \in I}$.
+	given by $f \mapsto \left(\dfrac{\partial}{\partial x_{i}} f\right)_{i \in I}$.
 
 	Now, note that any $f \in R$ only involves finitely many variables $x_{i}$. Thus, $d$ actually gives us a map $R \to R^{\oplus I}$. One checks that $(R^{\oplus I}, d)$ is the universal $A$-derivation. Thus, $\Omega_{R/A}$ is a free module, with basis given by $\{d x_{i}\}_{i \in I}$.
 \end{ex}

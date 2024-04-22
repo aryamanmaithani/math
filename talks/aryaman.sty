@@ -2,6 +2,7 @@
 % Tikz & PGF
 % -------------------
 \usepackage{tikz}
+\usepackage{tkz-berge}
 \usepackage{tikz-cd}
 \usetikzlibrary{
 	% calc,
@@ -12,7 +13,12 @@
 	% shapes.geometric,
 	decorations.markings,
 	arrows.meta,
+	trees,
+	fit,
+	shapes,
+	arrows,
 }
+\usepackage{tkz-graph}
 % \usepackage{pgfplots}
 % \pgfplotsset{compat=newest}
 
@@ -52,7 +58,6 @@
 	stmaryrd,			% Power Series Brackets
   thmtools,     % Custom Theorem Environments
   titlesec,			% Set (sub)section formatting
-  % tkz-graph,			% For graphs (vertices and edges)
 	thm-restate,		% For Re-stateable Theorems
 	% totcount,			% Define counters
 	tcolorbox,			% Use tcolorbox
@@ -206,6 +211,8 @@
 \DeclareMathOperator{\RHom}{RHom}
 \DeclareMathOperator{\REnd}{REnd}
 \DeclareMathOperator{\depth}{depth}
+\DeclareMathOperator{\reg}{reg}
+\DeclareMathOperator{\lcm}{lcm}
 % \newcommand*{\sHom}{\mathscr{H}\text{\kern -5pt {\calligra\large om}}\,}
 
 % Categories

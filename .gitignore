@@ -3,3 +3,6 @@ _site/
 *.bib
 *.xml
 .DS_Store
+*.snm
+*.nav
+.DS_Store
