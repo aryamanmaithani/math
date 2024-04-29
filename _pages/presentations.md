@@ -11,7 +11,10 @@ Below are (the links to) the slides/notes for various talks.
 
 ## Graduate
 
-* [Gorenstein Rings](/2023-05-19-icts-gorenstein.pdf), a preparatory lecture at the program [_Dualities in Topology and Algebra_](https://www.icts.res.in/program/dta2023) that happened in [ICTS, Bangalore](https://www.icts.res.in/)
+* I gave two (slightly different) talks about [my work](https://arxiv.org/pdf/2401.01046) with H. Ananthnarayan and Omkar Javadekar
+  * [The version at the commutative algebra seminar at the University of Utah]
+  * [The version at BIKES, the student commutative algebra seminar at the University of Utah]
+* [Gorenstein Rings]({{base_path}}/2023-05-19-icts-gorenstein.pdf), a preparatory lecture at the program [_Dualities in Topology and Algebra_](https://www.icts.res.in/program/dta2023) that happened in [ICTS, Bangalore](https://www.icts.res.in/)
 
 ## Undergraduate
 
