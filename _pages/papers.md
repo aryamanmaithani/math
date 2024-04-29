@@ -10,7 +10,7 @@ Here are my preprints, listed in (reverse chronological) order of first upload t
 {% include base_path %}
 
 <ul>
-  {%- for blink in site.papers-links -%}
+  {%- for blink in site.data.papers-links -%}
     {%- assign link = blink[1] -%}
     <li> {{ link.title }} with {{ link.coauths }} </li>
   {%- endfor -%}
