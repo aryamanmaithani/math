@@ -12,12 +12,6 @@ Here are my preprints, listed in (reverse chronological) order of first upload t
 <ul>
   {%- for blink in site.papers-links -%}
     {%- assign link = blink[1] -%}
-    <li> {{ link.title }} with {{ link.coauths }}, <a href={{ blink[0] | prepend: "https://arxiv.org/abs/"}}>arXiv:{{ blink[0] }}</a>
-  </li>
+    <li> {{ link.title }} with {{ link.coauths }} </li>
   {%- endfor -%}
 </ul>
-
-<!-- {% for post in site.publications reversed %}
-  {% include archive-single.html %}
-{% endfor %}
- -->
