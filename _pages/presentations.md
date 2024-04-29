@@ -7,7 +7,13 @@ author_profile: true
 
 {% include base_path %}
 
-Below are (the links to) the presentations I made during various reading projects and courses. 
+Below are (the links to) the slides/notes for various talks.
+
+## Graduate
+
+* [Gorenstein Rings](/2023-05-19-icts-gorenstein.pdf), a preparatory lecture at the program [_Dualities in Topology and Algebra_](https://www.icts.res.in/program/dta2023) that happened in [ICTS, Bangalore](https://www.icts.res.in/)
+
+## Undergraduate
 
 <ul>
   {%- for blink in site.data.presentations-links -%}
