@@ -1,5 +1,14 @@
 # main links links
 main:
+  - title: "Papers"
+    url: /papers/  
+    
+  - title: "Talks"
+    url: /talks/ 
+
+  - title: "Teaching"
+    url: /teaching/
+
   - title: "Blurbs"
     url: /blurbs/   
     
@@ -7,13 +16,4 @@ main:
     url: /course-notes/ 
     
   - title: "Reading"
-    url: /reading/ 
-    
-  - title: "Talks"
-    url: /talks/ 
-
-  - title: "Teaching"
-    url: /teaching/    
-        
-  - title: "Blog Posts"
-    url: /year-archive/
+    url: /reading/
