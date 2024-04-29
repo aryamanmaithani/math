@@ -5,5 +5,5 @@ subtitle: Topics in Commutative Algebra
 ---
 
 ## Handwritten Notes
-* [In-browser](/math/math-7830/hand-notes.pdf)
+* [In-browser](hand-notes.pdf)
 * [In-GitHub](https://github.com/aryamanmaithani/math/blob/master/math-7830/hand-notes.pdf)
