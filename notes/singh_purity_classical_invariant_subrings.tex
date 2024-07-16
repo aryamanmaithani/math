@@ -1,0 +1,628 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+\usepackage{aryaman}
+
+\setcounter{tocdepth}{2}
+
+\title{When are the natural embeddings of classical invariant rings pure?}
+\author{Lectures by Anurag K. Singh \\ {\small Notes by Aryaman Maithani}}
+\date{June 20--22, 2024}
+
+\newcommand{\verteq}{\rotatebox{90}{$\,=$}}
+\newcommand{\equalto}[2]{\underset{\scriptstyle\overset{\mkern4mu\verteq}{#2}}{#1}}
+
+\usepackage[backend=biber,style=alphabetic,doi=false,isbn=false,url=false,eprint=false,maxbibnames=5]{biblatex}
+\addbibresource{refs.bib}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section{Introduction}
+
+These are notes of three lectures given by Prof. Anurag K. Singh at IIT Bombay in June 2024 for the \emph{Recent Trends in Commutative Algebra} workshop. To quote from the abstract, \newline
+
+\begin{blockquote}
+	Consider a reductive linear algebraic group $G$ acting linearly on a polynomial ring $S$ over an infinite field; key examples are the general linear group, the symplectic group, the orthogonal group, and the special linear group, with the classical representations as in Weyl's book: for the general linear group, consider a direct sum of copies of the regular representation and copies of the dual; in the other cases take copies of the regular representation.  The invariant rings in the respective cases are determinantal rings, rings defined by Pfaffians of alternating matrices, symmetric determinantal rings, and the Pl\"{u}cker coordinate rings of Grassmannians; these are the classical invariant rings of the title, with $S^{G}$ in $S$ being the natural embedding.
+
+	A subring $R$ of a ring $S$ is pure if the inclusion remains injective upon tensoring with an arbitrary $R$-module.  Over a field of characteristic zero, a reductive group is linearly reductive; it follows that the invariant ring $S^{G}$ is a direct summand of $S$ as an $S^{G}$-module, equivalently that $S^{G}$ is a pure subring of $S$.  Over fields of positive characteristic, reductive groups are typically no longer linearly reductive.  We determine, in the positive characteristic case, precisely when the inclusion of $S^{G}$ in $S$ is pure.  This is joint work with Melvin Hochster, Jack Jeffries, and Vaibhav Pandey.
+\end{blockquote}
+
+\textbf{Notations.}
+\begin{enumerate}[label=(\alph*)]
+	\item Let $R$ be a noetherian ring, $M$ an $R$-module, $\mathfrak{a} \subset R$ an ideal, and $k$ an integer. Then, $H_{\mathfrak{a}}^{k}(M)$ is the $k$-th local cohomology module of $M$ supported at $\mathfrak{a}$. 
+	%
+	\item If $M$ is a graded module, and $n$ an integer, then $M_{n}$ is the $n$-th graded component of $M$. In particular, we may talk about $\left[H_{\mathfrak{a}}^{k}(M)\right]_{n}$ if $\mathfrak{a}$ and $M$ are homogeneous.
+\end{enumerate}
+
+\section{Pure extensions}
+
+\begin{defn}
+	A ring homomorphism $R \to S$ is \deff{pure} if $(R \to S) \otimes_{R} M$ is injective for all $R$-modules $M$. 
+\end{defn}
+
+\begin{ex}
+	Recall that a ring homomorphism $f : R \to S$ is said to be \deff{($R$-)split} if there exists an $R$-linear map $g : S \to R$ such that $g \circ f = \id_{R}$. 
+
+	Since tensoring preserves split exact sequences, we see that a split map is pure.
+\end{ex}
+
+The setup we will be interested in the following. 
+
+\begin{tcolorbox}
+	Let $K$ be a field, $S \coloneqq K[x_{1}, \ldots, x_{n}]$ a polynomial ring, and $G$ a group acing on $S$ by degree preserving $K$-algebra homomorphisms. The \deff{invariant subring} is
+	\begin{equation*} 
+		S^{G} \coloneqq \{s \in S : g(s) = s \text{ for all } g \in G\}.
+	\end{equation*}
+\end{tcolorbox}
+
+\textbf{Question.} Is $S^{G} \into S$ pure?
+
+\begin{rem} \label{rem:consequences-of-purity}
+	Having a positive answer to the above question will have the following consequences for $R = S^{G}$:
+	\begin{enumerate}[label=(\alph*)]
+		\item $R$ has Finite Frobenius Representation Type. 
+		\item The $F$-signature of $R$ is a rational number.
+		\item The Hilbert-Kunz multiplicity of $R$ is a rational number.
+		\item The ring of $K$-linear differential operators on $R$ is a simple ring.
+		\item The local cohomology modules $H_{\mathfrak{a}}^{k}(R)$ have finitely many associated primes for all homogeneous ideals $\mathfrak{a} \subset R$ and all integers $k$.
+	\end{enumerate}
+\end{rem}
+
+We examine the purity of $S^{G} \into S$ in some examples below.
+
+\begin{enumerate}[label=(\alph*),leftmargin=0em]
+	\item \label{item:reynolds-splitting} If $G$ is a finite group and $\frac{1}{\md{G}} \in K$, then there exists a splitting $\frac{1}{\md{G}} \sum_{g \in G} g : S \to S^{G}$. Thus, the inclusion is pure. The splitting is often called the \deff{Reynold's operator}.
+	%
+	\item If $G$ is the symmetric group $\Sigma_{n}$, then $R \coloneqq S^{G}$ is $K[e_{1}, \ldots, e_{n}]$, where the $e_{i}$ are the elementary symmetric polynomials. \newline
+	The ring $S$ is $R$-free with basis $\{x_{1}^{< 1} x_{2}^{< 2} \cdots x_{n}^{< n}\}$, so $R \into S$ splits -- even if $\chr(K)$ divides $n!$.
+	%
+	\item \label{item:alternating-group-description} If $G$ is the alternating group $A_{n}$, then $S^{G} \into S$ is pure if and only if $\chr(K) \nmid \md{G}$. \newline
+	The nontrivial direction \forward is shown below (\Cref{thm:An-modular-not-pure}).
+
+	In this case, we have $S^{G} = K[e_{1}, \ldots, e_{n}, \Delta]$, where
+	\begin{equation*} 
+		\Delta \coloneqq 
+		\begin{cases}
+			\displaystyle\prod_{i < j} (x_{i} - x_{j}) & \text{ if } \chr(K) \neq 2, \\
+			\displaystyle \frac{1}{2} \left\{\prod_{i < j} (x_{i} - x_{j}) + \prod_{i < j} (x_{i} + x_{j})\right\} & \text{ if } \chr(K) = 2.
+		\end{cases}
+	\end{equation*}
+	The second definition is to be interpreted as first computing the element in $\mathbb{Q}[\mathbf{x}]$, noting that it is an element of $\mathbb{Z}[\mathbf{x}]$, and then view it in $K[\mathbf{x}]$.
+
+	Then, $\Delta^{2}$ is fixed by $\Sigma_{n}$ and hence, $\Delta^{2} = f(\mathbf{e})$ for some polynomial $f$. This gives us a presentation $S^{G} \cong K[E_{1}, \ldots, E_{n}, D]/(D^{2} - f(\mathbf{E}))$. In particular, $S^{G}$ is a hypersurface.
+	%
+	\item \label{item:linearly-reductive-classical} As a generalisation of \ref{item:reynolds-splitting}, if $G$ is linearly reductive, e.g., $\SL(\mathbb{C})$, $\GL(\mathbb{C})$, $\Sp(\mathbb{C})$, $\OO(\mathbb{C})$, then there exists a splitting $S \to S^{G}$. A linear algebraic group (Zariski closed subgroup of $\GL$) over $\mathbb{C}$ is linearly reductive precisely if it has a Zariski dense subgroup that is a compact real Lie group; average over the compact subgroup with respect to the Haar measure to obtain the splitting. Elements fixed by a (Zariski) dense subgroup are fixed by everything.
+
+	\textbf{Question.} What if $\mathbb{C}$ is replaced by $\overline{\mathbb{F}_{p}}$, say for classical representations?
+\end{enumerate}
+
+In the above examples of invariant subrings, we deduced purity from the \emph{a priori} stronger notion of splitting. The following proposition indicates why.
+
+\begin{prop} \label{prop:purity-equivalence}
+	Suppose $R \into S$ is a degree preserving inclusion of $\mathbb{N}$-graded normal rings, that are finitely generated over a field $R_{0} = S_{0}$. Set $d \coloneqq \dim(R)$, $m_{R}$ the homogeneous maximal ideal of $R$, and $E_{R}$ the injective hull of $R/\mathfrak{m}_{R}$ in the category of graded $R$-modules. 
+
+	Consider the following statements:
+	\begin{enumerate}[label=(\arabic*)]
+		\item \label{item:R-S-split} $R \into S$ is $R$-split.
+		\item \label{item:R-S-pure} $R \into S$ is pure.
+		\item \label{item:R-S-tensor-ER-injective} $R \otimes_{R} E_{R} \to S \otimes_{R} E_{R}$ is injective.
+		\item \label{item:R-S-cohomology-nonzero} $H_{\mathfrak{m}_{R}}^{d}(S) \neq 0$.
+	\end{enumerate}
+
+	Then, \ref{item:R-S-split} $\Leftrightarrow$ \ref{item:R-S-pure} $\Leftrightarrow$ \ref{item:R-S-tensor-ER-injective} $\Rightarrow$ \ref{item:R-S-cohomology-nonzero}. \newline
+	If $R$ is a polynomial ring of char $p > 0$, then \ref{item:R-S-cohomology-nonzero} $\Rightarrow$ \ref{item:R-S-tensor-ER-injective}.
+\end{prop}
+\begin{proof} 
+	\ref{item:R-S-split} $\Rightarrow$ \ref{item:R-S-pure} $\Rightarrow$ \ref{item:R-S-tensor-ER-injective} is clear.
+
+	\ref{item:R-S-tensor-ER-injective} $\Rightarrow$ \ref{item:R-S-split}: Suppose $R \otimes_{R} E_{R} \to S \otimes_{R} E_{R}$ is injective. \newline
+	Apply the (graded) Hom functor $\Hom_{R}(-, E_{R})$ to this map. This yields the surjection
+	\begin{equation*} 
+		\Hom_{R}(S \otimes_{R} E_{R}, E_{R}) \onto \Hom_{R}(R \otimes_{R} E_{R}, E_{R}).
+	\end{equation*}
+	Now, using tensor-Hom adjunction, along with $\Hom_{R}(E_{R}, E_{R}) \cong R$, we get a surjection
+	\begin{equation*} 
+		\Hom_{R}(S, R) \onto \Hom_{R}(R, R).
+	\end{equation*}
+	Thus, there is an element $g \in \Hom_{R}(S, R)$ that maps to $\id_{R}$. This is precisely what a splitting is.\footnote{One needs to check that the map $\Hom_{R}(S, R) \to \Hom_{R}(R, R)$ is the natural map, i.e., the one obtained by applying $\Hom_{R}(-, R)$ to $R \to S$. This follows from the naturality of the identifications made earlier.}
+
+	Thus, we have proven the equivalence of \ref{item:R-S-split}--\ref{item:R-S-tensor-ER-injective}. 
+
+	\ref{item:R-S-pure} $\Rightarrow$ \ref{item:R-S-cohomology-nonzero}: Suppose $R \into S$ is pure. Then, tensoring this map with $H_{\mathfrak{m}_{R}}^{d}(R)$ gives us an injection
+	\begin{equation*} 
+		H_{\mathfrak{m}_{R}}^{d}(R) \into H_{\mathfrak{m}_{R}}^{d}(R) \otimes_{R} S \cong H_{\mathfrak{m}_{R}}^{d}(S),
+	\end{equation*}
+	where the last isomorphism follows since we are working with the top local cohomology. Since $d = \dim(R)$, we see that the module on the left is nonzero, implying the same for the desired module on the right.
+
+	Lastly, assume that $R$ is a polynomial ring of positive characteristic $p > 0$. \newline
+	\ref{item:R-S-cohomology-nonzero} $\Rightarrow$ \ref{item:R-S-tensor-ER-injective}: Suppose that $R = K[x_{1}, \ldots, x_{d}]$ and $H_{\mathfrak{m}_{R}}^{d}(S) \neq 0$. We wish to show that $R \otimes_{R} E_{R} \to S \otimes_{R} E_{R}$ is injective. Since $R$ is a polynomial ring, the injective hull is simply the top local cohomology. As noted before, we have $H_{\mathfrak{m}_{R}}^{d}(R) \otimes_{R} S \cong H_{\mathfrak{m}_{R}}^{d}(S)$. \newline
+	Thus, we wish to show 
+	\begin{equation*} 
+		\varphi : H_{\mathfrak{m}_{R}}^{d}(R) \to H_{\mathfrak{m}_{R}}^{d}(S)
+	\end{equation*} 
+	is injective. We will compute these local cohomology modules using the \v{C}ech complex on $\{x_{1}, \ldots, x_{d}\}$. Set 
+	\begin{equation*} 
+		\eta \coloneqq \left[\dfrac{1}{x_{1} \cdots x_{d}}\right].
+	\end{equation*}
+	We will write $\eta_{R}$ or $\eta_{S}$ according to whether this is considered as an element in either $H_{\mathfrak{m}_{R}}^{d}(R)$ or $H_{\mathfrak{m}_{R}}^{d}(S)$. Since $R$ is a polynomial ring, we know that $\eta_{R}$ is a generator for the socle of $H_{\mathfrak{m}_{R}}^{d}(R)$. Thus, if $\varphi$ is not injective, then $\eta_{R}$ is in the kernel, i.e., $\eta_{S} = 0$. Applying the Frobenius map, we get that 
+	\begin{equation*} 
+		\left[\dfrac{1}{(x_{1} \cdots x_{d})^{q}}\right]_{S} = 0 \text{ for all $q = p^{e}$}.
+	\end{equation*}
+	But these elements generate $H_{\mathfrak{m}_{R}}^{d}(S)$ as an $S$-module. This shows that $H_{\mathfrak{m}_{R}}^{d}(S) = 0$, a contradiction.
+\end{proof}
+\begin{por} \label{por:pure-implies-local-cohomology-injective}
+	Suppose $R \into S$ is a degree preserving inclusion of $\mathbb{N}$-graded normal rings, that are finitely generated over a field $R_{0} = S_{0}$. Then,
+	\begin{center}
+		$R \into S$ is pure \quad $\Rightarrow$ \quad $H_{\mathfrak{m}_{R}}^{\dim(R)}(R) \to H_{\mathfrak{m}_{R}}^{\dim(R)}(S)$ is injective.
+	\end{center}
+\end{por}
+
+We now look at examples to see how various hypotheses in the above theorem cannot be dropped.
+
+\begin{enumerate}[label=(\alph*)]
+	\item ``Graded'' cannot be replaced with ``local'': \cite{ChakrabortyGurjarMiyanishi} 
+
+	The inclusion
+	\begin{equation*} 
+		\mathbb{C}[x]_{(x)} \into \dfrac{\mathbb{C}[x, y]_{(x, y)}}{(xy^{2} - y + x)}
+	\end{equation*}
+	is pure but not split. \newline
+	The above map does split if we pass to the completion.
+	%
+	\item \ref{item:R-S-cohomology-nonzero} $\Rightarrow$ \ref{item:R-S-pure} fails if $R$ is only assumed to be Gorenstein instead of polynomial in positive characteristic: The inclusion
+	\begin{equation*} 
+		R \coloneqq \dfrac{\mathbb{F}_{p}[x, y, z]}{(x^{3} + y^{3} + z^{3})} \into R^{1/p}
+	\end{equation*}
+	is pure $\Leftrightarrow$ $p \equiv 1 \mod 3$. 
+
+	However, $H_{\mathfrak{m}_{R}}^{2}(R^{1/p}) \neq 0$ for all primes.
+	%
+	\item \ref{item:R-S-cohomology-nonzero} $\Rightarrow$ \ref{item:R-S-pure} fails in characteristic zero: the inclusion
+	\begin{equation*} 
+		R \coloneqq \mathbb{C}[x_{1}, x_{2}, x_{3}] \into \dfrac{\mathbb{C}[x_{1}, x_{2}, x_{3}, y_{1}, y_{2}, y_{3}]}{((x_{1} x_{2} x_{3})^{2} - \sum_{i} y_{i} x_{i}^{3})}
+	\end{equation*}
+	is not pure since $(R \to S) \otimes_{R} R/(x_{1}^{3}, x_{2}^{3}, x_{3}^{3})$ is not injective: the nonzero element $(x_{1} x_{2} x_{3})^{2}$ is in the kernel. 
+
+	However, $H_{(x_{1}, x_{2}, x_{3})}^{3}(S) \neq 0$, as shown in \cite{RobertsComputationLocalCohomology}. 
+
+	Note that the above is still a graded inclusion of normal domains if we consider the grading $\deg(x_{i}) = 1$ and $\deg(y_{i}) = 3$.
+\end{enumerate}
+
+Note that in the last example, the target was not polynomial:
+
+\textbf{Question.} Suppose $R \into S$ is a graded inclusion of polynomial rings of characteristic $0$ and $H_{\mathfrak{m}_{R}}^{\dim(R)}(S) \neq 0$. Is $R \into S$ pure?
+
+We now return to the alternating group.
+
+\begin{thm} \label{thm:An-modular-not-pure}
+	Let $G \coloneqq A_{n}$ act on $S \coloneqq \mathbb{F}_{p}[x_{1}, \ldots, x_{n}]$ by permuting the variables. If $p$ divides $\md{G}$, then $S^{G} \into S$ is not pure.
+\end{thm}
+In \cite{GlassbrennerThesis} the above was shown for when $p$ divides $n(n-1)$. It was strengthened to $p$ dividing $\md{G} = \frac{n!}{2}$ in \cite{SinghFailureFpurityFregularityInvariants}. The proof we give is adapted from \cite{GoelJeffriesSingh}.
+\begin{rem}
+	In our proof, we will use the following facts about the degree $(-n)$ component of local cohomology:
+	\begin{itemize}
+		\item $\left[H_{\mathfrak{m}_{S^{G}}}^{n}(S)\right]_{-n}$ is one-dimensional.
+		\item $\left[H_{\mathfrak{m}_{S^{G}}}^{n}(S^{G})\right]_{-n} \neq 0$.
+	\end{itemize}
+	The first is true since $S$ is a standard graded polynomial ring in $n$ variables and $\mathfrak{m}_{S^{G}}S$ is $\mathfrak{m}_{S}$-primary. \newline
+	The second is true for any subgroup $G \le A_{n}$, by \cite[Theorem 4.4]{GoelJeffriesSingh}. \newline
+	For $G = A_{n}$ specifically, this can be explicitly worked out using the description of $S^{G}$ from \ref{item:alternating-group-description} on page \pageref{item:alternating-group-description}. Following that notation, one checks that $\left[\frac{\Delta}{e_{1} \cdots e_{n}}\right] \in H_{\mathfrak{m}_{S^{G}}}^{n}(S^{G})_{-n}$ is nonzero.
+\end{rem}
+\begin{proof} 
+	Suppose $p \mid \md{G}$. Let $\mathfrak{m}$ denote the homogeneous maximal ideal of $S^{G}$. Consider the trace map
+	\begin{equation*} 
+		\Tr \coloneqq \sum_{g \in G} g : S \to S^{G}.
+	\end{equation*}
+	It is straightforward to check that the map does take values in $S^{G}$ and is $S^{G}$-linear. Moreover, by Dedekind's independence of characters, the above map is nonzero. 
+
+	Note however that $\Tr$ is far from a splitting: The composition
+	\begin{equation} \label{eq:inclusion-trace-composition}
+		S^{G} \into S \xrightarrow{\Tr} S^{G}
+	\end{equation}
+	is the zero map. Indeed, if $s \in S^{G}$, then $\Tr(s) = \sum_{g \in G} g(s) = \sum_{g \in G} s = \md{G} s = 0$.
+
+	Nevertheless, we have a short exact sequence of $S^{G}$-modules given as
+	\begin{equation*} 
+		S \xrightarrow{\Tr} S^{G} \to S^{G}/\im(\Tr) \to 0.
+	\end{equation*}
+	Since $S^{G}$ is a domain, the cokernel has strictly smaller dimension. Thus, the right exact functor $H_{\mathfrak{m}}^{n}(-)$ vanishes on $S^{G}/\im(\Tr)$ giving us a surjection
+	\begin{equation*} 
+		H_{\mathfrak{m}}^{n}(S) \overset{\Tr}{\onto} H_{\mathfrak{m}}^{n}(S^{G}).
+	\end{equation*}
+	The above surjection is degree-preserving; this gives us a sequence of $K$-vector spaces:
+	\begin{equation*} 
+		H_{\mathfrak{m}}^{n}(S^{G})_{-n} \to H_{\mathfrak{m}}^{n}(S)_{-n} \overset{\Tr}{\onto} H_{\mathfrak{m}}^{n}(S^{G})_{-n}.
+	\end{equation*}
+
+	As noted after \Cref{eq:inclusion-trace-composition}, the above composition is zero. Since the middle vector space is one-dimensional and the outer vector spaces are nonzero, we conclude that the left map is not injective. By \Cref{por:pure-implies-local-cohomology-injective}, $S^{G} \into S$ is not pure.
+\end{proof}
+
+\section{A Helpful Vanishing Theorem}
+
+We recall the following vanishing theorem from \cite[Proposition~III.4.1]{PeskineSzpiro}.
+
+\begin{thm}[Peskine-Szpiro] \label{thm:peskine-szpiro}
+	Suppose $S$ is a polynomial ring of characteristic $p > 0$, and $\mathfrak{a}$ a homogeneous ideal such that $S/\mathfrak{a}$ is Cohen-Macaulay. Then,
+	\begin{equation*} 
+		H_{\mathfrak{a}}^{k}(S) = 0 \quad \text{for all } k \neq \htt(\mathfrak{a}).
+	\end{equation*}
+\end{thm}
+\begin{proof} 
+	Let $h \coloneqq \htt(\mathfrak{a})$. Since $S$ is Cohen-Macaulay, we know that $\depth_{\mathfrak{a}}(S) = \htt(\mathfrak{a})$. Thus, the first nonvanishing of local cohomology occurs at the $h$-th index. We show that $H_{\mathfrak{a}}^{k}(S) = 0$ for all $k > h$. 
+
+	Since $S/\mathfrak{a}$ is Cohen-Macaulay, the Auslander-Buchsbaum formula gives us that 
+	\begin{equation*} 
+		\pdim_{S}(S/\mathfrak{a}) = \depth(S) - \depth(S/\mathfrak{a}) = \dim(S) - \dim(S/\mathfrak{a}) = \htt(\mathfrak{a}) = h.
+	\end{equation*}
+	Thus, the minimal free resolution $F_{\bullet}$ of $S/\mathfrak{a}$ has length $h$:
+	\begin{equation*} 
+		F_{\bullet} : 0 \leftarrow F_{0} \leftarrow F_{1} \leftarrow \cdots \leftarrow F_{h} \leftarrow 0.
+	\end{equation*}
+	Since $S$ is a polynomial ring, the Frobenius endomorphism $\Frob$ is flat. Thus, $\Frob^{e}(F_{\bullet})$ is acyclic, and resolves $S/\mathfrak{a}^{[p^{e}]}$ for all $e \ge 1$. In particular, these quotients have projective dimension $\le h$. This give us
+	\begin{equation*} 
+		H_{\mathfrak{a}}^{k}(S) = \colim_{e \to \infty} \Ext_{S}^{k}(S/\mathfrak{a}^{\left[p^{e}\right]}, S) = 0 \quad \text{for all } k > h. \qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{rem}
+	Lyubeznik \cite{LyubeznikVanishingLocalCohomologyPositive} showed that if $S$ is a polynomial ring of positive characteristic, and $\mathfrak{a}$ is a homogeneous ideal, then
+	\begin{equation*} 
+		H_{\mathfrak{a}}^{k}(S) = 0 \quad\Leftrightarrow\quad H_{\mathfrak{m}_{S}}^{\dim(S) - k}(S/\mathfrak{a}) \text{ is annihilated by some } \Frob^{e}.
+	\end{equation*}
+\end{rem}
+
+\section{Classical Group Actions}
+
+The next sections will discuss the following \emph{classical group actions}, in the following order.
+
+\begin{enumerate}[label=(\Roman*)]
+	\item (Special Linear Group) $\SL_{t}(K)$ acts on $K[Y_{t \times n}]$, where the action is given by
+	\begin{equation*} 
+		M : Y \mapsto MY.
+	\end{equation*}
+	To recall: $\SL_{t}(K) = \{M : \det(M) = 1\} \le \GL_{t}(K)$.
+	%
+	\item (General Linear Group) $\GL_{t}(K)$ acts on $K[Y_{m \times t}, Z_{t \times n}]$, where the action is given by
+	\begin{equation*} 
+		M : 
+		\begin{cases}
+			Y \mapsto YM^{-1}, \\
+			Z \mapsto MZ.
+		\end{cases}
+	\end{equation*}
+	%
+	\item (Symplectic Group) $\Sp_{2t}(K)$ acts on $K[Y_{2t \times n}]$, where the action is given by
+	\begin{equation*} 
+		M : Y \mapsto MY.
+	\end{equation*}
+	To recall: Define
+	\begin{equation*} 
+		\Omega \coloneqq 
+		\two{0}{\id_{t}}{-\id_{t}}{0} \in \GL_{2t}(K).
+	\end{equation*}
+	Then, $\Sp_{2t}(K) = \{M : M^{\trans} \Omega M = \Omega\} \le \GL_{2t}(K)$.
+	%
+	\item (Orthogonal Group) $\OO_{t}(K)$ acts on $K[Y_{t \times n}]$, where the action is given by
+	\begin{equation*} 
+		M : Y \mapsto MY.
+	\end{equation*}
+	To recall: $\OO_{t}(K) = \{M : M^{\trans} M = 1\} \le \GL_{t}(K)$.
+\end{enumerate}
+
+We use the example of $\SL_{t}(K)$ to explain our notation: $K[Y_{t \times n}]$ is the polynomial ring in $tn$ variables over $K$. We imagine the variables set as $\{y_{ij} : 1 \le t \le i,\, 1 \le j \le n\}$. We shall use $Y$ to refer to the corresponding obvious $t \times n$ matrix. The action of $M \in \SL_{t}(K)$ is given by mapping the entries of $Y$ to the corresponding entries of $MY$.
+
+The next four sections will elaborate on the purity of invariant subrings of each of these subgroups in positive characteristic. As noted earlier (cf. \ref{item:linearly-reductive-classical} on page \pageref{item:linearly-reductive-classical}), if $\chr(K) = 0$, then the subrings are pure.
+
+The common underlying template in the following sections is the following:
+\begin{enumerate}[label=\textsc{Step} \arabic*.]
+	\item Identify the invariant subring $R \coloneqq S^{G}$. We will be assuming that the field $K$ is infinite, see however \Cref{rem:theorem-is-for-finite-fields-too}. In each case, there will be some obvious invariants, and these will end up generating the invariant subring.
+	%
+	\item ``Understand'' the \deff{nullcone}: $S/\mathfrak{m}_{R}S$. For example, is this Cohen-Macaulay? If not, can we ``understand'' the minimal primes of $\mathfrak{m}_{R}S$?
+	%
+	\item Apply \mynameref{thm:peskine-szpiro} and \Cref{prop:purity-equivalence} appropriately.
+	%
+	\item Deduce that purity implies restrictive numerical conditions on $t$, $n$. For such conditions, it is (comparatively) easy to check purity. Thus, obtain a complete characterisation.
+\end{enumerate}
+
+\begin{rem}
+	Each of these cases have the corresponding analogous question: 
+	\begin{center}
+		Is $S^{G}$ a (graded) pure subring of \emph{some} polynomial ring? 
+	\end{center}
+	We will see in each section that the invariant subrings are interesting objects in their own right. By \Cref{rem:consequences-of-purity}, having a positive answer to the above will shed light on various properties of $S^{G}$.
+\end{rem}
+
+\begin{rem}
+	In the process of proving these results, it was proven for each of the four classical group actions (in any characteristic), the irreducible components of the nullcone are normal and Cohen-Macaulay.
+
+	This leads to the following question: Is there some linearly reductive group (say over $\mathbb{C}$) and some action for which the above is not true? 
+\end{rem}
+
+\section{\texorpdfstring{$\SL$}{SL}}
+
+The easiest and most illustrative case is the special linear group. 
+
+\begin{tcolorbox}[parbox=false]
+	\textbf{Setup.} 
+
+	$G \coloneqq \SL_{t}(K)$ is acting on $S \coloneqq K[Y_{t \times n}]$, where $M : Y \mapsto MY$.
+\end{tcolorbox}
+
+One checks that the $t \times t$ minors of $Y$ are fixed by $G$, and so $K[\text{$t \times t$ minors}] \subset S^{G}$.
+
+\begin{thm}[{\cite{Igusa}}, {\cite{DeConciniProcesi}}]
+	If $K$ is infinite, then $K[\text{$t \times t$ minors}] = S^{G}$.
+\end{thm}
+
+The above ring is of independent interest since $\Proj(S^{G}) = \operatorname{Grass}(t, n)$, the Grassmannian variety.
+
+\begin{thm}[{\cite[Theorem 3.1]{HochsterJeffriesPandeySingh}}]
+	If $\chr(K) > 0$ and $t \le n$, then
+	\begin{center} 
+		$K[\text{$t \times t$ minors}] \into K[Y_{t \times n}]$ is pure $\quad\Leftrightarrow\quad$ $t = 1$ or $t = n$.
+	\end{center}
+\end{thm}
+
+\begin{rem} \label{rem:theorem-is-for-finite-fields-too}
+	The above statement, as written, is true even if $K$ is a finite field. However, $K[\text{$t \times t$ minors}]$ is not the complete $\SL_{t}(K)$-invariant subring in that case.
+\end{rem}
+
+\begin{proof} 
+	Let $R \coloneqq K[\text{$t \times t$ minors}]$ and $S \coloneqq K[Y_{t \times n}]$. In this case, the nullcone\footnote{Strictly speaking, the term ``nullcone'' is used in the invariant theory context. As noted in \Cref{rem:theorem-is-for-finite-fields-too}, this is slightly iffy in the finite field case.} $S/\mathfrak{m}_{R} S$ is precisely $S/I_{t}(Y)$. By \cite{EagonNorthcott} or \cite{HochsterEagon}, we have that the nullcone is Cohen-Macaulay and $\htt(I_{t}(Y)) = n - t + 1$.
+
+	Thus, by \mynameref{thm:peskine-szpiro}, we have that
+	\begin{equation*} 
+		H_{\mathfrak{m}_{R} S}^{\dim(R)}(S) \neq 0 \quad\Leftrightarrow\quad \equalto{\dim(R)}{t(n - t) + 1} = \equalto{\htt(\mathfrak{m}_{R}S)}{n - t + 1}.
+	\end{equation*}
+	Rearranging terms gives us
+	\begin{equation*} 
+		H_{\mathfrak{m}_{R} S}^{\dim(R)}(S) \neq 0 \Leftrightarrow (t - 1)(n - t) = 0 \Leftrightarrow t \in \{1, n\}.
+	\end{equation*}
+
+	Now, if $R \into S$ is pure, then \Cref{prop:purity-equivalence} tells us that $H_{\mathfrak{m}_{R} S}^{\dim(R)}(S) \neq 0$, i.e., $t \in \{1, n\}$. This proves \forward. 
+
+	\backward If $t = 1$, then $R = S$ and the inclusion is pure. If $t = n$, then $R = K[\det(Y)]$. We may extend $\det(Y)$ to a homogeneous system of parameters for $S$. This gives us a Noether normalisation $A \subset S$. Since $S$ is Cohen-Macaulay, $S$ is free over $A$, which is in turn free over $R$. Thus, $R \into S$ splits.
+\end{proof}
+
+\begin{rem}
+	If $t = n - 1 > 1$, then the above tells us that the natural inclusion
+	\begin{equation*} 
+		K[\text{$(n - 1) \times (n - 1)$ minors}] \subset K[Y_{(n - 1) \times n}]
+	\end{equation*}
+	is \textbf{not} pure in positive characteristic. However, the subring on the left is known to be a polynomial ring.
+\end{rem}
+
+\textbf{Question.} If $\chr(K) > 0$ and $2 \le t \le n - 2$, is $R \coloneqq K[\text{$t \times t$ minors}]$ a (graded) pure subring of some polynomial ring over $K$? 
+
+The first example of the preceding question is $n = 4$ and $t = 2$. In this case, we are asking whether
+\begin{equation*} 
+	R \cong \dfrac{K[u, v, w, x, y, z]}{(ux + vy + wz)}
+\end{equation*}
+is a (graded) pure subring of some polynomial ring over $K$. This is open at the time of writing these notes.
+
+As remarked earlier, $\SL$ was the easiest case out of the four. For the groups in the next sections, we will state the theorem and outline some relevant ideas.
+
+\section{\texorpdfstring{$\GL$}{GL}}
+
+\begin{tcolorbox}[parbox=false]
+	\textbf{Setup.} 
+
+	$G \coloneqq \GL_{t}(K)$ is acting on $S \coloneqq K[Y_{m \times t}, Z_{t \times n}]$, where 
+	\begin{equation*} 
+		M : 
+		\begin{cases}
+			Y \mapsto YM^{-1}, \\
+			Z \mapsto MZ.
+		\end{cases}
+	\end{equation*}
+\end{tcolorbox}
+
+One checks that the entries of $YZ$ are fixed by $G$, and so $K[YZ] \subset S^{G}$.
+
+\begin{thm}[{\cite{DeConciniProcesi}}, {\cite{HashimotoClassicalInvariant}}]
+	If $K$ is infinite, then $K[YZ] = S^{G}$.
+\end{thm}
+
+The above ring is of independent interest since $K[YZ] \cong K[X_{m \times n}]/I_{t + 1}(X)$ is the generic determinantal ring.
+
+\begin{thm}[{\cite[Theorem 4.2]{HochsterJeffriesPandeySingh}}]
+	If $\chr(K) > 0$, then
+	\begin{center} 
+		$K[YZ] \into K[Y_{m \times t}, Z_{t \times n}]$ is pure $\quad\Leftrightarrow\quad$ 
+		$\begin{cases}
+			t = 1, & \text{or} \\
+			m \le t, & \text{or} \\
+			n \le t.
+		\end{cases}$
+	\end{center}
+\end{thm}
+
+In this case, the nullcone is $K[Y, Z]/(YZ)$, where $(YZ) = I_{1}(YZ)$ denotes the ideal generated by the entries of $YZ$. This nullcone is usually not Cohen-Macaulay (or even equidimensional). 
+
+We analyse the algebraic set cut out by $(YZ)$. Suppose $(\overline{Y}, \overline{Z}) \in V(YZ)$. This gives us that $\overline{Y} \cdot \overline{Z} = 0$, i.e.,
+\begin{equation*} 
+	K^{m} \xleftarrow{\overline{Y}} K^{t} \xleftarrow{\overline{Z}} K^{n}
+\end{equation*}
+is a complex, i.e., $\im(\overline{Z}) \subset \ker(\overline{Y})$. By rank-nullity, this implies $\rank(\overline{Y}) + \rank(\overline{Z}) \le t$. Thus, the following ideals are natural to consider:
+\begin{equation*} 
+	\mathfrak{p}_{ij} \coloneqq I_{i + 1}(Y) + I_{j + 1}(Z) + (YZ),
+\end{equation*}
+where $i$, $j$ are nonnegative integers satisfying $i + j = t$. 
+
+Then, the following statements are true:
+\begin{itemize}
+	\item Each $\mathfrak{p}_{ij}$ is a prime ideal.
+	\item The minimal elements of $\{\mathfrak{p}_{ij} : i + j = t\}$ are the minimal primes of $\mathfrak{m}_{R}S$, i.e., these define the irreducible components of $V(YZ)$.
+\end{itemize}
+
+Kempf showed (\cite{KempfImagesHomogeneousVectorBundles}, \cite{KempfCollapsingHomogeneousBundles}) that $\mathbb{C}[Y, Z]/\mathfrak{p}_{ij}$ has rational singularities and is a normal Cohen-Macaulay domain. De Concini-Strickland \cite[Theorem 2.7]{DeConciniStrickland} and Huneke \cite[Theorem 6.2]{HunekeArithmeticPerfectionBEVarieties} independently showed that $K[Y, Z]/\mathfrak{p}_{ij}$ is a normal Cohen-Macaulay domain for any field $K$. 
+
+Using this along with the Mayer-Vietoris sequence and \mynameref{thm:peskine-szpiro} gives the result.
+
+\section{\texorpdfstring{$\Sp$}{Sp}}
+
+\begin{tcolorbox}[parbox=false]
+	\textbf{Setup.} 
+
+	$G \coloneqq \Sp_{2t}(K)$ is acting on $K[Y_{2t \times n}]$, where $M : Y \mapsto MY$.
+\end{tcolorbox}
+
+As noted earlier, we have $\Sp_{2t}(K) = \{M : M^{\trans} \Omega M = \Omega\}$, where $\Omega \coloneqq \two{0}{\id_{t}}{-\id_{t}}{0}$. 
+
+It is straightforward to note that the entries of $Y^{\trans} \Omega Y$ are fixed; this follows from the symbolic computation that
+\begin{equation*} 
+	Y^{\trans} \Omega Y \mapsto Y^{\trans} M^{\trans} \Omega M Y = Y^{\trans} \Omega Y. 
+\end{equation*}
+
+Thus, $K[Y^{\trans} \Omega Y] \subset S^{G}$.	
+
+\begin{thm}[{\cite{DeConciniProcesi}}, {\cite{HashimotoClassicalInvariant}}]
+	If $K$ is infinite, then $K[Y^{\trans} \Omega Y] = S^{G}$.	
+\end{thm}
+
+The above ring is of independent interest since $K[Y^{\trans} \Omega Y] \cong K[X_{n \times n}^{\text{alt}}]/\operatorname{Pf}_{2t + 2}(X)$ is the generic Pfaffian ring.
+
+\begin{thm}[{\cite[Theorem 6.9]{HochsterJeffriesPandeySingh}}]
+	If $\chr(K) > 0$, then
+	\begin{center} 
+		$K[Y^{\trans} \Omega Y] \into K[Y_{2t \times n}]$ is pure $\quad\Leftrightarrow\quad$ $n \le t + 1$.
+	\end{center}
+\end{thm}
+
+While proving this result, it was shown in \cite[Theorem 6.8]{HochsterJeffriesPandeySingh} that
+\begin{equation*} 
+	\dfrac{K[Y_{2t \times n}]}{(Y^{\trans} \Omega Y)}
+\end{equation*}
+is a normal Cohen-Macaulay domain for any field $K$; previously in \cite{KraftSchwarz}, it was shown that $\mathbb{C}[Y]/(Y^{\trans} \Omega Y)$ is a normal domain. 
+
+\begin{fakerem}
+	Suppose $\overline{Y} \in V(Y^{\trans} \Omega Y)$. Then,
+	\begin{equation*} 
+		\text{$K^{n} \xleftarrow{\overline{Y}^{\trans}} K^{2t}$} \xleftarrow{\Omega} K^{2t} \xleftarrow{\overline{Y}} K^{n}
+	\end{equation*}
+	is a complex. Since $\Omega$ is invertible, rank-nullity as before gives us
+	\begin{equation*} 
+		\rank(\overline{Y}^{\trans}) + \rank(\overline{Y}) \le 2t.
+	\end{equation*}
+	Since $\rank(\overline{Y}^{\trans}) = \rank(\overline{Y})$, we get $\rank(\overline{Y}) \le t$.
+
+	Nullstellensatz tells us that $I_{t + 1}(Y) \subset \rad(Y^{\trans} \Omega Y)$.
+\end{fakerem}
+
+\begin{exe}
+	Show that $I_{t + 1}(Y) \subset (Y^{\trans} \Omega Y)$. 
+\end{exe}
+Of course, this follows from some of the results stated above since they imply that $(Y^{\trans} \Omega Y)$ is a prime ideal.
+
+\section{\texorpdfstring{$\OO$}{O}}
+
+\begin{tcolorbox}[parbox=false]
+	\textbf{Setup.} 
+
+	$G \coloneqq \OO_{t}(K)$ is acting on $K[Y_{t \times n}]$, where $M : Y \mapsto MY$.
+\end{tcolorbox}
+
+It is straightforward to note that the entries of $Y^{\trans} Y$ are fixed; this follows from the symbolic computation that
+\begin{equation*} 
+	Y^{\trans} Y \mapsto Y^{\trans} M^{\trans} M Y = Y^{\trans} Y.
+\end{equation*}
+
+Thus, $K[Y^{\trans} Y] \subset S^{G}$.	
+
+\begin{thm}[{\cite{DeConciniProcesi}}, {\cite{RichmanFundamentalTheoremsVectorInvariants}}]
+	If $K$ is infinite, then 
+	\begin{itemize}
+		\item $K[Y^{\trans} Y] = S^{G}$ if $\chr(K) \neq 2$, and
+		\item $K[Y^{\trans} Y, \sum_{i} Y_{ij}] = S^{G}$ if $\chr(K) = 2$.
+	\end{itemize}
+\end{thm}
+
+The above ring is of independent interest since $K[Y^{\trans} Y] \cong K[X_{n \times n}^{\text{sym}}]/I_{t + 1}(X)$ is the symmetric determinantal ring.
+
+\begin{thm}[{\cite[Theorems 7.14--7.15]{HochsterJeffriesPandeySingh}}]
+	If $\chr(K) \ge 3$, then
+	\begin{center} 
+		$K[Y^{\trans} Y] \into K[Y_{t \times n}]$ is pure $\quad\Leftrightarrow\quad$ $t = 1$, or $t = 2$, or $n \le (t + 2)/2$.
+	\end{center}
+
+	If $\chr(K) = 2$, then the following are equivalent:
+	\begin{itemize}
+		\item $K[Y^{\trans} Y] \into K[Y_{t \times n}]$ is pure.
+		\item $K[Y^{\trans} Y, \sum_{i} Y_{ij}] \into K[Y_{t \times n}]$ is pure.
+		\item $t = 1$ or $n \le (t + 1)/2$.
+	\end{itemize}
+\end{thm}
+
+In proving the above, the following was shown.
+
+\begin{thm}[{\cite[\S7]{HochsterJeffriesPandeySingh}}]
+	Let $K$ be any field, $S \coloneqq K[Y_{t \times n}]$, and $\mathfrak{a} \coloneqq I_{1}(Y^{\trans} Y)$.
+	\begin{enumerate}[label=(\alph*)]
+		\item Suppose $\chr(K) \neq 2$ and $\iota \coloneqq \sqrt{-1} \in K$. Then,
+		\begin{itemize}
+			\item $\mathfrak{a}$ is radical $\Leftrightarrow$ $2n \le d$.
+			\item $\mathfrak{a}$ is prime $\Leftrightarrow$ $2n < d$.
+			\item If $t$ is odd \underline{or} $2n < t$, then $S/\rad(\mathfrak{a})$ is a Cohen-Macaulay domain.
+			\item If $t$ is even \underline{and} $2n \ge t$, then $\mathfrak{a}$ has minimal primes $\mathfrak{P}$ and $\mathfrak{Q}$; $S/\mathfrak{P}$ and $S/\mathfrak{Q}$ are Cohen-Macaulay domains.
+		\end{itemize}
+		%
+		%
+		\item Suppose $\chr(K) = 2$. Then $S/\rad(\mathfrak{a})$ is a Cohen-Macaulay domain.
+	\end{enumerate}
+\end{thm}
+
+\begin{rem}
+	Let $\overline{Y} \in V(\mathfrak{a})$. Then we have a complex
+	\begin{equation*} 
+		\text{$K^{n} \xleftarrow{\overline{Y}^{\mathsf{T}}} K^{d}$} \xleftarrow{\overline{Y}} K^{n}
+	\end{equation*}
+	% doing the weird text thing above because it compiles weirdly otherwise
+	Hence, $I_{\fl{\sfrac{t}{2}} + 1}(\overline{Y}) = 0$. 
+
+	Thus, as before, Nullstellensatz tells us that $I_{\fl{\sfrac{t}{2}} + 1}(Y) \subset \rad(\mathfrak{a})$.
+\end{rem}
+
+Unlike before, one cannot drop the ``rad'': Consider $t = n = 2$. We have
+\begin{equation*} 
+	Y^{\trans}Y = \two{y_{11}}{y_{21}}{y_{12}}{y_{22}} \cdot \two{y_{11}}{y_{12}}{y_{21}}{y_{22}} = \two{y_{11}^{2} + y_{21}^{2}}{y_{11} y_{12} + y_{21} y_{22}}{y_{11} y_{12} + y_{21} y_{22}}{y_{12}^{2} + y_{22}^{2}}.
+\end{equation*}
+The entries of the matrix generate $\mathfrak{a}$. In particular, the degree two elements of $\mathfrak{a}$ are $K$-linear combinations of these elements. Using this, we see that
+\begin{equation*} 
+	I_{\fl{\sfrac{t}{2}} + 1}(Y) = I_{2}(Y) = (y_{11}y_{22} - y_{12}y_{21}) \not\subset \mathfrak{a}.
+\end{equation*}
+
+The minimal primes of $\mathfrak{a}$ are
+\begin{align*} 
+	(y_{11} - \iota y_{21}, y_{12} - \iota y_{22}), \\
+	(y_{11} + \iota y_{21}, y_{12} + \iota y_{22}).
+\end{align*}
+
+\begin{rem}
+	Suppose $t = 2k$. Let $A$ be a $k \times n$ matrix, and $Q \in \OO_{k}$. Consider the vertically stacked matrix
+	\begin{equation*} 
+		\overline{Y} \coloneqq \col{A}{\iota QA}.
+	\end{equation*}
+	Then,
+	\begin{equation*} 
+		\overline{Y}^{\trans} \overline{Y} = 
+		\begin{bmatrix}
+			A^{\trans} & \iota A^{\trans} Q^{\trans}
+		\end{bmatrix}
+		\col{A}{\iota QA} = 
+		\begin{bmatrix}A^{\trans} A + \iota^{2} A^{\trans} Q^{\trans} Q A \end{bmatrix} = 
+		\begin{bmatrix}A^{\trans} A - A^{\trans} A \end{bmatrix} = O.
+	\end{equation*}
+	This gives us a map
+	\begin{equation*} 
+		\OO_{k} \times \mathbb{A}^{k \times n} \to V(\mathfrak{a}).
+	\end{equation*}
+	The two components of $V(\mathfrak{a})$ correspond to
+	\begin{equation*} 
+		\OO_{k} = \SO_{k} \sqcup\ (\OO_{k} \setminus \SO_{k}).
+	\end{equation*}
+\end{rem}
+
+\printbibliography
+\end{document}
