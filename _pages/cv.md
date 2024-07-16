@@ -11,19 +11,15 @@ redirect_from:
 
 Education
 ======
-* B.S. in Mathematics, Indian Institute of Technology Bombay, 2022
-<!-- * Ph.D in Version Control Theory, GitHub University, 2018 (expected) -->
+* Ph.D in Mathematics, University of Utah, 2022–
+* B.S. in Mathematics, Indian Institute of Technology Bombay, 2018–2022
 
-Skills
+Technical Skills
 =====
 * $\LaTeX$
 * Macaulay2
 * Python
 * Sage
+* Magma
 
 For a more elaborate CV, see [this PDF](https://aryamanmaithani.github.io/files/CV.pdf).
-
-<!-- <object data='https://aryamanmaithani.github.io/files/CV.pdf#toolbar=1' 
-        type='application/pdf' 
-        width='100%' 
-        height='400px'> -->
