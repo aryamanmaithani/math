@@ -1,3 +1,4 @@
+\usepackage[dvipsnames]{xcolor}
 % -------------------
 % Tikz & PGF
 % -------------------
@@ -62,7 +63,7 @@
 	% totcount,			% Define counters
 	tcolorbox,			% Use tcolorbox
 	witharrows,			% Arrow transitions
-	xcolor,			    % Define Colors
+	% xcolor,			    % Define Colors
 	% ytableau,			% Young diagrams
 }
 
@@ -84,9 +85,9 @@
 \usepackage[all]{xy}
 \hypersetup{
 	colorlinks = true,
-	% citecolor = blue,
-  	% linkcolor  = blue,
-  	% urlcolor   = blue
+	linkcolor = BrickRed,
+	citecolor = Green,
+	% urlcolor   = blue
   	filecolor = red,
 }
 \PassOptionsToPackage{hyphens}{url}
@@ -172,6 +173,7 @@
 \DeclareMathOperator{\Max}{Max}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SU}{SU}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\trace}{trace}
@@ -247,13 +249,15 @@
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\fl}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\inm}{\in_m}
-\newcommand{\deff}[1]{{\color{blue}#1}}
+\newcommand{\deff}[1]{{\color{Turquoise}#1}}
 \newcommand{\dcos}[3]{#1 \reflectbox{\ensuremath{/}} #2 / #3}
 \newcommand*{\I}{\hat{\imath}}
 \newcommand*{\J}{\hat{\jmath}}
 \newcommand*{\K}{\hat{k}}
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\acts}{\curvearrowright}
+\newcommand{\mapsfrom}{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
 \newcommand{\forward}{($\Rightarrow$)\ }
 \newcommand{\backward}{($\Leftarrow$)\ }
 \renewcommand{\pmod}[1]{\ (\operatorname{mod} #1)}
@@ -300,6 +304,7 @@
 \newtheorem{fakelem}[fakethm]{Lemma}
 \newtheorem{fakecor}[fakethm]{Corollary}
 \newtheorem{fakerem}[fakethm]{Remark}
+\newtheorem{fakeques}[fakethm]{Question}
 
 \newtheorem{fakedefn}[fakethm]{Definition}
 \newtheorem{fakeex}[fakethm]{Example}
@@ -346,6 +351,10 @@
 \newenvironment{ex}
 {\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeex}}
 {\end{fakeex}\end{shaded}}
+
+\newenvironment{ques}
+{\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeques}}
+{\end{fakeques}\end{shaded}}
 
 \newenvironment{obs}
 {\colorlet{shadecolor}{purple!15}\begin{shaded}\begin{fakeobs}}
