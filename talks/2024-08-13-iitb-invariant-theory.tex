@@ -1,0 +1,427 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+% \usepackage{sepfootnotes}
+\newcommand{\myint}{I\!I}
+
+\setcounter{tocdepth}{2}
+
+\title{Invariant Theory of Commutative Rings}
+\author{Aryaman Maithani}
+\date{August 13, 2024}
+
+\usepackage[backend=biber,style=alphabetic,doi=false,isbn=false,url=false,eprint=false,maxbibnames=5]{biblatex}
+\addbibresource{talks.bib}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section*{Introduction}
+
+Notes I made for my talk at the commutative algebra seminar at IIT Bombay. Talk abstract: \newline
+
+\begin{blockquote}
+	Given a group $G$ acting on a ring $R$, we consider the subring $R^{G}$, the subring of elements fixed by $G$. It's a natural question to ask what ``good'' properties of $R$ are inherited by $R^{G}$. Some of these questions were considered by Hilbert and Noether, and were a motivation to study noetherian rings. We will discuss some of these results. \newline
+	This talk should be accessible to someone who's done a first course in module theory.
+\end{blockquote}
+
+\section{Group actions}
+
+Throughout the talk, $k$ will denote an arbitrary field, $R$ a commutative ring with unity, and $G$ a group. An \deff{action} of $G$ on $R$ is a group homomorphism $G \to \Aut(R)$. The \deff{fixed subring} is defined as
+\begin{equation*} 
+	R^{G} \coloneqq \{r \in R : g(r) = r \text{ for all } g \in G\}.
+\end{equation*}
+
+Some natural questions to ask are:
+
+\begin{ques}
+	Are ``good'' properties of $R$ inherited by $R^{G}$? \newline
+	Some examples of properties: noetherian, domain, normal, PID, UFD, polynomial, regular, Gorenstein, Cohen-Macaulay, $F$-regular, etc.
+\end{ques}
+
+\begin{ques}
+	What can we say about the inclusion $R^{G} \into R$? \newline
+	Is it integral? Module-finite? Algebra-finite? Split? \newline
+	Recall that an inclusion of $\iota \colon R \into S$ is said to be \deff{split} if it is split in the category of $R$-modules, i.e., if there an $R$-linear map $p \colon S \to R$ such that $p \circ \iota = \id_{R}$.
+\end{ques}
+
+\begin{ex}[Symmetric group acting on the polynomial ring] \label{ex:symmetric-group-action} \phantom{h} \newline
+	$S_{n}$ acts naturally on $R \coloneqq k[x_{1}, \ldots, x_{n}]$ by permuting the variables. \newline
+	We have $R^{S_{n}} = k[e_{1}, \ldots, e_{n}]$, where $e_{1}, \ldots, e_{n}$ are the elementary symmetric polynomials. \newline
+	In this case, the fixed subring is again a polynomial ring as the $e_{i}$ are algebraically independent and the inclusion $R^{S_{n}} \into R$ is split\footnotemark, independent of characteristic. \newline
+	This is also an integral extension since 
+	\begin{equation*} 
+		(T - x_{1}) \cdots (T - x_{n}) \in R^{S_{n}}[T].
+	\end{equation*}
+\end{ex}
+\footnotetext{There are multiple ways of seeing this: One is the fact that $R \into S$ always splits if the extension is finite and $R$ is a polynomial ring. The other is that $R$ is a free $R^{S_{n}}$-module with a basis given by elements of the form $x_{1}^{<1} x_{2}^{<2} \cdots x_{n}^{<n}$.}
+
+\begin{obs}
+	If $\md{G} < \infty$, then $R^{G} \into R$ is integral: every $r \in R$ satisfies the monic polynomial 
+	\begin{equation*} 
+		\prod_{g \in G} (x - g(r)) \in R^{G}[x].
+	\end{equation*}
+\end{obs}
+
+\section{Noetherian and Splitting}
+
+The answer to the invariant subring inheriting the property of being noetherian is ``no'' is general:
+
+\begin{ex}[Nagarajan \cite{NagarajanNoetherianAction}] \label{ex:nagarajan}
+	Let $R \coloneqq \mathbb{F}_{2}(a_{1}, a_{2}, \ldots)[\![x, y]\!]$ and $G \coloneqq \mathbb{Z}/2$. There is an action of $G$ on $R$ such that $R^{G}$ is not noetherian.
+\end{ex}
+Note that in the above example, $R$ is a really nice ring: a regular local ring. Note that the order of the group is not invertible in the ring.
+
+\begin{rem}
+	The above also implies that $R^{G} \into R$ is not a module-finite extension.
+
+	This is due to the Eakin-Nagata theorem which states: if $R \into S$ is a module-finite extension of rings, then $R$ is noetherian iff $S$ is so.
+	
+	Thus, Nagarajan's example \ref{ex:nagarajan} shows that $R^{G} \into R$ need not be algebra-finite either. (An algebra-finite integral extension is module-finite.)
+
+	Note that by Galois theory, $\Frac(R)^{G} \into \Frac(R)$ \emph{is} a module-finite extension. A rank two extension, in fact.
+\end{rem}
+
+\begin{thm}
+	Let $G$ be a finite group acting on a ring $R$ containing $\frac{1}{\md{G}}$. Then,
+	\begin{equation*} 
+		R^{G} \into R
+	\end{equation*}
+	splits with a splitting being given as
+	\begin{equation*} 
+		\frac{1}{\md{G}} \sum_{g \in G} g(r) \mapsfrom r.
+	\end{equation*}
+	The above is called the \deff{Reynolds operator}.
+
+	Consequently, for any ideal $I \subset R^{G}$, one has that
+	\begin{equation*} 
+		IR \cap R^{G} = I.
+	\end{equation*}
+	In particular, if $R$ is noetherian, then so is $R^{G}$.
+\end{thm}
+
+The above is not a necessary condition for splitting, as witnessed by \Cref{ex:symmetric-group-action}. 
+\begin{ex}
+	The alternating group $A_{3} \le S_{3}$ acts on $R \coloneqq k[x, y, z]$ by permuting the variables. If $\chr(k) \neq 2$, then $R^{A_{3}} = k[e_{1}, e_{2}, e_{3}, \Delta]$, where $\Delta \coloneqq (x - y)(y - z)(z - x)$.
+
+
+	Note that $\md{A_{3}} = 3$ and thus, $R^{A_{3}} \into R$ splits if $\chr(k) \neq 3$.
+
+	\textbf{Claim.} If $\chr(k) = 3$, then $R^{A_{3}} \into R$ is \emph{not} split.
+	\begin{proof} 
+		Assume $\chr(k) = 3$. It suffices to construct an ideal $I \subset R^{A_{3}}$ such that $IR \cap R^{A_{3}} \neq I$. To this end, consider $I \coloneqq (e_{1}, e_{2}, e_{3})R^{A_{3}}$. It is not difficult to check that $\Delta \notin I$. % (It might be helpful to use the description $R^{A_{3}} = k[e_{1}, e_{2}, e_{3}, \Delta]$.)
+
+		We show that $\Delta \in IR$. In fact, we show that $\Delta \in (e_{1}, e_{2}) R$. First, note that
+		\[\begin{WithArrows}[displaystyle]
+			(e_{1},\, e_{2}) R &= (x + y + z,\, xy + (x + y)z) R \\
+			&= (x + y + z,\, xy - (x + y)^{2}) R \\
+			&= (x + y + z,\, (x + y)^{2} - xy) R \\
+			&= (x + y + z,\, x^{2} + xy + y^{2}) R \Arrow{$\chr(k) = 3$}\\
+			&= (x + y + z,\, (x - y)^{2}) R. 
+		\end{WithArrows}\]
+
+		Now, modulo $(e_{1}, e_{2})R$, we note that
+		\[\begin{WithArrows}[displaystyle]
+			\Delta &= (x - y)(y - z)(z - x) \Arrow{$z \equiv -(x + y)$} \\
+			&\equiv -(x - y)(2y + x)(2x + y) \\
+			&= (x - y)^{3} \equiv 0. \qedhere
+		\end{WithArrows}\]
+
+	\end{proof}
+\end{ex}
+
+\begin{rem}
+	It is known (cf. \cite{SinghFailureFpurityFregularityInvariants}) that $R^{A_{n}} \into R$ splits precisely if $\chr(k) \nmid \md{A_{n}}$.
+\end{rem}
+
+These questions about finiteness were some forms of one of Hilbert's question (see \Cref{ques:hilbert-fourteen}). The following result is due to Emmy Noether, which helped motivate her development of noetherian rings.
+
+\begin{thm}[Noether] \label{thm:noether-finitely-generated}
+	Let $A$ be a noetherian ring, $R$ a finitely generated $A$-algebra, and $G$ a \underline{finite} group acting on $R$ via \underline{$A$-algebra automorphisms}. Then, $R^{G}$ is a finitely generated $A$-algebra and hence, noetherian.
+\end{thm}
+\begin{proof}
+	This follows, for example, from \cite[Proposition 7.8]{AtiyahMacdonald}: consider the tower of extensions $A \subset R^{G} \subset R$; the latter extension is integral as noted before.
+\end{proof}
+
+Of particular interest is the case when $A = k$ is a field, and $R = k[x_{1}, \ldots, x_{n}]$ is the polynomial algebra. In fact, even restricting to graded automorphisms of $R$ is of considerable interest. Note that such an action is determined by the the images of the variables $x_{i}$, which must necessarily be mapped to (homogeneous) linear polynomials. This gives a natural identification 
+\begin{equation*} 
+	\GL_{n}(k) \cong \operatorname{graded-Aut}_{k}(R).
+\end{equation*}
+
+\section{Infinite groups}
+
+A subgroup $G \le \GL_{m}(k)$ is called a \deff{linear algebraic group} if $G$ is closed in the Zariski topology, i.e., $G$ is ``cut out by polynomials''. We can consider graded actions of $G$ on $k[x_{1}, \ldots, x_{n}]$ by looking at homomorphisms $G \to \GL_{n}(k)$.\footnote{Note that $m$ and $n$ may be different.} Such an action is called \deff{$k$-rational} if the homomorphism is a morphism of varieties. Henceforth, if $G$ is a linear algebraic group, then its actions will be assumed to be $k$-rational.
+
+\begin{ex}
+	$\GL_{n}(k)$, $\SL_{n}(k)$, $\operatorname{O}_{n}(k)$, and $\operatorname{Sp}_{2n}(k)$ are some examples of linear algebraic groups. In particular, the multiplicative group $k^{\times} \cong \GL_{1}(k)$ is a linear algebraic group. So is the additive group $k$ via
+	\begin{equation*} 
+		k \cong \left\{\two{1}{\alpha}{0}{1} : \alpha \in k\right\} \le \GL_{2}(k).
+	\end{equation*}
+\end{ex}
+
+\begin{ques}[Hilbert's 14th Problem] \label{ques:hilbert-fourteen}
+	If $G$ is a linear algebraic group acting (rationally) on $k[x_{1}, \ldots, x_{n}] \eqqcolon R$, is $R^{G}$ a finitely generated $k$-algebra?
+\end{ques}
+\begin{proof}[Answer]
+	No. Nagata \cite{NagataFourteenthProblem} gave a (characteristic-independent) counterexample. The group was a product of copies of the additive group $k$.
+\end{proof}
+
+Similar to how requiring $\md{G}$ be invertible in $R$ had solved the issue earlier, the corresponding analogue here is to consider the algebraic groups that are \emph{linearly reductive}.\footnote{Loosely speaking, those l.a.g. $G$ which have the following property: every inclusion of $G$-modules splits.} In particular, one has the following.
+
+\begin{thm}
+	If $G$ is a linearly reductive group acting on a finitely generated $k$-algebra $R$, the ring $R^{G}$ is finitely generated as a $k$-algebra. Moreover, the inclusion $R^{G} \into R$ splits.
+\end{thm}
+
+\begin{ex}
+	$\GL_{n}(k)$, $\SL_{n}(k)$, $\operatorname{O}_{n}(k)$, and $\operatorname{Sp}_{2n}(k)$ are linearly reductive in characteristic zero, but generally not in positive characteristic. 
+\end{ex}
+
+A linear algebraic group over $\mathbb{C}$ is linearly reductive precisely if it has a Zariski dense subgroup that is a compact real Lie group; average over the compact subgroup with respect to the Haar measure to obtain the splitting. Elements fixed by a (Zariski) dense subgroup are fixed by everything. 
+
+For concreteness, we now focus on a specific example. Let $k$ be a field, $G \coloneqq \SL_{2}(k)$, and $R \coloneqq k[X_{2 \times 3}]$. Here, $R$ is a polynomial ring in six variables labeled $x_{ij}$ for $1 \le i \le 2$ and $1 \le j \le 3$. \newline
+$G$ acts on $R$, where the action is given by
+\begin{equation*} 
+	M \colon X \mapsto MX.
+\end{equation*}
+By the above, we mean that $M \in G$ acts via the automorphism that maps $x_{ij}$ to the $(i,j)$th entry of $MX$. For example, if $M = \smatrix{2 & 1 \\ 0 & 1/2}$, then $M$ acts via
+\begin{align*} 
+	& x_{11} \mapsto 2 x_{11} + x_{21}, && x_{12} \mapsto 2 x_{12} + x_{22}, && x_{13} \mapsto 2 x_{13} + x_{23} \\
+	& x_{21} \mapsto \phantom{2 x_{11} + } \tfrac{1}{2} x_{21}, && x_{22} \mapsto \phantom{2 x_{12} + } \tfrac{1}{2} x_{22}, && x_{23} \mapsto \phantom{2 x_{13} + } \tfrac{1}{2} x_{23}.
+\end{align*}
+
+It is not difficult to check that the three $2 \times 2$ minors $\Delta_{1}, \Delta_{2}, \Delta_{3}$ of $X$ are fixed by $G$. It also happens to be the case that these are algebraically independent, i.e., $k[\,\underline{\Delta}\,]$ is a polynomial ring.
+
+\begin{thm}
+	If $k$ is infinite, then $R^{G} = k[\Delta_{1}, \Delta_{2}, \Delta_{3}]$.
+\end{thm}
+
+Now, if $\chr(k) = 0$, then by the earlier remarks, we know that
+\begin{equation*} 
+	k[\,\underline{\Delta}\,] \into k[X]
+\end{equation*}
+splits. In contrast, one has the following.
+
+\begin{thm}
+	If $\chr(k) > 0$, then
+	\begin{equation*} 
+		k[\,\underline{\Delta}\,] \into k[X]
+	\end{equation*}
+	is \emph{not} split. Note that the subring is also a polynomial ring.
+\end{thm}
+\begin{sketch}
+	Let $R \coloneqq k[X]$, $S \coloneqq k[\,\underline{\Delta}\,]$, $I \coloneqq (\,\underline{\Delta}\,) S$. We wish to show that $S \into R$ does not split.
+
+	One can check that $(\Delta_{1} \Delta_{2} \Delta_{3})^{p - 1} \in I^{[p]}R \setminus I^{[p]}$ showing that $I^{[p]}R \cap S \neq I^{[p]}$.
+
+	Alternately, it suffices to show that the local cohomology module $H_{IR}^{3}(R)$ vanishes. To do this, note that $R/IR$ has an $R$-free resolution of length two which can be given the form
+	\begin{equation*} 
+		0 \to R \xrightarrow{\smatrix{x_{11} \\ x_{12} \\ x_{13}}} R^{3} \xrightarrow{\smatrix{\Delta_{1} & \Delta_{2} & \Delta_{3}}} R \to 0.
+	\end{equation*}
+	By flatness of Frobenius, we see that each $R/I^{[p^{e}]}R$ has a free resolution of length two. Thus, $H_{IR}^{3}(R) = \colimit_{e} \Ext_{R}^{3}(R/I^{[p^{e}]}R, R) = 0$.
+\end{sketch}
+
+\begin{rem}
+	A more general fact is true: Consider the analogous action $\SL_{t}(k) \acts k[X_{t \times n}]$ with $t \le n$. If $k$ is infinite, then the fixed subring is precisely the $k$-algebra generated by the $t \times t$ minors of $X$ (this may not be a polynomial ring).
+
+	This ring $R^{G}$ is of independent interest since $\Proj(S^{G}) = \operatorname{Grass}(t, n)$ is the Grassmannian variety.
+
+	In characteristic zero, the inclusion $R^{G} \into R$ is always split. In positive characteristic, the inclusion splits precisely if $t \in \{1, n\}$ as was shown in the recent work \cite{HochsterJeffriesPandeySingh}.
+\end{rem}
+
+The above has an interesting consequence: Let $\pi \colon \mathbb{Q}[X] \onto \mathbb{Q}[\,\underline{\Delta}\,]$ be a $\mathbb{Q}[\,\underline{\Delta}\,]$-linear splitting. Note that the set of monomials acts as a $\mathbb{Q}[\,\underline{\Delta}\,]$-generating set for $\mathbb{Q}[X]$. For every prime $p > 0$, there is some monomial $X^{\alpha}$ such that $p$ shows in the denominator of $\pi(X^{\alpha})$; for if not, then we could go modulo $p$ and obtain a splitting for $\mathbb{F}_{p}[\,\underline{\Delta}\,] \into \mathbb{F}_{p}[X]$.
+
+$\SL_{2}(\mathbb{C})$ is a small enough example where I could explicitly work out---to an extent---the splitting by integrating with respect to the Haar measure. 
+
+As before, let $R \coloneqq \mathbb{C}\left[\begin{smallmatrix} a & b & c \\ s & t & u \end{smallmatrix}\right]$.\footnote{$R$ could more generally be of the form $R[X_{2 \times n}]$. We use the letters $a, \ldots$ for ease of writing.} Consider the larger polynomial ring $S \coloneqq R[z, w, \overline{z}, \overline{w}]$. Even though we use suggestive notation, we intend for $S$ to be a polynomial ring over $R$ with $z, w, \overline{z}, \overline{w}$ being indeterminates. 
+
+Let $\varphi \colon R \to S$ be the $k$-algebra map defined by
+\begin{equation*} 
+	\begin{bmatrix}
+		a & b & c \\ s & t & u
+	\end{bmatrix}
+	\mapsto 
+	\begin{bmatrix}
+		z & -\overline{w} \\ w & \overline{z}
+	\end{bmatrix}
+	\begin{bmatrix}
+		a & b & c \\ s & t & u
+	\end{bmatrix}
+\end{equation*}
+For example, $\varphi(a) = az - s\overline{w}$ and $\varphi(t) = bw + t\overline{z}$.
+
+Let $\myint \colon S \to R$ be the $R$-linear map defined as following: 
+\begin{equation*}
+	(z \overline{z})^{m} (w \overline{w})^{n} \mapsto \frac{m! n!}{(m + n + 1)!}.
+\end{equation*}
+Monomials in $S$ not of the above form are mapped to $0$. \newline
+For reasons to be explained later, $\myint$ is to be thought of the \emph{integration} operator.
+
+Then, the splitting $S \to R$ is given by
+\begin{equation*} 
+	\pi = \myint \circ \varphi.
+\end{equation*}
+
+\begin{ex}
+	We have 
+	\begin{equation*} 
+		\varphi(at) = a b z w + a t z \overline{z} - b s w \overline{w} - s t \overline{z} \overline{w}.
+	\end{equation*}
+	\emph{Integrating} the above gives us
+	\begin{equation*} 
+		\pi(at) = 0 + at \cdot \dfrac{1!0!}{2!} - bs \cdot \dfrac{0!1!}{2!} + 0 = \frac{at - bc}{2}.
+	\end{equation*}
+	Thus, $\pi(at) = \frac{\Delta_{1}}{2}$.
+
+	With some more effort, one can show that
+	\begin{equation*} 
+		\pi\left((at)^{n}\right) = \frac{1}{n + 1}\Delta_{1}^{n}.
+	\end{equation*}
+	Thus, every positive integer---and hence, every prime---shows up in the denominator.
+\end{ex}
+
+The above description of the splitting follows essentially from the following: $\SU_{2}$ is a Zariski dense subgroup of $\SL_{2}$ that is a real Lie group. We have the paramaterisation 
+\begin{equation*} 
+	\SU_{2} = \left\{\two{z}{-\overline{w}}{w}{z} : z, w \in \mathbb{C},\, \md{z}^{2} + \md{w}^{2} = 1 \right\}.
+\end{equation*}
+
+Monomials in these coordinate functions can be integrated as
+\begin{equation*} 
+	\int_{\SU_{2}} z^{a} \overline{z}^{b} w^{c} \overline{w}^{d} \,{\mathrm{d}}{\SU_{2}} = \myint(z^{a} \overline{z}^{b} w^{c} \overline{w}^{d}),
+\end{equation*}
+where ${\mathrm{d}}{\SU_{2}}$ is the Haar measure on $\SU_{2}$. (Note that the monomial on the left is being treated as a complex-valued function on the Lie group $\SU_{2}$, whereas the monomial on the right is an element in the formal polynomial ring $S$.)
+
+\section{Back to Finite Groups}
+
+We now return to the finite group setup.
+
+\begin{tcolorbox}[parbox=false]
+	\textbf{Setup.} 
+
+	$k$ is a field, $R \coloneqq k[x_{1}, \ldots, x_{n}]$, $G$ is a finite subgroup of $\GL_{n}(k)$ acting on $R$ in the natural way.
+\end{tcolorbox}
+The case when $\chr(k)$ divides $\md{G}$ is called the \deff{modular case}.
+
+% \begin{ex}
+% 	To get our bearings straight, we look at the explicit example. Consider $\two{1}{1}{0}{1} \in \GL_{2}(k)$. We have
+% 	\begin{equation*} 
+% 		\two{1}{1}{0}{1} \col{x}{y} = \col{x + y}{y}.
+% 	\end{equation*}
+% 	Thus, the automorphism
+% 	\begin{equation*}
+% 		\two{1}{1}{0}{1} \colon k[x, y] \to k[x, y]
+% 	\end{equation*}
+% 	is
+% 	\begin{align*} 
+% 		x & \mapsto x + y, \\
+% 		y & \mapsto y.
+% 	\end{align*}
+% \end{ex}
+
+% \begin{rem}
+% 	Every (standard) graded automorphism of $k[x_{1}, \ldots, x_{n}]$ is given by some element of $\GL_{n}(k)$. Thus, our setup is precisely looking at the graded automorphism of the standard graded polynomial algebra.
+% \end{rem}
+
+\begin{ex}
+	Consider $R \coloneqq \mathbb{C}[x, y]$ and
+	\begin{equation*} 
+		G = \left\langle \two{-1}{}{}{1},\, \two{1}{}{}{-1} \right\rangle.
+	\end{equation*}
+	Then,
+	\begin{equation*} 
+		R^{G} = \mathbb{C}[x^{2}, y^{2}],
+	\end{equation*}
+	which is again a polynomial ring.
+\end{ex}
+
+By \Cref{thm:noether-finitely-generated}, we know in general that the invariant subring in this setup is a finitely generated $k$-algebra. A few relevant questions now are as follows.
+
+\begin{ques}
+	Given $G$, what are (minimal) generators of $R^{G}$ as a $k$-algebra? What are the relations between these generators? What is the largest degree of such a generator?
+\end{ques}
+
+\begin{thm}[Noether's bound]
+	If $\chr(k) \nmid \md{G}$, then $R^{G}$ is generated (as a $k$-algebra) by the elements of degree at most $\md{G}$.
+\end{thm}
+In 1915, Noether had proven the above in the chase that $\chr(k) \nmid \md{G}!$ (the factorial). For many years, the result as stated above was not known (called ``Noether's gap''). It was finally solved independently by Fleischmann in 2000 and Fogarty in 2001. These proofs were substantially simplified by Benson. \hfill {\color{purple}(Prof. Tony comment!)}
+
+\begin{ex}[Noether's bound failing in the modular case] \phantom{h} \newline
+	Let $R \coloneqq \mathbb{F}_{2}[x_{1}, x_{2}, x_{3}, y_{1}, y_{2}, y_{3}]$, and $\sigma$ be the order two automorphism given by $x_{i} \leftrightarrow y_{i}$. \newline
+	Then, $R^{\langle \sigma \rangle}$ needs a generator in degree three. Specifically, the invariant
+	\begin{equation*} 
+		x_{1} x_{2} x_{3} + y_{1} y_{2} y_{3}
+	\end{equation*}
+	is not in the algebra generated by the invariants of degree $\le 2$. 
+
+	As it happens, this subring is not Cohen-Macaulay.
+\end{ex}
+
+Noether's bound gives a na\"ive method for computing generators for $R^{G}$ in the nonmodular case: take the set of all monomials of degree $\le \md{G}$ and apply the Reynolds operator. \newline
+In fact, one can be more efficient by making use of the \deff{Molien series} which describes the Hilbert series of the invariant ring as
+\begin{equation*} 
+	H(R^{G}, t) = \frac{1}{\md{G}} \sum_{g \in G} \dfrac{1}{\det(I - tg)}.
+\end{equation*}
+As written, the above strictly only makes sense in characteristic zero. (Indeed, the left side is an element of $\mathbb{Q}(t)$ or $\mathbb{Z}[\![t]\!]$ whereas the right is an element of $k(t)$.) However, it can be made sense of in the positive characteristic (nonmodular) case by the use of \emph{Brauer lifts}.
+
+Interestingly, the following equality holds in the modular and nonmodular case both:
+\begin{equation*} 
+	\lim_{t \to 1} (1 - t)^{n} H(R^{G}, t) = \frac{1}{\md{G}}.
+\end{equation*}
+
+We now look at some homological properties.
+
+\begin{ex}
+	Consider $R \coloneqq \mathbb{C}[x, y]$, and
+	\begin{equation*} 
+		\sigma = \two{-1}{}{}{-1} \colon 
+		\begin{cases}
+			x \mapsto -x, \\
+			y \mapsto -y.
+		\end{cases}
+	\end{equation*}
+	Then, $R^{\langle \sigma \rangle} = \mathbb{C}[x^{2}, xy, y^{2}]$. Thus, being a UFD is not inherited by the invariant subring. 
+
+	More generally, if 
+	\begin{equation*} 
+		\sigma = \two{\zeta}{}{}{\zeta}, \qquad \text{where } \zeta \coloneqq \exp\left(\dfrac{2 \pi \iota}{d}\right),
+	\end{equation*}	
+	then $R^{\langle \sigma \rangle} = R^{(d)} = \mathbb{C}[x^{d}, x^{d - 1} y, \ldots, x y^{d - 1}, y^{d}]$ is the $d$-th Veronese of $R$.
+
+	These subrings are all Cohen-Macaulay.
+\end{ex}
+
+\begin{rem}
+	If $\md{G}^{-1} \in k$, then $R^{G}$ is Cohen-Macaulay since $R^{G} \into R$ is a \underline{finite} split extension and $R$ is Cohen-Macaulay. \newline
+	% (More generally, any direct summand of a \emph{polynomial} ring is Cohen-Macaulay, but that is a deeper theorem.)
+\end{rem}
+
+Recall that an element $g \in \GL_{n}(k)$ is called a \deff{pseudoreflection} if $\rank(g - I) = 1$.
+
+\begin{thm}[Watanabe]
+	Suppose $\chr(k)$ and $\md{G}$ are coprime. Then,
+	\begin{center}
+		$G \le \SL_{n}(k)$ $\quad\Rightarrow\quad$ $k[x_{1}, \ldots, x_{n}]^{G}$ is Gorenstein.
+	\end{center}
+	If $G$ contains no psuedoreflections, then the converse holds as well.
+\end{thm}
+
+\begin{exe}
+	Using the above, check that if $n \ge 2$, then
+	\begin{center} 
+		$\mathbb{C}[x_{1}, \ldots, x_{n}]^{(d)}$ is Gorenstein $\quad\Leftrightarrow\quad$ $d \mid n$.
+	\end{center}
+	The above gives a family of rings which are Cohen-Macaulay but not Gorenstein.
+\end{exe}
+
+\begin{thm}[Chevalley-Shephard-Todd]
+	Suppose $\chr(k)$ and $\md{G}$ are coprime. Then,
+	\begin{center}
+		$R^{G}$ is a polynomial ring $\quad\Leftrightarrow\quad$ $G$ is generated by pseudoreflections.
+	\end{center}
+\end{thm}
+The case of $k = \mathbb{C}$ was first proved by Shephard and Todd who gave a case-by-case proof. Soon afterwards, Chevalley gave a uniform proof. The general proof in the nonmodular setup was given by Serre.
+
+\printbibliography
+\end{document}
