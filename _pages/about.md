@@ -10,7 +10,7 @@ redirect_from:
 
 Me
 ======
-Hi, I am Aryaman. I am currently a second-year graduate student at the [Mathematics Department, University of Utah](https://www.math.utah.edu/).
+Hi, I am Aryaman. I am currently a third-year graduate student at the [Mathematics Department, University of Utah](https://www.math.utah.edu/). My advisor is [Anurag K. Singh](https://www.math.utah.edu/~singh/).
 
 This website
 ======
