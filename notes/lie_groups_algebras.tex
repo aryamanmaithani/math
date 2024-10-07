@@ -1,0 +1,978 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+\usepackage{aryaman}
+
+\setcounter{tocdepth}{2}
+
+\title{Lie Groups and Lie Algebras}
+\author{Aryaman Maithani}
+\date{Fall 2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section*{Introduction}
+
+Notes I'm making for my Lie groups course. 
+
+\section{Prerequisite definitions, notations, and conventions}
+
+The words ``smooth'' and ``differentiable'' will be used interchangeably, referring to the object being $\mathcal{C}^{\infty}$. 
+We assume that one has the notion of what this means when talking about maps between open subsets of $\mathbb{R}^{n}$. 
+We recall some notions of manifolds, mainly for the purpose of setting up the notation. \newline
+The definition of a submanifold may be different than usual (see \Cref{rem:submanifold}).
+
+Let $M$ be a topological space. A \deff{chart} $c$ on $M$ is a triple $(U, \varphi, n)$ where
+\begin{itemize}
+	\item $n \in \{0, 1, 2, \ldots\}$,
+	\item $U \subset M$ is open,
+	\item $\varphi \colon U \to \mathbb{R}^{n}$ is a continuous function that is a homeomorphism onto its image.
+\end{itemize}
+$U$ is the \deff{domain} of the chart, and $n$ the \deff{dimension}. 
+
+The charts $(U, \varphi, n)$ and $(V, \psi, m)$ are \deff{compatible} if either
+\begin{itemize}
+	\item $U \cap V = \emptyset$, or
+	\item $U \cap V \neq \emptyset$ and $\psi \circ \left(\varphi^{-1}|_{\varphi(U \cap V)}\right)$ is a diffeomorphism from $\varphi(U \cap V)$ onto $\psi(U \cap V)$.
+\end{itemize}
+The last condition would imply $m = n$. 
+
+An \deff{atlas} on $\mathcal{M}$ is a collection of compatible of charts such that the domains cover $M$. 
+This leads to the notion of a maximal (or saturated) atlas, which always exists. 
+
+\begin{defn}
+	A \deff{differentiable (or smooth) manifold} is a tuple $(M, \mathcal{A})$ , where $M$ is a Hausdorff topological space and $\mathcal{A}$ is a saturated atlas on $M$.
+\end{defn}
+By our definition, $\mathbb{R}$ with the discrete topology is a manifold which is zero-dimensional.
+
+As noted earlier, if $x \in M$, then any chart containing $x$ has the same dimension. 
+We denote this dimension by $\dim_{x}(M)$. 
+One checks that the map $x \mapsto \dim_{x}(M)$ is locally constant. 
+
+If $M$ is a smooth manifold, then every $x \in M$ has a connected neighbourhood. 
+Thus, the connected components of $M$ are open. 
+On the other hand, the connected components of any topological space are closed. Thus, we get:
+
+\begin{thm} \label{thm:manifold-components-clopen}
+	Let $M$ be a smooth manifold. Then, the connected components of $M$ are both open and closed.
+\end{thm}
+We only needed a topological manifold for the above.
+
+Let $M$, $N$ be smooth manifolds, and $f \colon M \to N$ a function. 
+Suppose that for all charts $(V, \psi, m)$ on $N$ and $(U, \varphi, n)$ on $M$ such that $f(U) \subset V$ we have that the composition
+\begin{equation*} 
+	\varphi(U) \xrightarrow{\varphi^{-1}} U \xrightarrow{f|_{U}} V \xrightarrow{\psi} \psi(V)
+\end{equation*}
+is a smooth map. 
+Then, $f$ is said to be \deff{smooth}.
+
+This gives us the category of (smooth) manifolds.
+
+\begin{defn} \label{defn:submanifold}
+	Suppose $M$ is a manifold, and $N \subset M$ a subset. $N$ is a \deff{submanifold} of $M$ if $N$ has the following property: for every $x \in N$, there exists a chart $(U, \varphi, n)$ with $x \in U$ such that $\varphi(U \cap N) = \varphi(U) \cap \mathbb{R}^{\ell}$. 
+\end{defn}
+\begin{rem} \label{rem:submanifold}
+	In the above, we assume $\mathbb{R}^{\ell} \subset R^{n}$ in the natural canonical way. \newline
+	For a chart as above, we get a chart $(U \cap N, \varphi|_{U \cap N}, \ell)$ on $N$. 
+	The collection of all such charts give us an atlas on $N$.
+
+	This is a strong definition: this implies that $N$ is locally closed in $M$.
+\end{rem}
+
+The above definition implies that the natural inclusion $\iota \colon N \to M$ is smooth since this locally looks like the natural inclusion $\mathbb{R}^{\ell} \into \mathbb{R}^{n}$.
+We then have the following criterion then to check smoothness of maps to submanifolds:
+\begin{thm} \label{thm:smoothness-into-submanifold}
+	Let $\iota \colon N \into M$ be as above, $P$ a smooth manifold, and $f \colon P \to N$ an arbitrary function. \newline
+	Let $\widetilde{f} \colon P \to M$ be the composition $P \to N \into M$. Then,
+	\begin{center}
+		$f$ is smooth $\Leftrightarrow$ $\widetilde{f}$ is smooth.
+	\end{center}
+\end{thm}
+
+\section{Lie groups: Definition and observations}
+
+We start with the basic definition.
+
+\subsection{Definition}
+
+\begin{defn}
+	A \deff{Lie group} is a smooth manifold $G$ equipped with smooth functions $m \colon G \times G \to G$ and $\iota \colon G \to G$ such that $(G, m, \iota)$ is a group.
+
+	A \deff{morphism} of Lie groups is a smooth group homomorphism. 
+
+	This gives us the category $\LieGrp$.
+\end{defn}
+Recall that $(G, m, \iota)$ being a group means the obvious thing: $m$ is associative, unital, and every element has an inverse; 
+the map $\iota$ is the inversion map $g \mapsto g^{-1}$.
+
+We will often denote the identity of $G$ by $1$ or $e$. We may include a subscript if necessary.
+
+\begin{ex}
+	$\GL(n, \mathbb{R})$ is a Lie group: this has a natural smooth structure since this is an open subset of $M_{n}(\mathbb{R}) \cong \mathbb{R}^{n^{2}}$. 
+	The usual multiplication map is a polynomial in the coordinates and hence smooth. 
+	Inversion is smooth as well, being a rational function.
+\end{ex}
+
+\begin{rem}
+	We will see (\Cref{cor:inversion-automatically-smooth}) that one need not require $\iota$ to be smooth.
+\end{rem}
+
+We also have the following full subcategories of $\LieGrp$:
+\begin{itemize}
+	\item $\CLieGrp$, the category of \emph{connected} Lie groups;
+	\item $\SCLieGrp$, the category of \emph{simply-connected} Lie groups.
+\end{itemize}
+
+\subsection{Natural maps}
+
+Given $g \in G$, we get the following natural maps on $G$:
+\begin{itemize}
+	\item The \emph{left translation} $\gamma(g) \colon G \to G$ defined by $h \mapsto gh$.
+	\item The \emph{conjugation} $\INT(g) \colon G \to G$ defined by $h \mapsto g h g^{-1}$.
+\end{itemize}
+
+Both of these maps are diffeomorphisms; the second is also a (iso)morphism of Lie groups.
+
+\subsection{Basic properties of Lie groups}
+
+\begin{thm}
+	If $G$ is a group, then the function $g \mapsto \dim_{g}(G)$ is constant. 
+	In other words, a Lie group has the same dimension at every point.
+\end{thm}
+
+\begin{defn}
+	The \deff{dimension} of a Lie group is defined as $\dim_{1_{G}}(G)$.
+\end{defn}
+
+\begin{defn}
+	The connected component of $1$ is denoted by $G_{0}$; this is a Lie group.
+\end{defn}
+The smooth structure on $G_{0}$ follows from \Cref{thm:manifold-components-clopen}. 
+That this is a subgroup follows from the fact that left multiplication by an element is continuous, as is inversion. 
+Thus, these maps preserve components. 
+By the same reasoning, we get the following:
+
+\begin{thm}
+	$G_{0}$ is an open, normal subgroup of $G$.
+
+	If $\varphi \colon G \to H$ is a morphism of Lie groups, then $\varphi(G_{0}) \subset H_{0}$.
+\end{thm}
+
+Thus, we get a functor
+\begin{equation*} 
+	\LieGrp \xrightarrow{(-)_{0}} \CLieGrp.
+\end{equation*}
+We also have the inclusion/forgetful functor
+\begin{equation*} 
+	\CLieGrp \xrightarrow{F} \LieGrp.
+\end{equation*}
+
+If $G$ is a connected Lie group, and $H$ an arbitrary Lie group, 
+then we have a natural equality of sets
+\begin{equation*} 
+	\Hom_{\LieGrp}\left(F(G), H\right) = \Hom_{\CLieGrp}(G, H_{0})
+\end{equation*}
+since $G = G_{0}$. 
+
+The above tells us that
+\begin{thm}
+	The forgetful functor and the connected-component functors are adjoints.
+\end{thm}
+
+\begin{defn}
+	A neighbourhood $U$ of $1$ is said to be \deff{symmetric} if $\iota(U) \subset U$.
+\end{defn}
+Every neighbourhood $U$ contains a symmetric neighbourhood: for example, $U \cap U^{-1}$.
+
+\subsection{Differentials of some maps}
+
+We can consider the differential of $m \colon G \times G \to G$. 
+Under the natural identification, this gives us a map
+\begin{equation*} 
+	T_{(1, 1)}(m) \colon T_{1}(G) \oplus T_{1}(G) \to T_{1}(G).
+\end{equation*}
+One might think that this is a useful map giving information about the Lie group. Alas,
+\begin{thm}[The differential of the multiplication map]
+	For $X, Y \in T_{1}(G)$, one has
+	\begin{equation*} 
+		T_{(1, 1)}(m)(X, Y) = X + Y.
+	\end{equation*}
+\end{thm}
+In particular, the above is the ``same'' map for any Lie group.
+\begin{sketch}
+	Consider the maps $\begin{tikzcd} \iota_{1}, \iota_{2} \colon M \arrow[r, shift left] \arrow[r, shift right] & M \times M \end{tikzcd}$ defined by $m \mapsto (m, 1)$ and $m \mapsto (1, m)$. 
+
+	Then, $T_{1}(\iota_{\ast})$ is the corresponding inclusion map $T_{1}(M) \to T_{1}(M) \oplus T_{1}(M)$. 
+	We also have $m \circ i_{\ast} = \id_{M}$. \newline
+	Using the chain rule gives us
+	\begin{equation*} 
+		T_{(1, 1)}(X, 0) = X \andd T_{(1, 1)}(0, Y) = Y. \qedhere
+	\end{equation*}
+\end{sketch}
+
+Next, let us compute some explicit differentials of matrix maps. Note that $\GL(n, F)$ is an open subset of the vector space $M_{n}(F)$ and thus, its tangent space at identity can be identified with $M_{n}(F)$. \newline
+In particular, $T_{1}(F^{\times}) = F$.
+
+\begin{thm} \label{thm:diff-complex-det-is-trace}
+	The differential of $\det \colon \GL(n, \mathbb{C}) \to \mathbb{C}^{\times}$ at identity is the trace map
+	\begin{equation*} 
+		\trace \colon M_{n}(\mathbb{C}) \to \mathbb{C}.
+	\end{equation*}
+	This has rank two over $\mathbb{R}$.
+\end{thm}
+\begin{sketch}
+	Consider a tangent vector $T \in T_{I}(\GL(n, \mathbb{C})) = M_{n}(\mathbb{C})$. 
+	Look at the line $s \mapsto I + sT$. 
+	We have
+	\begin{align*} 
+		\det(I + sT) &
+		= \det
+		\begin{bmatrix}
+			1 + s T_{11} & s T_{12} & \cdots & s T_{1n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			s T_{n1} & s T_{n2} & \cdots & 1 + s T_{nn} \\
+		\end{bmatrix} \\
+		&= 1 + s(T_{11} + \cdots T_{nn}) + s^{2}(\cdots). \qedhere
+	\end{align*}
+\end{sketch}
+
+\begin{thm}[Lie bracket on GL]
+	Consider $G \coloneqq \GL(n, \mathbb{R})$. 
+	For $A \in G$, we have the conjugation map $\Int(A) \colon G \to G$. 
+	Let $\Ad(A) \coloneqq T_{I}(\Int(A))$ denote its differential at identity. Thus, $\Ad(A)$ is a linear map $M_{n}(\mathbb{R}) \to M_{n}(\mathbb{R})$.
+
+	For $X \in M_{n}(\mathbb{R})$, we have $\Ad(A)(X) = AXA^{-1}$.
+
+	Furthermore, $\Ad$ gives us a map $\Ad \colon G \to \End(M_{n}(\mathbb{R}))$. We may differentiate this at identity to get a linear map
+	\begin{equation*} 
+		T_{I}(\Ad) \colon T_{1}(G) \to T_{1}(\End(M_{n}(\mathbb{R}))).
+	\end{equation*}
+	Under the usual identifications, this can be rewritten as a linear map
+	\begin{equation*} 
+		T_{I}(\Ad) \colon M_{n}(\mathbb{R}) \to \Hom(M_{n}(\mathbb{R}), M_{n}(\mathbb{R})).
+	\end{equation*}
+	Currying/uncurrying this gives us a \emph{bilinear} map
+	\begin{equation*} 
+		T_{I}(\Ad) \colon M_{n}(\mathbb{R}) \times M_{n}(\mathbb{R}) \to M_{n}(\mathbb{R}).
+	\end{equation*}
+	We have
+	\begin{equation*} 
+		T_{I}(\Ad)(X, Y) = XY - YX
+	\end{equation*}
+	for $X, Y \in M_{n}(\mathbb{R})$.
+\end{thm}
+Note that the above steps could be carried out for a general Lie group $G$ to get a \emph{bilinear} map $T_{1}(G) \times T_{1}(G) \to T_{1}(G)$. 
+This will give us the Lie algebra structure on $T_{1}(G)$.
+\begin{sketch}
+	First, let $A \in G$ and $X \in M_{n}(\mathbb{R})$ be arbitrary. 
+	For $s \in \mathbb{R}$, we note
+	\begin{equation*} 
+		\Int(A)(I + sX) = A(I + sX)A^{-1} = I + s(AXA^{-1}).
+	\end{equation*}
+	This shows $T_{I}(\Int(A))(X) = AXA^{-1}$.
+
+	Now, let $X, Y \in M_{n}(\mathbb{R})$ be arbitrary. 
+	For small $s$, the element $I + sX$ is invertible, and the above tells us
+	\begin{equation*} 
+		\Ad(I + sX)(Y) = (I + sX) Y (I + sX)^{-1}.
+	\end{equation*}
+	For small $s$, we may expand the above as
+	\begin{align*} 
+		\Ad(I + sX)(Y) &= (I + sX) Y \left(I - sX + (sX)^{2} - \cdots \right) \\
+		&= (Y + sXY) \left(I - sX + (sX)^{2} - \cdots \right) \\
+		&= Y + sXY - sYX - s^{2} XYX + \text{higher order} \\
+		&= Y + s(XY - YX) + \text{higher}. \qedhere
+	\end{align*}
+\end{sketch}
+
+\subsection{Creating Lie groups}
+
+We see a criteria here that gives us that many natural groups are Lie groups.
+In particular, we will see that smoothness of the multiplication map implies that of the inversion map.
+
+For this subsection, we have the following setup:
+
+\begin{tcolorbox}
+	Let $M$ be a ``Lie monoid'', i.e., a smooth manifold equipped with a smooth binary operator $m \colon M \times M \to M$ that is associative and unital.
+
+	Let $G$ be the subset of \deff{regular} elements, i.e.,
+	\begin{equation*} 
+		G \coloneqq \{m \in M : m \text{ is invertible}\}.
+	\end{equation*}
+\end{tcolorbox}
+
+Then, one has the following.
+
+\begin{thm} \label{thm:lie-monoid-invertible-subgroup}
+	$G$ is an open subset of $M$. (Thus, $G$ has a natural manifold structure.)
+
+	$G$ is closed under multiplication. The inverse of an element of $G$ is again an element of $G$.
+
+	The induced inversion map on $G$ is smooth. 
+
+	Thus, $G$ is a Lie group.
+\end{thm}
+We sketch a proof at the end of this subsection.
+
+\begin{cor} \label{cor:inversion-automatically-smooth}
+	Suppose $G$ is a smooth manifold, and $m \colon G \times G \to G$ is a smooth binary operator that makes $G$ into a group. \newline
+	Then, $G$ is a Lie group, i.e., the inversion map $g \to g^{-1}$ is smooth.
+\end{cor}
+
+The following is another setup where the above can be applied:
+
+Suppose $A$ is a finite-dimensional associative $\mathbb{R}$-algebra with a unit $1$. 
+Using a basis, we can identify $A \cong \mathbb{R}^{n}$; this gives a (basis-independent) smooth structure on $A$. 
+The multiplication on $A$ is $\mathbb{R}$-bilinear, hence smooth. Thus, the regular elements form a Lie group $G$.
+
+Note that since $G$ is an open subset of $A$, we get that $\dim(G) = \dim_{\mathbb{R}}(A)$.
+
+\begin{ex} \label{ex:GL-examples}
+	For $A$, we may take $M_{n}(F)$ where $F$ is one of $\mathbb{R}$, $\mathbb{C}$, or $\mathbb{H}$. \newline
+	This gives us the corresponding Lie group $\GL(n, \mathbb{F})$ with corresponding dimension.
+\end{ex}
+
+\begin{proof}[Sketch of \Cref{thm:lie-monoid-invertible-subgroup}]
+	Consider $\Phi \colon M \times M \to M$ defined by $(a, b) \mapsto (a, m(a, b))$. \newline
+	% Let $p_{1}, p_{2} \colon M \times M \to M$ be the projections. \newline
+	% Note $p_{1} \circ \Phi = p_{1}$ and $p_{2} \circ \Phi = m$. 
+	Thus,
+	\begin{equation*} 
+		T_{(1, 1)}(\Phi)(X, Y) = (X, X + Y).
+	\end{equation*}
+	(The calculation of $T_{(1, 1)}(m)$ done earlier is valid even for Lie monoids.)
+
+	Note that the above is an automorphism of tangent spaces, using the inverse function theorem tells us that $\Phi$ is a diffeomorphism when restricted to open sets. By restrictions, we may assume that 
+	\begin{equation*} 
+		\Phi|_{U} = \varphi \colon U \to V \times V
+	\end{equation*}
+	is a diffeomorphism where $U \subset M \times M$ is open, and $V \subset M$ is open. \newline
+	Let $\psi$ be its inverse. Check that $\psi$ looks like
+	\begin{equation*} 
+		\psi(a, b) = (a, m(a, \beta(a, b)))
+	\end{equation*}
+	for some smooth $\beta$. 
+	But then, $m(a, \beta(a, 1)) = 1$ for all $a \in V$. 
+	This gives a neighbourhood of $1$ where every element has a right inverse. 
+	By symmetry, there is one with left inverses. 
+	By intersection, there is a neighbourhood of $1$ on which every element has an inverse and that this inversion map is smooth. By translation, $G$ is open and inversion is smooth.
+\end{proof}
+
+\subsection{Lie subgroups}
+
+\begin{defn}
+	A \deff{Lie subgroup} of $G$ is a subgroup of $G$ that is a submanifold (\Cref{defn:submanifold}).
+\end{defn}
+\begin{rem}
+	Note that by \Cref{thm:smoothness-into-submanifold}, the restricted multiplication map $H \times H \to H$ is smooth. 
+	In turn, \Cref{cor:inversion-automatically-smooth} tells us that $H$ is a Lie group with the induced structure.
+\end{rem}
+
+As remarked in \Cref{rem:submanifold}, $H$ is locally closed in $G$. The following tells us more.
+\begin{thm}
+	Lie subgroups are closed.
+\end{thm}
+
+A deeper theorem of Cartan tells us that the purely topological converse is true:
+\begin{thm}[Cartan]
+	Any closed subgroup of a Lie group is a Lie subgroup.
+\end{thm}
+
+\section{Group actions}
+
+We now study properties of group actions. The interesting takeaway is how questions about group homomorphisms can be reduced to the general framework of group actions.
+
+\begin{defn}
+	Let $G$ be a Lie group, and $M$ a smooth manifold. 
+	A (smooth) \deff{action} of $G$ on $M$ is a smooth map $\mu \colon G \to M$ inducing a usual action on $M$.
+\end{defn}
+``Usual action'' means that $\mu(1, m) = m$ for all $m$ and that the diagram
+\begin{equation*} 
+	\begin{tikzcd}
+		G \times G \times M \arrow[rr, "\id_{G} \times \mu"] \arrow[d, "m \times \id_{M}"'] && G \times M \arrow[d, "\mu"] \\
+		G \times M \arrow[rr, "\mu"] && M
+	\end{tikzcd}
+\end{equation*}
+commutes.
+
+\subsection{Orbits}
+
+Given $m \in M$ and $g \in G$, we get the following maps
+
+\begin{align*} 
+	\omega_{m} \colon G & \to M \\
+	g & \mapsto g \cdot m,
+\end{align*}
+
+and
+
+\begin{align*} 
+	\tau(g) \colon M & \to M \\
+	m & \mapsto g \cdot m.
+\end{align*}
+
+Note that $\tau(g)$ is a diffeomorphism and we have
+\begin{equation*} 
+	\omega_{m} \circ \gamma(g) = \tau(g) \circ \omega_{m}.
+\end{equation*}
+Taking differentials at $1$ and noting diffeomorphisms, we get
+\begin{equation*} 
+	\rank(T_{g}(\omega_{m})) = \rank(T_{1}(\omega_{m})).
+\end{equation*}
+
+\begin{cor}
+	For a fixed $m$, the orbit map $\omega_{m} \colon G \to M$ has constant rank. \newline
+	Thus, $\omega_{m}$ is a \deff{subimmersion}.
+\end{cor}
+The rank may very well depend on $m$. 
+E.g., consider the action of $\GL(n, \mathbb{R})$ on $\mathbb{R}^{n}$. 
+The orbit map of $\mathbf{0}$ is different from any other orbit map.
+
+A subimmersion of rank $r$ locally looks like 
+\begin{equation*} 
+	\mathbb{R}^{d} \ni (x_{1}, \ldots, x_{r}, x_{r + 1} \ldots, x_{d}) \mapsto (x_{1}, \ldots, x_{r}, 0, \ldots, 0) \in \mathbb{R}^{n}.
+\end{equation*}
+
+\subsection{Stabilisers}
+
+Given $m \in M$, the \deff{stabiliser} of $m$ is the subgroup
+\begin{equation*} 
+	\Stab_{m} \coloneqq \{g \in G : g \cdot m = m\}.
+\end{equation*}
+We may denote the above as $S_{m}$ if the context is clear.
+
+\begin{thm} \label{thm:stabiliser-subgroup-tangent-space}
+	The stabiliser $\Stab_{m}$ is a Lie subgroup of $G$ with
+	\begin{equation*} 
+		T_{1}(\Stab_{m}) = \ker(T_{1}(\omega_{m})).
+	\end{equation*}
+\end{thm}
+
+\begin{cor} \label{cor:image-kernel-morphism-properties}
+	If $\varphi \colon G \to H$ is a Lie group morphism, then $\varphi$ is of constant rank and $\ker(\varphi)$ is a Lie subgroup of $G$ with 
+	\begin{equation*} 
+		T_{1}(\ker(\varphi)) = \ker(T_{1}(\varphi)).
+	\end{equation*}
+\end{cor}
+\begin{sketch} 
+	$G$ acts on $M$ via $(g, h) \mapsto \varphi(g) h$. Then, $\varphi = \omega_{1_{H}}$ and $\ker(\varphi) = \Stab_{1_{H}}$.
+\end{sketch}
+
+\begin{cor} \label{cor:local-diffeo-characterisation}
+	If $\varphi \colon G \to H$ is a morphism of Lie groups, then the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\varphi$ is a local diffeomorphism.
+		\item $T_{1}(\varphi)$ is an isomorphism.
+		\item $\dim(G) = \dim(H)$ and $\ker(\varphi)$ is zero-dimensional.
+	\end{enumerate}
+\end{cor}
+\begin{sketch}
+	(a) $\Rightarrow$ (b) is OK. \newline
+	(b)	$\Rightarrow$ (a): constant rank implies $T_{g}(\varphi)$ is an isomorphism for all $g$. \newline
+	(b) $\Leftrightarrow$ (c) follows by \Cref{cor:image-kernel-morphism-properties} and rank-nullity.
+\end{sketch}
+
+\begin{ex} \label{ex:SL-is-subgroup}
+	$\SL(n, F)$ is a subgroup of $\GL(n, F)$ for $F = \mathbb{R}, \mathbb{C}$ since this is the kernel of $\det \colon \GL(n, F) \to F^{\times}$.
+\end{ex}
+
+\section{Involutions on algebras}
+
+Let $A$ be a finite-dimensional associative unital $\mathbb{R}$-algebra. 
+As noted earlier, $A$ is a canonically a smooth manifold with the multiplication being smooth, 
+and $G$ the subset of invertible elements is a open subset which is a Lie group.
+
+\begin{defn}
+	An \deff{involution} on $A$ is a function $\tau \colon A \to A$ satisfying
+	\begin{itemize}
+		\item $\tau$ is $\mathbb{R}$-linear,
+		\item $\tau(\tau(a)) = a$ for all $a \in A$,
+		\item $\tau(ab) = \tau(b) \tau(a)$ for all $a, b \in A$.
+	\end{itemize}
+\end{defn}
+We use the notation $a^{\tau} \coloneqq \tau(a)$.
+
+\begin{ex}
+	$A \coloneqq M_{n}(\mathbb{R})$ is an example of such an $\mathbb{R}$-algebra with the usual matrix multiplication. \newline
+	The transpose operation is an involution.
+
+	Similarly, conjugate-transpose is an involution on $A \coloneqq M_{n}(\mathbb{C})$. Note that this \emph{is} $\mathbb{R}$-linear (but not $\mathbb{C}$-linear).
+\end{ex}
+
+\begin{lem}
+	$\tau(1) = 1$.
+\end{lem}
+
+Define
+\begin{equation*} 
+	H \coloneqq \{g \in A : g \cdot g^{\tau} = 1 = g^{\tau} \cdot g\}.
+\end{equation*}
+Note that $H \subset G$.
+
+\begin{lem}
+	$H$ is a subgroup of $G$.
+\end{lem}
+
+\begin{rem}
+	Since $A$ is a finite-dimensional $\mathbb{R}$-algebra, the equation $ab = 1$ implies $ba = 1$.
+\end{rem}
+
+\begin{thm}
+	$H$ is a Lie subgroup of $G$ with
+	\begin{equation*} 
+		T_{1}(H) = \{a \in A : a = -a^{\tau}\}.
+	\end{equation*}
+\end{thm}
+The above gives us the dimension of $H$ as well.
+
+\begin{ex} \label{ex:orthogonal-unitary-groups-dimensions}
+	The \deff{orthogonal matrix group}
+	\begin{equation*} 
+		\OO(n) \coloneqq \{A \in M_{n}(\mathbb{R}) : A A^{\trans} = I\}
+	\end{equation*}
+	is a Lie group of dimension $\frac{n(n - 1)}{2}$.
+
+	The \deff{unitary matrix group}
+	\begin{equation*} 
+		\UU(n) \coloneqq \{A \in M_{n}(\mathbb{C}) : A A^{\ast} = I\}
+	\end{equation*}
+	is a Lie group of dimension $n^{2}$.
+\end{ex}
+
+\begin{ex} \label{ex:special-orthogonal-unitary-groups-dimensions}
+	Considering the kernels of the $\det$ map on the above groups, 
+	we get $\SO(n)$ and $\SU(n)$ as Lie subgroups of $\OO(n)$ 
+	and $\UU(n)$ respectively. 
+	These are the subgroups of matrices of determinant $1$, called the \deff{special orthogonal group} 
+	and \deff{special unitary group} respectively. 
+	(These are subgroups by \Cref{cor:image-kernel-morphism-properties}.)
+
+	Note that $\det(\OO(n)) = \{\pm 1\}$. Thus, $\SO(n)$ is an open subset of $\OO(n)$. 
+	This gives us $\dim(\SO(n)) = \dim(\OO(n))$.
+
+	Similarly, we have $\det \colon \UU(n) \to S^{1}$. 
+	By \Cref{cor:image-kernel-morphism-properties}, we know that
+	\begin{equation*} 
+		\dim(\SU(n)) = \dim(\ker(\det)) = \dim_{\mathbb{R}}(\ker(T_{1}(\det))) = \nullity(T_{1}(\det)).
+	\end{equation*}
+	Recall from \Cref{thm:diff-complex-det-is-trace} that $T_{1}(\det) = \trace$. 
+	Restricting this to $T_{1}(\UU(n)) = \{A \in M_{n}(\mathbb{C}) : A = -A^{\ast}\}$ is still a nonzero map. 
+	Thus, $\det \colon \UU(n) \to S^{1}$ is a rank-one map. This gives us
+	\begin{equation*} 
+		\dim(\SU(n)) = \nullity(T_{1}(\det)) = \dim(\UU(n)) - 1.
+	\end{equation*}
+\end{ex}
+
+\section{Quaternions and symplectic group} \label{sec:sympletic-group}
+
+Recall that the algebra of quaternions $\mathbb{H}$ is a four-dimensional associative unital $\mathbb{R}$-algebra. 
+The usual representation is $\mathbb{H} = \mathbb{R}(1 \oplus \iota \oplus \jmath \oplus k)$ with the ``cross-product'' relations between $\iota$, $\jmath$, $k$. 
+The conjugation map on $\mathbb{H}$ is the linear map fixing $1$ and negating the other three basis elements.
+
+$\mathbb{H}$ can also be identified with the subalgebra $A$ of $M_{2}(\mathbb{C})$ given by
+\begin{equation*} 
+	A \coloneqq 
+	\left\{\two{\alpha}{\beta}{-\overline{\beta}}{\overline{\alpha}} : \alpha, \beta \in \mathbb{C}\right\}.
+\end{equation*}
+The determinant of the matrix above is $\md{\alpha}^{2} + \md{\beta}^{2} = 1$. 
+Moreover, the usual conjugate-transpose involution on $M_{2}(\mathbb{C})$ restricts to an involution on $A$. 
+This corresponds to the conjugation on $\mathbb{H}$.
+
+In turn, this leads to an involution on $M_{n}(\mathbb{H})$ given by conjugate-transpose. 
+As in \Cref{ex:orthogonal-unitary-groups-dimensions}, we see that the \deff{symplectic group} defined as
+\begin{equation*} 
+	\Sp(n) \coloneqq \{A \in M_{n}(\mathbb{H}) : AA^{\ast} = I\}
+\end{equation*}
+is a compact Lie group of dimension $n(2n + 1)$.
+
+Note that $\Sp(1) \cong \SU(2)$.
+
+\section{Connectedness of some groups} \label{sec:connectedness}
+
+\begin{thm}
+	$\SO(n)$, $\SU(n)$, $\Sp(n)$, and $\UU(n)$ are connected Lie groups.
+\end{thm}
+Note that $\OO(n)$ is not connected.
+
+\begin{proof}[Sketch for $\SO(n)$]
+	By induction on $n$. The case $n = 1$ is trivial. For $n = 2$, we explicitly have
+	\begin{equation*} 
+		\SO(2) = \left\{\two{\cos(\theta)}{-\sin(\theta)}{\sin(\theta)}{\cos(\theta)} : \theta \in \mathbb{R}\right\}
+	\end{equation*}
+	is connected. Assume $n \ge 3$.
+
+	The action of $\GL(n, \mathbb{R})$ on $\mathbb{R}^{n}$ restricts to a smooth action of $\SO(n)$ on $S^{n - 1}$. 
+	Consider the north pole $p = (1, 0, \ldots, 0)^{\trans} \in S^{n - 1}$. Note that $Mp$ is the first column of $M$. This gives us that the differential of the orbit map $\omega_{p}$ is
+	\begin{align*} 
+		T_{1}(\SO(n)) &\to T_{1}(S^{n - 1}) \\
+		M &\mapsto \text{first column of $M$}.
+	\end{align*}
+	We know $T_{1}(\SO(n)) = \{\text{skew-symmetric matrices}\}$ and 
+	$T_{1}(S^{n - 1}) \le T_{1}(\mathbb{R}^{n})$ consists of column vectors with first coordinate zero. 
+	This description tells us that $T_{1}(\omega_{p})$ is surjective, hence a submersion, hence an open map (using the local description of a submersion). 
+
+	Thus, $\omega_{p}(\SO(n))$ is an open subset of $S^{n - 1}$. But this is also compact. 
+	Connectedness of $S^{n - 1}$ tells us that $\omega_{p}(\SO(n)) = S^{n - 1}$.
+
+	Suppose $\SO(n)$ is not connected. 
+	Let $G_{0}$ be the component of $I$. 
+	The same arguments applied to $G_{0}$ tell us that $\omega_{p}(G_{0}) = S^{n - 1}$ as well.
+
+	Check that
+	\begin{equation*} 
+		\Stab_{p} = \left\{\two{1}{}{}{U} : U \in \SO(n - 1)\right\}.
+	\end{equation*}
+	By induction, the above is connected and hence, $\Stab_{p} \le G_{0}$.
+
+	Now, given $T \in \SO(n)$, the calculation earlier gives us $Tp = Sp$ for some $S \in G_{0}$. Thus, $S^{-1} T \in \Stab_{p} \subset G_{0}$.
+\end{proof}
+
+\section{A map from SU(2) to SO(3)}
+
+By earlier, we have $\dim(\SU(2)) = 2^{2} - 1 = 3$ and $\dim(\SO(3)) = 3(3 - 1)/2 = 3$. 
+Thus,
+\begin{equation*} 
+	\dim(\SU(2)) = \dim(\SO(3)).
+\end{equation*}
+We will show that we have a two-fold covering map $\SU(2) \to \SO(3)$. 
+
+First, note that $\SU(2)$ is simply-connected since topologically $\SU(2) \cong S^{3} \subset \mathbb{C}^{2}$ since
+\begin{equation*} 
+	\SU(2) = 
+	\left\{\two{\alpha}{\beta}{-\overline{\beta}}{\overline{\alpha}} : 
+	\begin{array}{c}
+	\alpha, \beta \in \mathbb{C}, \\ 
+	\md{\alpha}^{2} + \md{\beta}^{2} = 1
+	\end{array}
+	\right\}.
+\end{equation*}
+
+Consider the linear map $T : \mathbb{R}^{3} \to M_{2}(\mathbb{C})$ given by
+\begin{equation*} 
+	(x, y, z) \mapsto \two{x}{y + \iota z}{y - \iota z}{-x}.
+\end{equation*}
+Let $\mathcal{H} \coloneqq \im(T)$. Check that
+\begin{itemize}
+	\item $\dim(\mathcal{H}) = 3$.
+	\item $\mathcal{H}$ is precisely the space of traceless self-adjoint matrices.
+	\item $\det(T(x, y, z)) = -(x^{2} + y^{2} + z^{2}) = -\|(x, y, z)\|^{2}$.
+\end{itemize}
+Thus, $(\mathcal{H}, -\det)$ is isomorphic to $(\mathbb{R}^{3}, \|\cdot\|)$ as normed spaces.
+
+By the description of $\mathcal{H}$, we see that $\SU(2)$ acts on $\mathcal{H}$ by
+\begin{equation*} 
+	(T, H) \mapsto THT^{\ast}.
+\end{equation*}
+Moreover, $-\det(THT^{\ast}) = -\det(H)$. 
+Thus, $\SU(2)$ acts via norm-preserving isomorphisms, giving us a homomorphism $\SU(2) \to \OO(\mathcal{H}) \cong \OO(\mathbb{R}^{3})$. 
+Since $\SU(2)$ is connected, this map has image inside $\SO(3)$.
+
+One can calculate the map to get that the homomorphism $\rho : \SU(2) \to \SO(3)$ is
+\begin{equation*} 
+	\two{\alpha}{\beta}{-\overline{\beta}}{\overline{\alpha}} 
+	\mapsto
+	\begin{bmatrix}
+		\md{\alpha}^{2} - \md{\beta}^{2} & 2 \Re(\alpha \overline{\beta}) & -2 \Im(\alpha \overline{\beta}) \\
+		-2 \Re(\alpha \beta) & \Re(\alpha^{2} - \beta^{2}) & -\Im(\alpha^{2} + \beta^{2}) \\
+		-2 \Im(\alpha \beta) & \Im(\alpha^{2} - \beta^{2}) & \Re(\alpha^{2} + \beta^{2}) \\
+	\end{bmatrix}.
+\end{equation*}
+The above gives us that $\ker(\rho) = \{\pm I\}$. 
+By \Cref{cor:local-diffeo-characterisation}, $\rho$ is a local diffeomorphism. 
+We will see later \Cref{lem:covering-local-diffeo-equivalent} that this implies that $\rho$ is a covering map. 
+We already checked that $\SU(2)$ is simply-connected. 
+Thus, we have constructed the universal cover of $\SO(3)$. 
+It would also follow by \Cref{thm:pi-one-kernel-covering} that $\pi_{1}(\SO(3), I) \cong \mathbb{Z}/2$.
+
+\section{An open mapping theorem}
+
+\textbf{Question.} Suppose $G$ acts transitively on $M$, and $m \in M$. Is the orbit map $\omega_{m} : G \to M$ a submersion? \newline
+\textbf{Answer.} {\color{red}\textbf{No!}} Consider $G \coloneqq \mathbb{R}_{\text{disc}}$ and $M \coloneqq \mathbb{R}$. 
+By our definitions, $G$ is indeed a (zero-dimensional) Lie group. \newline
+We have the transitive action of $G$ on $M$ given by $(x, y) \mapsto x + y$. 
+The orbit map of $0$ is the ``identity'' map $\mathbb{R}_{\text{disc}} \to \mathbb{R}$. 
+However, this map cannot be a submersion since the dimensions are incorrect. \newline
+We will see that under mild assumptions \Cref{thm:open-mapping-group-action} such a thing cannot happen.
+
+For this section, just a topological action (i.e., a continuous action) is sufficient to prove the theorems.
+
+\begin{defn}
+	A topological space is said to be \deff{locally compact} if it is \underline{Hausdorff} and every point has a compact neighbourhood.
+\end{defn}
+
+\begin{defn}
+	A locally compact space is \deff{countable at $\infty$} if it is the union of countably many compact sets.
+\end{defn}
+$\mathbb{R}_{\text{disc}}$ is locally compact but not countable at $\infty$. \newline
+The Euclidean space $\mathbb{R}^{n}$ is countable at $\infty$.
+
+\begin{lem} 
+	Let $G$ be a connected topological group and $U$ a neighbourhood of $1$. Then,
+	\begin{equation*} 
+		G = \bigcup_{n \ge 1} U^{n},
+	\end{equation*}
+	where $U^{n}$ is the set of all products of $n$ elements of $U$.
+
+	In particular, any neighbourhood of the identity of a connected Lie group generates the group.
+\end{lem}
+\begin{sketch}
+	We may assume that $U$ is open and symmetric, in which case the union is an open subgroup $H$. 
+	But $G$ is then the disjoint union of the cosets of $H$. 
+	Since each coset is also open, we must have $H = G$.
+\end{sketch}
+
+\begin{cor}
+	Let $G$ be a connected topological group. If $G$ is locally compact, then $G$ is countable at $\infty$.
+\end{cor}
+
+\begin{lem} 
+	Let $G$ be a Lie group. The following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $G$ is countable at $\infty$.
+		\item $G$ has countably many components.
+	\end{enumerate}
+\end{lem}
+In the above, we only need that $G$ is a \emph{topological} manifold (with continuous multiplication and inversion).
+
+\begin{thm} \label{thm:open-mapping-group-action}
+	Let $G$ be a locally compact topological group with countably many components. 
+	Let $X$ be a locally compact topological space. 
+	Suppose $G$ acts on $X$ continuously and that this is action is transitive. 
+	Let $x \in X$. The orbit map 
+	\begin{align*} 
+		\omega_{x} : G &\to X\\
+		g &\mapsto gx
+	\end{align*}
+	is open.
+
+	In the case that everything is smooth, the map $\omega_{x}$ is an open submersion.
+\end{thm}
+Note that in the smooth case, we already knew that $\omega_{x}$ is a subimmersion. 
+Thus, being open gives us that it is an immersion. 
+(Recalling the local description of a subimmersion.)
+
+\begin{sketch}
+	Let $U \subset G$ be an open neighbourhood of $1$. 
+	Pick a compact symmetric neighbourhood $1 \in V \subset U$ with $V^{2} \subset U$. 
+	Since $G$ is countable at $\infty$, 
+	there is a countable set $\{g_{n} \in G : n\}$ such that 
+	$(g_{n} \cdot \Int(V))_{n}$ is an open cover of $G$. 
+	Hence, $(g_{n} \cdot V)_{n}$ is a compact cover of $G$. 
+	We have that $U_{n} \coloneqq X \setminus \omega_{x}(g_{n} \cdot V)$ is open in $X$ with $\bigcap_{n} U_{n} = \emptyset$. 
+	By the Baire category theorem, some $U_{n}$ is not dense in $X$. 
+	Thus, $\omega_{x}(g_{n} \cdot V) = g_{n} \cdot V \cdot x$ has nonempty interior. 
+	Thus, $V \cdot x$ is a neighbourhood of $g \cdot x$ for some $g$. 
+	But then $U \cdot x$ is a neighbourhood of $x$.
+\end{sketch}
+
+\section{Covering maps}
+
+For a smooth map $p \colon X \to Y$ of smooth connected manifolds, we say that $p$ is a \deff{covering} map 
+if $p$ is surjective and given any $y \in Y$, 
+there exists a connected open neighbourhood $U$ of $y$ such that 
+$p^{-1}(U)$ is a disjoint neighbourhood of components such that 
+$p$ restricted to any component is a diffeomorphism onto $U$. \newline
+In this case, $U$ is said to be an \deff{evenly covered} neighbourhood.
+
+\begin{lem} \label{lem:covering-local-diffeo-equivalent}
+	Assume $G$ and $H$ are \emph{connected} Lie groups, and $p \colon G \to H$ is a Lie group morphism. The following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $p$ is a covering map.
+		\item $T_{1}(p)$ is a linear isomorphism.
+		\item $p$ is a local diffeomorphism.
+	\end{enumerate}
+	In such a case, $D \coloneqq \ker(p)$ is a discrete subgroup contained in the center of $G$.
+\end{lem}
+\begin{sketch}
+	(b) $\Leftrightarrow$ (c) was \Cref{cor:local-diffeo-characterisation}.
+
+	(c) $\Rightarrow$ (a): $p(G)$ is open and hence, generates $H$. 
+	But $p(G)$ is already a subgroup. 
+	Thus, $p(G) = H$ and hence, $p$ is surjective. 
+	Let $V$ be a neighbourhood of $1_{G}$ on which $p$ is bijective.
+	We must have that $D \coloneqq \ker(p)$ does not intersect $V$. 
+	In turn, $D$ is discrete. \newline
+	Given $g \in G$, the map $\Int(g)$ lands inside $D$ by normality. 
+	A continuous map $G \to D$ must be constant and hence, $D$ is central. \newline
+	Now, let $W \subset V$ be a small enough open neighbourhood of $1_{G}$ such that $p|_{W}$ is a diffeomorphism, $W$ is connected, $W = W^{-1}$, $W^{2} \subset V$. 
+	Then $p(W)$ is evenly covered since
+	\begin{equation*} 
+		p^{-1}(p(W)) = \bigsqcup_{d \in D} dW. \qedhere
+	\end{equation*}
+\end{sketch}
+
+\subsection{Universal cover}
+
+Recall that given any connected smooth manifold with basepoint $(X, x_{0})$, 
+there exists a connected manifold $(\widetilde{X}, \widetilde{x}_{0})$ 
+with a covering map $p \colon (\widetilde{X}, \widetilde{x}_{0}) \to (X, x_{0})$ 
+such that any other covering map $q \colon (Y, y_{0}) \to (X, x_{0})$ factors uniquely as
+\begin{equation*} 
+	\begin{tikzcd}
+		{(\widetilde{X}, \widetilde{x}_{0})} \arrow[rd, "p"'] \arrow[rr, "\exists!r", dashed] & & {(Y, y_{0})} \arrow[ld, "q"] \\
+		& {(X, x_{0}).} &                             
+	\end{tikzcd}
+\end{equation*}
+This is called the \deff{universal cover} of $(X, x_{0})$ and is unique up to diffeomorphism.
+
+Now, if $G$ is a connected Lie group, 
+then there exists a universal covering space $p \colon (\widetilde{G}, \widetilde{1}) \to (G, 1)$ 
+using the fact that $G$ has a smooth structure. \newline
+To emphasise, $\widetilde{G}$ is only a smooth manifold with a distinguished basepoint $\widetilde{1}$, 
+and $p$ is only a smooth map.
+
+\begin{thm}
+	There exists a unique smooth binary operator $\widetilde{m}$ on $\widetilde{G}$ that makes $p$ a multiplicative map. 
+	This map $\widetilde{m}$ then also makes $\widetilde{G}$ a group with $\widetilde{1}$ as the identity.
+
+	Thus, $\widetilde{G}$ is then called the \deff{universal covering group}.
+\end{thm}
+
+The above will follows from the \textsc{Lifting Theorem}: Suppose we have a covering $(Y, y_{0}) \xrightarrow{p} (X, x_{0})$, a simply-connected space $Z$, and a smooth map $(Z, z_{0}) \xrightarrow{F} (X, x_{0})$. Then, there is a unique map $F'$ making the following commute:
+\begin{equation*} 
+	\begin{tikzcd}
+		{(Z, z_{0})} \arrow[rd, "F"'] \arrow[r, "F'", dashed] & {(Y, y_{0})} \arrow[d, "p"] \\
+		& {(X, x_{0})}
+	\end{tikzcd}
+\end{equation*}
+
+\begin{proof}[Sketch of the theorem]
+	To make $p$ multiplicative is precisely asking for a dashed arrow in the following diagram to exist (such that the diagram commutes):
+	\begin{equation*} 
+		\begin{tikzcd}
+		{(\widetilde{G} \times \widetilde{G}, (\widetilde{1}, \widetilde{1}))} \arrow[dd, "p \times p"'] \arrow[rr, dashed] \arrow[rrdd, "m \circ (p \times p)"] &  & {(\widetilde{G}, \widetilde{1})} \arrow[dd, "p"] \\ \\
+		{(G \times G, (1, 1))} \arrow[rr, "m"']  &  & {(G, 1).} 
+		\end{tikzcd}
+	\end{equation*}
+	The \textsc{Lifting Theorem} gives the existence and uniqueness of such a map, which we call $\widetilde{m}$. 
+	Note that this maps satisfies $\widetilde{m}(\widetilde{1}, \widetilde{1}) = \widetilde{1}$.
+
+	It now remains to check that $\widetilde{m}$ as defined above makes $\widetilde{G}$ 
+	into a group with $\widetilde{1}$ as the identity. 
+	This follows from using the \textsc{Lifting Theorem} in different ways appropriately. 
+
+	The point to note is the following: 
+	if $Z$ is simply-connected and $f, g : (Z, z_{0}) \to (\widetilde{G}, \widetilde{1})$ are two maps such that 
+	$f \circ p = g \circ p$, 
+	then we must have $f = g$.
+
+	Thus, for example, checking associativity means that we want the diagram
+
+	\begin{equation*} 
+		\begin{tikzcd}
+		\widetilde{G} \times \widetilde{G} \times \widetilde{G} \arrow[d, "\id \times \widetilde{m}"'] \arrow[rr, "\widetilde{m} \times \id"] &  & \widetilde{G} \times \widetilde{G} \arrow[d, "\widetilde{m}"] \\
+		\widetilde{G} \times \widetilde{G} \arrow[rr, "\widetilde{m}"']                                               &  & \widetilde{G}                        
+		\end{tikzcd}
+	\end{equation*}	
+	to commute. But the diagram does commute after composing with $p$ since we have associativity in $G$. 
+	We check that all the maps above do preserve the obvious basepoints.
+	% \begin{align*} 
+	% 	(p \circ \widetilde{m} \circ (\id \times \widetilde{m}))(a, b, c) &= (p \circ \widetilde{m})(a, \widetilde{m}(b, c)) \\
+	% 	&= m(p(a), p(\widetilde{m}(b, c))) \\
+	% 	&= m(p(a), m(p(b), p(c))) \\
+	% 	&= p(a) \cdot p(b) \cdot p(c),
+	% \end{align*}
+	% where the last equation
+\end{proof}
+
+Same techniques as earlier give us the following lifting theorem as well.
+
+\begin{thm}
+	Let $G$ and $H$ be connected Lie groups, and $\varphi \colon G \to H$ a morphism of Lie groups. 
+	Then, there is a unique smooth map $\widetilde{\varphi}$ that makes
+	\begin{equation*} 
+		\begin{tikzcd}
+			\widetilde{G} \arrow[r, "\widetilde{\varphi}"] \arrow[d, "p_{G}"'] & \widetilde{H} \arrow[d, "p_{H}"] \\
+			G \arrow[r, "\varphi"'] & H
+		\end{tikzcd}
+	\end{equation*}
+	commute and satisfies $\widetilde{\varphi}(1_{\widetilde{G}}) = 1_{\widetilde{H}}$. \newline
+	Moreover, this map is also a morphism of Lie groups.
+\end{thm}
+
+Thus, we have a new functor
+\begin{equation*} 
+	\CLieGrp \xrightarrow{\widetilde{(-)}} \SCLieGrp.
+\end{equation*}
+
+In all, we have the functors
+\begin{equation*} 
+	\begin{tikzcd}
+	{\SCLieGrp} \arrow[r, hook, shift left] & {\CLieGrp} \arrow[r, hook, shift left] \arrow[l, shift left, "\widetilde{(-)}"] & {\LieGrp} \arrow[l, shift left, "(-)_{0}"],
+	\end{tikzcd}
+\end{equation*}
+where the top functors are the natural inclusion/forgetful functors. 
+
+\begin{thm}
+	All sensible possibilities of pairs of functors above are adjoints.
+\end{thm}
+
+\subsection{Deck transformations}
+
+Let $p \colon (\widetilde{X}, \widetilde{x}_{0}) \to (X, x_{0})$ be a universal covering. 
+A \deff{deck transformation} is a diffeomorphism $T \colon \widetilde{X} \to \widetilde{X}$ such that
+\begin{equation*} 
+	\begin{tikzcd}
+		\widetilde{X} \arrow[rr, "T"] \arrow[rd, "p"'] & & \widetilde{X} \arrow[ld, "p"] \\
+		& X &
+	\end{tikzcd}
+\end{equation*}
+commutes.
+
+Note that $T$ will not usually preserve the basepoint $\widetilde{x}_{0}$. 
+However, it will permute the fiber $p^{-1}(x_{0})$.
+
+Usual theory of covering spaces tells us that
+\begin{equation*} 
+	\pi_{1}(X, x_{0}) \cong \{\text{group of deck transformations}\}.
+\end{equation*}
+
+Back to our setup of Lie groups, we have:
+\begin{equation*} 
+	p \colon (\widetilde{G}, \widetilde{1}) \to (G, 1).
+\end{equation*}
+We showed that $D \coloneqq \ker(p) = p^{-1}(1)$ is central and discrete (\Cref{lem:covering-local-diffeo-equivalent}). 
+
+For $g \in G$, recall the left translation map $\gamma(g) : G \to G$ defined by $h \mapsto gh$.
+
+\begin{thm} \label{thm:pi-one-kernel-covering}
+	We have an isomorphism
+	\begin{equation*} 
+		D \cong \{\text{group of deck transformations}\}
+	\end{equation*}
+	given by $d \mapsto \gamma(d)$. \newline
+	Thus, $\pi_{1}(G, 1) \cong D$. 
+	In particular, this is abelian.
+\end{thm}
+
+\section{Matrix Lie groups and properties}
+
+In this section, we compile the list of examples and their properties that we saw across various sections. 
+We give references to the earlier sections where we verified the properties mentioned.
+
+We mention which groups are compact. This is an easy check using Heine-Borel.
+
+\begin{enumerate}[label=(\alph*)]
+	\item $\GL(n, \mathbb{R})$ is a Lie group of dimension $n^{2}$.
+	\item $\GL(n, \mathbb{C})$ is a Lie group of dimension $(2n)^{2}$.
+	\item $\GL(n, \mathbb{H})$ is a Lie group of dimension $(4n)^{2}$. \newline
+	See \Cref{ex:GL-examples} for the above three.
+	%
+	\item $\SL(n, \mathbb{R})$ is a Lie group.
+	\item $\SL(n, \mathbb{C})$ is a Lie group. \newline
+	See \Cref{ex:SL-is-subgroup} for the above two.
+	%
+	\item $\OO(n)$ is a compact Lie group of dimension $n(n - 1)/2$.
+	\item $\UU(n)$ is a connected, compact Lie group of dimension $n^{2}$. \newline
+	See \Cref{ex:orthogonal-unitary-groups-dimensions} for the above two.
+	%
+	\item $\SO(n)$ is a connected, compact Lie group of dimension $n(n - 1)/2$.
+	\item $\SU(n)$ is a connected, compact Lie group of dimension $n^{2} - 1$. \newline
+	See \Cref{ex:special-orthogonal-unitary-groups-dimensions} for the above two. For connectedness, see \Cref{sec:connectedness}.
+	%
+	\item $\Sp(n)$ is a connected, compact Lie group of dimension $n(2n + 1)$. See \Cref{sec:sympletic-group,sec:connectedness}.
+\end{enumerate}
+
+\end{document}

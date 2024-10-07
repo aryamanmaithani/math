@@ -166,17 +166,21 @@
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\INT}{Int}
 \DeclareMathOperator{\Max}{Max}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator{\OO}{O}
 \DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SU}{SU}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\trace}{trace}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\Cl}{Cl}
@@ -212,6 +216,8 @@
 \DeclareMathOperator{\depth}{depth}
 \DeclareMathOperator{\pdim}{pdim}
 \DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Ad}{Ad}
 % \newcommand*{\sHom}{\mathscr{H}\text{\kern -5pt {\calligra\large om}}\,}
 
 % Categories
@@ -222,6 +228,9 @@
 \newcommand{\lmod}[1]{#1\text{-}\C{mod}}
 \newcommand{\Ch}[1]{\C{Ch}(#1)}
 \newcommand{\trans}{\mathsf{T}}
+\newcommand{\LieGrp}{\mathbf{LieGrp}}
+\newcommand{\CLieGrp}{\mathscr{C}\mathbf{LieGrp}}
+\newcommand{\SCLieGrp}{\mathscr{S}\mathscr{C}\mathbf{LieGrp}}
 % \newcommand{\Set}{\mathbf{Set}}
 % \newcommand{\Mod}{\mathbf{Mod}}
 % \newcommand{\Ring}{\mathbf{Ring}}
@@ -309,6 +318,10 @@
 % -------------------
 % Coloured theorem and other environments
 % -------------------
+
+\newenvironment{sketch}
+{\begin{proof}[Sketch]}
+{\end{proof}}
 
 \newenvironment{thm}
 {\colorlet{shadecolor}{orange!15}\begin{shaded}\begin{fakethm}}
