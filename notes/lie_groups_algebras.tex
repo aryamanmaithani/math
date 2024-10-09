@@ -90,9 +90,9 @@ This association satisfies
 	\end{equation*}
 \end{itemize}
 We have the natural identification of tangent spaces as
-\begin{equation*} 
+\begin{equation} \label{eq:tangent-space-of-product-identification}
 	T_{(x, y)}(X \times Y) \cong T_{x}(X) \oplus T_{y}(Y).
-\end{equation*}
+\end{equation}
 The projections $X \times Y \to X, Y$ induce the corresponding projections on tangent spaces under the above identification.
 
 We give one concrete realisation of the tangent spaces: 
@@ -110,7 +110,7 @@ Then,
 \end{equation*}
 The above is naturally an $\mathbb{R}$-vector space. (Maybe not clear why this has the correct dimension.)
 
-\begin{ex}
+\begin{rem} \label{rem:differential-on-derivations}
 	Let us check what $T_{1}(\varphi)$ is under this description. 
 	Let $\varphi \colon X \to Y$ be smooth, fix $x \in X$, and set $y \coloneqq \varphi(x)$. 
 
@@ -139,9 +139,9 @@ The above is naturally an $\mathbb{R}$-vector space. (Maybe not clear why this h
 	This shows that we do get a derivation.
 
 	The functoriality is clear.
-\end{ex}
+\end{rem}
 
-\begin{ex}
+\begin{rem} \label{rem:identification-product-tangent-spaces-derivations}
 	The identification
 	\begin{equation*} 
 		T_{(x, y)}(X \times Y) \cong T_{x}(X) \oplus T_{y}(Y)
@@ -150,7 +150,7 @@ The above is naturally an $\mathbb{R}$-vector space. (Maybe not clear why this h
 
 	Given $\partial_{x} \in T_{x}(X)$ and $\partial_{y} \in T_{y}(Y)$, we define the derivation $\partial \in T_{(x, y)}(X, Y)$ as
 	\begin{equation*} 
-		\partial(f) \coloneqq \partial_{x}(f(-, y)) + \partial_{y}(\varphi(x, -)),
+		\partial(f) \coloneqq \partial_{x}(f(-, y)) + \partial_{y}(f(x, -)),
 	\end{equation*}
 	for $f \in \mathcal{C}^{\infty}(X \times Y)$.
 
@@ -159,6 +159,48 @@ The above is naturally an $\mathbb{R}$-vector space. (Maybe not clear why this h
 		T_{x}(X) \oplus T_{y}(Y) \to T_{(x, y)}(X, Y).
 	\end{equation*}
 	One checks that this is an isomorphism.
+\end{rem}
+
+\begin{thm} \label{thm:differential-map-into-product}
+	Let $\varphi \colon X \to Y$ and $\psi \colon X \to Z$ be smooth maps, and $x \in X$. 
+	Then, the map
+	\begin{align*} 
+		X &\to Y \times Z \\
+		x & \mapsto (\varphi(x), \psi(x))
+	\end{align*}
+	is smooth whose differential
+	\begin{align*} 
+		T_{x}(X) &\to T_{\varphi(x)}(Y) \oplus T_{\psi(x)}(Z)
+	\end{align*}
+	at $x$ is given by
+	\begin{align*} 
+		\eta \mapsto (T_{x}(\varphi)(\eta), T_{x}(\psi)(\eta)).
+	\end{align*}
+	We have identified $T_{(y, z)}(Y \times Z) \cong T_{y}(Y) \oplus T_{z}(Z)$ as mentioned earlier \Cref{eq:tangent-space-of-product-identification}.
+\end{thm}
+
+\begin{ex} \label{ex:tangent-vector-diagonal}
+	Suppose $f \colon X \times X \to \mathbb{R}$ is smooth. 
+	This given us a map $g \colon X \to \mathbb{R}$ defined by $g(x) \coloneqq f(x, x)$. 
+	Given a derivation $\eta \in T_{x}(X)$, we have
+	\begin{equation*} 
+		\eta \cdot g = \eta \cdot(f(x, -)) + \eta \cdot (f(-, x)).
+	\end{equation*}
+
+	To see this, note that we may write $g = f \circ \Delta$ where 
+	\begin{align*} 
+		\Delta \colon X & \to X \times X, \\
+		x & \mapsto (x, x).
+	\end{align*}
+	Then, $T_{x}(\Delta)(\eta) = (\eta, \eta)$ by \Cref{thm:differential-map-into-product}. 
+
+	Note now that 
+	\[\begin{WithArrows}[displaystyle]
+		\eta \cdot g &= \eta \cdot (f \circ \Delta) \Arrow{\Cref{rem:differential-on-derivations}} \\
+		&= T_{x}(\Delta)(\eta)(f) \\
+		&= (\eta, \eta)(f) \Arrow{\Cref{rem:identification-product-tangent-spaces-derivations}} \\
+		&= \eta \cdot(f(x, -)) + \eta \cdot (f(-, x)).
+	\end{WithArrows}\]
 \end{ex}
 
 \subsection{Submanifold}
@@ -337,7 +379,7 @@ Under the natural identification, this gives us a map
 	T_{(1, 1)}(m) \colon T_{1}(G) \oplus T_{1}(G) \to T_{1}(G).
 \end{equation*}
 One might think that this is a useful map giving information about the Lie group. Alas,
-\begin{thm}[The differential of the multiplication map]
+\begin{thm}[The differential of the multiplication map] \label{thm:differential-multiplication}
 	For $X, Y \in T_{1}(G)$, one has
 	\begin{equation*} 
 		T_{(1, 1)}(m)(X, Y) = X + Y.
@@ -345,17 +387,17 @@ One might think that this is a useful map giving information about the Lie group
 \end{thm}
 In particular, the above is the ``same'' map for any Lie group.
 \begin{sketch}
-	Consider the maps $\begin{tikzcd} \iota_{1}, \iota_{2} \colon M \arrow[r, shift left] \arrow[r, shift right] & M \times M \end{tikzcd}$ defined by $m \mapsto (m, 1)$ and $m \mapsto (1, m)$. 
+	Consider the maps $\begin{tikzcd} \iota_{1}, \iota_{2} \colon G \arrow[r, shift left] \arrow[r, shift right] & G \times G \end{tikzcd}$ defined by $g \mapsto (g, 1)$ and $g \mapsto (1, g)$. 
 
-	Then, $T_{1}(\iota_{\ast})$ is the corresponding inclusion map $T_{1}(M) \to T_{1}(M) \oplus T_{1}(M)$. 
-	We also have $m \circ i_{\ast} = \id_{M}$. \newline
+	Then, $T_{1}(\iota_{\ast})$ is the corresponding inclusion map $T_{1}(G) \to T_{1}(G) \oplus T_{1}(G)$ for $\ast \in \{1, 2\}$. 
+	We also have $m \circ i_{\ast} = \id_{G}$. \newline
 	Using the chain rule gives us
 	\begin{equation*} 
-		T_{(1, 1)}(X, 0) = X \andd T_{(1, 1)}(0, Y) = Y. \qedhere
+		T_{(1, 1)}(m)(X, 0) = X \andd T_{(1, 1)}(m)(0, Y) = Y. \qedhere
 	\end{equation*}
 \end{sketch}
 
-\begin{thm}[The differential of the inversion map]
+\begin{thm}[The differential of the inversion map] \label{thm:differential-inversion}
 	For $X \in T_{1}(G)$, one has
 	\begin{equation*} 
 		T_{1}(\iota)(X) = -X.
@@ -373,6 +415,63 @@ In particular, the above is the ``same'' map for any Lie group.
 	\end{equation*}
 	is zero. Thus, $X + T_{1}(\iota)(X) = 0$.
 \end{sketch}
+
+\begin{cor}
+	Let $f \colon G \times G \to \mathbb{R}$ be a smooth map, and $\eta \in T_{1}(G)$ a derivation. 
+	Let $F \colon G \to G$ be given by $F(g) \coloneqq f(g, g^{-1})$. 
+	Then,
+	\begin{equation*} 
+		\eta \cdot F = \eta \cdot f(-, 1) - \eta \cdot f(1, -).
+	\end{equation*}
+\end{cor}
+As usual, $f(1, -)$ is the map $g \mapsto f(1, g)$.
+\begin{sketch}
+	We prove this as \Cref{ex:tangent-vector-diagonal}. 
+	We have $F = f \circ \Delta$ where $\Delta(g) \coloneqq (g, g^{-1})$. 
+	Note $T_{1}(\Delta)(\eta) = (\eta, -\eta)$ by \Cref{thm:differential-inversion,thm:differential-map-into-product}. 
+	By \Cref{rem:differential-on-derivations,rem:identification-product-tangent-spaces-derivations}, we have
+	\begin{align*} 
+		\eta \cdot F &= \eta \cdot (f \circ \Delta) \\
+		&= T_{1}(\Delta)(\eta)(f) \\
+		&= (\eta, -\eta)(f) \\
+		&= \eta \cdot f(-, 1) - \eta \cdot f(1, -). \qedhere
+	\end{align*}
+\end{sketch}
+
+\begin{exe} \label{exe:differential-multiplication-at-different-points}
+	Let $m \colon G \times G \to G$ denote the multiplication map, and fix $h \in G$. 
+	Let $\gamma(h) \coloneqq m(h, -)$ denote left multiplication by $h$ and $\rho(h) \coloneqq m(-, h)$ right multiplication. 
+
+	Prove the formulae
+	\begin{align*} 
+		T_{(h, 1)}(m) \colon T_{h}(G) \oplus T_{1}(G) & \to T_{h}(G) \\
+		(X, Y) &\mapsto X + T_{1}(\gamma(h))(Y),
+	\end{align*}
+	and
+	\begin{align*} 
+		T_{(1, h)}(m) \colon T_{h}(G) \oplus T_{1}(G) & \to T_{h}(G) \\
+		(X, Y) &\mapsto T_{1}(\rho(h))(X) + Y.
+	\end{align*}
+\end{exe}
+\begin{sketch}
+	Consider the four different inclusions $G \to G \times G$ that maps $g$ to $(g, 1)$, $(g, h)$, $(1, g)$, $(h, g)$ and proceed as in \Cref{thm:differential-multiplication}.
+\end{sketch}
+
+\begin{cor} \label{cor:derivation-applied-to-int-g-h}
+	Let $G$ be a Lie group, $h \in G$ an element, $f \in \mathcal{C}^{\infty}(G)$ a smooth function, and $\xi \in T_{1}(G)$ a derivation. 
+	Define
+	\begin{align*} 
+		F \colon G & \to \mathbb{R}, \\
+		F(g) & \coloneqq f(g h g^{-1}).
+	\end{align*}
+	Then,
+	\begin{equation*} 
+		\xi \cdot F = \xi \cdot \left((f \circ m)(-, h)\right) - \xi \cdot \left((f \circ m)(h, -)\right).
+	\end{equation*}
+\end{cor}
+\begin{proof} 
+	Exercise. Combine the previous results and techniques.
+\end{proof}
 
 Next, let us compute some explicit differentials of matrix maps. Note that $\GL(n, F)$ is an open subset of the vector space $M_{n}(F)$ and thus, its tangent space at identity can be identified with $M_{n}(F)$. \newline
 In particular, $T_{1}(F^{\times}) = F$.
@@ -449,7 +548,7 @@ This will give us the Lie algebra structure on $T_{1}(G)$.
 	\end{align*}
 \end{sketch}
 
-\subsection{Creating Lie groups}
+\subsection{Invertible elements of a smooth monoid}
 
 We see a criteria here that gives us that many natural groups are Lie groups.
 In particular, we will see that smoothness of the multiplication map implies that of the inversion map.
@@ -457,7 +556,7 @@ In particular, we will see that smoothness of the multiplication map implies tha
 For this subsection, we have the following setup:
 
 \begin{tcolorbox}
-	Let $M$ be a ``Lie monoid'', i.e., a smooth manifold equipped with a smooth binary operator $m \colon M \times M \to M$ that is associative and unital.
+	Let $M$ be a \deff{Lie monoid}, i.e., a smooth manifold equipped with a smooth binary operator $m \colon M \times M \to M$ that is associative and unital.
 
 	Let $G$ be the subset of \deff{regular} elements, i.e.,
 	\begin{equation*} 
@@ -470,7 +569,8 @@ Then, one has the following.
 \begin{thm} \label{thm:lie-monoid-invertible-subgroup}
 	$G$ is an open subset of $M$. (Thus, $G$ has a natural manifold structure.)
 
-	$G$ is closed under multiplication. The inverse of an element of $G$ is again an element of $G$.
+	$G$ is closed under multiplication. The inverse of an element of $G$ is again an element of $G$. 
+	Thus, $G$ is a subgroup of $M$.
 
 	The induced inversion map on $G$ is smooth. 
 
@@ -485,11 +585,13 @@ We sketch a proof at the end of this subsection.
 
 The following is another setup where the above can be applied:
 
-Suppose $A$ is a finite-dimensional associative $\mathbb{R}$-algebra with a unit $1$. 
-Using a basis, we can identify $A \cong \mathbb{R}^{n}$; this gives a (basis-independent) smooth structure on $A$. 
-The multiplication on $A$ is $\mathbb{R}$-bilinear, hence smooth. Thus, the regular elements form a Lie group $G$.
+\begin{rem}
+	Suppose $A$ is a finite-dimensional associative $\mathbb{R}$-algebra with a unit $1$. 
+	Using a basis, we can identify $A \cong \mathbb{R}^{n}$; this gives a (basis-independent) smooth structure on $A$. 
+	The multiplication on $A$ is $\mathbb{R}$-bilinear, hence smooth. Thus, the regular elements form a Lie group $G$.
 
-Note that since $G$ is an open subset of $A$, we get that $\dim(G) = \dim_{\mathbb{R}}(A)$.
+	Note that since $G$ is an open subset of $A$, we get that $\dim(G) = \dim_{\mathbb{R}}(A)$.
+\end{rem}
 
 \begin{ex} \label{ex:GL-examples}
 	For $A$, we may take $M_{n}(F)$ where $F$ is one of $\mathbb{R}$, $\mathbb{C}$, or $\mathbb{H}$. \newline
@@ -908,7 +1010,7 @@ For this section, just a topological action (i.e., a continuous action) is suffi
 $\mathbb{R}_{\text{disc}}$ is locally compact but not countable at $\infty$. \newline
 The Euclidean space $\mathbb{R}^{n}$ is countable at $\infty$.
 
-\begin{lem} 
+\begin{lem} \label{lem:neighbourhood-generates-connected-group}
 	Let $G$ be a connected topological group and $U$ a neighbourhood of $1$. Then,
 	\begin{equation*} 
 		G = \bigcup_{n \ge 1} U^{n},
@@ -1279,7 +1381,7 @@ We show that this is not always the case.
 	Thus, $[\mathfrak{g}, \mathfrak{g}] = \mathfrak{g}$.
 \end{ex}
 
-\begin{ex}[Lie algebras of small dimensions]
+\begin{ex}[Lie algebras of small dimensions] \label{ex:lie-algebras-small-dimension}
 	Let $\mathfrak{g}$ be a Lie algebra. We classify what $\mathfrak{g}$ is for $\dim(\mathfrak{g}) \le 2$.
 	\begin{itemize}
 		\item $\dim(\mathfrak{g}) = 0$: $\mathfrak{g}$ must be abelian and thus, there is exactly one Lie algebra of dimension $0$.
@@ -1460,10 +1562,9 @@ Alternately, we could (un)curry the function \Cref{eq:t1-ad-t1-G-end-t1-G} to ge
 \end{equation*}
 The above bilinear map is precisely what we defined $[-, -]$ to be.
 
-\begin{thm}
+\begin{thm} \label{thm:lie-algebra-functor}
 	$(T_{1}(G), [-, -])$ is a real Lie algebra.
-\end{thm}
-\begin{thm}
+
 	If $\varphi : G \to H$ is a map of Lie groups, then the induced map
 	\begin{equation*} 
 		T_{1}(\varphi) \colon T_{1}(G) \to T_{1}(H)
@@ -1471,7 +1572,7 @@ The above bilinear map is precisely what we defined $[-, -]$ to be.
 	is a map of Lie algebras.
 \end{thm}
 
-A useful step in the above proofs is the following observation: 
+A useful step in the above proof is the following observation: 
 given $\varphi$ as above, and $g \in G$, the diagram
 \begin{equation*} 
 	\begin{tikzcd}
@@ -1485,7 +1586,7 @@ commutes. Taking differentials at $1_{G}$ gives us
 \end{equation*}
 as maps $T_{1}(G) \to T_{1}(H)$.
 
-The rest of this subsection is proving the above theorems.
+The rest of this subsection is proving the above theorem.
 
 \begin{sketch}
 	We give a sketch of both the above theorems. 
@@ -1600,12 +1701,166 @@ The rest of this subsection is proving the above theorems.
 	\begin{equation*} 
 		(\xi \ast \eta)(f).
 	\end{equation*}
+	This defines a linear operator $\xi \ast \eta$ on $\mathcal{C}^{\infty}(G)$.
 
 	\textbf{Claim.} $[\xi, \eta] = \xi \ast \eta - \eta \ast \xi$. \newline
-	Note that this claim proves the result.
+	Note that this claim finishes the proof.
 
+	To this end, let $f \in \mathcal{C}^{\infty}(G)$ be arbitrary. 
+	Define the function $\omega \colon G \to \mathbb{R}$ by
+	\begin{equation*} 
+		\omega(g) \coloneqq \Ad(g)(\eta)(f).
+	\end{equation*}
+	Thus, $\omega$ is the composition
+	\begin{equation*} 
+		G \xrightarrow{\Ad} \End(T_{1}(G)) \xrightarrow{\eval(\eta)} T_{1}(G) \xrightarrow{\eval(f)} \mathbb{R}.
+	\end{equation*}
+	Note that the evaluation maps are linear.
+	Thus, the map $T_{1}(\omega) \colon T_{1}(G) \to \mathbb{R}$ is given by
+	\begin{equation*} 
+		T_{1}(G) \xrightarrow{T_{1}(\Ad)} \End(T_{1}(G)) \xrightarrow{\eval(\eta)} T_{1}(G) \xrightarrow{\eval(f)} \mathbb{R}.
+	\end{equation*}
+	Evaluating the above at $\xi$ gives us
+	\begin{equation} \label{eq:t1-omega-commutator}
+		T_{1}(\omega)(\xi) = T_{1}(\Ad)(\xi)(\eta)(f) = [\xi, \eta](f).
+	\end{equation}
+	We now calculate the differential in a different way.
 
+	By \Cref{rem:differential-on-derivations}, we have
+	\begin{equation*} 
+		\omega(g) = \Ad(g)(\eta)(f) = T_{1}(\INT(g))(\eta)(f) = \eta \cdot (f \circ \INT) = \eta \cdot (h \mapsto f(g h g^{-1})).
+	\end{equation*}
+
+	Define $F \colon G \times G \to \mathbb{R}$ by
+	\begin{equation*} 
+		F(g, h) \coloneqq f(ghg^{-1}).
+	\end{equation*}
+	Thus, we have
+	\begin{equation*} 
+		\omega(g) = \eta \cdot (F(g, -)) = F^{\eta}(g).
+	\end{equation*}
+	Thus,
+	\begin{equation*} 
+		T_{1}(\omega)(\xi) = \xi \cdot F^{\eta}.
+	\end{equation*}
+	Again, by equality of mixed partials, we can rewrite the above as
+	\begin{equation} \label{eq:t1-omega-xi-eta-F-xi}
+		T_{1}(\omega)(\xi) = \eta \cdot F_{\xi}.
+	\end{equation}
+	Note that $F_{\xi} \colon G \to \mathbb{R}$ is the function given by
+	\begin{equation*} 
+		F_{\xi}(h) = \xi \cdot F(-, h)
+	\end{equation*}
+	By \Cref{cor:derivation-applied-to-int-g-h}, we have
+	\begin{equation*} 
+		F_{\xi}(h) = (f \circ m)_{\xi}(h) - (f \circ m)^{\xi}(h).
+	\end{equation*}
+	Thus, \Cref{eq:t1-omega-xi-eta-F-xi} tells us
+	\begin{align*} 
+		T_{1}(\omega)(\xi) &= \eta \cdot \left((f \circ m)_{\xi} - (f \circ m)^{\xi}\right) \\
+		&= \eta (f \circ m)_{\xi} - \eta (f \circ m)^{\xi} \\
+		&= (\xi \ast \eta)(f) - (\eta \ast \xi)(f).
+	\end{align*}
+	Comparing with \Cref{eq:t1-omega-commutator} gives us
+	\begin{equation*} 
+		[\xi, \eta](f) = (\xi \ast \eta)(f) - (\eta \ast \xi)(f).
+	\end{equation*}
+	Since $f$ was arbitrary, we are done.
 \end{sketch}
+
+\subsection{Properties of the Lie algebra functor}
+
+\Cref{thm:lie-algebra-functor} gave us a functor
+\begin{equation*} 
+	\mathcal{L} \colon \LieGrp \to \LieAlg.
+\end{equation*}
+Note that the morphism $\varphi$ of Lie groups gets taken to the usual differential $T_{1}(\varphi)$. 
+Thus, we have the following theorems from earlier results.
+
+\begin{thm}
+	If $H \le G$ is a Lie subgroup, then $\mathcal{L}(H)$ is a Lie subalgebra of $\mathcal{L}(G)$.
+\end{thm}
+
+\begin{thm}
+	Suppose $G$ and $H$ are \emph{connected} Lie groups, and $p \colon G \to H$ is a Lie group morphism. The following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $p$ is a covering map.
+		\item $T_{1}(p)$ is a linear isomorphism.
+		\item $T_{1}(p)$ is an isomorphism of Lie algebras.
+	\end{enumerate}
+\end{thm}
+\begin{sketch}
+	Restatement of \Cref{lem:covering-local-diffeo-equivalent}.
+\end{sketch}
+
+Note that the above begins with a morphism of Lie groups and then talks about an isomorphism of Lie algebras. 
+We would like to have something in the other direction. 
+Namely, given an isomorphism of Lie algebras, we would like to get a map of Lie groups. 
+We shall see that this something to this end is true if $G$ is simply-connected.
+
+As an inkling, let us look at the following example.
+\begin{ex}
+	Suppose $G$ is a connected, two-dimensional, non-abelian Lie group. 
+	We will show (??) that this implies that $\mathcal{L}(G)$ is non-abelian. 
+	Thus, by our earlier classification (\Cref{ex:lie-algebras-small-dimension}), $\mathcal{L}(G)$ is uniquely determined. 
+
+	Note that one example of such a group is given by
+	\begin{equation*} 
+		\widehat{G} \coloneqq \left\{\two{a}{b}{}{1} : a > 0, b \in \mathbb{R}\right\}.
+	\end{equation*}
+	Topologically, this group is isomorphic to the right half-plane. 
+	Thus, $\widehat{G}$ is simply-connected.
+
+	Since we must have $\mathcal{L}(\widehat{G}) \cong \mathcal{L}(G)$, this would tell us (by a future theorem: ??) that we have a covering map $p \colon \widehat{G} \onto G$. 
+	By \Cref{lem:covering-local-diffeo-equivalent}, $\ker(p)$ is a discrete subgroup of the center of $\widehat{G}$. 
+	However, a straightforward computation shows that $\mathcal{Z}(\widehat{G})$ is trivial. 
+
+	Thus, $\widehat{G} \cong G$. This gives us that there is a unique connected two-dimensional non-abelian Lie group!
+\end{ex}
+
+\begin{lem} \label{lem:equaliser-subgroup-tangent-space}
+	Let $\varphi, \psi \colon G \to H$ be two Lie group morphisms. Then, the \deff{equaliser}
+	\begin{equation*} 
+		K \coloneqq \{g \in G : \varphi(g) = \psi(g)\}
+	\end{equation*}
+	is a Lie subgroup of $G$ with
+	\begin{equation*} 
+		\mathcal{L}(K) = \{\xi \in \mathcal{L}(G) : \mathcal{L}(\varphi)(\xi) = \mathcal{L}(\psi)(\xi)\}.
+	\end{equation*}
+\end{lem}
+\begin{sketch} 
+	Consider the action of $G$ on $H$ given by $(g, h) \mapsto \varphi(g) h \psi(g^{-1})$. 
+	Then, $K$ is the stabiliser of $1_{H}$ and hence a subgroup by \Cref{thm:stabiliser-subgroup-tangent-space}. 
+	Moreover, $T_{1}(K)$ is the kernel of $T_{1}(\omega)$, where $\omega \colon G \to H$ is given by $g \mapsto \varphi(g) \cdot \psi(g^{-1})$. 
+	$\omega$ factors as
+	\begin{equation*} 
+		G \xrightarrow{(\id_{G}, \iota)} G \times G \xrightarrow{(\varphi, \psi)} H \times H \xrightarrow{m_{H}} H.
+	\end{equation*}
+	Thus,
+	\begin{equation*} 
+		T_{1}(\omega) = T_{1}(\varphi) - T_{1}(\psi). \qedhere
+	\end{equation*}
+\end{sketch}
+
+\begin{thm}
+	Let $G$ and $H$ be Lie groups. The functor $\mathcal{L}$ induces the function
+	\begin{equation*} 
+		\Hom_{\LieGrp}(G, H) \xrightarrow{\mathcal{L}} \Hom_{\LieAlg}(\mathcal{L}(G), \mathcal{L}(H)).
+	\end{equation*}
+	If $G$ is connected, then the above map is injective.
+\end{thm}
+\begin{sketch} 
+	Let $K$ be the equaliser of $\varphi$ and $\psi$. 
+	By \Cref{ex:sl-2-algebra-computation}, we get $\mathcal{L}(K) = \mathcal{L}(G)$. 
+	Thus, $K$ has the same dimension as $G$ (as a Lie group). 
+	In particular, $K$ contains a $G$-neighbourhood of $1$. 
+	By \Cref{lem:neighbourhood-generates-connected-group}, we have $K = G$.
+\end{sketch}
+
+\begin{ex}[Above map need not be surjective]
+	If $G = S^{1}$ and $H = \mathbb{R}$, then $\Hom_{\LieGrp}(G, H) = \{\ast\}$ but $\Hom_{\LieAlg}(\mathcal{L}(G), \mathcal{L}(H)) \cong \mathbb{R}$. 
+	Note that $G$ here is not simply-connected.
+\end{ex}
 
 \section{Matrix Lie groups and properties}
 
