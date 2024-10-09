@@ -24,6 +24,8 @@ We assume that one has the notion of what this means when talking about maps bet
 We recall some notions of manifolds, mainly for the purpose of setting up the notation. \newline
 The definition of a submanifold may be different than usual (see \Cref{rem:submanifold}).
 
+\subsection{Manifolds}
+
 Let $M$ be a topological space. A \deff{chart} $c$ on $M$ is a triple $(U, \varphi, n)$ where
 \begin{itemize}
 	\item $n \in \{0, 1, 2, \ldots\}$,
@@ -68,7 +70,98 @@ Suppose that for all charts $(V, \psi, m)$ on $N$ and $(U, \varphi, n)$ on $M$ s
 is a smooth map. 
 Then, $f$ is said to be \deff{smooth}.
 
-This gives us the category of (smooth) manifolds.
+This gives us the category of (smooth) manifolds. There is a natural product in this category. 
+
+\subsection{Tangent spaces} \label{subsec:tangent-spaces}
+
+For the most part, we only need to know that there is a functor from the category of manifolds with basepoints to the category of vector spaces. 
+More precisely: given a manifold $X$ and $x \in X$, there is an associated vector space $T_{x}(X)$ of dimension $\dim_{x}(X)$. 
+To each smooth function $\varphi \colon X \to Y$ we associate a linear map
+\begin{equation*} 
+	T_{x}(\varphi) \colon T_{x}(X) \to T_{\varphi(x)}(Y).
+\end{equation*}
+
+This association satisfies 
+\begin{itemize}
+	\item $T_{x}(\id_{X}) = \id_{T_{x}(X)}$ for all $x \in X$, and
+	\item given $X \xrightarrow{\varphi} Y \xrightarrow{\psi} Z$, we have
+	\begin{equation*} 
+		T_{x}(\psi \circ \varphi) = T_{\varphi(x)}(\psi) \circ T_{x}(\varphi).
+	\end{equation*}
+\end{itemize}
+We have the natural identification of tangent spaces as
+\begin{equation*} 
+	T_{(x, y)}(X \times Y) \cong T_{x}(X) \oplus T_{y}(Y).
+\end{equation*}
+The projections $X \times Y \to X, Y$ induce the corresponding projections on tangent spaces under the above identification.
+
+We give one concrete realisation of the tangent spaces: 
+Let $\mathcal{C}^{\infty}(X)$ denote the space of all smooth maps $X \to \mathbb{R}$. 
+Fix $x \in X$.
+A linear map $\partial \colon C^{\infty}(X) \to \mathbb{R}$ is said to be a \deff{derivation at $x$} if 
+\begin{equation*} 
+	\partial(fg) = \partial(f) g(x) + f(x) \partial(g)
+\end{equation*}
+for all $f, g \in C^{\infty}(M)$.
+
+Then,
+\begin{equation*} 
+	T_{x}(X) = \text{space of all derivations at $x$}.
+\end{equation*}
+The above is naturally an $\mathbb{R}$-vector space. (Maybe not clear why this has the correct dimension.)
+
+\begin{ex}
+	Let us check what $T_{1}(\varphi)$ is under this description. 
+	Let $\varphi \colon X \to Y$ be smooth, fix $x \in X$, and set $y \coloneqq \varphi(x)$. 
+
+	We wish to describe the linear map
+	\begin{equation*} 
+		T_{x}(\varphi) \colon T_{x}(X) \to T_{y}(Y).
+	\end{equation*}
+
+	Let $\partial \in T_{x}(X)$ be a derivation at $x$. 
+	Given $f \in \mathcal{C}^{\infty}(Y)$, we define
+	\begin{equation*} 
+		T_{x}(\varphi)(\partial)(f) \coloneqq \partial(f \circ \varphi) \in \mathbb{R}.
+	\end{equation*}
+	The right hand side makes sense since $f \circ \varphi$ is a smooth map $X \to \mathbb{R}$. 
+
+	Thus, we have described a function $T_{x}(\varphi)(\partial) \colon \mathcal{C}^{\infty}(M) \to \mathbb{R}$. 
+	One checks that this is a linear function.
+
+	We check that this is a derivation at $y$. To this end, given $f, g \in C^{\infty}(Y)$, we have
+	\begin{align*} 
+		T_{x}(\varphi)(\partial)(f \cdot g) &= \partial((fg) \circ \varphi) \\
+		&= \partial((f \circ \varphi) \cdot (g \circ \varphi)) \\
+		&= \partial(f \circ \varphi) \cdot (g \circ \varphi)(x) + (f \circ \varphi)(x) \cdot \partial(g \circ \varphi)) \\ 
+		&= \partial(f \circ \varphi) g(y) + f(y) \partial(g \circ \varphi)). 
+	\end{align*}
+	This shows that we do get a derivation.
+
+	The functoriality is clear.
+\end{ex}
+
+\begin{ex}
+	The identification
+	\begin{equation*} 
+		T_{(x, y)}(X \times Y) \cong T_{x}(X) \oplus T_{y}(Y)
+	\end{equation*}
+	is done as follows:
+
+	Given $\partial_{x} \in T_{x}(X)$ and $\partial_{y} \in T_{y}(Y)$, we define the derivation $\partial \in T_{(x, y)}(X, Y)$ as
+	\begin{equation*} 
+		\partial(f) \coloneqq \partial_{x}(f(-, y)) + \partial_{y}(\varphi(x, -)),
+	\end{equation*}
+	for $f \in \mathcal{C}^{\infty}(X \times Y)$.
+
+	This association gives us a map
+	\begin{equation*} 
+		T_{x}(X) \oplus T_{y}(Y) \to T_{(x, y)}(X, Y).
+	\end{equation*}
+	One checks that this is an isomorphism.
+\end{ex}
+
+\subsection{Submanifold}
 
 \begin{defn} \label{defn:submanifold}
 	Suppose $M$ is a manifold, and $N \subset M$ a subset. $N$ is a \deff{submanifold} of $M$ if $N$ has the following property: for every $x \in N$, there exists a chart $(U, \varphi, n)$ with $x \in U$ such that $\varphi(U \cap N) = \varphi(U) \cap \mathbb{R}^{\ell}$. 
@@ -91,9 +184,59 @@ We then have the following criterion then to check smoothness of maps to submani
 	\end{center}
 \end{thm}
 
-\section{Lie groups: Definition and observations}
+We also note that given $x \in N$, the inclusion $\iota$ induces an inclusion of tangent spaces and we can identify $T_{x}(N)$ as a subspace of $T_{x}(M)$.
 
-We start with the basic definition.
+\subsection{Vector spaces as manifolds} \label{subsec:vector-spaces-manifolds}
+
+Let $V$ be a (finite-dimensional) vector space (over $\mathbb{R}$) of dimension $n$. 
+After fixing a basis for $V$, we have a bijection $V \cong R^{n}$. 
+Using this bijection, we can define an atlas on $V$. 
+This atlas is independent of the basis chosen. 
+Thus, $V$ is an $n$-dimensional manifold. 
+
+Given $v \in V$, the tangent space $T_{v}(V)$ can be naturally identified with $V$.
+
+\begin{rem}
+	The identification 
+	\begin{equation*} 
+		V \cong T_{v}(V)
+	\end{equation*}
+	is as follows: given $X \in V$, we define the map $\partial_{X} \colon \mathcal{C}^{\infty}(V) \to \mathbb{R}$ as
+	\begin{equation*} 
+		\partial_{X}(f) \coloneqq \lim_{t \to 0} \frac{f(v + tX) - f(v)}{t}.
+	\end{equation*}
+	The map $X \mapsto \partial_{X}$ is the identification.
+\end{rem}
+
+Since linear maps $\mathbb{R}^{n} \to \mathbb{R}^{m}$ are smooth, we get any linear map $\varphi \colon V \to W$ between vector spaces is smooth. 
+Moreover, under the identifications of tangent spaces with the vector space itself, the differential $T_{v}(\varphi)$ is again $\varphi$. 
+
+Indeed, one checks that $T_{v}(\partial_{X}) = \partial_{\varphi(X)} \in T_{\varphi(v)}(Y)$.
+
+Thus, the derivative at $v$ of
+\begin{equation*} 
+	\varphi \colon V \to W
+\end{equation*}
+is again itself.
+
+Next, suppose we are given a bilinear map $\varphi \colon V \times V \to W$. 
+Taking its differential at $(x, y) \in V \times V$ gives us a \emph{linear} map
+\begin{equation*} 
+	T_{(x, y)}(\varphi) : T_{(x, y)}(V \times V) \to T_{\varphi(x, y)}(W).
+\end{equation*}
+Under the two identifications mentioned before, the above is a linear map
+\begin{equation*} 
+	V \oplus V \to W.
+\end{equation*}
+Under these identifications the linear map turns out to be
+\begin{equation} \label{eq:product-rule-bilinear-map}
+	(\xi, \eta) \mapsto \varphi(x, \eta) + \varphi(\xi, y)
+\end{equation}
+for $\xi \in V \cong T_{v}(X)$ and $\eta \in V \cong T_{y}(V)$.
+
+\section{Lie groups}
+
+We start with the basic definitions.
 
 \subsection{Definition}
 
@@ -212,6 +355,25 @@ In particular, the above is the ``same'' map for any Lie group.
 	\end{equation*}
 \end{sketch}
 
+\begin{thm}[The differential of the inversion map]
+	For $X \in T_{1}(G)$, one has
+	\begin{equation*} 
+		T_{1}(\iota)(X) = -X.
+	\end{equation*}
+\end{thm}
+\begin{sketch}
+	Note that the composition
+	\begin{equation*} 
+		G \xrightarrow{\id_{G} \times \iota} G \times G \xrightarrow{m} G
+	\end{equation*}
+	is constant. Thus, its differential is zero. 
+	Differentiating using the chain tells us that
+	\begin{equation*} 
+		T_{1}(G) \xrightarrow{\id \oplus T_{1}(\iota)} T_{1}(G) \oplus T_{1}(G) \xrightarrow{+} T_{1}(G)
+	\end{equation*}
+	is zero. Thus, $X + T_{1}(\iota)(X) = 0$.
+\end{sketch}
+
 Next, let us compute some explicit differentials of matrix maps. Note that $\GL(n, F)$ is an open subset of the vector space $M_{n}(F)$ and thus, its tangent space at identity can be identified with $M_{n}(F)$. \newline
 In particular, $T_{1}(F^{\times}) = F$.
 
@@ -240,8 +402,8 @@ In particular, $T_{1}(F^{\times}) = F$.
 
 \begin{thm}[Lie bracket on GL]
 	Consider $G \coloneqq \GL(n, \mathbb{R})$. 
-	For $A \in G$, we have the conjugation map $\Int(A) \colon G \to G$. 
-	Let $\Ad(A) \coloneqq T_{I}(\Int(A))$ denote its differential at identity. Thus, $\Ad(A)$ is a linear map $M_{n}(\mathbb{R}) \to M_{n}(\mathbb{R})$.
+	For $A \in G$, we have the conjugation map $\INT(A) \colon G \to G$. 
+	Let $\Ad(A) \coloneqq T_{I}(\INT(A))$ denote its differential at identity. Thus, $\Ad(A)$ is a linear map $M_{n}(\mathbb{R}) \to M_{n}(\mathbb{R})$.
 
 	For $X \in M_{n}(\mathbb{R})$, we have $\Ad(A)(X) = AXA^{-1}$.
 
@@ -269,9 +431,9 @@ This will give us the Lie algebra structure on $T_{1}(G)$.
 	First, let $A \in G$ and $X \in M_{n}(\mathbb{R})$ be arbitrary. 
 	For $s \in \mathbb{R}$, we note
 	\begin{equation*} 
-		\Int(A)(I + sX) = A(I + sX)A^{-1} = I + s(AXA^{-1}).
+		\INT(A)(I + sX) = A(I + sX)A^{-1} = I + s(AXA^{-1}).
 	\end{equation*}
-	This shows $T_{I}(\Int(A))(X) = AXA^{-1}$.
+	This shows $T_{I}(\INT(A))(X) = AXA^{-1}$.
 
 	Now, let $X, Y \in M_{n}(\mathbb{R})$ be arbitrary. 
 	For small $s$, the element $I + sX$ is invertible, and the above tells us
@@ -474,15 +636,48 @@ We may denote the above as $S_{m}$ if the context is clear.
 	(b) $\Leftrightarrow$ (c) follows by \Cref{cor:image-kernel-morphism-properties} and rank-nullity.
 \end{sketch}
 
-\begin{ex} \label{ex:SL-is-subgroup}
-	$\SL(n, F)$ is a subgroup of $\GL(n, F)$ for $F = \mathbb{R}, \mathbb{C}$ since this is the kernel of $\det \colon \GL(n, F) \to F^{\times}$.
-\end{ex}
+\subsection{Special linear groups} \label{subsec:SL-subgroup}
+
+$\SL(n, F)$ is a subgroup of $\GL(n, F)$ for $F = \mathbb{R}, \mathbb{C}$ since this is the kernel of $\det \colon \GL(n, F) \to F^{\times}$.
+This is called the \deff{special linear group}.
+
+Let us consider $F = \mathbb{R}$ first. 
+Calculations as in \Cref{thm:diff-complex-det-is-trace} tell us that the differential $T_{I}(\det)$ is
+\begin{equation*} 
+	\trace \colon M_{n}(\mathbb{R}) \to \mathbb{R}.
+\end{equation*}
+
+Thus, by \Cref{cor:image-kernel-morphism-properties}, we have
+\begin{equation*} 
+	T_{I}(\SL(n, \mathbb{R})) = \{A \in M_{n}(\mathbb{R}) : \trace(A) = 0\} \le T_{I}(\GL(n, \mathbb{R})).
+\end{equation*}
+Thus,
+\begin{equation*} 
+	\dim(\SL(n, \mathbb{R})) = n^{2} - 1.
+\end{equation*}
+
+Similarly, for $F = \mathbb{C}$, we see that
+\begin{equation*} 
+	T_{I}(\SL(n, \mathbb{C})) = \{A \in M_{n}(\mathbb{C}) : \trace(A) = 0\} \le T_{I}(\GL(n, \mathbb{C})).
+\end{equation*}
+Note that since these are vector space dimensions over $\mathbb{R}$ and the $\trace$ is a rank two map in this case. Thus, we have
+\begin{equation*} 
+	\dim(\SL(n, \mathbb{C})) = 2n^{2} - 2.
+\end{equation*}
 
 \section{Involutions on algebras}
 
+We define the notion of an involution on an algebra (the prototypical examples being conjugation and transposition). 
+We then show that the elements whose inverse equals their involution form a Lie subgroup of invertible elements, 
+and identify the tangent space as a subspace of $A$.
+
+This general framework lets us define and compute the dimensions of the (usual and special) orthogonal-esque groups.
+
+\subsection{Definitions}
+
 Let $A$ be a finite-dimensional associative unital $\mathbb{R}$-algebra. 
 As noted earlier, $A$ is a canonically a smooth manifold with the multiplication being smooth, 
-and $G$ the subset of invertible elements is a open subset which is a Lie group.
+and $G$ the subset of invertible elements is a open subset which is a Lie group. 
 
 \begin{defn}
 	An \deff{involution} on $A$ is a function $\tau \colon A \to A$ satisfying
@@ -507,7 +702,7 @@ We use the notation $a^{\tau} \coloneqq \tau(a)$.
 
 Define
 \begin{equation*} 
-	H \coloneqq \{g \in A : g \cdot g^{\tau} = 1 = g^{\tau} \cdot g\}.
+	H \coloneqq \{g \in A : g g^{\tau} = 1 = g^{\tau} g\}.
 \end{equation*}
 Note that $H \subset G$.
 
@@ -516,16 +711,19 @@ Note that $H \subset G$.
 \end{lem}
 
 \begin{rem}
-	Since $A$ is a finite-dimensional $\mathbb{R}$-algebra, the equation $ab = 1$ implies $ba = 1$.
+	Since $A$ is a finite-dimensional $\mathbb{R}$-algebra, the equation $ab = 1$ implies $ba = 1$. 
+	We will use this going forth and only write the equality $gg^{\tau} = 1$.
 \end{rem}
 
-\begin{thm}
+\begin{thm} \label{thm:involution-subgroup-tangent-space}
 	$H$ is a Lie subgroup of $G$ with
 	\begin{equation*} 
 		T_{1}(H) = \{a \in A : a = -a^{\tau}\}.
 	\end{equation*}
 \end{thm}
 The above gives us the dimension of $H$ as well.
+
+\subsection{The orthogonal and unitary groups}
 
 \begin{ex} \label{ex:orthogonal-unitary-groups-dimensions}
 	The \deff{orthogonal matrix group}
@@ -539,6 +737,8 @@ The above gives us the dimension of $H$ as well.
 		\UU(n) \coloneqq \{A \in M_{n}(\mathbb{C}) : A A^{\ast} = I\}
 	\end{equation*}
 	is a Lie group of dimension $n^{2}$.
+
+	The dimensions were computed by computing the (real) dimensions of the tangent spaces obtained from \Cref{thm:involution-subgroup-tangent-space}.
 \end{ex}
 
 \begin{ex} \label{ex:special-orthogonal-unitary-groups-dimensions}
@@ -565,7 +765,7 @@ The above gives us the dimension of $H$ as well.
 	\end{equation*}
 \end{ex}
 
-\section{Quaternions and symplectic group} \label{sec:sympletic-group}
+\subsection{Quaternions and symplectic group} \label{subsec:sympletic-group}
 
 Recall that the algebra of quaternions $\mathbb{H}$ is a four-dimensional associative unital $\mathbb{R}$-algebra. 
 The usual representation is $\mathbb{H} = \mathbb{R}(1 \oplus \iota \oplus \jmath \oplus k)$ with the ``cross-product'' relations between $\iota$, $\jmath$, $k$. 
@@ -649,7 +849,7 @@ First, note that $\SU(2)$ is simply-connected since topologically $\SU(2) \cong 
 	\right\}.
 \end{equation*}
 
-Consider the linear map $T : \mathbb{R}^{3} \to M_{2}(\mathbb{C})$ given by
+Consider the linear map $T \colon \mathbb{R}^{3} \to M_{2}(\mathbb{C})$ given by
 \begin{equation*} 
 	(x, y, z) \mapsto \two{x}{y + \iota z}{y - \iota z}{-x}.
 \end{equation*}
@@ -669,7 +869,7 @@ Moreover, $-\det(THT^{\ast}) = -\det(H)$.
 Thus, $\SU(2)$ acts via norm-preserving isomorphisms, giving us a homomorphism $\SU(2) \to \OO(\mathcal{H}) \cong \OO(\mathbb{R}^{3})$. 
 Since $\SU(2)$ is connected, this map has image inside $\SO(3)$.
 
-One can calculate the map to get that the homomorphism $\rho : \SU(2) \to \SO(3)$ is
+One can calculate the map to get that the homomorphism $\rho \colon \SU(2) \to \SO(3)$ is
 \begin{equation*} 
 	\two{\alpha}{\beta}{-\overline{\beta}}{\overline{\alpha}} 
 	\mapsto
@@ -681,20 +881,20 @@ One can calculate the map to get that the homomorphism $\rho : \SU(2) \to \SO(3)
 \end{equation*}
 The above gives us that $\ker(\rho) = \{\pm I\}$. 
 By \Cref{cor:local-diffeo-characterisation}, $\rho$ is a local diffeomorphism. 
-We will see later \Cref{lem:covering-local-diffeo-equivalent} that this implies that $\rho$ is a covering map. 
+We will see later (\Cref{lem:covering-local-diffeo-equivalent}) that this implies that $\rho$ is a covering map. 
 We already checked that $\SU(2)$ is simply-connected. 
 Thus, we have constructed the universal cover of $\SO(3)$. 
-It would also follow by \Cref{thm:pi-one-kernel-covering} that $\pi_{1}(\SO(3), I) \cong \mathbb{Z}/2$.
+It would also follow (by \Cref{thm:pi-one-kernel-covering}) that $\pi_{1}(\SO(3), I) \cong \mathbb{Z}/2$.
 
 \section{An open mapping theorem}
 
-\textbf{Question.} Suppose $G$ acts transitively on $M$, and $m \in M$. Is the orbit map $\omega_{m} : G \to M$ a submersion? \newline
+\textbf{Question.} Suppose $G$ acts transitively on $M$, and $m \in M$. Is the orbit map $\omega_{m} \colon G \to M$ a submersion? \newline
 \textbf{Answer.} {\color{red}\textbf{No!}} Consider $G \coloneqq \mathbb{R}_{\text{disc}}$ and $M \coloneqq \mathbb{R}$. 
 By our definitions, $G$ is indeed a (zero-dimensional) Lie group. \newline
 We have the transitive action of $G$ on $M$ given by $(x, y) \mapsto x + y$. 
 The orbit map of $0$ is the ``identity'' map $\mathbb{R}_{\text{disc}} \to \mathbb{R}$. 
 However, this map cannot be a submersion since the dimensions are incorrect. \newline
-We will see that under mild assumptions \Cref{thm:open-mapping-group-action} such a thing cannot happen.
+We will see that under mild assumptions (\Cref{thm:open-mapping-group-action}) such a thing cannot happen.
 
 For this section, just a topological action (i.e., a continuous action) is sufficient to prove the theorems.
 
@@ -742,7 +942,7 @@ In the above, we only need that $G$ is a \emph{topological} manifold (with conti
 	Suppose $G$ acts on $X$ continuously and that this is action is transitive. 
 	Let $x \in X$. The orbit map 
 	\begin{align*} 
-		\omega_{x} : G &\to X\\
+		\omega_{x} \colon G &\to X\\
 		g &\mapsto gx
 	\end{align*}
 	is open.
@@ -794,7 +994,7 @@ In this case, $U$ is said to be an \deff{evenly covered} neighbourhood.
 	Let $V$ be a neighbourhood of $1_{G}$ on which $p$ is bijective.
 	We must have that $D \coloneqq \ker(p)$ does not intersect $V$. 
 	In turn, $D$ is discrete. \newline
-	Given $g \in G$, the map $\Int(g)$ lands inside $D$ by normality. 
+	Given $g \in G$, the map $\INT(g)$ lands inside $D$ by normality. 
 	A continuous map $G \to D$ must be constant and hence, $D$ is central. \newline
 	Now, let $W \subset V$ be a small enough open neighbourhood of $1_{G}$ such that $p|_{W}$ is a diffeomorphism, $W$ is connected, $W = W^{-1}$, $W^{2} \subset V$. 
 	Then $p(W)$ is evenly covered since
@@ -854,7 +1054,7 @@ The above will follows from the \textsc{Lifting Theorem}: Suppose we have a cove
 	This follows from using the \textsc{Lifting Theorem} in different ways appropriately. 
 
 	The point to note is the following: 
-	if $Z$ is simply-connected and $f, g : (Z, z_{0}) \to (\widetilde{G}, \widetilde{1})$ are two maps such that 
+	if $Z$ is simply-connected and $f, g \colon (Z, z_{0}) \to (\widetilde{G}, \widetilde{1})$ are two maps such that 
 	$f \circ p = g \circ p$, 
 	then we must have $f = g$.
 
@@ -935,7 +1135,7 @@ Back to our setup of Lie groups, we have:
 \end{equation*}
 We showed that $D \coloneqq \ker(p) = p^{-1}(1)$ is central and discrete (\Cref{lem:covering-local-diffeo-equivalent}). 
 
-For $g \in G$, recall the left translation map $\gamma(g) : G \to G$ defined by $h \mapsto gh$.
+For $g \in G$, recall the left translation map $\gamma(g) \colon G \to G$ defined by $h \mapsto gh$.
 
 \begin{thm} \label{thm:pi-one-kernel-covering}
 	We have an isomorphism
@@ -947,6 +1147,466 @@ For $g \in G$, recall the left translation map $\gamma(g) : G \to G$ defined by 
 	In particular, this is abelian.
 \end{thm}
 
+\section{Lie algebras}
+
+We first start with a purely algebraic discussion of Lie algebras. 
+However, unsurprisingly, we will later associate a Lie algebra to every Lie group. 
+The notations along the way will be alluding to what is to follow. 
+For example, we will define a Lie algebra $\gl(n, \mathbb{R})$ which will turn out to be the Lie algebra associated to the Lie group $\GL(n, \mathbb{R})$.
+
+As it will turn out, the Lie algebra of a Lie group $G$ is the vector space $T_{1}(G)$ equipped with a binary operator. 
+This will make it clear that the Lie algebra is only concerned with the connected component of $1$. 
+What we will also see is that the Lie algebra ``does not see covering maps''. 
+This is not surprising in view of \Cref{lem:covering-local-diffeo-equivalent} which told us that covering is equivalent to being an isomorphism of tangent spaces. 
+Thus, by passing to the universal covering space of the connected component, 
+the category of connected Lie groups seems to be the one to focus on. 
+As we shall see, on this full subcategory, the Lie algebra functor will give us an equivalence.
+
+\subsection{Definitions}
+
+In what follows, $F$ is either $\mathbb{R}$ or $\mathbb{C}$.
+\begin{defn}
+	A \deff{Lie algebra} over $F$ is a (finite-dimensional) vector space $\mathfrak{g}$ equipped with an $F$-bilinear map $[-, -] \colon \mathfrak{g} \times \mathfrak{g} \to \mathfrak{g}$ satisfying
+	\begin{enumerate}[label=(\alph*)]
+		\item (anticommutativity) $[x, x] = 0$ for all $x \in \mathfrak{g}$, and
+		\item (Jacobi identity) $[x, [y, z]] + [y, [z, x]] + [z, [x, y]] = 0$ for all $x, y, z \in \mathfrak{g}$.
+	\end{enumerate}
+	The operator $[-, -]$ is called the \deff{(Lie) bracket} or the \deff{commutator}.
+\end{defn}
+Since $\chr(F) = 0$, anticommutativity for a bilinear map is equivalent to $[x, y] = -[y, x]$. \newline
+
+\begin{defn}
+	A \deff{morphism} of Lie algebras is a liner map $\varphi \colon \mathfrak{g} \to \mathfrak{h}$ satisfying
+	\begin{equation*} 
+		\varphi([g, g']) = [\varphi(g), \varphi(g')]
+	\end{equation*}
+	for all $g, g' \in \mathfrak{g}$.
+
+	This gives us the category $\LieAlg$ of Lie algebras.
+\end{defn}
+
+\begin{defn}
+	A Lie algebra $(\mathfrak{g}, [-, -])$ is \deff{abelian} if $[-, -]$ is the zero map.
+\end{defn}
+
+\begin{rem}
+	Being a bilinear map, $[-, -]$ is uniquely determined by its values on a basis. 
+	In particular, being abelian can be checked on a basis.
+\end{rem}
+
+\begin{rem} \label{rem:abelian-lie-algebras-isomorphic}
+	If $\mathfrak{g}$ and $\mathfrak{h}$ are Lie algebras of the same dimension, then they are isomorphic.
+\end{rem}
+
+\begin{defn}
+	Let $\mathfrak{h} \subset \mathfrak{g}$ be a subspace of a Lie algebra.
+	\begin{itemize}
+		\item $\mathfrak{h}$ is a \deff{subalgebra} if $[\mathfrak{h}, \mathfrak{h}] \subset \mathfrak{h}$, that is, $[h, h'] \in \mathfrak{h}$ for all $h, h' \in \mathfrak{h}$.
+		%
+		\item $\mathfrak{h}$ is an \deff{ideal} if $[\mathfrak{h}, \mathfrak{g}] \subset \mathfrak{h}$, that is, $[h, g] \in \mathfrak{h}$ for all $h \in \mathfrak{h}$ and $g \in \mathfrak{g}$.
+	\end{itemize}
+\end{defn}
+Note that an ideal is in particular a subalgebra. 
+A subalgebra is a Lie algebra with the induced operations.
+
+\begin{defn}
+	$[\mathfrak{g}, \mathfrak{g}]$ denotes the vector space generated by all commutators, i.e., the $F$-span of $\{[x, y] : x, y \in \mathfrak{g}\}$. \newline
+	This is the called the \deff{derived subalgebra} or \deff{derived ideal} of $\mathfrak{g}$.
+\end{defn}
+
+\begin{thm}
+	If $\varphi \colon \mathfrak{g} \to \mathfrak{h}$ is a morphism of Lie algebras, then $\ker(\varphi)$ is an ideal of $\mathfrak{g}$.
+\end{thm}
+\begin{sketch} 
+	For $z \in \ker(\varphi), g \in \mathfrak{g}$, we have $\varphi([z, g]) = [\varphi(z), \varphi(g)] = [0, \varphi(g)] = 0$.
+\end{sketch}
+
+\begin{thm}
+	If $\mathfrak{h}$ is an ideal of a Lie algebra $\mathfrak{g}$, then the vector space $\mathfrak{g}/\mathfrak{h}$ is naturally a Lie algebra with the induced bracket.
+\end{thm}
+
+\begin{rem}
+	We have the usual isomorphism and factoring theorems. For example, if $\varphi : \mathfrak{g} \to \mathfrak{h}$ is a map of Lie algebras, then, $\varphi$ factors as
+	\begin{equation*} 
+		\mathfrak{g} \onto \mathfrak{g}/(\ker \varphi) \into \mathfrak{h}.
+	\end{equation*}
+\end{rem}
+
+\begin{defn}
+	The \deff{center} of $\mathfrak{g}$ is 
+	\begin{equation*} 
+		\mathfrak{z} \coloneqq \{x \in \mathfrak{g} : [x, y] = 0 \text{ for all } y \in \mathfrak{g}\}.
+	\end{equation*}
+\end{defn}
+
+\begin{thm}
+	$\mathfrak{z}$ is an ideal of $\mathfrak{g}$. 
+	$\mathfrak{z}$ is also an abelian subalgebra of $\mathfrak{g}$.
+\end{thm}
+The above follows by a direct computation. Alternately, $\mathfrak{z}$ is the kernel of the map $\ad$ to be defined below.
+
+\subsection{Examples}
+
+\begin{ex}
+	$\gl(n, \mathbb{R}) \coloneqq M_{n}(\mathbb{R})$ is a Lie algebra with
+	\begin{equation*} 
+		[A, B] \coloneqq AB - BA.
+	\end{equation*}
+	We also define the subspace
+	\begin{equation*} 
+		\sl(n, \mathbb{R}) \coloneqq \{A \in \gl(n, \mathbb{R}) : \trace(A) = 0\}.
+	\end{equation*}
+	The above is a subalgebra. \newline
+	In fact, something much stronger is true: $[\gl(n, \mathbb{R}), \gl(n, \mathbb{R})] \subset \sl(n, \mathbb{R})$.
+
+	Similarly, the space of upper triangular and strictly upper triangular matrices are also subalgebras.
+\end{ex}
+Note that for $\gl$, and the (strictly) upper triangular matrices, the algebra $[\mathfrak{g}, \mathfrak{g}]$ was strictly smaller. 
+We show that this is not always the case.
+
+\begin{ex}[Derived subalgebra is whole algebra] \label{ex:sl-2-algebra-computation}
+	Consider $\mathfrak{g} \coloneqq \sl(2, \mathbb{R})$, the algebra of $2 \times 2$ traceless matrices. 
+	Then, $\mathfrak{g}$ is $3$-dimensional with a basis given by
+	\begin{equation*} 
+		h \coloneqq \two{1}{}{}{-1},\, e \coloneqq \two{}{1}{}{},\, f \coloneqq \two{}{}{1}{}.
+	\end{equation*}
+	One checks that
+	\begin{align*} 
+		[h, e] &= 2e, \\
+		[h, f] &= -2f, \\
+		[e, f] &= h.
+	\end{align*}
+	Thus, $[\mathfrak{g}, \mathfrak{g}] = \mathfrak{g}$.
+\end{ex}
+
+\begin{ex}[Lie algebras of small dimensions]
+	Let $\mathfrak{g}$ be a Lie algebra. We classify what $\mathfrak{g}$ is for $\dim(\mathfrak{g}) \le 2$.
+	\begin{itemize}
+		\item $\dim(\mathfrak{g}) = 0$: $\mathfrak{g}$ must be abelian and thus, there is exactly one Lie algebra of dimension $0$.
+		%
+		\item $\dim(\mathfrak{g}) = 1$: since $[\alpha v, \beta v] = 0$ for every $v \in \mathfrak{g}$ and $\alpha, \beta \in F$, we see that $\mathfrak{g}$ is abelian. Thus, there is a unique Lie algebra of dimension $1$.
+		%
+		\item $\dim(\mathfrak{g}) = 2$: as noted before (\Cref{rem:abelian-lie-algebras-isomorphic}), there is exactly one abelian Lie algebra of any given dimension. 
+
+		There is a unique two-dimensional non-abelian Lie algebra: it has a basis $e, f$ such that $[e, f] = f$.
+
+		Thus, there are exactly two Lie algebras of dimension two (up to isomorphism).
+	\end{itemize}
+\end{ex}
+
+\begin{ex}[Two-dimensional non-abelian Lie algebra as an algebra of matrices]
+	The last example can be realised as a subgroup of $\gl(2, \mathbb{R})$ as
+	\begin{equation*} 
+		\mathfrak{g} \coloneqq \left\{\two{a}{b}{0}{0} : a, b \in \mathbb{R}\right\}.
+	\end{equation*}
+	The basis 
+	\begin{equation*} 
+		e \coloneqq \two{1}{0}{0}{0},\, f \coloneqq \two{0}{1}{0}{0}
+	\end{equation*}
+	satisfies $[e, f] = f$.
+\end{ex}
+
+A theorem of Ado tells that this can always be done:
+\begin{thm}[Ado]
+	Any finite-dimensional Lie algebra over $F$ is isomorphic to a Lie subalgebra of $\gl(n, F)$ for some $n$.
+\end{thm}
+The above is true for any field of characteristic zero.
+
+\begin{rem}
+	The corresponding theorem about Lie groups is not true: Consider $G \coloneqq \SL(2, \mathbb{R})$. 
+	Note that we have a topological decomposition as
+	\begin{align*} 
+		\SL(2, \mathbb{R}) \cong S^{1} \times \mathbb{R}_{> 0} \times \mathbb{R}.
+	\end{align*}
+	This is because every element of $G$ has a unique representation of the form
+	\begin{equation*} 
+		\two{\cos(\theta)}{-\sin(\theta)}{\sin(\theta)}{\cos(\theta)} \cdot \two{r}{}{}{1/r} \cdot \two{1}{x}{0}{1}.
+	\end{equation*}
+
+	Thus, $\pi_{1}(G, I) \cong \mathbb{Z}$. 
+	This means that $\widetilde{G} \to G$ is an infinite covering map. 
+	This will tell us that $\widetilde{G}$ is not a group of matrices. ??
+\end{rem}
+
+\subsection{Representation of Lie algebras}
+
+Analogous to $\gl(n, F)$, one defines the following.
+\begin{defn}
+	Given a vector space $V$, the Lie algebra $\gl(V)$ is defined as follows: this is the $F$-vector space $\End_{F}(V)$ with bracket $[S, T] \coloneqq S \circ T - T \circ S$.
+\end{defn}
+
+\begin{defn}
+	A \deff{representation} of a Lie group $\mathfrak{g}$ on $V$ is a morphism $\pi \colon \mathfrak{g} \to \gl(V)$.
+\end{defn}
+
+\subsection{The adjoint representation and center}
+
+Let $\mathfrak{g}$ be a Lie algebra, and $x \in \mathfrak{g}$. 
+This defines a linear map 
+\begin{align*} 
+	\ad(x) \colon \mathfrak{g} & \to \mathfrak{g} \\
+	z & \mapsto [x, z].
+\end{align*}
+
+This gives us a map $\ad \colon \mathfrak{g} \to \End(\mathfrak{g})$ given by $x \mapsto \ad(x)$. 
+This map is linear.
+
+The Jacobi identity tells us that
+\begin{equation*} 
+	\ad([x, y])(z) = (\ad(x) \circ \ad(y))(z) - (\ad(y) \circ \ad(x))(z).
+\end{equation*}
+
+Thus,
+\begin{equation*} 
+	\ad([x, y]) = [\ad(x), \ad(y)],
+\end{equation*}
+where the bracket on the right is in $\End(\mathfrak{g})$. 
+
+In other words, we have
+\begin{defn}
+	The \deff{adjoint representation} of $\mathfrak{g}$ is $\ad \colon \mathfrak{g} \to \gl(\mathfrak{g})$. 
+\end{defn}
+This is a representation of $\mathfrak{g}$ on $\mathfrak{g}$.
+
+Note that the center $\mathfrak{z}$ is precisely $\ker(ad)$ and hence is an ideal.
+
+\subsection{Complexification}
+
+If $\mathfrak{g}$ is an $\mathbb{R}$-Lie algebra, then $\mathfrak{g} \otimes_{R} \mathbb{C}$ is a $\mathbb{C}$-Lie algebra in a natural way. 
+We have $\dim_{\mathbb{R}}(\mathfrak{g}) = \dim_{\mathbb{C}}(\mathfrak{g} \otimes_{\mathbb{R}} \mathbb{C})$.
+
+We now see a curious example. 
+
+Consider the \underline{real} Lie algebras $\su(2, \mathbb{C})$ and $\sl(2, \mathbb{R})$. 
+We had already seen the latter; the former is
+\begin{equation*} 
+	\su(2) \coloneqq \left\{\two{\iota a}{z}{-\overline{z}}{-\iota a} : a \in \mathbb{R},\, z \in \mathbb{C}\right\},
+\end{equation*}
+with the bracket being the usual commutator of matrices.
+
+Both of these are $3$-dimensional real Lie algebras. One can check by hand that these are not isomorphic: $\su(2) \not\cong \sl(2, \mathbb{R})$. \newline
+
+\begin{blockquote}
+	If we believe the introduction of this section, here's a more conceptual reason to see that the Lie algebras are distinct:
+
+	As one may believe, these are the Lie algebras to be associated to $\SU(2)$ and $\SL(2, \mathbb{R})$ respectively. 
+	These are non-isomorphic Lie groups. For example, one is compact and the other is not. 
+	In fact, we have already seen the topological isomorphisms
+	\begin{equation*} 
+		\SU(2) \cong S^{3} \andd \SL(2, \mathbb{R}) \cong S^{1} \times \mathbb{R}_{> 0} \times \mathbb{R}.
+	\end{equation*}
+	This tells us that $\SU(2)$ is a simply-connected group and $\SL(2, \mathbb{R})$ is not. 
+	In particular, $\SU(2)$ is its own universal cover and compactness tells us that this does not cover $\SL(2, \mathbb{R})$. 
+\end{blockquote}
+
+On the other hand, one has
+\begin{equation*} 
+	\su(2) \otimes_{R} \mathbb{C} \cong \sl(2, \mathbb{R}) \otimes_{\mathbb{R}} \mathbb{C}
+\end{equation*}
+as $\mathbb{C}$-Lie algebras.
+
+To see this, note that $\su(2)$ has an $\mathbb{R}$-basis as
+\begin{equation*} 
+	A \coloneqq \two{\iota}{}{}{-\iota},\, B \coloneqq \two{0}{1}{-1}{0},\, C \coloneqq \two{0}{\iota}{\iota}{0}.
+\end{equation*}
+Let $h, e, f$ be the basis of $\sl(2, \mathbb{R})$ as in \Cref{ex:sl-2-algebra-computation}. 
+
+We see that we have
+\begin{equation*} 
+	A = \iota h,\, B = e - f,\, C = \iota(e + f).
+\end{equation*}
+
+The above lets one conclude the desired isomorphism after complexification.
+
+This example shows that the classification of Lie algebras may be a simpler task over $\mathbb{C}$.
+
+\subsection{Lie algebras from Lie groups}
+
+We finally define the Lie algebra associated to a Lie group. 
+We will see that this gives us an object that captures more information about the group than just the tangent space.
+
+Let $G$ be a Lie group, and $g \in G$. 
+We have the conjugation map $\INT(g) \colon G \to G$. 
+We define $\Ad(g) \coloneqq T_{1}(\INT(g))$. 
+Note that is a linear map
+\begin{equation*} 
+	\Ad(g) \colon T_{1}(G) \to T_{1}(G).
+\end{equation*}
+This gives us a smooth map
+\begin{equation*} 
+	\Ad \colon G \to \End(T_{1}(G)).
+\end{equation*}
+Differentiating this at $1$ and identifying the tangent space of a vector space with itself gives us
+\begin{equation} \label{eq:t1-ad-t1-G-end-t1-G}
+	T_{1}(\Ad) \colon T_{1}(G) \to \End(T_{1}(G)).
+\end{equation}
+Thus, given $\xi, \eta \in T_{1}(G)$, we have a linear map
+\begin{equation*} 
+	T_{1}(\Ad)(\xi) \colon T_{1}(G) \to T_{1}(G).
+\end{equation*}
+Thus, we have an element
+\begin{equation*} 
+	T_{1}(\Ad)(\xi)(\eta) \in T_{1}(G).
+\end{equation*}
+
+We define the bracket on $T_{1}(G)$ as
+\begin{equation*} 
+	[\xi, \eta] \coloneqq T_{1}(\Ad)(\xi)(\eta).
+\end{equation*}
+
+Alternately, we could (un)curry the function \Cref{eq:t1-ad-t1-G-end-t1-G} to get a bilinear map
+\begin{equation*} 
+	T_{1}(\Ad)(-, -) \colon T_{1}(G) \times T_{1}(G) \to T_{1}(G).
+\end{equation*}
+The above bilinear map is precisely what we defined $[-, -]$ to be.
+
+\begin{thm}
+	$(T_{1}(G), [-, -])$ is a real Lie algebra.
+\end{thm}
+\begin{thm}
+	If $\varphi : G \to H$ is a map of Lie groups, then the induced map
+	\begin{equation*} 
+		T_{1}(\varphi) \colon T_{1}(G) \to T_{1}(H)
+	\end{equation*}
+	is a map of Lie algebras.
+\end{thm}
+
+A useful step in the above proofs is the following observation: 
+given $\varphi$ as above, and $g \in G$, the diagram
+\begin{equation*} 
+	\begin{tikzcd}
+		G \arrow[r, "\varphi"] \arrow[d, "\INT_{G}(g)"'] & H \arrow[d, "\INT_{H}(\varphi(g))"] \\
+		G \arrow[r, "\varphi"'] & H
+	\end{tikzcd}
+\end{equation*}
+commutes. Taking differentials at $1_{G}$ gives us
+\begin{equation*} 
+	\Ad_{H}(\varphi(g)) \circ T_{1}(\varphi) = T_{1}(\varphi) \circ \Ad_{G}(g)
+\end{equation*}
+as maps $T_{1}(G) \to T_{1}(H)$.
+
+The rest of this subsection is proving the above theorems.
+
+\begin{sketch}
+	We give a sketch of both the above theorems. 
+	The second theorem is proven first (by showing that $T_{1}(\varphi)$ preserves brackets). 
+	We will make use of \mynameref{subsec:vector-spaces-manifolds} to make different identifications.
+
+	For $\eta \in T_{1}(G)$ and $g \in G$, we have
+	\begin{equation*} 
+		\Ad_{H}(\varphi(g))(T_{1}(\varphi)(\eta)) = T_{1}(\varphi)(\Ad_{G}(g)(\eta)).
+	\end{equation*}
+	Keeping $\eta$ fixed, we may view both sides as functions $G \to T_{1}(H)$.
+
+	The left side is the composition
+	\begin{equation*} 
+		G \xrightarrow{\varphi} H \xrightarrow{\Ad_{H}} \End(T_{1}(H)) \xrightarrow{\eval(T_{1}(\varphi)(\eta))} T_{1}(H),
+	\end{equation*}
+	and the right is
+	\begin{equation*} 
+		G \xrightarrow{\Ad_{G}} \End(T_{1}(G)) \xrightarrow{\eval(\eta)} T_{1}(G) \xrightarrow{T_{1}(\varphi)} T_{1}(H).
+	\end{equation*}
+
+	Since the above functions are equal, we may differentiate them both at $1_{G}$. 
+	To do so, we use the chain rule and remember that linear maps between vector spaces can be identified with their own differentials. 
+	Thus, the two derivatives respectively are
+	\begin{equation*} 
+		T_{1}(G) \xrightarrow{T_{1}(\varphi)} T_{1}(H) \xrightarrow{T_{1}(\Ad_{H})} \End(T_{1}(H)) \xrightarrow{\eval(T_{1}(\varphi)(\eta))} T_{1}(H),
+	\end{equation*}
+	and
+	\begin{equation*} 
+		T_{1}(G) \xrightarrow{T_{1}(\Ad_{G})} \End(T_{1}(G)) \xrightarrow{\eval(\eta)} T_{1}(G) \xrightarrow{T_{1}(\varphi)} T_{1}(H).
+	\end{equation*}
+
+	Evaluating both these functions at $\xi \in T_{1}(G)$ gives us the equality
+	\begin{equation*} 
+		\left(T_{1}(\Ad_{H})(T_{1}(\varphi)(\xi))\right)\left(T_{1}(\varphi)(\eta)\right) = T_{1}(\varphi)((T_{1}(\Ad_{G})(\xi))(\eta)).
+	\end{equation*}
+	Recalling $T_{1}(\Ad_{G})(-)(-) = [-, -]$ gives us
+	\begin{equation*} 
+		[T_{1}(\varphi)(\xi), T_{1}(\varphi)(\eta)] = T_{1}(\varphi)([\xi, \eta]).
+	\end{equation*}
+	This shows that $T_{1}(\varphi)$ preserves brackets.
+
+	Jacobi identity: 
+
+	Fix $g \in G$. Since $\INT(g) \colon G \to G$ is a homomorphism, we now know that
+	\begin{equation*} 
+		\Ad(g)\left([\xi, \eta]\right) = [\Ad(g)(\xi), \Ad(g)(\eta)]
+	\end{equation*}
+	for all $\xi, \eta \in T_{1}(G)$.
+
+	As before, fix $\xi$ and $\eta$ and both sides above as functions of $G$ into $T_{1}(G)$. 
+	The left side is
+	\begin{equation*} 
+		G \xrightarrow{\Ad} \End(T_{1}(G)) \xrightarrow{\eval([\xi, \eta])} T_{1}(G)
+	\end{equation*}
+	and the right is
+	\begin{equation*} 
+		G \xrightarrow{\Ad} \End(T_{1}(G)) \xrightarrow{(\eval(\xi), \eval(\eta))} T_{1}(G) \times T_{1}(G) \xrightarrow{[-, -]} T_{1}(G).
+	\end{equation*}
+
+	As before, we identify and differentiate this functions at $1_{G}$. 
+	For the second function, we use \Cref{eq:product-rule-bilinear-map} to differentiate the bilinear map.
+
+	We get the respective derivatives as
+	\begin{equation*} 
+		T_{1}(G) \xrightarrow{T_{1}(\Ad)} \End(T_{1}(G)) \xrightarrow{\eval([\xi, \eta])} T_{1}(G)
+	\end{equation*}
+	and
+	\begin{equation*} 
+		T_{1}(G) \xrightarrow{T_{1}(\Ad)} \End(T_{1}(G)) \xrightarrow{(\eval(\xi), \eval(\eta))} T_{1}(G) \oplus T_{1}(G) \xrightarrow{T_{1}([-, -])} T_{1}(G).
+	\end{equation*}
+	Evaluating these maps at $\zeta \in T_{1}(G)$ gives us
+	\begin{equation*} 
+		(T_{1}(\Ad)(\zeta))([\xi, \eta]) = (T_{1}(\Ad)(\zeta))(\xi), \eta) + (\xi, T_{1}(\Ad)(\zeta))(\eta)).
+	\end{equation*}
+	Rewriting $T_{1}(Ad)(-)(-)$ as $[-, -]$ gives us
+	\begin{equation*} 
+		[\zeta, [\xi, \eta]] = [[\zeta, \xi], \eta] + [\xi, [\zeta, \eta]].
+	\end{equation*}
+	This would give us Jacobi identity, if we knew anticommutativity.
+
+	Anticommutativity: 
+
+	We define a function $\ast$ on $T_{1}(G) \times T_{1}(G)$. 
+	We will show that 
+	\begin{equation*} 
+		[\xi, \eta] = \xi \ast \eta - \eta \ast \xi,
+	\end{equation*} 
+	proving anticommutativity. 
+	(Both sides of the equation are to be viewed as linear operators on $\mathcal{C}^{\infty}(G)$.)
+
+	For this, we will consider the realisation of $T_{1}(G)$ described in \Cref{subsec:tangent-spaces}. 
+	Let $\xi, \eta \in T_{1}(G)$ be derivations at $1$ and $f \in \mathcal{C}^{\infty}(G)$ be arbitrary. 
+	We wish to define $(\xi \ast \eta)(f) \in \mathbb{R}$. 
+
+	Fix $g \in G$. We then get a function $(f \circ m)(g, -) \in \mathcal{C}^{\infty}(G)$. 
+	We can apply the derivation $\eta$ to this function. 
+	This gives us a real number (dependent on $g$), which we denote by $(f \circ m)^{\eta}(g)$. 
+	But now this gives a (smooth!) function $(f \circ m)^{\eta} \colon G \to \mathbb{R}$. 
+	Thus, we may apply $\xi$ to this function to get a real number
+	\begin{equation*} 
+		\xi\left((f \circ m)^{\eta}\right) \in \mathbb{R}.
+	\end{equation*}
+
+	Note that we could have also done this in the other order to get something like
+	\begin{equation*} 
+		\eta\left((f \circ m)_{\xi}\right).
+	\end{equation*}
+
+	Equality of mixed partials tells us that both these numbers are the same. 
+	We denote this quantity by
+	\begin{equation*} 
+		(\xi \ast \eta)(f).
+	\end{equation*}
+
+	\textbf{Claim.} $[\xi, \eta] = \xi \ast \eta - \eta \ast \xi$. \newline
+	Note that this claim proves the result.
+
+
+\end{sketch}
+
 \section{Matrix Lie groups and properties}
 
 In this section, we compile the list of examples and their properties that we saw across various sections. 
@@ -956,13 +1616,13 @@ We mention which groups are compact. This is an easy check using Heine-Borel.
 
 \begin{enumerate}[label=(\alph*)]
 	\item $\GL(n, \mathbb{R})$ is a Lie group of dimension $n^{2}$.
-	\item $\GL(n, \mathbb{C})$ is a Lie group of dimension $(2n)^{2}$.
-	\item $\GL(n, \mathbb{H})$ is a Lie group of dimension $(4n)^{2}$. \newline
+	\item $\GL(n, \mathbb{C})$ is a Lie group of dimension $2n^{2}$.
+	\item $\GL(n, \mathbb{H})$ is a Lie group of dimension $4n^{2}$. \newline
 	See \Cref{ex:GL-examples} for the above three.
 	%
-	\item $\SL(n, \mathbb{R})$ is a Lie group.
-	\item $\SL(n, \mathbb{C})$ is a Lie group. \newline
-	See \Cref{ex:SL-is-subgroup} for the above two.
+	\item $\SL(n, \mathbb{R})$ is a Lie group of dimension $(n^{2} - 1)$.
+	\item $\SL(n, \mathbb{C})$ is a Lie group of dimension $2(n^{2} - 1)$. \newline
+	See \Cref{subsec:SL-subgroup} for the above two.
 	%
 	\item $\OO(n)$ is a compact Lie group of dimension $n(n - 1)/2$.
 	\item $\UU(n)$ is a connected, compact Lie group of dimension $n^{2}$. \newline
@@ -972,7 +1632,7 @@ We mention which groups are compact. This is an easy check using Heine-Borel.
 	\item $\SU(n)$ is a connected, compact Lie group of dimension $n^{2} - 1$. \newline
 	See \Cref{ex:special-orthogonal-unitary-groups-dimensions} for the above two. For connectedness, see \Cref{sec:connectedness}.
 	%
-	\item $\Sp(n)$ is a connected, compact Lie group of dimension $n(2n + 1)$. See \Cref{sec:sympletic-group,sec:connectedness}.
+	\item $\Sp(n)$ is a connected, compact Lie group of dimension $n(2n + 1)$. See \Cref{subsec:sympletic-group,sec:connectedness}.
 \end{enumerate}
 
 \end{document}
