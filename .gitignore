@@ -4,6 +4,9 @@ _site/
 .DS_Store
 *.snm
 *.nav
-.DS_Store
-.DS_Store
-.DS_Store
+*.aux
+*.fls
+*.log
+*.toc
+*.fdb_latexmk
+*.synctex.gz
