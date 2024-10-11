@@ -264,7 +264,7 @@ is again itself.
 Next, suppose we are given a bilinear map $\varphi \colon V \times V \to W$. 
 Taking its differential at $(x, y) \in V \times V$ gives us a \emph{linear} map
 \begin{equation*} 
-	T_{(x, y)}(\varphi) : T_{(x, y)}(V \times V) \to T_{\varphi(x, y)}(W).
+	T_{(x, y)}(\varphi) \colon T_{(x, y)}(V \times V) \to T_{\varphi(x, y)}(W).
 \end{equation*}
 Under the two identifications mentioned before, the above is a linear map
 \begin{equation*} 
@@ -439,22 +439,20 @@ As usual, $f(1, -)$ is the map $g \mapsto f(1, g)$.
 \end{sketch}
 
 \begin{exe} \label{exe:differential-multiplication-at-different-points}
-	Let $m \colon G \times G \to G$ denote the multiplication map, and fix $h \in G$. 
-	Let $\gamma(h) \coloneqq m(h, -)$ denote left multiplication by $h$ and $\rho(h) \coloneqq m(-, h)$ right multiplication. 
+	Let $m \colon G \times G \to G$ denote the multiplication map, and fix $g_{1}, g_{2} \in G$. 
+	Let $\gamma(h) \coloneqq m(g_{1}, -)$ denote left multiplication by $g_{1}$ and $\rho(g_{2}) \coloneqq m(-, g_{2})$. 
 
-	Prove the formulae
-	\begin{align*} 
-		T_{(h, 1)}(m) \colon T_{h}(G) \oplus T_{1}(G) & \to T_{h}(G) \\
-		(X, Y) &\mapsto X + T_{1}(\gamma(h))(Y),
-	\end{align*}
-	and
-	\begin{align*} 
-		T_{(1, h)}(m) \colon T_{h}(G) \oplus T_{1}(G) & \to T_{h}(G) \\
-		(X, Y) &\mapsto T_{1}(\rho(h))(X) + Y.
-	\end{align*}
+	Then the differential
+	\begin{equation*} 
+		T_{(g_{1}, g_{2})}(m) \colon T_{g_{1}}(G) \oplus T_{g_{2}}(G) \to T_{g_{1} g_{2}}(G)
+	\end{equation*}
+	is given as
+	\begin{equation*} 
+		(X, Y) \mapsto T_{g_{1}}(\rho(g_{2}))(X) + T_{g_{2}}(\gamma(g_{1}))(Y).
+	\end{equation*}
 \end{exe}
 \begin{sketch}
-	Consider the four different inclusions $G \to G \times G$ that maps $g$ to $(g, 1)$, $(g, h)$, $(1, g)$, $(h, g)$ and proceed as in \Cref{thm:differential-multiplication}.
+	Modify the inclusions and proceed as in \Cref{thm:differential-multiplication}.
 \end{sketch}
 
 \begin{cor} \label{cor:derivation-applied-to-int-g-h}
@@ -1328,7 +1326,7 @@ A subalgebra is a Lie algebra with the induced operations.
 \end{thm}
 
 \begin{rem}
-	We have the usual isomorphism and factoring theorems. For example, if $\varphi : \mathfrak{g} \to \mathfrak{h}$ is a map of Lie algebras, then, $\varphi$ factors as
+	We have the usual isomorphism and factoring theorems. For example, if $\varphi \colon \mathfrak{g} \to \mathfrak{h}$ is a map of Lie algebras, then, $\varphi$ factors as
 	\begin{equation*} 
 		\mathfrak{g} \onto \mathfrak{g}/(\ker \varphi) \into \mathfrak{h}.
 	\end{equation*}
@@ -1450,7 +1448,11 @@ This defines a linear map
 	z & \mapsto [x, z].
 \end{align*}
 
-This gives us a map $\ad \colon \mathfrak{g} \to \End(\mathfrak{g})$ given by $x \mapsto \ad(x)$. 
+This gives us a map 
+\begin{equation} \label{eq:ad}
+	\ad \colon \mathfrak{g} \to \End(\mathfrak{g})
+\end{equation} 
+given by $x \mapsto \ad(x)$. 
 This map is linear.
 
 The Jacobi identity tells us that
@@ -1465,7 +1467,7 @@ Thus,
 where the bracket on the right is in $\End(\mathfrak{g})$. 
 
 In other words, we have
-\begin{defn}
+\begin{defn} 
 	The \deff{adjoint representation} of $\mathfrak{g}$ is $\ad \colon \mathfrak{g} \to \gl(\mathfrak{g})$. 
 \end{defn}
 This is a representation of $\mathfrak{g}$ on $\mathfrak{g}$.
@@ -1565,7 +1567,7 @@ The above bilinear map is precisely what we defined $[-, -]$ to be.
 \begin{thm} \label{thm:lie-algebra-functor}
 	$(T_{1}(G), [-, -])$ is a real Lie algebra.
 
-	If $\varphi : G \to H$ is a map of Lie groups, then the induced map
+	If $\varphi \colon G \to H$ is a map of Lie groups, then the induced map
 	\begin{equation*} 
 		T_{1}(\varphi) \colon T_{1}(G) \to T_{1}(H)
 	\end{equation*}
@@ -1798,10 +1800,10 @@ We would like to have something in the other direction.
 Namely, given an isomorphism of Lie algebras, we would like to get a map of Lie groups. 
 We shall see that this something to this end is true if $G$ is simply-connected.
 
-As an inkling, let us look at the following example.
+As a teaser, let us look at the following example.
 \begin{ex}
 	Suppose $G$ is a connected, two-dimensional, non-abelian Lie group. 
-	We will show (??) that this implies that $\mathcal{L}(G)$ is non-abelian. 
+	We will show (\Cref{thm:lie-group-algebra-abelian-iff}) that this implies that $\mathcal{L}(G)$ is non-abelian. 
 	Thus, by our earlier classification (\Cref{ex:lie-algebras-small-dimension}), $\mathcal{L}(G)$ is uniquely determined. 
 
 	Note that one example of such a group is given by
@@ -1842,7 +1844,7 @@ As an inkling, let us look at the following example.
 	\end{equation*}
 \end{sketch}
 
-\begin{thm}
+\begin{thm} \label{thm:connected-group-L-functor-injective}
 	Let $G$ and $H$ be Lie groups. The functor $\mathcal{L}$ induces the function
 	\begin{equation*} 
 		\Hom_{\LieGrp}(G, H) \xrightarrow{\mathcal{L}} \Hom_{\LieAlg}(\mathcal{L}(G), \mathcal{L}(H)).
@@ -1857,10 +1859,110 @@ As an inkling, let us look at the following example.
 	By \Cref{lem:neighbourhood-generates-connected-group}, we have $K = G$.
 \end{sketch}
 
+\begin{por} \label{por:connected-lie-subgroup-equal-lie-algebra}
+	Let $G$ be a connected Lie group and $H \le G$ a Lie subgroup. 
+	If $\mathcal{L}(H) = \mathcal{L}(G)$, then $H = G$.
+\end{por}
+
 \begin{ex}[Above map need not be surjective]
 	If $G = S^{1}$ and $H = \mathbb{R}$, then $\Hom_{\LieGrp}(G, H) = \{\ast\}$ but $\Hom_{\LieAlg}(\mathcal{L}(G), \mathcal{L}(H)) \cong \mathbb{R}$. 
 	Note that $G$ here is not simply-connected.
 \end{ex}
+
+We recall the function $\Ad$. 
+Thus far, we were noting that $\Ad$ is a function from $G$ to $\End(T_{1}(G))$. 
+However, note that we also have
+\begin{equation*} 
+	\Ad(gh) = T_{1}(\INT(gh)) = T_{1}(\INT(g) \circ \INT(h)) = \Ad(g) \circ \Ad(h).
+\end{equation*}
+Since $\Ad(1_{G}) = \id$, we get that the image of $\Ad$ lies inside $\GL(T_{1}(G))$ and that
+\begin{equation*} 
+	\Ad \colon G \to \GL(T_{1}(G))
+\end{equation*}
+is a morphism of Lie groups. 
+Thus, we may apply the functor $\mathcal{L}$ to this morphism.
+\begin{thm}
+	\begin{center}
+		$\mathcal{L}(\Ad_{G}) = \ad_{\mathcal{L}(G)}$.
+	\end{center}
+\end{thm}
+\begin{sketch}
+	We first make sense of the equation syntactically: the differential of $\Ad$ must be a map
+	\begin{equation*} 
+		\mathcal{L}(\Ad) \colon T_{1}(G) \to T_{1}(\GL(T_{1}(G))) \cong \End(T_{1}(G)).
+	\end{equation*}
+	Thus, setting $\mathfrak{g} \coloneqq \mathcal{L}(G)$ gives us
+	\begin{equation*} 
+		\mathcal{L}(\Ad) \colon \mathfrak{g} \to \End(\mathfrak{g}).
+	\end{equation*}
+	The domain and codomain match \Cref{eq:ad}.
+
+	But now this translation is simply saying $\mathcal{L}(\Ad)(\xi)(\eta) = [\xi, \eta]$ for all $\xi, \eta \in T_{1}(G)$.
+\end{sketch}
+
+Another restatement of definitions gives us the following.
+\begin{thm} \label{thm:L-INT-Ad}
+	Let $G$ be a Lie group, and $g \in G$. Then,
+	\begin{equation*} 
+		\mathcal{L}(\INT(g)) = \Ad(g).
+	\end{equation*}
+\end{thm}
+
+\begin{thm} \label{thm:center-lie-group-lie-algebra}
+	Let $G$ be a connected Lie group, and $Z$ its center. Then,
+	\begin{enumerate}[label=(\alph*)]
+		\item $Z$ is a Lie subgroup of $G$.
+		\item $Z = \ker(\Ad)$.
+		\item $\mathcal{L}(Z)$ is the center of $\mathcal{L}(G)$.
+	\end{enumerate}
+\end{thm}
+\begin{sketch}
+	Since $\Ad$ is a homomorphism, we have (b) $\Rightarrow$ (a). 
+
+	Let $e \colon G \to G$ denote the constant map $g \mapsto 1$. 
+	Note that this \emph{is} a Lie group homomorphism. 
+	Being a constant map, we have $\mathcal{L}(e) = 0$.
+
+	Now, for $g \in G$, note that
+	\[\begin{WithArrows}[displaystyle]
+		g \in Z & \Leftrightarrow \INT(g) = e \\
+		& \Leftrightarrow \mathcal{L}(\INT(g)) = \mathcal{L}(e) \Arrow{\Cref{thm:connected-group-L-functor-injective,thm:L-INT-Ad}} \\
+		& \Leftrightarrow \Ad(g) = 0 \\
+		& \Leftrightarrow g \in \ker(Ad).
+	\end{WithArrows}\]
+	This proves (b).
+
+	By \Cref{cor:image-kernel-morphism-properties}, we have
+	\begin{equation*} 
+		T_{1}(\ker(\Ad)) = \ker(T_{1}(\Ad)).
+	\end{equation*}
+	This is rewritten as
+	\begin{equation*} 
+		\mathcal{L}(Z) = \ker(\ad).
+	\end{equation*}
+	As noted, $\ker(\ad)$ is the center of the Lie algebra.
+\end{sketch}
+
+\begin{thm} \label{thm:lie-group-algebra-abelian-iff}
+	Let $G$ be a Lie group.
+	\begin{center}
+		$G$ is abelian $\Rightarrow$ $\mathcal{L}(G)$ is abelian.
+	\end{center}
+	The converse holds if $G$ is connected.
+\end{thm}
+For a counterexample to the converse, take any finite non-abelian group.
+\begin{sketch}
+	\forward $G$ abelian $\Rightarrow$ $\Ad$ is constant $\Rightarrow$ $\mathcal{L}(\Ad) = 0$.
+	% Assume $G$ is abelian. 
+	% Then $\INT(g) = \id_{G}$ for any $g \in G$. 
+	% Thus, $\Ad(g) = \id_{T_{1}(G)}$ for all $g \in G$. 
+	% Thus, $\Ad$ is constant and hence $[-, -] = T_{1}(\Ad)(-)(-) = 0$.
+
+	\backward Assume $G$ is connected and $\mathcal{L}(G)$ is abelian. 
+	Let $Z$ be the center of $G$.
+	By \Cref{thm:center-lie-group-lie-algebra}, $\mathcal{L}(Z) = \mathcal{L}(G)$. 
+	By \Cref{por:connected-lie-subgroup-equal-lie-algebra}, $Z = G$.
+\end{sketch}
 
 \section{Matrix Lie groups and properties}
 
