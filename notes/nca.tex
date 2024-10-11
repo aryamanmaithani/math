@@ -1,0 +1,1021 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+\usepackage{aryaman}
+
+% \numberwithin{fakethm}{subsection}
+\setcounter{tocdepth}{2}
+
+\title{Noncommutative algebra}
+\author{Aryaman Maithani}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\part*{Introduction}
+
+This document is a compilation of facts about noncommutative rings. 
+The motivation is to understand facts about finite algebras over a field, 
+e.g., $k[G]$ for a finite group $G$. 
+
+The facts are stated without proofs. 
+The sequence of the theorems may seem funny. 
+These are \emph{not} in logical order. 
+For example, we begin the sections on simple and semisimple rings by stating the structure theorem for these rings. 
+The abstract facts that follow later would then be easy consequences of the structure theorem. 
+However, in practice, one goes the other way around in proving the structure theorem (possibly even using theorems from later subsections). 
+The hope is that the organisation here makes it an easy reference to get to the relevant facts. 
+
+We first begin by stating all the relevant definitions in \Cref{part:definitions}. 
+It may benefit the reader to only look these up when referred to in \Cref{part:theorems}, where we list the theorems.
+
+\part{Definitions} \label{part:definitions}
+
+Rings throughout will be unital but not necessarily commutative. 
+All modules will also be unital. 
+We assume familiarity with basic notions of (left/right) artinian and noetherian rings and modules. 
+For example, a left artinian ring is left noetherian. 
+A module has finite length iff it is both artinian and noetherian.
+
+For this section, $A$ will denote an arbitrary ring. 
+
+Note that a \emph{left} $A$-module $M$ is (by definition) an abelian group $M$ with a multiplication $A \times M \to M$ satisfying certain properties. 
+This is precisely the data of an abelian group $M$ and a ring homomorphism
+\begin{equation*} 
+	\rho \colon A \to \End_{\mathbb{Z}}(M).
+\end{equation*}
+For this reason, we may think of $\rho$ (or $M$) as a representation of $A$. 
+The \deff{annihilator} of $M$ is defined as $\ker(\rho)$ and denoted as $\ann_{A}(M)$.
+
+We have that $\rho(a)$ is the left-multiplication (or \deff{homothety}) map. We denote this by $a_{M}$, i.e.,
+\begin{align*} 
+	a_{M} \colon M &\to M\\
+	m & \mapsto a \cdot m.
+\end{align*}
+Note that $a_{M} \in \End_{\mathbb{Z}}(M)$ but this is not necessarily an $A$-module homomorphism.
+
+\begin{defn} \label{defn:commutant-bicommutant}
+	If $M$ is a left $A$-module, the \deff{commutant} is defined as $A' \coloneqq \End_{A}(M)$, and the \deff{bicommutant} as $A'' \coloneqq \End_{A'}(M)$.
+
+	There is a (well-defined) ring homomorphism $\lambda_{M} \colon A \to A''$ given by $a \mapsto a_{M}$.
+\end{defn}
+Note that $M$ is a left $A'$-module with the multiplication $A' \times M \to M$ given by $(\varphi, m) \mapsto \varphi(m)$. 
+Thus, the bicommutant is well-defined. 
+Moreover, each homothety $a_{M}$ (for $a \in A$) is an element of the bicommutant $\End_{A'}(M)$ since $a_{M} \circ \varphi = \varphi \circ a_{M}$ for $a \in A$ and $\varphi \in A'$.
+
+\begin{defn}
+	Let $R$ be a commutative ring. 
+	An \deff{$R$-algebra} is a (possibly noncommutative) ring $A$ with a ring homomorphism $\rho \colon R \to \operatorname{center}(A)$.
+\end{defn}
+In particular, whenever we talk about a $k$-algebra (for a field $k$), we have that $k$ lies in the center of $A$. 
+Note that even though we may have a natural ring homomorphism $\mathbb{C} \into \mathbb{H}$, 
+the division ring $\mathbb{H}$ is \emph{not} a $\mathbb{C}$-algebra.
+
+\begin{defn}
+	A (nonzero) module is \deff{simple} if it has exactly two submodules.
+\end{defn}
+The two submodules are then zero and the module itself.
+
+\begin{defn}
+	An $A$-module $M$ is \deff{faithful} if $\ann_{A}(M)$ is zero. 
+	Equivalently, if $\lambda_{M}$ is injective.
+\end{defn}
+
+\begin{defn} \label{defn:semisimple}
+	A module $M$ is \deff{semisimple} if any of the following equivalent conditions hold: 
+	\begin{itemize}
+		\item every submodule of $N$ has a direct sum complement, i.e., every inclusion $N \into M$ splits;
+		\item every short exact sequence of the form $0 \to N \to M \to L \to 0$ splits;
+		\item $M$ is the sum of its simple submodules;
+		\item $M$ is the direct sum of a family of simple modules.
+	\end{itemize} 
+
+	A ring $A$ is \deff{(left) semisimple} if $A$ is a semisimple as a left module over $A$.
+\end{defn}
+Semisimplicity is a symmetric notion: $A$ is left semisimple iff $A$ is right semisimple.
+
+\begin{defn} \label{defn:simple}
+	A (nonzero) ring $A$ is \deff{simple} if $A$ is is semisimple and has only one isomorphism class of simple left ideals.
+\end{defn}
+
+The definition above is more restrictive than found in some books. 
+Also note that being simple (or even weakly-simple) as a ring is weaker than being simple as a left-module over itself. 
+See \Cref{thm:simple-as-a-module}.
+
+\begin{defn} \label{defn:weakly-simple}
+	A (nonzero) ring $A$ is \deff{weakly-simple} if $A$ has exactly two two-sided ideals.
+\end{defn}
+See \Cref{thm:weakly-simple-not-semisimple,thm:simple-equivalences-with-semisimple} for the implications. 
+
+\begin{defn}
+	A (nonzero) ring $A$ is \deff{primitive} if $A$ has a faithful simple module. 
+\end{defn}
+
+\begin{defn}
+	A ring $A$ is \deff{semiprimitive} if for any nonzero $a \in A$, there is an irreducible representation $\rho$ of $A$ such that $\rho(a) \neq 0$.
+\end{defn}
+In the language of modules: for every $a \neq 0$, there is a simple $A$-module $M$ such that $aM \neq 0$. \newline
+This is equivalent to the existence of a faithful \emph{semisimple} module, see \Cref{thm:semi-primtive-equivalence}.
+
+\begin{defn}
+	Let $L$ be a left ideal of $A$. The \deff{idealiser} of $L$ is defined as
+	\begin{equation*} 
+		(L : A) \coloneqq \{a \in A \colon aA \subset L\} = \ann_{A}(A/L).
+	\end{equation*} 
+\end{defn}
+The idealiser is the unique largest two-sided ideal contained in $L$.
+
+\begin{restatable}[]{defn}{jacobsonradical} \label{defn:jacobson-radical}
+	Let $A$ be a ring. 
+	The \deff{(Jacobson) radical} is a two-sided ideal of $A$, denoted $\rad(A)$, defined as any of the following equivalent objects.
+	\begin{enumerate}[label=(\alph*)]
+		\item the intersection $\bigcap_{\rho} \ker(\rho)$, where $\rho$ varies over all irreducible representations of $A$;
+		\item the intersection $\bigcap_{M} \ann_{A}(M)$, where $M$ is a simple left $A$-module;
+		\item the intersection $\bigcap_{L} L$ over all maximal left ideals $L$ of $A$;
+		\item the intersection $\bigcap_{R} R$ over all maximal right ideals $R$ of $A$;
+		\item the intersection $\bigcap_{P} P$ over all two-sided ideals $P$ such that $A/P$ is a primitive ring;
+		\item the set of elements $z$ such that $1 - az$ has a left inverse for every $a \in A$.
+	\end{enumerate}	
+\end{restatable}
+
+\begin{defn}
+	An element $a \in A$ is called \deff{left quasi-regular} if $1 - a$ has a left inverse. 
+	A \deff{right quasi-regular} element is defined analogously. 
+	An element is \deff{quasi-regular} if it is both left and right quasi-regular. 
+
+	A left ideal is \deff{quasi-regular} if all its elements are left quasi-regular. Analogously, a right ideal is quasi-regular if all its elements are right quasi-regular.
+\end{defn}
+
+\begin{defn}
+	An ideal $I$ is \deff{nilpotent} if $I^{k} = 0$ for some $k$.
+\end{defn}
+
+\begin{defn}
+	Let $N$ be a submodule of the $A$-module $M$. We say that
+	\begin{enumerate}[label=(\alph*)]
+		\item $M$ is an \deff{essential extension} of $N$ if for every \underline{nonzero} submodule $K \subset M$, we have $N \cap K \neq 0$;
+		\item $N$ is a \deff{superfluous submodule} of $M$ if for every \underline{proper} submodule $K \subsetneq M$, we have $N + K \neq M$.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}
+	Let $M$ be an $A$-module. 
+
+	The \deff{socle} of $M$ is defined as
+	\begin{align*} 
+		\soc(M) &\coloneqq \sum_{N \subset M \text{ simple}} N\\
+		&= \bigcap_{N \subset M \text{ essential}} N.
+	\end{align*} 
+
+	The \deff{radical} of $M$ is defined as
+	\begin{align*} 
+		\rad(M) &\coloneqq \bigcap_{N \subset M \text{ maximal}} N \\
+		&= \sum_{N \subset M \text{ superfluous}} N.
+	\end{align*}
+
+	The convention is that the empty sum is $0$ and the empty intersection is $M$.
+\end{defn}
+Note that $N \subset M$ is maximal iff $M/N$ is simple.
+
+\begin{defn}
+	Let $M$ be an $A$-module. 
+
+	An \deff{injective hull} of $M$ is an essential extension $\iota \colon M \into E$ with $E$ injective.
+
+	A \deff{projective cover} of $M$ is a surjection $\pi \colon P \onto M$ with $P$ projective and $\ker(\pi) \subset P$ a superfluous submodule.
+\end{defn}
+
+\begin{defn}
+	$A$ is called
+	\begin{itemize}
+		\item \deff{(left) perfect} if every left module has a projective cover;
+		\item \deff{(left) semiperfect} if every finitely generated left module has a projective cover.
+	\end{itemize}
+\end{defn}
+
+\begin{defn}
+	A left \deff{principal indecomposable module (PIM)} of $A$ is an indecomposable direct summand of $A$. 
+	Equivalently, an indecomposable, projective, cyclic module.
+\end{defn}
+
+\begin{defn} \label{defn:subdirect-product}
+	$A$ is said to be a \deff{subdirect product} of $A_{1}, \ldots, A_{k}$  if 
+	there is an injective ring homomorphism $\iota \colon A \to \prod_{i} A_{i}$ such that 
+	the each induced map $\pi_{i} \circ \iota \colon A \to A_{i}$ is surjective for each $i$.
+\end{defn}
+
+\begin{defn}
+	A (nonzero) ring is called \deff{local} if its set of nonunits forms a two-sided ideal.
+\end{defn}
+
+\begin{defn}
+	An $A$-module $M$ is 
+	\begin{itemize}
+		\item \deff{primordial} if $\End_{A}(M)$ is a local ring;
+		\item \deff{semi-primordial} if it is the direct sum of a family of primordial submodules.
+	\end{itemize}
+\end{defn}
+Injectives over a noetherian ring are semi-primordial.
+
+\part{Theorems} \label{part:theorems}
+
+A summary of the main implications is given below.
+
+\begin{equation*} 
+	\begin{tikzcd}
+	 & \text{simple} \arrow[ld, Rightarrow] \arrow[rd, Rightarrow] && \\
+	\text{weakly-simple} \arrow[ru, Rightarrow, "\text{semisimple}", bend left=49] \arrow[d, Rightarrow] && \text{semisimple} \arrow[ldd, Rightarrow, bend left] \arrow[rd, Rightarrow] & \\
+	\text{primitive} \arrow[rd, Rightarrow]  & & & \text{artinian} \arrow[lu, "\text{semiprimitive}"', Rightarrow, bend right=49] \arrow[d, Rightarrow] & \\
+ & \text{semiprimitive} \arrow[d, Leftrightarrow]  &  & \text{perfect} \arrow[d, Rightarrow] \\
+ & \rad = 0 & \text{local} \arrow[r, Rightarrow] & \text{semiperfect}  &
+	\end{tikzcd}
+\end{equation*}
+
+The situation becomes much better for artinian rings.
+
+\begin{restatable}[]{fakethm*}{artinianringimplications} \label{thm:artinian-ring-implications}
+	For the class of \textbf{{\color{red}left artinian}} rings, the following chain of implications hold.
+	\begin{equation*} 
+		\begin{tikzcd}[ampersand replacement = \&]
+			\text{simple} \arrow[rr, Leftrightarrow] \arrow[d, Rightarrow] \&  \& \text{weakly-simple} \arrow[rr, Leftrightarrow] \&  \& \text{primitive} \\
+		\text{semisimple} \arrow[rr, Leftrightarrow]  \&  \& \rad = 0 \arrow[rr, Leftrightarrow] \& \& \text{semiprimitive}
+		\end{tikzcd}	
+	\end{equation*}
+\end{restatable}
+
+\section{Implications between some of the properties}
+
+\begin{thm} \label{thm:simple-as-a-module}
+	Let $A$ be a ring. The following are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is simple as a left module over $A$.
+		\item $A$ is a division ring.
+		\item $A$ is simple as a right module over $A$.
+	\end{enumerate}
+	In such a case, $A$ is a simple ring, a weakly-simple ring, and a semisimple ring.
+\end{thm}
+
+\begin{thm} \label{thm:semismimple-implies-artinian}
+	A semisimple ring is left and right artinian.
+\end{thm}
+
+\begin{thm} \label{thm:weakly-simple-not-semisimple}
+	There exists a weakly-simple ring that is not artinian and hence not semisimple.
+\end{thm}
+
+\begin{thm} \label{thm:simple-equivalences-with-semisimple}
+	Let $A$ be a ring. The following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is simple.
+		\item $A$ is weakly-simple and left artinian.
+		\item $A$ is weakly-simple and semisimple.
+		\item $A$ is weakly-simple and has exactly one isomorphism class of minimal left ideals.
+	\end{enumerate}
+	All ``left''s can be replaced with ``right''s as well.
+\end{thm}
+
+\begin{thm}
+	A weakly-simple ring is primitive.
+\end{thm}
+
+\begin{thm}
+	A left artinian primitive ring is simple.
+\end{thm}
+
+% \begin{equation*} 
+% 	\begin{tikzcd}
+% 		& \text{weakly-simple} & \\ \\
+% 		\text{simple} \arrow[ruu, Rightarrow] \arrow[rr, Rightarrow] \arrow[rdd, Rightarrow] & & \text{artinian} \\ \\
+% 		& \text{semisimple} \arrow[ruu, Rightarrow] &                
+% 	\end{tikzcd}
+% \end{equation*}
+
+% \begin{equation*} 
+% 	\begin{tikzcd}
+% 	\text{weakly-simple} \arrow[rr, "\text{semisimple}", Rightarrow, bend left=49] \arrow[rr, "\text{left artinian}"', Rightarrow, bend right=49] &  & \text{simple}
+% \end{tikzcd}
+% \end{equation*}
+
+% \begin{equation*} 
+% 	\begin{tikzcd}
+% 	    \text{weakly-simple} \arrow[rr, "\text{semisimple}", Rightarrow, bend left=49] \arrow[rr, "\text{left artinian}"', Rightarrow, bend right=49] &  & \text{simple} \arrow[rr, Rightarrow] \arrow[rdd, Rightarrow] \arrow[ll, Rightarrow] &   & \text{artinian} \\
+% 	    &  & &   & \\
+% 	    &  & & \text{semisimple} \arrow[ruu, Rightarrow] &
+% 	\end{tikzcd}
+% \end{equation*}
+
+% \begin{equation*} 
+% 	\begin{tikzcd}
+% 		\text{weakly-simple} \arrow[rr, "\text{semisimple}", Rightarrow, bend left=49] \arrow[rr, "\text{left artinian}"', Rightarrow, bend right=49] &  & \text{simple} \arrow[ll, Rightarrow] \arrow[r, Rightarrow] & \text{semisimple} \arrow[r, Rightarrow] & \text{artinian}
+% 	\end{tikzcd}
+% \end{equation*}
+
+% \begin{equation*} 
+% 	\begin{tikzcd}
+% 		\text{primitive} & \text{weakly-simple} \arrow[rr, "\text{semisimple}", Rightarrow, bend left=49] \arrow[rr, "\text{left artinian}"', Rightarrow, bend right=49] \arrow[l, Rightarrow] &  & \text{simple} \arrow[ll, Rightarrow] \arrow[r, Rightarrow] & \text{semisimple} \arrow[r, Rightarrow] & \text{artinian}
+% 	\end{tikzcd}
+% \end{equation*}
+
+
+% \begin{equation*} 
+% 	\begin{tikzcd}
+% 		\text{primitive} \arrow[rrr, "\text{left artinian}", Rightarrow, bend left=67] & \text{weakly-simple} \arrow[rr, "\text{semisimple}", Rightarrow, bend left=49] \arrow[rr, "\text{left artinian}"', Rightarrow, bend right=49] \arrow[l, Rightarrow] &  & \text{simple} \arrow[ll, Rightarrow] \arrow[r, Rightarrow] & \text{semisimple} \arrow[r, Rightarrow] & \text{artinian}
+% 	\end{tikzcd}
+% \end{equation*}
+
+\section{Simple rings}
+
+We recall again that our definition of simple (\Cref{defn:simple}) is possibly stricter than the one the reader may have seen before (\Cref{defn:weakly-simple}). See \Cref{thm:simple-equivalences-with-semisimple}.
+
+We begin by stating the main theorems.
+
+\begin{thm} \label{thm:simple-ring-is-matrix-ring}
+	Every simple ring $A$ is of the form $\End_{D}(V)$, 
+	where $D$ is a division ring and $V$ is a finite-dimensional vector space over $D$. 
+
+	In other words, $A$ is a matrix ring $M_{n}(D)$ over a division ring. 
+	This $D$ and $n$ is uniquely determined.
+\end{thm}
+See \Cref{thm:simple-ring-commutant-isomorphism} for some description of $D$ and $V$.
+
+\begin{thm}
+	Let $D$ be a division ring, and $V$ a finite-dimensional vector space over $D$. Set $A \coloneqq \End_{D}(V)$. Then, $A$ is a simple ring, $M$ a simple $A$-module, and $D = \End_{A}(V)$.
+\end{thm}
+
+\begin{thm}
+	A simple ring has exactly one simple module up to isomorphism.
+
+	Specifically, the unique simple module over $M_{n}(D)$ is $D^{n}$.
+\end{thm}
+
+\begin{thm}
+	Let $A$ be a simple ring. Then, $A$ is a finite direct sum of simple left ideals.
+
+	If $I$ and $J$ are simple left ideals of $A$, then there exists $a \in A$ such that $Ia = J$.
+\end{thm}
+
+\begin{thm}
+	Let $A$ be a simple ring, $M$ a simple $A$-module and $L$ a simple left ideal of $A$. 
+	Then, $LM = M$ and $M$ is faithful.
+\end{thm}
+
+\begin{thm} \label{thm:simple-ring-commutant-isomorphism}
+	Let $A$ be a simple ring. Then, there exists a faithful simple $A$-module $M$ such that $D \coloneqq \End_{A}(M)$ is a division ring and $A \cong \End_{D}(M)$ via $\lambda_{M} \colon a \mapsto a_{M}$. 
+
+	The module $M$ can be chosen to be any simple left ideal of $A$. 
+\end{thm}
+Note that $\lambda_{M}$ appears in \Cref{defn:commutant-bicommutant}. 
+See also \mynameref{thm:jacobson-density-theorem} and \Cref{cor:left-artin-semisimple-commutant-division-ring} which tells us that $M$ is a finite $D$-module.
+
+\section{Semisimple rings}
+
+\begin{thm} \label{thm:semisimple-ring-equivalences}
+	Let $A$ be a ring. The following conditions are equivalent. Parts of the equivalence constitute the Wedderburn--Artin theorem.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is semisimple.
+		\item $A$ is a finite direct product of rings of the form $\End_{D}(V)$ where $D$ is a division ring, and $V$ is a finite-dimensional $D$-vector space.
+		\item $A \cong M_{n_{1}}(D_{1}) \times \cdots \times M_{n_{k}}(D_{k})$, where $D_{i}$ are division rings, and $n_{i}$ are positive integers. \newline
+		This decomposition is unique.
+		\item $A$ is left artinian and semiprimitive.
+		\item $A$ is left artinian and $\rad A = 0$
+		\item $A$ is left artinian and contains no nonzero nilpotent ideals.
+		\item $A$ is left artinian and the subdirect product of weakly-simple rings.
+	\end{enumerate}
+\end{thm}
+See \Cref{defn:subdirect-product} for the definition of subdirect product.
+
+\begin{rem}
+	We describe the recovery of the $k$, $D_{i}$, and $n_{i}$: 
+	\begin{itemize}
+		\item The number $k$ is the number of isomorphism classes of simple \underline{right} $A$-modules.
+		\item Let $S_{1}, \ldots, S_{k}$ be a list of the non-isomorphic simple right modules.
+		\item We recover $D_{i}$ as the endomorphism ring of $S_{i}$.
+		\item The corresponding $n_{i}$ is the number of right ideals in $A$ that are isomorphic to $S_{i}$.
+	\end{itemize}
+	The reason for choosing right ideals and right modules is that 
+	we have $A \cong \End_{A}(A_{A})$, where $A_{A}$ denotes $A$ viewed as a right module over itself. \newline
+	If we had worked with left ideals, we would have to consider $D_{i}^{\op}$.
+\end{rem}
+
+\begin{thm}[Artin--Wedderburn for $k$-algebras]
+	If $A$ is a finite-dimensional semisimple $k$-algebra, 
+	then in the decomposition $A \cong \prod_{i} M_{n_{i}}(D_{i})$, 
+	each $D_{i}$ is a finite-dimensional division algebra over $k$.
+
+	If $k$ is algebraically closed, then $D_{i} = k$ for all $i$.
+\end{thm}
+Note that without the algebraic closure hypothesis, we only have that the center of $D_{i}$ is a finite extension of $k$. 
+It could be larger than $k$. 
+For example, $\mathbb{C}$ as an algebra over $\mathbb{R}$.
+
+\begin{rem}
+	A semisimple ring may very well contain nonzero nilpotent \emph{elements}! 
+	Indeed, the matrix rings contain many such elements.
+\end{rem}
+
+\begin{thm} \label{thm:modules-over-semisimple-rings}
+	Any module over a semisimple ring is a semisimple module.
+\end{thm}
+
+\begin{thm} \label{thm:semisimple-finitely-many-simples}
+	A semisimple ring $A$ has finitely many isomorphism classes of simple modules. 
+	Moreover, every simple left $A$-module is isomorphic to a (simple) left ideal.
+\end{thm}
+
+\begin{thm}
+	Let $A$ be a semisimple ring, $L$ a simple left ideal, and $M$ a simple left module. 
+	If $L \not\cong M$ as left modules, then $LM = 0$.
+\end{thm}
+
+\begin{thm}
+	A semisimple ring $A$ can be written as a finite product of ``simple subrings'' (which are, in fact, two-sided ideals):
+	\begin{align*} 
+		A = \prod_{i = 1}^{k} A_{i}.
+	\end{align*}
+	Moreover, if $e_{i}$ is the unit of $A_{i} \subset A$, then $1_{A} = \sum_{i = 1}^{k} e_{i}$ and $A_{i} = A e_{i}$.
+\end{thm}
+Some clarification is needed here: $A_{i}$ is not really a subring of $A$ since $1 \notin A_{i}$. \newline
+What is true is that $A$ is a product of simple rings $A_{i}$, in which case each $A_{i}$ is naturally a subset of $A$. 
+Each $A_{i}$ is further then a two-sided ideal generated by an idempotent $e_{i}$ that acts as identity of $A_{i}$.
+
+\section{Weakly-simple rings}
+
+\begin{thm}
+	If $A$ is weakly-simple, then every nonzero $A$-module is faithful.
+\end{thm}
+
+\begin{thm}[Rieffel]
+	Let $A$ be a weakly-simple ring, and $L$ a nonzero left ideal. Let $A' \coloneqq \End_{A}(L)$, $A'' \coloneqq \End_{A'}(L)$, and $\lambda \colon A \to A''$ be as in \Cref{defn:commutant-bicommutant}.
+
+	Then, $\lambda$ is an isomorphism. In particular, $L$ is a faithful $A$-module.
+\end{thm}
+
+\begin{thm}[Wedderburn]
+	Let $A$ be a ring and $M$ a faithful simple module over $A$. So, $A' \coloneqq \End_{A}(M)$ is a division ring, and $\lambda \colon A \into A''$ makes $A$ a subring of $A''$.
+
+	If $M$ is finite-dimensional over $A'$, then $\lambda$ is an isomorphism, i.e., $A = A''$.
+\end{thm}
+
+\section{(Semi)primitive rings}
+
+\begin{thm} \label{thm:semi-primtive-equivalence}
+	Let $A$ be a ring. The following statements are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is left semiprimitive.
+		\item $A$ is right semiprimitive.
+		\item $A$ admits a faithful semisimple module.
+		\item $A$ is a finite subdirect product of primitive rings.
+		\item $\rad(A) = 0$.
+	\end{enumerate}
+\end{thm}
+See \Cref{defn:subdirect-product} for the definition of subdirect product. See also \Cref{thm:radical-and-semiprimitivity} for a generalisation of the last result. 
+
+\begin{thm}
+	Let $A$ be a ring.
+
+	$A$ is left primitive iff $A$ has a maximal left ideal $L$ that contains no non-zero two-sided ideal of $A$. 
+
+	$A$ is (left) semiprimitive iff $\bigcap_{L}(L : A) = 0$, where the intersection is taken over all maximal left ideals of $A$.  
+\end{thm}
+
+\begin{cor}
+	Let $R$ be a \underline{commutative} ring.
+
+	$R$ is primitive iff $R$ is a field. 
+
+	$R$ is semiprimitive iff $R$ is a subdirect product of fields. 
+\end{cor}
+
+\section{The radical}
+
+Since the definition is really a theorem in itself, we state it again.
+
+\jacobsonradical
+
+\begin{thm}
+	Let $A$ be a ring. The two notions of $\rad(A)$ coincide: namely the Jacobson radical of $A$ as a ring, and the radical of $A$ as a left-module over $A$.
+\end{thm}
+
+\begin{thm}
+	The Jacobson ideal $\rad A$ is quasi-regular as a left ideal. \newline
+	Moreover, $\rad A$ contains every quasi-regular left ideal.
+\end{thm}
+
+\begin{thm}
+	Any nilpotent element is left quasi-regular. \newline
+	Thus, any nilpotent left ideal is quasi-regular.
+\end{thm}
+
+\begin{thm} \label{thm:radical-and-semiprimitivity}
+	Let $A$ be a ring, and $I$ a two-sided ideal.
+	\begin{itemize}
+		\item $A$ is semiprimitive iff $\rad(A) = 0$.
+		\item If $A/I$ is semiprimitive, then $\rad(A) \subset I$.
+		\item $A/{\rad(A)}$ is a semiprimitive ring. Hence, $\rad(A/{\rad A}) = 0$.
+	\end{itemize}
+\end{thm}
+
+\begin{thm}
+	Let $M$ be an $A$-module, and $N$ a submodule.
+	\begin{itemize}
+		\item $\rad(M/{\rad M}) = 0$.
+		\item $\rad(M/N) = 0$ implies $N \supset \rad M$.
+	\end{itemize}
+\end{thm}
+
+\begin{thm}
+	For any $A$-linear map $f \colon M \to N$, one has $f(\rad M) \subset \rad N$.
+\end{thm}
+
+\begin{thm}[Radical and semisimplicity] \label{thm:radical-and-semisimplicity}
+	Let $M$ be an $A$-module.
+	\begin{itemize}
+		\item If $M$ is semisimple, then $\rad(M) = 0$ and $\rad(\End_{A}(M)) = 0$.
+		\item If $M$ is artinian and $\rad(M) = 0$, then $M$ is semisimple.
+	\end{itemize}
+\end{thm}
+
+\begin{thm}
+	Let $A$ be a left artinian ring, and $M$ a left $A$-module. 
+	Then,
+	\begin{equation*} 
+		\rad(M) = \rad(A) \cdot M.
+	\end{equation*}
+\end{thm}
+
+\section{Local rings}
+
+\begin{thm}
+	Let $A$ be a ring. Let $A^{\ast}$ denote its set of units. The following are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is local, i.e., $A \setminus A^{\ast}$ is an ideal.
+		\item $A \setminus A^{\ast}$ is closed addition.
+		\item $A \setminus A^{\ast} \subset \rad(A)$.
+		\item $A \setminus A^{\ast} = \rad(A)$.
+		\item $A \setminus \rad(A) = A^{\ast}$.
+		\item $A$ has a unique maximal right ideal.
+		\item $A$ has a unique maximal left ideal.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}
+	If $A$ is local, then $A$ is semiperfect.
+\end{thm}
+
+\begin{thm}[Kaplansky]
+	Any projective module over a local ring is free.
+\end{thm}
+
+\begin{thm} \label{thm:invertible-or-nilpotent-is-local}
+	Let $A$ be a ring in which every element is either invertible or nilpotent. 
+	Then, $A$ is local.
+\end{thm}
+
+\section{Indecomposable-esque modules and locality}
+
+Recall that a module is primordial if its endomorphism ring is local.
+\begin{thm}
+	A simple module is primordial. \newline
+	A primordial module is indecomposable. \newline
+	An indecomposable module of finite length is primordial.
+\end{thm}
+
+\begin{equation*} 
+	\begin{tikzcd}
+	\text{simple} \arrow[rr, Rightarrow] && \text{primordial} \arrow[rr, Rightarrow, bend left=49] &  & \text{indecomposable}  \arrow[ll, "\text{finite length}", Rightarrow, bend left=49]
+\end{tikzcd}
+\end{equation*}
+
+\begin{lem}[Fitting] 
+	Let $M$ be an $A$-module of finite length. 
+	Given $u \in \End_{A}(M)$, we have
+	\begin{equation*} 
+		M = \ker(u^{\infty}) \oplus \im(u^{\infty}).
+	\end{equation*}
+	Further, $u$ restricted to $\ker(u^{\infty})$ is nilpotent and $u$ restricted to $\im(u^{\infty})$ is an isomorphism.
+\end{lem}
+To clarify notation: the sequences of submodules $(\ker(u^{N}))_{N}$ and $(\im(u^{N}))_{N}$ both stabilise. 
+The stable value is denoted by $\ker(u^{\infty})$ and $\im(u^{\infty})$ respectively.
+
+\begin{cor}
+	If $E$ is an indecomposable $A$-module of finite length, then any map in $\End_{A}(E)$ is either nilpotent or invertible. 
+	Thus, $\End_{A}(E)$ is local.
+\end{cor}
+
+\begin{thm}[Schur]
+	Any nonzero map between simple modules is an isomorphism.
+
+	If $E$ is a simple $A$-module, then $\End_{A}(E)$ is a division ring.
+\end{thm}
+
+\begin{thm}[Krull--Remak--Schmidt]
+	Let $M$ be an $A$-module of finite length. 
+	Then, $M$ can be \emph{uniquely} decomposed as a (necessarily finite) direct sum of indecomposable modules.
+
+	Uniqueness means the following: if we have
+	\begin{equation*} 
+		M \cong E_{1} \oplus \cdots \oplus E_{r} \cong F_{1} \oplus \cdots \oplus F_{s}
+	\end{equation*}
+	for indecomposable modules $E_{i}$ and $F_{j}$, 
+	then $r = s$, 
+	and there exists a permutation $\sigma$ of $[r]$ such that 
+	$E_{i} \cong F_{\sigma(i)}$.
+\end{thm}
+\begin{cor}
+	Let $A$ be a left artinian ring, and $M$ a finitely generated left $A$-module. 
+	Then, $M$ is the finite direct sum of indecomposable modules (in a unique way). 
+
+	In particular, $A$ is the direct sum of principal indecomposable modules.
+\end{cor}
+
+Since we cannot have infinite direct sums in a noetherian or artinian module, we still have an existence theorem:
+\begin{thm}
+	Let $M$ be an $A$-module that is either artinian or noetherian. 
+	Then, $M$ is a finite direct sum of indecomposables, not necessarily in a unique way.
+\end{thm}
+
+We also have a uniqueness theorem for semi-primordial modules.
+
+\begin{thm}
+	Let $A$ be a ring. Suppose we have an isomorphism
+	\begin{equation*} 
+		E_{1} \oplus \cdots \oplus E_{r} \cong F_{1} \oplus \cdots \oplus F_{s}
+	\end{equation*}
+	for primordial $A$-modules $E_{i}$ and $F_{j}$. 
+	Then, $r = s$, 
+	and there exists a permutation $\sigma$ of $[r]$ such that 
+	$E_{i} \cong F_{\sigma(i)}$.
+\end{thm}
+
+\section{Jacobson Density Theorem}
+
+\begin{thm}[Jacobson Density Theorem] \label{thm:jacobson-density-theorem}
+	Let $M$ be a \underline{semisimple} $A$-module. 
+	Let $A'$ denote the commutant of $M$, and $A''$ the bicommutant. 
+	Let $\lambda \colon A \to A''$ be the ring homomorphism $a \mapsto a_{M}$.
+
+	For any $\psi \in A''$ and any finite subset $S \subset M$, 
+	there exists $a \in A$ such that $\psi$ and $a_{M}$ agree on $S$.
+
+	If $M$ is finitely generated over $A'$, then $\lambda$ is surjective.
+\end{thm}
+\begin{cor} \label{cor:left-artin-semisimple-commutant-division-ring}
+	Let $A$ be a left artinian ring, and $M$ a semisimple $A$-module. 
+	If $A' \coloneqq \End_{A}(M)$ is a division ring (e.g., $M$ is simple), 
+	then $M$ is a finite-dimensional vector space over $A'$. 
+	Hence, $\lambda(A) = A''$.
+\end{cor}
+\begin{cor}
+	Let $V$ be a finite-dimensional vector space over an algebraically closed field $k$, 
+	and $A$ a subalgebra of $\End_{k}(V)$. 
+
+	If $V$ is a simple $A$-module, then $A = \End_{k}(V)$.
+\end{cor}
+\begin{cor}
+	Let $V$ be a finite-dimensional vector space over an algebraically closed field $k$, 
+	and $G$ a submonoid of $\GL(V)$. 
+
+	If $V$ is a simple $G$-module, then $k[G] = \End_{k}(V)$.
+\end{cor}
+Note that here $k[G]$ is the subalgebra of $\End_{k}(V)$ generated by $G \subset \GL(V) \subset \End_{k}(V)$.
+
+\section{Projective modules}
+
+Throughout this section, 
+$A$ will denote a ring, 
+$J \coloneqq \rad(A)$ the Jacobson radical, 
+set $\overline{A} \coloneqq A/J$, 
+and $\overline{M} \coloneqq M/JM$ for a left $A$-module $M$. 
+This makes $\overline{(-)}$ an additive functor in the obvious way. 
+All modules are considered to be left modules. 
+
+In particular, given $A$-modules $M$ and $N$, we have a map of abelian groups
+\begin{equation*} 
+	\Hom_{A}(M, N) \to \Hom_{\overline{A}}(\overline{M}, \overline{N})
+\end{equation*}
+and a map of rings
+\begin{equation*} 
+	\End_{A}(M) \to \End_{\overline{A}}(\overline{M}).
+\end{equation*}
+
+We study when these maps are injective or surjective.
+
+\begin{thm}
+	Let $P$ be a projective $A$-module, and $N$ an arbitrary $A$-module.
+
+	Then, $\overline{P}$ is a projective $\overline{A}$-module, 
+	and $\Hom_{A}(P, N) \onto \Hom_{\overline{A}}(\overline{P}, \overline{N})$ is onto.
+\end{thm}
+
+\begin{thm}
+	Suppose $A$ is (left) artinian, and $P$ is a projective $A$-module. Then, the map $\End_{A}(P) \onto \End_{\overline{A}}(\overline{P})$ induces an isomorphism
+	\begin{equation*} 
+		\frac{\End_{A}(P)}{\rad(\End_{A}(P))} \cong \End_{\overline{A}}(\overline{P}).
+	\end{equation*}
+\end{thm}
+\begin{cor} \label{cor:artinian-projective-isomorphic-mod-radical}
+	Suppose $A$ is artinian, and $P, Q$ are projective $A$-modules. Then,
+	\begin{center}
+		$P \cong Q$ $\Leftrightarrow$ $\overline{P} \cong \overline{Q}$.
+	\end{center}
+\end{cor}
+
+\begin{thm} \label{thm:artinian-PIM-criteria}
+	Suppose $A$ is artinian, and $P$ is a direct summand of $A$ as a left module. Then,
+	\begin{center}
+		$P$ is a PIM $\Leftrightarrow$ $P$ is indecomposable $\Leftrightarrow$ $\overline{P}$ is indecomposable $\Leftrightarrow$ $\overline{P}$ is simple.
+	\end{center}
+\end{thm}
+Note that $\overline{A}$ is semisimple in the above situation, giving the last $\Leftrightarrow$. 
+
+\section{Superfluous extensions and (semi)perfect rings}
+
+\begin{thm}
+	The zero submodule is always superfluous, and a nonzero module is never a superfluous submodule of itself. 
+\end{thm}
+
+\begin{thm}[Nakayama's lemma]
+	Let $M$ be a finitely generated left $A$-module. 
+	Then, $\rad(A)M$ is a superfluous submodule of $M$.
+\end{thm}
+
+\begin{thm}
+	Injective hulls and projective covers are unique up to isomorphism.
+
+	Injective hulls always exist, but projective covers may not exist.
+\end{thm}
+
+\begin{thm}
+	If $M$ is a projective module, then its projective cover is $M$.
+\end{thm}
+
+\begin{thm}
+	Let $A$ be a semiprimitive ring (i.e., $\rad(A) = 0$), and $M$ an $A$-module. 
+
+	$M$ has a projective cover iff $M$ is projective.
+\end{thm}
+
+\begin{thm}
+	Any left artinian ring is right-and-left perfect. 
+
+	Any local ring is right-and-left semiperfect.
+\end{thm}
+
+\begin{thm}[Characterisation of perfect rings]
+	Let $A$ be a ring. The following are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is \underline{left} perfect.
+		\item Every left $A$-module has a projective cover. 
+		\item $A$ satisfies the descending chain condition on principal \underline{right} ideals.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Characterisation of semiperfect rings]
+	Let $A$ be a ring. The following are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is left semiperfect.
+		\item $A$ is right semiperfect.
+		\item Every finitely generated left $A$-module has a projective cover. 
+		\item Every simple left $A$-module has a projective cover. 
+		\item $A/{\rad A}$ is semisimple and idempotents lift modulo $\rad A$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}
+	Over a semiperfect ring, every indecomposable projective module is a PIM, 
+	and every finitely generated projective module is a direct sum of PIMs.
+\end{thm}
+
+\section{Artinian rings}
+
+We restate the theorem from earlier.
+
+\begin{thm}
+	\artinianringimplications
+\end{thm}
+
+\begin{thm}
+	Let $A$ be left artinian. Then, $\rad A$ is nilpotent.
+\end{thm}
+
+\begin{thm}
+	Let $A$ be left artinian. Then, $A/{\rad A}$ is semisimple.
+\end{thm}
+\begin{sketch}
+Use \Cref{thm:radical-and-semiprimitivity,thm:semisimple-ring-equivalences}.
+\end{sketch}
+
+\begin{thm} \label{thm:radical-module-over-artinian}
+	Let $A$ be a left artinian ring, and $M$ a left $A$-module. 
+	Then,
+	\begin{equation*} 
+		\rad(M) = \rad(A) \cdot M.
+	\end{equation*}
+\end{thm}
+
+\begin{thm}
+	If $A$ is left artinian, then $A$ is right-and-left perfect.
+\end{thm}
+
+\begin{thm}
+	If $A$ is left artinian, then any finitely generated left $A$-module is the direct sum of finitely many indecomposables. 
+
+	In particular, $A$ is a finite direct sum of PIMs.
+\end{thm}
+\begin{thm}
+	Over an artinian ring, every indecomposable projective module is a PIM, 
+	and every finitely generated projective module is a direct sum of PIMs.
+\end{thm}
+\begin{sketch}
+	Let $P$ be a projective indecomposable. 
+	Write $P \oplus Q = F$ for some free module $F$.
+	Since the ring is artinian, we have that $F \cong \bigoplus_{i} P_{i}$ for PIMs $P_{i}$. 
+	Thus, $P \oplus Q = \bigoplus_{i} P_{i}$. 
+	By uniqueness of decomposition, we see that $P \cong P_{i}$ for some $i$, i.e., 
+	$P$ is a PIM.
+\end{sketch}
+
+\begin{thm}
+	Let $A$ be left artinian. 
+	Every nonzero homomorphic image of an indecomposable left projective module is again indecomposable.
+
+	That is, if $P \onto N$ with $P$ an indecomposable project (not necessarily a PIM), then $N$ is indecomposable (or zero).
+\end{thm}
+
+\begin{thm}
+	Let $A$ be left artinian and local.
+	Then, (the left module) $A$ is the only PIM.
+\end{thm}
+
+\begin{thm}
+	If $A$ is a left artinian ring, then $A$ has finitely many simple left $A$-modules (up to isomorphism). 
+	More precisely, setting $J \coloneqq \rad(A)$, one has a bijection
+	\begin{equation*} 
+		\left\{
+			\begin{array}{c}
+				\text{isomorphism classes of}\\
+				\text{simple $A$-modules}
+			\end{array}
+		\right\}
+		\leftrightarrow 
+		\left\{
+			\begin{array}{c}
+				\text{isomorphism classes of}\\
+				\text{simple $A/J$-modules}
+			\end{array}
+		\right\}.
+	\end{equation*}
+\end{thm}
+\begin{sketch}
+	If $M$ is a simple $A$-module, then $\rad(A) \subset \ann_{A}(M)$, i.e., $\rad(A) \cdot M = 0$. 
+	% Thus, $M$ is a $A/{\rad(A)}$-module. 
+
+	This gives us the isomorphism-preserving bijection. 
+	But $A/{\rad A}$ is a semisimple ring, so 
+	\Cref{thm:semisimple-finitely-many-simples} gives us the finiteness.
+\end{sketch}
+
+\begin{thm}
+	If $A$ is a left artinian ring, and $J \coloneqq \rad(A)$ its Jacobson radical, then the map $P \mapsto P/JP$ induces a bijection
+	\begin{equation*} 
+		\left\{
+			\begin{array}{c}
+				\text{isomorphism classes of}\\
+				\text{principal indecomposable $A$-modules}
+			\end{array}
+		\right\}
+		\leftrightarrow
+		\left\{
+			\begin{array}{c}
+				\text{isomorphism classes of}\\
+				\text{simple modules (over $A$ or $A/J$)}
+			\end{array}
+		\right\}.
+	\end{equation*}
+	In particular, the left set is finite. 
+	The module $P/JP$ is called the \deff{head} of $P$. 
+	The other direction is given by mapping a simple $A/J$-module to its projective cover (viewed as an $A$-module).
+\end{thm}
+\begin{sketch}
+	\Cref{thm:artinian-PIM-criteria} tells us that $P/JP$ is indeed simple when $P$ is a PIM. 
+	\Cref{cor:artinian-projective-isomorphic-mod-radical} shows that the map $P \mapsto P/JP$ is injective.
+
+	In the other direction, let $S$ be a simple $A$-module, and $\pi \colon P \onto S$ its projective cover. 
+	Write $P = \bigoplus_{i} P_{i}$ as a sum of PIMs. 
+	The induced maps $P_{i} \into P \onto S$ cannot all be zero. 
+	If $P_{1} \to S$ is nonzero, then $P_{1}$ is a projective cover of $S$. 
+	By uniqueness, $P = P_{1}$ is a PIM.
+
+	This shows that we do have a well-defined map in the backwards direction.
+
+	Moreover, $P \onto S$ induces $\overline{P} \onto \overline{S} = S$. 
+	Since $\overline{P}$ is simple, this map is an isomorphism. 
+
+	This shows that (going mod $J$) is a left inverse for (taking projective cover). 
+	Since the former is known to be injective, this finishes the proof.
+	% ???
+\end{sketch}
+
+\section{Representation theory}
+
+For a finite group $G$ and a field $k$, we let $k[G]$ denote the group algebra. 
+This is a $k$-algebra of dimension equal to $\md{G}$. 
+
+Recall that a \deff{representation} of $G$ on a $k$-vector space $V$ is a group homomorphism $\rho \colon G \to \GL(V)$. 
+This is precisely the same data as a $k[G]$-module $V$. 
+
+Note that $k[G]$ is (left and right) artinian, being finite-dimensional over a field. 
+The \deff{modular} case refers to the situation when $\chr(k) \mid \md{G}$.
+
+Recall that we have the \deff{augmentation map}
+\begin{align*} 
+	\varepsilon \colon k[G] & \to k \\
+	\sum_{g \in G} a_{g} g & \mapsto \sum_{g \in G} a_{g}.
+\end{align*}
+
+\begin{thm}
+	The group algebra $k[G]$ is semisimple iff $\chr(k) \nmid \md{G}$.
+\end{thm}
+\begin{sketch}
+	\forward Suppose $\chr(k) \mid \md{G}$. 
+	Consider $z \coloneqq \sum_{g \in G} g$. 
+	Then, $kz$ is an ideal of $k[G]$. 
+	We have $z^{2} = \md{G}z = 0$. 
+	Thus, $kz$ is a nonzero nilpotent ideal. 
+	Now apply \Cref{thm:semisimple-ring-equivalences}.
+
+	\backward Suppose $\chr(k) \nmid \md{G}$. 
+	Any inclusion $W \into V$ of $k[G]$-modules has a $k$-linear splitting $\pi \colon V \to W$. 
+	This gives rise to the $k[G]$-linear splitting given by 
+	\begin{equation*} 
+		\frac{1}{\md{G}} \sum_{g \in G} g_{V} \circ \pi \circ g_{V}^{-1}. \qedhere
+	\end{equation*}
+\end{sketch}
+
+Thus, we get the following.
+\begin{thm}
+	Let $k$ be a field and $G$ a finite group such that $\chr(k) \nmid \md{G}$. 
+	Then, 
+	\begin{itemize}
+		\item the indecomposable and irreducible representations of $G$ coincide;
+		\item there are finitely many irreducible representations of $G$;
+		\item every representation decomposes as a direct sum of irreducible representations of $G$.
+	\end{itemize}
+\end{thm}
+
+Regardless, since $k[G]$ is artinian even in the modular case, we have the following.
+\begin{thm}
+	Let $k$ be a field, and $G$ be any finite group. 
+	Then,
+	\begin{itemize}
+		\item the ring $k[G]$ has finitely many simple modules;
+		\item the group $G$ has finitely many irreducible representations over $k$;
+		\item any finite-dimensional representation is (uniquely) the direct sum of finitely many indecomposable representations;
+		\item every $k[G]$-module has a projective cover;
+		\item the projective cover of each simple module is indecomposable and cyclic, i.e., a PIM;
+		\item if $J \coloneqq \rad(k[G])$, then we have a one-to-one correspondence of isomorphism classes
+		\begin{align*} 
+			\{\text{PIMs}\} & \leftrightarrow \{\text{simple modules}\} \\
+			P & \mapsto P/JP,
+		\end{align*}
+		with the inverse being given by taking projective covers.
+	\end{itemize}
+\end{thm}
+In the modular case, the issue is that there exist representations that cannot be written as a (direct) sum of irreducible representations.
+
+\begin{thm}
+	Let $k$ be a field of characteristic $p > 0$, 
+	and $G$ a finite group.
+
+	The ring $k[G]$ is local iff $G$ is a $p$-group. 
+
+	In this case, the ideal of nonunits, which is equal to the Jacobson radical, is given by
+	\begin{equation*} 
+		\rad(k[G]) = \left\{\sum_{g} a_{g} g : \sum_{g} a_{g} = 0\right\} = \ker(\varepsilon).
+	\end{equation*}
+\end{thm}
+
+\section{Symmetric and asymmetric properties}
+
+We list the properties we have considered in this document and note whether they are symmetric. 
+A property $P$ of a ring is \deff{symmetric} if the following is true: $A$ has $P$ iff $A^{\op}$ has $P$. \newline
+Equivalently, since our properties are often listed stated as ``$A$ is left $P$'', being symmetric is saying: $A$ is left $P$ iff $A$ is right $P$.
+
+\begin{enumerate}[label=(\alph*)]
+	\item Artinian: not symmetric.
+	\item Noetherian: not symmetric.
+	\item Finite length: not symmetric. \newline
+	Moreover, even if $A$ has finite length as a left and right module, these lengths could be different.
+	\item Local: symmetric by definition.
+	\item Semisimple: symmetric by classification theorem. 
+	\item Simple: symmetric by classification theorem. 
+	\item Weakly-simple: symmetric by definition.
+	\item Semiprimitive: symmetric since characterised by $\rad = 0$.
+	\item Primitive: \textbf{not} symmetric! 
+	\item Semiperfect: symmetric.
+	\item Perfect: \textbf{not} symmetric! 
+\end{enumerate}
+
+\end{document}
