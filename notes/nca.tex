@@ -4,6 +4,7 @@
 
 % \numberwithin{fakethm}{subsection}
 \setcounter{tocdepth}{2}
+% \tikzcdset{}	% so tikzcd within theorem boxes is ok
 
 \title{Noncommutative algebra}
 \author{Aryaman Maithani}
@@ -233,17 +234,18 @@ A summary of the main implications is given below.
 	\end{tikzcd}
 \end{equation*}
 
-The situation becomes much better for artinian rings.
+\newcommand{\artinianimplications}[1]{%
+\begin{equation*} 
+	\begin{tikzcd}[ampersand replacement = \&, background color=#1]
+		\text{simple} \arrow[rr, Leftrightarrow] \arrow[d, Rightarrow] \&  \& \text{weakly-simple} \arrow[rr, Leftrightarrow] \&  \& \text{primitive} \\
+	\text{semisimple} \arrow[rr, Leftrightarrow]  \&  \& \rad = 0 \arrow[rr, Leftrightarrow] \& \& \text{semiprimitive}
+	\end{tikzcd}	
+\end{equation*}
+}
 
-\begin{restatable}[]{fakethm*}{artinianringimplications} \label{thm:artinian-ring-implications}
-	For the class of \textbf{{\color{red}left artinian}} rings, the following chain of implications hold.
-	\begin{equation*} 
-		\begin{tikzcd}[ampersand replacement = \&]
-			\text{simple} \arrow[rr, Leftrightarrow] \arrow[d, Rightarrow] \&  \& \text{weakly-simple} \arrow[rr, Leftrightarrow] \&  \& \text{primitive} \\
-		\text{semisimple} \arrow[rr, Leftrightarrow]  \&  \& \rad = 0 \arrow[rr, Leftrightarrow] \& \& \text{semiprimitive}
-		\end{tikzcd}	
-	\end{equation*}
-\end{restatable}
+However, for the class of \textbf{{\color{red}left artinian}} rings, the following chain of implications hold.
+
+\artinianimplications{white}
 
 \section{Implications between some of the properties}
 
@@ -793,7 +795,9 @@ Note that $\overline{A}$ is semisimple in the above situation, giving the last $
 We restate the theorem from earlier.
 
 \begin{thm}
-	\artinianringimplications
+	For a left artinian ring, one has:
+
+	\artinianimplications{orange!15}
 \end{thm}
 
 \begin{thm}
