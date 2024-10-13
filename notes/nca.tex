@@ -2,14 +2,13 @@
 \usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
 \usepackage{aryaman}
 
-% \numberwithin{fakethm}{subsection}
-\setcounter{tocdepth}{2}
-% \tikzcdset{}	% so tikzcd within theorem boxes is ok
+\setcounter{tocdepth}{3}
 
 \title{Noncommutative algebra}
 \author{Aryaman Maithani}
 \date{\today}
 
+\setlength{\cftbeforesecskip}{4pt}
 \begin{document}
 
 \maketitle
@@ -29,8 +28,12 @@ The abstract facts that follow later would then be easy consequences of the stru
 However, in practice, one goes the other way around in proving the structure theorem (possibly even using theorems from later subsections). 
 The hope is that the organisation here makes it an easy reference to get to the relevant facts. 
 
-We first begin by stating all the relevant definitions in \Cref{part:definitions}. 
-It may benefit the reader to only look these up when referred to in \Cref{part:theorems}, where we list the theorems.
+\Cref{part:definitions,part:theorems} are definitions and theorems about general noncommutative algebra. 
+We first begin by stating all the relevant definitions in \Cref{part:definitions}, 
+followed by the theorems in \Cref{part:theorems}. 
+
+\Cref{part:rep-th} focuses on facts about the group ring $k[G]$. 
+The relevant definitions and notions for this object are introduced in the first section there.
 
 \part{Definitions} \label{part:definitions}
 
@@ -162,6 +165,13 @@ The idealiser is the unique largest two-sided ideal contained in $L$.
 \end{defn}
 
 \begin{defn}
+	A surjection $f \colon M \onto N$ is called an \deff{essential surjection} if 
+	there exists no proper submodule $M' \subset M$ such that $f(M') = N$.
+
+	Equivalently, $\ker(f) \subset M$ is a superfluous submodule.
+\end{defn}
+
+\begin{defn}
 	Let $M$ be an $A$-module. 
 
 	The \deff{socle} of $M$ is defined as
@@ -185,8 +195,10 @@ Note that $N \subset M$ is maximal iff $M/N$ is simple.
 
 	An \deff{injective hull} of $M$ is an essential extension $\iota \colon M \into E$ with $E$ injective.
 
-	A \deff{projective cover} of $M$ is a surjection $\pi \colon P \onto M$ with $P$ projective and $\ker(\pi) \subset P$ a superfluous submodule.
+	A \deff{projective cover} of $M$ is a surjection $\pi \colon P \onto M$ with $P$ projective and $\ker(\pi) \subset P$ a superfluous submodule. 
+	Equivalently, an essential surjection $P \onto M$ with $P$ projective.
 \end{defn}
+If $\pi \colon P \onto M$ is a projective cover, then $\pi(N) \neq M$ for any proper submodule $N \subsetneq P$.
 
 \begin{defn}
 	$A$ is called
@@ -209,6 +221,20 @@ Note that $N \subset M$ is maximal iff $M/N$ is simple.
 
 \begin{defn}
 	A (nonzero) ring is called \deff{local} if its set of nonunits forms a two-sided ideal.
+\end{defn}
+
+\begin{defn}
+	$A$ is \deff{quasi-Frobenius} if $R$ is left noetherian and injective as a left module over itself.
+\end{defn}
+This turns out to be highly symmetric: see \Cref{thm:quasi-frobenius-equivalences}.
+
+\begin{defn}
+	A \deff{Frobenius algebra} over a field $k$ is a finite-dimensional $k$-algebra $A$ equipped with 
+	a nondegenerate bilinear form $\sigma \colon A \times A \to A$ satisfying
+	\begin{equation*} 
+		\sigma(a \cdot b, c) = \sigma(a, b \cdot c)
+	\end{equation*}
+	for all $a, b, c \in A$.
 \end{defn}
 
 \begin{defn}
@@ -384,6 +410,10 @@ See also \mynameref{thm:jacobson-density-theorem} and \Cref{cor:left-artin-semis
 		\item $A$ is left artinian and $\rad A = 0$
 		\item $A$ is left artinian and contains no nonzero nilpotent ideals.
 		\item $A$ is left artinian and the subdirect product of weakly-simple rings.
+		\item Every $A$-module is projective.
+		\item Every $A$-module is injective.
+		\item Every short exact sequence of $A$-modules is a split exact sequence.
+		\item Every $A$-module is semisimple.
 	\end{enumerate}
 \end{thm}
 See \Cref{defn:subdirect-product} for the definition of subdirect product.
@@ -416,10 +446,6 @@ For example, $\mathbb{C}$ as an algebra over $\mathbb{R}$.
 	A semisimple ring may very well contain nonzero nilpotent \emph{elements}! 
 	Indeed, the matrix rings contain many such elements.
 \end{rem}
-
-\begin{thm} \label{thm:modules-over-semisimple-rings}
-	Any module over a semisimple ring is a semisimple module.
-\end{thm}
 
 \begin{thm} \label{thm:semisimple-finitely-many-simples}
 	A semisimple ring $A$ has finitely many isomorphism classes of simple modules. 
@@ -490,7 +516,36 @@ See \Cref{defn:subdirect-product} for the definition of subdirect product. See a
 	$R$ is semiprimitive iff $R$ is a subdirect product of fields. 
 \end{cor}
 
-\section{The radical}
+\section{Quasi-Frobenius rings}
+
+\begin{thm} \label{thm:quasi-frobenius-equivalences}
+	Let $A$ be a ring. The following are equivalent.
+	\begin{enumerate}[label=(\alph*)]
+		\item $A$ is quasi-Frobenius.
+		\item $A$ is noetherian on one side and self-injective on one side.
+		\item $A$ is artinian on one side and self-injective on one side.
+		\item Any left (or right) injective $A$-module is projective.
+		\item Any left (or right) projective $A$-module is injective.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}
+	For a \underline{commutative} ring $R$, the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $R$ is quasi-Frobenius.
+		\item $R$ is a product of local artinian rings which have unique minimal (nonzero) ideals.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm} \label{thm:quasi-frobenius-either-semisimple-or-infinite}
+	If $A$ is quasi-Frobenius, then either $A$ is semisimple or has infinite right global dimension (that is, there exist modules with no finite projective resolution).
+\end{thm}
+
+\begin{thm}
+	Any Frobenius algebra over a field is quasi-Frobenius.
+\end{thm}
+
+\section{The Jacobson radical}
 
 Since the definition is really a theorem in itself, we state it again.
 
@@ -517,6 +572,33 @@ Since the definition is really a theorem in itself, we state it again.
 		\item If $A/I$ is semiprimitive, then $\rad(A) \subset I$.
 		\item $A/{\rad(A)}$ is a semiprimitive ring. Hence, $\rad(A/{\rad A}) = 0$.
 	\end{itemize}
+\end{thm}
+
+\begin{thm}
+	The radical of a ring annihilates the socle of the ring.
+\end{thm}
+
+\section{Socle and radical}
+
+We recall that for any module $M$, we have
+\begin{align*} 
+	\soc(M) &\coloneqq \sum_{N \subset M \text{ simple}} N = \bigcap_{N \subset M \text{ essential}} N, \\[5pt]
+	\rad(M) &\coloneqq \bigcap_{N \subset M \text{ maximal}} N  = \sum_{N \subset M \text{ superfluous}} N.
+\end{align*}
+
+\begin{thm}
+	The socle of $M$ is the largest semisimple submodule of $M$. \newline
+	Thus, $M$ is semisimple iff $\soc(M) = M$.
+
+	If $M$ is artinian, then the socle is an essential submodule.
+	
+	If $M$ is finitely generated, then $\rad(M)$ is a superfluous submodule of $M$. 
+	Moreover, $N \subset M$ is superfluous iff $N \subset \rad(M)$. 
+	Thus, the radical is the largest superfluous submodule of $M$.
+\end{thm}
+
+\begin{thm}
+	If $\rad(M)$ is a superfluous submodule and the \emph{cosocle} $M/{\rad M}$ is finitely generated, then $M$ is finitely generated.
 \end{thm}
 
 \begin{thm}
@@ -612,7 +694,7 @@ The stable value is denoted by $\ker(u^{\infty})$ and $\im(u^{\infty})$ respecti
 	If $E$ is a simple $A$-module, then $\End_{A}(E)$ is a division ring.
 \end{thm}
 
-\begin{thm}[Krull--Remak--Schmidt]
+\begin{thm}[Krull--Remak--Schmidt] \label{thm:krs}
 	Let $M$ be an $A$-module of finite length. 
 	Then, $M$ can be \emph{uniquely} decomposed as a (necessarily finite) direct sum of indecomposable modules.
 
@@ -748,6 +830,9 @@ Note that $\overline{A}$ is semisimple in the above situation, giving the last $
 
 	Injective hulls always exist, but projective covers may not exist.
 \end{thm}
+\begin{ex}
+	The $\mathbb{Z}$-module $\mathbb{Z}/2$ has no projective cover.
+\end{ex}
 
 \begin{thm}
 	If $M$ is a projective module, then its projective cover is $M$.
@@ -822,12 +907,29 @@ Use \Cref{thm:radical-and-semiprimitivity,thm:semisimple-ring-equivalences}.
 \begin{thm}
 	If $A$ is left artinian, then $A$ is right-and-left perfect.
 \end{thm}
+\begin{sketch}
+	We show that $A$ is left semiperfect. 
+	If $M$ is finitely generated, we can write $f \colon P \onto M$ for some projective $P$. 
+	Choose $P$ of minimal length. Then, $f$ is the projective cover, i.e., $f$ is essential.
+
+	Suppose not. Then, pick $N \subsetneq P$ of minimal length with $f(N) = M$. 
+	We will show that $N$ is projective, proving the result. 
+	It suffices to show that the inclusion $\iota \colon N \into P$ splits.
+
+	By projectivity of $P$, we get $g \colon P \to N$ such that $f = f|_{N} \circ g$. 
+	Minimality of $N$ gives us $g(N) = N$. 
+	Thus, $g|_{N}$ is surjective and hence an isomorphism. 
+	Thus, the composition $g|_{N}^{-1} \circ g \circ \iota$ is the identity on $N$, giving us the splitting.
+\end{sketch}
 
 \begin{thm}
 	If $A$ is left artinian, then any finitely generated left $A$-module is the direct sum of finitely many indecomposables. 
 
 	In particular, $A$ is a finite direct sum of PIMs.
 \end{thm}
+\begin{sketch}
+	Follows from \mynameref{thm:krs}.
+\end{sketch}
 \begin{thm}
 	Over an artinian ring, every indecomposable projective module is a PIM, 
 	and every finitely generated projective module is a direct sum of PIMs.
@@ -909,8 +1011,8 @@ Use \Cref{thm:radical-and-semiprimitivity,thm:semisimple-ring-equivalences}.
 	In the other direction, let $S$ be a simple $A$-module, and $\pi \colon P \onto S$ its projective cover. 
 	Write $P = \bigoplus_{i} P_{i}$ as a sum of PIMs. 
 	The induced maps $P_{i} \into P \onto S$ cannot all be zero. 
-	If $P_{1} \to S$ is nonzero, then $P_{1}$ is a projective cover of $S$. 
-	By uniqueness, $P = P_{1}$ is a PIM.
+	If $P_{1} \to S$ is nonzero, then it is surjective since $S$ is simple.
+	But $\pi$ being essential then forces $P = P_{1} \in \{\text{PIMs}\}$.
 
 	This shows that we do have a well-defined map in the backwards direction.
 
@@ -919,47 +1021,252 @@ Use \Cref{thm:radical-and-semiprimitivity,thm:semisimple-ring-equivalences}.
 
 	This shows that (going mod $J$) is a left inverse for (taking projective cover). 
 	Since the former is known to be injective, this finishes the proof.
-	% ???
 \end{sketch}
 
-\section{Representation theory}
+\begin{cor}
+	For $A$ left artinian, and $J$ its radical, we have: if $S$ is a simple left $A$-module, we have an exact sequence
+	\begin{equation*} 
+		0 \to \rad(P) \to P \to S \to 0,
+	\end{equation*}
+	where the second map is the projective cover.
 
-For a finite group $G$ and a field $k$, we let $k[G]$ denote the group algebra. 
-This is a $k$-algebra of dimension equal to $\md{G}$. 
+	Said differently, if $P \onto S$ is the projective cover, then $P/{\rad P} = P/JP \cong S$.
+\end{cor}
+
+\section{Symmetric and asymmetric properties}
+
+We list the properties we have considered in this document and note whether they are symmetric. 
+A property $P$ of a ring is \deff{symmetric} if the following is true: $A$ has $P$ iff $A^{\op}$ has $P$. \newline
+Equivalently, since our properties are often listed stated as ``$A$ is left $P$'', being symmetric is saying: $A$ is left $P$ iff $A$ is right $P$.
+
+\begin{enumerate}[label=(\alph*)]
+	\item Artinian: not symmetric.
+	\item Noetherian: not symmetric.
+	\item Finite length: not symmetric. \newline
+	Moreover, even if $A$ has finite length as a left and right module, these lengths could be different.
+	\item Local: symmetric by definition.
+	\item Semisimple: symmetric by classification theorem. 
+	\item Simple: symmetric by classification theorem. 
+	\item Weakly-simple: symmetric by definition.
+	\item Semiprimitive: symmetric since characterised by $\rad = 0$.
+	\item Primitive: \textbf{not} symmetric! 
+	\item Semiperfect: symmetric.
+	\item Perfect: \textbf{not} symmetric! 
+	\item Quasi-Frobenius: symmetric.
+\end{enumerate}
+
+\part{Representation theory?} \label{part:rep-th}
+
+We now focus our attention to the artinian ring $k[G]$.
+
+\section{Definitions}
+
+In what follows, $k$ will denote an arbitrary field and $G$ a \underline{finite} group. 
+
+\begin{defn}
+	The \deff{group ring} (or the \deff{group algebra}) $k[G]$ is the $k$-algebra defined as follows:
+	\begin{itemize}
+		\item as a vector space, we have $k[G] = \bigoplus_{g \in G} kg$;
+		\item the multiplication on the basis $\{g : g \in G\}$ is given by $g \cdot h = gh$;
+		\item the ring homomorphism $\eta \colon k \to k[G]$ with $1 \mapsto 1$ makes this a $k$-algebra.
+	\end{itemize}
+
+	The \deff{modular} case refers to the situation when $\chr(k) \mid \md{G}$.
+\end{defn}
+Note that the $k$-dimension of $k[G]$ is $\md{G}$. 
+The ring $k[G]$ is commutative iff $G$ is abelian.
 
 Recall that a \deff{representation} of $G$ on a $k$-vector space $V$ is a group homomorphism $\rho \colon G \to \GL(V)$. 
 This is precisely the same data as a $k[G]$-module $V$. 
 
 Note that $k[G]$ is (left and right) artinian, being finite-dimensional over a field. 
-The \deff{modular} case refers to the situation when $\chr(k) \mid \md{G}$.
 
-Recall that we have the \deff{augmentation map}
+\begin{defn}
+	The algebra $k[G]$ is further an \deff{augmented algebra}.
+
+	The \deff{augmentation map} is defined as
+	\begin{align*} 
+		\varepsilon \colon k[G] & \to k \\
+		\sum_{g \in G} a_{g} g & \mapsto \sum_{g \in G} a_{g}.
+	\end{align*}
+	This is a map of $k$-algebras, a $k$-linear ring homomorphism.
+
+	The \deff{augmentation ideal} of $G$ is defined as
+	\begin{equation*} 
+		\II(G) \coloneqq \ker(\varepsilon) = \left\{\sum_{g} a_{g} g : \sum_{g} a_{g} = 0\right\}.
+	\end{equation*}
+\end{defn}
+
+\begin{defn}
+	The map $\varepsilon$ gives $k$ the structure of a $k[G]$-bimodule.
+\end{defn}
+
+\section{Basic constructions}
+
+We list some basis constructions and observations that connected groups with their algebras.
+
+\subsection{Functoriality}
+
+Given a group homomorphism $\varphi \colon G_{1} \to G_{2}$, 
+we get a $k$-linear map $k[\varphi]$ given on a basis as
 \begin{align*} 
-	\varepsilon \colon k[G] & \to k \\
-	\sum_{g \in G} a_{g} g & \mapsto \sum_{g \in G} a_{g}.
+	k[\varphi] \colon k[G_{1}] & \to k[G_{2}] \\
+	g & \mapsto \varphi(g).
 \end{align*}
+This is a homomorphism of \emph{augmented} $k$-algebras.
+
+\begin{lem}
+	Its kernel is generated both as a left and right ideal by $\{g - 1 : g \in \ker(\varphi)\}$.
+\end{lem}
+
+Note that if $H \le G$ is a subgroup, then $k[H]$ is naturally a subalgebra of $k[G]$.
 
 \begin{thm}
-	The group algebra $k[G]$ is semisimple iff $\chr(k) \nmid \md{G}$.
+	If $N$ is a normal subgroup of $G$, then the canonical surjection $G \onto G/N$ induces
+	a surjection $k[G] \onto k[G/N]$ whose kernel is generated by $\{n - 1 : n \in N\}$. 
+	Thus, we get
+	\begin{equation*} 
+		k[G/N] \cong k[G]/\II(N)k[G].
+	\end{equation*}
+\end{thm}
+
+\subsection{Product of groups}
+
+There is a natural isomorphism of augmented $k$-algebras, given on a basis as
+\begin{align*} 
+	k[G_{1}] \otimes_{k} k[G_{2}] &\cong k[G_{1} \times G_{2}], \\
+	g_{1} \otimes g_{2} &\mapsto (g_{1}, g_{2}).
+\end{align*}
+
+Going forth, we may often implicitly identify the group ring of a product with the tensor algebra.
+
+\subsection{The diagonal map}
+
+The diagonal homomorphism $\Delta \colon G \to G \times G$ induces an algebra homomorphism
+\begin{align*} 
+	\Delta \colon k[G] &\to k[G] \otimes_{k} k[G] \\
+	g &\mapsto g \otimes g.
+\end{align*}
+
+This is called the \deff{diagonal homomorphism} (or \deff{coproduct}) of the group algebra $k[G]$.
+
+\subsection{The anti-isomorphism}
+
+Recall that every group $G$ is isomorphic to its opposite group $G^{\op}$ via $g \mapsto g^{-1}$. 
+Equivalently, this map is an \emph{anti-isomorphism} $G \to G$. 
+Consequently, we get the anti-isomorphism 
+\begin{equation*} 
+	\sigma \colon k[G] \to k[G].
+\end{equation*}
+This map is called the \deff{antipode}.
+
+The antipode commutes with the diagonal:
+\begin{equation*} 
+	\begin{tikzcd}
+		k[G] \arrow[r, "\sigma^{G}"] \arrow[d, "\Delta^{G}"'] & k[G] \arrow[d, "\Delta^{G}"] \\
+		k[G \times G] \arrow[r, "\sigma^{G \times G}"'] & k[G \times G]
+	\end{tikzcd}
+\end{equation*}
+
+This data makes $k[G]$ into a Hopf algebra.
+
+\subsection{Abelian groups}
+
+We have $k[\mathbb{Z}] = k[x, x^{-1}]$ with $\II(\mathbb{Z}) = (x - 1)$. \newline
+If $d > 0$ is a positive integer, then
+$k[\mathbb{Z}/d] = k[x]/(x^{d} - 1)$ with $\II(\mathbb{Z}/d) = (x - 1)$.
+
+If $G$ is a finitely generated abelian group, then we can write $G \cong \mathbb{Z}^{n} \oplus \mathbb{Z}/d_{1} \oplus \cdots \oplus \mathbb{Z}/d_{k}$. 
+Then,
+\begin{equation*} 
+	k[G] = \frac{k[x_{1}, \ldots, x_{n}, y_{1}, \ldots, y_{k}]}{(y_{1}^{d_{1}} - 1, \ldots, y_{k}^{d_{k}} - 1)}.
+\end{equation*}
+Note that this is a complete intersection.
+
+\subsection{\texorpdfstring{$p$}{p}-groups}
+
+\begin{thm}
+	Let $k$ be a field of characteristic $p > 0$, 
+	and $G$ a finite group.
+
+	The ring $k[G]$ is local iff $G$ is a $p$-group. 
+\end{thm}
+
+Suppose now that $\chr(k) = p > 0$ and that $G$ is a $p$-group.
+
+Then, the ideal of nonunits, which is equal to the Jacobson radical, coincides with the augmentation ideal:
+\begin{equation*} 
+	\rad(k[G]) = \left\{\sum_{g} a_{g} g : \sum_{g} a_{g} = 0\right\} = \II(G).
+\end{equation*}
+
+Thus, $k[G]/\rad \cong k$ and we get:
+\begin{thm}
+	Suppose $\chr(k) = p > 0$ and $G$ is a $p$-group.
+
+	There is exactly one simple $k[G]$-module, namely $k$. 
+
+	There is exactly one PIM over $k[G]$, namely $k[G]$.
+\end{thm}
+
+\section{Basic properties of the group algebra}
+
+In this section, we list some properties of $k[G]$ that follows from the general theory of earlier. 
+As before, $k$ will denote a field, and $G$ a finite group.
+
+\begin{thm}
+	The group algebra $k[G]$ is a Frobenius algebra over $k$ with the bilinear map
+	\begin{equation*} 
+		\sigma(a, b) = \text{coefficient of $1$ in $a \cdot b$}.
+	\end{equation*}
+	In particular, $k[G]$ is a quasi-Frobenius ring. 
+	Thus, $k[G]$ is self-injective.
+\end{thm}
+
+\begin{thm}
+	The following are equivalent. The implication (a) $\Leftrightarrow$ (b) is known as Maschke's theorem.
+	\begin{enumerate}[label=(\alph*)]
+		\item (Nonmodular) $\chr(k) \nmid \md{G}$.
+		\item The group algebra $k[G]$ is semisimple.
+		\item Every left (or right) $k[G]$-module has finite projective dimension.
+		\item The module $k$---viewed as a left (or right) $k[G]$-module via the augmentation---is projective.
+		\item The augmentation map $k[G] \onto k$ has a $k[G]$-linear section.
+	\end{enumerate}
 \end{thm}
 \begin{sketch}
-	\forward Suppose $\chr(k) \mid \md{G}$. 
-	Consider $z \coloneqq \sum_{g \in G} g$. 
-	Then, $kz$ is an ideal of $k[G]$. 
-	We have $z^{2} = \md{G}z = 0$. 
-	Thus, $kz$ is a nonzero nilpotent ideal. 
-	Now apply \Cref{thm:semisimple-ring-equivalences}.
+	% (b) $\Rightarrow$ (a): Suppose $\chr(k) \mid \md{G}$. 
+	% Consider $z \coloneqq \sum_{g \in G} g$. 
+	% Then, $kz$ is an ideal of $k[G]$. 
+	% We have $z^{2} = \md{G}z = 0$. 
+	% Thus, $kz$ is a nonzero nilpotent ideal. 
+	% Now apply \Cref{thm:semisimple-ring-equivalences}.
 
-	\backward Suppose $\chr(k) \nmid \md{G}$. 
+	(b) $\Leftrightarrow$ (c): follows from \Cref{thm:quasi-frobenius-either-semisimple-or-infinite} since $k[G]$ is quasi-Frobenius.
+
+	(b) $\Rightarrow$ (d): any module over a semisimple ring is projective.
+
+	(d) $\Leftrightarrow$ (e): true because $k[G]$ is projective.
+
+	(a) $\Rightarrow$ (b): Suppose $\chr(k) \nmid \md{G}$. 
 	Any inclusion $W \into V$ of $k[G]$-modules has a $k$-linear splitting $\pi \colon V \to W$. 
 	This gives rise to the $k[G]$-linear splitting given by 
 	\begin{equation*} 
-		\frac{1}{\md{G}} \sum_{g \in G} g_{V} \circ \pi \circ g_{V}^{-1}. \qedhere
+		\frac{1}{\md{G}} \sum_{g \in G} g_{V} \circ \pi \circ g_{V}^{-1}.
+	\end{equation*} 
+
+	(e) $\Rightarrow$ (a): Let $\iota \colon k \into k[G]$ be a (left) $k[G]$-linear section to $\varepsilon \colon k[G] \to k$. 
+	For any $h \in H$, we have 
+	\begin{equation*} 
+		\iota(1) = \iota(\varepsilon(h) 1) = \iota(h \cdot 1) = h \iota(1).
 	\end{equation*}
+	Thus, if we write $\iota(1) = \sum_{g} a_{g} g$, we see that $a_{g}$ is constant with respect to $g$. 
+	In turn,
+	\begin{equation*} 
+		1 = \varepsilon(\iota(1)) = \sum_{g} a_{1} = \md{G} a_{1},
+	\end{equation*}
+	showing that $\md{G}$ is invertible in $k$.
 \end{sketch}
 
-Thus, we get the following.
-\begin{thm}
+\begin{cor}
 	Let $k$ be a field and $G$ a finite group such that $\chr(k) \nmid \md{G}$. 
 	Then, 
 	\begin{itemize}
@@ -967,7 +1274,7 @@ Thus, we get the following.
 		\item there are finitely many irreducible representations of $G$;
 		\item every representation decomposes as a direct sum of irreducible representations of $G$.
 	\end{itemize}
-\end{thm}
+\end{cor}
 
 Regardless, since $k[G]$ is artinian even in the modular case, we have the following.
 \begin{thm}
@@ -989,37 +1296,11 @@ Regardless, since $k[G]$ is artinian even in the modular case, we have the follo
 \end{thm}
 In the modular case, the issue is that there exist representations that cannot be written as a (direct) sum of irreducible representations.
 
+\section{The augmentation ideal}
+
 \begin{thm}
-	Let $k$ be a field of characteristic $p > 0$, 
-	and $G$ a finite group.
-
-	The ring $k[G]$ is local iff $G$ is a $p$-group. 
-
-	In this case, the ideal of nonunits, which is equal to the Jacobson radical, is given by
-	\begin{equation*} 
-		\rad(k[G]) = \left\{\sum_{g} a_{g} g : \sum_{g} a_{g} = 0\right\} = \ker(\varepsilon).
-	\end{equation*}
+	Let $\{g_{\lambda}\}_{\lambda \in \Lambda}$ be generating set for $G$. 
+	Then, the left (or right) ideal generated by $\{g_{\lambda} - 1\}_{\lambda \in \Lambda}$ is the augmentation ideal $\II(G)$.
 \end{thm}
-
-\section{Symmetric and asymmetric properties}
-
-We list the properties we have considered in this document and note whether they are symmetric. 
-A property $P$ of a ring is \deff{symmetric} if the following is true: $A$ has $P$ iff $A^{\op}$ has $P$. \newline
-Equivalently, since our properties are often listed stated as ``$A$ is left $P$'', being symmetric is saying: $A$ is left $P$ iff $A$ is right $P$.
-
-\begin{enumerate}[label=(\alph*)]
-	\item Artinian: not symmetric.
-	\item Noetherian: not symmetric.
-	\item Finite length: not symmetric. \newline
-	Moreover, even if $A$ has finite length as a left and right module, these lengths could be different.
-	\item Local: symmetric by definition.
-	\item Semisimple: symmetric by classification theorem. 
-	\item Simple: symmetric by classification theorem. 
-	\item Weakly-simple: symmetric by definition.
-	\item Semiprimitive: symmetric since characterised by $\rad = 0$.
-	\item Primitive: \textbf{not} symmetric! 
-	\item Semiperfect: symmetric.
-	\item Perfect: \textbf{not} symmetric! 
-\end{enumerate}
 
 \end{document}
