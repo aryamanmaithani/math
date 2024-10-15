@@ -1118,6 +1118,14 @@ Note that $k[G]$ is (left and right) artinian, being finite-dimensional over a f
 	The map $\varepsilon$ gives $k$ the structure of a $k[G]$-bimodule.
 \end{defn}
 
+\begin{rem}
+	Under the identification $\{\text{left $k[G]$-modules}\} = \{\text{representations of $G$}\}$, 
+	the left module $k$ (viewed as a module via the augmentation) corresponds to the 
+	trivial representation $G \to \GL_{1}(k)$. 
+
+	Indeed, for $g \in G$ and $\alpha \in k$, we have $g \cdot \alpha = \alpha$.
+\end{rem}
+
 \section{Basic constructions}
 
 We list some basis constructions and observations that connected groups with their algebras.
@@ -1187,43 +1195,93 @@ The antipode commutes with the diagonal:
 
 This data makes $k[G]$ into a Hopf algebra.
 
-\subsection{Abelian groups}
+\subsection{Conjugation} \label{subsec:conjugation}
 
-We have $k[\mathbb{Z}] = k[x, x^{-1}]$ with $\II(\mathbb{Z}) = (x - 1)$. \newline
-If $d > 0$ is a positive integer, then
-$k[\mathbb{Z}/d] = k[x]/(x^{d} - 1)$ with $\II(\mathbb{Z}/d) = (x - 1)$.
-
-If $G$ is a finitely generated abelian group, then we can write $G \cong \mathbb{Z}^{n} \oplus \mathbb{Z}/d_{1} \oplus \cdots \oplus \mathbb{Z}/d_{k}$. 
-Then,
+If $M$ is a left $k[G]$-module, then the underlying $k$-vector space $M$ may be viewed as a \emph{right} $k[G]$-module by defining
 \begin{equation*} 
-	k[G] = \frac{k[x_{1}, \ldots, x_{n}, y_{1}, \ldots, y_{k}]}{(y_{1}^{d_{1}} - 1, \ldots, y_{k}^{d_{k}} - 1)}.
+	m \cdot g \coloneqq g^{-1}m
 \end{equation*}
-Note that this is a complete intersection.
+for $g \in G$ and $m \in M$.
 
-\subsection{\texorpdfstring{$p$}{p}-groups}
+\textbf{However}, $M$ is above is \textbf{{\color{red} NOT}} a $k[G]$-bimodule.
 
-\begin{thm}
-	Let $k$ be a field of characteristic $p > 0$, 
-	and $G$ a finite group.
-
-	The ring $k[G]$ is local iff $G$ is a $p$-group. 
-\end{thm}
-
-Suppose now that $\chr(k) = p > 0$ and that $G$ is a $p$-group.
-
-Then, the ideal of nonunits, which is equal to the Jacobson radical, coincides with the augmentation ideal:
+We have
 \begin{equation*} 
-	\rad(k[G]) = \left\{\sum_{g} a_{g} g : \sum_{g} a_{g} = 0\right\} = \II(G).
+	g \cdot (m \cdot h) = g \cdot (h^{-1}m) = gh^{-1}m
+\end{equation*}
+and
+\begin{equation*} 
+	(g \cdot m) \cdot h = (gm) \cdot h = h^{-1}gm.
 \end{equation*}
 
-Thus, $k[G]/\rad \cong k$ and we get:
+\subsection{Tensor product}
+
+Let $R$ and $S$ be $k$-algebras, and let $M$ and $N$ be left modules over $R$ and $S$ respectively. 
+Then, $M \otimes_{k} N$ has a natural left $(R \otimes_{k} S)$-module structure via
+\begin{equation*} 
+	(r \otimes_{k} s) \cdot (m \otimes_{k} n) = (rm) \otimes_{k} (sn).
+\end{equation*}
+
+If $M$ and $N$ are left $k[G]$-modules, we get a left $(k[G] \otimes_{k} k[G])$-module $M \otimes_{k} N$. 
+The diagonal map makes this into a left $k[G]$-module with
+\begin{equation*} 
+	g \cdot (m \otimes_{k} n) = (gm) \otimes_{k} (gn).
+\end{equation*}
+
+We have an isomorphism of $k[G]$-modules 
+\begin{align*} 
+	M \otimes_{k} N &\xrightarrow{\cong} N \otimes_{k} M, \\
+	m \otimes_{k} n &\mapsto n \otimes_{k} m.
+\end{align*}
+
+The above is the correct tensor product to consider, since this does give us back a $k[G]$-module.
+
+\subsection{Homomorphisms} \label{subsec:Hom-group-algebra}
+
+Let $M$ and $N$ be left $k[G]$-module. 
+The $k$-vector space $\Hom_{k}(M, N)$ can be endowed with a $G$-action as
+\begin{equation*} 
+	(g \cdot \alpha)(m) \coloneqq g \alpha(g^{-1} m)
+\end{equation*}
+for $g \in G$ and $m \in M$.
+
+Note that $\Hom_{k[G]}(M, N)$ is a subset of $\Hom_{k}(M, N)$. 
+The definition gives us
+\begin{equation*} 
+	\Hom_{k[G]}(M, N) = \Hom_{k}(M, N)^{G}.
+\end{equation*}
+
+In particular, one has the natural identification
+\begin{equation*} 
+	\Hom_{k[G]}(k, M) = M^{G}.
+\end{equation*}
+
+Thus, the functor $\Hom_{k[G]}(k, -)$ is the invariants functor $(-)^{G}$.
+
 \begin{thm}
-	Suppose $\chr(k) = p > 0$ and $G$ is a $p$-group.
-
-	There is exactly one simple $k[G]$-module, namely $k$. 
-
-	There is exactly one PIM over $k[G]$, namely $k[G]$.
+	Let $L$, $M$, $N$ be left modules over $k[G]$. Then,
+	\begin{equation*} 
+		\Hom_{k[G]}(L \otimes_{k} M, N) \cong \Hom_{k[G]}(L, \Hom_{k}(M, N)).
+	\end{equation*}
 \end{thm}
+
+\subsection{Dual}
+
+Let $M$ be a left $k[G]$-module and set $M^{\ast} \coloneqq \Hom_{k}(M, k)$ as a $k$-vector space. 
+Specialising \S\ref{subsec:Hom-group-algebra} to this object makes $M^{\ast}$ a left $k[G]$-module. 
+On the other hand, conjugation (\S\ref{subsec:conjugation}) gives $M$ a right module structure, which gives $M^{\ast}$ a natural left $k[G]$-module structure by
+\begin{equation*} 
+	(g \cdot \alpha)(m) \coloneqq \alpha(m \cdot g).
+\end{equation*}
+A calculation shows that they both coincide.
+
+Moreover, the canonical $k$-linear maps
+\begin{align*} 
+	M &\to M^{\ast \ast} & N \otimes_{k} M^{\ast} & \to \Hom_{k}(M, N) \\
+	m &\mapsto (f \mapsto f(m)) & n \otimes_{k} f & \mapsto (m \mapsto f(m)n)
+\end{align*}
+are $k[G]$-linear. 
+These maps are bijective when $\rank_{k} M$ is finite.
 
 \section{Basic properties of the group algebra}
 
@@ -1294,7 +1352,7 @@ As before, $k$ will denote a field, and $G$ a finite group.
 \end{cor}
 
 Regardless, since $k[G]$ is artinian even in the modular case, we have the following.
-\begin{thm}
+\begin{thm} \label{thm:facts-about-kG}
 	Let $k$ be a field, and $G$ be any finite group. 
 	Then,
 	\begin{itemize}
@@ -1302,10 +1360,11 @@ Regardless, since $k[G]$ is artinian even in the modular case, we have the follo
 		\item the group $G$ has finitely many irreducible representations over $k$;
 		\item any finite-dimensional representation is (uniquely) the direct sum of finitely many indecomposable representations;
 		\item every $k[G]$-module has a projective cover;
+		\item every indecomposable projective is a PIM;
 		\item the projective cover of each simple module is indecomposable and cyclic, i.e., a PIM;
 		\item if $J \coloneqq \rad(k[G])$, then we have a one-to-one correspondence of isomorphism classes
 		\begin{align*} 
-			\{\text{PIMs}\} & \leftrightarrow \{\text{simple modules}\} \\
+			\{\text{projective indecomposables}\} = \{\text{PIMs}\} & \leftrightarrow \{\text{simple modules}\} \\
 			P & \mapsto P/JP,
 		\end{align*}
 		with the inverse being given by taking projective covers.
@@ -1319,5 +1378,271 @@ In the modular case, the issue is that there exist representations that cannot b
 	Let $\{g_{\lambda}\}_{\lambda \in \Lambda}$ be generating set for $G$. 
 	Then, the left (or right) ideal generated by $\{g_{\lambda} - 1\}_{\lambda \in \Lambda}$ is the augmentation ideal $\II(G)$.
 \end{thm}
+
+As remarked earlier, if $N \unlhd G$ is a normal subgroup, then the kernel of the natural map
+\begin{equation*} 
+	k[G] \to k[G/N]
+\end{equation*}
+is generated by $\{n - 1 : n \in N\}$; this is precisely $\II(N)k[G]$.
+
+\section{Representation type of groups}
+
+We give a classification of representation type finite groups on the basis
+of the type of Sylow-$p$ subgroup that they have. 
+Recall that any two Sylow-$p$ subgroups of a finite group are isomorphic.
+By ``representation type'', we roughly mean the number of inequivalent indecomposable representations. 
+
+\begin{thm}
+	Let $G$ be a finite group and $k$ an \underline{infinite} field of characteristic $p > 0$.
+	\begin{enumerate}[label=(\alph*)]
+		\item (Finite) $k[G]$ has finitely many indecomposables iff the Sylow-$p$ subgroups of $G$ are cyclic.
+		%
+		\item (Domestic) $k[G]$ has domestic representation type iff $p = 2$ and the Sylow-$2$ subgroups are isomorphic to the Klein four group.
+		%
+		\item (Tame) $k[G]$ has tame representation type iff $p = 2$ and the Sylow-$2$ subgroups are dihedral, semidihedral, or generalised quaternion.
+		%
+		\item (Wild) In all other cases, $k[G]$ has wild representation type.
+	\end{enumerate}
+\end{thm}
+\underline{Loosely(!) speaking}: Tame type means it is not finite and 
+that in every dimension,
+modulo finitely many exceptions, there is a one-parameter family 
+that parameterises the indecomposables. \newline
+Domestic is something about being able to narrow down to an independent-of-$n$ family.
+
+\subsection{Klein four group}
+
+Consider the Klein four group $V_{4} \coloneqq \mathbb{Z}/2 \times \mathbb{Z}/2$, and $k$ a field of characteristic two. 
+
+A complete classification is given in Benson's \emph{Representations and cohomology, I: Basic representation theory of finite groups and associative algebras} (Theorem 4.3.3) 
+but we give some examples of indecomposables here.
+
+After a change of variables, we have $k[V_{4}] = k[x, y]/(x^{2}, y^{2})$. 
+
+\begin{ex}
+	Every rank two indecomposable $k[V_{4}]$ is of the form 
+	\begin{equation*} 
+		V_{(\alpha_{1}, \alpha_{2})} = \frac{k[V_{4}]}{(\alpha_{1} x + \alpha_{2} y, xy)}.
+	\end{equation*}
+	Moreover, $V_{(\alpha_{1}, \alpha_{2})}$ is isomorphic to $V_{(\beta_{1}, \beta_{2})}$ iff 
+	$(\alpha_{1}, \alpha_{2})$ is proportional to $(\beta_{1}, \beta_{2})$.
+\end{ex}
+The above gives a $\mathbb{P}^{1}(k)$-parameterised family.
+
+For $n \ge 0$, let $M_{n}$ denote the $n$-th syzygy of $k$ as a $kV_{4}$-module, 
+and set $M_{n}^{\ast} \coloneqq \Hom_{k}(M, k)$. 
+
+Then, we have:
+\begin{ex}
+	The family $\{\ldots, M_{2}, M_{1}, k, M_{1}^{\ast}, M_{2}^{\ast}, \ldots\}$ consists of inequivalent indecomposable $kV_{4}$-modules. 
+	We have
+	\begin{equation*} 
+		\rank(M_{n}) = \rank(M_{n}^{\ast}) = 2n + 1.
+	\end{equation*}
+	Every indecomposable of odd rank appears in the above family.
+\end{ex}
+
+There are other indecomposables in even ranks. 
+These are parameterised by ``indecomposable rational canonical forms''. 
+
+\section{Projective modules}
+
+As before, $G$ is a finite group, and $k$ an arbitrary field of characteristic $p$. 
+Recall that $k[G]$ is quasi-Frobenius: thus, the injectives and projectives coincide. 
+So, all the consequent theorems have their ``injective'' analogue.
+
+\begin{thm}
+	Let $G$ be a group and $P$ a projective $k[G]$-module. 
+	For any $k[G]$-module $X$, the $k[G]$-modules $P \otimes_{k} X$ and $X \otimes_{k} P$ are projective.
+\end{thm}
+Note again that the tensor is over $k$. 
+The two modules are isomorphic as noted before. 
+The above says that---under a suitable interpretation---the subcategory of projective modules is an \emph{ideal}.
+
+\begin{thm}
+	Let $G$ be a finite group, and $M$ a finite $k[G]$-module. 
+	The projectivity of the following modules are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $M$,
+		\item $M \otimes_{k} M$,
+		\item $M^{\ast} \otimes_{k} M$,
+		\item $M \otimes_{k} M^{\ast}$,
+		\item $\Hom_{k}(M, M)$, and
+		\item $M^{\ast}$.
+	\end{enumerate}
+\end{thm}
+What we mean is that if one of the above modules is projective, then so are the rest.
+
+\begin{thm}
+	Let $A$ be a finite-dimensional $k$-algebra. 
+	For each finite left $A$-module $M$, one has
+	\begin{equation*} 
+		\pdim_{A}(M) = \operatorname{flatdim}_{A}(M) = \injdim_{A^{\op}}(M^{\ast}).
+	\end{equation*}
+\end{thm}
+
+We recall again that:
+\begin{thm}
+	If $G$ is a $p$-group and $\chr(k) = p$, then $k[G]$ is local and the only projective modules are the free modules.
+\end{thm}
+
+More generally, one has:
+\begin{thm}
+	Let $p^{d}$ be the order of a Sylow-$p$ subgroup of $G$. 
+	If $P$ is a finite $k[G]$-module, then 
+	$p^{d}$ divides $\rank_{k} P$.
+\end{thm}
+\begin{sketch}
+	Let $H \le G$ be a Sylow-$p$ subgroup. 
+	Then, $P$ is a projective $kH$-module and hence free over $kH$.
+\end{sketch}
+
+\subsection{Symmetric group on three letters}
+
+Consider 
+\begin{equation*} 
+	\Sigma_{3} = \langle a,\, b \mid a^{2} = b^{3} = 1,\, ba = ab^{2} \rangle.
+\end{equation*}
+
+Let $k$ be a field of characteristic $p$.
+
+If $p \neq 2, 3$, then $k\Sigma_{3}$ is semisimple and every module is projective.
+
+Suppose $p = 3$: By \Cref{thm:facts-about-kG}, we know that $k\Sigma_{3}$ is a sum of projective indecomposables and 
+that every projective indecomposable appears in the (unique) representation of $k\Sigma_{3}$ as a sum of indecomposables. 
+Each such projective has rank divisible by three. 
+Since $\rank_{k} k\Sigma_{3} = 6$, we see that there are at most two distinct indecomposable projectives.
+
+We construct two such projectives: Let $H = \langle a \rangle$ be a Sylow-$2$ subgroup. We can turn $k$ into a left $k[H]$-module in two different ways: 
+the trivial one, via the augmentation map, 
+and the one defined by the character $a \mapsto -1$; 
+denote the latter by $^{\sigma}k$. \newline
+Since $k[H]$ is semisimple, both of these are projective $k[H]$-modules. 
+Base change preserves projectives (direct summands of free modules), so we get two projective $k[\Sigma_{3}]$-modules
+\begin{equation*} 
+	P_{1} \coloneqq k[\Sigma_{3}] \otimes_{k[H]} k \andd P_{2} \coloneqq k[\Sigma_{3}] \otimes_{k[H]} ^{\sigma}k.
+\end{equation*}
+These are indecomposable since these are rank $3$ (and $3$ divides the rank of any projective).
+Also, $\rank_{k}(P_{1}^{G}) = 1$ and $\rank_{k}(P_{2}^{G}) = 0$ shows that these are not isomorphic.
+
+Suppose $p = 2$: Let $H = \langle b \rangle = \{1, b, b^{2}\}$. 
+Note that 
+\begin{equation*} 
+	k[H] = k[x]/(x^{3} - 1) \cong \frac{k[x]}{(x - 1)} \times \frac{k[x]}{(x^{2} + x + 1)}.
+\end{equation*}
+If $x^{2} + x + 1$ is irreducible, then $k[H]$ has two simple (projective) modules, of ranks $1$ and $2$ over $k$. 
+Base-changing them to $k[\Sigma_{3}]$ will give projectives of ranks $2$ and $4$. \newline
+If $x^{2} + x + 1$ is irreducible, then this will give us three projectives over $k[\Sigma_{3}]$, of rank $2$ each. 
+
+One checks that in each case, this does give us the complete family of projective indecomposables.
+
+\section{Cohomology of supplemented algebras}
+
+Recall that a group algebra is a \deff{supplemented algebra}, i.e., 
+we have ring homomorphisms $\eta \colon k \to A$ and $\varepsilon \colon R \to k$ 
+such that $\varepsilon \circ \eta = \id_{k}$.
+
+Let $R$ be a supplemented $k$-algebra, and view $k$ as an $R$-module via the augmentation. 
+Let $M$ be a left $R$-module. 
+The \deff{cohomology of $R$ with coefficients in $M$} is the graded $k$-vector space $\Ext_{R}^{\ast}(k, M)$. \newline
+When $M = k$, we get $\Ext_{R}^{\ast}(k, k)$, which is usually called the \deff{cohomology of $R$}.
+
+Just to recall: the above graded $k$-vector space is computed as following: 
+start with a (left) $R$-projective resolution of $k$ as
+\begin{equation*} 
+	\cdots \to P_{1} \to P_{0} \to 0.
+\end{equation*}
+Applying $\Hom_{R}(-, M)$ to the above gives us a cocomplex of $k$-vector spaces (note that we lose the $R$-module structure in the noncommutative case):
+\begin{equation*} 
+	0 \to \Hom_{R}(P_{0}, M) \to \Hom_{R}(P_{1}, M) \to \cdots.
+\end{equation*}
+The homology at the $n$-th stage is $\Ext_{R}^{n}(k, M)$.
+
+We now describe how to give $\Ext_{R}^{\ast}(k, k)$ the structure of
+a supplemented $k$-algebra, over which $\Ext_{R}^{\ast}(k, M)$ can be made
+into a \emph{right} module.
+
+\subsection{Composition product}
+
+Let $P = (P_{\bullet}, \partial^{P}_{\bullet})$ be a projective resolution of $k$. 
+Recall that $\Hom_{R}(P, P)$ is a complex of $k$-vector spaces defined as:
+\begin{itemize}
+	\item $\Hom_{R}(P, P)_{n} = \prod_{i \in \mathbb{Z}} \Hom_{R}(P_{i}, P_{i + n})$, the degree $n$ morphisms with no compatibility condition;
+	\item the differential 
+	\begin{align*} 
+		\Hom_{R}(P, P)_{n + 1} & \to \Hom_{R}(P, P)_{n} \\
+		f & \mapsto \partial^{P} \circ f - (-1)^{n + 1} f \circ \partial^{P}.
+	\end{align*}
+	(If we imagine $f$ as a tuple of module maps, the compositions on the right are being performed component-wise in the appropriate sense.)
+\end{itemize}
+
+We may also think of $\Hom_{R}(P, P)$ as a graded $k$-vector space in the natural way. 
+For homogeneous $f, g \in \Hom_{R}(P, P)$, we have
+\begin{equation*} 
+	\partial(f \circ g) = \partial(f) \circ g + (-1)^{\md{f}} f \circ \partial(g).
+\end{equation*}
+This makes $\Hom_{R}(P, P)$ into a differential graded algebra (DGA), 
+called the \deff{endomorphism DGA} of $P$.
+
+We also recall that $\Ext$ can be computed using the endomorphism complex. 
+In particular,
+\begin{equation*} 
+	\Ext_{R}^{n}(k, k) = H_{n}(\Hom_{R}(P, P)).
+\end{equation*}
+
+\section{Examples}
+
+We work out some of the earlier theory in explicit examples.
+
+\subsection{Abelian groups}
+
+We have $k[\mathbb{Z}] = k[x, x^{-1}]$ with $\II(\mathbb{Z}) = (x - 1)$. \newline
+If $d > 0$ is a positive integer, then
+$k[\mathbb{Z}/d] = k[x]/(x^{d} - 1)$ with $\II(\mathbb{Z}/d) = (x - 1)$.
+
+If $G$ is a finitely generated abelian group, then we can write $G \cong \mathbb{Z}^{n} \oplus \mathbb{Z}/d_{1} \oplus \cdots \oplus \mathbb{Z}/d_{k}$. 
+Then,
+\begin{equation*} 
+	k[G] = \frac{k[x_{1}, \ldots, x_{n}, y_{1}, \ldots, y_{k}]}{(y_{1}^{d_{1}} - 1, \ldots, y_{k}^{d_{k}} - 1)}.
+\end{equation*}
+Note that this is a complete intersection.
+
+\subsection{\texorpdfstring{$p$}{p}-groups}
+
+\begin{thm}
+	Let $k$ be a field of characteristic $p > 0$, 
+	and $G$ a finite group.
+
+	The ring $k[G]$ is local iff $G$ is a $p$-group. 
+\end{thm}
+
+Suppose now that $\chr(k) = p > 0$ and that $G$ is a $p$-group.
+
+Then, the ideal of nonunits, which is equal to the Jacobson radical, coincides with the augmentation ideal:
+\begin{equation*} 
+	\rad(k[G]) = \left\{\sum_{g} a_{g} g : \sum_{g} a_{g} = 0\right\} = \II(G).
+\end{equation*}
+
+Thus, $k[G]/\rad \cong k$ and we get:
+\begin{thm}
+	Suppose $\chr(k) = p > 0$ and $G$ is a $p$-group.
+
+	There is exactly one simple $k[G]$-module, namely $k$. 
+
+	There is exactly one projective indecomposable over $k[G]$, namely $k[G]$. 
+	(In particular, the unique PIM as well.)
+\end{thm}
+
+For cyclic groups, the representation theory is even better.
+\begin{thm}
+	Let $k$ be a field of characteristic $p > 0$, and $G \coloneqq C_{p^{r}}$ the cyclic group of order $p^{r}$. 
+	There are exactly $p^{r}$ inequivalent indecomposable $k[G]$-modules, 
+	one of dimension $n$ for each $1 \le n \le p^{r}$. 
+	Moreover, there is a chain of inclusions
+	\begin{equation*} 
+		V_{1} \subset V_{2} \subset \cdots \subset V_{p^{r}}.
+	\end{equation*}
+\end{thm}
+The representation $V_{n}$ is given by $G$ acting on $k^{n}$ via the size-$n$ Jordan block. 
 
 \end{document}
