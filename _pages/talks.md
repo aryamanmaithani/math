@@ -11,6 +11,7 @@ redirect_from:
 
 Below are (the links to) the slides/notes for various talks.
 
+* Evil rings, a talk at [BIKES](https://www.brendan.phd/BIKES/BIKES.html): [Full slides](2024-08-28-bikes-evil-rings.pdf), [Handout](2024-08-28-bikes-evil-rings-handout.pdf)
 * [Invariant Theory of Commutative Rings]({{base_path}}/talks/2024-08-13-iitb-invariant-theory.pdf), a talk at the IITB commutative algebra seminar 
 * [Classical Invariant Theory]({{base_path}}/talks/2024-04-22-utah-rep-theory-invariants.pdf), a short course presentation for my Representation Theory course
 * I gave two (slightly different) talks about [my work](https://arxiv.org/pdf/2401.01046) with H. Ananthnarayan and Omkar Javadekar
