@@ -60,8 +60,6 @@ N = len(papers)
 for _, paper in papers.items():
 	s = f"{N}\\. "
 	N -= 1
-	# print(paper)
-	# s += f"[{paper['title']}]({paper['pdf']}.pdf)"
 
 	s += f"<i>{paper['title']}</i>"
 	if "coauthors" in paper:
@@ -77,7 +75,7 @@ for _, paper in papers.items():
 
 	if 'pdf' in paper:
 		s = add_newline(s)
-		s += f"[PDF]({paper['pdf']})"
+		s += f"[PDF]({paper['pdf']}.pdf)"
 
 	if 'arxiv' in paper:
 		s = add_newline(s)
