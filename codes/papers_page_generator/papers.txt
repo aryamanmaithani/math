@@ -1,0 +1,27 @@
+ignore
+title: Splitting the difference: Computations of the Reynolds operator in classical invariant theory
+date: 2024-12-25
+arxiv: TBD
+pdf: maithani_classical_reynolds
+=========
+3
+title: Monomial ideals with minimal generalized Barile-Macchia resolutions
+date: 2024-12-16
+coauthors: TC, THH
+arxiv: 2412.11843
+pdf: chau_ha_maithani_monomial_ideal_BM
+=========
+2
+title: Minimal cellular resolutions of powers of graphs
+date: 2024-04-05
+coauthors: TC, THH
+arxiv: 2404.04380
+pdf: chau_ha_maithani_minimal_cellular_resolutions
+=========
+1
+title: Linear quotients of connected ideals of graphs
+date: 2024-01-02
+coauthors: HA, OJ
+arxiv: 2401.01046
+pdf: ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals
+=========
