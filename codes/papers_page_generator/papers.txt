@@ -1,7 +1,7 @@
-ignore
+4
 title: Splitting the difference: Computations of the Reynolds operator in classical invariant theory
 date: 2024-12-25
-arxiv: TBD
+arxiv: 2412.18841
 pdf: maithani_classical_reynolds
 =========
 3
