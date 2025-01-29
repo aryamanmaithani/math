@@ -1,3 +1,9 @@
+5
+title: Polynomial invariants of \(\operatorname{GL}_{2}\): Conjugation over finite fields
+date: 2025-1-25
+arxiv: 2501.15080
+pdf: maithani_conjugation
+=========
 4
 title: Splitting the difference: Computations of the Reynolds operator in classical invariant theory
 date: 2024-12-25
