@@ -1,12 +1,15 @@
 HA
 name: H. Ananthnarayan
+webpage: https://www.math.iitb.ac.in/~ananth/
 =========
 OJ
 name: Omkar Javadekar
 =========
 TC
 name: Trung Chau
+webpage: https://trungchaumath.github.io/
 =========
 THH
 name: Tài Huy Hà
+webpage: http://www.math.tulane.edu/~tai/
 =========

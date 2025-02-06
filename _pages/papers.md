@@ -16,15 +16,15 @@ arXiv: [2501.15080](https://arxiv.org/abs/2501.15080)
 [PDF](maithani_classical_reynolds.pdf)  
 arXiv: [2412.18841](https://arxiv.org/abs/2412.18841)
 
-3\. <i>Monomial ideals with minimal generalized Barile-Macchia resolutions</i>, with Trung Chau and Tài Huy Hà  
+3\. <i>Monomial ideals with minimal generalized Barile-Macchia resolutions</i>, with [Trung Chau](https://trungchaumath.github.io/) and [Tài Huy Hà](http://www.math.tulane.edu/~tai/)  
 [PDF](chau_ha_maithani_monomial_ideal_BM.pdf)  
 arXiv: [2412.11843](https://arxiv.org/abs/2412.11843)
 
-2\. <i>Minimal cellular resolutions of powers of graphs</i>, with Trung Chau and Tài Huy Hà  
+2\. <i>Minimal cellular resolutions of powers of graphs</i>, with [Trung Chau](https://trungchaumath.github.io/) and [Tài Huy Hà](http://www.math.tulane.edu/~tai/)  
 [PDF](chau_ha_maithani_minimal_cellular_resolutions.pdf)  
 arXiv: [2404.04380](https://arxiv.org/abs/2404.04380)
 
-1\. <i>Linear quotients of connected ideals of graphs</i>, with H. Ananthnarayan and Omkar Javadekar  
+1\. <i>Linear quotients of connected ideals of graphs</i>, with [H. Ananthnarayan](https://www.math.iitb.ac.in/~ananth/) and Omkar Javadekar  
 [PDF](ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals.pdf)  
 arXiv: [2401.01046](https://arxiv.org/abs/2401.01046)
 

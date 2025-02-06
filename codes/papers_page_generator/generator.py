@@ -54,6 +54,13 @@ Here are my preprints, listed in (reverse chronological) order of first upload t
 def printt(*args):
 	print(*args, file=outfile)
 	outfile.flush()
+	# print(args)
+
+def coauthor_code(author):
+	s = author['name']
+	if 'webpage' in author:
+		s = f"[{s}]({author['webpage']})"
+	return s
 
 printt(preamble)
 N = len(papers)
@@ -64,7 +71,8 @@ for _, paper in papers.items():
 	s += f"<i>{paper['title']}</i>"
 	if "coauthors" in paper:
 		coauthors = paper['coauthors'].split(",")
-		coauthors = [authors[c.strip()]['name'] for c in coauthors]
+		# coauthors = [authors[c.strip()]['name'] for c in coauthors]
+		coauthors = [coauthor_code(authors[c.strip()]) for c in coauthors]
 		if len(coauthors) > 1:
 			coauthors[-1] = f"and {coauthors[-1]}"
 		if len(coauthors) == 2:
