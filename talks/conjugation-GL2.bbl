@@ -1,0 +1,275 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{Magma}{article}{}
+      \name{author}{3}{}{%
+        {{hash=6af9d924e0ce2bc82b20f1cb4cceb29b}{%
+           family={Bosma},
+           familyi={B\bibinitperiod},
+           given={Wieb},
+           giveni={W\bibinitperiod}}}%
+        {{hash=ef4238cce44c194cec970f8d4eb8e92b}{%
+           family={Cannon},
+           familyi={C\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6dbe502fea0e8279934da21eeeb7cc3b}{%
+           family={Playoust},
+           familyi={P\bibinitperiod},
+           given={Catherine},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{d05713c29377946f6c9a0fe8864f3687}
+      \strng{fullhash}{d05713c29377946f6c9a0fe8864f3687}
+      \strng{bibnamehash}{d05713c29377946f6c9a0fe8864f3687}
+      \strng{authorbibnamehash}{d05713c29377946f6c9a0fe8864f3687}
+      \strng{authornamehash}{d05713c29377946f6c9a0fe8864f3687}
+      \strng{authorfullhash}{d05713c29377946f6c9a0fe8864f3687}
+      \field{labelalpha}{BCP}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0747-7171}
+      \field{journaltitle}{J. Symbolic Comput.}
+      \field{note}{Computational algebra and number theory (London, 1993)}
+      \field{number}{3-4}
+      \field{title}{The {M}agma algebra system. {I}. {T}he user language}
+      \field{volume}{24}
+      \field{year}{1997}
+      \field{pages}{235\bibrangedash 265}
+      \range{pages}{31}
+      \verb{doi}
+      \verb 10.1006/jsco.1996.0125
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1006/jsco.1996.0125
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1006/jsco.1996.0125
+      \endverb
+    \endentry
+    \entry{CampbellWehlau:ModularInvariantTheory}{book}{}
+      \name{author}{2}{}{%
+        {{hash=7188291652aefc37e7ea7ca13dddb5f9}{%
+           family={Campbell},
+           familyi={C\bibinitperiod},
+           given={H.\bibnamedelimi E.\bibnamedelimi A.\bibnamedelimi Eddy},
+           giveni={H\bibinitperiod\bibinitdelim E\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=9332337b33c96b03953eb90937da35c5}{%
+           family={Wehlau},
+           familyi={W\bibinitperiod},
+           given={David\bibnamedelima L.},
+           giveni={D\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag, Berlin}%
+      }
+      \strng{namehash}{8320f4c2fede921ac33ff8d1a60266e3}
+      \strng{fullhash}{8320f4c2fede921ac33ff8d1a60266e3}
+      \strng{bibnamehash}{8320f4c2fede921ac33ff8d1a60266e3}
+      \strng{authorbibnamehash}{8320f4c2fede921ac33ff8d1a60266e3}
+      \strng{authornamehash}{8320f4c2fede921ac33ff8d1a60266e3}
+      \strng{authorfullhash}{8320f4c2fede921ac33ff8d1a60266e3}
+      \field{labelalpha}{CW}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-642-17403-2}
+      \field{note}{Invariant Theory and Algebraic Transformation Groups, 8}
+      \field{series}{Encyclopaedia of Mathematical Sciences}
+      \field{title}{Modular invariant theory}
+      \field{volume}{139}
+      \field{year}{2011}
+      \field{pages}{xiv+233}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1007/978-3-642-17404-9
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-642-17404-9
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-642-17404-9
+      \endverb
+    \endentry
+    \entry{DerksenKemper}{book}{}
+      \name{author}{2}{}{%
+        {{hash=fca84357df9d9260f5ec6e2f768b4adf}{%
+           family={Derksen},
+           familyi={D\bibinitperiod},
+           given={Harm},
+           giveni={H\bibinitperiod}}}%
+        {{hash=4d4bdeb1dac22611ea638f1595bc482b}{%
+           family={Kemper},
+           familyi={K\bibinitperiod},
+           given={Gregor},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer, Heidelberg}%
+      }
+      \strng{namehash}{11253854c5f06e3e7e74019e310a3059}
+      \strng{fullhash}{11253854c5f06e3e7e74019e310a3059}
+      \strng{bibnamehash}{11253854c5f06e3e7e74019e310a3059}
+      \strng{authorbibnamehash}{11253854c5f06e3e7e74019e310a3059}
+      \strng{authornamehash}{11253854c5f06e3e7e74019e310a3059}
+      \strng{authorfullhash}{11253854c5f06e3e7e74019e310a3059}
+      \field{labelalpha}{DK}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{enlarged}
+      \field{isbn}{978-3-662-48420-3; 978-3-662-48422-7}
+      \field{note}{With two appendices by Vladimir L. Popov, and an addendum by Norbert A'Campo and Popov, Invariant Theory and Algebraic Transformation Groups, VIII}
+      \field{series}{Encyclopaedia of Mathematical Sciences}
+      \field{title}{Computational invariant theory}
+      \field{volume}{130}
+      \field{year}{2015}
+      \field{pages}{xxii+366}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1007/978-3-662-48422-7
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-662-48422-7
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-662-48422-7
+      \endverb
+    \endentry
+    \entry{GoelJeffriesSingh}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b339d2f59d13e0f76d8e1d34fc28f456}{%
+           family={Goel},
+           familyi={G\bibinitperiod},
+           given={Kriti},
+           giveni={K\bibinitperiod}}}%
+        {{hash=0eaf71fc0b736127ce5dc71ccc3589ef}{%
+           family={Jeffries},
+           familyi={J\bibinitperiod},
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1a5c3a97f2e227bc3d07ad7724bc4ee3}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Anurag\bibnamedelima K.},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Springer Science}%
+        {Business Media LLC}%
+      }
+      \strng{namehash}{ffe2f64c9d263a31c198f86f0efdd77d}
+      \strng{fullhash}{ffe2f64c9d263a31c198f86f0efdd77d}
+      \strng{bibnamehash}{ffe2f64c9d263a31c198f86f0efdd77d}
+      \strng{authorbibnamehash}{ffe2f64c9d263a31c198f86f0efdd77d}
+      \strng{authornamehash}{ffe2f64c9d263a31c198f86f0efdd77d}
+      \strng{authorfullhash}{ffe2f64c9d263a31c198f86f0efdd77d}
+      \field{labelalpha}{GJS}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1531-586X}
+      \field{journaltitle}{Transformation Groups}
+      \field{month}{3}
+      \field{title}{Local Cohomology of Modular Invariant Rings}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.1007/s00031-024-09851-6
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/s00031-024-09851-6
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/s00031-024-09851-6
+      \endverb
+    \endentry
+    \entry{Maithani:Conjugation}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=23ceba2432b2e3c2b518f0c1006866b3}{%
+           family={Maithani},
+           familyi={M\bibinitperiod},
+           given={Aryaman},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{23ceba2432b2e3c2b518f0c1006866b3}
+      \strng{fullhash}{23ceba2432b2e3c2b518f0c1006866b3}
+      \strng{bibnamehash}{23ceba2432b2e3c2b518f0c1006866b3}
+      \strng{authorbibnamehash}{23ceba2432b2e3c2b518f0c1006866b3}
+      \strng{authornamehash}{23ceba2432b2e3c2b518f0c1006866b3}
+      \strng{authorfullhash}{23ceba2432b2e3c2b518f0c1006866b3}
+      \field{labelalpha}{Ma}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.AC}
+      \field{eprinttype}{arXiv}
+      \field{title}{Polynomial invariants of $\operatorname{GL}_{2}$: Conjugation over finite fields}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2501.15080
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2501.15080
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2501.15080
+      \endverb
+    \endentry
+    \entry{Smith:PolynomialInvariantsBook}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c1b10fea357294ad0885a7c9f6f289ad}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Larry},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {A K Peters, Ltd., Wellesley, MA}%
+      }
+      \strng{namehash}{c1b10fea357294ad0885a7c9f6f289ad}
+      \strng{fullhash}{c1b10fea357294ad0885a7c9f6f289ad}
+      \strng{bibnamehash}{c1b10fea357294ad0885a7c9f6f289ad}
+      \strng{authorbibnamehash}{c1b10fea357294ad0885a7c9f6f289ad}
+      \strng{authornamehash}{c1b10fea357294ad0885a7c9f6f289ad}
+      \strng{authorfullhash}{c1b10fea357294ad0885a7c9f6f289ad}
+      \field{labelalpha}{Sm}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{1-56881-053-9}
+      \field{series}{Research Notes in Mathematics}
+      \field{title}{Polynomial invariants of finite groups}
+      \field{volume}{6}
+      \field{year}{1995}
+      \field{pages}{xvi+360}
+      \range{pages}{-1}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
