@@ -10,3 +10,5 @@ _site/
 *.toc
 *.fdb_latexmk
 *.synctex.gz
+*.bcf
+*.blg
