@@ -1,6 +1,8 @@
 author_file = "authors.txt"
 paper_file = "papers.txt"
 outfile = open("../../_pages/papers.md", "w")
+pdflink = r"""<a href="{0}"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a>"""
+arxivlink = r"""<a href="https://arxiv.org/abs/{0}"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a>"""
 
 def get_lines(filepath):
 	with open(filepath, 'r') as f:
@@ -54,7 +56,7 @@ Here are my preprints, listed in (reverse chronological) order of first upload t
 def printt(*args):
 	print(*args, file=outfile)
 	outfile.flush()
-	# print(args)
+	# print(*args)
 
 def coauthor_code(author):
 	s = author['name']
@@ -68,10 +70,19 @@ for _, paper in papers.items():
 	s = f"{N}\\. "
 	N -= 1
 
-	s += f"<i>{paper['title']}</i>"
+	s += f"<b>{paper['title']}</b>"
+	s = add_newline(s)
+
+	if 'pdf' in paper:
+		name = paper['pdf']
+		s += pdflink.format(paper['pdf'])
+
+	if 'arxiv' in paper:
+		s += arxivlink.format(paper['arxiv'])
+
 	if "coauthors" in paper:
+		s = add_newline(s)
 		coauthors = paper['coauthors'].split(",")
-		# coauthors = [authors[c.strip()]['name'] for c in coauthors]
 		coauthors = [coauthor_code(authors[c.strip()]) for c in coauthors]
 		if len(coauthors) > 1:
 			coauthors[-1] = f"and {coauthors[-1]}"
@@ -79,16 +90,7 @@ for _, paper in papers.items():
 			coauthors = f"{coauthors[0]} {coauthors[1]}"
 		else:
 			coauthors = ", ".join(coauthors)
-		s += f", with {coauthors}"
-
-	if 'pdf' in paper:
-		s = add_newline(s)
-		s += f"[PDF]({paper['pdf']}.pdf)"
-
-	if 'arxiv' in paper:
-		s = add_newline(s)
-		ax = paper['arxiv']
-		s += f"arXiv: [{ax}](https://arxiv.org/abs/{ax})"
+		s += f"with {coauthors}"
 
 	s += "\n"
 	printt(s)
