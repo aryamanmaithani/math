@@ -1,3 +1,5 @@
+import re
+
 author_file = "authors.txt"
 paper_file = "papers.txt"
 outfile = open("../../_pages/papers.md", "w")
@@ -39,6 +41,9 @@ def file_to_dict(filepath):
 def add_newline(s):
 	return s + " " * 2 + "\n"
 
+def dollars_to_brackets(s):
+	return re.sub(r'\$(.*?)\$', r'\\\(\1\\\)', s)
+
 authors = file_to_dict(author_file)
 papers = file_to_dict(paper_file)
 
@@ -70,7 +75,7 @@ for _, paper in papers.items():
 	s = f"{N}\\. "
 	N -= 1
 
-	s += f"<b>{paper['title']}</b>"
+	s += f"<b>{dollars_to_brackets(paper['title'])}</b>"
 	s = add_newline(s)
 
 	if 'arxiv' in paper:

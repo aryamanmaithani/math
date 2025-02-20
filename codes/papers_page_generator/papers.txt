@@ -1,5 +1,5 @@
 5
-title: Polynomial invariants of \\(\operatorname{GL}_{2}\\): Conjugation over finite fields
+title: Polynomial invariants of $\operatorname{GL}_{2}$: Conjugation over finite fields
 date: 2025-1-25
 arxiv: 2501.15080
 pdf: maithani_conjugation
