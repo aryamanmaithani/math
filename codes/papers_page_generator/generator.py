@@ -82,7 +82,7 @@ for _, paper in papers.items():
 		s += arxivlink.format(paper['arxiv'])
 
 	if 'pdf' in paper:
-		s += pdflink.format(paper['pdf'])
+		s += pdflink.format(paper['pdf'] + ".pdf")
 
 	if "coauthors" in paper:
 		s = add_newline(s)
