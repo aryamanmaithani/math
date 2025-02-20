@@ -3,8 +3,8 @@ import re
 author_file = "authors.txt"
 paper_file = "papers.txt"
 outfile = open("../../_pages/papers.md", "w")
-pdflink = r""" <a href="{0}"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a>"""
-arxivlink = r""" <a href="https://arxiv.org/abs/{0}"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a>"""
+pdflink = r""" <a href="{0}" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a>"""
+arxivlink = r""" <a href="https://arxiv.org/abs/{0}" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a>"""
 
 def get_lines(filepath):
 	with open(filepath, 'r') as f:
