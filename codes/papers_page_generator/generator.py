@@ -3,8 +3,7 @@ import re
 author_file = "authors.txt"
 paper_file = "papers.txt"
 outfile = open("../../_pages/papers.md", "w")
-pdflink = r""" <a href="{0}" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a>"""
-arxivlink = r""" <a href="https://arxiv.org/abs/{0}" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a>"""
+linkstyle = r""" <a href="{0}" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">({1})</span></a>"""
 
 def get_lines(filepath):
 	with open(filepath, 'r') as f:
@@ -80,10 +79,12 @@ for _, paper in papers.items():
 	s = add_newline(s)
 
 	if 'arxiv' in paper:
-		s += arxivlink.format(paper['arxiv'])
+		link = r"""https://arxiv.org/abs/""" + paper['arxiv']
+		s += linkstyle.format(link, "arXiv")
 
 	if 'pdf' in paper:
-		s += pdflink.format(paper['pdf'] + ".pdf")
+		link = paper['pdf'] + ".pdf"
+		s += linkstyle.format(link, "PDF")
 
 	if "coauthors" in paper:
 		s = add_newline(s)
