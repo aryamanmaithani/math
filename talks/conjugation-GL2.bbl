@@ -67,6 +67,45 @@
       \verb http://dx.doi.org/10.1006/jsco.1996.0125
       \endverb
     \endentry
+    \entry{Benson:PolynomialInvariantsBook}{book}{}
+      \name{author}{1}{}{%
+        {{hash=b0a25adf448139401a95f1c9cf6e7e9a}{%
+           family={Benson},
+           familyi={B\bibinitperiod},
+           given={D.\bibnamedelimi J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press, Cambridge}%
+      }
+      \strng{namehash}{b0a25adf448139401a95f1c9cf6e7e9a}
+      \strng{fullhash}{b0a25adf448139401a95f1c9cf6e7e9a}
+      \strng{bibnamehash}{b0a25adf448139401a95f1c9cf6e7e9a}
+      \strng{authorbibnamehash}{b0a25adf448139401a95f1c9cf6e7e9a}
+      \strng{authornamehash}{b0a25adf448139401a95f1c9cf6e7e9a}
+      \strng{authorfullhash}{b0a25adf448139401a95f1c9cf6e7e9a}
+      \field{labelalpha}{Be}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-521-45886-2}
+      \field{series}{London Mathematical Society Lecture Note Series}
+      \field{title}{Polynomial invariants of finite groups}
+      \field{volume}{190}
+      \field{year}{1993}
+      \field{pages}{x+118}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1017/CBO9780511565809
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1017/CBO9780511565809
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1017/CBO9780511565809
+      \endverb
+    \endentry
     \entry{CampbellWehlau:ModularInvariantTheory}{book}{}
       \name{author}{2}{}{%
         {{hash=7188291652aefc37e7ea7ca13dddb5f9}{%
