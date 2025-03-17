@@ -1,3 +1,10 @@
+6
+title: Edge ideals with linear quotients and without homological linear quotients
+date: 2025-3-14
+coauthors: TC, KKD
+arxiv: 2503.11424
+pdf: chau_das_maithani_homological_shift_ideals
+=========
 5
 title: Polynomial invariants of $\operatorname{GL}_{2}$: Conjugation over finite fields
 date: 2025-1-25

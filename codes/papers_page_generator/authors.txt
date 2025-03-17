@@ -13,3 +13,7 @@ THH
 name: Tài Huy Hà
 webpage: http://www.math.tulane.edu/~tai/
 =========
+KKD
+name: Kanoy Kumar Das
+webpage: https://sites.google.com/site/kanoysclassichomepage/
+=========
