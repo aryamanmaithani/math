@@ -17,3 +17,7 @@ KKD
 name: Kanoy Kumar Das
 webpage: https://sites.google.com/site/kanoysclassichomepage/
 =========
+NE
+name: Nursel Erey
+webpage: https://sites.google.com/view/nursel-erey/home
+=========
