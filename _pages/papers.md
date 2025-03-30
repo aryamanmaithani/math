@@ -33,5 +33,6 @@ with [Trung Chau](https://trungchaumath.github.io/) and [Tài Huy Hà](http://ww
 
 1\. <b>Linear quotients of connected ideals of graphs</b>  
  <a href="https://arxiv.org/abs/2401.01046" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a> <a href="ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals.pdf" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a>  
-with [H. Ananthnarayan](https://www.math.iitb.ac.in/~ananth/) and Omkar Javadekar
+with [H. Ananthnarayan](https://www.math.iitb.ac.in/~ananth/) and Omkar Javadekar  
+Journal of Algebraic Combinatorics *61*, 34 (2025)
 
