@@ -44,5 +44,5 @@ date: 2024-01-02
 coauthors: HA, OJ
 arxiv: 2401.01046
 pdf: ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals
-cite: Journal of Algebraic Combinatorics *61*, 34 (2025)
+cite: Journal of Algebraic Combinatorics **61**, 34 (2025)
 =========
