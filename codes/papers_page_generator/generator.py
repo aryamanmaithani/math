@@ -98,5 +98,9 @@ for _, paper in papers.items():
 			coauthors = ", ".join(coauthors)
 		s += f"with {coauthors}"
 
+	if "cite" in paper:
+		s = add_newline(s)
+		s += paper["cite"]
+
 	s += "\n"
 	printt(s)
