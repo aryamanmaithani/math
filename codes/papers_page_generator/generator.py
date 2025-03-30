@@ -86,6 +86,10 @@ for _, paper in papers.items():
 		link = paper['pdf'] + ".pdf"
 		s += linkstyle.format(link, "PDF")
 
+	if 'journal' in paper:
+		link = paper['journal']
+		s += linkstyle.format(link, "Journal")
+
 	if "coauthors" in paper:
 		s = add_newline(s)
 		coauthors = paper['coauthors'].split(",")
