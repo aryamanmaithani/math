@@ -32,7 +32,7 @@ with [Trung Chau](https://trungchaumath.github.io/) and [Tài Huy Hà](http://ww
 with [Trung Chau](https://trungchaumath.github.io/) and [Tài Huy Hà](http://www.math.tulane.edu/~tai/)
 
 1\. <b>Linear quotients of connected ideals of graphs</b>  
- <a href="https://arxiv.org/abs/2401.01046" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a> <a href="ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals.pdf" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a> <a href="https://doi.org/10.1007/s10801-025-01395-6" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(Journal)</span></a>  
+ <a href="https://arxiv.org/abs/2401.01046" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a> <a href="ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals.pdf" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a> <a href="https://doi.org/10.1007/s10801-025-01395-6" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(Journal)</span></a> <a href="https://mathscinet.ams.org/mathscinet/article?mr=4884486" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(MathSciNet)</span></a>  
 with [H. Ananthnarayan](https://www.math.iitb.ac.in/~ananth/) and Omkar Javadekar  
-Journal of Algebraic Combinatorics **61**, 34 (2025)
+Journal of Algebraic Combinatorics, Volume **61**, Issue 34 (2025)
 
