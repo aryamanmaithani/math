@@ -90,6 +90,10 @@ for _, paper in papers.items():
 		link = paper['journal']
 		s += linkstyle.format(link, "Journal")
 
+	if 'mr' in paper:
+		link = r"""https://mathscinet.ams.org/mathscinet/article?mr=""" + paper['mr']
+		s += linkstyle.format(link, "MathSciNet")
+
 	if "coauthors" in paper:
 		s = add_newline(s)
 		coauthors = paper['coauthors'].split(",")
