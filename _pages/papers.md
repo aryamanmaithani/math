@@ -17,7 +17,7 @@ with [Trung Chau](https://trungchaumath.github.io/) and [Nursel Erey](https://si
  <a href="https://arxiv.org/abs/2503.11424" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a> <a href="chau_das_maithani_homological_shift_ideals.pdf" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a>  
 with [Trung Chau](https://trungchaumath.github.io/) and [Kanoy Kumar Das](https://sites.google.com/site/kanoysclassichomepage/)
 
-5\. <b>Polynomial invariants of \\(\operatorname{GL}_{2}\\): Conjugation over finite fields</b>  
+5\. <b>Polynomial invariants of classical subgroups of \\(\operatorname{GL}_{2}\\): Conjugation over finite fields</b>  
  <a href="https://arxiv.org/abs/2501.15080" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(arXiv)</span></a> <a href="maithani_conjugation.pdf" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">(PDF)</span></a>
 
 4\. <b>Splitting the difference: Computations of the Reynolds operator in classical invariant theory</b>  
