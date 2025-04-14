@@ -41,7 +41,7 @@ def file_to_dict(filepath):
 def add_newline(s):
 	return s + " <br>\n"
 
-def dollars_to_brackets(s, slashes = 2):
+def dollars_to_brackets(s, slashes = 1):
 	assert slashes in [1, 2], "Haven't implemented!"
 	bracketed = r'\\\(\1\\\)' if slashes == 2 else r'\(\1\)'
 	return re.sub(r'\$(.*?)\$', bracketed, s)
