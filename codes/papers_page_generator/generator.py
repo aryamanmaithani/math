@@ -40,8 +40,10 @@ def file_to_dict(filepath):
 def add_newline(s):
 	return s + " " * 2 + "\n"
 
-def dollars_to_brackets(s):
-	return re.sub(r'\$(.*?)\$', r'\\\(\1\\\)', s)
+def dollars_to_brackets(s, slashes = 2):
+	assert slashes in [1, 2], "Haven't implemented!"
+	bracketed = r'\\\(\1\\\)' if slashes == 2 else r'\(\1\)'
+	return re.sub(r'\$(.*?)\$', bracketed, s)
 
 authors = file_to_dict(author_file)
 papers = file_to_dict(paper_file)
