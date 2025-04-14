@@ -1,10 +1,14 @@
 import re
+import arxiv
 
 author_file = "authors.txt"
 paper_file = "papers.txt"
 outfile = open("../../_pages/papers.html", "w")
 linkstyle = r""" <a href="{0}" target="_blank"><span style="font-family: sans-serif, 'Open Sans';color: #999;font-size: 15px;">({1})</span></a>"""
 normal_link = r"""<a href="{0}" target="_blank">{1}</a>"""
+abstract_format = r"""<details> <summary><b>Abstract</b></summary>
+{0}
+</details>"""
 
 def get_lines(filepath):
 	with open(filepath, 'r') as f:
@@ -82,9 +86,12 @@ for _, paper in papers.items():
 	s += f"<b>{dollars_to_brackets(paper['title'])}</b>"
 	s = add_newline(s)
 
+	arxiv_paper = None
 	if 'arxiv' in paper:
-		link = r"""https://arxiv.org/abs/""" + paper['arxiv']
+		paper_id = paper['arxiv']
+		link = r"""https://arxiv.org/abs/""" + paper_id
 		s += linkstyle.format(link, "arXiv")
+		arxiv_paper = next(arxiv.Client().results(arxiv.Search(id_list=[paper_id])))
 
 	if 'pdf' in paper:
 		link = paper['pdf'] + ".pdf"
@@ -114,6 +121,10 @@ for _, paper in papers.items():
 		s = add_newline(s)
 		s += paper["cite"]
 
-	s += "</p>"
-	s += "\n"
+	if arxiv_paper is not None:
+		abstract = arxiv_paper.summary
+		s = add_newline(s)
+		s += abstract_format.format(abstract)
+
+	s += "\n</p>\n"
 	printt(s)
