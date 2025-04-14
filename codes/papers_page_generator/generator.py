@@ -75,7 +75,8 @@ def coauthor_code(author):
 printt(preamble)
 N = len(papers)
 for _, paper in papers.items():
-	s = f"{N}. "
+	s = "<p>\n"
+	s += f"{N}. "
 	N -= 1
 
 	s += f"<b>{dollars_to_brackets(paper['title'])}</b>"
@@ -113,5 +114,6 @@ for _, paper in papers.items():
 		s = add_newline(s)
 		s += paper["cite"]
 
+	s += "</p>"
 	s += "\n"
 	printt(s)
