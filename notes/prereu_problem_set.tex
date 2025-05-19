@@ -1,35 +1,101 @@
-\documentclass[12pt]{article}
-\usepackage[lmargin=0.8in,rmargin=0.8in,tmargin=1in,bmargin=1in]{geometry}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm} % This is for theorems, lemmas, propositions, etc.
+\usepackage{amssymb}%Package for symbols
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mathtools}
 
-\usepackage{aryaman}
-% \setcounter{tocdepth}{2}
-
-\usepackage{mathptmx}
+\setlength{\hoffset}{-0.66in}
+\setlength{\textwidth}{6in}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Int}{int}
+\DeclareMathOperator{\INT}{Int}
+\DeclareMathOperator{\Max}{Max}
+\DeclareMathOperator{\GL}{GL}
+\newcommand{\gl}{\mathfrak{gl}}
+\DeclareMathOperator{\SL}{SL}
+\renewcommand{\sl}{\mathfrak{sl}}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\OO}{O}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SU}{SU}
+\newcommand{\su}{\mathfrak{su}}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\type}{type}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\pre}{pre}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\germ}{germ}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\ann}{ann}
+\DeclareMathOperator{\Tot}{Tot}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\cyl}{cyl}
+\DeclareMathOperator{\Presheaves}{Presheaves}
+\DeclareMathOperator{\Sheaves}{Sheaves}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator{\exx}{ex}
+\DeclareMathOperator{\htt}{ht}
+\DeclareMathOperator{\chr}{char}
+\DeclareMathOperator{\Ass}{Ass}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\depth}{depth}
+\DeclareMathOperator{\pdim}{pdim}
+\DeclareMathOperator{\injdim}{injdim}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\eval}{eval}
+\DeclareMathOperator{\soc}{soc}
+\DeclareMathOperator{\II}{I}
+\DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Isom}{Isom}
+
+\newcommand{\trans}{\mathsf{T}}
 \newcommand{\halfitem}{\item[\number\numexpr\value{enumi}+0.5\relax.]}
 \newcommand{\staritem}{\refstepcounter{enumi}\item[${}^{L}$\theenumi]}
+\newcommand{\smatrix}[1]{\left(\begin{smallmatrix} #1 \end{smallmatrix}\right)}
 
-
-\title{Problem Set - pre-REU 2025}
-\author{}
-\date{}
-
-% \usepackage[
-% 	hyperref = true,      	% Link to online documents
-%   	backend  = bibtex,      % Use bibtex instead of biber
-%   	sorting  = nyt,       	% Sorts by (name, year, title)
-%   	style  = alphabetic 	% Citations look like [Har77]
-% ]{biblatex}
-% \addbibresource{source.bib}
 
 \begin{document}
 
-\maketitle
-% \tableofcontents
-
-Problems marked with ${}^{L}$ are problems on linear algebra. 
+\begin{center}
+\bf Problem Set 5 - pre-REU 2025
+\end{center}
 
 \textbf{Problem set on Invariant Theory}
+
+Problems marked with ${}^{L}$ are problems on linear algebra. 
 
 \begin{enumerate}[label=\arabic*., leftmargin=*]
 	\item Show that the following sets of matrices form a group under matrix multiplication. 
@@ -73,7 +139,8 @@ Problems marked with ${}^{L}$ are problems on linear algebra.
 	\item Let $G = \GL_{2}(\mathbb{R})$ act on $R = \mathbb{R}[X_{2 \times m}]$ in the usual way. 
 	Show that $R^{G} = \mathbb{R}$, i.e., the only invariant polynomials are the constants. 
 
-	\emph{Hint:} Think about what the matrix $\smatrix{2 & 0 \\ 0 & 2}$ does. 
+	\emph{Hint:} Think about what the matrix $\smatrix{2 & 0 \\ 0 & 2}$ does. \newline
+	Start out with $m = 1$ or $2$ to get an idea. 
 	%
 	\staritem Let $A, B$ be $n \times n$ matrices such that 
 	% there exists an invertible matrix 
@@ -115,6 +182,7 @@ Problems marked with ${}^{L}$ are problems on linear algebra.
 	%
 	\halfitem Generalise the previous to $\SL_{n}(\mathbb{R})$ acting on $\mathbb{R}[X_{n \times m}]$. 
 \end{enumerate}
+	
 
-% \printbibliography
 \end{document}
+
