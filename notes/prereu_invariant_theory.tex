@@ -1,0 +1,310 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+\setcounter{tocdepth}{2}
+
+\DeclareMathOperator{\Isom}{Isom}
+
+\title{Classical Invariant Theory}
+\author{Pre-REU Day 11}
+\date{\today}
+
+% \usepackage[
+% 	hyperref = true,      	% Link to online documents
+%   	backend  = bibtex,      % Use bibtex instead of biber
+%   	sorting  = nyt,       	% Sorts by (name, year, title)
+%   	style  = alphabetic 	% Citations look like [Har77]
+% ]{biblatex}
+% \addbibresource{source.bib}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section*{Introduction} 
+
+	So far, we have seen groups as ``acting'' on the plane $\mathbb{R}^{2}$, 
+	i.e., 
+	our groups were transformation subgroups of $\Sym(\mathbb{R}^{2})$. 
+	Moreover, we focused our attention to groups preserving structure, 
+	e.g., 
+	by considering only the isometries. 
+	In this lecture, we will consider the action of matrix groups on \emph{rings}. 
+	We will focus our attention on the so-called \emph{classical groups} with their ``classical representations'' and look at the \emph{invariant} rings. 
+
+\section{The classical matrix groups}
+	
+	By a classical group, we shall mean one of the following:
+	\begin{itemize}
+		\item (General linear group) The group $\GL_{n}(\mathbb{R})$ of invertible $n \times n$ matrices.
+		%
+		\item (Special linear group) The group $\SL_{n}(\mathbb{R})$ of $n \times n$ matrices with determinant one.
+		%
+		\item (Orthogonal group) The group $\OO_{n}(\mathbb{R})$ of $n \times n$ matrices satisfying $M M^{\trans} = I$.
+		%
+		\item (Symplectic group) The group $\Sp_{2n}(\mathbb{R})$ of $2n \times 2n$ invertible matrices satisfying $M \Omega M^{\trans} = \Omega$, 
+		where $\Omega$ is the $2n \times 2n$ block matrix given as 
+		$\Omega = \smatrix{0 & I \\ -I & 0}$. 
+	\end{itemize}
+	
+	The general linear group is the most general group of invertible matrices; 
+	each of the other can be thought of as preserving something:
+	\begin{itemize}
+		\item The special lienar group preserves the ($n$-dimensional) volume.
+		%
+		\item As we saw in class, the orthogonal group is the group of matrices that preserves the usual dot \underline{product} (and this was equivalent to preserving the lengths, thanks to the parallelogram law). 
+		%
+		\item The symplectic group arises as the group of matrices that preserves a certain other kind of \underline{product}. 
+		Why is this product relevant? 
+		As per Wikipedia\footnote{\url{https://en.wikipedia.org/wiki/Symplectic_group}}: ``[The symplectic group] comes up in classical physics as the symmetries of canonical coordinates preserving the Poisson [product].''
+	\end{itemize}
+
+\section{Action on rings}
+	
+	Now, let us consider the set 
+	$R = \mathbb{R}[x_{1}, \ldots, x_{n}]$---this is the set of all polynomials in the variables $x_{1}, \ldots, x_{n}$. 
+	Furthermore, the set $R$ is equipped with the two natural binary operations of addition and multiplication that satisfy certain axioms such as commutativity, associativity, distributivity, and having the necessary identities and inverses---this makes $R$ a \emph{ring}. 
+
+	Given an $n \times n$ matrix $M$, it defines a function on $R$. 
+	Let us consider this by means of an example: say $n = 2$, and we write $R = \mathbb{R}[x, y]$ and consider $M = \smatrix{1 & 3 \\ 0 & 1}$. 
+	First, we define the function on the variables $x$ and $y$ using matrix multiplication as following: 
+	we have
+	\begin{equation*} 
+		M 
+		\begin{bmatrix}
+			x \\
+			y \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			x + 3y \\
+			y \\
+		\end{bmatrix}.
+	\end{equation*}
+	So, $M(x) = x + 3y$ and $M(y) = y$. 
+	We now extend this to all polynomials by extending it ``polynomially''. 
+	For example, if we have the polynomial 
+	$f = 10 + 2 x + 3 x y - y^{2}$, then we define
+	\begin{align*} 
+		M(f) &= M(10 + 2 x + 3 x y - y^{2}) \\
+		&= 10 + 2 M(x) + 3 M(x) M(y) - M(y)^{2}.
+	\end{align*}
+	We can now use the values of $M(x)$ and $M(y)$ from before to compute the above. 
+
+	By defining the action in this way, we get that $M$ acts on $R$ via \emph{ring homomorphisms}---the action of $M$ preserves the addition and multiplication operations. 
+
+	We could generalise the above further: say $M$ in as $n \times n$ matrix,
+	and $R$ is a polynomial ring in $nm$ variables for some $n, m \ge 1$. 
+	Then, we can again define an action of $M$ on $R$ by arranging the variables in an $n \times m$ matrix and proceeding as before. 
+
+	Let us look at an example of this, say 
+	$R = \mathbb{R}[w, x, y, z]$ is a polynomial ring in four variables, and 
+	$M = \smatrix{1 & 3 \\ 0 & 1}$ as before. 
+	We then have
+	\begin{equation*} 
+		M
+		\begin{bmatrix}
+			w & x \\
+			y & z \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			w + 3y & x + 3z \\
+			y & z \\
+		\end{bmatrix}.
+	\end{equation*}
+	In particular, $M(y) = y$ and $M(z) = z$, giving us two \emph{fixed points}. 
+	Are there any others? 
+
+	A first source of fixed points is ``any polynomial in $y$ and $z$'', e.g., 
+	$y^{2} z$ because we have 
+	$M(y^{2} z) = M(y)^{2} M(z) = y^{2} z$. 
+
+	Let us try to come up with fixed points not of this form. 
+	We have
+	\begin{align*} 
+		M(w z) = M(w) M(z) &= (w + 3y) z = w z + 3 y z, \\
+		M(x y) = M(x) M(y) &= (x + 3z) y = x y + 3 z y.
+	\end{align*}
+	Can we get an invariant from the above two equations? 
+	Yes! We have
+	\begin{equation*} 
+		M(w z - x y) = M(w z) - M(x y) 
+		= (w z + 3 y z) - (x y + 3 z y )
+		= w z - x y.
+	\end{equation*}
+
+	Thus, the determinant is a fixed point or an \emph{invariant}. This is not surprising: the matrix $M$ that we started out with, had determinant $1$. 
+	Invariant theory is concerned with the study of the ring of invariants. 
+	Instead of studying the fixed points of one given function, we will instead consider a group of functions.
+
+	\begin{defn}
+		Let $G$ be a group acting on a ring $R$. 
+		The \deff{ring of invariants} is defined as
+		\begin{equation*} 
+			R^{G} \coloneqq \{r \in R : g(r) = r \text{ for all } g \in G\}.
+		\end{equation*}
+	\end{defn}
+
+	As we will see in the problem set, $R^{G}$ itself turns out to be a ring. 
+	The problems in invariant theory can be broadly described as:
+	\begin{enumerate}[label=(\roman*)]
+		\item Finding a (preferably optimal) set of generators for $R^{G}$.
+		%
+		\item Finding what the ``relations'' between those generators are.
+		\item Finding what good properties of $R$ are inherited by $R^{G}$.
+		%
+	\end{enumerate}
+
+	Our results today will focus on the first, with some allusion to the other two.
+
+\section{Classical invariant rings}
+
+	We shall now see the invariants for the classical actions of the classical groups. 
+
+	\begin{thm}
+		Let $n, m \ge 1$ be integers, 
+		$R \coloneqq \mathbb{R}[X_{n \times m}]$ a polynomial ring in $n m$ variables, 
+		and $G \coloneqq \SL_{n}(\mathbb{R})$. 
+		Consider the action of $G$ on $R$ in the manner described earlier. 
+		The fixed subring is then given as
+		\begin{equation*} 
+			R^{G} = \mathbb{R}[\Delta : \Delta \text{ is an $n \times n$ minor of $X$}].
+		\end{equation*}
+	\end{thm}
+
+	Let us parse the above with the help of an example:
+
+	\begin{ex}
+		Let us consider $n = 2$ and $m = 2$. 
+		Let us denote our variables as
+		\begin{equation*} 
+			\begin{bmatrix}
+				x_{1} & x_{2} \\
+				y_{1} & y_{2} \\
+			\end{bmatrix}.
+		\end{equation*}
+		Then, there is exactly one $2 \times 2$ minor, 
+		namely $\Delta \coloneqq x_{1} y_{2} - x_{2} y_{1}$. 
+		The theorem then reads:
+		\begin{equation*} 
+			R^{G} = \mathbb{R}[x_{1} y_{2} - x_{2} y_{1}].
+		\end{equation*}
+		This means that any invariant can be written as a polynomial in the $\Delta$. 
+		In this case, $R^{G}$ is particularly nice---it is itself again (isomorphic to) a polynomial ring in one variable.
+	\end{ex}
+
+	\begin{ex}
+		Let us now consider $n = 2$ and $m = 4$. 
+		Let us denote our variables as
+		\begin{equation*} 
+			\begin{bmatrix}
+				x_{1} & x_{2} & x_{3} & x_{4} \\
+				y_{1} & y_{2} & y_{3} & y_{4} \\
+			\end{bmatrix}.
+		\end{equation*}
+		Now, there are exactly six minors: 
+		let $\Delta_{i, j} = x_{i} y_{j} - x_{j} y_{i}$ 
+		denote the determinant of the matrix obtained by considering the columns $i$ and $j$. 
+
+		Then, the theorem reads
+		\begin{equation*} 
+			R^{G} = \mathbb{R}
+			[\Delta_{12}, \Delta_{13}, \Delta_{14}, 
+			\Delta_{23}, \Delta_{24}, \Delta_{34}].
+		\end{equation*}
+
+		This means that any invariant can be written as a polynomial in the $\Delta_{ij}$s. 
+		However, there are \emph{relations}, that is to say, some invariant possibly be written as a polynomial in the $\Delta_{ij}$s in two different ways. 
+		One may verify that
+		\begin{equation*} 
+			\Delta_{12} \Delta_{34} + \Delta_{14} \Delta_{23} = \Delta_{13} \Delta_{24}.
+		\end{equation*}
+		In particular, $R^{G}$ is \emph{not} isomorphic to the polynomial ring in $6$ variables. 
+	\end{ex}
+
+	Note that the inclusion $\mathbb{R}[\{\Delta\}] \subset \mathbb{R}^{G}$ is not too difficult: 
+	we saw that elements of $\SL_{2}(\mathbb{R})$ will fix the determinant. 
+	The remarkable fact is that these determinants give us all the invariants.
+
+	The theme is repeated in the descriptions for the other invariant rings as well: the ``obvious'' invariants give us all.
+
+	\begin{thm}
+		Consider the action of $G \coloneqq \OO_{n}(\mathbb{R})$ on $R \coloneqq \mathbb{R}[X_{n \times m}]$. 
+		The invariant ring is given as
+		\begin{equation*} 
+			R^{G} = \mathbb{R}[X^{\trans} X],
+		\end{equation*}
+		i.e., the generators are the entries of the matrix $X^{\trans} X$.
+	\end{thm}
+
+	Once again, let us see a sketch of why the inclusion 
+	$\mathbb{R}[X^{\trans} X] \subset R^{G}$ is true: 
+	consider a matrix $M \in \OO_{n}(\mathbb{R})$. 
+	Then, we have
+	\begin{equation*} 
+		X^{\trans} X \xmapsto{M} (M X)^{\trans} (M X) 
+		= X^{\trans} (M^{\trans} M) X
+		= X^{\trans} X.
+	\end{equation*}
+
+	\begin{ex}
+		Consider the case $n = 2$ and $m = 1$. 
+		If we call the variables $x$ and $y$, then the theorem reads $R^{G} = \mathbb{R}[x^{2} + y^{2}]$. 
+		This matches our geometric intuition of the orthogonal group preserving the norm. 
+
+		More generally, if $n \ge 1$ is arbitrary and $m = 1$, we get the invariant ring as being generated by $x_{1}^{2} + \cdots + x_{n}^{2}$. 
+
+		In the problem set, we will see how in the general case, the entries of $X^{\trans} X$ can be interpreted as dot products. 
+		Thus, we recover the familiar fact about $\OO_{n}(\mathbb{R})$ preserving the dot product.
+	\end{ex}
+
+	Similarly, we get the same result for its symplectic cousin.
+
+	\begin{thm}
+		Consider the action of $G \coloneqq \Sp_{2n}(\mathbb{R})$ on $R \coloneqq \mathbb{R}[X_{2n \times m}]$. 
+		The invariant ring is given as
+		\begin{equation*} 
+			R^{G} = \mathbb{R}[X^{\trans} \Omega X],
+		\end{equation*}
+		i.e., the generators are the entries of the matrix $X^{\trans} \Omega X$.
+	\end{thm}
+
+	For the group $\GL_{n}(\mathbb{R})$, one typically considers a more complicated action. 
+	(In the problem set, we will see that for the usual left multiplication action, the ring of invariants is somewhat ``boring''.)
+
+	\begin{thm}
+		Consider the action of the general linear group $G \coloneqq \GL_{n}(\mathbb{R})$ on the polynomial ring 
+		$R \coloneqq \mathbb{R}[X_{m \times n}, Y_{n \times p}]$, 
+		where $M \in G$ acts as
+		\begin{equation*} 
+			M \colon 
+			\begin{cases}
+				X \mapsto X M^{-1}, \\
+				Y \mapsto M Y.
+			\end{cases}
+		\end{equation*}
+		The invariant ring is given as
+		\begin{equation*} 
+			R^{G} = \mathbb{R}[X Y],
+		\end{equation*}
+		i.e., the generators are the entries of the matrix $X Y$.
+	\end{thm}
+
+	Here's another interesting group action, though usually not under the umbrella of the classical group actions:
+	\begin{thm}
+		Consider the group $G \coloneqq \GL_{n}(\mathbb{R})$ acting on $R \coloneqq \mathbb{R}[X_{n \times n}]$ via conjugation, i.e., 
+		$M \in G$ acts via $X \mapsto M^{-1} X M$. 
+		Then, the invariant ring is given as
+		\begin{equation*} 
+			R^{G} = \mathbb{R}[\trace(X), \ldots, \det(X)],
+		\end{equation*}
+		i.e., the generators are the coefficients of the characteristic polynomial of $X$. 
+	\end{thm}
+
+	One question of interest to me is: what if we replace $\mathbb{R}$ with a finite field such as $\mathbb{Z}/5$? What are the rings of invariants in that case? 
+
+% \printbibliography
+\end{document}
