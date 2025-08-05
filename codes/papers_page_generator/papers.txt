@@ -4,6 +4,7 @@ date: 2025-3-17
 coauthors: TC, NE
 arxiv: 2503.13337
 pdf: chau_erey_maithani_scarf_powers
+toa: Communications in Algebra
 =========
 6
 title: Edge ideals with linear quotients and without homological linear quotients
@@ -23,6 +24,7 @@ title: Splitting the difference: Computations of the Reynolds operator in classi
 date: 2024-12-25
 arxiv: 2412.18841
 pdf: maithani_classical_reynolds
+toa: Bulletin of the London Mathematical Society
 =========
 3
 title: Monomial ideals with minimal generalized Barile-Macchia resolutions
@@ -30,6 +32,7 @@ date: 2024-12-16
 coauthors: TC, THH
 arxiv: 2412.11843
 pdf: chau_ha_maithani_monomial_ideal_BM
+toa: Vietnam Journal of Mathematics
 =========
 2
 title: Minimal cellular resolutions of powers of graphs

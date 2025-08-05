@@ -121,6 +121,10 @@ for _, paper in papers.items():
 		s = add_newline(s)
 		s += paper["cite"]
 
+	if "toa" in paper:
+		s = add_newline(s)
+		s += paper["toa"] + " (To appear)"
+
 	if arxiv_paper is not None:
 		abstract = arxiv_paper.summary
 		s = add_newline(s)
