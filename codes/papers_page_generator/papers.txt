@@ -3,8 +3,9 @@ title: The Scarf complex of squarefree powers, symbolic powers of edge ideals, a
 date: 2025-3-17
 coauthors: TC, NE
 arxiv: 2503.13337
+journal: https://doi.org/10.1080/00927872.2025.2544296
 pdf: chau_erey_maithani_scarf_powers
-toa: Communications in Algebra
+cite: Communications in Algebra
 =========
 6
 title: Edge ideals with linear quotients and without homological linear quotients
