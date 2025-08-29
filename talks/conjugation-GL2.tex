@@ -11,7 +11,8 @@
 \author{Aryaman Maithani}
 \date{%
 February 7, 2025 at University of Utah \\ 
-February 24, 2025 at UC Sand Diego %
+February 24, 2025 at UC San Diego \\
+September 3, 2024 at Purdue University %
 }
 
 \usepackage[backend=biber,style=alphabetic,doi=false,isbn=false,url=false,eprint=true,maxbibnames=5,minbibnames=5,mincitenames=5,maxcitenames=5,maxalphanames=5,minalphanames=5,backref=true]{biblatex}
@@ -128,8 +129,9 @@ February 24, 2025 at UC Sand Diego %
 	\begin{tcolorbox}
 		We have $K \coloneqq \mathbb{F}_{q}$ the finite field on $q$ elements, 
 		$G \coloneqq \GL_{2}(K)$ the general linear group, 
+		$V \coloneqq M_{2}(K)$ the vector space of $2 \times 2$ matrices,
 		$S \coloneqq K[X_{2 \times 2}] = K\left[\smatrix{a & b \\ c & d}\right]$, 
-		and $G$ acts on $S$ by conjugation. 
+		and $G$ acts on $S$ (and $V$) by conjugation. 
 	\end{tcolorbox}
 
 	The idea is to compute $S^{G}$ as follows: 
@@ -154,7 +156,7 @@ February 24, 2025 at UC Sand Diego %
 	We define
 	\begin{tcolorbox}
 		\begin{equation*} 
-			f_{3} \coloneqq a^{q + 1} + b^{q} c + b c^{q} + d^{q + 1}.
+			f_{3} \coloneqq a^{q} d + a d^{q} - b^{q} c - b c^{q}.
 		\end{equation*}
 	\end{tcolorbox}
 
@@ -172,12 +174,7 @@ February 24, 2025 at UC Sand Diego %
 		a \mapsto a - c, \quad b \mapsto a + b - c - d, \quad & c \mapsto c, \quad d \mapsto c + d.
 	\end{align*}
 	One may then check $\sigma(f_{3}) = f_{3}$ for any of the above generators, noting that $\beta^{q - 1} = 1$. 
-	However, there is a more abstract way to see this: we have
-	\begin{equation*} 
-		f_{3} = (a + d)^{q + 1} - (a^{q} d + a d^{q} - b^{q} c - b c^{q})
-	\end{equation*}
-	and so, it suffices to show that the last element is an invariant;
-	this follows by noting that it is $\mathcal{P}^{1}(ad - bc)$ for a `nice' operation $\mathcal{P}^{1}$, a \emph{Steenrod operation}.
+	However, there is a more conceptual way to see this: by noting that $f_{3} = \mathcal{P}^{1}(ad - bc)$ for a `nice' operation $\mathcal{P}^{1}$, a \emph{Steenrod operation}.
 
 	Things now seemed to be a dead end. 
 	\texttt{Magma} suggested that the fourth primary invariant should have degree $q^{2} - q$. 
@@ -293,7 +290,7 @@ February 24, 2025 at UC Sand Diego %
 	We now determine $n$ by first showing that $R$ is Cohen--Macaulay. 
 	First, we define $P$ to be the following Sylow-$p$ group of $G$:
 	\begin{equation*} 
-		V \coloneqq \two{1}{K}{}{1} \le G.
+		P \coloneqq \two{1}{K}{}{1} \le G.
 	\end{equation*}
 
 	\begin{lem} 
@@ -424,7 +421,7 @@ February 24, 2025 at UC Sand Diego %
 		\begin{bmatrix}
 			1 & 0 & 0 & 1 \\
 			d & -c & -b & a \\
-			a^{q} & c^{q} & b^{q} & d^{q} \\
+			d^{q} & -c^{q} & -b^{q} & a^{q} \\
 			\frac{\partial f_{4}}{\partial a} & \frac{\partial f_{4}}{\partial b} & \frac{\partial f_{4}}{\partial c} & \frac{\partial f_{4}}{\partial d} \\
 		\end{bmatrix}.
 		\label{eq:002}
