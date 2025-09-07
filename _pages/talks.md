@@ -11,7 +11,7 @@ redirect_from:
 
 Below are (the links to) the slides/notes for various talks.
 
-* [Polynomial invariants of \\(\operatorname{GL}_{2}\\): Conjugation over finite fields](conjugation-GL2.pdf), a talk at the [UoU CA Seminar](https://www.math.utah.edu/caseminar/Spring2025.html) and the [UCSD Algebra seminar](https://mathweb.ucsd.edu/~asalehig/AlgebraSeminar-24.html), about [my paper with the same-ish name](https://arxiv.org/abs/2501.15080)
+* [Polynomial invariants of \\(\operatorname{GL}_{2}\\): Conjugation over finite fields](conjugation-GL2.pdf), a talk at the algebra seminars at [UoU](https://www.math.utah.edu/caseminar/Spring2025.html), [UCSD](https://mathweb.ucsd.edu/~asalehig/AlgebraSeminar-24.html), and [Purdue](https://vaibhav-pandey1.github.io/seminar.html) about [my paper with the same-ish name](https://arxiv.org/abs/2501.15080)
 * Evil rings, a talk at [BIKES](https://www.brendan.phd/BIKES/BIKES.html): [Full slides](2024-08-28-bikes-evil-rings.pdf), [Handout](2024-08-28-bikes-evil-rings-handout.pdf)
 * [Invariant Theory of Commutative Rings]({{base_path}}/talks/2024-08-13-iitb-invariant-theory.pdf), a talk at the IITB commutative algebra seminar 
 * [Classical Invariant Theory]({{base_path}}/talks/2024-04-22-utah-rep-theory-invariants.pdf), a short course presentation for my Representation Theory course
