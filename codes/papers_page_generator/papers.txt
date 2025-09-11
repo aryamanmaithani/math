@@ -25,7 +25,8 @@ title: Splitting the difference: Computations of the Reynolds operator in classi
 date: 2024-12-25
 arxiv: 2412.18841
 pdf: maithani_classical_reynolds
-toa: Bulletin of the London Mathematical Society
+journal: http://doi.org/10.1112/blms.70175
+cite: Bulletin of the London Mathematical Society
 =========
 3
 title: Monomial ideals with minimal generalized Barile-Macchia resolutions
