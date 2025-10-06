@@ -25,7 +25,7 @@ title: Splitting the difference: Computations of the Reynolds operator in classi
 date: 2024-12-25
 arxiv: 2412.18841
 pdf: maithani_classical_reynolds
-journal: http://doi.org/10.1112/blms.70175
+journal: https://onlinelibrary.wiley.com/share/author/NRF8NCKPV5ZAUGZIBYVV?target=10.1112/blms.70175
 cite: Bulletin of the London Mathematical Society
 =========
 3
@@ -34,7 +34,8 @@ date: 2024-12-16
 coauthors: TC, THH
 arxiv: 2412.11843
 pdf: chau_ha_maithani_monomial_ideal_BM
-toa: Vietnam Journal of Mathematics
+journal: https://doi.org/10.1007/s10013-025-00773-8
+cite: Vietnam Journal of Mathematics
 =========
 2
 title: Minimal cellular resolutions of powers of graphs
