@@ -43,6 +43,7 @@ date: 2024-04-05
 coauthors: TC, THH
 arxiv: 2404.04380
 pdf: chau_ha_maithani_minimal_cellular_resolutions
+toa: Electronic Journal of Combinatorics
 =========
 1
 title: Linear quotients of connected ideals of graphs
