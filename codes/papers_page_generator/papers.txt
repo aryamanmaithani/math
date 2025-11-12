@@ -1,3 +1,9 @@
+8
+title: Homological properties of invariant rings of permutation groups
+date: 2025-11-11
+arxiv: 2511.07718
+pdf: maithani_permutation_invariants.pdf
+=========
 7
 title: The Scarf complex of squarefree powers, symbolic powers of edge ideals, and cover ideals of graphs
 date: 2025-3-17
