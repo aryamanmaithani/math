@@ -2,16 +2,9 @@ HA
 name: H. Ananthnarayan
 webpage: https://www.math.iitb.ac.in/~ananth/
 =========
-OJ
-name: Omkar Javadekar
-=========
 TC
 name: Trung Chau
 webpage: https://trungchaumath.github.io/
-=========
-THH
-name: Tài Huy Hà
-webpage: http://www.math.tulane.edu/~tai/
 =========
 KKD
 name: Kanoy Kumar Das
@@ -20,4 +13,11 @@ webpage: https://sites.google.com/site/kanoysclassichomepage/
 NE
 name: Nursel Erey
 webpage: https://sites.google.com/view/nursel-erey/home
+=========
+OJ
+name: Omkar Javadekar
+=========
+THH
+name: Tài Huy Hà
+webpage: http://www.math.tulane.edu/~tai/
 =========
