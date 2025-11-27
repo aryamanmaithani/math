@@ -1,5 +1,5 @@
 9
-title: Homological properties of invariant rings of permutation groups
+title: Abelian extensions of equicharacteristic regular rings need not be Cohen-Macaulay
 date: 2025-11-25
 arxiv: 2511.19800
 pdf: maithani_singh_sridhar
