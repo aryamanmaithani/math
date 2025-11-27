@@ -21,3 +21,11 @@ THH
 name: Tài Huy Hà
 webpage: http://www.math.tulane.edu/~tai/
 =========
+AKS
+name: Anurag K. Singh
+webpage: http://math.utah.edu/~singh/
+=========
+PS
+name: Prashanth Sridhar
+webpage: https://sites.google.com/view/prashanthsridhar/home
+=========

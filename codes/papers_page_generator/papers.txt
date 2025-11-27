@@ -1,3 +1,10 @@
+9
+title: Homological properties of invariant rings of permutation groups
+date: 2025-11-25
+arxiv: 2511.19800
+pdf: maithani_singh_sridhar
+coauthors: AKS, PS
+=========
 8
 title: Homological properties of invariant rings of permutation groups
 date: 2025-11-11
