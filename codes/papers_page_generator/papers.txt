@@ -26,6 +26,9 @@ date: 2025-3-14
 coauthors: TC, KKD
 arxiv: 2503.11424
 pdf: chau_das_maithani_homological_shift_ideals
+doi: 10.1007/s00009-025-03028-5
+journal: https://rdcu.be/eUKiy
+cite: Mediterranean Journal of Mathematics, Volume <b>23</b>, Article 31 (2026)
 =========
 5
 title: Polynomial invariants of classical subgroups of $\operatorname{GL}_{2}$: Conjugation over finite fields
