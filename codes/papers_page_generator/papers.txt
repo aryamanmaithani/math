@@ -10,6 +10,7 @@ title: Homological properties of invariant rings of permutation groups
 date: 2025-11-11
 arxiv: 2511.07718
 pdf: maithani_permutation_invariants
+toa: Proceedings of the American Mathematical Society
 =========
 7
 title: The Scarf complex of squarefree powers, symbolic powers of edge ideals, and cover ideals of graphs
@@ -42,7 +43,7 @@ date: 2024-12-25
 arxiv: 2412.18841
 pdf: maithani_classical_reynolds
 journal: https://doi.org/10.1112/blms.70175
-cite: Bulletin of the London Mathematical Society
+cite: Bulletin of the London Mathematical Society, Volume <b>58</b>, Issue 1 (2026)
 =========
 3
 title: Monomial ideals with minimal generalized Barile-Macchia resolutions
@@ -68,6 +69,6 @@ coauthors: HA, OJ
 arxiv: 2401.01046
 journal: https://doi.org/10.1007/s10801-025-01395-6
 pdf: ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals
-cite: Journal of Algebraic Combinatorics, Volume <b>61</b>, Issue 34 (2025)
+cite: Journal of Algebraic Combinatorics, Volume <b>61</b>, Article 34 (2025)
 mr: 4884486
 =========
