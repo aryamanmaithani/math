@@ -28,6 +28,8 @@ def file_to_dict(filepath):
 			start_new = False
 			continue
 
+		if len(L[i]) == 0: continue
+
 		if len(L[i]) > 0 and L[i][0] == "=":
 			start_new = True
 			if current == "ignore":
