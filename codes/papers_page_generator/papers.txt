@@ -17,7 +17,7 @@ title: The Scarf complex of squarefree powers, symbolic powers of edge ideals, a
 date: 2025-3-17
 coauthors: TC, NE
 arxiv: 2503.13337
-journal: https://doi.org/10.1080/00927872.2025.2544296
+jour-link: https://doi.org/10.1080/00927872.2025.2544296
 pdf: chau_erey_maithani_scarf_powers
 cite: Communications in Algebra, Volume <b>54</b>, Issue 3, 982–1001 (2026)
 =========
@@ -28,7 +28,7 @@ coauthors: TC, KKD
 arxiv: 2503.11424
 pdf: chau_das_maithani_homological_shift_ideals
 doi: 10.1007/s00009-025-03028-5
-journal: https://rdcu.be/eUKiy
+jour-link: https://rdcu.be/eUKiy
 cite: Mediterranean Journal of Mathematics, Volume <b>23</b>, Article 31 (2026)
 =========
 5
@@ -42,7 +42,7 @@ title: Splitting the difference: Computations of the Reynolds operator in classi
 date: 2024-12-25
 arxiv: 2412.18841
 pdf: maithani_classical_reynolds
-journal: https://doi.org/10.1112/blms.70175
+jour-link: https://doi.org/10.1112/blms.70175
 cite: Bulletin of the London Mathematical Society, Volume <b>58</b>, Issue 1 (2026)
 =========
 3
@@ -51,7 +51,7 @@ date: 2024-12-16
 coauthors: TC, THH
 arxiv: 2412.11843
 pdf: chau_ha_maithani_monomial_ideal_BM
-journal: https://doi.org/10.1007/s10013-025-00773-8
+jour-link: https://doi.org/10.1007/s10013-025-00773-8
 cite: Vietnam Journal of Mathematics
 =========
 2
@@ -67,7 +67,7 @@ title: Linear quotients of connected ideals of graphs
 date: 2024-01-02
 coauthors: HA, OJ
 arxiv: 2401.01046
-journal: https://doi.org/10.1007/s10801-025-01395-6
+jour-link: https://doi.org/10.1007/s10801-025-01395-6
 pdf: ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals
 cite: Journal of Algebraic Combinatorics, Volume <b>61</b>, Article 34 (2025)
 mr: 4884486

@@ -97,8 +97,8 @@ for _, paper in papers.items():
 		link = paper['pdf'] + ".pdf"
 		s += linkstyle.format(link, "PDF")
 
-	if 'journal' in paper:
-		link = paper['journal']
+	if 'jour-link' in paper:
+		link = paper['jour-link']
 		s += linkstyle.format(link, "Journal")
 
 	if 'mr' in paper:
