@@ -19,7 +19,7 @@ coauthors: TC, NE
 arxiv: 2503.13337
 journal: https://doi.org/10.1080/00927872.2025.2544296
 pdf: chau_erey_maithani_scarf_powers
-cite: Communications in Algebra
+cite: Communications in Algebra, Volume <b>54</b>, Issue 3, 982–1001 (2026)
 =========
 6
 title: Edge ideals with linear quotients and without homological linear quotients
