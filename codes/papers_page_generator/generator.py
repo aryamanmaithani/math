@@ -125,7 +125,7 @@ for _, paper in papers.items():
 		if "volume" in paper:
 			citation += f" <b>{paper['volume']}</b>"
 			if "issue" in paper:
-				citation += f"({paper['issue']})"
+				citation += f":{paper['issue']}"
 
 			assert "year" in paper, "Volume but no year!"
 			citation += f" ({paper['year']}), "
