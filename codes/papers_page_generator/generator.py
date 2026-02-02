@@ -119,9 +119,26 @@ for _, paper in papers.items():
 			coauthors = ", ".join(coauthors)
 		s += f"with {coauthors}"
 
-	if "cite" in paper:
+	citation = None
+	if "journal" in paper:
+		citation = paper["journal"]
+		if "volume" in paper:
+			citation += f" <b>{paper['volume']}</b>"
+			if "issue" in paper:
+				citation += f"({paper['issue']})"
+
+			assert "year" in paper, "Volume but no year!"
+			citation += f" ({paper['year']}), "
+
+			assert "pages" in paper or "article" in paper, "Lack of identification!"
+			if "article" in paper:
+				citation += f"article no. {paper["article"]}"
+			else:
+				citation += paper["pages"]
+
+	if citation:
 		s = add_newline(s)
-		s += paper["cite"]
+		s += citation
 
 	if "toa" in paper:
 		s = add_newline(s)

@@ -19,7 +19,12 @@ coauthors: TC, NE
 arxiv: 2503.13337
 jour-link: https://doi.org/10.1080/00927872.2025.2544296
 pdf: chau_erey_maithani_scarf_powers
-cite: Communications in Algebra, Volume <b>54</b>, Issue 3, 982–1001 (2026)
+
+journal: Communications in Algebra
+volume: 54
+issue: 3
+pages: 982–1001
+year: 2026
 =========
 6
 title: Edge ideals with linear quotients and without homological linear quotients
@@ -29,7 +34,11 @@ arxiv: 2503.11424
 pdf: chau_das_maithani_homological_shift_ideals
 doi: 10.1007/s00009-025-03028-5
 jour-link: https://rdcu.be/eUKiy
-cite: Mediterranean Journal of Mathematics, Volume <b>23</b>, Article 31 (2026)
+
+journal: Mediterranean Journal of Mathematics
+volume: 23
+article: 31
+year: 2026
 =========
 5
 title: Polynomial invariants of classical subgroups of $\operatorname{GL}_{2}$: Conjugation over finite fields
@@ -43,7 +52,12 @@ date: 2024-12-25
 arxiv: 2412.18841
 pdf: maithani_classical_reynolds
 jour-link: https://doi.org/10.1112/blms.70175
-cite: Bulletin of the London Mathematical Society, Volume <b>58</b>, Issue 1 (2026)
+
+journal: Bulletin of the London Mathematical Society
+volume: 58
+issue: 1
+article: e70175
+year: 2026
 =========
 3
 title: Monomial ideals with minimal generalized Barile-Macchia resolutions
@@ -52,7 +66,8 @@ coauthors: TC, THH
 arxiv: 2412.11843
 pdf: chau_ha_maithani_monomial_ideal_BM
 jour-link: https://doi.org/10.1007/s10013-025-00773-8
-cite: Vietnam Journal of Mathematics
+
+journal: Vietnam Journal of Mathematics
 =========
 2
 title: Minimal cellular resolutions of powers of graphs
@@ -69,6 +84,10 @@ coauthors: HA, OJ
 arxiv: 2401.01046
 jour-link: https://doi.org/10.1007/s10801-025-01395-6
 pdf: ananthnarayan_javadekar_maithani_linear_quotients_connected_ideals
-cite: Journal of Algebraic Combinatorics, Volume <b>61</b>, Article 34 (2025)
+
+journal: Journal of Algebraic Combinatorics
+volume: 61
+article: 34 
+year: 2025
 mr: 4884486
 =========
