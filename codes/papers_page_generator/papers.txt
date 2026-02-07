@@ -39,6 +39,7 @@ journal: Mediterranean Journal of Mathematics
 volume: 23
 article: 31
 year: 2026
+mr: 5002414
 =========
 5
 title: Polynomial invariants of classical subgroups of $\operatorname{GL}_{2}$: Conjugation over finite fields
