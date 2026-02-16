@@ -25,6 +25,7 @@ volume: 54
 issue: 3
 pages: 982–1001
 year: 2026
+mr: 5025522
 =========
 6
 title: Edge ideals with linear quotients and without homological linear quotients
@@ -59,6 +60,7 @@ volume: 58
 issue: 1
 article: e70175
 year: 2026
+mr: 5019856
 =========
 3
 title: Monomial ideals with minimal generalized Barile-Macchia resolutions
