@@ -85,6 +85,7 @@ volume: 33
 issue: 1
 article: P1.25
 year: 2026
+mr: 5037335
 =========
 1
 title: Linear quotients of connected ideals of graphs

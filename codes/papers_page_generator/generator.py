@@ -103,7 +103,7 @@ for _, paper in papers.items():
 		link = paper['jour-link']
 		s += linkstyle.format(link, "Journal")
 	elif 'doi' in paper:
-		link = r"https://doi.org/" + paper['doi']
+		link = r"""https://doi.org/""" + paper['doi']
 		s += linkstyle.format(link, "Journal")
 
 	if 'mr' in paper:
