@@ -135,7 +135,7 @@ for _, paper in papers.items():
 
 			assert "pages" in paper or "article" in paper, "Lack of identification!"
 			if "article" in paper:
-				citation += f"article no. {paper["article"]}"
+				citation += f"article no. {paper['article']}"
 			else:
 				citation += paper["pages"]
 

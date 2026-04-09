@@ -1,3 +1,10 @@
+10
+title: Congruence modules and Wiles defects of determinantal rings of maximal minors
+date: 2026-04-07
+arxiv: 2604.06446
+pdf: khan_maithani_cong_det
+coauthors: KK
+=========
 9
 title: Abelian extensions of equicharacteristic regular rings need not be Cohen-Macaulay
 date: 2025-11-25
