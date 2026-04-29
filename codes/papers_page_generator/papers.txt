@@ -16,8 +16,10 @@ coauthors: AKS, PS
 title: Homological properties of invariant rings of permutation groups
 date: 2025-11-11
 arxiv: 2511.07718
+doi: 10.1090/proc/17664
 pdf: maithani_permutation_invariants
-toa: Proceedings of the American Mathematical Society
+
+journal: Proceedings of the American Mathematical Society
 =========
 7
 title: The Scarf complex of squarefree powers, symbolic powers of edge ideals, and cover ideals of graphs
