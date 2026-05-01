@@ -84,6 +84,7 @@ volume: 54
 issue: 2
 pages: 307–324
 year: 2026
+mr: 5010020
 =========
 2
 title: Minimal cellular resolutions of powers of graphs
