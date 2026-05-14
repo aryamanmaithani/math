@@ -11,6 +11,8 @@ date: 2025-11-25
 arxiv: 2511.19800
 pdf: maithani_singh_sridhar
 coauthors: AKS, PS
+
+toa: Proceedings of the American Mathematical Society
 =========
 8
 title: Homological properties of invariant rings of permutation groups
