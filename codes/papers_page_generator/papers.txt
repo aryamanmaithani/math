@@ -58,6 +58,8 @@ title: Polynomial invariants of classical subgroups of $\operatorname{GL}_{2}$: 
 date: 2025-1-25
 arxiv: 2501.15080
 pdf: maithani_conjugation
+
+toa: Journal of Pure and Applied Algebra
 =========
 4
 title: Splitting the difference: Computations of the Reynolds operator in classical invariant theory
