@@ -89,7 +89,7 @@ for _, paper in papers.items():
 	s = add_newline(s)
 
 	arxiv_paper = None
-	if False and 'arxiv' in paper:
+	if 'arxiv' in paper:
 		paper_id = paper['arxiv']
 		link = r"""https://arxiv.org/abs/""" + paper_id
 		s += linkstyle.format(link, "arXiv")
