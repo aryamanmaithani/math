@@ -65,6 +65,7 @@ volume: 230
 issue: 8
 article: 108307
 year: 2026
+mr: 5078345
 =========
 4
 title: Splitting the difference: Computations of the Reynolds operator in classical invariant theory
