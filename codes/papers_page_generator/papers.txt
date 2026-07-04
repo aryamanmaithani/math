@@ -22,6 +22,11 @@ doi: 10.1090/proc/17664
 pdf: maithani_permutation_invariants
 
 journal: Proceedings of the American Mathematical Society
+volume: 154
+issue: 8
+pages: 3257–3272
+year: 2026
+mr: 5093254
 =========
 7
 title: The Scarf complex of squarefree powers, symbolic powers of edge ideals, and cover ideals of graphs
