@@ -14,6 +14,11 @@ pdf: maithani_singh_sridhar
 coauthors: AKS, PS
 
 journal: Proceedings of the American Mathematical Society
+volume: 154
+issue: 11
+pages: 4667–4672
+year: 2026
+mr: 5118944
 =========
 8
 title: Homological properties of invariant rings of permutation groups
