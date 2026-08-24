@@ -10,7 +10,7 @@ redirect_from:
 
 Me
 ======
-Hi, I am Aryaman, a fourth-year graduate student at the [Mathematics Department, University of Utah](https://www.math.utah.edu/). My advisor is [Anurag K. Singh](https://www.math.utah.edu/~singh/).
+Hi, I am Aryaman, a fifth-year graduate student at the [Mathematics Department, University of Utah](https://www.math.utah.edu/). My advisor is [Anurag K. Singh](https://www.math.utah.edu/~singh/). I am supported by a [Simons dissertation fellowship](https://www.simonsfoundation.org/2025/07/23/first-class-of-simons-dissertation-fellows-in-mathematics-announced/).
 
 This website
 ======
