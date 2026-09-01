@@ -1,3 +1,10 @@
+11
+title: The arithmetic rank of nullcones of classical invariant rings
+date: 2026-08-29
+arxiv: 2608.29445
+pdf: batavia_maithani_mohana-sundaram
+coauthors: MB, KMS
+=========
 10
 title: Congruence modules and Wiles defects of determinantal rings of maximal minors
 date: 2026-04-07
