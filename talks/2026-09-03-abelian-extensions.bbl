@@ -1,0 +1,191 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global/global}
+    \entry{Kemper:CM}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=4d4bdeb1dac22611ea638f1595bc482b}{%
+           family={Kemper},
+           familyi={K\bibinitperiod},
+           given={Gregor},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d4bdeb1dac22611ea638f1595bc482b}
+      \strng{fullhash}{4d4bdeb1dac22611ea638f1595bc482b}
+      \strng{fullhashraw}{4d4bdeb1dac22611ea638f1595bc482b}
+      \strng{bibnamehash}{4d4bdeb1dac22611ea638f1595bc482b}
+      \strng{authorbibnamehash}{4d4bdeb1dac22611ea638f1595bc482b}
+      \strng{authornamehash}{4d4bdeb1dac22611ea638f1595bc482b}
+      \strng{authorfullhash}{4d4bdeb1dac22611ea638f1595bc482b}
+      \strng{authorfullhashraw}{4d4bdeb1dac22611ea638f1595bc482b}
+      \field{labelalpha}{Kem99}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0021-8693,1090-266X}
+      \field{journaltitle}{J. Algebra}
+      \field{number}{1}
+      \field{title}{On the {C}ohen-{M}acaulay property of modular invariant rings}
+      \field{volume}{215}
+      \field{year}{1999}
+      \field{pages}{330\bibrangedash 351}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1006/jabr.1998.7716
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1006/jabr.1998.7716
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1006/jabr.1998.7716
+      \endverb
+    \endentry
+    \entry{Koh:unramified}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=4d2616a0bde5ab9c13f878af5ceb7df8}{%
+           family={Koh},
+           familyi={K\bibinitperiod},
+           given={Jee},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \strng{fullhash}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \strng{fullhashraw}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \strng{bibnamehash}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \strng{authorbibnamehash}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \strng{authornamehash}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \strng{authorfullhash}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \strng{authorfullhashraw}{4d2616a0bde5ab9c13f878af5ceb7df8}
+      \field{labelalpha}{Koh86}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0021-8693}
+      \field{journaltitle}{J. Algebra}
+      \field{number}{2}
+      \field{title}{Degree {$p$} extensions of an unramified regular local ring of mixed characteristic {$p$}}
+      \field{volume}{99}
+      \field{year}{1986}
+      \field{pages}{310\bibrangedash 323}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1016/0021-8693(86)90029-3
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/0021-8693(86)90029-3
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/0021-8693(86)90029-3
+      \endverb
+    \endentry
+    \entry{MSS:Abelian}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=23ceba2432b2e3c2b518f0c1006866b3}{%
+           family={Maithani},
+           familyi={M\bibinitperiod},
+           given={Aryaman},
+           giveni={A\bibinitperiod}}}%
+        {{hash=2174197a276544cfddc39ebe154ab3de}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Anurag},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d5082833341ff7cc2f11e161be0ab95a}{%
+           family={Sridhar},
+           familyi={S\bibinitperiod},
+           given={Prashanth},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{ca0827a9521d443c77f3ece73c1ffded}
+      \strng{fullhash}{ca0827a9521d443c77f3ece73c1ffded}
+      \strng{fullhashraw}{ca0827a9521d443c77f3ece73c1ffded}
+      \strng{bibnamehash}{ca0827a9521d443c77f3ece73c1ffded}
+      \strng{authorbibnamehash}{ca0827a9521d443c77f3ece73c1ffded}
+      \strng{authornamehash}{ca0827a9521d443c77f3ece73c1ffded}
+      \strng{authorfullhash}{ca0827a9521d443c77f3ece73c1ffded}
+      \strng{authorfullhashraw}{ca0827a9521d443c77f3ece73c1ffded}
+      \field{labelalpha}{MSS26}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0002-9939,1088-6826}
+      \field{journaltitle}{Proc. Amer. Math. Soc.}
+      \field{number}{11}
+      \field{title}{Abelian extensions of equicharacteristic regular rings need not be {C}ohen-{M}acaulay}
+      \field{volume}{154}
+      \field{year}{2026}
+      \field{pages}{4667\bibrangedash 4672}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1090/proc/17803
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1090/proc/17803
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1090/proc/17803
+      \endverb
+    \endentry
+    \entry{Roberts:Abelian}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=86f08bba37f5c418da733791a4a6846f}{%
+           family={Roberts},
+           familyi={R\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{86f08bba37f5c418da733791a4a6846f}
+      \strng{fullhash}{86f08bba37f5c418da733791a4a6846f}
+      \strng{fullhashraw}{86f08bba37f5c418da733791a4a6846f}
+      \strng{bibnamehash}{86f08bba37f5c418da733791a4a6846f}
+      \strng{authorbibnamehash}{86f08bba37f5c418da733791a4a6846f}
+      \strng{authornamehash}{86f08bba37f5c418da733791a4a6846f}
+      \strng{authorfullhash}{86f08bba37f5c418da733791a4a6846f}
+      \strng{authorfullhashraw}{86f08bba37f5c418da733791a4a6846f}
+      \field{labelalpha}{Rob80}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0002-9939,1088-6826}
+      \field{journaltitle}{Proc. Amer. Math. Soc.}
+      \field{number}{3}
+      \field{title}{Abelian extensions of regular local rings}
+      \field{volume}{78}
+      \field{year}{1980}
+      \field{pages}{307\bibrangedash 310}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.2307/2042312
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.2307/2042312
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.2307/2042312
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

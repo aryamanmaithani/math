@@ -1,0 +1,223 @@
+\documentclass[12pt]{article}
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+\usepackage{aryaman}
+
+\setcounter{tocdepth}{2}
+
+\title{On the Cohen--Macaulayness of abelian extensions of regular local rings}
+\author{Aryaman Maithani}
+\date{September 3, 2026}
+
+\usepackage[backend=biber,style=alphabetic,doi=false,isbn=false,url=false,eprint=false,maxbibnames=5]{biblatex}
+\addbibresource{talks.bib}
+
+\begin{document}
+
+\maketitle
+% \tableofcontents
+
+\section*{Introduction}
+
+Notes I made for my talk at BIKES: \newline
+
+\begin{blockquote}
+	Let $R$ be a regular local ring with quotient field $K$. Let $L$ be a Galois extension of $K$ and $S$ the integral closure of $R$ in $L$. Assume that the Galois group is abelian. Is $S$ Cohen--Macaulay? Roberts showed the answer is affirmative when the order of the group is invertible in the residue field of $R$, and Koh gave a counterexample in mixed characteristic. Recently, in joint work with Singh and Sridhar, we give equicharacteristic counterexamples. We shall discuss all these results, being rather elementary constructions and proofs! 
+\end{blockquote}
+
+\section{Nonmodular}
+
+	Paul Roberts \cite{Roberts:Abelian} showed the following:
+
+	\begin{thm} \label{thm:roberts}
+		Let $R$ be a \underline{regular local ring} with fraction field $K$. Let $L$ be a finite Galois extension of $K$ with an abelian Galois group. Assume moreover that the order of the Galois group is not divisible by the characteristic of the residue field of $R$. Let $S$ denote the integral closure of $R$ in $L$. Then~$S$ is a \underline{Cohen--Macaulay ring}.
+	\end{thm}
+
+	We observe some generalities. 
+	The separability of $L/K$ implies that $S$ is a finite $R$-module. 
+	Thus, the Cohen--Macaulayness of $S$ is equivalent to its $R$-freeness.\footnote{Use the Auslander--Buchsbaum formula, recalling that $R$ is regular.} 
+	Let $G$ denote the Galois group of $L/K$. 
+	The group $G$ acts on $L$ and $S$ while fixing $K$ and $R$, respectively. 
+	Thus, $L$ is a $K[G]$-module and $S$ an $R[G]$-module. 
+	Finiteness of $R \subseteq S$ gives us an isomorphism 
+	$S \otimes_{R} K \cong L$, which is also one of $K[G]$-modules. 
+	(The isomorphism is saying that every element of $L$ can be written as a fraction $s/r$ with $s \in S$ and $r \in R$.) 
+	On the other hand, we also have $L \cong K[G]$ in view of the Normal Basis Theorem, giving us
+	\begin{equation} \label{eq:L-KG}
+		K[G] \cong S \otimes_{R} K. 
+	\end{equation}
+
+	We now outline the main ideas of the proof. 
+	Roberts first reduces the problem to the case that $R$ is complete with an algebraically closed residue field $k$; we assume that this is now the case. 
+	Writing $G$ as a sum of cyclic groups $\mathbb{Z}/d_{1} \oplus \cdots \oplus \mathbb{Z}/d_{k}$, we see that the group ring $k[G]$ is isomorphic to
+	\begin{equation*} 
+		k[G] = 
+		\frac{k[x_{1}]}{(x_{1}^{d_{1}} - 1)}
+		\times \cdots \times
+		\frac{k[x_{k}]}{(x_{k}^{d_{k}} - 1)}.
+	\end{equation*}
+	The nonmodularity implies that each $d_{i}$ is coprime to $\chr(k)$. 
+	As $k$ is algebraically closed, each factor above splits into linear factors, giving us that
+	\begin{equation*} 
+		k[G] \cong k_{1} \times \cdots k_{n}; 
+		\quad \text{each $k_{i}$ isomorphic to $k$}.
+	\end{equation*}
+	As $R$ is complete, the above decomposition be lifted to $R[G]$, giving us
+	\begin{equation*} 
+		R[G] \cong R_{1} \times \cdots R_{n}; 
+		\quad \text{each $R_{i}$ isomorphic to $R$}.
+	\end{equation*}
+	As $S$ is an $R[G]$-module, it must decompose as
+	\begin{equation*} %\label{eq:S-decomp}
+		S \cong S_{1} \times \cdots S_{n},
+	\end{equation*}
+	where each $S_{i}$ is an $R$-module. Moreover, the above decomposition is \emph{canonical}! 
+	The module $S_{i}$ is given as the elements of $S$ annihilated by elements of 
+	$R_{1} \times \cdots \times R_{n}$ whose $i$th component is zero. 
+
+	In view of~\eqref{eq:L-KG}, we see that $K[G]$ can be decomposed in the following ways:
+	\begin{align*} 
+		K[G] \cong R[G] \otimes_{R} K &\cong 
+		(R_{1} \otimes K) \times \cdots \times (R_{n} \otimes K)
+		\cong K \times \cdots \times K, \\
+		K[G] \cong S \otimes_{R} K &\cong 
+		(S_{1} \otimes K) \times \cdots \times (S_{n} \otimes K).
+	\end{align*} 
+	As the above decompositions are canonical, we must have 
+	$S_{i} \otimes K \cong K$ for each $i$. 
+	However, $S$ is a reflexive $R$-module, and thus the same is true for $S_{i}$. 
+	Thus, each $S_{i}$ is a reflexive $R$-module of rank one. 
+	As $R$ is a UFD, this implies that each $S_{i}$ is isomorphic to $R$. 
+	In turn,
+	\begin{equation*} 
+		S \cong S_{1} \times \cdots \times S_{n} \cong R^{n} 
+		\quad
+		\text{as $R$-modules.}
+	\end{equation*}
+
+	In fact, factoriality of $R$ was all that we used to conclude that $S$ is free. Thus, we obtain:
+
+	\begin{por} \label{por:UFD}
+		Let $R$ be a \underline{UFD} with fraction field $K$. Let $L$ be a finite Galois extension of $K$ with an abelian Galois group. Assume moreover that the order of the Galois group is not divisible by the characteristic of the residue field of $R$. Let $S$ denote the integral closure of $R$ in $L$. Then~$S$ is \underline{free over $R$}.
+	\end{por}
+
+	If we assume $G$ to only be nilpotent, the theorem fails \cite[Example~2]{Roberts:Abelian}. 
+
+\section{Mixed characteristic}
+	
+	In the same paper, Roberts \cite[Example~1]{Roberts:Abelian} also showed that the hypothesis on the order cannot be dropped in Porism~\ref{por:UFD}: 
+	\begin{ex}
+		Consider the regular ring
+		\begin{equation*} 
+			R \coloneqq 
+			\left(
+			\frac{\widehat{\mathbb{Z}}_{2}[X, Y, U, V]}%
+			{(Y^{2} - 4U - X^{2} V)}\right)_{(2, X, Y, U, V)}
+			,
+		\end{equation*}	
+		where $\widehat{\mathbb{Z}}_{2}$ denote the ring of $2$-adic integers. 
+		Then, one checks that $R$ is a UFD by showing that $2$ is prime and that $R[2^{-1}]$ is a UFD. 
+		Letting $K$ denote $\Frac(R)$ and $L$ the Galois extension $K[\sqrt{V}]$, one checks that the integral closure $S$ is not free over $R$. 
+		In fact, Roberts shows that no nonzero $S$-module can be free over $R$. 
+	\end{ex}
+
+	Six years later, Koh \cite[Example~2.4]{Koh:unramified} showed that the hypothesis on the order cannot be dropped in Theorem~\ref{thm:roberts} cannot be dropped either: 
+	\begin{ex}
+		Pick a regular local ring $R$ such that $\dim R \ge 3$ such that $\sqrt{-3}$ is part of a regular system of parameters of $R$.% 
+		\footnote{In particular, $R$ is of mixed characteristic $3$.}
+		Pick $x, y \in R$ such that $\sqrt{-3}, x, y$ is a part of a regular system of parameters. 
+		% Let $a$ and $b$ be square free elements of $R$ such that
+		% \begin{equation*} 
+		% 	a \equiv x y^{4} \mod 27R \andd
+		% 	b \equiv x^{4} y \mod 27R.
+		% \end{equation*}
+		Consider $a \coloneqq xy^4 + 27$ and $b \coloneqq x^4y + 27$, and define
+		$\theta_1 \coloneqq \sqrt[3]{ab^2}$ and 
+		$\theta_2 \coloneqq \sqrt[3]{a^2b}$.
+		Let $S$ be the integral closure of $R$ in $L = K(\theta_1)$. 
+		The extension $L/K$ is Galois of order $3$ but $S$ is not free over $R$. 
+	\end{ex}
+
+\section{Equicharacteristic}
+	
+	Forty years after \emph{that}, we have equicharacteristic counterexamples \cite[Theorem~2.2]{MSS:Abelian}. 
+	Recall that if $G$ is a finite subgroup of $\GL_{n}(k)$, then $G$ acts on the polynomial ring $S \coloneqq k[x_1,\dots,x_n]$ via degree-preserving $k$-algebra automorphisms, where the action of $g \in G$ is given by
+	\begin{equation*}
+		\begin{bmatrix} x_1 & \hdots & x_n \end{bmatrix}^{\tr}
+		\mapsto
+		g \begin{bmatrix} x_1 & \hdots & x_n \end{bmatrix}^{\tr}.
+	\end{equation*}
+	Note the action of $G$ extends to $L \coloneqq \Frac(S)$ and we have 
+	$L^{G} = \Frac(R) \eqqcolon K$, 
+	the extension $L/K$ has Galois group $G$,
+	and $S$ is the integral closure of $R$ in $L$. 
+
+	\begin{ex} \label{ex:poly}
+		Consider the action of $G = \left\langle \two{1}{1}{}{1} \right\rangle$ on $S \coloneqq \mathbb{F}_{p}[x, y]$. 
+		The generator maps $x \mapsto x+y$ and $y \mapsto y$, using which we see that
+		$R \coloneqq \mathbb{F}_{p}[x^p - x y^{p-1}, y] \subseteq S^{G}$. 
+		One checks that $S$ is integral over $R$ and $[\Frac(S) : \Frac(R)]=p$ and that $R$ is a polynomial ring (hence normal). 
+		Using this, one concludes that $S^G = R$, a polynomial ring. 
+	\end{ex}
+
+	We recall that an element $g \in G$ is a \deff{bireflection} if $\rank(g-1) \le 2$. 
+	We have the following useful theorem of Kemper \cite[Theorem~2.1]{Kemper:CM}:
+	\begin{thm}
+		Let $K$ be a field of characteristic $p>0$, and $H$ a finite subgroup of~$\GL_n(K)$, with its natural action on the polynomial ring 
+		$T \coloneqq K[x_1,\dots,x_n]$. 
+		If $H$ is a $p$-group, and $T^H$ is Cohen-Macaulay, then $H$ is generated by bireflections.
+	\end{thm}	
+
+	We now construct our example in positive characteristic. 
+	Consider the ring 
+	\begin{equation*} 
+		T \coloneqq \mathbb{F}_{p}[x_1, y_1, x_2, y_2, x_3, y_3]
+	\end{equation*}
+	with the natural action of the group $G \le \GL_{6}(\mathbb{F}_{p})$ consisting of matrices of the form
+	\begin{equation*} 
+		\phantom{\quad\text{ for } a,b,c \in \mathbb{F}_{p}.}
+		\left[
+		\begin{array}{cc|cc|cc}
+		1 & a & & & &\\
+		& 1 & & & &\\
+		\hline
+		& & 1 & b & &\\
+		& & & 1 & &\\
+		\hline
+		& & & & 1 & c\\
+		& & & & & 1
+		\end{array}
+		\right]
+		\quad\text{ for } a,b,c \in \mathbb{F}_{p}.
+	\end{equation*}
+	In other words, we have taken three copies of Example~\ref{ex:poly}. 
+	Within $G$, consider the subgroup generated by
+	\begin{equation*} 
+		\left[
+		\begin{array}{cc|cc|cc}
+		1 & 1 & & & &\\
+		& 1 & & & &\\
+		\hline
+		& & 1 & 1 & &\\
+		& & & 1 & &\\
+		\hline
+		& & & & 1 & 1\\
+		& & & & & 1
+		\end{array}
+		\right],
+	\end{equation*}	
+	i.e., the diagonal copy of group from Example~\ref{ex:poly}. 
+	Then, by Kemper's theorem, the ring of invariants $T^H$ is not Cohen--Macaulay, the only bireflection in $H$ being the identity. 
+	On the other hand, the ring $T^G$ is a polynomial ring, stemming from Example~\ref{ex:poly}. 
+
+	Thus, we have a obtained an extension
+	\begin{equation*} 
+		R \coloneqq T^G \subseteq T^H \eqqcolon S
+	\end{equation*}
+	of rings where the smaller ring is regular but the larger ring is not Cohen--Macaulay. 
+	As $G$ was abelian, Galois theory tells us that $\Frac(S)/\Frac(R)$ is Galois with abelian Galois group $G/H \cong \mathbb{Z}/p \times \mathbb{Z}/p$. 
+	One may also note that $S \subseteq T$ is Galois (at the field level) with Galois group $\mathbb{Z}/p$ with $S$ being a UFD but $T$ not $S$-free. 
+	The rings above are constructed in the $\mathbb{N}$-graded realm, rather than the local one, but one may localise at the homogeneous maximal ideals to get the desired results. 
+
+\printbibliography
+\end{document}
