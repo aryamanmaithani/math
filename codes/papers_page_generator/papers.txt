@@ -1,3 +1,10 @@
+12
+title: On the $b$-invariant of a normal graded ring
+date: 2026-09-25
+arxiv: 2609.32003
+pdf: maithani_singh_watanabe_b
+coauthors: AKS, KW
+=========
 11
 title: The arithmetic rank of nullcones of classical invariant rings
 date: 2026-08-29
