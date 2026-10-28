@@ -12,6 +12,8 @@ Me
 ======
 Hi, I am Aryaman, a fifth-year graduate student at the [Mathematics Department, University of Utah](https://www.math.utah.edu/). My advisor is [Anurag K. Singh](https://www.math.utah.edu/~singh/). I am supported by a [Simons dissertation fellowship](https://www.simonsfoundation.org/2025/07/23/first-class-of-simons-dissertation-fellows-in-mathematics-announced/). Here is my [CV](CV.pdf). 
 
+I am currently on the job market.
+
 This website
 ======
 I shall put all my math-related content here. The navigation bar at the top has the links to the appropriate pages. 
