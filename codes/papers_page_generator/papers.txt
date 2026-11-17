@@ -1,3 +1,10 @@
+13
+title: Symbolic Powers and Asymptotic Invariants of Invariant Ideals in Determinantal Rings
+date: 2026-11-14
+arxiv: 2611.19607
+pdf: bmmss_det
+coauthors: SB, KMS, AS, SS
+=========
 12
 title: On the $b$-invariant of a normal graded ring
 date: 2026-09-25

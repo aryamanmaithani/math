@@ -44,3 +44,15 @@ webpage: https://kesavan-ms.github.io/
 KW
 name: Kei-ichi Watanabe
 =========
+SB
+name: Sankhaneel Bisui
+webpage: https://sites.google.com/view/sankhaneelbisui/home
+=========
+AS
+name: Alexandra Seceleanu
+webpage: https://aseceleanu.github.io/
+=========
+SS
+name: Stephen Stern
+webpage: https://sterns.github.io/
+=========
