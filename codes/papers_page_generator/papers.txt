@@ -1,5 +1,5 @@
 13
-title: Symbolic Powers and Asymptotic Invariants of Invariant Ideals in Determinantal Rings
+title: Symbolic powers and asymptotic invariants of invariant ideals in determinantal rings
 date: 2026-11-14
 arxiv: 2611.19607
 pdf: bmmss_det
